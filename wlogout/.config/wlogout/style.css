@@ -13,7 +13,8 @@
  }
  
  window {
-     background: url("../1923/cache/blurred_wallpaper.png");
+     /* background: url("../1923/cache/blurred_wallpaper.png"); */
+     background: transparent;
      background-size: cover;
      font-size: 16pt;
      color: #cdd6f4;

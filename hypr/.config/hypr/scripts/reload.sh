@@ -22,7 +22,7 @@ done
 ags quit
 
 # Launch ags
-ags run ~/auralis/app.ts&
+ags run ~/auralis/app.ts &
 
 sleep 1
 #Restart waybar
@@ -30,7 +30,7 @@ sleep 1
 
 # relaunch swaync
 sleep 0.5
-# swaync > /dev/null 2>&1 &
+# swaync > /dev/null 2>&1 &jsx@../../../home/anatolij1923/auralis-gtk4/widget/osd/OSD.tsx:75:13
 
 
 exit 0

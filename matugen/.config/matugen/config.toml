@@ -36,5 +36,5 @@ output_path = '~/.config/ags/colors.scss'
 
 [templates.auralis]
 input_path = '~/.config/matugen/templates/colors.scss'
-output_path = '~/auralis/colors.scss'
+output_path = '~/auralis-gtk4/colors.scss'
 

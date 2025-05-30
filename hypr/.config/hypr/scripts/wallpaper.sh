@@ -21,24 +21,24 @@ echo "WALLPAPER = $WALLPAPER"
 matugen image "$WALLPAPER"
 
 # 5. Create blurred wallpaper
-CACHE_DIR="$HOME/.config/1923/cache"
-BLURRED_WALLPAPER="$CACHE_DIR/blurred_wallpaper.png"
-BLUR_FILE="$HOME/.config/1923/settings/blur.sh"
+# CACHE_DIR="$HOME/.config/1923/cache"
+# BLURRED_WALLPAPER="$CACHE_DIR/blurred_wallpaper.png"
+# BLUR_FILE="$HOME/.config/1923/settings/blur.sh"
 
-mkdir -p "$CACHE_DIR"
+# mkdir -p "$CACHE_DIR"
 
 # Read blur strength from file or use default
-if [ -f "$BLUR_FILE" ]; then
-    BLUR_STRENGTH=$(cat "$BLUR_FILE")
-else
-    BLUR_STRENGTH="0x8"  
-fi
+# if [ -f "$BLUR_FILE" ]; then
+    # BLUR_STRENGTH=$(cat "$BLUR_FILE")
+# else
+    # BLUR_STRENGTH="0x8"  
+# fi
 
 # Blur the wallpaper
-magick "$WALLPAPER" -resize 75% "$BLURRED_WALLPAPER"
-magick "$BLURRED_WALLPAPER" -blur "$BLUR_STRENGTH" "$BLURRED_WALLPAPER"
+# magick "$WALLPAPER" -resize 75% "$BLURRED_WALLPAPER"
+# magick "$BLURRED_WALLPAPER" -blur "$BLUR_STRENGTH" "$BLURRED_WALLPAPER"
 
-echo "Blurred wallpaper saved to $BLURRED_WALLPAPER with blur strength $BLUR_STRENGTH"
+# echo "Blurred wallpaper saved to $BLURRED_WALLPAPER with blur strength $BLUR_STRENGTH"
 
 
 # 6. Reload waybar
