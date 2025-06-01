@@ -2,7 +2,8 @@ require("lazy").setup({
     -- Визуал
     -- { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     -- { "ellisonleao/gruvbox.nvim", priority = 1000 },
-    { "EdenEast/nightfox.nvim", priority = 1000 },
+    -- { "EdenEast/nightfox.nvim", priority = 1000 },
+    { "olimorris/onedarkpro.nvim", priority = 1000 },
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
     { "numToStr/Comment.nvim", config = true }, -- комментарии кода
     {
@@ -84,5 +85,6 @@ require('nvim-highlight-colors').setup({})
 -- require("catppuccin").setup({
   -- transparent_background = true,
 -- })
-require("nightfox").setup({})
-vim.cmd.colorscheme("carbonfox")
+-- require("nightfox").setup({})
+-- vim.cmd.colorscheme("carbonfox")
+vim.cmd("colorscheme onedark")
