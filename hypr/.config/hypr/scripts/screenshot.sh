@@ -11,7 +11,13 @@ FILENAME="$(date +'%s_grim.png')"
 FILEPATH="$SCREENSHOT_DIR/$FILENAME"
 
 # Снимок экрана
-grim "$FILEPATH"
+if [[ "$1" == "area" ]]; then
+    GEOM="$(slurp -d)" 
+    [[ -z "GEOM" ]] && exit 1
+    grim -g "$GEOM" "$FILEPATH"
+else
+    grim "$FILEPATH"    
+fi
 
 # Копирование в буфер обмена (если установлен wl-copy)
 if command -v wl-copy &> /dev/null; then

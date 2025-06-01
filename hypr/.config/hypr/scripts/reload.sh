@@ -22,7 +22,7 @@ done
 ags quit
 
 # Launch ags
-ags run ~/auralis/app.ts &
+ags run ~/auralis-gtk4/app.ts --gtk4 &
 
 sleep 1
 #Restart waybar
