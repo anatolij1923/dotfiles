@@ -18,6 +18,12 @@ fzf --fish | source
 alias svim="sudo nvim"
 alias v="nvim"
 
+alias gcl="git clone"
+alias ga="git add"
+alias gc="git commit"
+alias gp="git push"
+alias gu="git pull"
+
 # Functions
 function mkcd
     mkdir -p $argv
