@@ -20,22 +20,9 @@
       "key": "󰌢 hs",
       "keyColor": "green"
     },
-    // "break",
-    // {
-    //     "type": "cpu",
-    //     "key": "├─󰻠 CPU",
-    //     "keyColor": "red",
-    //     "format": "{1}"
-    // },
-    // {
-    //     "type": "gpu",
-    //     "key": "├─󰍛 GPU",
-    //     "keyColor": "green",
-    //     "format": "{1} {2}"
-    // },
     {
       "type": "os",
-      "key": "\udb82\udcc7 os", // Just get your distro's logo off nerdfonts.com
+      "key": "\udb82\udcc7 os", 
       "keyColor": "yellow",
       "format": "Arch Linux"
     },
@@ -43,6 +30,12 @@
       "type": "kernel",
       "key": " kr",
       "keyColor": "red"
+    },
+    {
+       "type": "wm",
+       "key": " wm",
+       "keyColor": "magenta",
+       "format": "{1}"
     },
     {
       "type": "packages",
@@ -78,11 +71,6 @@
     //   "type": "disk",
     //   "key": "├─ Disk",
     //   "keyColor": "green"
-    // },
-    // {
-    //   "type": "wm",
-    //   "key": "├─ WM",
-    //   "keyColor": "yellow"
     // },
     {
       "type": "colors",
