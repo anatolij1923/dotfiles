@@ -7,19 +7,30 @@ vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true, silent = true })
 
 map("n", "<Space>", "", opts)
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
-vim.keymap.set("n", "\\", ":Neotree toggle<CR>", { noremap = true, silent = true })
-map("n", "<leader>ff", ":Telescope find_files<CR>", opts)
+-- map("n", "<leader>ff", ":Telescope find_files<CR>", opts)
 map("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
 
--- Comments
-vim.keymap.set("n", "<leader>/", function()
-    require("Comment.api").toggle.linewise.current()
-end, { noremap = true, silent = true })
+-- Move lines 
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
-vim.keymap.set("v", "<leader>/", function()
-    require("Comment.api").toggle.linewise(vim.fn.visualmode())
-end, { noremap = true, silent = true })
+-- Move lines left and right
+vim.keymap.set("v", ">", ">gv", opts)
+vim.keymap.set("v", "<", "<gv", opts)
+
+-- Center in search
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "nzzzv")
+
+-- Remove search highlight
+vim.keymap.set("n", "<C-c>", ":nohl<CR>")
+
+-- Splits
+vim.keymap.set("n", "<leader>-", "<C-w>s")
+vim.keymap.set("n", "<leader>|", "<C-w>v")
+vim.keymap.set("n", "<leader>x", "<cmd>close<CR>")
 
 -- Переключение между буферами с помощью Tab
 vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })

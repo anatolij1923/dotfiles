@@ -3,13 +3,6 @@ vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
 end)
 
---  Notice listchars is set using `vim.opt` instead of `vim.o`.
---  It is very similar to `vim.o` but offers an interface for conveniently interacting with tables.
---   See `:help lua-options`
---   and `:help lua-options-guide`
-vim.o.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-
 -- Make line numbers default
 vim.opt.number = true
 
@@ -34,6 +27,18 @@ vim.o.confirm = true
 
 -- Save undo history
 vim.o.undofile = true
+
+-- Disable swap file
+vim.opt.swapfile = false
+
+-- Configure how new splits should be opened
+vim.o.splitright = true
+vim.o.splitbelow = true
+
+-- Decrease update time
+vim.o.updatetime = 250
+
+vim.opt.laststatus = 3 
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
