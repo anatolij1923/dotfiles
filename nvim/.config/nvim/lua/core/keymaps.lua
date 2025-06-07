@@ -22,7 +22,7 @@ vim.keymap.set("v", "<", "<gv", opts)
 
 -- Center in search
 vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
 
 -- Remove search highlight
 vim.keymap.set("n", "<C-c>", ":nohl<CR>")
