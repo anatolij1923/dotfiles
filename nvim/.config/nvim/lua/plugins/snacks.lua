@@ -23,6 +23,7 @@ return {
             
             { "\\", function() Snacks.explorer() end, desc = "File Explorer" },        
             { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+            { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
 
             -- Other
             { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },

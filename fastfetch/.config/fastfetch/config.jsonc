@@ -35,7 +35,7 @@
        "type": "wm",
        "key": " wm",
        "keyColor": "magenta",
-       "format": "{1}"
+       // "format": "{1}"
     },
     {
       "type": "packages",
