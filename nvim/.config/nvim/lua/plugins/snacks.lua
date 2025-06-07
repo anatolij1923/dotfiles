@@ -12,16 +12,20 @@ return {
                 },
             },
 
-            dashboard = {
-                enabled = true,
-            }
+            dashboard = { enabled = true },
+
+            indent = { enabled = true },
+
+            notifier = { enabled = true },
+
+            input = { enabled = true },
         },
 
         keys = {
             -- Lazygit
             { "<leader>lg", function() Snacks.lazygit() end, desc = "Lazygit" },
-            
-            { "\\", function() Snacks.explorer() end, desc = "File Explorer" },        
+
+            { "\\", function() Snacks.explorer() end, desc = "File Explorer" },
             { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
             { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
 

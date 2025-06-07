@@ -5,6 +5,7 @@ return {
     dependencies = {
         "hrsh7th/cmp-buffer", -- source for text in buffer
         "hrsh7th/cmp-path", -- source for file system paths
+        "hrsh7th/cmp-cmdline", -- command line completion
         {
             "L3MON4D3/LuaSnip",
             -- follow latest release.
@@ -350,6 +351,25 @@ return {
                 -- }),
                 -- format = require("tailwindcss-colorizer-cmp").formatter
             },
+            cmp.setup.cmdline(':', {
+                sources = {
+                    { name = 'cmdline' },
+                    { name = 'path' },
+                    { name = 'buffer' },
+                }
+            }),
+            cmp.setup.cmdline('/', {
+                sources = {
+                    { name = 'buffer' },
+                }
+            }),
+            cmp.setup.cmdline('?', {
+                sources = {
+                    { name = 'buffer' },
+                }
+            }),
+
+
         })
 
         -- NOTE: Added Ghost text stuff
