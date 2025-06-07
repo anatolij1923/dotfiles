@@ -30,12 +30,16 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "clangd",
+                "html",
+                "cssls",
             },
         })
 
         mason_tool_installer.setup({
             ensure_installed = {
                 "stylua", -- lua formatter
+                "prettier",
+                "denols",
             },
         })
     end,

@@ -12,7 +12,21 @@ return {
                 },
             },
 
-            dashboard = { enabled = true },
+            dashboard = { enabled = true, 
+                sections = {
+                    {
+                        section = "terminal",
+                        cmd = "chafa ~/Изображения/wallpapers/trash/photo_2024-10-15_21-51-141.jpg --format symbols --symbols vhalf --size 60x17 --stretch; sleep .1",
+                        padding = 1,
+                        height = 20,
+                    },
+                    {
+                        pane = 2,
+                        { section = "keys", gap = 1, padding = 1 },
+                        { section = "startup" },
+                    },
+                }
+            },
 
             indent = { enabled = true },
 
