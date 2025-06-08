@@ -32,6 +32,7 @@ return {
                 "clangd",
                 "html",
                 "cssls",
+                "eslint",
             },
         })
 

@@ -42,6 +42,8 @@ return {
             { "\\", function() Snacks.explorer() end, desc = "File Explorer" },
             { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
             { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
+            { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
+            { "<leader>ks", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
 
             -- Other
             { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
