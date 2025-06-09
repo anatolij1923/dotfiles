@@ -1,2 +1,7 @@
 # tmux plugin manager
 tmux/.config/tmux/.tmux/plugins
+wlogout/.config/wlogout/colors.css
+waypaper/.config/waypaper/config.ini
+rofi/.config/rofi/colors.rasi
+kitty/.config/kitty/colors.conf
+hypr/.config/hypr/colors.conf
