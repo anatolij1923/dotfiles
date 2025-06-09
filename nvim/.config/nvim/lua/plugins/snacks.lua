@@ -16,7 +16,7 @@ return {
                 sections = {
                     {
                         section = "terminal",
-                        cmd = "chafa ~/Изображения/wallpapers/trash/photo_2024-10-15_21-51-141.jpg --format symbols --symbols vhalf --size 60x17 --stretch; sleep .1",
+                        cmd = "chafa ~/Изображения/wallpapers/trash/putin-png.png --format symbols --symbols vhalf --size 40x17 --stretch; sleep .1",
                         padding = 1,
                         height = 20,
                     },
