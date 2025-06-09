@@ -128,5 +128,8 @@ return {
                 },
             },
         })
+        lspconfig.pyright.setup({
+            capabilities = capabilities,
+        })
     end,
 }

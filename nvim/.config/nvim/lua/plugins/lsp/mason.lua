@@ -41,6 +41,7 @@ return {
                 "stylua", -- lua formatter
                 "prettier",
                 "denols",
+                "pyright",
             },
         })
     end,
