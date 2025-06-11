@@ -11,8 +11,29 @@ set fish_greeting
 
 oh-my-posh init fish --config ~/.config/ohmyposh/config.toml | source
 
+# Zoxide
+zoxide init fish | source
+
 # FZF 
+set -gx FZF_DEFAULT_COMMAND "fd --hidden --strip-cwd-prefix --exclude .git" 
+
+set -gx FZF_CTRL_T_OPTS "--preview 'bat --style=numbers --color=always {} | head -100'"
+set -gx FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
+
+set -gx FZF_ALT_C_OPTS "--preview 'eza -al --color=always {} | head -100'"
+set -gx FZF_ALT_C_COMMAND "fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
 fzf --fish | source
+
+# --- Yazi Setup ---
+function y
+	set tmp (mktemp -t "yazi-cwd.XXXXXX")
+	yazi $argv --cwd-file="$tmp"
+	if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+		builtin cd -- "$cwd"
+	end
+	rm -f -- "$tmp"
+end
 
 # Aliases
 alias svim="sudo nvim"
@@ -24,6 +45,9 @@ alias gc="git commit"
 alias gp="git push"
 alias gu="git pull"
 
+alias ls="eza --no-filesize --long --color=always --icons=always --no-user"
+
+alias update-mirrors="reflector --sort rate --number 10 --threads 100 --protocol https | sudo tee /etc/pacman.d/mirrorlist"
 # Functions
 function mkcd
     mkdir -p $argv
