@@ -41,5 +41,5 @@ matugen image "$WALLPAPER"
 # echo "Blurred wallpaper saved to $BLURRED_WALLPAPER with blur strength $BLUR_STRENGTH"
 
 
-# 6. Reload waybar
+# 6. Reload 
 "$HOME/.config/hypr/scripts/reload.sh"
