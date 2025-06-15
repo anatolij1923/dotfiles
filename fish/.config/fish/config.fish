@@ -11,6 +11,7 @@ set fish_greeting
 
 oh-my-posh init fish --config ~/.config/ohmyposh/config.toml | source
 
+
 # Zoxide
 zoxide init fish | source
 
@@ -48,6 +49,9 @@ alias gu="git pull"
 alias ls="eza --no-filesize --long --color=always --icons=always --no-user"
 
 alias update-mirrors="reflector --sort rate --number 10 --threads 100 --protocol https | sudo tee /etc/pacman.d/mirrorlist"
+
+alias cat="bat"
+
 # Functions
 function mkcd
     mkdir -p $argv
