@@ -7,5 +7,5 @@ if [[ color == "" ]]; then
     exit 0
 fi
 
-notify-send $color
+notify-send -i color-select-symbolic -a Color\ Picker $color
 wl-copy $color
