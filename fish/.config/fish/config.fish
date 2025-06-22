@@ -45,6 +45,7 @@ alias ga="git add"
 alias gc="git commit"
 alias gp="git push"
 alias gu="git pull"
+alias lg="lazygit" 
 
 alias ls="eza --no-filesize --long --color=always --icons=always --no-user"
 
