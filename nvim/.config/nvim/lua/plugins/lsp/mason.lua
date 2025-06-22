@@ -29,9 +29,9 @@ return {
 			-- servers for mason to install
 			ensure_installed = {
 				"lua_ls",
+                "cssls",
 				"clangd",
 				"html",
-				"cssls",
 				"eslint",
 				"emmet_ls",
 				"emmet_language_server",
@@ -43,7 +43,7 @@ return {
 				"stylua", -- lua formatter
 				"prettier",
 				"denols",
-				"pyright",
+				"pylint",
 			},
 		})
 	end,

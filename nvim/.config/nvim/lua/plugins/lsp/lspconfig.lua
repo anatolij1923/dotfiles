@@ -108,16 +108,16 @@ return {
 		lspconfig.emmet_language_server.setup({
 			capabilities = capabilities,
 			filetypes = {
-				"css",
-				"eruby",
+				-- "css",
+				-- "eruby",
 				"html",
-				"javascript",
-				"javascriptreact",
-				"less",
-				"sass",
-				"scss",
-				"pug",
-				"typescriptreact",
+				-- "javascript",
+				-- "javascriptreact",
+				-- "less",
+				-- "sass",
+				-- "scss",
+				-- "pug",
+				-- "typescriptreact",
 			},
 			init_options = {
 				includeLanguages = {},
@@ -132,6 +132,21 @@ return {
 			},
 		})
 
+		lspconfig.cssls.setup({
+			capabilities = capabilities,
+			settings = {
+				css = {
+					validate = true,
+				},
+				less = {
+					validate = true,
+				},
+				scss = {
+					validate = true,
+				},
+			},
+		})
+
 		-- clangd
 		lspconfig.clangd.setup({
 			capabilities = capabilities,
@@ -142,9 +157,10 @@ return {
 			--       "--compile-commands-dir=build",
 			--     },
 			--   },
-			-- },
+			-- },css lsp nvim
 		})
 
+		-- javascript/typescript
 		lspconfig.ts_ls.setup({
 			capabilities = capabilities,
 			root_dir = function(fname)
@@ -160,6 +176,8 @@ return {
 				},
 			},
 		})
+
+		-- Python
 		lspconfig.pyright.setup({
 			capabilities = capabilities,
 		})

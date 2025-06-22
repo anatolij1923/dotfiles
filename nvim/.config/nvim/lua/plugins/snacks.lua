@@ -12,20 +12,20 @@ return {
                 },
             },
 
-            dashboard = { enabled = true, 
-                sections = {
-                    {
-                        section = "terminal",
-                        cmd = "chafa ~/Изображения/wallpapers/trash/putin-png.png --format symbols --symbols vhalf --size 40x17 --stretch; sleep .1",
-                        padding = 1,
-                        height = 20,
-                    },
-                    {
-                        pane = 2,
-                        { section = "keys", gap = 1, padding = 1 },
-                        { section = "startup" },
-                    },
-                }
+            dashboard = { enabled = true,
+                -- sections = {
+                --     {
+                --         section = "terminal",
+                --         cmd = "chafa ~/Изображения/wallpapers/trash/putin-png.png --format symbols --symbols vhalf --size 40x17 --stretch; sleep .1",
+                --         padding = 1,
+                --         height = 20,
+                --     },
+                --     {
+                --         pane = 2,
+                --         { section = "keys", gap = 1, padding = 1 },
+                --         { section = "startup" },
+                --     },
+                -- }
             },
 
             indent = { enabled = true },

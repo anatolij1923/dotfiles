@@ -38,7 +38,7 @@ vim.o.splitbelow = true
 -- Decrease update time
 vim.o.updatetime = 250
 
-vim.opt.laststatus = 3 
+vim.opt.laststatus = 3
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
@@ -52,3 +52,13 @@ vim.opt.title = true
 
 vim.opt.backup = false
 vim.opt.showcmd = true
+
+-- 2 tabwidth for js/ts
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
+    callback = function()
+        vim.bo.tabstop = 2
+        vim.bo.shiftwidth = 2
+        vim.bo.softtabstop = 2
+    end,
+})
