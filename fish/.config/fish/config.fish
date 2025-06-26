@@ -7,10 +7,13 @@ end
 set fish_greeting
 
 # Set proxy
-# set -gx http_proxy http://127.0.0.1:12334
+set -gx http_proxy http://127.0.0.1:12334
+
+if test -f ~/.env.fish
+    source ~/.env.fish
+end
 
 oh-my-posh init fish --config ~/.config/ohmyposh/config.toml | source
-
 
 # Zoxide
 zoxide init fish | source
