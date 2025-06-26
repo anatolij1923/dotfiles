@@ -19,7 +19,6 @@ vim.o.smartcase = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10
 
-
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
 -- See `:help 'confirm'`
@@ -62,3 +61,8 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.softtabstop = 2
     end,
 })
+
+vim.o.foldcolumn = "1"    -- колонка слева для отображения фолдов
+vim.o.foldlevel = 99      -- чтобы не сворачивало всё при открытии
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true   -- включить фолды
