@@ -22,6 +22,8 @@ return {
 				python = { "black" },
 				markdown = { "prettier" },
 				["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+                c = { "clang-format" },
+                cpp = { "clang-format" },
 			},
 			-- format_on_save = {
 			-- 	lsp_fallback = true,

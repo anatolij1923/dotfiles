@@ -29,7 +29,7 @@ return {
 			-- servers for mason to install
 			ensure_installed = {
 				"lua_ls",
-                "cssls",
+				"cssls",
 				"clangd",
 				"html",
 				"eslint",
@@ -41,6 +41,8 @@ return {
 		mason_tool_installer.setup({
 			ensure_installed = {
 				"stylua", -- lua formatter
+				"clang-format",
+                "black",
 				"prettier",
 				"denols",
 				"pylint",
