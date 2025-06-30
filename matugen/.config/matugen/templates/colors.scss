@@ -4,7 +4,7 @@
  */
 
 $blur-background: {{colors.surface.default.rgba | set_alpha: 0.3}};
-$blur-background8: {{colors.surface.default.rgba | set_alpha: 0.7}};
+$blur-background8: {{colors.surface.default.rgba | set_alpha: 0.8}};
 
 <* for name, value in colors *>
 $color-{{name}}: {{value.default.hex}};
