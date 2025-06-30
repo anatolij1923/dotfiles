@@ -1,7 +1,7 @@
 import { createComputed, createExternal, For } from "ags";
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
 
-const MIN_WS = 5;
+const MIN_WS = 8;
 
 export default function Workspaces() {
   const hypr = AstalHyprland.get_default();
