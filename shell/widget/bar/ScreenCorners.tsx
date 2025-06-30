@@ -9,7 +9,7 @@ export function ScreenCorners(gdkmonitor: Gdk.Monitor) {
       namespace={"ScreenCorners"}
       gdkmonitor={gdkmonitor}
       anchor={TOP}
-      keymode={Astal.Keymode.ON_DEMAND}
+      keymode={Astal.Keymode.NONE}
       layer={Astal.Layer.BOTTOM}
       widthRequest={1920}
       heightRequest={22}
