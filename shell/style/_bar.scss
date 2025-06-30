@@ -25,7 +25,7 @@ window#bar {
       .workspaces {
         background-color: $color-surface_container;
         color: $color-on_surface;
-        padding: 0 8px;
+        padding: 0 6px;
         border-radius: 24px;
 
         button {
@@ -35,7 +35,7 @@ window#bar {
           margin: 4px 0;
           border-radius: 24px;
           font-weight: 500;
-          transition: 200ms;
+          transition: all 0.2s;
 
           &:hover {
             background-color: gtkalpha($color-primary, 0.5);
@@ -63,6 +63,7 @@ window#bar {
           @include material-icon(24px);
         }
       }
+
     }
 
     .right-side {
@@ -70,9 +71,33 @@ window#bar {
 
       .tray {
         button {
+          outline: none;
           border-radius: 8px;
           margin: 4px 2px;
           padding: 2px 8px;
+        }
+      }
+
+      .bluetooth-widget {
+        margin: 6px;
+        color: $color-on_surface;
+
+        levelbar {
+          transform: rotate(180deg);
+          block {
+            border-radius: 2px;
+            &.filled {
+              background-color: $color-primary;
+            }
+
+            &.filled.low {
+              background-color: $color-error;
+            }
+          }
+        }
+
+        .material-icon {
+          @include material-icon(24px)
         }
       }
 
@@ -81,8 +106,12 @@ window#bar {
         color: $color-on_surface;
       }
 
+
       .time {
         button {
+          border-radius: 24px;
+          outline: none;
+
           label {
             color: $color-on_surface;
             font-weight: 500;
