@@ -1,0 +1,95 @@
+@use "./colors" as *;
+@use "mixins/material" as *;
+@use "sass:string";
+
+@function gtkalpha($c, $a) {
+  @return string.unquote("alpha(#{$c},#{$a})");
+}
+
+window#bar {
+  background: transparent;
+
+  >box {
+    background: $color-surface;
+    padding: 4px;
+
+    .left-side {
+      margin: 0 0 0 16px;
+
+      .focused-client {}
+
+    }
+
+    .center {
+
+      .workspaces {
+        background-color: $color-surface_container;
+        color: $color-on_surface;
+        padding: 0 8px;
+        border-radius: 24px;
+
+        button {
+          all: unset;
+          // padding: 0px 8px;
+          min-width: 28px;
+          margin: 4px 0;
+          border-radius: 24px;
+          font-weight: 500;
+          transition: 200ms;
+
+          &:hover {
+            background-color: gtkalpha($color-primary, 0.5);
+          }
+
+          &.empty {
+            color: gtkalpha($color-on_surface, 0.5);
+          }
+        }
+
+        .focused {
+          color: $color-surface;
+          background-color: $color-primary;
+
+          &.empty {
+            color: $color-surface;
+          }
+        }
+      }
+
+      .kb-layout {
+        color: $color-on_surface;
+
+        .material-icon {
+          @include material-icon(24px);
+        }
+      }
+    }
+
+    .right-side {
+      margin: 0 16px 0 0;
+
+      .tray {
+        button {
+          border-radius: 8px;
+          margin: 4px 2px;
+          padding: 2px 8px;
+        }
+      }
+
+
+      .battery {
+        color: $color-on_surface;
+      }
+
+      .time {
+        button {
+          label {
+            color: $color-on_surface;
+            font-weight: 500;
+          }
+        }
+      }
+
+    }
+  }
+}

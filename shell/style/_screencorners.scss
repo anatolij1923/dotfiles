@@ -1,0 +1,30 @@
+@use "./colors" as *;
+
+$radius: 20px;
+$padding: 6px;
+$_margin: 99px;
+$border-width: 0px;
+
+$_radius: $radius + $padding;
+
+window.screen-corner {
+    box.shadow {
+        margin-right: $_margin * -1;
+        margin-left: $_margin * -1;
+        margin-bottom: $_margin * -1;
+    }
+
+    box.border {
+        margin-right: $_margin;
+        margin-left: $_margin;
+        border-radius: if($radius > 0, $_radius, 0);
+
+        // this line for color of screen-corner
+        box-shadow: 0 0 0 $_radius $color-background;
+    }
+
+    /* box.corner {
+        box-shadow: 0 0 0 $border-width $color-background;
+        border-radius: if($radius > 0, $_radius, 0);
+    } */
+}

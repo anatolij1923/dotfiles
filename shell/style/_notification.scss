@@ -1,0 +1,109 @@
+@use "sass:string";
+@use "./colors" as *;
+
+@function gtkalpha($c, $a) {
+  @return string.unquote("alpha(#{$c},#{$a})");
+}
+
+// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+
+window.NotificationPopups {
+  all: unset;
+}
+
+.Notification {
+  border-radius: 24px;
+  background-color: $color-surface;
+  margin: 0.5rem 1rem 0rem 1rem;
+
+  &.critical {
+    border: 1pt solid gtkalpha($color-error, 0.4);
+
+    .header {
+      .app-name {
+        color: gtkalpha($color-error, 0.8);
+      }
+
+      .app-icon {
+        color: gtkalpha($color-error, 0.6);
+      }
+    }
+  }
+
+  .header {
+    padding: 0.5rem;
+    color: gtkalpha($color-on_surface, 0.5);
+
+    .app-icon {
+      margin: 0 0.4rem;
+    }
+
+    .app-name {
+      margin-right: 0.3rem;
+      font-weight: bold;
+
+      &:first-child {
+        margin-left: 0.4rem;
+      }
+    }
+
+    .time {
+      margin: 0 0.4rem;
+    }
+
+    button {
+      outline: none;
+      background-color: $color-surface_container_high;
+      border-radius: 16px;
+      padding: 0.2rem;
+      min-width: 0;
+      min-height: 0;
+
+      &:hover {
+        background-color: $color-primary;
+        color: $color-surface;
+      }
+    }
+  }
+
+  .content {
+    margin: 1rem;
+    margin-top: 0.5rem;
+
+    .summary {
+      font-size: 1.2em;
+      color: $color-on_surface;
+    }
+
+    .body {
+      color: gtkalpha($color-on_surface, 0.8);
+    }
+
+    .image {
+      margin-right: 0.5rem;
+      border-radius: 9px;
+      min-width: 100px;
+      min-height: 100px;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  .actions {
+    margin: 1rem;
+    margin-top: 0;
+
+    button {
+      margin: 0 0.3rem;
+      border-radius: 16px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+@mixin material-icon($size: 24px) {
+    font-family: "Material Icons Outlined";
+    font-weight: 600; // Убедитесь, что это правильный вес для вашего шрифта
+    font-size: $size;
+}
