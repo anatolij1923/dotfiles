@@ -1,4 +1,5 @@
 import { createState } from "ags";
+import { exec } from "ags/process";
 import Hyprland from "gi://AstalHyprland";
 
 export default function KbLayout() {
@@ -27,8 +28,16 @@ export default function KbLayout() {
 
   return (
     <box spacing={8} class="kb-layout">
-      <label label={"keyboard"} class="material-icon" />
-      <label label={layout} />
+      <button
+        onClicked={() =>
+          exec("hyprctl switchxkblayout at-translated-set-2-keyboard next")
+        }
+      >
+        <box>
+          <label label={"keyboard"} class="material-icon" />
+          <label label={layout} />
+        </box>
+      </button>
     </box>
   );
 }

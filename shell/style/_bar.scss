@@ -62,8 +62,13 @@ window#bar {
       .kb-layout {
         color: $color-on_surface;
 
-        .material-icon {
-          @include material-icon(24px);
+        button {
+          background-color: $color-surface_container;
+          outline: none;
+          border-radius: 24px;
+          .material-icon {
+            @include material-icon(24px);
+          }
         }
       }
 
@@ -110,6 +115,7 @@ window#bar {
 
       .time {
         button {
+          background-color: $color-surface_container;
           border-radius: 24px;
           outline: none;
 
