@@ -7,6 +7,7 @@ import Battery from "./modules/battery/Battery";
 import Tray from "./modules/tray/Tray";
 import Workspaces from "./modules/workspaces/Workspaces";
 import BluetoothWidget from "./modules/bluetoothWidget/bluetoothWidget";
+import Test from "../osd/OSD";
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP, RIGHT, LEFT } = Astal.WindowAnchor;
@@ -24,13 +25,13 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         <box $type="start" class="left-side" spacing={16}>
           <FocusedClient />
         </box>
-        <box $type="center" class="center" spacing={16} >
+        <box $type="center" class="center" spacing={16}>
           <Workspaces />
-          <KbLayout />
         </box>
         <box $type="end" class="right-side" spacing={16}>
           <Tray />
           <BluetoothWidget />
+          <KbLayout />
           <Battery />
           <Clock />
         </box>

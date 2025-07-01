@@ -54,6 +54,10 @@ window#bar {
           }
         }
       }
+    }
+
+    .right-side {
+      margin: 0 16px 0 0;
 
       .kb-layout {
         color: $color-on_surface;
@@ -62,10 +66,6 @@ window#bar {
           @include material-icon(24px);
         }
       }
-    }
-
-    .right-side {
-      margin: 0 16px 0 0;
 
       .tray {
         button {
