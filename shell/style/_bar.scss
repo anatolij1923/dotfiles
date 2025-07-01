@@ -73,6 +73,10 @@ window#bar {
           border-radius: 8px;
           margin: 4px 2px;
           padding: 2px 8px;
+
+          &:checked {
+            background-color: $color-primary;
+          }
         }
       }
 
