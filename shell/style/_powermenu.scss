@@ -1,0 +1,21 @@
+@use "./colors" as *;
+@use "mixins/material.scss" as *;
+
+window.powermenu {
+  .powermenu-content {
+    background-color: $color-surface;
+    border-radius: 36px;
+
+    button {
+      margin: 16px;
+      border-radius: 24px;
+      .material-icon {
+        @include material-icon(56px);
+      }
+      .button-name {
+        font-weight: 500;
+        font-size: 1rem;
+      }
+    }
+  }
+}
