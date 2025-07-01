@@ -43,7 +43,7 @@ export default function Powermenu() {
               app.toggle_window("Powermenu");
             }}
           >
-            <box orientation={Gtk.Orientation.VERTICAL} spacing={16}>
+            <box orientation={Gtk.Orientation.VERTICAL} spacing={8}>
               <label label={option.icon} class="material-icon" />
               <label label={option.name} class="button-name" />
             </box>

@@ -3,18 +3,41 @@
 
 window.powermenu {
   .powermenu-content {
-    background-color: $color-surface;
-    border-radius: 36px;
+    background-color: $color-surface_container;
+    border-radius: 24px;
+    padding: 24px;
 
     button {
-      margin: 16px;
-      border-radius: 24px;
+      background-color: $color-surface_container_high;
+      color: $color-on_surface;
+      border-radius: 16px;
+      margin: 0 6px;
+      padding: 12px;
+      transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out,
+        transform 0.1s ease;
+
+      &:hover {
+        background-color: $color-primary_container;
+        transform: scale(1.03);
+      }
+
+      &:focus {
+        background-color: $color-primary;
+        color: $color-on_primary;
+        box-shadow: 0 0 10px 3px rgba($color-primary, 0.35);
+      }
+
+      &:active {
+        transform: scale(0.97);
+      }
+
       .material-icon {
         @include material-icon(56px);
       }
+
       .button-name {
         font-weight: 500;
-        font-size: 1rem;
+        font-size: 0.9rem;
       }
     }
   }
