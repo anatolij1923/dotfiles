@@ -9,19 +9,18 @@
 window#bar {
   background: transparent;
 
-  >box {
+  > box {
     background: $color-surface;
     padding: 4px;
 
     .left-side {
       margin: 0 0 0 16px;
 
-      .focused-client {}
-
+      .focused-client {
+      }
     }
 
     .center {
-
       .workspaces {
         background-color: $color-surface_container;
         color: $color-on_surface;
@@ -63,7 +62,6 @@ window#bar {
           @include material-icon(24px);
         }
       }
-
     }
 
     .right-side {
@@ -85,7 +83,8 @@ window#bar {
         levelbar {
           transform: rotate(180deg);
           block {
-            border-radius: 2px;
+            min-width: 6px;
+            border-radius: 4px;
             &.filled {
               background-color: $color-primary;
             }
@@ -97,15 +96,13 @@ window#bar {
         }
 
         .material-icon {
-          @include material-icon(24px)
+          @include material-icon(24px);
         }
       }
-
 
       .battery {
         color: $color-on_surface;
       }
-
 
       .time {
         button {
@@ -116,9 +113,16 @@ window#bar {
             color: $color-on_surface;
             font-weight: 500;
           }
+
+          &:checked {
+            background-color: $color-primary;
+
+            label {
+              color: $color-surface;
+            }
+          }
         }
       }
-
     }
   }
 }
