@@ -11,11 +11,18 @@ export default function NotificationPopups() {
   const notifd = AstalNotifd.get_default();
 
   const [notifications, setNotifications] = createState(
-    new Array<AstalNotifd.Notification>(),
+    new Array<AstalNotifd.Notification>()
   );
 
   const notifiedHandler = notifd.connect("notified", (_, id, replaced) => {
     const notification = notifd.get_notification(id);
+
+    if (
+      notifd.dont_disturb &&
+      notification.urgency !== AstalNotifd.Urgency.CRITICAL
+    ) {
+      return;
+    }
 
     if (replaced && notifications.get().some((n) => n.id === id)) {
       setNotifications((ns) => ns.map((n) => (n.id === id ? notification : n)));
@@ -50,10 +57,9 @@ export default function NotificationPopups() {
               {(notification) => (
                 <Notification
                   notification={notification}
-
                   // onHoverLost={() =>
                   //   setNotifications((ns) =>
-                  //     ns.filter((n) => n.id !== notification.id),
+                  //     ns.filter((n) => n.id !== notification.id)
                   //   )
                   // }
                 />
