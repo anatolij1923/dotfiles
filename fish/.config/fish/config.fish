@@ -62,3 +62,24 @@ function mkcd
     cd $argv
 end
 
+function arch_news_check
+    echo "Latest news check:"
+    curl -s https://archlinux.org/news/ \
+        | grep -Eo 'href="/news/[^"]+"' \
+        | cut -d'"' -f2 \
+        | head -n 5 \
+        | sed 's|^|https://archlinux.org|'
+    echo
+
+    read -l -P "Do you want to continue with the system upgrade? [y/N] " answer
+    switch $answer
+        case y Y
+            sudo pacman -Syu
+        case '*'
+            echo "Upgrade cancelled."
+    end
+end
+
+
+alias pacnews="arch_news_check"
+
