@@ -14,7 +14,7 @@ if [ -f "$FLAG_FILE" ]; then
         keyword decoration:blur:enabled 1;\
         keyword general:gaps_in 10;\
         keyword general:gaps_out 20;\
-        keyword general:border_size 3;\
+        keyword general:border_size 0;\
         keyword decoration:rounding 20; \
         keyword input:touchpad:disable_while_typing 1 "
     notify-send "Gamemode" "Gamemode is turned off"
@@ -27,7 +27,7 @@ else
         keyword decoration:blur:enabled 0;\
         keyword general:gaps_in 0;\
         keyword general:gaps_out 0;\
-        keyword general:border_size 1;\
+        keyword general:border_size 0;\
         keyword decoration:rounding 0;\
         keyword input:touchpad:disable_while_typing 0"
 
