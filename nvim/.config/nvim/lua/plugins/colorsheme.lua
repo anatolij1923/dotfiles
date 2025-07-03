@@ -25,4 +25,7 @@ return {
         --     vim.cmd(" colorscheme kanagawa")
         -- end
     },
+    {
+        "tiagovla/tokyodark.nvim"
+    }
 }

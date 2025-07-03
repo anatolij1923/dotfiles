@@ -1,11 +1,12 @@
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
-      
--- Копировать выделенный текст в системный буфер обмена по Ctrl+C
+
+-- Sync clipboard
 vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true, silent = true })
 
+map("n", ";", ":")
 
-map("n", "<Space>", "", opts)
+map("n", "<Space>", "",opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -13,8 +14,8 @@ vim.g.maplocalleader = " "
 map("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
 
 -- Move lines 
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", {desc = "Move selected region down"})
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {desc = "Move selected region up"})
 
 -- Move lines left and right
 vim.keymap.set("v", ">", ">gv", opts)
@@ -27,32 +28,27 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- Remove search highlight
 vim.keymap.set("n", "<C-c>", ":nohl<CR>")
 
---split management
-vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
+-- split management
 -- split window vertically
-vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
+vim.keymap.set("n", "<leader>v", "<C-w>v", { desc = "Split window vertically" })
 -- split window horizontally
-vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
+vim.keymap.set("n", "<leader>h", "<C-w>s", { desc = "Split window horizontally" })
+-- make split windows equal width & height
+vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) 
 -- close current split window
-vim.keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" })
+vim.keymap.set("n", "<leader>x", "<cmd>close<CR>", { desc = "Close current split" })
 
--- Переключение между буферами с помощью Tab
+-- Switch tabs
 vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
 
--- Закрытие вкладки
+-- Close tab
 map("n", "<leader>q", "<Cmd>bdelete<CR>", {
   noremap = true,
   silent = true,
-  desc = "Buffer: Close current" -- Описание для WhichKey
+  desc = "Buffer: Close current"
 })
 
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Keybinds to make split navigation easier.

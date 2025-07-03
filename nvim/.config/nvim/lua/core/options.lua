@@ -33,6 +33,7 @@ vim.opt.swapfile = false
 -- Configure how new splits should be opened
 vim.o.splitright = true
 vim.o.splitbelow = true
+vim.o.equalalways = false
 
 -- Decrease update time
 vim.o.updatetime = 250
