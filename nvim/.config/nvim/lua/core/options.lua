@@ -53,17 +53,9 @@ vim.opt.title = true
 vim.opt.backup = false
 vim.opt.showcmd = true
 
--- 2 tabwidth for js/ts
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
-    callback = function()
-        vim.bo.tabstop = 2
-        vim.bo.shiftwidth = 2
-        vim.bo.softtabstop = 2
-    end,
-})
+vim.opt.fillchars:append('eob: ')
 
-vim.o.foldcolumn = "1"    -- колонка слева для отображения фолдов
+vim.o.foldcolumn = "0"    -- колонка слева для отображения фолдов
 vim.o.foldlevel = 99      -- чтобы не сворачивало всё при открытии
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true   -- включить фолды
