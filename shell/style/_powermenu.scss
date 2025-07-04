@@ -23,8 +23,10 @@ window.powermenu {
 
       &:focus {
         background-color: $color-primary;
+        outline: none;
         color: $color-on_primary;
         box-shadow: 0 0 10px 3px rgba($color-primary, 0.35);
+        transform: scale(1.05);
       }
 
       &:active {

@@ -36,6 +36,7 @@ window#launcher {
 
             &:focus {
                 outline: none;
+                box-shadow: 0 0 10px 2px rgba($color-primary, $alpha: 0.4);
                 background-color: $color-primary;
                 color: $color-surface;
             }

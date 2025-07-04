@@ -5,6 +5,11 @@ import { Astal, Gtk } from "ags/gtk4";
 
 const options = [
   {
+    name: "Lock",
+    command: "hyprlock",
+    icon: "lock",
+  },
+  {
     name: "Shutdown",
     command: "systemctl poweroff",
     icon: "power_settings_new",

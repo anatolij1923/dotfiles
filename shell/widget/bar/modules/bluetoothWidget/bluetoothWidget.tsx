@@ -30,7 +30,7 @@ export default function BluetoothWidget() {
       visible={deviceInfo((di) => di.connected)}
       class="bluetooth-widget"
       tooltipText={tooltip}
-      spacing={4}
+      spacing={0}
     >
       <label label={"bluetooth"} class="material-icon" />
       <levelbar

@@ -33,7 +33,7 @@ export default function KbLayout() {
           exec("hyprctl switchxkblayout at-translated-set-2-keyboard next")
         }
       >
-        <box>
+        <box spacing={8}>
           <label label={"keyboard"} class="material-icon" />
           <label label={layout} />
         </box>
