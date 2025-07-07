@@ -6,9 +6,12 @@ return {
 
 		opts = {
 			explorer = {
-				enabled = true,
+				enabled = false,
 				layout = {
 					cycle = false,
+					layout = {
+						width = 10,
+					},
 				},
 			},
 
