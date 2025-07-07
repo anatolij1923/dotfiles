@@ -181,5 +181,14 @@ return {
 		lspconfig.pyright.setup({
 			capabilities = capabilities,
 		})
+
+		lspconfig.qmlls.setup({
+			cmd = { "qmlls6", "-E" },
+			filetypes = { "qml" },
+			root_dir = function(fname)
+				return lspconfig.util.root_pattern("qmldir", ".git")(fname) or vim.fn.getcwd()
+			end,
+			capabilities = capabilities,
+		})
 	end,
 }

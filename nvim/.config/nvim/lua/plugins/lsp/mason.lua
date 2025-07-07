@@ -42,10 +42,12 @@ return {
 			ensure_installed = {
 				"stylua", -- lua formatter
 				"clang-format",
-                "black",
+				"black",
 				"prettier",
 				"denols",
 				"pylint",
+				"rust-analyzer",
+                "qmlls",
 			},
 		})
 	end,

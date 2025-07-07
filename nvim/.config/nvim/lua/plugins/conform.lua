@@ -22,8 +22,9 @@ return {
 				python = { "black" },
 				markdown = { "prettier" },
 				["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
-                c = { "clang-format" },
-                cpp = { "clang-format" },
+				c = { "clang-format" },
+				cpp = { "clang-format" },
+				qml = { "qmlls" },
 			},
 			-- format_on_save = {
 			-- 	lsp_fallback = true,
@@ -50,6 +51,6 @@ return {
 				async = false,
 				timeout_ms = 1000,
 			})
-		end, { desc = " Prettier Format whole file or range (in visual mode) with" })
+		end, { desc = "Format whole file or range (in visual mode)" })
 	end,
 }
