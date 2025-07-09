@@ -17,7 +17,7 @@ window#bar {
       margin: 0 0 0 16px;
 
       .focused-client {
-        font-weight:  500;
+        font-weight: 500;
       }
     }
 
@@ -65,8 +65,10 @@ window#bar {
 
         button {
           background-color: $color-surface_container;
+          font-weight: 500;
           outline: none;
-          border-radius: 24px;
+          border-radius: 24px 8px 8px 24px;
+
           .material-icon {
             @include material-icon(24px);
           }
@@ -87,14 +89,16 @@ window#bar {
       }
 
       .bluetooth-widget {
-        margin: 6px;
+        // margin: 6px;
         color: $color-on_surface;
 
         levelbar {
           transform: rotate(180deg);
+
           block {
             min-width: 6px;
             border-radius: 4px;
+
             &.filled {
               background-color: $color-primary;
             }
@@ -114,10 +118,17 @@ window#bar {
         color: $color-on_surface;
       }
 
-      .time {
+      .common-button {
+        button {
+          outline: none;
+          border-radius: 8px;
+        }
+      }
+
+      .clock {
         button {
           background-color: $color-surface_container;
-          border-radius: 24px;
+          border-radius: 8px 20px 20px 8px;
           outline: none;
 
           label {

@@ -36,7 +36,8 @@ const options = [
 export default function Powermenu() {
   return (
     <Window
-      name="Powermenu"
+      name="powermenu"
+      namespace="powermenu"
       keymode={Astal.Keymode.EXCLUSIVE}
       class="powermenu"
     >

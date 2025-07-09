@@ -9,6 +9,23 @@ import Workspaces from "./modules/workspaces/Workspaces";
 import BluetoothWidget from "./modules/bluetoothWidget/bluetoothWidget";
 import Test from "../osd/OSD";
 
+function CommonButton() {
+  return (
+    <box class="common-button">
+      <button
+        onClicked={() => {
+          app.toggle_window("quicksettings");
+        }}
+      >
+        <box spacing={16}>
+          <BluetoothWidget />
+          <Battery />
+        </box>
+      </button>
+    </box>
+  );
+}
+
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP, RIGHT, LEFT } = Astal.WindowAnchor;
 
@@ -22,17 +39,18 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       application={app}
     >
       <centerbox>
-        <box $type="start" class="left-side" spacing={16}>
+        <box $type="start" class="left-side" spacing={8}>
           <FocusedClient />
         </box>
-        <box $type="center" class="center" spacing={16}>
+        <box $type="center" class="center" spacing={8}>
           <Workspaces />
         </box>
-        <box $type="end" class="right-side" spacing={16}>
+        <box $type="end" class="right-side" spacing={8}>
           <Tray />
-          <BluetoothWidget />
+          {/* <BluetoothWidget /> */}
           <KbLayout />
-          <Battery />
+          {/* <Battery /> */}
+          <CommonButton />
           <Clock />
         </box>
       </centerbox>

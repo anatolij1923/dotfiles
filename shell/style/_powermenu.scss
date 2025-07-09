@@ -3,8 +3,9 @@
 
 window.powermenu {
   .powermenu-content {
-    background-color: $color-surface_container;
+    background-color: rgba($color-surface_container, $alpha: 1) ;
     border-radius: 24px;
+    box-shadow: none;
     padding: 24px;
 
     button {
@@ -23,6 +24,7 @@ window.powermenu {
 
       &:focus {
         background-color: $color-primary;
+        border-radius: 24px;
         outline: none;
         color: $color-on_primary;
         box-shadow: 0 0 10px 3px rgba($color-primary, 0.35);
