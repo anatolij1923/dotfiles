@@ -11,7 +11,7 @@ export default function NotificationPopups() {
   const notifd = AstalNotifd.get_default();
 
   const [notifications, setNotifications] = createState(
-    new Array<AstalNotifd.Notification>()
+    new Array<AstalNotifd.Notification>(),
   );
 
   const notifiedHandler = notifd.connect("notified", (_, id, replaced) => {
@@ -29,6 +29,10 @@ export default function NotificationPopups() {
     } else {
       setNotifications((ns) => [notification, ...ns]);
     }
+
+    timeout(5000, () => {
+      setNotifications((ns) => ns.filter((n) => n.id != notification.id))
+    })
   });
 
   const resolvedHandler = notifd.connect("resolved", (_, id) => {
