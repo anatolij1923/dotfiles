@@ -5,19 +5,34 @@ import Bar from "./widget/bar/Bar";
 import Applauncher from "./widget/applauncher/Applauncher";
 import NotificationPopups from "./widget/notifications/NotificationPopups";
 import { ScreenCorners } from "./widget/bar/ScreenCorners";
-
-let applauncher: Gtk.Window;
+import Powermenu from "./widget/powermenu/Powermenu";
+import Quicksettings from "./widget/quicksettings/Quicksettings";
+import OSD from "./widget/osd/OSD";
 
 app.start({
   css: style,
   gtkTheme: "Adwaita",
   main() {
     app.get_monitors().forEach((monitor) => {
+      // Topbar
       Bar(monitor);
+
+      // Screencorners
       ScreenCorners(monitor);
-      applauncher = Applauncher() as Gtk.Window;
-      app.add_window(applauncher);
+
+      // Applauncher
+      app.add_window(Applauncher() as Gtk.Window);
+
+      // Notification Popups
       NotificationPopups();
+
+      // Powermenu
+      app.add_window(Powermenu() as Gtk.Window)
+
+      // Quick Settings
+      app.add_window(Quicksettings(monitor) as Gtk.Window)
+
+      OSD(monitor)
     });
   },
 });
