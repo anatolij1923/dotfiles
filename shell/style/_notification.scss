@@ -1,5 +1,6 @@
 @use "sass:string";
 @use "./colors" as *;
+@use "mixins/material.scss" as *;
 
 @function gtkalpha($c, $a) {
   @return string.unquote("alpha(#{$c},#{$a})");
@@ -17,16 +18,17 @@ window.NotificationPopups {
   margin: 0.5rem 1rem 0rem 1rem;
 
   &.critical {
-    border: 1pt solid gtkalpha($color-error, 0.4);
+    // border: 1pt solid gtkalpha($color-error, 0.4);
 
     .header {
       .app-name {
         color: gtkalpha($color-error, 0.8);
       }
 
-      .app-icon {
-        color: gtkalpha($color-error, 0.6);
-      }
+        .app-icon {
+          color: $color-error
+        }
+
     }
   }
 
@@ -34,6 +36,7 @@ window.NotificationPopups {
     padding: 0.5rem;
     color: gtkalpha($color-on_surface, 0.5);
 
+    
     .app-icon {
       margin: 0 0.4rem;
     }
@@ -51,9 +54,14 @@ window.NotificationPopups {
       margin: 0 0.4rem;
     }
 
-    button {
+    .expand-button {
+      @include material-icon;
+    }
+
+    .close-button {
       outline: none;
-      background-color: $color-surface_container_high;
+      // background-color: $color-surface_container_high;
+      background-color: transparent;
       border-radius: 16px;
       padding: 0.2rem;
       min-width: 0;
@@ -87,6 +95,7 @@ window.NotificationPopups {
       background-size: cover;
       background-position: center;
     }
+    
   }
 
   .actions {
