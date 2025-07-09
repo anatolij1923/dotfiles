@@ -2,25 +2,30 @@
 @use "mixins/material.scss" as *;
 
 .osd {
-  background-color: $color-surface;
-  border-radius: 24px;
-  padding: 16px;
-  margin: 20px 0;
+  background-color: transparent;
 
-  .icon {
-    @include material-icon
-  }
+  .osd-content {
+    background-color: $color-surface;
+    border-radius: 24px;
+    padding: 16px;
+    margin: 20px 0;
 
-  progressbar {
-    trough {
-      min-height: 12px;
-
-      progress {
-        min-height: 12px;
-        background-color: $color-primary;
-      }
-
+    .icon {
+      @include material-icon
     }
-  }
 
+    progressbar {
+      trough {
+        min-height: 12px;
+
+        progress {
+          min-height: 12px;
+          background-color: $color-primary;
+        }
+
+      }
+    }
+
+  }
 }
+

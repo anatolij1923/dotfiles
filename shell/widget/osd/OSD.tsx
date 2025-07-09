@@ -112,7 +112,7 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
         transitionType={Gtk.RevealerTransitionType.CROSSFADE}
         transitionDuration={200}
       >
-        <box spacing={16}>
+        <box spacing={16} class="osd-content">
           <label label={osdState((s) => s.icon)} class="material-icon icon"/>
           <Gtk.ProgressBar
             valign={Gtk.Align.CENTER}
