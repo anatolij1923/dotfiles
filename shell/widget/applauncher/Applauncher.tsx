@@ -1,4 +1,4 @@
-import { For, createState } from "ags";
+import { For, createComputed, createState } from "ags";
 import { Astal, Gtk, Gdk } from "ags/gtk4";
 import AstalApps from "gi://AstalApps";
 import Window from "../common/Window";
@@ -67,23 +67,29 @@ export default function Applauncher() {
         />
       </box>
       <Gtk.Separator visible={list((l) => l.length > 0)} class="separator" />
-      <box orientation={Gtk.Orientation.VERTICAL}>
-        <For each={list}>
-          {(app, index) => (
-            <button onClicked={() => launch(app)}>
-              <box spacing={12}>
-                <image iconName={app.iconName} pixelSize={32} />
-                <label label={app.name} maxWidthChars={40} wrap />
-                <label
-                  hexpand
-                  halign={Gtk.Align.END}
-                  label={index((i) => `󰘳  ${i + 1}`)}
-                />
-              </box>
-            </button>
-          )}
-        </For>
-      </box>
+      <revealer
+        revealChild={list((l) => l.length > 0)}
+        transitionDuration={130}
+        transitionType={Gtk.RevealerTransitionType.SWING_DOWN}
+      >
+        <box orientation={Gtk.Orientation.VERTICAL}>
+          <For each={list}>
+            {(app, index) => (
+              <button onClicked={() => launch(app)}>
+                <box spacing={12}>
+                  <image iconName={app.iconName} pixelSize={32} />
+                  <label label={app.name} maxWidthChars={40} wrap />
+                  <label
+                    hexpand
+                    halign={Gtk.Align.END}
+                    label={index((i) => `󰘳  ${i + 1}`)}
+                  />
+                </box>
+              </button>
+            )}
+          </For>
+        </box>
+      </revealer>
     </Window>
   );
 }
