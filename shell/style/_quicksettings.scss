@@ -10,12 +10,47 @@ window.quicksettings {
     background-color: $color-surface;
     color: $color-on_surface;
 
-    .qs-button {
+    .sliders {
+      margin: 0 0;
+      padding: 8px;
       border-radius: 16px;
-      padding: 24px;
+      background-color: $color-surface_container;
+      @include material-icon;
+
+      scale {
+        trough {
+          background-color: $color-on_primary;
+          slider {
+            all: unset;
+            outline: none;
+            padding: 10px;
+            background: none;
+          }
+          highlight {
+            background-color: $color-primary;
+          }
+
+          empty {
+            background-color: wheat;
+          }
+        }
+      }
+    }
+
+    .qs-button {
+      outline: none;
+      border-radius: 24px;
+      margin: 0 4px;
+      padding: 16px 20px;
       @include material-icon($size: 32px);
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        transform: scaleX(1.1);
+      }
+
       &.active {
-        border-radius: 24px;
+        border-radius: 16px;
         background-color: $color-primary;
         color: $color-surface;
       }
