@@ -1,0 +1,24 @@
+@use "./colors" as *;
+@use "mixins/material" as *;
+
+window.quicksettings {
+  .quicksettings-content {
+    margin: 10px;
+    padding: 16px;
+    border-radius: 24px;
+
+    background-color: $color-surface;
+    color: $color-on_surface;
+
+    .qs-button {
+      border-radius: 16px;
+      padding: 24px;
+      @include material-icon($size: 32px);
+      &.active {
+        border-radius: 24px;
+        background-color: $color-primary;
+        color: $color-surface;
+      }
+    }
+  }
+}
