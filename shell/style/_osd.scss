@@ -1,10 +1,15 @@
 @use "colors" as *;
+@use "mixins/material.scss" as *;
 
 .osd {
   background-color: $color-surface;
   border-radius: 24px;
   padding: 16px;
   margin: 20px 0;
+
+  .icon {
+    @include material-icon
+  }
 
   progressbar {
     trough {

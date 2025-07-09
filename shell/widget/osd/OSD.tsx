@@ -25,13 +25,39 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
   const [isVisible, setIsVisible] = createState(false);
   let hideTimeout: ReturnType<typeof timeout> | undefined;
 
+  function getVolumeIcon(volume: number, mute: boolean): string {
+    if (mute || volume === 0) return "volume_off"; // или volume_mute
+
+    if (volume < 0.33) return "volume_mute";
+
+    if (volume < 0.66) return "volume_down";
+
+    return "volume_up";
+  }
+
   speaker?.connect("notify::volume", () => {
     const volume = speaker.volume;
 
     setOsdState({
       type: "speaker",
       percentage: volume,
-      icon: "audio-volume-high-symbolic",
+      mute: speaker.mute,
+      icon: getVolumeIcon(speaker.volume, speaker.mute),
+    });
+
+    setIsVisible(true);
+    if (hideTimeout) hideTimeout.cancel();
+    hideTimeout = timeout(1500, () => setIsVisible(false));
+  });
+
+  speaker?.connect("notify::mute", () => {
+    setOsdState({
+      type: "speaker",
+      percentage: speaker.volume,
+      mute: speaker.mute,
+      icon: speaker.mute
+        ? "volume_off"
+        : "volume_up", 
     });
 
     setIsVisible(true);
@@ -45,7 +71,7 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
     setOsdState({
       type: "brightness",
       percentage: brightnessPercent,
-      icon: "penis",
+      icon: "brightness_6",
     });
 
     setIsVisible(true);
@@ -55,6 +81,7 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
 
   return (
     <window
+      gdkmonitor={gdkmonitor}
       class="osd"
       name="osd"
       anchor={TOP}
@@ -85,8 +112,8 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
         transitionType={Gtk.RevealerTransitionType.CROSSFADE}
         transitionDuration={200}
       >
-        <box spacing={8}>
-          <image iconName={osdState((s) => s.icon)} />
+        <box spacing={16}>
+          <label label={osdState((s) => s.icon)} class="material-icon icon"/>
           <Gtk.ProgressBar
             valign={Gtk.Align.CENTER}
             fraction={osdState((s) => s.percentage)}
