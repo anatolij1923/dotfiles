@@ -48,6 +48,7 @@ export default function Applauncher() {
   return (
     <Window
       name="launcher"
+      namespace="launcher"
       anchor={TOP | BOTTOM | LEFT | RIGHT}
       exclusivity={Astal.Exclusivity.IGNORE}
       keymode={Astal.Keymode.EXCLUSIVE}

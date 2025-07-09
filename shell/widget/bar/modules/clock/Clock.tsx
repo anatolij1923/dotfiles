@@ -9,7 +9,7 @@ export default function Clock({ format = "%H:%M" }) {
   });
 
   return (
-    <box class="time">
+    <box class="clock">
       <menubutton>
         <label label={time} />
         <popover>
