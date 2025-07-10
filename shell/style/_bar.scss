@@ -96,7 +96,7 @@ window#bar {
           transform: rotate(180deg);
 
           block {
-            min-width: 6px;
+            min-width: 4px;
             border-radius: 4px;
 
             &.filled {
@@ -114,8 +114,17 @@ window#bar {
         }
       }
 
+      .wifi {
+        color: $color-on_surface;
+
+        label {
+          @include material-icon;
+        }
+      }
+
       .battery {
         color: $color-on_surface;
+        font-weight: 500;
       }
 
       .common-button {

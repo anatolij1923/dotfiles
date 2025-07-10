@@ -10,12 +10,13 @@
 
 window.NotificationPopups {
   all: unset;
+  margin: 0.5rem 1rem;
 }
 
 .Notification {
   border-radius: 24px;
   background-color: $color-surface;
-  margin: 0.5rem 1rem 0rem 1rem;
+  margin: 0.35rem 0rem ;
 
   &.critical {
     // border: 1pt solid gtkalpha($color-error, 0.4);
