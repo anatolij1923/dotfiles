@@ -8,6 +8,7 @@ import Tray from "./modules/tray/Tray";
 import Workspaces from "./modules/workspaces/Workspaces";
 import BluetoothWidget from "./modules/bluetoothWidget/bluetoothWidget";
 import Test from "../osd/OSD";
+import Wifi from "./modules/wifi/Wifi";
 
 function CommonButton() {
   return (
@@ -18,6 +19,7 @@ function CommonButton() {
         }}
       >
         <box spacing={16}>
+          <Wifi />
           <BluetoothWidget />
           <Battery />
         </box>
