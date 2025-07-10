@@ -1,4 +1,4 @@
-import { createState } from "ags";
+import { createState, onCleanup } from "ags";
 import { exec } from "ags/process";
 import Hyprland from "gi://AstalHyprland";
 
@@ -23,7 +23,9 @@ export default function KbLayout() {
     }
   };
 
-  hypr.connect("keyboard-layout", update);
+  const id = hypr.connect("keyboard-layout", update);
+  onCleanup(() => hypr.disconnect(id))
+
   update();
 
   return (

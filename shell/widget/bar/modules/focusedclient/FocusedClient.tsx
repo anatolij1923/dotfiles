@@ -41,6 +41,7 @@ export default function FocusedClient() {
         currentClient.disconnect(titleSignalId);
         titleSignalId = null;
       }
+      focusedClientUnsubscribe()
     };
   });
 

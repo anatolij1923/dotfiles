@@ -1,4 +1,4 @@
-import { createComputed, createExternal, For } from "ags";
+import { createComputed, createExternal, For, onCleanup } from "ags";
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
 
 const MIN_WS = 8;
@@ -8,12 +8,13 @@ export default function Workspaces() {
 
   const workspaces = createExternal(hypr.workspaces, (set) => {
     const update = () => set(hypr.workspaces);
-    hypr.connect("notify::workspaces", update);
+    const id = hypr.connect("notify::workspaces", update);
     update();
+    onCleanup(() => hypr.disconnect(id));
   });
 
   const sortedWorkspaces = workspaces((ws) =>
-    ws.filter((w) => !(w.id >= -99 && w.id <= -2)).sort((a, b) => a.id - b.id),
+    ws.filter((w) => !(w.id >= -99 && w.id <= -2)).sort((a, b) => a.id - b.id)
   );
 
   const workspaceRange = createComputed([sortedWorkspaces], (sorted) => {
@@ -25,16 +26,18 @@ export default function Workspaces() {
     <box class="workspaces" spacing={4}>
       <For each={workspaceRange}>
         {(id) => {
-          const ws = hypr.get_workspace(id) ?? AstalHyprland.Workspace.dummy(id, null);
+          const ws =
+            hypr.get_workspace(id) ?? AstalHyprland.Workspace.dummy(id, null);
 
           const focusedWorkspace = createExternal(
             hypr.focusedWorkspace,
             (set) => {
               const update = () => set(hypr.focusedWorkspace);
-              hypr.connect("notify::focused-workspace", update);
+              const id = hypr.connect("notify::focused-workspace", update);
               update();
+              onCleanup(() => hypr.disconnect(id));
               return () => {};
-            },
+            }
           );
 
           const classNames = createComputed([focusedWorkspace], (fw) => {
@@ -46,13 +49,10 @@ export default function Workspaces() {
           });
 
           return (
-          <button 
-              class={classNames}
-              onClicked={() => ws.focus()}
-          >
+            <button class={classNames} onClicked={() => ws.focus()}>
               <label label={id.toString()} />
             </button>
-          )
+          );
         }}
       </For>
     </box>

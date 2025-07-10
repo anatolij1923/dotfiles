@@ -1,7 +1,7 @@
 import { Astal, Gdk, Gtk } from "ags/gtk4";
 import Wp from "gi://AstalWp";
 import Brightness from "../../lib/brightness";
-import { createBinding, createState } from "ags";
+import { createBinding, createState, onCleanup } from "ags";
 import { timeout } from "ags/time";
 import cairo from "gi://cairo?version=1.0";
 
@@ -35,7 +35,7 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
     return "volume_up";
   }
 
-  speaker?.connect("notify::volume", () => {
+  const volumeId = speaker?.connect("notify::volume", () => {
     const volume = speaker.volume;
 
     setOsdState({
@@ -50,14 +50,12 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
     hideTimeout = timeout(1500, () => setIsVisible(false));
   });
 
-  speaker?.connect("notify::mute", () => {
+  const muteId = speaker?.connect("notify::mute", () => {
     setOsdState({
       type: "speaker",
       percentage: speaker.volume,
       mute: speaker.mute,
-      icon: speaker.mute
-        ? "volume_off"
-        : "volume_up", 
+      icon: speaker.mute ? "volume_off" : "volume_up",
     });
 
     setIsVisible(true);
@@ -65,7 +63,7 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
     hideTimeout = timeout(1500, () => setIsVisible(false));
   });
 
-  brigtness.connect("notify::screen", () => {
+  const brightnessId = brigtness.connect("notify::screen", () => {
     const brightnessPercent = brigtness.screen;
 
     setOsdState({
@@ -77,6 +75,12 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
     setIsVisible(true);
     if (hideTimeout) hideTimeout.cancel();
     hideTimeout = timeout(1500, () => setIsVisible(false));
+  });
+
+  onCleanup(() => {
+    if (volumeId) speaker?.disconnect(volumeId);
+    if (muteId) speaker?.disconnect(muteId);
+    brigtness.disconnect(brightnessId);
   });
 
   return (
@@ -113,7 +117,7 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
         transitionDuration={200}
       >
         <box spacing={16} class="osd-content">
-          <label label={osdState((s) => s.icon)} class="material-icon icon"/>
+          <label label={osdState((s) => s.icon)} class="material-icon icon" />
           <Gtk.ProgressBar
             valign={Gtk.Align.CENTER}
             fraction={osdState((s) => s.percentage)}
