@@ -3,18 +3,49 @@
 
 window.quicksettings {
   .quicksettings-content {
-    margin: 10px;
     padding: 16px;
     border-radius: 24px;
 
-    background-color: $color-surface;
+    background-color: rgba($color-surface, $alpha: 0.5);
     color: $color-on_surface;
 
-    .sliders {
-      margin: 0 0;
+    .stack-widget {
+      background-color: rgba($color-surface_container, $alpha: 0.7);
       padding: 8px;
       border-radius: 16px;
-      background-color: $color-surface_container;
+      .buttons {
+        .material-icon {
+          @include material-icon;
+        }
+
+        button {
+          border-radius: 16px;
+          &.active {
+            background-color: $color-primary;
+            color: $color-surface;
+          }
+        }
+      }
+    }
+
+    // .notification-window {
+    //   background-color: rgba($color-surface_container, $alpha: 0.7);
+    //   border-radius: 16px;
+    //   padding: 8px;
+    //   .clear-button {
+    //     color: $color-error;
+    //     border-radius: 24px;
+    //     .material-icon {
+    //       @include material-icon;
+    //     }
+    //   }
+    // }
+
+    .sliders {
+      margin: 0 0px;
+      padding: 8px 16px;
+      border-radius: 16px;
+      background-color: rgba($color-surface_container, $alpha: 0.7);
       @include material-icon;
 
       scale {
@@ -53,6 +84,14 @@ window.quicksettings {
         border-radius: 16px;
         background-color: $color-primary;
         color: $color-surface;
+      }
+      .title {
+        all: unset;
+        label {
+          font-family: "Rubik";
+          // font-weight: 500;
+          font-size: 24px;
+        }
       }
     }
   }
