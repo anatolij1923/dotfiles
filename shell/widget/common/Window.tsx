@@ -18,6 +18,10 @@ interface CommonWindowProps extends WindowProps {
   onClick?: (_e: Gtk.GestureClick, _: number, x: number, y: number) => void;
   onVisibilityChange?: (visible: boolean) => void;
   children?: any;
+  contentValign?: Gtk.Align;
+  contentHalign?: Gtk.Align;
+  contentVexpand?: boolean;
+  contentHexpand?: boolean;
 }
 
 export default function Window({
@@ -30,6 +34,10 @@ export default function Window({
   onClick,
   onVisibilityChange,
   children,
+  contentValign,
+  contentHalign,
+  contentVexpand,
+  contentHexpand,
   ...rest
 }: CommonWindowProps) {
   let win: Astal.Window;
@@ -67,7 +75,7 @@ export default function Window({
       exclusivity={exclusivity}
       keymode={keymode}
       layer={Astal.Layer.OVERLAY}
-      margin={10}
+      margin={16}
       onNotifyVisible={({ visible }) => {
         if (visible) {
           contentbox.grab_focus();
@@ -81,8 +89,10 @@ export default function Window({
       <box
         $={(ref) => (contentbox = ref)}
         name={`${name}-content`}
-        valign={Gtk.Align.CENTER}
-        halign={Gtk.Align.CENTER}
+        valign={contentValign ?? Gtk.Align.CENTER}
+        halign={contentHalign ?? Gtk.Align.CENTER}
+        vexpand={contentVexpand ?? false}
+        hexpand={contentHexpand ?? false}
         orientation={Gtk.Orientation.VERTICAL}
       >
         {children}
