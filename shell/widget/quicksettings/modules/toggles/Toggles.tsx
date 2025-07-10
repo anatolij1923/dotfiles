@@ -4,9 +4,11 @@ import Notifd from "gi://AstalNotifd";
 import { createBinding } from "ags";
 import Network from "gi://AstalNetwork";
 import Bluetooth from "gi://AstalBluetooth";
+import { Gtk } from "ags/gtk4";
 
 function WifiButton() {
   const wifi = Network.get_default().wifi;
+  // const wifiName =
 
   return (
     <QSButton
@@ -31,6 +33,18 @@ function BluetoothButton() {
         bluetooth,
         "isPowered"
       )((v) => (v ? "bluetooth" : "bluetooth_disabled"))}
+      // label={createBinding(bluetooth, "isConnected").as((connected) => {
+      //   if (connected) {
+      //     const device = bluetooth.devices.find((d) => d.connected);
+      //     if (device) {
+      //       return device.name;
+      //     } else {
+      //       return "Bluetooth";
+      //     }
+      //   } else {
+      //     return "Bluetooth";
+      //   }
+      // })}
     />
   );
 }
@@ -72,11 +86,13 @@ function DND() {
 
 export default function Toggles() {
   return (
-    <box>
-      <WifiButton />
-      <BluetoothButton />
-      <Mic />
-      <DND />
+    <box orientation={Gtk.Orientation.VERTICAL} spacing={8}>
+      <box>
+        <WifiButton />
+        <BluetoothButton />
+        <Mic />
+        <DND />
+      </box>
     </box>
   );
 }

@@ -2,6 +2,7 @@ import { createState, createBinding, createExternal } from "ags";
 import { Gtk } from "ags/gtk4";
 import GObject from "gi://GObject?version=2.0";
 import type { Accessor } from "ags";
+import Pango from "gi://Pango?version=1.0";
 
 interface QSButtonProps<T extends GObject.Object> {
   iconName: string | Accessor<string>; // Allow Accessor for iconName
@@ -71,13 +72,19 @@ export default function QSButton<T extends GObject.Object>({
       onClicked={onClicked}
       tooltipText={label}
     >
-      <box spacing={12}>
+      <box spacing={0}>
         <label
           label={iconName} // This will now accept Accessor<string>
           halign={Gtk.Align.CENTER}
           class="material-icon"
         />
-        {/* <label label={label} /> */}
+        {/* <box class="title">
+          <label
+            label={label}
+            maxWidthChars={10}
+            ellipsize={Pango.EllipsizeMode.END}
+          />
+        </box> */}
       </box>
     </button>
   );
