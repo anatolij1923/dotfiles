@@ -88,6 +88,7 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
       gdkmonitor={gdkmonitor}
       class="osd"
       name="osd"
+      layer={Astal.Layer.OVERLAY}
       anchor={TOP}
       $={(win) => {
         const surface = win.get_surface();
