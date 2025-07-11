@@ -9,11 +9,11 @@ if [ -f "$FLAG_FILE" ]; then
     # Анимации выключаются
     rm "$FLAG_FILE"
     hyprctl keyword animations:enabled 0
-    notify-send "Animations" "Animations are turned off"
+    notify-send -a "Animations" "Animations are turned off" 
 else
     # Анимации включаются
     touch "$FLAG_FILE"
     hyprctl keyword animations:enabled 1
-    notify-send "Animations" "Animations are turned on"
+    notify-send -a "Animations" "Animations are turned on"
 fi
 

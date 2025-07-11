@@ -17,7 +17,7 @@ if [ -f "$FLAG_FILE" ]; then
         keyword general:border_size 0;\
         keyword decoration:rounding 20; \
         keyword input:touchpad:disable_while_typing 1 "
-    notify-send "Gamemode" "Gamemode is turned off"
+    notify-send -a "Gamemode" "Gamemode is turned off"
 else
     # Gamemode включается
     touch "$FLAG_FILE"
@@ -31,6 +31,6 @@ else
         keyword decoration:rounding 0;\
         keyword input:touchpad:disable_while_typing 0"
 
-    notify-send "Gamemode" "Gamemode is turned on"
+    notify-send -a "Gamemode" "Gamemode is turned on"
 fi
 
