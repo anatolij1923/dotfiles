@@ -6,7 +6,7 @@ export default function Battery() {
 
   const percent = createBinding(
     battery,
-    "percentage",
+    "percentage"
   )((p) => `${Math.floor(p * 100)}%`);
 
   return (
@@ -17,7 +17,7 @@ export default function Battery() {
     //   </box>
     // </menubutton>
     //
-    <box spacing={8} class="battery">
+    <box spacing={4} class="battery">
       <image iconName={createBinding(battery, "iconName")} />
       <label label={percent} />
     </box>

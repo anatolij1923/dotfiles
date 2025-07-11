@@ -9,7 +9,7 @@ export default function StackWidget() {
 
   return (
     <box orientation={Gtk.Orientation.VERTICAL} class="stack-widget">
-      <box class="buttons" halign={Gtk.Align.CENTER}>
+      <box class="buttons" halign={Gtk.Align.CENTER} spacing={8}>
         <button
           class={activeStackChild.as((v) =>
             v === "notifications" ? "active" : ""

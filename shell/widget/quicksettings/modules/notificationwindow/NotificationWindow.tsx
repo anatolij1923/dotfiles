@@ -24,9 +24,10 @@ function NotificationScrolledWindow() {
         >
           <Gtk.Image
             iconName="mail-unread-symbolic"
-            iconSize={Gtk.IconSize.LARGE}
+            // iconSize={Gtk.IconSize.LARGE}
+            pixelSize={48}
           />
-          <Gtk.Label label="No notifications" />
+          <Gtk.Label label="You have no notifications" />
         </box>
       </box>
     </Gtk.ScrolledWindow>

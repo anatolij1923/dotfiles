@@ -31,7 +31,7 @@ function urgency(n: AstalNotifd.Notification) {
   }
 }
 
-function truncateBody(text: string, max = 35) {
+function truncateBody(text: string, max = 40) {
   return text.length > max ? text.slice(0, max) + "…" : text;
 }
 
