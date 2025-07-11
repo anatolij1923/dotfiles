@@ -19,6 +19,7 @@ window.quicksettings {
         }
 
         button {
+          font-weight: 600;
           outline: none;
           border-radius: 16px;
           transition: all 0.2s ease-in-out;
@@ -47,6 +48,7 @@ window.quicksettings {
         .device-button {
           margin: 16px 0;
           border-radius: 16px;
+          font-weight: 500;
 
           &.active {
             background-color: $color-primary;

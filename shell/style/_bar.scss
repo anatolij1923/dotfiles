@@ -81,10 +81,11 @@ window#bar {
           border-radius: 8px;
           margin: 4px 2px;
           padding: 2px 8px;
+          background-color: transparent;
 
-          &:checked {
-            background-color: $color-primary;
-          }
+          // &:checked {
+          //   background-color: $color-primary;
+          // }
         }
       }
 
@@ -131,6 +132,13 @@ window#bar {
         button {
           outline: none;
           border-radius: 8px;
+        }
+      }
+
+      .notification-widget {
+        font-weight: 500;
+        .material-icon {
+          @include material-icon;
         }
       }
 
