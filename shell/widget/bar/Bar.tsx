@@ -9,6 +9,7 @@ import Workspaces from "./modules/workspaces/Workspaces";
 import BluetoothWidget from "./modules/bluetoothWidget/bluetoothWidget";
 import Test from "../osd/OSD";
 import Wifi from "./modules/wifi/Wifi";
+import NotificationWidget from "./modules/notificationWidget/NotifiicationWidget";
 
 function CommonButton() {
   return (
@@ -19,6 +20,7 @@ function CommonButton() {
         }}
       >
         <box spacing={16}>
+          <NotificationWidget />
           <Wifi />
           <BluetoothWidget />
           <Battery />
