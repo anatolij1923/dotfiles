@@ -45,8 +45,8 @@ export default function Powermenu() {
         {options.map((option) => (
           <button
             onClicked={() => {
+              app.toggle_window("powermenu");
               exec(option.command);
-              app.toggle_window("Powermenu");
             }}
           >
             <box orientation={Gtk.Orientation.VERTICAL} spacing={8}>
