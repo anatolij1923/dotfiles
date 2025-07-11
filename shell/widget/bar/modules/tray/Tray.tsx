@@ -11,12 +11,12 @@ export default function Tray() {
     btn.insert_action_group("dbusmenu", item.actionGroup);
 
     const id = item.connect("notify::action-group", () => {
-      btn.insert_action_group("dbusmenu", item.actionGroup)
-    })
-    
+      btn.insert_action_group("dbusmenu", item.actionGroup);
+    });
+
     onCleanup(() => {
-      item.disconnect(id)
-    })
+      item.disconnect(id);
+    });
   };
 
   return (
@@ -25,7 +25,7 @@ export default function Tray() {
         {(item) =>
           item.gicon ? (
             <menubutton $={(self) => init(self, item)}>
-              <image gicon={createBinding(item, "gicon")} pixelSize={20}/>
+              <image gicon={createBinding(item, "gicon")} pixelSize={16} />
             </menubutton>
           ) : null
         }
