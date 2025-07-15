@@ -6,8 +6,8 @@ export default function Battery() {
 
   const percent = createBinding(
     battery,
-    "percentage"
-  )((p) => `${Math.floor(p * 100)}%`);
+    "percentage",
+  )((p) => `${Math.floor(p * 100)}`);
 
   return (
     // <menubutton visible={createBinding(battery, "isPresent")}>
@@ -17,9 +17,22 @@ export default function Battery() {
     //   </box>
     // </menubutton>
     //
-    <box spacing={4} class="battery">
-      <image iconName={createBinding(battery, "iconName")} />
-      <label label={percent} />
+    // <box spacing={4} class="battery">
+    //   <image iconName={createBinding(battery, "iconName")} />
+    //   <label label={percent} />
+    // </box>
+
+    <box class="battery">
+      <overlay>
+        <levelbar
+          value={createBinding(battery, "percentage")}
+          widthRequest={45}
+          class={createBinding(battery, "charging").as((charging) =>
+            charging ? "charging" : "",
+          )}
+        />
+        <label label={percent} $type="overlay" />
+      </overlay>
     </box>
   );
 }
