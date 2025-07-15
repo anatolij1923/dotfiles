@@ -91,10 +91,16 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
       layer={Astal.Layer.OVERLAY}
       anchor={TOP}
       $={(win) => {
+
         const surface = win.get_surface();
-        if (surface) {
-          surface.set_input_region(new cairo.Region());
-        }
+        surface?.set_input_region(new cairo.Region())
+
+        win.connect("map", () => {
+          win.get_surface()?.set_input_region(new cairo.Region())
+        })
+        // if (surface) {
+        //   surface.set_input_region(new cairo.Region());
+        // }
 
         const revealer = win.child as Gtk.Revealer;
         isVisible.subscribe(async () => {
