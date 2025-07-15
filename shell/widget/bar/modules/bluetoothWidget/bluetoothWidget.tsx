@@ -18,22 +18,26 @@ const deviceInfo = createPoll(
     } else {
       return { connected: false, battery: 0, name: "" };
     }
-  },
+  }
 );
 
 export default function BluetoothWidget() {
-
-  const tooltip = (deviceInfo((di => `${di.name} - ${di.battery*100}%`)))
+  const tooltip = deviceInfo((di) => `${di.name} - ${di.battery * 100}%`);
+  const icon = deviceInfo((di) => {
+    if (!bt.is_powered) {
+      return "bluetooth_disabled";
+    }
+    if (di.connected) {
+      return "bluetooth_connected";
+    }
+    return "bluetooth";
+  });
 
   return (
-    <box
-      visible={deviceInfo((di) => di.connected)}
-      class="bluetooth-widget"
-      tooltipText={tooltip}
-      spacing={0}
-    >
-      <label label={"bluetooth"} class="material-icon" />
+    <box class="bluetooth-widget" tooltipText={tooltip} spacing={0}>
+      <label label={icon} class="material-icon" />
       <levelbar
+        visible={deviceInfo((di) => di.connected)}
         value={deviceInfo((di) => di.battery)}
         orientation={Gtk.Orientation.VERTICAL}
       />
