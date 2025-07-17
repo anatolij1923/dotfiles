@@ -8,6 +8,7 @@ import { ScreenCorners } from "./widget/bar/ScreenCorners";
 import Powermenu from "./widget/powermenu/Powermenu";
 import Quicksettings from "./widget/quicksettings/Quicksettings";
 import OSD from "./widget/osd/OSD";
+import BatteryWarnings from "./utils/batteryWarning";
 
 app.start({
   css: style,
@@ -27,12 +28,17 @@ app.start({
       NotificationPopups();
 
       // Powermenu
-      app.add_window(Powermenu() as Gtk.Window)
+      app.add_window(Powermenu(monitor) as Gtk.Window);
 
       // Quick Settings
-      app.add_window(Quicksettings(monitor) as Gtk.Window)
+      app.add_window(Quicksettings(monitor) as Gtk.Window);
 
-      OSD(monitor)
+      // On Screen Display
+      // OSD(monitor);
+      app.add_window(OSD(monitor) as Gtk.Window)
+
+      //Battery warnings
+      BatteryWarnings();
     });
   },
 });
