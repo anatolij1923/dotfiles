@@ -11,7 +11,7 @@ window.quicksettings {
 
     .stack-widget {
       background-color: rgba($color-surface_container, $alpha: 0.7);
-      padding: 8px;
+      // padding: 8px;
       border-radius: 24px;
       .buttons {
         .material-icon {
@@ -28,7 +28,7 @@ window.quicksettings {
             color: $color-surface;
           }
           &:hover {
-            transform: scaleX(1.1);
+            transform: scaleX(1.05);
           }
         }
       }
@@ -90,17 +90,21 @@ window.quicksettings {
       border-radius: 24px;
       margin: 0 4px;
       padding: 16px 20px;
-      @include material-icon($size: 32px);
       transition: all 0.2s ease-in-out;
 
       &:hover {
-        transform: scaleX(1.1);
+        transform: scaleX(1.05);
       }
 
       &.active {
         border-radius: 16px;
         background-color: $color-primary;
         color: $color-surface;
+      }
+
+      .material-icon {
+        @include material-icon($size: 32px);
+
       }
       // .title {
       //   all: unset;

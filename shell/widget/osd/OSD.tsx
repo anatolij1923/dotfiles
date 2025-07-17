@@ -92,12 +92,14 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
       anchor={TOP}
       $={(win) => {
 
-        const surface = win.get_surface();
-        surface?.set_input_region(new cairo.Region())
-
-        win.connect("map", () => {
-          win.get_surface()?.set_input_region(new cairo.Region())
-        })
+        // const surface = win.get_surface();
+        // surface?.set_input_region(new cairo.Region())
+        //
+        // win.connect("map", () => {
+        //   win.get_surface()?.set_input_region(new cairo.Region())
+        // })
+        //
+        //
         // if (surface) {
         //   surface.set_input_region(new cairo.Region());
         // }

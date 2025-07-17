@@ -1,7 +1,7 @@
 import app from "ags/gtk4/app";
 import Window from "../common/Window";
 import { exec } from "ags/process";
-import { Astal, Gtk } from "ags/gtk4";
+import { Astal, Gdk, Gtk } from "ags/gtk4";
 
 const options = [
   {
@@ -33,11 +33,12 @@ const options = [
   },
 ];
 
-export default function Powermenu() {
+export default function Powermenu(gdkmonitor: Gdk.Monitor) {
   return (
     <Window
       name="powermenu"
       namespace="powermenu"
+      gdkmonitor={gdkmonitor}
       keymode={Astal.Keymode.EXCLUSIVE}
       class="powermenu"
     >
