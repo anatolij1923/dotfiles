@@ -38,9 +38,11 @@ function truncateBody(text: string, max = 40) {
 export default function Notification({
   notification: n,
   onHoverLost,
+  showActions = true
 }: {
   notification: AstalNotifd.Notification;
   onHoverLost: () => void;
+    showActions: boolean
 }) {
   return (
     <Adw.Clamp maximumSize={400}>
@@ -115,11 +117,11 @@ export default function Notification({
             )}
           </box>
         </box>
-        {n.actions.length > 0 && (
+        {showActions && n.actions.length > 0 && (
           <box class="actions">
             {n.actions.map(({ label, id }) => (
               <button hexpand onClicked={() => n.invoke(id)}>
-                <label label={label} halign={Gtk.Align.CENTER} hexpand />
+                <label label={label} halign={Gtk.Align.CENTER} ellipsize={Pango.EllipsizeMode.END} />
               </button>
             ))}
           </box>
