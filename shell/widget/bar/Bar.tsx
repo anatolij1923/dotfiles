@@ -23,7 +23,6 @@ function CommonButton() {
           <NotificationWidget />
           <Wifi />
           <BluetoothWidget />
-          <Battery />
         </box>
       </button>
     </box>
@@ -43,19 +42,18 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       application={app}
     >
       <centerbox>
-        <box $type="start" class="left-side" spacing={8}>
+        <box $type="start" class="left-side" spacing={16}>
+          <Workspaces />
           <FocusedClient />
         </box>
         <box $type="center" class="center" spacing={8}>
-          <Workspaces />
+          <Clock />
         </box>
         <box $type="end" class="right-side" spacing={8}>
           <Tray />
-          {/* <BluetoothWidget /> */}
           <KbLayout />
-          {/* <Battery /> */}
           <CommonButton />
-          <Clock />
+          <Battery />
         </box>
       </centerbox>
     </window>

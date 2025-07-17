@@ -9,12 +9,42 @@
 window#bar {
   background: transparent;
 
-  > box {
+  >box {
     background: $color-surface;
     padding: 4px;
 
     .left-side {
       margin: 0 0 0 16px;
+
+      .workspaces {
+        // padding: 0 6px;
+        border-radius: 24px;
+        margin: 2px;
+
+        button {
+          all: unset;
+          background-color: $color-secondary;
+          min-width: 16px;
+          min-height: 16px;
+          margin: 8px 0;
+          border-radius: 24px;
+          transition: all 0.3s;
+
+          &:hover {
+            background-color: gtkalpha($color-primary, 0.5);
+          }
+
+          &.empty {
+            background-color: $color-on_primary;
+          }
+
+          &.focused {
+            background-color: $color-primary;
+            min-width: 32px;
+          }
+        }
+      }
+
 
       .focused-client {
         font-weight: 500;
@@ -22,39 +52,36 @@ window#bar {
     }
 
     .center {
-      .workspaces {
-        background-color: $color-surface_container;
-        color: $color-on_surface;
-        padding: 0 6px;
-        border-radius: 24px;
-
+      .clock {
         button {
-          all: unset;
-          // padding: 0px 8px;
-          min-width: 28px;
-          margin: 4px 0;
-          border-radius: 24px;
-          font-weight: 500;
-          transition: all 0.2s;
+          background-color: transparent;
+          outline: none;
+          border-radius: 16px;
 
-          &:hover {
-            background-color: gtkalpha($color-primary, 0.5);
+          label {
+            color: $color-on_surface;
+            font-weight: 500;
           }
 
-          &.empty {
-            color: gtkalpha($color-on_surface, 0.5);
+          &:checked {
+            background-color: $color-primary;
+
+            label {
+              color: $color-surface;
+            }
           }
         }
 
-        .focused {
-          color: $color-surface;
-          background-color: $color-primary;
-
-          &.empty {
-            color: $color-surface;
+        popover.background {
+          border-radius: 100px;
+          calendar {
+            all: unset;
+            padding: 10px;
+            background: $color-surface;
           }
         }
       }
+
     }
 
     .right-side {
@@ -64,10 +91,10 @@ window#bar {
         color: $color-on_surface;
 
         button {
-          background-color: $color-surface_container;
+          background-color: transparent;
           font-weight: normal;
           outline: none;
-          border-radius: 24px 8px 8px 24px;
+          border-radius: 16px;
 
           .material-icon {
             @include material-icon(24px);
@@ -128,8 +155,34 @@ window#bar {
       }
 
       .battery {
-        color: $color-on_surface;
+        color: lighten($color-surface, 10%);
+        // color: $color-on_surface;
+        padding: 6px 0;
         font-weight: 500;
+
+        levelbar {
+          block {
+            background-color: gtkalpha($color-on_surface, 0.4);
+            border-radius: 8px;
+
+            &.filled {
+              background-color: $color-on_surface;
+              min-width: 0;
+
+              &.low {
+                background-color: $color-error;
+              }
+            }
+          }
+
+          &.charging {
+            block {
+              &.filled {
+                background-color: #3ba446;
+              }
+            }
+          }
+        }
       }
 
       .common-button {
@@ -141,31 +194,12 @@ window#bar {
 
       .notification-widget {
         font-weight: normal;
+
         .material-icon {
           @include material-icon;
         }
       }
 
-      .clock {
-        button {
-          background-color: $color-surface_container;
-          border-radius: 8px 20px 20px 8px;
-          outline: none;
-
-          label {
-            color: $color-on_surface;
-            font-weight: 500;
-          }
-
-          &:checked {
-            background-color: $color-primary;
-
-            label {
-              color: $color-surface;
-            }
-          }
-        }
-      }
     }
   }
 }

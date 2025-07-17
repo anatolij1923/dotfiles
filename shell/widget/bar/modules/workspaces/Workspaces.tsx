@@ -1,7 +1,7 @@
 import { createComputed, createExternal, For, onCleanup } from "ags";
 import AstalHyprland from "gi://AstalHyprland?version=0.1";
 
-const MIN_WS = 8;
+const MIN_WS = 5;
 
 export default function Workspaces() {
   const hypr = AstalHyprland.get_default();
@@ -50,7 +50,7 @@ export default function Workspaces() {
 
           return (
             <button class={classNames} onClicked={() => ws.focus()}>
-              <label label={id.toString()} />
+              {/* <label label={id.toString()} /> */}
             </button>
           );
         }}

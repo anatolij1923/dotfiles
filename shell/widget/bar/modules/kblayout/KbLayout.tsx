@@ -36,7 +36,7 @@ export default function KbLayout() {
         }
       >
         <box spacing={8}>
-          <label label={"keyboard"} class="material-icon" />
+          <label label={"language"} class="material-icon" />
           <label label={layout} />
         </box>
       </button>

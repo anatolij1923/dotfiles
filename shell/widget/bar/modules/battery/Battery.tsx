@@ -26,7 +26,7 @@ export default function Battery() {
       <overlay>
         <levelbar
           value={createBinding(battery, "percentage")}
-          widthRequest={45}
+          widthRequest={55}
           class={createBinding(battery, "charging").as((charging) =>
             charging ? "charging" : "",
           )}
