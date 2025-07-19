@@ -1,37 +1,51 @@
-import { createBinding } from "ags";
+import { createBinding, createComputed } from "ags";
 import AstalBattery from "gi://AstalBattery?version=0.1";
+import { formatTime } from "../../../../utils/formatTime";
 
 export default function Battery() {
   const battery = AstalBattery.get_default();
 
-  const percent = createBinding(
-    battery,
-    "percentage",
-  )((p) => `${Math.floor(p * 100)}`);
+  const isCharging = createBinding(battery, "charging");
+  const percent = createBinding(battery, "percentage");
+  const timeToFull = createBinding(battery, "time_to_full");
+  const timeToEmpty = createBinding(battery, "time_to_empty");
+  const energyRate = createBinding(battery, "energy_rate");
+
+  function updateTooltip(
+    percent: number,
+    isCharging: boolean,
+    timeToEmpty: number,
+    timeToFull: number,
+    energyRate: number,
+  ) {
+    return [
+      `${
+        isCharging
+          ? Math.floor(percent * 100) === 100
+            ? "Full"
+            : `Time to full: ${formatTime(timeToFull)}`
+          : `Time to empty: ${formatTime(timeToEmpty)}`
+      }`,
+      `${energyRate}W`
+    ].join(" - ");
+  }
+
+  const tooltip = createComputed(
+    [percent, isCharging, timeToEmpty, timeToFull, energyRate],
+    updateTooltip,
+  );
+
+  const formattedPercent = percent.as((p) => `${Math.floor(p * 100)}`);
 
   return (
-    // <menubutton visible={createBinding(battery, "isPresent")}>
-    //   <box>
-    //     <image iconName={createBinding(battery, "iconName")} />
-    //     <label label={percent} />
-    //   </box>
-    // </menubutton>
-    //
-    // <box spacing={4} class="battery">
-    //   <image iconName={createBinding(battery, "iconName")} />
-    //   <label label={percent} />
-    // </box>
-
-    <box class="battery">
+    <box class="battery" tooltipMarkup={tooltip}>
       <overlay>
         <levelbar
           value={createBinding(battery, "percentage")}
           widthRequest={55}
-          class={createBinding(battery, "charging").as((charging) =>
-            charging ? "charging" : "",
-          )}
+          class={isCharging.as((charging) => (charging ? "charging" : ""))}
         />
-        <label label={percent} $type="overlay" />
+        <label label={formattedPercent} $type="overlay" />
       </overlay>
     </box>
   );
