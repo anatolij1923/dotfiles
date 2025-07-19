@@ -26,3 +26,22 @@ install_packages() {
     yay -S --noconfirm "${to_install[@]}"
   fi
 } 
+
+# Function to execute a command with retry/skip/exit logic
+try() {
+  "$@"
+  local status=$?
+  if [ $status -ne 0 ]; then
+    echo "Error: Command \"$@\" failed with status $status."
+    while true; do
+      read -p "Do you want to (r)etry, (s)kip, or (e)xit? " choice
+      case "$choice" in
+        r|R ) try "$@"; return;;
+        s|S ) return;;
+        e|E ) exit 1;;
+        * ) echo "Invalid choice. Please enter r, s, or e.";;
+      esac
+    done
+  fi
+  return 0
+}
