@@ -1,0 +1,14 @@
+# Font Settings
+font-family = Liga SFMono Nerd Font 
+font-size = 14 
+font-style = semibold
+font-feature = 1
+
+# Theme Settings
+theme = ayu
+background-opacity = 0.8
+background-blur = true
+
+# Window Settings
+title = "Ghostty"
+confirm-close-surface = false
