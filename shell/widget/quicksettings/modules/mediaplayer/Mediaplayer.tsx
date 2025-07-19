@@ -1,114 +1,85 @@
-import { bind, timeout, Variable } from "astal";
+import { createBinding, For } from "ags";
+import { Gtk } from "ags/gtk4";
+import AstalApps01 from "gi://AstalApps";
 import Mpris from "gi://AstalMpris";
-import icons from "../../../utils/icons";
-import { Gtk } from "astal/gtk4";
 import Pango from "gi://Pango?version=1.0";
 
-function lengthStr(length: number) {
-  const min = Math.floor(length / 60);
-  const sec = Math.floor(length % 60);
-  const sec0 = sec < 10 ? "0" : "";
-  return `${min}:${sec0}${sec}`;
-}
-
-function MediaPlayer({ player }: { player: Mpris.Player }) {
-  let lastPlayingPositionString = "0:00 / 0:00"; // Store the last playing position string
-
-  if (!player) {
-    return <box />;
-  }
-
-  const trackLengthBinding = Variable.derive(
-    [bind(player, "position"), bind(player, "playbackStatus")],
-    (p: number, status: Mpris.PlaybackStatus) => {
-      const formattedLength = `${lengthStr(p)} / ${lengthStr(player.length)}`;
-      if (status === Mpris.PlaybackStatus.PLAYING) {
-        lastPlayingPositionString = formattedLength;
-        return formattedLength;
-      } else {
-        return lastPlayingPositionString;
-      }
-    }
-  )();
-
-  const title = bind(player, "title").as((t) => t || "Unknown Track");
-  const artist = bind(player, "artist").as((t) => t || "Unknown Artist");
-  const cover = bind(player, "coverArt");
-  const playIcon = bind(player, "playbackStatus").as((s) =>
-    s === Mpris.PlaybackStatus.PLAYING
-      ? icons.media.playing
-      : icons.media.paused
-  );
-  const position = bind(player, "position").as((p) =>
-    player.length > 0 ? p / player.length : 0
-  );
-
-  return (
-    <box cssClasses={["MediaPlayer"]} hexpand>
-      <box cssClasses={["Cover"]}>
-        <image
-          overflow={Gtk.Overflow.HIDDEN}
-          pixelSize={90}
-          file={cover}
-          cssClasses={["CoverArt"]}
-        />
-      </box>
-
-      <box vertical>
-        <box hexpand>
-          <box vertical cssClasses={["TrackInfo"]} hexpand>
-            <box>
-              <label
-                cssClasses={["TrackName"]}
-                label={title}
-                ellipsize={Pango.EllipsizeMode.END}
-                maxWidthChars={20}
-              />
-            </box>
-            <box>
-              <label label={artist} cssClasses={["ArtistName"]} />
-            </box>
-          </box>
-        </box>
-        <box>
-          <box cssClasses={["Controls"]}>
-            <box hexpand>
-              <button onClicked={() => player.previous()}>
-                <image iconName={icons.media.prev} />
-              </button>
-              <button onClicked={() => player.next()}>
-                <image iconName={icons.media.next} />
-              </button>
-            </box>
-            <box cssClasses={["track-length"]}>
-              <label
-                label={trackLengthBinding.as((s: string) => s)} // Bind to the derived variable's value
-              />
-            </box>
-            <box>
-              <button
-                halign={Gtk.Align.END}
-                valign={Gtk.Align.CENTER}
-                onClicked={() => player.play_pause()}
-                visible={bind(player, "canControl")}
-              >
-                <image iconName={playIcon} />
-              </button>
-            </box>
-          </box>
-        </box>
-      </box>
-    </box>
-  );
-}
-
-export default function PlayerWidget() {
+export default function Mediaplayer() {
   const mpris = Mpris.get_default();
+  const players = createBinding(mpris, "players");
+  const apps = new AstalApps01.Apps();
+
   return (
-    <box>
-      {bind(mpris, "players").as((players) => (
-        <MediaPlayer player={players[0]} />
-      ))}
+    <box orientation={Gtk.Orientation.VERTICAL}>
+      <For each={players}>
+        {(player) => (
+          <box class="mediaplayer" spacing={16}>
+            <box overflow={Gtk.Overflow.HIDDEN} class="cover-art">
+              <image file={createBinding(player, "coverArt")} pixelSize={96} />
+            </box>
+
+            <box orientation={Gtk.Orientation.VERTICAL}>
+              <box class="info" hexpand>
+                <box orientation={Gtk.Orientation.VERTICAL} spacing={2}>
+                  <label
+                    ellipsize={Pango.EllipsizeMode.END}
+                    maxWidthChars={20}
+                    xalign={0}
+                    label={createBinding(player, "title")}
+                    class="track"
+                  />
+                  <label
+                    xalign={0}
+                    maxWidthChars={15}
+                    ellipsize={Pango.EllipsizeMode.END}
+                    label={createBinding(player, "artist")}
+                    class="artist"
+                  />
+                </box>
+
+                <box hexpand></box>
+                <box>
+                  {(() => {
+                    const [app] = apps.exact_query(player.entry);
+                    return (
+                      <image
+                        visible={!!app.iconName}
+                        iconName={app?.iconName}
+                        pixelSize={32}
+                      />
+                    );
+                  })()}
+                </box>
+              </box>
+
+              <box>
+                <Gtk.ProgressBar
+                  fraction={createBinding(player, "position")}
+                  hexpand
+                />
+              </box>
+
+              <box class="buttons" halign={Gtk.Align.CENTER} spacing={16}>
+                <button onClicked={() => player.previous()}>
+                  <label label="skip_previous" class="material-icon" />
+                </button>
+                <button onClicked={() => player.play_pause()}>
+                  <label
+                    label={createBinding(
+                      player,
+                      "playbackStatus"
+                    )((v) => (v ? "play_arrow" : "pause"))}
+                    class="material-icon"
+                  />
+                </button>
+                <button onClicked={() => player.next()}>
+                  <label label="skip_next" class="material-icon" />
+                </button>
+              </box>
+            </box>
+          </box>
+        )}
+      </For>
     </box>
   );
 }
