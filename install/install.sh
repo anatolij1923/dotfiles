@@ -46,10 +46,9 @@ run_install_packages() {
     local group_name="$1"
     shift
     local packages=("$@")
-    if [ ${#packages[@]} -gt 0 ]; {
+    if [ ${#packages[@]} -gt 0 ]; then
         print_info "Installing $group_name..."
         install_packages "${packages[@]}"
-    }
     fi
 }
 
