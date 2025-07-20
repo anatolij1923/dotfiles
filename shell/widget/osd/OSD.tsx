@@ -6,7 +6,7 @@ import { timeout } from "ags/time";
 import cairo from "gi://cairo?version=1.0";
 
 export default function OSD(gdkmonitor: Gdk.Monitor) {
-  const { TOP, BOTTOM } = Astal.WindowAnchor;
+  const { TOP, BOTTOM, RIGHT } = Astal.WindowAnchor;
   const speaker = Wp.get_default()?.audio.defaultSpeaker;
   const brigtness = Brightness.get_default();
 
@@ -89,9 +89,8 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
       class="osd"
       name="osd"
       layer={Astal.Layer.OVERLAY}
-      anchor={TOP}
+      anchor={RIGHT}
       $={(win) => {
-
         // const surface = win.get_surface();
         // surface?.set_input_region(new cairo.Region())
         //
@@ -125,15 +124,28 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
         transitionType={Gtk.RevealerTransitionType.CROSSFADE}
         transitionDuration={200}
       >
-        <box spacing={16} class="osd-content">
-          <label label={osdState((s) => s.icon)} class="material-icon icon" />
-          <Gtk.ProgressBar
-            valign={Gtk.Align.CENTER}
-            fraction={osdState((s) => s.percentage)}
-          />
-          <label
+        <box
+          spacing={16}
+          class="osd-content"
+          orientation={Gtk.Orientation.VERTICAL}
+        >
+          <overlay>
+            <Gtk.ProgressBar
+              valign={Gtk.Align.CENTER}
+              fraction={osdState((s) => s.percentage)}
+              orientation={Gtk.Orientation.VERTICAL}
+              heightRequest={250}
+            />
+            <label
+              label={osdState((s) => s.icon)}
+              valign={Gtk.Align.END}
+              class="material-icon icon"
+              $type="overlay"
+            />
+          </overlay>
+          {/* <label
             label={osdState((s) => `${Math.floor(s.percentage * 100)}%`)}
-          />
+          /> */}
         </box>
       </revealer>
     </window>

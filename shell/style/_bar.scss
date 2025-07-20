@@ -9,7 +9,7 @@
 window#bar {
   background: transparent;
 
-  >box {
+  > box {
     background: $color-surface;
     padding: 4px;
 
@@ -45,9 +45,9 @@ window#bar {
         }
       }
 
-
       .focused-client {
         font-weight: 500;
+        color: $color-on_surface;
       }
     }
 
@@ -81,7 +81,6 @@ window#bar {
           }
         }
       }
-
     }
 
     .right-side {
@@ -194,12 +193,12 @@ window#bar {
 
       .notification-widget {
         font-weight: normal;
+        color: $color-on_surface;
 
         .material-icon {
           @include material-icon;
         }
       }
-
     }
   }
 }

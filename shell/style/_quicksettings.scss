@@ -67,7 +67,7 @@ window.quicksettings {
 
       scale {
         trough {
-          background-color: $color-on_primary;
+          background-color: $color-on_secondary_fixed;
           slider {
             all: unset;
             outline: none;
@@ -120,7 +120,7 @@ window.quicksettings {
     background-color: rgba($color-surface_container, $alpha: 1);
     border-radius: 16px;
     padding: 8px;
-
+    color: $color-on_surface;
     .cover-art {
       // border: 1px solid white;
       border-radius: 16px;
@@ -145,6 +145,15 @@ window.quicksettings {
         outline: none;
         border-radius: 16px;
         background-color: transparent;
+      }
+    }
+    .progress {
+      progressbar {
+        trough {
+          progress {
+            background-color: $color-on_surface;
+          }
+        }
       }
     }
 

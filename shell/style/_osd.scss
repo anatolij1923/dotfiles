@@ -5,27 +5,30 @@
   background-color: transparent;
 
   .osd-content {
-    background-color: $color-surface;
+    background-color: transparent;
     border-radius: 24px;
     padding: 16px;
     margin: 20px 0;
 
     .icon {
-      @include material-icon
+      @include material-icon;
+      color: $color-surface;
+      margin: 8px 0;
     }
 
     progressbar {
+      transform: rotate(180deg);
       trough {
-        min-height: 12px;
+        background-color: $color-on_secondary_fixed;
+        border-radius: 16px;
+        min-width: 2rem;
 
         progress {
-          min-height: 12px;
+          border-radius: 4px;
+          min-width: 2rem;
           background-color: $color-primary;
         }
-
       }
     }
-
   }
 }
-
