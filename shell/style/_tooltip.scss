@@ -1,0 +1,8 @@
+@use "./colors" as *;
+
+tooltip {
+  border-radius: 16px;
+  border: 1px solid $color-on_secondary;
+  background-color: $color-surface_container;
+  padding: 16px;
+}
