@@ -10,6 +10,7 @@ interface QSButtonProps<T extends GObject.Object> {
   setup?: (self: Gtk.Widget) => void;
   onClicked?: () => void;
   connection?: [T & Record<string, any>, string, ((v: any) => boolean)?]; // Allow indexing with string
+  tooltip?: string;
 }
 
 export default function QSButton<T extends GObject.Object>({
@@ -18,6 +19,7 @@ export default function QSButton<T extends GObject.Object>({
   setup: originalSetup,
   onClicked,
   connection,
+  tooltip,
 }: QSButtonProps<T>) {
   const [cssClasses, setCssClasses] = createState<string[]>(["qs-button"]);
 
@@ -70,7 +72,7 @@ export default function QSButton<T extends GObject.Object>({
       $={setup}
       cssClasses={cssClasses}
       onClicked={onClicked}
-      tooltipText={label}
+      tooltipText={tooltip}
     >
       <box spacing={8} hexpand>
         <label
@@ -81,9 +83,10 @@ export default function QSButton<T extends GObject.Object>({
         <box class="title">
           <label
             label={label}
+            maxWidthChars={10}
             ellipsize={Pango.EllipsizeMode.END}
           />
-        </box> 
+        </box>
       </box>
     </button>
   );

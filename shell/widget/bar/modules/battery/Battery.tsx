@@ -16,7 +16,7 @@ export default function Battery() {
     isCharging: boolean,
     timeToEmpty: number,
     timeToFull: number,
-    energyRate: number,
+    energyRate: number
   ) {
     return [
       `${
@@ -26,13 +26,13 @@ export default function Battery() {
             : `Time to full: ${formatTime(timeToFull)}`
           : `Time to empty: ${formatTime(timeToEmpty)}`
       }`,
-      `${energyRate}W`
+      `${energyRate}W`,
     ].join(" - ");
   }
 
   const tooltip = createComputed(
     [percent, isCharging, timeToEmpty, timeToFull, energyRate],
-    updateTooltip,
+    updateTooltip
   );
 
   const formattedPercent = percent.as((p) => `${Math.floor(p * 100)}`);
@@ -42,7 +42,7 @@ export default function Battery() {
       <overlay>
         <levelbar
           value={createBinding(battery, "percentage")}
-          widthRequest={55}
+          widthRequest={50}
           class={isCharging.as((charging) => (charging ? "charging" : ""))}
         />
         <label label={formattedPercent} $type="overlay" />

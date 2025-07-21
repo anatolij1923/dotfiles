@@ -5,6 +5,8 @@ import { createBinding, createState, onCleanup } from "ags";
 import { timeout } from "ags/time";
 import cairo from "gi://cairo?version=1.0";
 
+const hideTime = 2000;
+
 export default function OSD(gdkmonitor: Gdk.Monitor) {
   const { TOP, BOTTOM, RIGHT } = Astal.WindowAnchor;
   const speaker = Wp.get_default()?.audio.defaultSpeaker;
@@ -47,7 +49,7 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
 
     setIsVisible(true);
     if (hideTimeout) hideTimeout.cancel();
-    hideTimeout = timeout(1500, () => setIsVisible(false));
+    hideTimeout = timeout(hideTime, () => setIsVisible(false));
   });
 
   const muteId = speaker?.connect("notify::mute", () => {
@@ -60,7 +62,7 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
 
     setIsVisible(true);
     if (hideTimeout) hideTimeout.cancel();
-    hideTimeout = timeout(1500, () => setIsVisible(false));
+    hideTimeout = timeout(hideTime, () => setIsVisible(false));
   });
 
   const brightnessId = brigtness.connect("notify::screen", () => {
@@ -74,7 +76,7 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
 
     setIsVisible(true);
     if (hideTimeout) hideTimeout.cancel();
-    hideTimeout = timeout(1500, () => setIsVisible(false));
+    hideTimeout = timeout(hideTime, () => setIsVisible(false));
   });
 
   onCleanup(() => {
@@ -82,6 +84,10 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
     if (muteId) speaker?.disconnect(muteId);
     brigtness.disconnect(brightnessId);
   });
+
+  const [currentPercentage, setCurrentPercentage] = createState(
+    osdState.get().percentage
+  );
 
   return (
     <window
@@ -132,9 +138,9 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
           <overlay>
             <Gtk.ProgressBar
               valign={Gtk.Align.CENTER}
+              heightRequest={250}
               fraction={osdState((s) => s.percentage)}
               orientation={Gtk.Orientation.VERTICAL}
-              heightRequest={250}
             />
             <label
               label={osdState((s) => s.icon)}

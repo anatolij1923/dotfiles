@@ -5,8 +5,7 @@ import Sliders from "./modules/sliders/Sliders";
 import StackWidget from "./modules/stackwidget/StackWidget";
 import { createState } from "ags";
 import Adw from "gi://Adw?version=1";
-
-export const [qsPage, setQsPage] = createState("notifications");
+import Mediaplayer from "./modules/mediaplayer/Mediaplayer";
 
 export default function Quicksettings(gdkmonitor: Gdk.Monitor) {
   const maxWidth = gdkmonitor.geometry.width * 0.25;
@@ -21,19 +20,21 @@ export default function Quicksettings(gdkmonitor: Gdk.Monitor) {
       keymode={Astal.Keymode.EXCLUSIVE}
       gdkmonitor={gdkmonitor}
       contentValign={Gtk.Align.FILL}
+      contentHalign={Gtk.Align.FILL}
+      contentHexpand={true}
       contentVexpand={true}
     >
-      <Adw.Clamp maximumSize={380}>
-        <box
-          class={"quicksettings-content"}
-          orientation={Gtk.Orientation.VERTICAL}
-          spacing={16}
-        >
-          <Sliders />
-          <Toggles />
-          <StackWidget />
-        </box>
-      </Adw.Clamp>
+      <box
+        widthRequest={maxWidth}
+        class={"quicksettings-content"}
+        orientation={Gtk.Orientation.VERTICAL}
+        spacing={16}
+      >
+        <Sliders />
+        <Toggles />
+        {/* <Mediaplayer /> */}
+        <StackWidget />
+      </box>
     </Window>
   );
 }

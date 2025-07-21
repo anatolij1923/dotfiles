@@ -36,11 +36,12 @@ export default function BluetoothWidget() {
   return (
     <box class="bluetooth-widget" tooltipText={tooltip} spacing={0}>
       <label label={icon} class="material-icon" />
-      <levelbar
-        visible={deviceInfo((di) => di.connected)}
-        value={deviceInfo((di) => di.battery)}
-        orientation={Gtk.Orientation.VERTICAL}
-      />
+      <box visible={deviceInfo((di) => di.connected)}>
+        <levelbar
+          value={deviceInfo((di) => di.battery)}
+          orientation={Gtk.Orientation.VERTICAL}
+        />
+      </box>
     </box>
   );
 }

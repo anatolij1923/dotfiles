@@ -49,7 +49,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         <box $type="center" class="center" spacing={8}>
           <Clock />
         </box>
-        <box $type="end" class="right-side" spacing={8}>
+        <box $type="end" class="right-side" spacing={16}>
           <Tray />
           <KbLayout />
           <CommonButton />

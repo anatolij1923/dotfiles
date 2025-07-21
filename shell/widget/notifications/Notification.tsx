@@ -31,18 +31,18 @@ function urgency(n: AstalNotifd.Notification) {
   }
 }
 
-function truncateBody(text: string, max = 40) {
-  return text.length > max ? text.slice(0, max) + "…" : text;
-}
+// function truncateBody(text: string, max = 40) {
+//   return text.length > max ? text.slice(0, max) + "…" : text;
+// }
 
 export default function Notification({
   notification: n,
   onHoverLost,
-  showActions = true
+  showActions = true,
 }: {
   notification: AstalNotifd.Notification;
   onHoverLost: () => void;
-    showActions: boolean
+  showActions: boolean;
 }) {
   return (
     <Adw.Clamp maximumSize={400}>
@@ -101,7 +101,7 @@ export default function Notification({
               xalign={0}
               label={n.summary}
               ellipsize={Pango.EllipsizeMode.END}
-              maxWidthChars={19}
+              // maxWidthChars={19}
             />
             {n.body && (
               <label
@@ -112,7 +112,7 @@ export default function Notification({
                 xalign={0}
                 justify={Gtk.Justification.FILL}
                 ellipsize={Pango.EllipsizeMode.END}
-                label={truncateBody(n.body)}
+                label={n.body}
               />
             )}
           </box>
@@ -121,7 +121,11 @@ export default function Notification({
           <box class="actions">
             {n.actions.map(({ label, id }) => (
               <button hexpand onClicked={() => n.invoke(id)}>
-                <label label={label} halign={Gtk.Align.CENTER} ellipsize={Pango.EllipsizeMode.END} />
+                <label
+                  label={label}
+                  halign={Gtk.Align.CENTER}
+                  ellipsize={Pango.EllipsizeMode.END}
+                />
               </button>
             ))}
           </box>
