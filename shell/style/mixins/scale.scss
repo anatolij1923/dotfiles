@@ -1,0 +1,19 @@
+@mixin scale {
+  scale {
+    all: unset;
+    trough {
+      all: unset;
+
+      slider {
+        all: unset;
+        padding: 8px;
+      }
+      highlight {
+        all: unset;
+      }
+      empty {
+        all: unset;
+      }
+    }
+  }
+}

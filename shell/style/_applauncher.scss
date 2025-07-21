@@ -1,11 +1,11 @@
 @use "./colors" as *;
 @use "mixins/material" as *;
+@use "mixins/button.scss" as *;
 
 window#launcher {
   background: transparent;
 
   box#launcher-content {
-
     background: $color-surface;
     min-width: 400px;
     border-radius: 24px;
@@ -34,14 +34,17 @@ window#launcher {
     }
 
     button {
+      @include button;
+      background-color: transparent;
       margin: 4px 0;
+      padding: 8px;
       border-radius: 16px;
       color: $color-on_surface;
-      font-weight: 500;
+      font-weight: 400;
 
       &:focus {
         outline: none;
-        box-shadow: 0 0 10px 2px rgba($color-primary, $alpha: 0.4);
+        // box-shadow: 0 0 10px 2px rgba($color-primary, $alpha: 0.4);
         background-color: $color-primary;
         color: $color-surface;
       }

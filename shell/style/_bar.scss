@@ -1,5 +1,6 @@
 @use "./colors" as *;
 @use "mixins/material" as *;
+@use "mixins/button.scss" as *;
 @use "sass:string";
 
 @function gtkalpha($c, $a) {
@@ -19,10 +20,10 @@ window#bar {
       .workspaces {
         // padding: 0 6px;
         border-radius: 24px;
-        margin: 2px;
+        margin: 4px;
 
         button {
-          all: unset;
+          @include button;
           background-color: $color-secondary;
           min-width: 16px;
           min-height: 16px;
@@ -35,7 +36,7 @@ window#bar {
           }
 
           &.empty {
-            background-color: $color-on_primary;
+            background-color: $color-surface_variant;
           }
 
           &.focused {
@@ -54,6 +55,8 @@ window#bar {
     .center {
       .clock {
         button {
+          @include button;
+          padding: 8px;
           background-color: transparent;
           outline: none;
           border-radius: 16px;
@@ -69,6 +72,9 @@ window#bar {
             label {
               color: $color-surface;
             }
+          }
+          &:hover {
+            background-color: lighten($color-surface, 10%);
           }
         }
 
@@ -90,6 +96,7 @@ window#bar {
         color: $color-on_surface;
 
         button {
+          @include button;
           background-color: transparent;
           font-weight: normal;
           outline: none;
@@ -103,6 +110,7 @@ window#bar {
 
       .tray {
         button {
+          @include button;
           outline: none;
           border-radius: 8px;
           margin: 4px 2px;
@@ -127,8 +135,10 @@ window#bar {
           transform: rotate(180deg);
 
           block {
+            all: unset;
             min-width: 4px;
             border-radius: 4px;
+            background-color: $color-on_secondary_fixed;
 
             &.filled {
               background-color: $color-primary;
@@ -161,6 +171,7 @@ window#bar {
 
         levelbar {
           block {
+            all: unset;
             background-color: gtkalpha($color-on_surface, 0.6);
             border-radius: 8px;
 
@@ -186,8 +197,15 @@ window#bar {
 
       .common-button {
         button {
+          @include button;
+          padding: 8px;
+          background-color: lighten($color-surface, 5%);
           outline: none;
-          border-radius: 8px;
+          border-radius: 16px;
+
+          &:hover {
+            background-color: lighten($color-surface, 10%);
+          }
         }
       }
 

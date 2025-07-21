@@ -19,13 +19,14 @@
     progressbar {
       transform: rotate(180deg);
       trough {
+        all: unset;
         background-color: $color-on_secondary_fixed;
         border-radius: 16px;
-        min-width: 2rem;
+        min-width: 2.5rem;
 
         progress {
           border-radius: 4px;
-          min-width: 2rem;
+          min-width: 2.5rem;
           background-color: $color-primary;
         }
       }

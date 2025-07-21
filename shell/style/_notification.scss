@@ -61,15 +61,11 @@ window.NotificationPopups {
       outline: none;
       // background-color: $color-surface_container_high;
       background-color: transparent;
+      color: #d05050;
       border-radius: 16px;
       padding: 0.2rem;
       min-width: 0;
       min-height: 0;
-
-      &:hover {
-        background-color: $color-primary;
-        color: $color-surface;
-      }
     }
   }
 

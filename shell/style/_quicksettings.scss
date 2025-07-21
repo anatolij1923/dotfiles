@@ -1,5 +1,7 @@
 @use "./colors" as *;
 @use "mixins/material" as *;
+@use "mixins/button.scss" as *;
+@use "mixins/scale.scss" as *;
 
 window.quicksettings {
   .quicksettings-content {
@@ -64,17 +66,20 @@ window.quicksettings {
       border-radius: 16px;
       background-color: rgba($color-surface_container, $alpha: 1);
       @include material-icon;
+      @include scale;
 
       scale {
+        margin: 8px;
         trough {
           background-color: $color-on_secondary_fixed;
+
           slider {
-            all: unset;
             outline: none;
-            padding: 10px;
+            padding: 12px;
             background: none;
           }
           highlight {
+            border-radius: 16px;
             background-color: $color-primary;
           }
 
@@ -86,8 +91,10 @@ window.quicksettings {
     }
 
     .qs-button {
+      @include button;
       outline: none;
-      border-radius: 24px;
+      background-color: $color-surface_container_high;
+      border-radius: 16px;
       margin: 0 4px;
       padding: 16px 20px;
       transition: all 0.2s ease-in-out;
@@ -97,7 +104,7 @@ window.quicksettings {
       }
 
       &.active {
-        border-radius: 16px;
+        border-radius: 24px;
         background-color: $color-primary;
         color: $color-surface;
       }
