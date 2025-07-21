@@ -1,5 +1,6 @@
 @use "./colors" as *;
 @use "mixins/material.scss" as *;
+@use "mixins/button.scss" as *;
 
 window.powermenu {
   .powermenu-content {
@@ -9,11 +10,12 @@ window.powermenu {
     padding: 24px;
 
     button {
+      @include button;
       background-color: $color-surface_container_high;
       color: $color-on_surface;
       border-radius: 16px;
       margin: 0 6px;
-      padding: 12px;
+      padding: 16px;
       transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out,
         transform 0.1s ease;
 
