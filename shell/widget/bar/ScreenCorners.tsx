@@ -1,4 +1,5 @@
 import { Astal, Gdk } from "ags/gtk4";
+import cairo from "gi://cairo?version=1.0";
 
 export function ScreenCorners(gdkmonitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
@@ -11,10 +12,18 @@ export function ScreenCorners(gdkmonitor: Gdk.Monitor) {
       gdkmonitor={gdkmonitor}
       anchor={TOP | LEFT | RIGHT}
       keymode={Astal.Keymode.NONE}
-      layer={Astal.Layer.BOTTOM}
+      layer={Astal.Layer.OVERLAY}
       heightRequest={22}
       visible
       hexpand
+      $={(win) => {
+        const surface = win.get_surface();
+        surface?.set_input_region(new cairo.Region());
+
+        win.connect("map", () => {
+          win.get_surface()?.set_input_region(new cairo.Region());
+        });
+      }}
     >
       <box cssClasses={["shadow"]} vexpand hexpand>
         <box cssClasses={["border"]} vexpand hexpand>
