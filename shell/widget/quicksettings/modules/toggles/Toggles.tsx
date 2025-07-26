@@ -19,7 +19,7 @@ function WifiButton() {
   const state = createBinding(wifi, "state");
   const ssid = createBinding(wifi, "ssid");
   const wifiName = createComputed([state, ssid], (state, ssid) =>
-    state === Network.DeviceState.ACTIVATED ? ssid : "Wi-Fi"
+    state === Network.DeviceState.ACTIVATED ? ssid : "Wi-Fi",
   );
 
   return (
@@ -28,7 +28,7 @@ function WifiButton() {
       onClicked={() => wifi.set_enabled(!wifi.get_enabled())}
       iconName={createBinding(
         wifi,
-        "enabled"
+        "enabled",
       )((v: boolean) => (v ? "network_wifi" : "signal_wifi_off"))}
       tooltip="Click to enable or disable wifi"
     />
@@ -42,9 +42,12 @@ function BluetoothButton() {
     <QSButton
       connection={[bluetooth, "isPowered"]} // Changed to camelCase
       onClicked={() => bluetooth.toggle()}
+      onSecondaryClick={() => {
+        execAsync(["blueman-manager"])
+      }}
       iconName={createBinding(
         bluetooth,
-        "isPowered"
+        "isPowered",
       )((v: boolean) => (v ? "bluetooth" : "bluetooth_disabled"))}
       tooltip="Click to enable or disable bluetooth. Right click to open blueman"
     />
@@ -68,7 +71,7 @@ function Mic() {
       }}
       iconName={createBinding(
         defaultMicrophone,
-        "mute"
+        "mute",
       )((v: boolean) => (v ? "mic_off" : "mic"))}
       tooltip="Click to mute or unmute mic"
     />
@@ -86,7 +89,7 @@ function DND() {
       }}
       iconName={createBinding(
         notifd,
-        "dontDisturb" // Changed to camelCase
+        "dontDisturb", // Changed to camelCase
       )((dnd: boolean) => (dnd ? "notifications_off" : "notifications"))}
       tooltip="Click to change DND mode"
     />

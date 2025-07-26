@@ -1,5 +1,5 @@
 import { createState, createBinding, createExternal } from "ags";
-import { Gtk } from "ags/gtk4";
+import { Gdk, Gtk } from "ags/gtk4";
 import GObject from "gi://GObject?version=2.0";
 import type { Accessor } from "ags";
 import Pango from "gi://Pango?version=1.0";
@@ -15,6 +15,7 @@ interface QSButtonProps {
   onClicked?: () => void;
   connection?: ConnectionType; // Use the new union type
   tooltip?: string;
+  onSecondaryClick?: () => void;
 }
 
 export default function QSButton({
@@ -23,12 +24,23 @@ export default function QSButton({
   onClicked,
   connection,
   tooltip,
+  onSecondaryClick,
 }: QSButtonProps) {
   const [cssClasses, setCssClasses] = createState<string[]>(["qs-button"]);
 
   const setup = (self: Gtk.Widget) => {
     if (connection) {
       const [source, propertyOrNull, cond] = connection;
+
+      const gestures = new Gtk.GestureClick();
+      gestures.set_button(0);
+      gestures.connect("pressed", (_) => {
+        const button = _.get_current_button();
+        if (button === Gdk.BUTTON_SECONDARY) {
+          onSecondaryClick();
+        }
+      });
+      self.add_controller(gestures);
 
       const updateClasses = (v: any) => {
         const newClasses = ["qs-button"];
@@ -65,7 +77,7 @@ export default function QSButton({
           "[DEBUG] binding setup for",
           propertyName,
           "initial value:",
-          object[propertyName]
+          object[propertyName],
         );
 
         if (propertyName != null) {
