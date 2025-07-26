@@ -7,6 +7,7 @@ import { createState } from "ags";
 import Adw from "gi://Adw?version=1";
 import Mediaplayer from "./modules/mediaplayer/Mediaplayer";
 import Header from "./modules/header/Header";
+import NotificationWindow from "./modules/notificationwindow/NotificationWindow";
 
 export default function Quicksettings(gdkmonitor: Gdk.Monitor) {
   const maxWidth = gdkmonitor.geometry.width * 0.25;
@@ -34,6 +35,7 @@ export default function Quicksettings(gdkmonitor: Gdk.Monitor) {
         <Header />
         <Sliders />
         <Toggles />
+        <NotificationWindow />
         {/* <Mediaplayer /> */}
         {/* <StackWidget /> */}
       </box>

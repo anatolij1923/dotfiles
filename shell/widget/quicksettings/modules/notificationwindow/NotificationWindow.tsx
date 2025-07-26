@@ -68,13 +68,14 @@ export default function NotificationWindow() {
       vexpand
       hexpand
     >
-      <box vexpand>
-        <NotificationScrolledWindow />
-      </box>
-      <box>
-        <NotificationCount />
+      <box class="header">
+        {/* <NotificationCount /> */}
+        <label label="Notifications" />
         <box hexpand />
         <ClearButton />
+      </box>
+      <box vexpand>
+        <NotificationScrolledWindow />
       </box>
     </box>
   );
