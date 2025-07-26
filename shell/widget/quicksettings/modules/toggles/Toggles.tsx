@@ -1,7 +1,12 @@
 import Wp from "gi://AstalWp";
 import QSButton from "../../QSButton";
 import Notifd from "gi://AstalNotifd";
-import { createBinding, createComputed, createState } from "ags";
+import {
+  createBinding,
+  createComputed,
+  createExternal,
+  createState,
+} from "ags";
 import Network from "gi://AstalNetwork";
 import Bluetooth from "gi://AstalBluetooth";
 import { Gtk } from "ags/gtk4";
@@ -24,7 +29,6 @@ function WifiButton() {
         wifi,
         "enabled"
       )((v) => (v ? "network_wifi" : "signal_wifi_off"))}
-      label={wifiName}
       tooltip="Click to enable or disable wifi"
     />
   );
@@ -41,18 +45,6 @@ function BluetoothButton() {
         bluetooth,
         "isPowered"
       )((v) => (v ? "bluetooth" : "bluetooth_disabled"))}
-      label={createBinding(bluetooth, "isConnected").as((connected) => {
-        if (connected) {
-          const device = bluetooth.devices.find((d) => d.connected);
-          if (device) {
-            return device.name;
-          } else {
-            return "Bluetooth";
-          }
-        } else {
-          return "Bluetooth";
-        }
-      })}
       tooltip="Click to enable or disable bluetooth. Right click to open blueman"
     />
   );
@@ -71,10 +63,6 @@ function Mic() {
         wp?.defaultMicrophone,
         "mute"
       )((v) => (v ? "mic_off" : "mic"))}
-      label={createBinding(
-        wp?.defaultMicrophone,
-        "mute"
-      )((v) => (v ? "Muted" : "Unmuted"))}
       tooltip="Click to mute or unmute mic"
     />
   );
@@ -93,23 +81,29 @@ function DND() {
         notifd,
         "dontDisturb" // Changed to camelCase
       )((dnd) => (dnd ? "notifications_off" : "notifications"))}
-      label="Do not disturb"
       tooltip="Click to change DND mode"
     />
   );
 }
+function NightLight() {
+  return <QSButton iconName="bedtime" />;
+}
+
+function IdleInhibitor() {
+  return <QSButton iconName="coffee" />;
+}
 
 export default function Toggles() {
   return (
-    <box orientation={Gtk.Orientation.VERTICAL} spacing={8}>
-      <box homogeneous>
+    <centerbox class="toggles" halign={Gtk.Align.CENTER}>
+      <box $type="center" spacing={8}>
         <WifiButton />
         <BluetoothButton />
-      </box>
-      <box homogeneous>
-        <Mic />
+        <NightLight />
         <DND />
+        <Mic />
+        <IdleInhibitor />
       </box>
-    </box>
+    </centerbox>
   );
 }

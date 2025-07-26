@@ -10,6 +10,7 @@ import BluetoothWidget from "./modules/bluetoothWidget/bluetoothWidget";
 import Test from "../osd/OSD";
 import Wifi from "./modules/wifi/Wifi";
 import NotificationWidget from "./modules/notificationWidget/NotifiicationWidget";
+import Tools from "./modules/tools/Tools";
 
 function CommonButton() {
   return (
@@ -49,7 +50,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         <box $type="center" class="center" spacing={8}>
           <Clock />
         </box>
-        <box $type="end" class="right-side" spacing={16}>
+        <box $type="end" class="right-side" spacing={8}>
           <Tray />
           <KbLayout />
           <CommonButton />

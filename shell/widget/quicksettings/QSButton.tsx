@@ -6,7 +6,6 @@ import Pango from "gi://Pango?version=1.0";
 
 interface QSButtonProps<T extends GObject.Object> {
   iconName: string | Accessor<string>; // Allow Accessor for iconName
-  label?: string | Accessor<string>;
   setup?: (self: Gtk.Widget) => void;
   onClicked?: () => void;
   connection?: [T & Record<string, any>, string, ((v: any) => boolean)?]; // Allow indexing with string
@@ -15,7 +14,6 @@ interface QSButtonProps<T extends GObject.Object> {
 
 export default function QSButton<T extends GObject.Object>({
   iconName,
-  label,
   setup: originalSetup,
   onClicked,
   connection,
@@ -74,19 +72,12 @@ export default function QSButton<T extends GObject.Object>({
       onClicked={onClicked}
       tooltipText={tooltip}
     >
-      <box spacing={8} hexpand>
+      <box >
         <label
           label={iconName} // This will now accept Accessor<string>
           halign={Gtk.Align.CENTER}
           class="material-icon"
         />
-        <box class="title">
-          <label
-            label={label}
-            maxWidthChars={10}
-            ellipsize={Pango.EllipsizeMode.END}
-          />
-        </box>
       </box>
     </button>
   );

@@ -6,6 +6,7 @@ import StackWidget from "./modules/stackwidget/StackWidget";
 import { createState } from "ags";
 import Adw from "gi://Adw?version=1";
 import Mediaplayer from "./modules/mediaplayer/Mediaplayer";
+import Header from "./modules/header/Header";
 
 export default function Quicksettings(gdkmonitor: Gdk.Monitor) {
   const maxWidth = gdkmonitor.geometry.width * 0.25;
@@ -30,10 +31,11 @@ export default function Quicksettings(gdkmonitor: Gdk.Monitor) {
         orientation={Gtk.Orientation.VERTICAL}
         spacing={16}
       >
+        <Header />
         <Sliders />
         <Toggles />
         {/* <Mediaplayer /> */}
-        <StackWidget />
+        {/* <StackWidget /> */}
       </box>
     </Window>
   );

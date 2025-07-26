@@ -20,6 +20,7 @@ window.NotificationPopups {
 
   &.critical {
     // border: 1pt solid gtkalpha($color-error, 0.4);
+    // background: $color-inverse_primary;
 
     .header {
       .app-name {
@@ -58,6 +59,7 @@ window.NotificationPopups {
     }
 
     .close-button {
+      all: unset;
       outline: none;
       // background-color: $color-surface_container_high;
       background-color: transparent;
@@ -84,7 +86,7 @@ window.NotificationPopups {
 
     .image {
       margin-right: 0.5rem;
-      border-radius: 9px;
+      border-radius: 16px;
       min-width: 100px;
       min-height: 100px;
       background-size: cover;

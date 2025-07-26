@@ -57,33 +57,26 @@ window#bar {
       .clock {
         button {
           @include button;
-          background-color: transparent;
-          outline: none;
-          border-radius: 16px;
+          background-color: lighten($color-surface, 4%);
+          box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.4);
+          border-radius: 32px;
+          padding: 0 16px;
 
           label {
             color: $color-on_surface;
-            font-weight: 500;
+            font-weight: 400;
           }
 
           &:checked {
-            background-color: $color-primary;
+            background-color: $color-on_secondary_fixed_variant;
 
             label {
-              color: $color-surface;
+              // color: $color-surface;
             }
           }
+
           &:hover {
             background-color: lighten($color-surface, 10%);
-          }
-        }
-
-        popover.background {
-          border-radius: 100px;
-          calendar {
-            all: unset;
-            padding: 10px;
-            background: $color-surface;
           }
         }
       }
@@ -97,13 +90,14 @@ window#bar {
 
         button {
           @include button;
+          // border: 1px solid wheat;
           background-color: transparent;
-          font-weight: normal;
+          font-weight: 500;
           outline: none;
           border-radius: 16px;
 
           .material-icon {
-            @include material-icon(24px);
+            @include material-icon;
           }
         }
       }
@@ -141,17 +135,20 @@ window#bar {
             background-color: $color-on_secondary_fixed;
 
             &.filled {
-              background-color: $color-primary;
+              background: linear-gradient(
+                $color-primary,
+                lighten($color-primary, 10%)
+              );
             }
 
             &.filled.low {
-              background-color: $color-error;
+              background: $color-error;
             }
           }
         }
 
         .material-icon {
-          @include material-icon(24px);
+          @include material-icon;
         }
       }
 
@@ -163,44 +160,22 @@ window#bar {
         }
       }
 
-      .battery {
-        color: lighten($color-surface, 10%);
-        // color: $color-on_surface;
-        padding: 6px 0;
-        font-weight: 500;
+      .notification-widget {
+        font-weight: normal;
+        color: $color-on_surface;
 
-        levelbar {
-          block {
-            all: unset;
-            background-color: gtkalpha($color-on_surface, 0.6);
-            border-radius: 8px;
-
-            &.filled {
-              background-color: $color-on_surface;
-              min-width: 0;
-
-              &.low {
-                background-color: $color-error;
-              }
-            }
-          }
-
-          &.charging {
-            block {
-              &.filled {
-                background-color: #3ba446;
-              }
-            }
-          }
+        .material-icon {
+          @include material-icon;
         }
       }
 
       .common-button {
         button {
           @include button;
-          background-color: lighten($color-surface, 5%);
-          outline: none;
-          border-radius: 16px;
+          background-color: lighten($color-surface, 4%);
+          box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+          border-radius: 32px;
+          padding: 8px;
 
           &:hover {
             background-color: lighten($color-surface, 10%);
@@ -208,12 +183,67 @@ window#bar {
         }
       }
 
-      .notification-widget {
-        font-weight: normal;
-        color: $color-on_surface;
+      .battery {
+        color: lighten($color-surface, 10%);
+        // color: $color-on_surface;
+        padding: 8px 0;
+        font-weight: 500;
 
-        .material-icon {
-          @include material-icon;
+        // levelbar {
+        //   block {
+        //     all: unset;
+        //     background-color: gtkalpha($color-on_surface, 0.6);
+        //     border-radius: 8px;
+
+        //     &.filled {
+        // background: linear-gradient(
+        //   to right,
+        //   $color-primary,
+        //   lighten($color-primary, 10%)
+        // );
+        //       min-width: 0;
+
+        //       &.low {
+        //         background: $color-error;
+        //       }
+        //     }
+        //   }
+
+        //   &.charging {
+        //     block {
+        //       &.filled {
+        //         background: #3ba446;
+        //       }
+        //     }
+        //   }
+        // }
+
+        progressbar {
+          trough {
+            all: unset;
+            background-color: gtkalpha($color-on_surface, 0.7);
+            min-height: 24px;
+            border-radius: 8px;
+
+            progress {
+              all: unset;
+              min-height: 24px;
+              background: linear-gradient(
+                to right,
+                $color-primary,
+                lighten($color-primary, 10%)
+              );
+              border-radius: 4px;
+            }
+          }
+
+          &.charging {
+            trough {
+              progress {
+                background: linear-gradient(to right, #35953f, #6ac672);
+              }
+            }
+          }
         }
       }
     }

@@ -9,23 +9,22 @@ export default function Sliders() {
 
   return (
     <box class="sliders" orientation={Gtk.Orientation.VERTICAL}>
-      <box>
+      <box spacing={8}>
+        <label label="light_mode" class="material-icon" />
+        <slider
+          value={createBinding(brightness, "screen")}
+          onChangeValue={(self) => {
+            brightness.screen = self.value;
+          }}
+          hexpand
+        />
+      </box>
+      <box spacing={8}>
         <label label="music_note" class="material-icon" />
         <slider
           value={createBinding(speaker, "volume")}
           onChangeValue={(self) => {
             speaker.volume = self.value;
-          }}
-          hexpand
-        />
-      </box>
-
-      <box>
-        <label label="brightness_6" class="material-icon" />
-        <slider
-          value={createBinding(brightness, "screen")}
-          onChangeValue={(self) => {
-            brightness.screen = self.value;
           }}
           hexpand
         />

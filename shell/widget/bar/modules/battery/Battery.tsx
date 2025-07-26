@@ -1,6 +1,7 @@
 import { createBinding, createComputed } from "ags";
 import AstalBattery from "gi://AstalBattery?version=0.1";
 import { formatTime } from "../../../../utils/formatTime";
+import { Gtk } from "ags/gtk4";
 
 export default function Battery() {
   const battery = AstalBattery.get_default();
@@ -39,11 +40,22 @@ export default function Battery() {
 
   return (
     <box class="battery" tooltipMarkup={tooltip}>
-      <overlay>
+      {/* <overlay>
         <levelbar
           value={createBinding(battery, "percentage")}
           widthRequest={50}
           class={isCharging.as((charging) => (charging ? "charging" : ""))}
+        />
+        <label label={formattedPercent} $type="overlay" />
+      </overlay> */}
+
+      <overlay>
+        <Gtk.ProgressBar
+          fraction={createBinding(battery, "percentage")}
+          halign={Gtk.Align.CENTER}
+          widthRequest={50}
+          class={isCharging.as((charging) => (charging ? "charging" : ""))}
+          valign={Gtk.Align.CENTER}
         />
         <label label={formattedPercent} $type="overlay" />
       </overlay>

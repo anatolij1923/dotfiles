@@ -24,7 +24,7 @@ export default function KbLayout() {
   };
 
   const id = hypr.connect("keyboard-layout", update);
-  onCleanup(() => hypr.disconnect(id))
+  onCleanup(() => hypr.disconnect(id));
 
   update();
 
