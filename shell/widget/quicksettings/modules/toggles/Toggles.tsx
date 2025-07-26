@@ -2,6 +2,7 @@ import Wp from "gi://AstalWp";
 import QSButton from "../../QSButton";
 import Notifd from "gi://AstalNotifd";
 import {
+  Accessor,
   createBinding,
   createComputed,
   createExternal,
@@ -28,7 +29,7 @@ function WifiButton() {
       iconName={createBinding(
         wifi,
         "enabled"
-      )((v) => (v ? "network_wifi" : "signal_wifi_off"))}
+      )((v: boolean) => (v ? "network_wifi" : "signal_wifi_off"))}
       tooltip="Click to enable or disable wifi"
     />
   );
@@ -44,7 +45,7 @@ function BluetoothButton() {
       iconName={createBinding(
         bluetooth,
         "isPowered"
-      )((v) => (v ? "bluetooth" : "bluetooth_disabled"))}
+      )((v: boolean) => (v ? "bluetooth" : "bluetooth_disabled"))}
       tooltip="Click to enable or disable bluetooth. Right click to open blueman"
     />
   );
@@ -52,17 +53,23 @@ function BluetoothButton() {
 
 function Mic() {
   const wp = Wp.get_default();
+  const defaultMicrophone = wp?.defaultMicrophone;
+
+  if (!defaultMicrophone) {
+    return null; // Don't render if defaultMicrophone is not available
+  }
+
   return (
     <QSButton
-      connection={[wp?.defaultMicrophone, "mute"]}
+      connection={[defaultMicrophone, "mute"]}
       onClicked={() => {
-        const mute = wp?.defaultMicrophone.mute;
-        wp?.defaultMicrophone.set_mute(!mute);
+        const mute = defaultMicrophone.mute;
+        defaultMicrophone.set_mute(!mute);
       }}
       iconName={createBinding(
-        wp?.defaultMicrophone,
+        defaultMicrophone,
         "mute"
-      )((v) => (v ? "mic_off" : "mic"))}
+      )((v: boolean) => (v ? "mic_off" : "mic"))}
       tooltip="Click to mute or unmute mic"
     />
   );
@@ -80,17 +87,45 @@ function DND() {
       iconName={createBinding(
         notifd,
         "dontDisturb" // Changed to camelCase
-      )((dnd) => (dnd ? "notifications_off" : "notifications"))}
+      )((dnd: boolean) => (dnd ? "notifications_off" : "notifications"))}
       tooltip="Click to change DND mode"
     />
   );
 }
-function NightLight() {
-  return <QSButton iconName="bedtime" />;
-}
 
 function IdleInhibitor() {
-  return <QSButton iconName="coffee" />;
+  const [idleInhibitor, setIdleInhibitor] = createState(false);
+
+  const setupIdleInhibitor = async (self: Gtk.Widget) => {
+    try {
+      const pid = await execAsync(["pidof", "idle-inhibitor.py"]);
+      setIdleInhibitor(pid.trim() !== "");
+    } catch (e) {
+      setIdleInhibitor(false);
+    }
+  };
+
+  return (
+    <QSButton
+      setup={setupIdleInhibitor} // Call setup function to check initial state
+      connection={[idleInhibitor, null, (v: boolean) => v]}
+      onClicked={() => {
+        const newState = !idleInhibitor.get();
+        setIdleInhibitor(newState); // Update state immediately
+        if (newState) {
+          execAsync([
+            "bash",
+            "-c",
+            `pidof idle-inhibitor.py || ~/dotfiles/shell/scripts/idleInhibitor.py `,
+          ]).catch(print);
+        } else {
+          execAsync(["bash", "-c", "pkill -f idle-inhibitor.py"]).catch(print);
+        }
+      }}
+      iconName={"coffee"}
+      tooltip="Keeping your system awake"
+    />
+  );
 }
 
 export default function Toggles() {
@@ -99,7 +134,6 @@ export default function Toggles() {
       <box $type="center" spacing={8}>
         <WifiButton />
         <BluetoothButton />
-        <NightLight />
         <DND />
         <Mic />
         <IdleInhibitor />
