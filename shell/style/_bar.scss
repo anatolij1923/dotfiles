@@ -1,6 +1,7 @@
 @use "./colors" as *;
 @use "mixins/material" as *;
 @use "mixins/button.scss" as *;
+@use "mixins/elevation.scss" as *;
 @use "sass:string";
 
 @function gtkalpha($c, $a) {
@@ -57,8 +58,9 @@ window#bar {
       .clock {
         button {
           @include button;
+          @include elevation(3);
           background-color: lighten($color-surface, 4%);
-          box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.4);
+          // box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.4);
           border-radius: 32px;
           padding: 0 16px;
 
@@ -172,8 +174,8 @@ window#bar {
       .common-button {
         button {
           @include button;
+          @include elevation(3);
           background-color: lighten($color-surface, 4%);
-          box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
           border-radius: 32px;
           padding: 8px;
 
