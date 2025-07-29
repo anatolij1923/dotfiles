@@ -34,10 +34,10 @@ export default function QSButton({
 
       const gestures = new Gtk.GestureClick();
       gestures.set_button(0);
-      gestures.connect("pressed", (_) => {
+      gestures.connect("released", (_) => {
         const button = _.get_current_button();
         if (button === Gdk.BUTTON_SECONDARY) {
-          onSecondaryClick();
+          onSecondaryClick?.();
         }
       });
       self.add_controller(gestures);
