@@ -1,5 +1,5 @@
 # custom promt initiatlization
-oh-my-posh init fish --config ~/.config/ohmyposh/config.toml | source
+starship init fish | source
 
 # Zoxide initialization
 zoxide init fish | source

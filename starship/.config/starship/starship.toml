@@ -1,0 +1,37 @@
+format = """\
+$directory\
+$fill\
+$bun\
+$git_branch\
+$git_status
+$character\
+"""
+
+right_format = """\
+$cmd_duration\
+$time\
+"""
+
+[fill]
+symbol = " "
+
+[directory]
+style = "bold blue"
+truncation_length = 3
+truncate_to_repo = true
+
+[git_branch]
+symbol = " "
+style = "bold purple"
+format = "[$symbol$branch]($style)"
+
+[git_status]
+format = "[$ahead_behind]($style)"
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+
+[cmd_duration]
+min_time = 1000
+

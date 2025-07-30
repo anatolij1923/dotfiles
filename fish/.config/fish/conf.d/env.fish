@@ -16,3 +16,6 @@ set -Ux QML_IMPORT_PATH /usr/lib/qt6/qml
 set -gx FZF_COMPLETE 2
 
 set -U FZF_DISABLE_KEYBINDINGS 0
+
+# Starship config path
+set -Ux STARSHIP_CONFIG ~/.config/starship/starship.toml
