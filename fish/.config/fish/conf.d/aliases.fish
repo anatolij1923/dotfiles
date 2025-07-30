@@ -6,6 +6,7 @@ alias tree="eza --tree"
 
 # Utilities
 alias cat="bat"
+alias ff="fastfetch"
 
 # Neovim
 alias svim="sudo nvim"
