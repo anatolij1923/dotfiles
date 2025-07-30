@@ -71,7 +71,7 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
     setOsdState({
       type: "brightness",
       percentage: brightnessPercent,
-      icon: "brightness_6",
+      icon: "light_mode",
     });
 
     setIsVisible(true);
@@ -84,10 +84,6 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
     if (muteId) speaker?.disconnect(muteId);
     brigtness.disconnect(brightnessId);
   });
-
-  const [currentPercentage, setCurrentPercentage] = createState(
-    osdState.get().percentage
-  );
 
   return (
     <window
@@ -115,7 +111,7 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
 
           if (!visible) {
             revealer.set_reveal_child(false);
-            await new Promise((r) => setTimeout(r, 150));
+            await new Promise((r) => setTimeout(r, 300));
           }
 
           win.set_visible(visible);
@@ -128,7 +124,7 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
     >
       <revealer
         transitionType={Gtk.RevealerTransitionType.CROSSFADE}
-        transitionDuration={200}
+        transitionDuration={300}
       >
         <box
           spacing={16}
