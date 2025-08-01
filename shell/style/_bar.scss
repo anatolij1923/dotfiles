@@ -170,7 +170,7 @@ window#bar {
         }
       }
 
-      .common-button {
+      .sys-button {
         button {
           @include button;
           @include elevation(3);
@@ -197,37 +197,7 @@ window#bar {
       .battery {
         color: lighten($color-surface, 10%);
         // color: $color-on_surface;
-        padding: 8px 0;
         font-weight: 500;
-
-        // levelbar {
-        //   block {
-        //     all: unset;
-        //     background-color: gtkalpha($color-on_surface, 0.6);
-        //     border-radius: 8px;
-
-        //     &.filled {
-        // background: linear-gradient(
-        //   to right,
-        //   $color-primary,
-        //   lighten($color-primary, 10%)
-        // );
-        //       min-width: 0;
-
-        //       &.low {
-        //         background: $color-error;
-        //       }
-        //     }
-        //   }
-
-        //   &.charging {
-        //     block {
-        //       &.filled {
-        //         background: #3ba446;
-        //       }
-        //     }
-        //   }
-        // }
 
         progressbar {
           trough {
@@ -241,8 +211,8 @@ window#bar {
               min-height: 24px;
               background: linear-gradient(to right,
                   $color-primary,
-                  lighten($color-primary, 10%));
-              border-radius: 4px;
+                  lighten($color-primary, 5%));
+              border-radius: 2px;
             }
           }
 
