@@ -7,14 +7,23 @@ import Battery from "./modules/battery/Battery";
 import Tray from "./modules/tray/Tray";
 import Workspaces from "./modules/workspaces/Workspaces";
 import BluetoothWidget from "./modules/bluetoothWidget/bluetoothWidget";
-import Test from "../osd/OSD";
 import Wifi from "./modules/wifi/Wifi";
 import NotificationWidget from "./modules/notificationWidget/NotifiicationWidget";
-import Tools from "./modules/tools/Tools";
+import { onCleanup } from "ags";
 
 function CommonButton() {
   return (
-    <box class="common-button">
+    <box
+      class="common-button"
+      $={(self) => {
+        const appconnect = app.connect("window-toggled", (_, win) => {
+          if (win.name !== "quicksettings") return;
+          const visible = win.visible;
+          self[visible ? "add_css_class" : "remove_css_class"]("active");
+        });
+        onCleanup(() => app.disconnect(appconnect));
+      }}
+    >
       <button
         onClicked={() => {
           app.toggle_window("quicksettings");
@@ -43,7 +52,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       application={app}
     >
       <centerbox>
-        <box $type="start" class="left-side" spacing={16}>
+        <box $type="start" hexpand class="left-side" spacing={16}>
           <Workspaces />
           <FocusedClient />
         </box>
