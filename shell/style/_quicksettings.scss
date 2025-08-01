@@ -17,6 +17,13 @@ window.quicksettings {
       padding: 8px;
 
       .user-info {
+
+        .user-pic {
+          overflow: hidden;
+          border-radius: 100%;
+
+        }
+
         .username {
           font-weight: 600;
           color: $color-on_surface;
@@ -47,7 +54,7 @@ window.quicksettings {
         }
 
         .power-button {
-          color: #ff4040;
+          color: #e25c5c;
         }
       }
     }
@@ -106,7 +113,7 @@ window.quicksettings {
           font-family: "Material Icons";
 
           &:hover {
-            background-color: rgba($color-primary, 0.70);
+            background-color: rgba($color-primary, 0.80);
           }
         }
 
@@ -132,7 +139,7 @@ window.quicksettings {
           @include elevation(3);
           background: $color-surface_container;
           color: $color-error;
-          border-radius: 24px;
+          border-radius: 32px;
           padding: 8px 16px;
 
           &:hover {
@@ -140,7 +147,8 @@ window.quicksettings {
           }
 
           &:active {
-            border-radius: 8px;
+            border-radius: 16px;
+            background-color: rgba($color-error, 0.3);
           }
 
           &:disabled {
@@ -150,86 +158,6 @@ window.quicksettings {
       }
 
     }
-
-    .stack-widget {
-      background-color: rgba($color-surface_container, $alpha: 0);
-      padding: 8px;
-      border-radius: 24px;
-
-      .buttons {
-        .material-icon {
-          @include material-icon;
-        }
-
-        button {
-          @include button;
-          font-weight: 500;
-          padding: 8px;
-          outline: none;
-          border-radius: 16px;
-          transition: all 0.2s ease-in-out;
-
-          &.active {
-            background-color: $color-primary;
-            color: $color-surface;
-          }
-
-          &:hover {
-            transform: scaleX(1.02);
-          }
-        }
-      }
-
-
-      .bluetooth-devices {
-        .device-button {
-          margin: 16px 0;
-          border-radius: 16px;
-          font-weight: 500;
-
-          &.active {
-            background-color: $color-primary;
-            color: $color-surface;
-          }
-        }
-      }
-    }
-
-
-    // .qs-button {
-    //   @include button;
-    //   outline: none;
-    //   background-color: $color-surface_container_high;
-    //   border-radius: 16px;
-    //   // margin: 0 4px;
-    //   padding: 16px 16px;
-    //   transition: all 0.2s ease-in-out;
-    //   font-weight: 500;
-    //   box-shadow: 0 0 12px rgba(0, 0, 0, 1);
-    //
-    //   &:hover {
-    //     transform: scaleX(1.02);
-    //   }
-    //
-    //   &.active {
-    //     border-radius: 24px;
-    //     background-color: $color-primary;
-    //     color: $color-surface;
-    //   }
-    //
-    //   .material-icon {
-    //     @include material-icon($size: 32px);
-    //   }
-    //
-    //   // .title {
-    //   //   all: unset;
-    //   //   label {
-    //   //     font-family: "Rubik";
-    //   //     // font-weight: 500;
-    //   //     font-size: 24px;
-    //   //   }
-    //   // }
-    // }
   }
 
   .mediaplayer {

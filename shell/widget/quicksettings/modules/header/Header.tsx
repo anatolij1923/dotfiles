@@ -8,12 +8,32 @@ const userName = GLib.get_user_name();
 
 const uptime = createPoll("", 5000, async () => await getUptime());
 
+const imageDir = GLib.get_user_special_dir(
+  GLib.UserDirectory.DIRECTORY_PICTURES,
+);
+const userPic = GLib.build_filenamev([imageDir, "pic.png"]);
+
+function fileExists(path: string) {
+  return GLib.file_test(path, GLib.FileTest.EXISTS);
+}
+
 export default function Header() {
   return (
     <box class="header">
-      <box class="user-info">
-        <box orientation={Gtk.Orientation.VERTICAL} spacing={4}>
-          <label label={userName} class="username" xalign={0}/>
+      <box class="user-info" spacing={16}>
+        <box
+          class="user-pic"
+          overflow={Gtk.Overflow.HIDDEN}
+          visible={fileExists(userPic)}
+        >
+          <image file={userPic} pixelSize={64} />
+        </box>
+        <box
+          orientation={Gtk.Orientation.VERTICAL}
+          spacing={4}
+          valign={Gtk.Align.CENTER}
+        >
+          <label label={userName} class="username" xalign={0} />
           <box class="uptime">
             <label label="Uptime: " />
             <label label={uptime} />
