@@ -12,7 +12,7 @@ export function ScreenCorners(gdkmonitor: Gdk.Monitor) {
       gdkmonitor={gdkmonitor}
       anchor={TOP | LEFT | RIGHT}
       keymode={Astal.Keymode.NONE}
-      layer={Astal.Layer.OVERLAY}
+      layer={Astal.Layer.TOP}
       heightRequest={22}
       visible
       hexpand
