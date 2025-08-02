@@ -1,6 +1,6 @@
 import { onCleanup } from "ags";
 import app from "ags/gtk4/app";
-import NotificationWidget from "../notificationWidget/NotifiicationWidget";
+import NotificationWidget from "../notificationWidget/NotificationWidget";
 import Wifi from "../wifi/Wifi";
 import BluetoothWidget from "../bluetoothWidget/bluetoothWidget";
 
