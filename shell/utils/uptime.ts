@@ -1,4 +1,3 @@
-import { createState, createExternal } from "ags";
 import { execAsync } from "ags/process";
 
 export const getUptime = async () => {

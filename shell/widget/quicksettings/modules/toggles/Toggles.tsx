@@ -43,7 +43,7 @@ function BluetoothButton() {
       connection={[bluetooth, "isPowered"]} // Changed to camelCase
       onClicked={() => bluetooth.toggle()}
       onSecondaryClick={() => {
-        execAsync(["blueman-manager"])
+        execAsync(["blueman-manager"]);
       }}
       iconName={createBinding(
         bluetooth,
@@ -99,7 +99,7 @@ function DND() {
 function IdleInhibitor() {
   const [idleInhibitor, setIdleInhibitor] = createState(false);
 
-  const setupIdleInhibitor = async (self: Gtk.Widget) => {
+  const setupIdleInhibitor = async () => {
     try {
       const pid = await execAsync(["pidof", "idle-inhibitor.py"]);
       setIdleInhibitor(pid.trim() !== "");

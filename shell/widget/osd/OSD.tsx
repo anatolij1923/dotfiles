@@ -145,9 +145,9 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
               $type="overlay"
             />
           </overlay>
-          {/* <label
-            label={osdState((s) => `${Math.floor(s.percentage * 100)}%`)}
-          /> */}
+          {/* <label */}
+          {/*   label={osdState((s) => `${Math.floor(s.percentage * 100)}%`)} */}
+          {/* />  */}
         </box>
       </revealer>
     </window>

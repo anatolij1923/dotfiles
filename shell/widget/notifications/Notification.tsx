@@ -83,7 +83,12 @@ export default function Notification({
         </box>
         <box class="content">
           {n.image && fileExists(n.image) && (
-            <image valign={Gtk.Align.START} class="image" file={n.image} />
+            <image
+              valign={Gtk.Align.START}
+              class="image"
+              file={n.image}
+              overflow={Gtk.Overflow.HIDDEN}
+            />
           )}
           {n.image && isIcon(n.image) && (
             <box valign={Gtk.Align.START} class="icon-image">

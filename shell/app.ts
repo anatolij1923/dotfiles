@@ -9,8 +9,10 @@ import Powermenu from "./widget/powermenu/Powermenu";
 import Quicksettings from "./widget/quicksettings/Quicksettings";
 import OSD from "./widget/osd/OSD";
 import BatteryWarnings from "./utils/batteryWarning";
+import Screendim from "./widget/screendim/Screendim";
 
 app.start({
+  icons: "assets",
   css: style,
   gtkTheme: "Adwaita",
   main() {
@@ -35,10 +37,13 @@ app.start({
 
       // On Screen Display
       // OSD(monitor);
-      app.add_window(OSD(monitor) as Gtk.Window)
+      app.add_window(OSD(monitor) as Gtk.Window);
 
       //Battery warnings
       BatteryWarnings();
+
+      // Screendim(monitor);
+      //
     });
   },
 });
