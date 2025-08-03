@@ -11,7 +11,9 @@ hypr/.config/hypr/colors.conf
 shell/colors.scss
 
 # fish
-fish/.config/fish/functions/fisher.fish
 fish/.config/fish/completions/fisher.fish
+fish/.config/fish/functions/fisher.fish
+fish/.config/fish/functions/__fzfcmd.fish
 fish/.config/fish/functions/__fzf*
+fish/.config/fish/conf.d/fzf.fish
 fish/.config/fish/fish_variables
