@@ -17,6 +17,11 @@ return {
 			view = {
 				width = 30,
 			},
+            renderer = {
+                icons = {
+
+                }
+            }
 		})
 	end,
 }
