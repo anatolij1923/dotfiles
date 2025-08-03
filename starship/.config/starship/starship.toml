@@ -1,7 +1,8 @@
+add_newline = true
+
 format = """\
 $directory\
 $fill\
-$bun\
 $git_branch\
 $git_status
 $character\
@@ -18,10 +19,11 @@ symbol = " "
 [directory]
 style = "bold blue"
 truncation_length = 3
-truncate_to_repo = true
+truncate_to_repo = false
+format = '[$path]($style)[$read_only]($read_only_style) '
 
 [git_branch]
-symbol = " "
+symbol = " "
 style = "bold purple"
 format = "[$symbol$branch]($style)"
 
@@ -31,7 +33,9 @@ format = "[$ahead_behind]($style)"
 [character]
 success_symbol = "[❯](bold green)"
 error_symbol = "[❯](bold red)"
+format = '$symbol '
 
 [cmd_duration]
 min_time = 1000
+format = 'took [$duration]($style)'
 
