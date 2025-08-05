@@ -170,8 +170,8 @@ main() {
   try run_install_packages "Development Tools" "${DEV_TOOLS[@]}"
   
   # Dotfiles and Services
-  try install_dotfiles
-  try enable_services
+  # try install_dotfiles
+  # try enable_services
 
   print_header "Installation Complete!"
   print_success "Your system is ready."

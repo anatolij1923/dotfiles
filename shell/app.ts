@@ -9,7 +9,6 @@ import Powermenu from "./widget/powermenu/Powermenu";
 import Quicksettings from "./widget/quicksettings/Quicksettings";
 import OSD from "./widget/osd/OSD";
 import BatteryWarnings from "./utils/batteryWarning";
-import Screendim from "./widget/screendim/Screendim";
 
 app.start({
   icons: "assets",
