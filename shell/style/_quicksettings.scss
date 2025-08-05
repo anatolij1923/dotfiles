@@ -37,20 +37,21 @@ window.quicksettings {
 
       .buttons {
         margin: 8px;
+
         button {
           @include button;
           @include material-icon(32px);
           @include elevation(3);
-          // border: 1px solid white;
           border-radius: 16px;
-          padding: 0 8px;
+          padding: 8px;
 
           &:hover {
             background-color: $color-surface_container_high;
           }
 
           &:active {
-            padding: 8px 16px;
+            background-color: $color-surface_container_highest;
+            transform: scale(1.1)
           }
         }
 
