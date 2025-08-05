@@ -33,6 +33,7 @@ return {
 				"cssls",
 				"clangd",
 				"html",
+                "ts_ls",
 				"eslint",
 				"emmet_ls",
 				"emmet_language_server",
