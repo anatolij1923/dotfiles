@@ -3,6 +3,7 @@ import { createPoll } from "ags/time";
 import GLib from "gi://GLib?version=2.0";
 import { getUptime } from "../../../../utils/uptime";
 import app from "ags/gtk4/app";
+import { execAsync } from "ags/process";
 
 const userName = GLib.get_user_name();
 
@@ -41,16 +42,29 @@ export default function Header() {
         </box>
       </box>
       <box hexpand />
-      <box class="buttons">
-        <button
-          class="power-button"
-          onClicked={() => {
-            app.toggle_window("powermenu");
-            app.toggle_window("quicksettings");
-          }}
-        >
-          <label label="power_settings_new" class="material-icon" />
-        </button>
+      <box class="buttons" spacing={4}>
+        <box>
+          <button
+            class="logout-button"
+            onClicked={() => {
+              app.toggle_window("quicksettings");
+              execAsync(["hyprctl", "dispatch exit"])
+            }}
+          >
+            <label label="exit_to_app" class="material-icon" />
+          </button>
+        </box>
+        <box>
+          <button
+            class="power-button"
+            onClicked={() => {
+              app.toggle_window("powermenu");
+              app.toggle_window("quicksettings");
+            }}
+          >
+            <label label="power_settings_new" class="material-icon" />
+          </button>
+        </box>
       </box>
     </box>
   );
