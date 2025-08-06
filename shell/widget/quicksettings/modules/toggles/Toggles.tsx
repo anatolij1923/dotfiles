@@ -12,6 +12,7 @@ import Network from "gi://AstalNetwork";
 import Bluetooth from "gi://AstalBluetooth";
 import { Gtk } from "ags/gtk4";
 import { execAsync } from "ags/process";
+import AstalPowerProfiles from "gi://AstalPowerProfiles";
 
 function WifiButton() {
   const wifi = Network.get_default().wifi;
@@ -131,6 +132,54 @@ function IdleInhibitor() {
   );
 }
 
+function PowerProfiles() {
+  const powerprofiles = AstalPowerProfiles.get_default();
+
+  const icons = [
+    {
+      profile: "power-saver",
+      icon: "energy_savings_leaf",
+    },
+    {
+      profile: "balanced",
+      icon: "balance",
+    },
+    {
+      profile: "performance",
+      icon: "rocket_launch",
+    },
+  ];
+
+  return (
+    <QSButton
+      connection={[
+        powerprofiles,
+        "activeProfile",
+        (profile) => profile == "performance",
+      ]}
+      iconName={createBinding(
+        powerprofiles,
+        "activeProfile",
+      )((profile) => icons.find((i) => i.profile === profile)?.icon)}
+      onClicked={() => {
+        const profile = powerprofiles.activeProfile;
+
+        let nextProfile;
+        if (profile === "performance") {
+          nextProfile = "power-saver";
+        } else if (profile === "balanced") {
+          nextProfile = "performance";
+        } else {
+          nextProfile = "balanced";
+        }
+
+        powerprofiles.set_active_profile(nextProfile);
+      }}
+      tooltip="Change power profiles"
+    />
+  );
+}
+
 export default function Toggles() {
   return (
     <centerbox class="toggles" halign={Gtk.Align.CENTER}>
@@ -140,6 +189,7 @@ export default function Toggles() {
         <DND />
         <Mic />
         <IdleInhibitor />
+        <PowerProfiles />
       </box>
     </centerbox>
   );
