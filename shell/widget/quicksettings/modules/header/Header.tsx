@@ -9,14 +9,20 @@ const userName = GLib.get_user_name();
 
 const uptime = createPoll("", 5000, async () => await getUptime());
 
-const imageDir = GLib.get_user_special_dir(
-  GLib.UserDirectory.DIRECTORY_PICTURES,
-);
-const userPic = GLib.build_filenamev([imageDir, "pic.png"]);
+const path = GLib.build_filenamev([
+  "/var/lib/AccountsService/icons/",
+  userName,
+]);
 
-function fileExists(path: string) {
-  return GLib.file_test(path, GLib.FileTest.EXISTS);
+function findUserPic(): string | null {
+  if (GLib.file_test(path, GLib.FileTest.EXISTS)) {
+    return path;
+  } else {
+    return null;
+  }
 }
+
+const userPic = findUserPic();
 
 export default function Header() {
   return (
@@ -25,7 +31,7 @@ export default function Header() {
         <box
           class="user-pic"
           overflow={Gtk.Overflow.HIDDEN}
-          visible={fileExists(userPic)}
+          visible={!!userPic}
         >
           <image file={userPic} pixelSize={64} />
         </box>
@@ -48,7 +54,7 @@ export default function Header() {
             class="logout-button"
             onClicked={() => {
               app.toggle_window("quicksettings");
-              execAsync(["hyprctl", "dispatch exit"])
+              execAsync(["hyprctl", "dispatch exit"]);
             }}
           >
             <label label="exit_to_app" class="material-icon" />
