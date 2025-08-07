@@ -1,3 +1,5 @@
+@use "sass:color";
+
 @use "../colors" as *;
 @use "mixins/material" as *;
 @use "mixins/button.scss" as *;
@@ -75,7 +77,7 @@ window#bar {
           }
 
           &:hover {
-            background-color: lighten($color-surface, 10%);
+            background-color: color.adjust($color-surface, $lightness: 10%, $space: hsl);
           }
         }
       }
@@ -140,7 +142,7 @@ window#bar {
             &.filled {
               background: linear-gradient(
                 $color-primary,
-                lighten($color-primary, 10%)
+                color.adjust($color-primary, $lightness: 10%, $space: hsl)
               );
             }
 
@@ -182,7 +184,7 @@ window#bar {
           padding: 8px;
 
           &:hover {
-            background-color: lighten($color-surface, 10%);
+            background-color: color.adjust($color-surface, $lightness: 10%, $space: hsl);
           }
         }
 
@@ -198,7 +200,7 @@ window#bar {
       }
 
       .battery {
-        color: lighten($color-surface, 10%);
+        color: color.adjust($color-surface, $lightness: 10%, $space: hsl);
         // color: $color-on_surface;
         font-weight: 500;
 
@@ -215,7 +217,7 @@ window#bar {
               background: linear-gradient(
                 to right,
                 $color-primary,
-                lighten($color-primary, 5%)
+                color.adjust($color-primary, $lightness: 5%, $space: hsl)
               );
               border-radius: 2px;
             }

@@ -1,6 +1,7 @@
 @use "../colors" as *;
 @use "mixins/material.scss" as *;
 @use "mixins/button.scss" as *;
+@use "mixins/elevation.scss" as *;
 
 window.powermenu {
   .powermenu-content {
@@ -11,16 +12,20 @@ window.powermenu {
 
     button {
       @include button;
+      @include elevation(6);
       background-color: $color-surface_container_high;
       color: $color-on_surface;
       border-radius: 16px;
       margin: 0 6px;
       padding: 16px;
-      transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out,
-        transform 0.1s ease;
+      transition:
+        background-color 0.2s ease-in-out,
+        box-shadow 0.2s ease-in-out,
+        transform 0.1s ease,
+        border-radius 0.2s ease-out;
 
       &:hover {
-        background-color: $color-primary_container;
+        background-color: $color-on_secondary_fixed_variant;
         transform: scale(1.03);
       }
 

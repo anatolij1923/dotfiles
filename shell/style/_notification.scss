@@ -1,4 +1,5 @@
 @use "sass:string";
+@use 'sass:color';
 @use "../colors" as *;
 @use "mixins/material.scss" as *;
 
@@ -15,7 +16,7 @@ window.NotificationPopups {
 
 .Notification {
   border-radius: 24px;
-  background-color: lighten($color-surface, 2%);
+  background-color: color.adjust($color-surface, $lightness: 2%, $space: hsl);
   margin: 0.35rem 0rem;
 
   &.critical {
