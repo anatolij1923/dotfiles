@@ -13,17 +13,12 @@ window#launcher {
 
     .search {
       entry {
-        border-radius: 16px;
-        min-height: 56px;
-        color: $color-on-surface;
-        outline: none;
-        caret-color: $color-primary;
+        all: unset;
+        padding: 16px;
         font-size: 1.2rem;
         font-weight: 500;
-      }
-
-      image {
-        --gtk-icon-size: 32px;
+        color: $color-on-surface;
+        caret-color: $color-primary;
       }
     }
 
@@ -33,6 +28,14 @@ window#launcher {
       border: none;
     }
 
+    .calculator-result {
+      padding: 8px;
+      label {
+        color: $color-on-surface;
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+    }
     button {
       @include button;
       background-color: transparent;
@@ -45,8 +48,8 @@ window#launcher {
       &:focus {
         outline: none;
         // box-shadow: 0 0 10px 2px rgba($color-primary, $alpha: 0.4);
-        background-color: $color-primary;
-        color: $color-surface;
+        background-color: $color-on_secondary_fixed_variant;
+        color: $color-on_surface;
       }
     }
   }

@@ -11,10 +11,33 @@ export default function Applauncher() {
 
   const apps = new AstalApps.Apps();
   const [list, setList] = createState(new Array<AstalApps.Application>());
+  const [calcResult, setCalcResult] = createState("");
+
+  function isMathExpression(text: string) {
+    return /^[0-9+\-*/().\s]+$/.test(text);
+  }
 
   function search(text: string) {
-    if (text === "") setList([]);
-    else setList(apps.fuzzy_query(text).slice(0, 8));
+    // if (text === "") setList([]);
+    // else
+    if (text === "") {
+      setList([]);
+      setCalcResult("");
+      return;
+    }
+
+    if (isMathExpression(text)) {
+      try {
+        const result = eval(text);
+        if (typeof result === "number" && isFinite(result)) {
+          setCalcResult(result.toString());
+          setList([]);
+          return;
+        }
+      } catch (e) {}
+    }
+    setCalcResult("");
+    setList(apps.fuzzy_query(text).slice(0, 8));
   }
 
   function launch(app?: AstalApps.Application) {
@@ -22,6 +45,10 @@ export default function Applauncher() {
       // The common Window component will handle hiding the window
       app.launch();
       hide();
+    }
+
+    if (calcResult.get() !== "") {
+      return;
     }
   }
 
@@ -43,6 +70,12 @@ export default function Applauncher() {
         }
       }
     }
+    if (keyval === Gdk.KEY_Return && calcResult.get() !== "") {
+      // Copy result to clipboard
+      Gtk.Clipboard.get_default()?.set_text(calcResult.get());
+      hide();
+      return;
+    }
   }
 
   return (
@@ -63,10 +96,20 @@ export default function Applauncher() {
           hexpand
           onNotifyText={({ text }) => search(text)}
           primaryIconName={"system-search-symbolic"}
-          placeholderText="Search"
+          placeholderText="Search or calculate"
         />
       </box>
       <Gtk.Separator visible={list((l) => l.length > 0)} class="separator" />
+
+      <revealer
+        revealChild={calcResult((r) => r !== "")}
+        transitionDuration={130}
+        transitionType={Gtk.RevealerTransitionType.SWING_DOWN}
+      >
+        <box class="calculator-result">
+          <label label={calcResult} xalign={0} />
+        </box>
+      </revealer>
       <revealer
         revealChild={list((l) => l.length > 0)}
         transitionDuration={130}
