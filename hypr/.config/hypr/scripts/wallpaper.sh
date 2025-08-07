@@ -20,4 +20,4 @@ echo "WALLPAPER = $WALLPAPER"
 matugen -m dark image "$WALLPAPER"
 
 # 5. Reload 
-"$HOME/.config/hypr/scripts/reload.sh"
+# "$HOME/.config/hypr/scripts/reload.sh"

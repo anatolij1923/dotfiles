@@ -22,6 +22,6 @@ done
 ags quit
 
 # Launch ags
-ags run ~/dotfiles/shell/app.ts
+$HOME/dotfiles/shell/run.sh
 
 exit 0

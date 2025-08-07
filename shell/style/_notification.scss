@@ -1,5 +1,5 @@
 @use "sass:string";
-@use "./colors" as *;
+@use "../colors" as *;
 @use "mixins/material.scss" as *;
 
 @function gtkalpha($c, $a) {

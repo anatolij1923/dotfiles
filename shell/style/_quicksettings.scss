@@ -1,4 +1,4 @@
-@use "./colors" as *;
+@use "../colors" as *;
 @use "mixins/material" as *;
 @use "mixins/button.scss" as *;
 @use "mixins/scale.scss" as *;
@@ -17,11 +17,9 @@ window.quicksettings {
       padding: 8px;
 
       .user-info {
-
         .user-pic {
           overflow: hidden;
           border-radius: 100%;
-
         }
 
         .username {
@@ -51,7 +49,7 @@ window.quicksettings {
 
           &:active {
             background-color: $color-surface_container_highest;
-            transform: scale(1.1)
+            transform: scale(1.1);
           }
         }
 
@@ -115,7 +113,7 @@ window.quicksettings {
           font-family: "Material Icons";
 
           &:hover {
-            background-color: rgba($color-primary, 0.80);
+            background-color: rgba($color-primary, 0.8);
           }
         }
 
@@ -134,7 +132,6 @@ window.quicksettings {
         }
 
         font-weight: 500;
-
 
         .clear-button {
           @include button;
@@ -159,7 +156,6 @@ window.quicksettings {
           }
         }
       }
-
     }
   }
 
@@ -175,7 +171,6 @@ window.quicksettings {
     }
 
     .info {
-
       // border: 1px solid white;
       .track {
         font-weight: 700;

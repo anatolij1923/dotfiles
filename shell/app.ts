@@ -9,10 +9,11 @@ import Powermenu from "./widget/powermenu/Powermenu";
 import Quicksettings from "./widget/quicksettings/Quicksettings";
 import OSD from "./widget/osd/OSD";
 import BatteryWarnings from "./utils/batteryWarning";
+import { monitorFile } from "ags/file";
 
 app.start({
   icons: "assets",
-  css: style,
+  css: `${SRC}/style.css`,
   gtkTheme: "Adwaita",
   main() {
     app.get_monitors().forEach((monitor) => {
@@ -38,11 +39,12 @@ app.start({
       // OSD(monitor);
       app.add_window(OSD(monitor) as Gtk.Window);
 
-      //Battery warnings
+      // Battery warnings
       BatteryWarnings();
 
-      // Screendim(monitor);
-      //
+      monitorFile(`${SRC}/style.css`, () => {
+        app.apply_css(`${SRC}/style.css`);
+      });
     });
   },
 });

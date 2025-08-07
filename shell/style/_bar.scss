@@ -1,4 +1,4 @@
-@use "./colors" as *;
+@use "../colors" as *;
 @use "mixins/material" as *;
 @use "mixins/button.scss" as *;
 @use "mixins/elevation.scss" as *;
@@ -11,7 +11,7 @@
 window#bar {
   background: transparent;
 
-  >box {
+  > box {
     background: $color-surface;
     padding: 4px;
 
@@ -41,7 +41,6 @@ window#bar {
             background-color: $color-surface_variant;
           }
 
-
           &.focused {
             background-color: $color-primary;
             min-width: 32px;
@@ -59,9 +58,6 @@ window#bar {
       .clock {
         button {
           @include button;
-          @include elevation(3);
-          // background-color: lighten($color-surface, 4%);
-          // box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.4);
           border-radius: 32px;
           padding: 0 16px;
 
@@ -82,6 +78,10 @@ window#bar {
             background-color: lighten($color-surface, 10%);
           }
         }
+      }
+
+      .circular-progress {
+        background-color: red;
       }
     }
 
@@ -138,8 +138,10 @@ window#bar {
             background-color: $color-on_secondary_fixed;
 
             &.filled {
-              background: linear-gradient($color-primary,
-                  lighten($color-primary, 10%));
+              background: linear-gradient(
+                $color-primary,
+                lighten($color-primary, 10%)
+              );
             }
 
             &.filled.low {
@@ -210,9 +212,11 @@ window#bar {
             progress {
               all: unset;
               min-height: 24px;
-              background: linear-gradient(to right,
-                  $color-primary,
-                  lighten($color-primary, 5%));
+              background: linear-gradient(
+                to right,
+                $color-primary,
+                lighten($color-primary, 5%)
+              );
               border-radius: 2px;
             }
           }
@@ -220,7 +224,7 @@ window#bar {
           &.charging {
             trough {
               progress {
-              background: linear-gradient(to right, #27ba31, #4adb3d);
+                background: linear-gradient(to right, #27ba31, #4adb3d);
               }
             }
           }
