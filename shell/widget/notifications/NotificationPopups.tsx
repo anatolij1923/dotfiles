@@ -11,7 +11,7 @@ export default function NotificationPopups() {
   const notifd = AstalNotifd.get_default();
 
   const [notifications, setNotifications] = createState(
-    new Array<AstalNotifd.Notification>(),
+    new Array<AstalNotifd.Notification>()
   );
 
   const notifiedHandler = notifd.connect("notified", (_, id, replaced) => {
@@ -31,8 +31,8 @@ export default function NotificationPopups() {
     }
 
     timeout(5000, () => {
-      setNotifications((ns) => ns.filter((n) => n.id != notification.id))
-    })
+      setNotifications((ns) => ns.filter((n) => n.id != notification.id));
+    });
   });
 
   const resolvedHandler = notifd.connect("resolved", (_, id) => {
@@ -56,20 +56,16 @@ export default function NotificationPopups() {
           visible={notifications((ns) => ns.length > 0)}
           anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
         >
-          <box orientation={Gtk.Orientation.VERTICAL}>
-            <For each={notifications}>
-              {(notification) => (
-                <Notification
-                  notification={notification}
-                  // onHoverLost={() =>
-                  //   setNotifications((ns) =>
-                  //     ns.filter((n) => n.id !== notification.id)
-                  //   )
-                  // }
-                />
-              )}
-            </For>
-          </box>
+          <revealer
+            transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
+            revealChild
+          >
+            <box orientation={Gtk.Orientation.VERTICAL}>
+              <For each={notifications}>
+                {(notification) => <Notification notification={notification} />}
+              </For>
+            </box>
+          </revealer>
         </window>
       )}
     </For>
