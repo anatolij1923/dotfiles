@@ -46,7 +46,6 @@ export default function QSButton({
         const newClasses = ["qs-button"];
         if (cond ? cond(v) : v) newClasses.push("active");
         setCssClasses(newClasses);
-        console.log("[DEBUG] updating classes to", newClasses);
       };
 
       // Check if the source is an Accessor
@@ -73,12 +72,6 @@ export default function QSButton({
           .replace(/([A-Z])/g, "-$1")
           .toLowerCase();
 
-        // console.log(
-        //   "[DEBUG] binding setup for",
-        //   propertyName,
-        //   "initial value:",
-        //   object[propertyName],
-        // );
 
         if (propertyName != null) {
           const handlerId = object.connect(`notify::${signalName}`, () => {
