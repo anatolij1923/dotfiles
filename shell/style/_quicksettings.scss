@@ -97,7 +97,7 @@ window.quicksettings {
       .qs-button {
         @include button;
         @include material-icon(28px);
-        padding: 8px;
+        padding: 6px 8px;
         border-radius: 32px;
 
         &:hover {
