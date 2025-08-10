@@ -4,6 +4,7 @@ import Adw from "gi://Adw";
 import GLib from "gi://GLib";
 import AstalNotifd from "gi://AstalNotifd";
 import Pango from "gi://Pango";
+import { createBinding, createState } from "ags";
 
 function isIcon(icon?: string | null) {
   const iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default()!);
@@ -31,9 +32,9 @@ function urgency(n: AstalNotifd.Notification) {
   }
 }
 
-// function truncateBody(text: string, max = 40) {
-//   return text.length > max ? text.slice(0, max) + "…" : text;
-// }
+function truncateBody(text: string, max = 40) {
+  return text.length > max ? text.slice(0, max) + "…" : text;
+}
 
 export default function Notification({
   notification: n,
@@ -42,6 +43,7 @@ export default function Notification({
   notification: AstalNotifd.Notification;
   showActions: boolean;
 }) {
+  const [expanded, setExpanded] = createState(false);
   return (
     <Adw.Clamp maximumSize={400}>
       <box
@@ -74,9 +76,20 @@ export default function Notification({
             halign={Gtk.Align.END}
             label={time(n.time)}
           />
-          <button onClicked={() => n.dismiss()} class="close-button">
-            <image iconName="window-close-symbolic" />
+          <button
+            onClicked={() => setExpanded(!expanded.get())}
+            class="expand-button"
+          >
+            <label
+              label={expanded(() =>
+                expanded.get() ? "keyboard_arrow_up" : "keyboard_arrow_down",
+              )}
+              class="material-icon"
+            />
           </button>
+          {/* <button onClicked={() => n.dismiss()} class="close-button"> */}
+          {/*   <image iconName="window-close-symbolic" /> */}
+          {/* </button> */}
         </box>
         <box class="content">
           {n.image && fileExists(n.image) && (
@@ -106,31 +119,58 @@ export default function Notification({
               // maxWidthChars={19}
             />
             {n.body && (
-              <label
-                class="body"
-                wrap
-                useMarkup
-                halign={Gtk.Align.START}
-                xalign={0}
-                justify={Gtk.Justification.FILL}
-                ellipsize={Pango.EllipsizeMode.END}
-                label={n.body}
-              />
+              <>
+                <label
+                  visible={expanded(() => !expanded.get())}
+                  class="body"
+                  wrap
+                  useMarkup
+                  halign={Gtk.Align.START}
+                  xalign={0}
+                  justify={Gtk.Justification.FILL}
+                  ellipsize={Pango.EllipsizeMode.END}
+                  label={truncateBody(n.body, 40)}
+                />
+                <revealer
+                  revealChild={expanded}
+                  transitionDuration={300}
+                  transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
+                >
+                  <label
+                    class="body"
+                    wrap
+                    useMarkup
+                    halign={Gtk.Align.START}
+                    xalign={0}
+                    justify={Gtk.Justification.FILL}
+                    label={n.body}
+                  />
+                </revealer>
+              </>
             )}
           </box>
         </box>
-        {showActions && n.actions.length > 0 && (
-          <box class="actions">
-            {n.actions.map(({ label, id }) => (
-              <button hexpand onClicked={() => n.invoke(id)}>
-                <label
-                  label={label}
-                  halign={Gtk.Align.CENTER}
-                  ellipsize={Pango.EllipsizeMode.END}
-                />
+        {showActions && (
+          <revealer
+            revealChild={expanded}
+            transitionDuration={200}
+            transitionType={Gtk.RevealerTransitionType.SWING_DOWN}
+          >
+            <box class="actions">
+              <button  hexpand onClicked={() => n.dismiss()} class="close-button">
+                <label label="close" class="close-button" />
               </button>
-            ))}
-          </box>
+              {n.actions.map(({ label, id }) => (
+                <button hexpand onClicked={() => n.invoke(id)}>
+                  <label
+                    label={label}
+                    halign={Gtk.Align.CENTER}
+                    ellipsize={Pango.EllipsizeMode.END}
+                  />
+                </button>
+              ))}
+            </box>
+          </revealer>
         )}
       </box>
     </Adw.Clamp>
