@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 
+# Paths
 SCSS="$HOME/dotfiles/shell/style.scss"
 CSS="$HOME/dotfiles/shell/style.css"
 APP="$HOME/dotfiles/shell/app.ts"

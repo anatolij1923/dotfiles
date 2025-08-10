@@ -10,12 +10,19 @@ import Quicksettings from "./widget/quicksettings/Quicksettings";
 import OSD from "./widget/osd/OSD";
 import BatteryWarnings from "./utils/batteryWarning";
 import { monitorFile } from "ags/file";
+import Settings from "./widget/settings/Settings";
 
 app.start({
   icons: "assets",
   css: `${SRC}/style.css`,
   gtkTheme: "Adwaita",
   main() {
+    // Monitoring styles file to immediately reapply css
+    monitorFile(`${SRC}/style.css`, () => {
+      console.log("[LOG] CSS reapplied");
+      app.apply_css(`${SRC}/style.css`);
+    });
+
     app.get_monitors().forEach((monitor) => {
       // Topbar
       Bar(monitor);
@@ -42,9 +49,8 @@ app.start({
       // Battery warnings
       BatteryWarnings();
 
-      monitorFile(`${SRC}/style.css`, () => {
-        app.apply_css(`${SRC}/style.css`);
-      });
+      // Settings
+      app.add_window(Settings() as Gtk.Window);
     });
   },
 });
