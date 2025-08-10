@@ -14,7 +14,7 @@ export default function Applauncher() {
   const [calcResult, setCalcResult] = createState("");
 
   function isMathExpression(text: string) {
-    return /^[0-9+\-*/().\s]+$/.test(text);
+    return /^[0-9+\-*/().\s]|sqrt/.test(text);
   }
 
   function search(text: string) {
@@ -26,9 +26,11 @@ export default function Applauncher() {
       return;
     }
 
+    let processedText = text.replace(/sqrt\(/g, "Math.sqrt(");
+
     if (isMathExpression(text)) {
       try {
-        const result = eval(text);
+        const result = eval(processedText);
         if (typeof result === "number" && isFinite(result)) {
           setCalcResult(result.toString());
           setList([]);
