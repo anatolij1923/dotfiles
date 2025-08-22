@@ -4,6 +4,7 @@ import GLib from "gi://GLib?version=2.0";
 import { getUptime } from "../../../../utils/uptime";
 import app from "ags/gtk4/app";
 import { execAsync } from "ags/process";
+import Settings from "../../../settings/Settings";
 
 const userName = GLib.get_user_name();
 
@@ -49,6 +50,16 @@ export default function Header() {
       </box>
       <box hexpand />
       <box class="buttons" spacing={4}>
+        <box>
+          <button
+            onClicked={() => {
+              // app.add_window(Settings() as Gtk.Window);
+              app.toggle_window("settings");
+            }}
+          >
+            <label label="settings" class="material-icon" />
+          </button>
+        </box>
         <box>
           <button
             class="logout-button"
