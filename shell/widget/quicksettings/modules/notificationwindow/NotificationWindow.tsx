@@ -11,7 +11,7 @@ function NotificationScrolledWindow() {
     <Gtk.ScrolledWindow>
       <box orientation={Gtk.Orientation.VERTICAL}>
         <For each={notifications}>
-          {(n) => <Notification notification={n} showActions={false} />}
+          {(n) => <Notification notification={n} showActions={true} />}
         </For>
         <box
           orientation={Gtk.Orientation.VERTICAL}
