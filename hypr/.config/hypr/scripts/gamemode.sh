@@ -1,12 +1,8 @@
 #!/usr/bin/env sh
 
-FLAG_FILE="$HOME/.config/1923/cache/gamemode_enabled"
-
-# Создание директории, если её нет
-mkdir -p "$HOME/.config/1923/cache"
+FLAG_FILE="$HOME/.cache/gamemode"
 
 if [ -f "$FLAG_FILE" ]; then
-    # Gamemode выключается
     rm "$FLAG_FILE"
     hyprctl --batch "\
         keyword animations:enabled 1;\
@@ -19,7 +15,6 @@ if [ -f "$FLAG_FILE" ]; then
         keyword input:touchpad:disable_while_typing 1 "
     notify-send -a "Gamemode" "Gamemode is turned off"
 else
-    # Gamemode включается
     touch "$FLAG_FILE"
     hyprctl --batch "\
         keyword animations:enabled 0;\
