@@ -22,7 +22,7 @@ const deviceInfo = createPoll(
 );
 
 export default function BluetoothWidget() {
-  const tooltip = deviceInfo((di) => `${di.name} - ${di.battery * 100}%`);
+  const tooltip = deviceInfo((di) => di.connected ? `${di.name} - ${di.battery * 100}%` : "");
   const icon = deviceInfo((di) => {
     if (!bt.is_powered) {
       return "bluetooth_disabled";
