@@ -3,6 +3,7 @@ import { Astal, Gtk, Gdk } from "ags/gtk4";
 import AstalApps from "gi://AstalApps";
 import Window from "../common/Window";
 import App from "ags/gtk4/app";
+import { evaluateExpression } from "../../utils/calculator";
 
 const { TOP, BOTTOM, LEFT, RIGHT } = Astal.WindowAnchor;
 
@@ -18,25 +19,24 @@ export default function Applauncher() {
   }
 
   function search(text: string) {
-    // if (text === "") setList([]);
-    // else
     if (text === "") {
       setList([]);
       setCalcResult("");
       return;
     }
 
-    let processedText = text.replace(/sqrt\(/g, "Math.sqrt(");
-
     if (isMathExpression(text)) {
       try {
-        const result = eval(processedText);
+        const result = evaluateExpression(text);
         if (typeof result === "number" && isFinite(result)) {
           setCalcResult(result.toString());
           setList([]);
           return;
         }
-      } catch (e) {}
+      } catch (e) {
+        // Optionally log the error for debugging, but don't show to user
+        // console.error("Calculator error:", e);
+      }
     }
     setCalcResult("");
     setList(apps.fuzzy_query(text).slice(0, 8));
