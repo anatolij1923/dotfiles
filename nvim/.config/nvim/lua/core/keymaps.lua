@@ -34,7 +34,7 @@ vim.keymap.set("n", "<leader>v", "<C-w>v", { desc = "Split window vertically" })
 -- split window horizontally
 vim.keymap.set("n", "<leader>h", "<C-w>s", { desc = "Split window horizontally" })
 -- make split windows equal width & height
-vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) 
+vim.keymap.set("n", "<leader>e", "<C-w>=", { desc = "Make splits equal size" })
 -- close current split window
 vim.keymap.set("n", "<leader>x", "<cmd>close<CR>", { desc = "Close current split" })
 
@@ -53,7 +53,6 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
---
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
