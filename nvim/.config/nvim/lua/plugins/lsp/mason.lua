@@ -42,10 +42,11 @@ return {
 
 		mason_tool_installer.setup({
 			ensure_installed = {
-				"stylua", -- lua formatter
+                "prettier",
+				"stylua",
 				"clang-format",
+                "eslint_d",
 				"black",
-				"prettier",
 				"denols",
 				"pylint",
 				"rust-analyzer",

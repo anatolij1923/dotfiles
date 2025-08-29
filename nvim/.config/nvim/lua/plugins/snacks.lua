@@ -5,15 +5,15 @@ return {
 		lazy = false,
 
 		opts = {
-			explorer = {
-				enabled = false,
-				layout = {
-					cycle = false,
-					layout = {
-						width = 10,
-					},
-				},
-			},
+			-- explorer = {
+			-- 	enabled = false,
+			-- 	layout = {
+			-- 		cycle = false,
+			-- 		layout = {
+			-- 			width = 10,
+			-- 		},
+			-- 	},
+			-- },
 
 			dashboard = { enabled = true },
 

@@ -4,6 +4,7 @@ return {
         "kevinhwang91/promise-async",
         "nvim-treesitter/nvim-treesitter",
     },
+    event = "BufReadPost",
     config = function()
         require("ufo").setup({
             provider_selector = function(_, _, _)
