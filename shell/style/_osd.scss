@@ -5,32 +5,53 @@
   background-color: transparent;
 
   .osd-content {
-    background-color: transparent;
+    background-color: $color-surface_container;
+    border: 1px solid $color-surface_container_high;
     border-radius: 24px;
-    padding: 16px;
+    padding: 8px 16px;
     margin: 20px 0;
 
-    .icon {
+    .material-icon {
       @include material-icon;
-      color: $color-surface;
+      color: $color-on_surface;
       margin: 8px 0;
     }
 
     progressbar {
-      transform: rotate(180deg);
 
       trough {
         all: unset;
+        min-height: 0.6rem;
+        min-width: 8rem;
         background-color: $color-on_secondary_fixed;
         border-radius: 16px;
-        min-width: 2.5rem;
 
         progress {
-          border-radius: 4px;
-          min-width: 2.5rem;
+          all: unset;
+          min-height: 0.6rem;
           background-color: $color-primary;
+          border-radius: 16px;
         }
       }
     }
+
+    // progressbar {
+    //   border: 1px solid  whitesmoke;
+    //   max-height: 3px;
+    //
+    //   trough {
+    //     all: unset;
+    //     background-color: $color-on_secondary_fixed;
+    //     border-radius: 16px;
+    //     min-width: 8rem;
+    //
+    //     progress {
+    //       all: unset;
+    //       border-radius: 8px;
+    //       min-width: 2.5rem;
+    //       background-color: $color-primary;
+    //     }
+    //   }
+    // }
   }
 }

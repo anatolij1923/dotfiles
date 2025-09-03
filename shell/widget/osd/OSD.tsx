@@ -91,7 +91,7 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
       class="osd"
       name="osd"
       layer={Astal.Layer.OVERLAY}
-      anchor={RIGHT}
+      anchor={TOP}
       $={(win) => {
         // const surface = win.get_surface();
         // surface?.set_input_region(new cairo.Region())
@@ -126,29 +126,40 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
         transitionType={Gtk.RevealerTransitionType.CROSSFADE}
         transitionDuration={300}
       >
-        <box
-          spacing={16}
-          class="osd-content"
-          orientation={Gtk.Orientation.VERTICAL}
-        >
-          <overlay>
-            <Gtk.ProgressBar
-              valign={Gtk.Align.CENTER}
-              heightRequest={250}
-              fraction={osdState((s) => s.percentage)}
-              orientation={Gtk.Orientation.VERTICAL}
-            />
-            <label
-              label={osdState((s) => s.icon)}
-              valign={Gtk.Align.END}
-              class="material-icon icon"
-              $type="overlay"
-            />
-          </overlay>
-          {/* <label */}
-          {/*   label={osdState((s) => `${Math.floor(s.percentage * 100)}%`)} */}
-          {/* />  */}
+        <box class="osd-content" spacing={8}>
+          <label
+            label={osdState((s) => s.icon)}
+            class="material-icon"
+          />
+          <Gtk.ProgressBar
+            valign={Gtk.Align.CENTER}
+            fraction={osdState((s) => s.percentage)}
+          />
+          <label label={osdState((s) => `${Math.floor(s.percentage * 100)}%`)} />
         </box>
+        {/* <box */}
+        {/*   spacing={16} */}
+        {/*   class="osd-content" */}
+        {/*   orientation={Gtk.Orientation.VERTICAL} */}
+        {/* > */}
+        {/*   <overlay> */}
+        {/*     <Gtk.ProgressBar */}
+        {/*       valign={Gtk.Align.CENTER} */}
+        {/*       heightRequest={250} */}
+        {/*       fraction={osdState((s) => s.percentage)} */}
+        {/*       orientation={Gtk.Orientation.VERTICAL} */}
+        {/*     /> */}
+        {/*     <label */}
+        {/*       label={osdState((s) => s.icon)} */}
+        {/*       valign={Gtk.Align.END} */}
+        {/*       class="material-icon icon" */}
+        {/*       $type="overlay" */}
+        {/*     /> */}
+        {/*   </overlay> */}
+        {/*   <label */}
+        {/*     label={osdState((s) => `${Math.floor(s.percentage * 100)}%`)} */}
+        {/*   />  */}
+        {/* </box> */}
       </revealer>
     </window>
   );
