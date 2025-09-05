@@ -6,9 +6,6 @@ if test -f ~/.env.fish
     source ~/.env.fish
 end
 
-# Set proxy
-set -gx http_proxy http://127.0.0.1:12334
-
 # For quickshell
 set -Ux QML_IMPORT_PATH /usr/lib/qt6/qml
 

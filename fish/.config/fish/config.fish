@@ -3,3 +3,5 @@ if status is-interactive
     # fastfetch
 end
 
+
+fish_add_path /home/anatolij1923/.spicetify

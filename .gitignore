@@ -1,6 +1,6 @@
 # tmux plugin manager
-tmux/.config/tmux/plugins/tmux
-tmux/.config/tmux/plugins
+tmux/.config/tmux/plugins/
+tmux/.config/tmux/tpm
 
 # color files
 wlogout/.config/wlogout/colors.css
