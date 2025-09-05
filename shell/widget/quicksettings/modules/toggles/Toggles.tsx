@@ -31,7 +31,7 @@ function WifiButton() {
         wifi,
         "enabled",
       )((v: boolean) => (v ? "network_wifi" : "signal_wifi_off"))}
-      tooltip="Click to enable or disable wifi"
+      tooltip="Click to enable or disable Wi-Fi"
     />
   );
 }
@@ -50,7 +50,7 @@ function BluetoothButton() {
         bluetooth,
         "isPowered",
       )((v: boolean) => (v ? "bluetooth" : "bluetooth_disabled"))}
-      tooltip="Click to enable or disable bluetooth. Right click to open blueman"
+      tooltip="Click to enable or disable Bluetooth. Right click to open Blueman"
     />
   );
 }

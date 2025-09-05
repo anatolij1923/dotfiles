@@ -5,7 +5,8 @@ import { createBinding, createState, For } from "ags";
 import Pango from "gi://Pango?version=1.0";
 
 function AudioMixer() {
-  const audio = Wp.get_default().audio;
+  const wp = Wp.get_default();
+  const audio = wp.audio
   const streams = createBinding(audio, "streams");
 
   return (

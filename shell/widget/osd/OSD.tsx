@@ -1,9 +1,8 @@
 import { Astal, Gdk, Gtk } from "ags/gtk4";
 import Wp from "gi://AstalWp";
 import Brightness from "../../lib/brightness";
-import { createBinding, createState, onCleanup } from "ags";
+import { createState, onCleanup } from "ags";
 import { timeout } from "ags/time";
-import cairo from "gi://cairo?version=1.0";
 
 const hideTime = 2000;
 

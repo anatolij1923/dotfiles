@@ -1,4 +1,5 @@
 import { createBinding } from "ags";
+import { Gtk } from "ags/gtk4";
 import Notifd from "gi://AstalNotifd";
 
 export default function NotificationWidget() {

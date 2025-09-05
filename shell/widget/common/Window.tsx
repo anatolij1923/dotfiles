@@ -5,15 +5,18 @@ import app from "ags/gtk4/app";
 
 interface CommonWindowProps extends WindowProps {
   name: string;
+  namespace: string;
+  gdkmonitor?: Gdk.Monitor;
   anchor?: Astal.WindowAnchor;
   exclusivity?: Astal.Exclusivity;
   keymode?: Astal.Keymode;
   visible?: boolean;
+  class: string;
   onKey?: (
     _e: Gtk.EventControllerKey,
     keyval: number,
     _: number,
-    mod: number
+    mod: number,
   ) => void;
   onClick?: (_e: Gtk.GestureClick, _: number, x: number, y: number) => void;
   onVisibilityChange?: (visible: boolean) => void;
@@ -26,6 +29,8 @@ interface CommonWindowProps extends WindowProps {
 
 export default function Window({
   name,
+  namespace,
+  gdkmonitor,
   anchor,
   exclusivity,
   keymode,
@@ -47,7 +52,7 @@ export default function Window({
     _e: Gtk.EventControllerKey,
     keyval: number,
     _: number,
-    mod: number
+    mod: number,
   ) {
     if (keyval === Gdk.KEY_Escape) {
       win.visible = false;
@@ -71,6 +76,7 @@ export default function Window({
       application={app}
       $={(ref) => (win = ref)}
       name={name}
+      gdkmonitor={gdkmonitor}
       anchor={anchor}
       exclusivity={exclusivity}
       keymode={keymode}

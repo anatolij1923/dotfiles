@@ -1,7 +1,8 @@
 @use "sass:string";
-@use 'sass:color';
+@use "sass:color";
 @use "../colors" as *;
 @use "mixins/material.scss" as *;
+@use "mixins/button.scss" as *;
 
 @function gtkalpha($c, $a) {
   @return string.unquote("alpha(#{$c},#{$a})");
@@ -16,12 +17,12 @@ window.NotificationPopups {
 
 .Notification {
   border-radius: 24px;
-  background-color: color.adjust($color-surface, $lightness: 2%, $space: hsl);
-  margin: 0.35rem 0rem;
+  background-color: $color-surface_container;
+  margin: 0.20rem 0rem;
 
   &.critical {
     // border: 1pt solid gtkalpha($color-error, 0.4);
-    // background: $color-inverse_primary;
+    background: $color-inverse_primary;
 
     .header {
       .app-name {
@@ -30,6 +31,25 @@ window.NotificationPopups {
 
       .app-icon {
         color: $color-error;
+      }
+
+      .expand-button {
+        @include button;
+        @include material-icon;
+
+        // background-color: $color-on_primary_fixed_variant;
+        padding: 2px 6px;
+        border-radius: 16px;
+      }
+    }
+
+    .actions {
+      button {
+        background-color: $color-on_primary_fixed_variant;
+
+        &:hover {
+          background-color: $color-on_primary_fixed;
+        }
       }
     }
   }
@@ -52,21 +72,25 @@ window.NotificationPopups {
     }
 
     .time {
-      margin: 0 0.4rem;
+      margin: 0 0.5rem;
     }
 
     .expand-button {
+      @include button;
       @include material-icon;
+
+      // background-color: $color-surface_container_highest;
+      padding: 2px 6px;
+      border-radius: 16px;
     }
 
     .close-button {
-      all: unset;
-      outline: none;
+      @include button;
       // background-color: $color-surface_container_high;
       background-color: transparent;
       color: #d05050;
       border-radius: 16px;
-      padding: 0.2rem;
+      padding: 0 0.5rem;
       min-width: 0;
       min-height: 0;
     }
@@ -100,8 +124,22 @@ window.NotificationPopups {
     margin-top: 0;
 
     button {
+      @include button;
+      background-color: $color-surface_container_high;
+      color: $color-on_surface;
       margin: 0 0.3rem;
-      border-radius: 16px;
+      padding: 8px;
+      border-radius: 24px;
+
+      font-weight: 500;
+
+      .close-button {
+        @include material-icon;
+      }
+
+      &:hover {
+        background-color: $color-inverse_primary;
+      }
 
       &:first-child {
         margin-left: 0;

@@ -63,21 +63,21 @@ export default function Applauncher() {
     _e: Gtk.EventControllerKey,
     keyval: number,
     _: number,
-    mod: number
+    mod: number,
   ) {
     if (mod === Gdk.ModifierType.ALT_MASK) {
       for (const i of [1, 2, 3, 4, 5, 6, 7, 8, 9] as const) {
         if (keyval === Gdk[`KEY_${i}`]) {
-          return launch(list.get()[i - 1]), hide();
+          return (launch(list.get()[i - 1]), hide());
         }
       }
     }
-    if (keyval === Gdk.KEY_Return && calcResult.get() !== "") {
-      // Copy result to clipboard
-      Gtk.Clipboard.get_default()?.set_text(calcResult.get());
-      hide();
-      return;
-    }
+    // if (keyval === Gdk.KEY_Return && calcResult.get() !== "") {
+    //   // Copy result to clipboard
+    //   Gtk.Clipboard.get_default()?.set_text(calcResult.get());
+    //   hide();
+    //   return;
+    // }
   }
 
   return (

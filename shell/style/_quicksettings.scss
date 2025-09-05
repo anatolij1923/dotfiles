@@ -9,6 +9,7 @@ window.quicksettings {
   .quicksettings-content {
     padding: 16px;
     border-radius: 24px;
+    border: 1px solid $color-surface_container_high;
 
     background-color: rgba($color-surface, $alpha: 1);
     color: $color-on_surface;
@@ -44,7 +45,11 @@ window.quicksettings {
           padding: 8px;
 
           &:hover {
-            background-color: $color-surface_container_high;
+            background-color: color.adjust(
+              $color-surface,
+              $lightness: 10%,
+              $space: hsl
+            );
           }
 
           &:active {
@@ -93,7 +98,7 @@ window.quicksettings {
       }
 
       .expand-button {
-        @include button;
+        @include button
       }
     }
 
@@ -131,7 +136,6 @@ window.quicksettings {
 
       .mute-button {
         @include button;
-        @include elevation(3);
         padding: 8px;
         border-radius: 32px;
 

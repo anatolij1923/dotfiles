@@ -10,7 +10,7 @@ type ConnectionType =
   | [Accessor<any>, null, ((v: any) => boolean)?];
 
 interface QSButtonProps {
-  iconName: string | Accessor<string>; // Allow Accessor for iconName
+  iconName: string | Accessor<any>; // Allow Accessor for iconName
   setup?: (self: Gtk.Widget) => void;
   onClicked?: () => void;
   connection?: ConnectionType; // Use the new union type

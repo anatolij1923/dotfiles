@@ -43,7 +43,7 @@ export default function Notification({
   notification: AstalNotifd.Notification;
   showActions: boolean;
 }) {
-  const [expanded, setExpanded] = createState(false);
+  const [isExpanded, setExpanded] = createState(false);
   return (
     <Adw.Clamp maximumSize={400}>
       <box
@@ -77,12 +77,12 @@ export default function Notification({
             label={time(n.time)}
           />
           <button
-            onClicked={() => setExpanded(!expanded.get())}
+            onClicked={() => setExpanded(!isExpanded.get())}
             class="expand-button"
           >
             <label
-              label={expanded(() =>
-                expanded.get() ? "keyboard_arrow_up" : "keyboard_arrow_down",
+              label={isExpanded(() =>
+                isExpanded.get() ? "keyboard_arrow_up" : "keyboard_arrow_down",
               )}
               class="material-icon"
             />
@@ -121,7 +121,7 @@ export default function Notification({
             {n.body && (
               <>
                 <label
-                  visible={expanded(() => !expanded.get())}
+                  visible={isExpanded(() => !isExpanded.get())}
                   class="body"
                   wrap
                   useMarkup
@@ -132,7 +132,7 @@ export default function Notification({
                   label={truncateBody(n.body, 40)}
                 />
                 <revealer
-                  revealChild={expanded}
+                  revealChild={isExpanded}
                   transitionDuration={300}
                   transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
                 >
@@ -152,7 +152,7 @@ export default function Notification({
         </box>
         {showActions && (
           <revealer
-            revealChild={expanded}
+            revealChild={isExpanded}
             transitionDuration={200}
             transitionType={Gtk.RevealerTransitionType.SWING_DOWN}
           >

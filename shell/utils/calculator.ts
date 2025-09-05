@@ -95,10 +95,10 @@ function shuntingYard(tokens: Token[]): Token[] {
           (operatorStack[operatorStack.length - 1].type ===
             TokenType.OPERATOR ||
             operatorStack[operatorStack.length - 1].type ===
-              TokenType.FUNCTION) &&
+            TokenType.FUNCTION) &&
           OPERATORS[token.value].precedence <=
-            OPERATORS[operatorStack[operatorStack.length - 1].value]
-              ?.precedence &&
+          OPERATORS[operatorStack[operatorStack.length - 1].value]
+            ?.precedence &&
           OPERATORS[token.value].associativity === "left"
         ) {
           outputQueue.push(operatorStack.pop()!);
