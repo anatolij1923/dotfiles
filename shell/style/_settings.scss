@@ -1,0 +1,54 @@
+@use "../colors.scss" as *;
+@use "./mixins/material.scss" as *;
+@use "./mixins/elevation.scss" as *;
+@use "./mixins/button.scss" as *;
+@use "sass:color";
+
+.settings {
+  background-color: $color-surface;
+
+  .buttons-row {
+    background-color: $color-surface_container;
+    color: $color-on_surface;
+    min-width: 200px;
+    padding: 24px;
+
+    .header {
+      label {
+        font-size: 1.5rem;
+        // border: 2px solid red;
+      }
+
+      .fold {
+        @include button;
+        @include material-icon;
+      }
+    }
+
+    .settings-button {
+      @include button;
+      background-color: $color-surface_container;
+      border-radius: 24px;
+      padding: 16px;
+
+      .material-icon {
+        @include material-icon;
+      }
+
+      &.active {
+        background-color: $color-on_secondary_fixed_variant;
+      }
+    }
+  }
+
+  .page {
+    padding: 24px;
+    color: $color-on_surface;
+
+    .header {
+      label {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}
