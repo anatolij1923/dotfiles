@@ -8,12 +8,16 @@ FILENAME="$(date +'%s_grim.png')"
 FILEPATH="$SCREENSHOT_DIR/$FILENAME"
 
 if [[ "$1" == "area" ]]; then
-    GEOM="$(slurp -d -b "#38383883" -c "#f3f3f3" )" 
+    GEOM="$(slurp -d -b "#38383883" -c "#f3f3f300" )" 
     if  [ $? -ne 0 ]; then
         exit 1;
     fi
     [[ -z "GEOM" ]] && exit 1
     grim -g "$GEOM" "$FILEPATH"
+
+    if command -v satty &> /dev/null; then
+        satty --filename "$FILEPATH" &
+    fi
 else
     grim "$FILEPATH"    
 fi
