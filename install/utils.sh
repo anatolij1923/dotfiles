@@ -27,21 +27,22 @@ install_packages() {
   fi
 } 
 
-# Function to execute a command with retry/skip/exit logic
+# Function to execute a command with retry/skip/exit 
 try() {
-  "$@"
-  local status=$?
-  if [ $status -ne 0 ]; then
-    echo "Error: Command \"$@\" failed with status $status."
-    while true; do
+  while true; do
+    "$@"
+    local status=$?
+    if [ $status -ne 0 ]; then
+      echo "Error: Command \"$@\" failed with status $status."
       read -p "Do you want to (r)etry, (s)kip, or (e)xit? " choice
       case "$choice" in
-        r|R ) try "$@"; return;;
-        s|S ) return;;
-        e|E ) exit 1;;
+        r|R ) continue;; # Retry the command 
+        s|S ) return 0;; # Skip 
+        e|E ) exit 1;;   # Exit the script entirely
         * ) echo "Invalid choice. Please enter r, s, or e.";;
       esac
-    done
-  fi
-  return 0
+    else
+      return 0 # Command succeeded, exit the function successfully
+    fi
+  done
 }

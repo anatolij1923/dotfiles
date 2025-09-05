@@ -82,7 +82,7 @@ enable_services() {
 
 main() {
   clear
-  print_header "Anatolij's Dotfiles Installer"
+  print_header "Dotfiles Installer"
 
   # --- Mode selection ---
   echo "Please choose an installation mode:"
