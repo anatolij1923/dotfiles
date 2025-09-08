@@ -1,4 +1,4 @@
-source "extra_packages.conf"
+source ./extra_packages.conf
 
 for pak in "${FLATPAKS[@]}"; do
   if ! flatpak list | grep -i "$pak" &> /dev/null; then
