@@ -161,6 +161,7 @@ main() {
   try run_install_packages "Window Manager" "${WINDOW_MANAGER[@]}"
   try run_install_packages "Aylur's GTK Shell" "${ASTAL[@]}"
   try run_install_packages "File Management" "${FILE_MANAGEMENT[@]}"
+  try run_install_packages "Video Codecs" "${CODECS[@]}"
   try run_install_packages "Fonts" "${FONTS[@]}"
   try run_install_packages "Audio" "${AUDIO[@]}"
   try run_install_packages "CLI Utilities" "${CLI_UTILS[@]}"
