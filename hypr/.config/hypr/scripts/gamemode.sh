@@ -8,8 +8,8 @@ if [ -f "$FLAG_FILE" ]; then
         keyword animations:enabled 1;\
         keyword decoration:shadow:enabled 0;\
         keyword decoration:blur:enabled 1;\
-        keyword general:gaps_in 10;\
-        keyword general:gaps_out 20;\
+        keyword general:gaps_in 7;\
+        keyword general:gaps_out 14;\
         keyword general:border_size 0;\
         keyword decoration:rounding 20; \
         keyword input:touchpad:disable_while_typing 1 "
