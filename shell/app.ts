@@ -41,8 +41,7 @@ app.start({
       // Quick Settings
       app.add_window(Quicksettings(monitor) as Gtk.Window);
 
-      // On Screen Display
-      // OSD(monitor);
+      // OSD;
       app.add_window(OSD(monitor) as Gtk.Window);
 
       // Battery warnings
