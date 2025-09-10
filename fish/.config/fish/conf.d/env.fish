@@ -16,3 +16,6 @@ set -U FZF_DISABLE_KEYBINDINGS 0
 
 # Starship config path
 set -Ux STARSHIP_CONFIG ~/.config/starship/starship.toml
+
+# colors
+set -g fish_color_command green
