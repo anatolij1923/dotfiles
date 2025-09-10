@@ -24,7 +24,7 @@ truncate_to_repo = false
 format = '[$path]($style)[$read_only]($read_only_style) '
 
 [python]
-format = '[(\($virtualenv\)) (${version})]($style)'
+format = '[ (${version}) (\($virtualenv\))]($style)'
 
 [git_branch]
 symbol = " "
