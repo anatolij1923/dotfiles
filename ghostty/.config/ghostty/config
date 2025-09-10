@@ -5,7 +5,8 @@ font-style = semibold
 font-feature = 1
 
 # Theme Settings
-theme = MaterialDarker
+# theme = MaterialDarker
+theme = tokyonight
 background-opacity = 0.6
 background-blur = true
 
