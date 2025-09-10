@@ -37,9 +37,14 @@ window.NotificationPopups {
         @include button;
         @include material-icon;
 
-        // background-color: $color-on_primary_fixed_variant;
-        padding: 2px 6px;
+        background-color: $color-on_primary_fixed_variant;
+        padding: 2px 8px;
+        margin: 0 4px;
         border-radius: 16px;
+
+        &:hover {
+          background-color: $color-on_primary_fixed;
+        }
       }
     }
 
@@ -73,15 +78,21 @@ window.NotificationPopups {
 
     .time {
       margin: 0 0.5rem;
+      font-weight: 400;
     }
 
     .expand-button {
       @include button;
       @include material-icon;
 
-      // background-color: $color-surface_container_highest;
-      padding: 2px 6px;
+      background-color: $color-surface_container_high;
+      padding: 2px 8px;
+      margin: 0 4px;
       border-radius: 16px;
+
+      &:hover {
+        background-color: $color-surface_container_highest;
+      }
     }
 
     .close-button {
@@ -112,8 +123,8 @@ window.NotificationPopups {
     .image {
       margin-right: 0.5rem;
       border-radius: 16px;
-      min-width: 100px;
-      min-height: 100px;
+      min-width: 80px;
+      min-height: 80px;
       background-size: cover;
       background-position: center;
     }

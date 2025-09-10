@@ -35,23 +35,10 @@
       }
     }
 
-    // progressbar {
-    //   border: 1px solid  whitesmoke;
-    //   max-height: 3px;
-    //
-    //   trough {
-    //     all: unset;
-    //     background-color: $color-on_secondary_fixed;
-    //     border-radius: 16px;
-    //     min-width: 8rem;
-    //
-    //     progress {
-    //       all: unset;
-    //       border-radius: 8px;
-    //       min-width: 2.5rem;
-    //       background-color: $color-primary;
-    //     }
-    //   }
-    // }
+    .percentage-label {
+      font-weight: 400;
+      color: $color-on_surface;
+    }
+
   }
 }

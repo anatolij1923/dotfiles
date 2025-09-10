@@ -134,31 +134,8 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
             valign={Gtk.Align.CENTER}
             fraction={osdState((s) => s.percentage)}
           />
-          <label label={osdState((s) => `${Math.floor(s.percentage * 100)}%`)} />
+          <label label={osdState((s) => `${Math.floor(s.percentage * 100)}%`)} class="percentage-label" />
         </box>
-        {/* <box */}
-        {/*   spacing={16} */}
-        {/*   class="osd-content" */}
-        {/*   orientation={Gtk.Orientation.VERTICAL} */}
-        {/* > */}
-        {/*   <overlay> */}
-        {/*     <Gtk.ProgressBar */}
-        {/*       valign={Gtk.Align.CENTER} */}
-        {/*       heightRequest={250} */}
-        {/*       fraction={osdState((s) => s.percentage)} */}
-        {/*       orientation={Gtk.Orientation.VERTICAL} */}
-        {/*     /> */}
-        {/*     <label */}
-        {/*       label={osdState((s) => s.icon)} */}
-        {/*       valign={Gtk.Align.END} */}
-        {/*       class="material-icon icon" */}
-        {/*       $type="overlay" */}
-        {/*     /> */}
-        {/*   </overlay> */}
-        {/*   <label */}
-        {/*     label={osdState((s) => `${Math.floor(s.percentage * 100)}%`)} */}
-        {/*   />  */}
-        {/* </box> */}
       </revealer>
     </window>
   );

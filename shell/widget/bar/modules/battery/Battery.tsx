@@ -17,7 +17,7 @@ export default function Battery() {
     isCharging: boolean,
     timeToEmpty: number,
     timeToFull: number,
-    energyRate: number
+    energyRate: number,
   ) {
     return [
       `${
@@ -33,31 +33,32 @@ export default function Battery() {
 
   const tooltip = createComputed(
     [percent, isCharging, timeToEmpty, timeToFull, energyRate],
-    updateTooltip
+    updateTooltip,
   );
 
   const formattedPercent = percent.as((p) => `${Math.floor(p * 100)}`);
 
   return (
     <box class="battery" tooltipMarkup={tooltip}>
-      {/* <overlay>
-        <levelbar
-          value={createBinding(battery, "percentage")}
-          widthRequest={50}
-          class={isCharging.as((charging) => (charging ? "charging" : ""))}
-        />
-        <label label={formattedPercent} $type="overlay" />
-      </overlay> */}
-
       <overlay>
         <Gtk.ProgressBar
           fraction={createBinding(battery, "percentage")}
           halign={Gtk.Align.CENTER}
-          widthRequest={50}
           class={isCharging.as((charging) => (charging ? "charging" : ""))}
           valign={Gtk.Align.CENTER}
         />
-        <label label={formattedPercent} $type="overlay" />
+        <centerbox
+          class="percentage-label"
+          $type="overlay"
+          halign={Gtk.Align.CENTER}
+        >
+          <box $type="start">
+            <label label="bolt" class="bolt-icon" visible={isCharging} />
+          </box>
+          <box $type="center">
+            <label label={formattedPercent} />
+          </box>
+        </centerbox>
       </overlay>
     </box>
   );
