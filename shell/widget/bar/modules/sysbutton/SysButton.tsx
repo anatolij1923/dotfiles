@@ -1,8 +1,8 @@
 import { onCleanup } from "ags";
 import app from "ags/gtk4/app";
 import NotificationWidget from "../notificationWidget/NotificationWidget";
-import Wifi from "../wifi/Wifi";
 import BluetoothWidget from "../bluetoothWidget/bluetoothWidget";
+import NetworkWidget from "../network/Network";
 
 export default function SysButton() {
   return (
@@ -24,7 +24,7 @@ export default function SysButton() {
       >
         <box spacing={16}>
           <NotificationWidget />
-          <Wifi />
+          <NetworkWidget />
           <BluetoothWidget />
         </box>
       </button>
