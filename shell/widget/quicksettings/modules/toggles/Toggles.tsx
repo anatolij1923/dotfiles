@@ -120,7 +120,7 @@ function IdleInhibitor() {
           execAsync([
             "bash",
             "-c",
-            `pidof idle-inhibitor.py || ~/dotfiles/shell/scripts/idleInhibitor.py `,
+            `pidof idle-inhibitor.py || ${SRC}/scripts/idleInhibitor.py `,
           ]).catch(print);
         } else {
           execAsync(["bash", "-c", "pkill -f idle-inhibitor.py"]).catch(print);
