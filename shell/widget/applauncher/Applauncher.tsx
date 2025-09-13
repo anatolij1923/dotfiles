@@ -88,8 +88,12 @@ export default function Applauncher() {
       keymode={Astal.Keymode.EXCLUSIVE}
       onKey={onKey}
       onVisibilityChange={(visible) => {
-        if (visible) searchentry.grab_focus();
-        else searchentry.set_text("");
+        if (visible) {
+          apps.reload();
+          searchentry.grab_focus();
+        } else {
+          searchentry.set_text("");
+        }
       }}
     >
       <box class="search">
