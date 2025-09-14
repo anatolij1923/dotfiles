@@ -3,8 +3,8 @@ import Adw from "gi://Adw?version=1";
 import SettingsButton from "./SettingsButton";
 import Appearance from "./pages/Appearance";
 import { createState } from "ags";
-import Test from "./pages/Test";
 import About from "./pages/About";
+import Hyprland from "./pages/Hyprland";
 
 const [settingsPage, setSettingsPage] = createState("appearance");
 
@@ -35,6 +35,15 @@ function ButtonsRow() {
           pageName="appearance"
         />
         <SettingsButton
+          icon="settings"
+          label="Hyprland"
+          onClicked={() => {
+            setSettingsPage("hyprland");
+          }}
+          connection={settingsPage}
+          pageName="hyprland"
+        />
+        <SettingsButton
           icon="info"
           label="About"
           onClicked={() => {
@@ -58,6 +67,9 @@ function Page() {
       >
         <box $type="named" name="appearance">
           <Appearance />
+        </box>
+        <box $type="named" name="hyprland">
+          <Hyprland />
         </box>
         <box $type="named" name="about">
           <About />
