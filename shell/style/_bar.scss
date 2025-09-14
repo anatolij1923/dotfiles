@@ -13,7 +13,7 @@
 window#bar {
   background: transparent;
 
-  >box {
+  > box {
     background: $color-surface;
     padding: 4px;
 
@@ -32,7 +32,7 @@ window#bar {
           min-height: 16px;
           margin: 8px 0;
           border-radius: 24px;
-          transition: all 0.3s;
+          transition: min-width 0.3s;
           padding: 0;
 
           &:hover {
@@ -78,9 +78,11 @@ window#bar {
           }
 
           &:hover {
-            background-color: color.adjust($color-surface,
-                $lightness: 10%,
-                $space: hsl);
+            background-color: color.adjust(
+              $color-surface,
+              $lightness: 10%,
+              $space: hsl
+            );
           }
         }
 
@@ -216,7 +218,7 @@ window#bar {
       }
 
       .notification-widget {
-        font-weight: normal;
+        font-weight: 500;
         color: $color-on_surface;
 
         .material-icon {
@@ -233,9 +235,11 @@ window#bar {
           padding: 8px;
 
           &:hover {
-            background-color: color.adjust($color-surface,
-                $lightness: 10%,
-                $space: hsl);
+            background-color: color.adjust(
+              $color-surface,
+              $lightness: 10%,
+              $space: hsl
+            );
           }
         }
 
@@ -252,16 +256,15 @@ window#bar {
 
       .battery {
         color: color.adjust($color-surface, $lightness: 10%, $space: hsl);
-        // color: $color-on_surface;
+        // color: $color-surface;
         font-weight: 700;
-
 
         progressbar {
           trough {
             all: unset;
             background-color: gtkalpha($color-on_surface, 0.7);
             min-height: 24px;
-            min-width: 3rem;
+            min-width: 3.2rem;
             border-radius: 16px;
 
             progress {

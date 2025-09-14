@@ -1,4 +1,4 @@
-@use 'sass:color';
+@use "sass:color";
 @use "../colors" as *;
 @use "mixins/material" as *;
 @use "mixins/button.scss" as *;
@@ -71,7 +71,7 @@ window.quicksettings {
       padding: 0 8px;
 
       .material-icon {
-        @include material-icon
+        @include material-icon;
       }
 
       scale {
@@ -90,15 +90,11 @@ window.quicksettings {
             border-radius: 8px;
             background-color: $color-primary;
           }
-
-          empty {
-            background-color: wheat;
-          }
         }
       }
 
       .expand-button {
-        @include button
+        @include button;
       }
     }
 
@@ -126,10 +122,6 @@ window.quicksettings {
           highlight {
             border-radius: 8px;
             background-color: $color-primary;
-          }
-
-          empty {
-            background-color: wheat;
           }
         }
       }
@@ -221,7 +213,7 @@ window.quicksettings {
   }
 
   .mediaplayer {
-    background-color: rgba($color-surface_container, $alpha: 1);
+    background-color: $color-surface_container;
     border-radius: 16px;
     padding: 8px;
     color: $color-on_surface;
@@ -232,7 +224,6 @@ window.quicksettings {
     }
 
     .info {
-
       // border: 1px solid white;
       .track {
         font-weight: 700;
