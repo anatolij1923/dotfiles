@@ -16,12 +16,12 @@ in_block && /^\s*}/ { in_block=0 }
 
 echo "WALLPAPER = $WALLPAPER"
 
-SETTINGS_FILE="$HOME/.config/gtk-4.0/settings.ini"
-THEME_PREF=$(grep -E '^gtk-application-prefer-dark-theme=' "$SETTINGS_FILE" | awk -F'=' '{print $2}')
+# 4. check theme
+COLOR_SCHEME=$(gsettings get org.gnome.desktop.interface color-scheme)
 
-# 4. Generate palette with matugen
-if [ "$THEME_PREF" -eq 1 ]; then
-    matugen image "$WALLPAPER" -m "dark" 
+# 5. Generate palette with matugen
+if [[ $COLOR_SCHEME == "'prefer-dark'" ]]; then
+    matugen image "$WALLPAPER" -m dark
 else
-    matugen image "$WALLPAPER" -m "light"
+    matugen image "$WALLPAPER" -m light
 fi
