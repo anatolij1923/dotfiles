@@ -3,13 +3,18 @@ import Wp from "gi://AstalWp";
 import Brightness from "../../lib/brightness";
 import { createState, onCleanup } from "ags";
 import { timeout } from "ags/time";
+import { options } from "../../lib/settings";
 
 const hideTime = 2000;
 
 export default function OSD(gdkmonitor: Gdk.Monitor) {
-  const { TOP, BOTTOM, RIGHT } = Astal.WindowAnchor;
+  const { TOP, BOTTOM } = Astal.WindowAnchor;
   const speaker = Wp.get_default()?.audio.defaultSpeaker;
   const brigtness = Brightness.get_default();
+
+  const osdTop = options.osd.top
+
+  const anchor = osdTop.value ? TOP : BOTTOM;
 
   const [osdState, setOsdState] = createState<{
     type: "speaker" | "microphone" | "brightness";
@@ -90,7 +95,8 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
       class="osd"
       name="osd"
       layer={Astal.Layer.OVERLAY}
-      anchor={TOP}
+      anchor={anchor}
+      margin={options.osd.margin.value}
       $={(win) => {
         // const surface = win.get_surface();
         // surface?.set_input_region(new cairo.Region())
@@ -126,15 +132,16 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
         transitionDuration={300}
       >
         <box class="osd-content" spacing={8}>
-          <label
-            label={osdState((s) => s.icon)}
-            class="material-icon"
-          />
+          <label label={osdState((s) => s.icon)} class="material-icon" />
           <Gtk.ProgressBar
             valign={Gtk.Align.CENTER}
             fraction={osdState((s) => s.percentage)}
           />
-          <label label={osdState((s) => `${Math.floor(s.percentage * 100)}%`)} class="percentage-label" />
+          <label
+            label={osdState((s) => `${Math.floor(s.percentage * 100)}%`)}
+            class="percentage-label"
+            visible={options.osd.percentage.value}
+          />
         </box>
       </revealer>
     </window>

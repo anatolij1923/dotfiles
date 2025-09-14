@@ -1,29 +1,23 @@
 import { Astal, Gdk } from "ags/gtk4";
 import cairo from "gi://cairo?version=1.0";
+import { options } from "../../lib/settings";
 
 export function ScreenCorners(gdkmonitor: Gdk.Monitor) {
-  const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
+  const { TOP, BOTTOM, LEFT, RIGHT } = Astal.WindowAnchor;
 
-  return (
+  const cornersEnabled = options.corners.enabled.value;
+  if (!cornersEnabled) return null;
+
+  // Верхние углы
+  const topCorners = (
     <window
-      class="screen-corner"
-      name={"screen-corner"}
-      namespace={"ScreenCorners"}
+      class="screen-corner top"
+      name="screen-corner-top"
       gdkmonitor={gdkmonitor}
       anchor={TOP | LEFT | RIGHT}
-      keymode={Astal.Keymode.NONE}
-      layer={Astal.Layer.TOP}
-      heightRequest={22}
-      visible
+      visible={options.bar.top.value} 
       hexpand
-      $={(win) => {
-        const surface = win.get_surface();
-        surface?.set_input_region(new cairo.Region());
-
-        win.connect("map", () => {
-          win.get_surface()?.set_input_region(new cairo.Region());
-        });
-      }}
+      heightRequest={22}
     >
       <box cssClasses={["shadow"]} vexpand hexpand>
         <box cssClasses={["border"]} vexpand hexpand>
@@ -32,4 +26,27 @@ export function ScreenCorners(gdkmonitor: Gdk.Monitor) {
       </box>
     </window>
   );
+
+  const bottomCorners = (
+    <window
+      class="screen-corner bottom"
+      name="screen-corner-bottom"
+      gdkmonitor={gdkmonitor}
+      anchor={BOTTOM | LEFT | RIGHT}
+      visible={!options.bar.top.value} 
+      hexpand
+      heightRequest={22}
+    >
+      <box cssClasses={["shadow"]} vexpand hexpand>
+        <box cssClasses={["border"]} vexpand hexpand>
+          <box cssClasses={["corner"]} vexpand hexpand />
+        </box>
+      </box>
+    </window>
+  );
+
+  // подписка на изменение положения бара
+
+  return [topCorners, bottomCorners];
 }
+
