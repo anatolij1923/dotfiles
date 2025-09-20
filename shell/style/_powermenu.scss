@@ -5,18 +5,18 @@
 
 window.powermenu {
   .powermenu-content {
-    background-color: rgba($color-surface, $alpha: 1);
-    border-radius: 24px;
+    background-color: $color-surface;
+    border-radius: 48px;
     box-shadow: none;
     padding: 24px;
 
     button {
       @include button;
-      @include elevation(6);
+      @include elevation(2);
       background-color: $color-surface_container_high;
       color: $color-on_surface;
-      border-radius: 16px;
-      margin: 0 6px;
+      border-radius: 8px;
+      margin: 2px;
       padding: 16px;
       transition:
         background-color 0.2s ease-in-out,
@@ -24,17 +24,29 @@ window.powermenu {
         transform 0.1s ease,
         border-radius 0.2s ease-out;
 
+      &:first-child {
+        border-top-left-radius: 28px;
+        border-bottom-left-radius: 28px;
+      }
+
+      &:last-child {
+        border-top-right-radius: 28px;
+        border-bottom-right-radius: 28px;
+      }
+
       &:hover {
-        background-color: $color-on_secondary_fixed_variant;
+        @include elevation(4);
+        background-color: $color-surface_variant;
         transform: scale(1.03);
       }
 
       &:focus {
+        @include elevation(6);
         background-color: $color-primary;
-        border-radius: 24px;
+        border-radius: 20px;
         outline: none;
         color: $color-on_primary;
-        box-shadow: 0 0 10px 3px rgba($color-primary, 0.35);
+        // box-shadow: 0 0 10px 3px rgba($color-primary, 0.35);
         transform: scale(1.05);
       }
 
@@ -44,10 +56,12 @@ window.powermenu {
 
       .material-icon {
         @include material-icon(56px);
+        font-weight: 700;
+        opacity: 0.8;
       }
 
       .button-name {
-        font-weight: 500;
+        font-weight: 600;
         font-size: 0.9rem;
       }
     }
