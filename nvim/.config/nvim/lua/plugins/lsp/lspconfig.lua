@@ -5,7 +5,6 @@ return {
         { "antosha417/nvim-lsp-file-operations", config = true },
     },
     config = function()
-        -- NOTE: LSP Keybinds
 
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -76,23 +75,21 @@ return {
             update_in_insert = false, -- Keep diagnostics active in insert mode
         })
 
-        -- Setup servers
-        local lspconfig = require("lspconfig")
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+        local capabilities = require("blink.cmp").get_lsp_capabilities(
+            vim.lsp.protocol.make_client_capabilities()
+        )
 
-        -- Config lsp servers here
+        -- Setup servers
+
         -- lua_ls
-        lspconfig.lua_ls.setup({
+        vim.lsp.config["lua_ls"] = {
             capabilities = capabilities,
+            cmd = { "lua-language-server" },
+            filetypes = { "lua" },
             settings = {
                 Lua = {
-                    diagnostics = {
-                        globals = { "vim" },
-                    },
-                    completion = {
-                        callSnippet = "Replace",
-                    },
+                    diagnostics = { globals = { "vim" } },
+                    completion = { callSnippet = "Replace" },
                     workspace = {
                         library = {
                             [vim.fn.expand("$VIMRUNTIME/lua")] = true,
@@ -101,93 +98,88 @@ return {
                     },
                 },
             },
-        })
+        }
 
         -- emmet_language_server
-        lspconfig.emmet_language_server.setup({
+        vim.lsp.config["emmet_language_server"] = {
             capabilities = capabilities,
-            filetypes = {
-                -- "css",
-                -- "eruby",
-                "html",
-                -- "javascript",
-                -- "javascriptreact",
-                -- "less",
-                -- "sass",
-                -- "scss",
-                -- "pug",
-                -- "typescriptreact",
-            },
+            filetypes = { "html" },
             init_options = {
                 includeLanguages = {},
                 excludeLanguages = {},
                 extensionsPath = {},
                 preferences = {},
-                showAbbreviationSuggestions = true,
+                showAbbreviationSuggestions = false,
                 showExpandedAbbreviation = "always",
                 showSuggestionsAsSnippets = false,
                 syntaxProfiles = {},
                 variables = {},
             },
-        })
+        }
 
-        lspconfig.cssls.setup({
+        -- html-lsp
+        vim.lsp.config["html-lsp"] = {
             capabilities = capabilities,
-            settings = {
-                css = {
-                    validate = true,
+            cmd = { "vscode-html-language-server", "--stdio" },
+            filetypes = { "html" },
+            root_markers = { ".git" }, 
+            init_options = {
+                configurationSection = { "html" },
+                embeddedLanguages = {
+                    css = true,
+                    javascript = true,
                 },
-                less = {
-                    validate = true,
-                },
-                scss = {
-                    validate = true,
-                },
+                provideFormatter = true, 
             },
-        })
+        }
+
+        -- cssls
+        vim.lsp.config["cssls"] = {
+            cmd = { "vscode-css-language-server", "--stdio" },
+            capabilities = capabilities,
+            filetypes = { "css", "scss", "less" },
+            settings = {
+                css = { validate = true },
+                less = { validate = true },
+                scss = { validate = true },
+            },
+        }
 
         -- clangd
-        lspconfig.clangd.setup({
+        vim.lsp.config["clangd"] = {
+            cmd = { "clangd" },
             capabilities = capabilities,
-            -- Add any specific clangd settings here if needed
-            -- settings = {
-            --   clangd = {
-            --     extraArgs = {
-            --       "--compile-commands-dir=build",
-            --     },
-            --   },
-            -- },css lsp nvim
-        })
+            filetypes = { "c", "cpp", "objc", "objcpp" },
+        }
 
-        -- javascript/typescript
-        lspconfig.ts_ls.setup({
+        -- ts_ls 
+        vim.lsp.config["ts_ls"] = {
             capabilities = capabilities,
-            root_dir = function(fname)
-                local util = lspconfig.util
-                return not util.root_pattern("deno.json", "deno.jsonc")(fname)
-                    and util.root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git")(fname)
-            end,
-            single_file_support = false,
-            init_options = {
-                preferences = {
-                    includeCompletionsWithSnippetText = true,
-                    includeCompletionsForImportStatements = true,
-                },
-            },
-        })
+            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+            cmd = { "typescript-language-server", "--stdio" },
+        }
+        --
+        -- python
+        vim.lsp.config["pyright"] = {
+            filetypes = { "python" },
+            capabilities = capabilities,
+        }
+        -- rust 
+        vim.lsp.config["rust_analyzer"] = {
+            capabilities = capabilities,
+            cmd = { "rust-analyzer" },
+            filetypes = { "rust" },
+            root_markers = { "Cargo.toml", "rust-project.json", ".git" },
+        }
 
-        -- Python
-        lspconfig.pyright.setup({
-            capabilities = capabilities,
-        })
-
-        lspconfig.qmlls.setup({
-            cmd = { "qmlls6", "-E" },
-            filetypes = { "qml" },
-            root_dir = function(fname)
-                return lspconfig.util.root_pattern("qmldir", ".git")(fname) or vim.fn.getcwd()
-            end,
-            capabilities = capabilities,
-        })
+        -- enable lsp servers
+        vim.lsp.enable("lua_ls")
+        vim.lsp.enable("html-lsp")
+        vim.lsp.enable("emmet_language_server")
+        vim.lsp.enable("cssls")
+        vim.lsp.enable("ts_ls")
+        vim.lsp.enable("clangd")
+        vim.lsp.enable("pyright")
+        vim.lsp.enable("rust-analyzer")
     end,
 }
