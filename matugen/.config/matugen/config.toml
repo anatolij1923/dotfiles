@@ -26,3 +26,6 @@ output_path = '~/.config/kitty/colors.conf'
 input_path = '~/.config/matugen/templates/colors.scss'
 output_path = '~/dotfiles/shell/colors.scss'
 
+[templates.ghostty]
+input_path = '~/.config/matugen/templates/ghostty.conf'
+output_path = '~/.config/ghostty/colors'

@@ -6,10 +6,15 @@ font-feature = 1
 
 # Theme Settings
 # theme = MaterialDarker
-theme = tokyonight
-background-opacity = 0.6
+background-opacity = 0.8
 background-blur = true
 
 # Window Settings
 title = "Ghostty"
 confirm-close-surface = false
+
+# Colors
+config-file = ./colors
+
+gtk-titlebar = false
+window-decoration = false
