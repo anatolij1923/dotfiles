@@ -6,6 +6,7 @@ import { createState, For } from "ags";
 import About from "./pages/About";
 import Hyprland from "./pages/Hyprland";
 import NetworkPage from "./pages/NetworkPage";
+import BluetoothPage from "./pages/BluetoothPage";
 
 const [settingsPage, setSettingsPage] = createState("network");
 
@@ -14,6 +15,11 @@ const settingsButtons = [
     icon: "wifi",
     label: "Network",
     page: "network",
+  },
+  {
+    icon: "bluetooth",
+    label: "Bluetooth",
+    page: "bluetooth",
   },
   {
     icon: "palette",
@@ -72,6 +78,9 @@ function Page() {
       >
         <box $type="named" name="network">
           <NetworkPage />
+        </box>
+        <box $type="named" name="bluetooth">
+          <BluetoothPage />
         </box>
         <box $type="named" name="appearance">
           <Appearance />

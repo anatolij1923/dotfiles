@@ -145,4 +145,53 @@
       }
     }
   }
+
+  .bluetooth-page {
+
+    .bluetooth-device {
+
+      background-color: $color-surface_container_high;
+      padding: 16px;
+      border-radius: 8px;
+
+      font-weight: 500;
+
+      &:first-child {
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+      }
+
+      &:last-child {
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
+      }
+
+      .connect-button {
+        @include button;
+        border-radius: 50%;
+        padding: 8px;
+
+        .material-icon {
+          @include material-icon
+        }
+
+        &:hover {
+          background-color: $color-on_secondary_fixed_variant;
+        }
+      }
+
+    }
+
+    // .search-button {
+    //   @include button;
+    //   background-color: $color-surface_container_highest;
+    //   padding: 4px;
+    //   margin: 0 8px;
+    //   // border: 1px solid red;
+    //
+    //   .material-icon {
+    //     @include material-icon
+    //   }
+    // }
+  }
 }

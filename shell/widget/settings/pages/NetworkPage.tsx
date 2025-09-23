@@ -24,7 +24,7 @@ export default function NetworkPage() {
   );
 
   return (
-    <SettingsPage className="page network-page" headerTitle="Network">
+    <SettingsPage className="network-page" headerTitle="Network">
       <SwitchRow
         label="Wi-Fi"
         value={wifiEnabled}

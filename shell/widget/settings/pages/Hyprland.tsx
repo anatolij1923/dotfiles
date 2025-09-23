@@ -7,7 +7,7 @@ import SettingsPage from "./SettingsPage";
 
 export default function Hyprland() {
   return (
-    <SettingsPage headerTitle="Hyprland" className="page hyprland-page">
+    <SettingsPage headerTitle="Hyprland" className="hyprland-page">
       <SwitchRow
         label="Enable Animations"
         setting={options.hyprland.animations.enabled}

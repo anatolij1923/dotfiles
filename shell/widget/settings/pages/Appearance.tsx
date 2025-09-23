@@ -8,7 +8,7 @@ import SettingsPage from "./SettingsPage";
 
 export default function Appearance() {
   return (
-    <SettingsPage headerTitle="Appearance" className="page appearance-page">
+    <SettingsPage headerTitle="Appearance" className="appearance-page">
       <SwitchRow label="Dark Mode" setting={options.theme.darkMode} />
       <SwitchRow label="Bar Top" setting={options.bar.top} />
       <SwitchRow label="Corners Enabled" setting={options.corners.enabled} />

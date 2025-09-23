@@ -13,7 +13,11 @@ export default function SettingsPage({
   className,
 }: SettingsPageProps) {
   return (
-    <box class={className} hexpand orientation={Gtk.Orientation.VERTICAL}>
+    <box
+      class={`page ${className}`.trim()}
+      hexpand
+      orientation={Gtk.Orientation.VERTICAL}
+    >
       <Header title={headerTitle} />
       <Gtk.ScrolledWindow hexpand vexpand>
         <box
