@@ -1,52 +1,71 @@
 import { Gtk } from "ags/gtk4";
 import { Setting } from "../../../lib/settings";
-import { onCleanup } from "ags";
+import { Accessor, onCleanup } from "ags";
 
 interface SwitchRowProps {
   label: string;
-  setting: Setting<boolean>;
+  setting?: Setting<boolean>;
+  value?: boolean | Accessor<boolean>;
+  onChange?: (v: boolean) => void;
 }
 
-export function SwitchRow({ label, setting }: SwitchRowProps) {
-  // Create the switch widget programmatically to get a reference.
+function isAccessor<T = any>(v: any): v is Accessor<T> {
+  return v && typeof v.get === "function" && typeof v.subscribe === "function";
+}
+
+export function SwitchRow({ label, setting, value, onChange }: SwitchRowProps) {
+  const getCurrent = (): boolean => {
+    if (setting) return setting.value;
+    if (isAccessor<boolean>(value)) return value.get();
+    return typeof value === "boolean" ? value : false;
+  };
+
   const switchWidget = new Gtk.Switch({
-    // Set the initial state from the setting's value.
-    active: setting.value,
+    active: getCurrent(),
   });
 
-  // --- Data Flow: From UI to State ---
-  // Connect to the GTK signal for when the 'active' property changes.
-  // This happens when the user clicks the switch.
   const notifyId = switchWidget.connect("notify::active", () => {
-    // When the switch is clicked, update our setting's value.
-    // We check first to prevent potential infinite loops.
-    if (setting.value !== switchWidget.active) {
-      setting.value = switchWidget.active;
+    const active = switchWidget.active;
+
+    if (setting) {
+      if (setting.value !== active) setting.value = active;
+      return;
     }
+
+    if (isAccessor<boolean>(value)) {
+      const accessorAny: any = value;
+      if (typeof accessorAny.set === "function") {
+        accessorAny.set(active);
+      } else if (onChange) {
+        onChange(active);
+      }
+      return;
+    }
+
+    if (onChange) onChange(active);
   });
 
-  // --- Data Flow: From State to UI ---
-  // Subscribe to our setting's Accessor.
-  // This handles cases where the value is changed from somewhere else.
-  const unsubscribe = setting.subscribe(() => {
-    // When the setting's value changes, update the switch's visual state.
-    if (setting.value !== switchWidget.active) {
-      switchWidget.active = setting.value;
-    }
-  });
+  let unsubscribe: (() => void) | undefined;
+  if (setting) {
+    unsubscribe = setting.subscribe(() => {
+      if (switchWidget.active !== setting.value)
+        switchWidget.active = setting.value;
+    });
+  } else if (isAccessor<boolean>(value)) {
+    unsubscribe = value.subscribe((v?: boolean) => {
+      const newVal = typeof v === "boolean" ? v : value.get();
+      if (switchWidget.active !== newVal) switchWidget.active = newVal;
+    });
+  }
 
-  // --- Cleanup ---
-  // When the component is destroyed, we must disconnect the signal
-  // and unsubscribe from the accessor to prevent memory leaks.
   onCleanup(() => {
     switchWidget.disconnect(notifyId);
-    unsubscribe();
+    if (unsubscribe) unsubscribe();
   });
 
   return (
-    <box class="setting-row" hexpand>
+    <box class="switch-row" hexpand>
       <label label={label} xalign={0} hexpand />
-      {/* Add the widget instance to the JSX tree */}
       {switchWidget}
     </box>
   );

@@ -54,7 +54,7 @@ export default function SettingsButton({
     >
       <box spacing={16}>
         <label label={icon} class="material-icon" />
-        <label label={label} />
+        <label label={label} class="page-name" />
       </box>
     </button>
   );

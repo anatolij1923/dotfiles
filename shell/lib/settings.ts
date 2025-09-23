@@ -1,5 +1,6 @@
 import { createState, Accessor, Setter } from "ags";
 import { execAsync } from "ags/process";
+import { timeout } from "ags/time";
 import Gio from "gi://Gio";
 import GLib from "gi://GLib?version=2.0";
 
@@ -75,7 +76,7 @@ class SettingsService {
   load() {
     if (!this._file.query_exists(null)) {
       print(
-        `[Settings] No settings file found at ${SETTINGS_PATH}. Using defaults.`,
+        `[Settings] No settings file found at ${SETTINGS_PATH}. Using defaults.`
       );
       // Save the defaults to create the file
       this._save();
@@ -116,7 +117,7 @@ class SettingsService {
         null,
         false,
         Gio.FileCreateFlags.REPLACE_DESTINATION,
-        null,
+        null
       );
     } catch (e) {
       logError(e, "Error saving settings:");
@@ -135,25 +136,34 @@ settings.register("bar.top", true, (value) => {
 settings.register("corners.enabled", true);
 
 settings.register("osd.top", true);
-settings.register("osd.percentage", true)
-settings.register("osd.margin", 24)
+settings.register("osd.percentage", true);
+settings.register("osd.margin", 24);
 
 settings.register("hyprland.animations.enabled", true, (value) => {
   const command = `hyprctl keyword animations:enabled ${value}`;
   print(`[Settings] Running: ${command}`);
   execAsync(command).catch(logError);
 });
+
+settings.register("hyprland.decoration.rounding", 25, (value) => {
+  const command = `hyprctl keyword decoration:rounding ${value}`;
+  execAsync(command).catch(logError);
+});
+
 settings.register("theme.darkMode", false, (value) => {
   const switchThemeCommand = `gsettings set org.gnome.desktop.interface color-scheme ${
     value ? "prefer-dark" : "default"
   }`;
-  print("[Setting] Running: ${switchThemeCommand}");
+  console.log(`[Setting] Running: ${switchThemeCommand}`);
   execAsync(switchThemeCommand).catch(logError);
 
   const wallpaperScriptCommand = `${GLib.get_home_dir()}/.config/hypr/scripts/wallpaper.sh`;
-  print("[Setting] Running ${wallpaperScriptCommand}");
-  execAsync(wallpaperScriptCommand).catch(logError);
+  console.log(`[Setting] Running ${wallpaperScriptCommand}`);
+  timeout(20, () => execAsync(wallpaperScriptCommand).catch(logError));
+  // execAsync(wallpaperScriptCommand).catch(logError);
 });
+
+settings.register("test.number", 0);
 
 // After all settings are registered, load the values from the file.
 settings.load();
@@ -167,16 +177,23 @@ export const options = settings.options as {
     enabled: Setting<boolean>;
   };
   osd: {
-    top: Setting<boolean>,
-    percentage: Setting<boolean>,
-    margin: Setting<number>
-  }
+    top: Setting<boolean>;
+    percentage: Setting<boolean>;
+    margin: Setting<number>;
+  };
   hyprland: {
     animations: {
       enabled: Setting<boolean>;
     };
+    decoration: {
+      rounding: Setting<number>;
+    };
   };
   theme: {
     darkMode: Setting<boolean>;
+  };
+
+  test: {
+    number: Setting<number>;
   };
 };

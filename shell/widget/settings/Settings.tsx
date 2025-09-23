@@ -2,16 +2,40 @@ import { Gtk } from "ags/gtk4";
 import Adw from "gi://Adw?version=1";
 import SettingsButton from "./SettingsButton";
 import Appearance from "./pages/Appearance";
-import { createState } from "ags";
+import { createState, For } from "ags";
 import About from "./pages/About";
 import Hyprland from "./pages/Hyprland";
+import NetworkPage from "./pages/NetworkPage";
 
-const [settingsPage, setSettingsPage] = createState("appearance");
+const [settingsPage, setSettingsPage] = createState("network");
 
-function ButtonsRow() {
+const settingsButtons = [
+  {
+    icon: "wifi",
+    label: "Network",
+    page: "network",
+  },
+  {
+    icon: "palette",
+    label: "Appearance",
+    page: "appearance",
+  },
+  {
+    icon: "settings",
+    label: "Hyprland",
+    page: "hyprland",
+  },
+  {
+    icon: "info",
+    label: "About",
+    page: "about",
+  },
+];
+
+function ButtonsColumn() {
   return (
     <box
-      class="buttons-row"
+      class="buttons-column"
       orientation={Gtk.Orientation.VERTICAL}
       halign={Gtk.Align.START}
       hexpand={false}
@@ -19,40 +43,21 @@ function ButtonsRow() {
     >
       <box class="header">
         <label label="Settings" xalign={0} hexpand />
+        {/* TODO: make buttons menu foldable */}
         <button class="fold">
           <label label="menu" class="material-icon" />
         </button>
       </box>
       <box orientation={Gtk.Orientation.VERTICAL} spacing={8}>
-        <SettingsButton
-          icon="palette"
-          label="Appearance"
-          onClicked={() => {
-            setSettingsPage("appearance");
-            console.log("appearance");
-          }}
-          connection={settingsPage}
-          pageName="appearance"
-        />
-        <SettingsButton
-          icon="settings"
-          label="Hyprland"
-          onClicked={() => {
-            setSettingsPage("hyprland");
-          }}
-          connection={settingsPage}
-          pageName="hyprland"
-        />
-        <SettingsButton
-          icon="info"
-          label="About"
-          onClicked={() => {
-            setSettingsPage("about");
-            console.log("test");
-          }}
-          connection={settingsPage}
-          pageName="about"
-        />
+        {settingsButtons.map((btn) => (
+          <SettingsButton
+            icon={btn.icon}
+            label={btn.label}
+            onClicked={() => setSettingsPage(btn.page)}
+            connection={settingsPage}
+            pageName={btn.page}
+          />
+        ))}
       </box>
     </box>
   );
@@ -65,6 +70,9 @@ function Page() {
         visibleChildName={settingsPage}
         transitionType={Gtk.StackTransitionType.CROSSFADE}
       >
+        <box $type="named" name="network">
+          <NetworkPage />
+        </box>
         <box $type="named" name="appearance">
           <Appearance />
         </box>
@@ -83,7 +91,7 @@ export default function Settings() {
   return (
     <Gtk.Window name="settings" title="Settings" hideOnClose={true}>
       <box class="settings">
-        <ButtonsRow />
+        <ButtonsColumn />
         <Page />
       </box>
     </Gtk.Window>
