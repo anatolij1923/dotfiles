@@ -4,7 +4,13 @@ import AstalBluetooth from "gi://AstalBluetooth?version=0.1";
 import { Gtk } from "ags/gtk4";
 import { SwitchRow } from "../controls/SwitchRow";
 
-function toggleDevice(device: Bluetooth.Device) {
+const matreialDeviceIcons: Record<string, string> = {
+  "audio-headset": "headphones",
+  laptop: "laptop",
+  watch: "watch",
+};
+
+function toggleDevice(device: AstalBluetooth.Device) {
   if (!device.paired) {
     device.trusted = true;
     device.pair();
@@ -16,6 +22,10 @@ function toggleDevice(device: Bluetooth.Device) {
   }
 }
 
+function devicePercentage(device: AstalBluetooth.Device) {
+  const percentage = createBinding(device, "batteryPercentage");
+  return `${percentage.get() * 100}%`;
+}
 
 export default function BluetoothPage() {
   const bluetooth = AstalBluetooth.get_default();
@@ -39,11 +49,43 @@ export default function BluetoothPage() {
           <For each={createBinding(bluetooth, "devices")}>
             {(device: AstalBluetooth.Device) => (
               <box class="bluetooth-device">
-                <label label={device.name} />
+                <box class="device-info" spacing={16}>
+                  <box
+                    class={createBinding(
+                      device,
+                      "connected",
+                    )((c) => (c ? "device-icon connected" : "device-icon"))}
+                  >
+                    <label
+                      label={matreialDeviceIcons[device.icon] || "devices"}
+                      class="material-icon"
+                    />
+                  </box>
+                  <box
+                    class="device-name"
+                    orientation={Gtk.Orientation.VERTICAL}
+                  >
+                    <label label={device.name} class="name" xalign={0} />
+                    <label
+                      label={createBinding(
+                        device,
+                        "connected",
+                      )((c) =>
+                        c
+                          ? `Connected - ${devicePercentage(device)}`
+                          : device.address,
+                      )}
+                      class="address"
+                      xalign={0}
+                    />
+                  </box>
+                </box>
                 <box hexpand />
-                <button class="connect-button" onClicked={() => toggleDevice(device)}>
-                  <label label="link" class="material-icon" />
-                </button>
+                <box class="connect-button">
+                  <button onClicked={() => toggleDevice(device)}>
+                    <label label="link" class="material-icon" />
+                  </button>
+                </box>
               </box>
             )}
           </For>

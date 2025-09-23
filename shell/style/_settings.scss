@@ -154,7 +154,6 @@
       padding: 16px;
       border-radius: 8px;
 
-      font-weight: 500;
 
       &:first-child {
         border-top-left-radius: 16px;
@@ -166,10 +165,41 @@
         border-bottom-right-radius: 16px;
       }
 
+      .device-info {
+        .device-icon {
+          background-color: $color-on_surface;
+          padding:  6px;
+          border-radius: 50%;
+          .material-icon {
+            color: $color-surface;
+            @include material-icon(32px)
+          }
+          &.connected {
+            background-color: $color-primary;
+            color: $color-inverse_primary
+          }
+        }
+
+        .device-name {
+          color: $color-on_surface;
+
+          .name {
+            font-size: 110%;
+            font-weight: 500
+          }
+
+          .address {
+            font-weight: 400
+          }
+        }
+      }
+
       .connect-button {
-        @include button;
-        border-radius: 50%;
+        button {
+          @include button;
+        }
         padding: 8px;
+        border-radius: 50%;
 
         .material-icon {
           @include material-icon
