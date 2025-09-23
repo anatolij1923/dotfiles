@@ -42,7 +42,7 @@ export default function Powermenu(gdkmonitor: Gdk.Monitor) {
       keymode={Astal.Keymode.EXCLUSIVE}
       class="powermenu"
     >
-      <box class="powermenu-content">
+      <box class="powermenu-content" spacing={4}>
         {options.map((option) => (
           <button
             onClicked={() => {

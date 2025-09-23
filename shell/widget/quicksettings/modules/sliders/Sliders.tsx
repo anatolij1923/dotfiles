@@ -4,9 +4,10 @@ import { Gtk } from "ags/gtk4";
 import { createBinding, createState, For } from "ags";
 import Pango from "gi://Pango?version=1.0";
 
+// TODO: move audio mixer to antoher component
 function AudioMixer() {
   const wp = Wp.get_default();
-  const audio = wp.audio
+  const audio = wp.audio;
   const streams = createBinding(audio, "streams");
 
   return (

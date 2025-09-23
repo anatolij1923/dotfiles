@@ -8,7 +8,6 @@ export function ScreenCorners(gdkmonitor: Gdk.Monitor) {
   const cornersEnabled = options.corners.enabled.value;
   if (!cornersEnabled) return null;
 
-  // Верхние углы
   const topCorners = (
     <window
       class="screen-corner top"
@@ -44,8 +43,6 @@ export function ScreenCorners(gdkmonitor: Gdk.Monitor) {
       </box>
     </window>
   );
-
-  // подписка на изменение положения бара
 
   return [topCorners, bottomCorners];
 }

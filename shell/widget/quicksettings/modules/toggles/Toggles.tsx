@@ -42,7 +42,9 @@ function BluetoothButton() {
   return (
     <QSButton
       connection={[bluetooth, "isPowered"]} // Changed to camelCase
-      onClicked={() => bluetooth.toggle()}
+      onClicked={() => {
+        bluetooth.toggle();
+      }}
       onSecondaryClick={() => {
         execAsync(["blueman-manager"]);
       }}

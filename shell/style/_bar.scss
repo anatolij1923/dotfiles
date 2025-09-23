@@ -1,5 +1,4 @@
 @use "sass:color";
-
 @use "../colors" as *;
 @use "mixins/material" as *;
 @use "mixins/button.scss" as *;
@@ -13,7 +12,7 @@
 window#bar {
   background: transparent;
 
-  > box {
+  >box {
     background: $color-surface;
     padding: 4px;
 
@@ -78,11 +77,9 @@ window#bar {
           }
 
           &:hover {
-            background-color: color.adjust(
-              $color-surface,
-              $lightness: 10%,
-              $space: hsl
-            );
+            background-color: color.adjust($color-surface,
+                $lightness: 10%,
+                $space: hsl);
           }
         }
 
@@ -192,10 +189,10 @@ window#bar {
             all: unset;
             min-width: 4px;
             border-radius: 4px;
-            background-color: $color-on_secondary_fixed;
+            background-color: $color-surface_container_highest;
 
             &.filled {
-              background-color: $color-on_primary_container;
+              background-color: $color-primary;
             }
 
             &.filled.low {
@@ -235,11 +232,9 @@ window#bar {
           padding: 8px;
 
           &:hover {
-            background-color: color.adjust(
-              $color-surface,
-              $lightness: 10%,
-              $space: hsl
-            );
+            background-color: color.adjust($color-surface,
+                $lightness: 10%,
+                $space: hsl);
           }
         }
 
@@ -262,7 +257,7 @@ window#bar {
         progressbar {
           trough {
             all: unset;
-            background-color: gtkalpha($color-on_surface, 0.7);
+            background-color: gtkalpha($color-on_surface, 0.6);
             min-height: 24px;
             min-width: 3.2rem;
             border-radius: 16px;
@@ -270,18 +265,10 @@ window#bar {
             progress {
               all: unset;
               min-height: 24px;
-              background-color: $color-on_primary_container;
+              background-color: $color-primary;
               border-radius: 6px;
             }
           }
-
-          // &.charging {
-          //   trough {
-          //     progress {
-          //       background-color: #1dcc34;
-          //     }
-          //   }
-          // }
         }
 
         .percentage-label {
