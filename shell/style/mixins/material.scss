@@ -1,6 +1,7 @@
-@mixin material-icon($size: 24px) {
-  font-family: "Material Icons Outlined";
+@mixin material-icon($size: 24px, $font-family: "Material Symbols Rounded") {
+  // font-family: "Material Icons Outlined";
   // font-family: "Material Symbols Rounded";
+  font-family: $font-family;
   font-weight: 600;
   font-size: $size;
 }

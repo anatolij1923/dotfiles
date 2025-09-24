@@ -15,7 +15,7 @@ export default function SpinRow({
   setting,
   min,
   max,
-  step,
+  step = 1,
 }: SpinRowProps) {
   const spin = new Gtk.SpinButton({
     adjustment: new Gtk.Adjustment({

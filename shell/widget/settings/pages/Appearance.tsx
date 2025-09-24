@@ -17,7 +17,6 @@ export default function Appearance() {
         label="OSD Margin"
         min={0}
         max={100}
-        step={1}
         setting={options.osd.margin}
       />
     </SettingsPage>
