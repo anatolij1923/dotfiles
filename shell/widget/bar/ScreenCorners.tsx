@@ -1,12 +1,8 @@
 import { Astal, Gdk } from "ags/gtk4";
 import cairo from "gi://cairo?version=1.0";
-import { options } from "../../lib/settings";
 
 export function ScreenCorners(gdkmonitor: Gdk.Monitor) {
   const { TOP, BOTTOM, LEFT, RIGHT } = Astal.WindowAnchor;
-
-  const cornersEnabled = options.corners.enabled.value;
-  if (!cornersEnabled) return null;
 
   const topCorners = (
     <window
@@ -14,7 +10,7 @@ export function ScreenCorners(gdkmonitor: Gdk.Monitor) {
       name="screen-corner-top"
       gdkmonitor={gdkmonitor}
       anchor={TOP | LEFT | RIGHT}
-      visible={options.bar.top.value} 
+      visible
       hexpand
       heightRequest={22}
     >
@@ -32,7 +28,6 @@ export function ScreenCorners(gdkmonitor: Gdk.Monitor) {
       name="screen-corner-bottom"
       gdkmonitor={gdkmonitor}
       anchor={BOTTOM | LEFT | RIGHT}
-      visible={!options.bar.top.value} 
       hexpand
       heightRequest={22}
     >

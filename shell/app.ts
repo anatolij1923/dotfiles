@@ -9,7 +9,6 @@ import Quicksettings from "./widget/quicksettings/Quicksettings";
 import OSD from "./widget/osd/OSD";
 import BatteryWarnings from "./utils/batteryWarning";
 import { monitorFile } from "ags/file";
-import Settings from "./widget/settings/Settings";
 
 app.start({
   icons: "assets",
@@ -19,6 +18,7 @@ app.start({
     // Monitoring styles file to immediately reapply css
     monitorFile(`${SRC}/style.css`, () => {
       console.log("[LOG] CSS reapplied");
+      app.reset_css()
       app.apply_css(`${SRC}/style.css`);
     });
 
@@ -28,27 +28,24 @@ app.start({
 
       // Screencorners
       ScreenCorners(monitor);
-
-      // Applauncher
+       
+      //Applauncher
       app.add_window(Applauncher() as Gtk.Window);
-
+     
       // Notification Popups
       NotificationPopups();
-
+     
       // Powermenu
       app.add_window(Powermenu(monitor) as Gtk.Window);
-
+      
       // Quick Settings
       app.add_window(Quicksettings(monitor) as Gtk.Window);
-
+      
       // OSD;
       app.add_window(OSD(monitor) as Gtk.Window);
-
+      
       // Battery warnings
       BatteryWarnings();
-
-      // Settings
-      app.add_window(Settings() as Gtk.Window);
     });
   },
 });
