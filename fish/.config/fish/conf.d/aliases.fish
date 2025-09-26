@@ -1,7 +1,7 @@
 # --- Aliases ---
 
 # List directories
-alias ls="eza --no-filesize --long --color=always --icons=always --no-user"
+alias ls="eza --long --no-filesize --color=always --icons=always --no-user"
 alias tree="eza --tree"
 
 # Utilities
