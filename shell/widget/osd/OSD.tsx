@@ -126,7 +126,7 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
         transitionDuration={300}
       >
         <box class="osd-content" spacing={8}>
-          <label label={osdState((s) => s.icon)} class="material-icon" />
+          <label valign={Gtk.Align.CENTER} label={osdState((s) => s.icon)} class="material-icon" />
           <Gtk.ProgressBar
             valign={Gtk.Align.CENTER}
             fraction={osdState((s) => s.percentage)}

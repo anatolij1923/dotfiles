@@ -1,4 +1,4 @@
-import { For, createComputed, createState } from "ags";
+import { For, createState } from "ags";
 import { Astal, Gtk, Gdk } from "ags/gtk4";
 import AstalApps from "gi://AstalApps";
 import Window from "../common/Window";

@@ -20,7 +20,7 @@ export default function Tray() {
   };
 
   return (
-    <box class="tray">
+    <box class="tray" spacing={4}>
       <For each={items}>
         {(item) =>
           item.gicon ? (

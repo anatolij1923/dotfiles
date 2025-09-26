@@ -8,13 +8,13 @@
     background-color: $color-surface_container;
     border: 1px solid $color-surface_container_high;
     border-radius: 24px;
-    padding: 8px 16px;
-    margin: 20px 0;
+    padding: 0.8rem 1rem;
+    margin: 20px;
 
     .material-icon {
-      @include material-icon;
+      @include material-icon(24px, "Material Icons Outlined");
       color: $color-on_surface;
-      margin: 8px 0;
+      margin: 0;
     }
 
     progressbar {

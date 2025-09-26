@@ -21,7 +21,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       application={app}
     >
       <centerbox class="bar">
-        <box $type="start" hexpand class="left-side" spacing={16}>
+        <box $type="start" hexpand class="left-side" spacing={8}>
           <Workspaces />
           <FocusedClient />
         </box>

@@ -19,7 +19,6 @@ export default function BatteryWarnings() {
     if (charging && value === good) {
 
       execAsync([
-
         "notify-send",
         "-a",
         "Battery",

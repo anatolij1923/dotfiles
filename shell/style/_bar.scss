@@ -9,274 +9,269 @@
   @return string.unquote("alpha(#{$c},#{$a})");
 }
 
-window#bar {
-  background: transparent;
+.bar {
+  background: $color-surface;
 
-  >box {
-    background: $color-surface;
-    padding: 4px;
+  .left-side {
+    margin: 0 0 0 1rem;
+  }
 
-    .left-side {
-      margin: 0 0 0 16px;
+  .center {
+    margin: 0 1rem;
+  }
 
-      .workspaces {
-        // padding: 0 6px;
-        border-radius: 24px;
-        margin: 4px;
+  .right-side {
+    margin: 0 1rem 0 0;
+  }
 
-        button {
-          @include button;
-          background-color: $color-secondary;
-          min-width: 16px;
-          min-height: 16px;
-          margin: 8px 0;
-          border-radius: 24px;
-          transition: min-width 0.3s;
-          padding: 0;
+  .workspaces {
+    margin: 1rem 0.3rem;
 
-          &:hover {
-            background-color: gtkalpha($color-primary, 0.5);
-          }
+    button {
+      @include button;
+      background-color: $color-secondary;
+      min-height: 1rem;
+      min-width: 1rem;
+      transition: min-width 0.3s;
 
-          &.empty {
-            background-color: $color-surface_container_highest;
-          }
+      border-radius: 1rem;
 
-          &.focused {
-            background-color: $color-primary;
-            min-width: 32px;
-          }
-        }
+      &:hover {
+        background-color: $color-primary;
       }
 
-      .focused-client {
-        font-weight: 500;
-        color: $color-on_surface;
+      &.empty {
+        background-color: $color-surface_variant;
       }
+
+      &.focused {
+        min-width: 2rem;
+        background-color: $color-primary
+      }
+
     }
+  }
 
-    .center {
-      .clock {
-        button {
-          @include button;
-          border-radius: 32px;
-          // background-color: $color-surface_container;
-          padding: 0 16px;
+  .focused-client {
+    font-weight: 500;
+    color: $color-on_surface;
+  }
 
-          label {
-            color: $color-on_surface;
-            font-weight: 400;
-          }
+  .clock {
+    button {
+      @include button;
+      border-radius: 32px;
+      // background-color: $color-surface_container;
+      padding: 0 1rem;
 
-          &:checked {
-            background-color: $color-on_secondary_fixed_variant;
-
-            // label {
-            // color: $color-surface;
-            // }
-          }
-
-          &:hover {
-            background-color: color.adjust($color-surface,
-                $lightness: 10%,
-                $space: hsl);
-          }
-        }
-
-        popover.background {
-          arrow {
-            all: unset;
-          }
-
-          contents {
-            all: unset;
-            // background-color: transparent;
-
-            calendar {
-              background-color: $color-surface_container;
-              padding: 8px;
-              border-radius: 24px;
-
-              header {
-                button {
-                  color: $color-on_surface;
-                }
-
-                stack.month {
-                  color: $color-on_surface;
-                  font-weight: 500;
-                }
-
-                label.year {
-                  color: $color-on_surface;
-                  font-weight: 500;
-                }
-              }
-
-              grid {
-                label {
-                  color: $color-on_surface;
-                  border-radius: 8px;
-                  // padding: 8px;
-
-                  &.day-name {
-                    font-weight: 600;
-                  }
-
-                  &.today {
-                    background-color: $color-primary;
-                    color: $color-surface;
-                  }
-
-                  &.other-month {
-                    color: $color-secondary_container;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-
-    .right-side {
-      margin: 0 16px 0 0;
-
-      .kb-layout {
+      label {
         color: $color-on_surface;
-
-        button {
-          @include button;
-          // border: 1px solid wheat;
-          background-color: transparent;
-          font-weight: 500;
-          outline: none;
-          border-radius: 16px;
-
-          .material-icon {
-            @include material-icon;
-          }
-        }
+        font-weight: 400;
       }
 
-      .tray {
-        button {
-          @include button;
-          outline: none;
-          border-radius: 8px;
-          margin: 4px 2px;
-          padding: 2px 8px;
-          background-color: transparent;
+      &:checked {
+        background-color: $color-on_secondary_fixed_variant;
 
-          &:hover {
-            background-color: gtkalpha($color-primary, 0.3);
-          }
-
-          // &:checked {
-          //   background-color: $color-primary;
-          // }
-        }
-      }
-
-      .bluetooth-widget {
-        color: $color-on_surface;
-
-        levelbar {
-          margin: 2px 4px;
-          transform: rotate(180deg);
-
-          block {
-            all: unset;
-            min-width: 4px;
-            border-radius: 4px;
-            background-color: $color-surface_container_highest;
-
-            &.filled {
-              background-color: $color-primary;
-            }
-
-            &.filled.low {
-              background-color: $color-error;
-            }
-          }
-        }
-
-        .material-icon {
-          @include material-icon;
-        }
-      }
-
-      .network {
-        color: $color-on_surface;
-
-        label {
-          @include material-icon;
-        }
-      }
-
-      .notification-widget {
-        font-weight: 500;
-        color: $color-on_surface;
-
-        .material-icon {
-          @include material-icon;
-        }
-      }
-
-      .sys-button {
-        button {
-          @include button;
-          // @include elevation(3);
-          // background-color: $color-surface_container;
-          border-radius: 32px;
-          padding: 8px;
-
-          &:hover {
-            background-color: color.adjust($color-surface,
-                $lightness: 10%,
-                $space: hsl);
-          }
-        }
-
-        &.active {
-          button {
-            @include button;
-            @include elevation(3);
-            border-radius: 32px;
-            padding: 8px;
-            background-color: $color-on_secondary_fixed_variant;
-          }
-        }
-      }
-
-      .battery {
-        color: color.adjust($color-surface, $lightness: 10%, $space: hsl);
+        // label {
         // color: $color-surface;
-        font-weight: 700;
+        // }
+      }
 
-        progressbar {
-          trough {
-            all: unset;
-            background-color: gtkalpha($color-on_surface, 0.6);
-            min-height: 24px;
-            min-width: 3.2rem;
-            border-radius: 16px;
+      &:hover {
+        background-color: color.adjust($color-surface,
+            $lightness: 10%,
+          );
+      }
+    }
 
-            progress {
-              all: unset;
-              min-height: 24px;
-              background-color: $color-primary;
-              border-radius: 6px;
+    popover.background {
+      arrow {
+        all: unset;
+      }
+
+      contents {
+        all: unset;
+        // background-color: transparent;
+
+        calendar {
+          background-color: $color-surface_container;
+          padding: 0.5rem;
+          border-radius: 1.5rem;
+
+          header {
+            button {
+              color: $color-on_surface;
+            }
+
+            stack.month {
+              color: $color-on_surface;
+              font-weight: 500;
+            }
+
+            label.year {
+              color: $color-on_surface;
+              font-weight: 500;
+            }
+          }
+
+          grid {
+            label {
+              color: $color-on_surface;
+              border-radius: 0.5rem;
+              // padding: 8px;
+
+              &.day-name {
+                font-weight: 600;
+              }
+
+              &.today {
+                background-color: $color-primary;
+                color: $color-surface;
+              }
+
+              &.other-month {
+                color: $color-secondary_container;
+              }
             }
           }
         }
+      }
+    }
+  }
 
-        .percentage-label {
-          .bolt-icon {
-            @include material-icon(20px);
-            font-weight: 900;
-          }
+  .tray {
+    button {
+      @include button;
+      border-radius: 0.5rem;
+      margin: 0.5rem 0;
+      padding: 0 0.5rem;
+
+      background-color: transparent;
+
+      &:hover {
+        background-color: $color-secondary_container
+      }
+
+      &:checked {
+        background-color: color.adjust($color-secondary_container, $lightness: 15%);
+      }
+    }
+  }
+
+  .kb-layout {
+    color: $color-on_surface;
+
+    button {
+      @include button;
+      // border: 1px solid wheat;
+      background-color: transparent;
+      font-weight: 500;
+      outline: none;
+      border-radius: 1rem;
+
+      .material-icon {
+        @include material-icon;
+      }
+    }
+  }
+
+  .sys-button {
+    button {
+      @include button;
+      // @include elevation(3);
+      // background-color: $color-surface_container;
+      border-radius: 32px;
+      padding: 0.5rem;
+
+      &:hover {
+        background-color: color.adjust($color-surface,
+            $lightness: 10%,
+            $space: hsl);
+      }
+    }
+
+    &.active {
+      button {
+        @include button;
+        @include elevation(3);
+        border-radius: 32px;
+        padding: 8px;
+        background-color: $color-on_secondary_fixed_variant;
+      }
+    }
+  }
+
+  .bluetooth-widget {
+    color: $color-on_surface;
+
+    levelbar {
+      margin: 0.3rem 4px;
+      transform: rotate(180deg);
+
+      block {
+        all: unset;
+        min-width: 4px;
+        border-radius: 4px;
+        background-color: $color-surface_container_highest;
+
+        &.filled {
+          background-color: $color-primary;
         }
+
+        &.filled.low {
+          background-color: $color-error;
+        }
+      }
+    }
+
+    .material-icon {
+      @include material-icon;
+    }
+  }
+
+  .network {
+    color: $color-on_surface;
+
+    label {
+      @include material-icon;
+    }
+  }
+
+  .notification-widget {
+    font-weight: 500;
+    color: $color-on_surface;
+
+    .material-icon {
+      @include material-icon;
+    }
+  }
+
+  .battery {
+    color: color.adjust($color-surface, $lightness: 10%, $space: hsl);
+    // color: $color-surface;
+    font-weight: 700;
+
+    progressbar {
+      trough {
+        all: unset;
+        background-color: gtkalpha($color-on_surface, 0.6);
+        min-height: 1.5rem;
+        min-width: 3.5rem;
+        border-radius: 16px;
+
+        progress {
+          all: unset;
+          min-height: 1.5rem;
+          background-color: $color-primary;
+          border-radius: 6px;
+        }
+      }
+    }
+
+    .percentage-label {
+      .bolt-icon {
+        @include material-icon(20px, "Material Icons Outlined");
+        font-weight: 900;
       }
     }
   }
