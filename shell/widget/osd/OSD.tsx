@@ -3,6 +3,7 @@ import Wp from "gi://AstalWp";
 import Brightness from "../../lib/brightness";
 import { createState, onCleanup } from "ags";
 import { timeout } from "ags/time";
+import cairo from "gi://cairo?version=1.0";
 
 const hideTime = 2000;
 
@@ -92,17 +93,16 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
       layer={Astal.Layer.OVERLAY}
       anchor={TOP}
       $={(win) => {
-        // const surface = win.get_surface();
-        // surface?.set_input_region(new cairo.Region())
-        //
-        // win.connect("map", () => {
-        //   win.get_surface()?.set_input_region(new cairo.Region())
-        // })
-        //
-        //
-        // if (surface) {
-        //   surface.set_input_region(new cairo.Region());
-        // }
+        const surface = win.get_surface();
+        surface?.set_input_region(new cairo.Region());
+
+        win.connect("map", () => {
+          win.get_surface()?.set_input_region(new cairo.Region());
+        });
+
+        if (surface) {
+          surface.set_input_region(new cairo.Region());
+        }
 
         const revealer = win.child as Gtk.Revealer;
         isVisible.subscribe(async () => {
@@ -125,12 +125,19 @@ export default function OSD(gdkmonitor: Gdk.Monitor) {
         transitionType={Gtk.RevealerTransitionType.CROSSFADE}
         transitionDuration={300}
       >
-        <box class="osd-content" spacing={8}>
-          <label valign={Gtk.Align.CENTER} label={osdState((s) => s.icon)} class="material-icon" />
-          <Gtk.ProgressBar
+        <box class="osd-content" spacing={8} hexpand>
+          <label
             valign={Gtk.Align.CENTER}
-            fraction={osdState((s) => s.percentage)}
+            label={osdState((s) => s.icon)}
+            class="material-icon"
           />
+          {/* <Gtk.ProgressBar */}
+          {/*   valign={Gtk.Align.CENTER} */}
+          {/*   fraction={osdState((s) => s.percentage)} */}
+          {/* /> */}
+          <box class="osd-slider" hexpand>
+            <slider value={osdState((s) => s.percentage)} hexpand />
+          </box>
           <label
             label={osdState((s) => `${Math.floor(s.percentage * 100)}%`)}
             class="percentage-label"

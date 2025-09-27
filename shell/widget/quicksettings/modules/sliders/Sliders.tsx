@@ -61,7 +61,7 @@ export default function Sliders() {
   const [isExpanded, setIsExpanded] = createState(false);
 
   return (
-    <box class="sliders" orientation={Gtk.Orientation.VERTICAL}>
+    <box class="sliders" orientation={Gtk.Orientation.VERTICAL} spacing={8}>
       <box spacing={8}>
         <label label="light_mode" class="material-icon" />
         <slider

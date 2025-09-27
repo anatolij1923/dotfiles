@@ -1,5 +1,6 @@
 @use "../colors" as *;
 @use "mixins/material.scss" as *;
+@use "mixins/scale.scss" as *;
 
 .osd {
   background-color: transparent;
@@ -17,23 +18,47 @@
       margin: 0;
     }
 
-    progressbar {
-
-      trough {
-        all: unset;
-        min-height: 0.6rem;
+    .osd-slider {
+      @include scale;
+      scale {
         min-width: 8rem;
-        background-color: $color-on_secondary_fixed_variant;
-        border-radius: 16px;
 
-        progress {
-          all: unset;
-          min-height: 0.6rem;
-          background-color: $color-primary;
-          border-radius: 16px;
+        trough {
+          background-color: $color-on_secondary_fixed_variant;
+
+          highlight {
+            background-color: $color-primary;
+          }
+
+          slider {
+            border-radius: 1rem;
+            background-color: $color-primary;
+            box-shadow: 0 0 0 0.275rem $color-surface_container;
+            padding: 0.5rem 0.125rem;
+            margin: -0.2rem 0;
+
+          }
         }
       }
     }
+
+    // progressbar {
+    //
+    //   trough {
+    //     all: unset;
+    //     min-height: 0.6rem;
+    //     min-width: 8rem;
+    //     background-color: $color-on_secondary_fixed_variant;
+    //     border-radius: 16px;
+    //
+    //     progress {
+    //       all: unset;
+    //       min-height: 0.6rem;
+    //       background-color: $color-primary;
+    //       border-radius: 16px;
+    //     }
+    //   }
+    // }
 
     .percentage-label {
       font-weight: 400;
