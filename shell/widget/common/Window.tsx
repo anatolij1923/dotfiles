@@ -1,90 +1,97 @@
 import { Astal, Gtk, Gdk } from "ags/gtk4";
 import Graphene from "gi://Graphene";
-import type { WindowProps } from "astal/widget";
 import app from "ags/gtk4/app";
 
-interface CommonWindowProps extends WindowProps {
+interface WindowProps extends Partial<Astal.Window.ConstructorProps> {
   name: string;
-  namespace: string;
+  namespace?: string;
   gdkmonitor?: Gdk.Monitor;
   anchor?: Astal.WindowAnchor;
   exclusivity?: Astal.Exclusivity;
   keymode?: Astal.Keymode;
   visible?: boolean;
-  class: string;
+  class?: string;
+
   onKey?: (
-    _e: Gtk.EventControllerKey,
+    ctrl: Gtk.EventControllerKey,
     keyval: number,
-    _: number,
+    keycode: number,
     mod: number,
   ) => void;
-  onClick?: (_e: Gtk.GestureClick, _: number, x: number, y: number) => void;
+  onClickOutside?: () => void;
   onVisibilityChange?: (visible: boolean) => void;
+
   children?: any;
-  contentValign?: Gtk.Align;
-  contentHalign?: Gtk.Align;
-  contentVexpand?: boolean;
-  contentHexpand?: boolean;
+  valign?: Gtk.Align;
+  halign?: Gtk.Align;
+  vexpand?: boolean;
+  hexpand?: boolean;
 }
 
 export default function Window({
   name,
   namespace,
   gdkmonitor,
-  anchor,
   exclusivity,
-  keymode,
-  visible,
+  keymode = Astal.Keymode.ON_DEMAND,
+  visible = false,
+  class: className,
   onKey,
-  onClick,
+  onClickOutside,
   onVisibilityChange,
   children,
-  contentValign,
-  contentHalign,
-  contentVexpand,
-  contentHexpand,
+  valign = Gtk.Align.CENTER,
+  halign = Gtk.Align.CENTER,
+  vexpand = false,
+  hexpand = false,
   ...rest
-}: CommonWindowProps) {
+}: WindowProps) {
   let win: Astal.Window;
-  let contentbox: Gtk.Box;
+  let contentBox: Gtk.Box;
 
-  function handleKey(
-    _e: Gtk.EventControllerKey,
+  const handleKey = (
+    ctrl: Gtk.EventControllerKey,
     keyval: number,
-    _: number,
+    keycode: number,
     mod: number,
-  ) {
+  ) => {
     if (keyval === Gdk.KEY_Escape) {
       win.visible = false;
     }
-    onKey?.(_e, keyval, _, mod);
-  }
+    onKey?.(ctrl, keyval, keycode, mod);
+  };
 
-  function handleClick(_e: Gtk.GestureClick, _: number, x: number, y: number) {
-    const [, rect] = contentbox.compute_bounds(win);
-    const position = new Graphene.Point({ x, y });
+  const handleClick = (
+    _: Gtk.GestureClick,
+    __: number,
+    x: number,
+    y: number,
+  ) => {
+    const [, rect] = contentBox.compute_bounds(win);
+    const pos = new Graphene.Point({ x, y });
 
-    if (!rect.contains_point(position)) {
+    if (!rect.contains_point(pos)) {
       win.visible = false;
-      return true;
+      onClickOutside?.();
     }
-    onClick?.(_e, _, x, y);
-  }
+  };
 
   return (
     <window
       application={app}
       $={(ref) => (win = ref)}
       name={name}
+      namespace={namespace}
       gdkmonitor={gdkmonitor}
-      anchor={anchor}
       exclusivity={exclusivity}
       keymode={keymode}
+      visible={visible}
       layer={Astal.Layer.OVERLAY}
       margin={16}
+      class={className}
       onNotifyVisible={({ visible }) => {
         if (visible) {
-          contentbox.grab_focus();
+          contentBox.grab_focus();
         }
         onVisibilityChange?.(visible);
       }}
@@ -93,12 +100,12 @@ export default function Window({
       <Gtk.EventControllerKey onKeyPressed={handleKey} />
       <Gtk.GestureClick onPressed={handleClick} />
       <box
-        $={(ref) => (contentbox = ref)}
+        $={(ref) => (contentBox = ref)}
         name={`${name}-content`}
-        valign={contentValign ?? Gtk.Align.CENTER}
-        halign={contentHalign ?? Gtk.Align.CENTER}
-        vexpand={contentVexpand ?? false}
-        hexpand={contentHexpand ?? false}
+        valign={valign}
+        halign={halign}
+        vexpand={vexpand}
+        hexpand={hexpand}
         orientation={Gtk.Orientation.VERTICAL}
       >
         {children}
