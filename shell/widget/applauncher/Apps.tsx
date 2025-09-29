@@ -4,7 +4,7 @@ import {  Accessor, For } from "ags";
 import { appsList, setAppsList } from "./states";
 import { hide, launchApplication } from "../../utils/util";
 
-const apps = new AstalApps.Apps();
+export const apps = new AstalApps.Apps();
 
 export function searchApps(text: string) {
   if (!text) {

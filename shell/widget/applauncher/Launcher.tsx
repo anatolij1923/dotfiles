@@ -1,6 +1,6 @@
 import { Astal, Gdk, Gtk } from "ags/gtk4";
 import Window from "../common/Window";
-import { Apps, searchApps } from "./Apps";
+import { apps, Apps, searchApps } from "./Apps";
 import Commands, { searchCommands, setCommands } from "./Commands";
 import { hide, launchApplication } from "../../utils/util";
 import { appsList, setAppsList } from "./states";
@@ -12,10 +12,10 @@ export default function Launcher(gdkmonitor: Gdk.Monitor) {
   function onTextChange(text: string) {
     if (text.startsWith(":")) {
       searchCommands(text);
-      setAppsList([]); // прячем приложения
+      setAppsList([]); 
     } else {
       searchApps(text);
-      setCommands([]); // прячем команды
+      setCommands([]); 
     }
   }
 
@@ -46,6 +46,7 @@ export default function Launcher(gdkmonitor: Gdk.Monitor) {
       onKey={onKey}
       onVisibilityChange={(visible) => {
         if (visible) {
+          apps.reload()
           entry.grab_focus();
         } else {
           entry.set_text("");
@@ -67,6 +68,7 @@ export default function Launcher(gdkmonitor: Gdk.Monitor) {
 
         <Apps />
         <Commands />
+        {/* TODO: add calculator */}
       </box>
     </Window>
   );
