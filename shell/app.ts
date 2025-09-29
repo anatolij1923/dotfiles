@@ -9,6 +9,8 @@ import Quicksettings from "./widget/quicksettings/Quicksettings";
 import OSD from "./widget/osd/OSD";
 import BatteryWarnings from "./utils/batteryWarning";
 import { monitorFile } from "ags/file";
+import Sidebar from "./widget/sidebar/Sidebar";
+import Launcher from "./widget/applauncher/Launcher";
 
 app.start({
   icons: "assets",
@@ -28,22 +30,25 @@ app.start({
 
       // Screencorners
       ScreenCorners(monitor);
-       
+
       //Applauncher
-      app.add_window(Applauncher() as Gtk.Window);
-     
+      app.add_window(Launcher(monitor) as Gtk.Window);
+
       // Notification Popups
       NotificationPopups();
-     
+
       // Powermenu
       app.add_window(Powermenu(monitor) as Gtk.Window);
-      
+
       // Quick Settings
       app.add_window(Quicksettings(monitor) as Gtk.Window);
-      
+
+      // Left sidebar
+      app.add_window(Sidebar(monitor) as Gtk.Window);
+
       // OSD;
       app.add_window(OSD(monitor) as Gtk.Window);
-      
+
       // Battery warnings
       BatteryWarnings();
     });
