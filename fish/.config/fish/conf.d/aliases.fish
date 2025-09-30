@@ -2,11 +2,15 @@
 
 # List directories
 alias ls="eza --long --no-filesize --color=always --icons=always --no-user"
+alias lsa="eza -a --long --no-filesize --color=always --icons=always --no-user"
 alias tree="eza --tree"
 
 # Utilities
 alias cat="bat"
 alias ff="fastfetch"
+
+# Zellij
+alias zj="zellij"
 
 # Neovim
 alias svim="sudo nvim"
