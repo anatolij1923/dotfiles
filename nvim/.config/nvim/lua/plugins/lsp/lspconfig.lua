@@ -5,7 +5,6 @@ return {
         { "antosha417/nvim-lsp-file-operations", config = true },
     },
     config = function()
-
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("UserLspConfig", {}),
             callback = function(ev)
@@ -122,14 +121,14 @@ return {
             capabilities = capabilities,
             cmd = { "vscode-html-language-server", "--stdio" },
             filetypes = { "html" },
-            root_markers = { ".git" }, 
+            root_markers = { ".git" },
             init_options = {
                 configurationSection = { "html" },
                 embeddedLanguages = {
                     css = true,
                     javascript = true,
                 },
-                provideFormatter = true, 
+                provideFormatter = true,
             },
         }
 
@@ -152,7 +151,7 @@ return {
             filetypes = { "c", "cpp", "objc", "objcpp" },
         }
 
-        -- ts_ls 
+        -- ts_ls
         vim.lsp.config["ts_ls"] = {
             capabilities = capabilities,
             filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
@@ -164,12 +163,18 @@ return {
             filetypes = { "python" },
             capabilities = capabilities,
         }
-        -- rust 
+        -- rust
         vim.lsp.config["rust_analyzer"] = {
             capabilities = capabilities,
             cmd = { "rust-analyzer" },
             filetypes = { "rust" },
             root_markers = { "Cargo.toml", "rust-project.json", ".git" },
+        }
+        -- qml
+        vim.lsp.config["qmlls"] = {
+            cmd = { "qmlls6" },
+            filetypes = { "qml" },
+            capabilities = capabilities,
         }
 
         -- enable lsp servers
@@ -181,5 +186,6 @@ return {
         vim.lsp.enable("clangd")
         vim.lsp.enable("pyright")
         vim.lsp.enable("rust-analyzer")
+        vim.lsp.enable("qmlls")
     end,
 }
