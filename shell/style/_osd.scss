@@ -13,13 +13,14 @@
     margin: 20px;
 
     .material-icon {
-      @include material-icon(24px, "Material Icons Outlined");
+      @include material-icon(32px);
       color: $color-on_surface;
       margin: 0;
     }
 
     .osd-slider {
       @include scale;
+
       scale {
         min-width: 8rem;
 
@@ -42,28 +43,9 @@
       }
     }
 
-    // progressbar {
-    //
-    //   trough {
-    //     all: unset;
-    //     min-height: 0.6rem;
-    //     min-width: 8rem;
-    //     background-color: $color-on_secondary_fixed_variant;
-    //     border-radius: 16px;
-    //
-    //     progress {
-    //       all: unset;
-    //       min-height: 0.6rem;
-    //       background-color: $color-primary;
-    //       border-radius: 16px;
-    //     }
-    //   }
-    // }
-
     .percentage-label {
       font-weight: 400;
       color: $color-on_surface;
     }
-
   }
 }

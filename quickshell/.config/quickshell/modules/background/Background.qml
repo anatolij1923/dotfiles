@@ -7,6 +7,7 @@ import QtQuick
 import QtQuick.Effects  
   
 import qs  
+import qs.services
   
 Variants {  
     id: root  
@@ -82,7 +83,7 @@ Variants {
                 sourceSize: Qt.size(bgRoot.width * wallpaperScale, bgRoot.height * wallpaperScale)  
                 width: bgRoot.width * wallpaperScale  
                 height: bgRoot.height * wallpaperScale  
-                source: "file:///home/anatolij1923/Изображения/wallpapers/1923\ Pack/Lowpoly_Street.png"  
+                source: "file:///home/anatolij1923/Изображения/wallpapers/1923 Pack/car_and_desert.jpg"  
             }  
         }  
     }  

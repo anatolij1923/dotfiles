@@ -1,0 +1,766 @@
+/*
+ * SCSS Colors
+ * Generated with Matugen
+ */
+.bar {
+  background: #111318;
+}
+.bar .left-side {
+  margin: 0 0 0 1rem;
+}
+.bar .center {
+  margin: 0 1rem;
+}
+.bar .right-side {
+  margin: 0 1rem 0 0;
+}
+.bar .workspaces {
+  margin: 1rem 0.3rem;
+}
+.bar .workspaces button {
+  all: unset;
+  transition: 200ms;
+  background-color: #bec6dc;
+  min-height: 1rem;
+  min-width: 1rem;
+  transition: min-width 0.3s;
+  border-radius: 1rem;
+}
+.bar .workspaces button:hover {
+  background-color: #aac7ff;
+}
+.bar .workspaces button.empty {
+  background-color: #44474e;
+}
+.bar .workspaces button.focused {
+  min-width: 2rem;
+  background-color: #aac7ff;
+}
+.bar .focused-client {
+  font-weight: 500;
+  color: #e2e2e9;
+}
+.bar .clock button {
+  all: unset;
+  transition: 200ms;
+  border-radius: 32px;
+  padding: 0 1rem;
+}
+.bar .clock button label {
+  color: #e2e2e9;
+  font-weight: 400;
+}
+.bar .clock button:checked {
+  background-color: rgba(170, 199, 255, 0.25);
+}
+.bar .clock button:hover {
+  background-color: rgba(170, 199, 255, 0.1);
+}
+.bar .clock popover.background arrow {
+  all: unset;
+}
+.bar .clock popover.background contents {
+  all: unset;
+}
+.bar .clock popover.background contents calendar {
+  background-color: #1d2024;
+  padding: 0.5rem;
+  border-radius: 1.5rem;
+}
+.bar .clock popover.background contents calendar header button {
+  color: #e2e2e9;
+}
+.bar .clock popover.background contents calendar header stack.month {
+  color: #e2e2e9;
+  font-weight: 500;
+}
+.bar .clock popover.background contents calendar header label.year {
+  color: #e2e2e9;
+  font-weight: 500;
+}
+.bar .clock popover.background contents calendar grid label {
+  color: #e2e2e9;
+  border-radius: 0.5rem;
+}
+.bar .clock popover.background contents calendar grid label.day-name {
+  font-weight: 600;
+}
+.bar .clock popover.background contents calendar grid label.today {
+  background-color: #aac7ff;
+  color: #111318;
+}
+.bar .clock popover.background contents calendar grid label.other-month {
+  color: #3e4759;
+}
+.bar .tray button {
+  all: unset;
+  transition: 200ms;
+  border-radius: 0.5rem;
+  margin: 0.5rem 0;
+  padding: 0 0.5rem;
+  background-color: transparent;
+}
+.bar .tray button:hover {
+  background-color: #3e4759;
+}
+.bar .tray button:checked {
+  background-color: rgb(93.4105960265, 106.9701986755, 134.0894039735);
+}
+.bar .kb-layout {
+  color: #e2e2e9;
+}
+.bar .kb-layout button {
+  all: unset;
+  transition: 200ms;
+  background-color: transparent;
+  font-weight: 500;
+  outline: none;
+  border-radius: 1rem;
+}
+.bar .kb-layout button .material-icon {
+  font-family: "Material Symbols Rounded";
+  font-weight: 600;
+  font-size: 24px;
+}
+.bar .sys-button button {
+  all: unset;
+  transition: 200ms;
+  border-radius: 32px;
+  padding: 0.5rem;
+}
+.bar .sys-button button:hover {
+  background-color: rgba(170, 199, 255, 0.1);
+}
+.bar .sys-button.active button {
+  all: unset;
+  transition: 200ms;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 32px;
+  padding: 8px;
+  background-color: rgba(170, 199, 255, 0.25);
+}
+.bar .bluetooth-widget {
+  color: #e2e2e9;
+}
+.bar .bluetooth-widget levelbar {
+  margin: 0.3rem 4px;
+  transform: rotate(180deg);
+}
+.bar .bluetooth-widget levelbar block {
+  all: unset;
+  min-width: 4px;
+  border-radius: 4px;
+  background-color: #33353a;
+}
+.bar .bluetooth-widget levelbar block.filled {
+  background-color: #aac7ff;
+}
+.bar .bluetooth-widget levelbar block.filled.low {
+  background-color: #ffb4ab;
+}
+.bar .bluetooth-widget .material-icon {
+  font-family: "Material Symbols Rounded";
+  font-weight: 600;
+  font-size: 24px;
+}
+.bar .network {
+  color: #e2e2e9;
+}
+.bar .network label {
+  font-family: "Material Symbols Rounded";
+  font-weight: 600;
+  font-size: 24px;
+}
+.bar .notification-widget {
+  font-weight: 500;
+  color: #e2e2e9;
+}
+.bar .notification-widget .material-icon {
+  font-family: "Material Symbols Rounded";
+  font-weight: 600;
+  font-size: 24px;
+}
+.bar .battery {
+  color: rgb(38.1463414634, 42.6341463415, 53.8536585366);
+  font-weight: 700;
+}
+.bar .battery progressbar trough {
+  all: unset;
+  background-color: alpha(#e2e2e9,0.6);
+  min-height: 1.5rem;
+  min-width: 3.5rem;
+  border-radius: 16px;
+}
+.bar .battery progressbar trough progress {
+  all: unset;
+  min-height: 1.5rem;
+  background-color: #aac7ff;
+  border-radius: 6px;
+}
+.bar .battery .percentage-label .bolt-icon {
+  font-family: "Material Icons Outlined";
+  font-weight: 600;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+window.screen-corner box.shadow {
+  margin-right: -99px;
+  margin-left: -99px;
+}
+window.screen-corner.top box.shadow {
+  margin-bottom: -99px;
+  margin-top: 0;
+}
+window.screen-corner.bottom box.shadow {
+  margin-top: -99px;
+  margin-bottom: 0;
+}
+window.screen-corner box.border {
+  margin-right: 99px;
+  margin-left: 99px;
+  border-radius: 26px;
+  box-shadow: 0 0 0 26px #111318;
+}
+window.screen-corner box.corner {
+  box-shadow: 0 0 0 0px #111318;
+  border-radius: 26px;
+}
+
+.launcher {
+  background-color: transparent;
+}
+.launcher .launcher-content {
+  background-color: #111318;
+  border-radius: 1.5rem;
+  min-width: 400px;
+  padding: 0.5rem;
+}
+.launcher .launcher-content .search {
+  border-radius: 2rem;
+  padding: 0.7rem;
+}
+.launcher .launcher-content .search .material-icon {
+  font-family: "Material Symbols Rounded";
+  font-weight: 600;
+  font-size: 24px;
+  color: #e2e2e9;
+}
+.launcher .launcher-content .search entry {
+  all: unset;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #e2e2e9;
+  caret-color: #aac7ff;
+}
+.launcher .launcher-content .apps-list button {
+  all: unset;
+  transition: 200ms;
+  background-color: #111318;
+  border-radius: 1.2rem;
+  padding: 0.8rem;
+  font-weight: 500;
+  color: #e2e2e9;
+}
+.launcher .launcher-content .apps-list button:hover {
+  background-color: rgba(170, 199, 255, 0.1);
+}
+.launcher .launcher-content .apps-list button:focus {
+  background-color: rgba(170, 199, 255, 0.25);
+}
+.launcher .launcher-content .command-list button {
+  all: unset;
+  transition: 200ms;
+  background-color: #111318;
+  border-radius: 1rem;
+  padding: 0.8rem;
+  font-weight: 500;
+}
+.launcher .launcher-content .command-list button .command-name {
+  color: #e2e2e9;
+}
+.launcher .launcher-content .command-list button .command-desc {
+  color: rgba(226, 226, 233, 0.4);
+  font-weight: 400;
+}
+.launcher .launcher-content .command-list button:hover {
+  background-color: rgba(170, 199, 255, 0.1);
+}
+.launcher .launcher-content .command-list button:focus {
+  background-color: rgba(170, 199, 255, 0.25);
+}
+
+window.NotificationPopups {
+  all: unset;
+  margin: 0.5rem 1rem;
+}
+
+.Notification {
+  border-radius: 24px;
+  background-color: #1d2024;
+  margin: 0.2rem 0rem;
+}
+.Notification.critical {
+  background-color: rgb(99.5, 115.5, 145.5);
+}
+.Notification.critical .header .app-name {
+  color: alpha(#ffb4ab,0.8);
+}
+.Notification.critical .header .app-icon {
+  color: #ffb4ab;
+}
+.Notification.critical .header .expand-button {
+  all: unset;
+  transition: 200ms;
+  font-family: "Material Symbols Rounded";
+  font-weight: 600;
+  font-size: 24px;
+  background-color: rgb(118, 136.2, 171.8);
+  padding: 2px 8px;
+  margin: 0 4px;
+  border-radius: 16px;
+}
+.Notification.critical .header .expand-button:hover {
+  background-color: rgb(137.5, 159.75, 203);
+}
+.Notification.critical .actions button {
+  background-color: rgb(122.4, 140.6, 176.2);
+}
+.Notification.critical .actions button:hover {
+  background-color: rgb(137.5, 159.75, 203);
+}
+.Notification .header {
+  padding: 0.5rem;
+  color: alpha(#e2e2e9,0.5);
+}
+.Notification .header .app-icon {
+  margin: 0 0.4rem;
+}
+.Notification .header .app-name {
+  margin-right: 0.3rem;
+  font-weight: bold;
+}
+.Notification .header .app-name:first-child {
+  margin-left: 0.4rem;
+}
+.Notification .header .time {
+  margin: 0 0.5rem;
+  font-weight: 400;
+}
+.Notification .header .expand-button {
+  all: unset;
+  transition: 200ms;
+  font-family: "Material Symbols Rounded";
+  font-weight: 600;
+  font-size: 24px;
+  background-color: #282a2f;
+  padding: 2px 8px;
+  margin: 0 4px;
+  border-radius: 16px;
+}
+.Notification .header .expand-button:hover {
+  background-color: #33353a;
+}
+.Notification .header .close-button {
+  all: unset;
+  transition: 200ms;
+  background-color: transparent;
+  color: #d05050;
+  border-radius: 16px;
+  padding: 0 0.5rem;
+  min-width: 0;
+  min-height: 0;
+}
+.Notification .content {
+  margin: 1rem;
+  margin-top: 0.5rem;
+}
+.Notification .content .summary {
+  font-size: 1.2em;
+  color: #e2e2e9;
+}
+.Notification .content .body {
+  color: alpha(#e2e2e9,0.8);
+}
+.Notification .content .image {
+  margin-right: 0.5rem;
+  border-radius: 16px;
+  min-width: 80px;
+  min-height: 80px;
+  background-size: cover;
+  background-position: center;
+}
+.Notification .actions {
+  margin: 1rem;
+  margin-top: 0;
+}
+.Notification .actions button {
+  all: unset;
+  transition: 200ms;
+  background-color: #282a2f;
+  color: #e2e2e9;
+  margin: 0 0.3rem;
+  padding: 0.5rem;
+  border-radius: 24px;
+  font-weight: 500;
+}
+.Notification .actions button .close-button {
+  font-family: "Material Symbols Rounded";
+  font-weight: 600;
+  font-size: 24px;
+}
+.Notification .actions button:hover {
+  background-color: #33353a;
+}
+.Notification .actions button:first-child {
+  margin-left: 0;
+}
+.Notification .actions button:last-child {
+  margin-right: 0;
+}
+
+window.powermenu .powermenu-content {
+  background-color: #111318;
+  border-radius: 48px;
+  box-shadow: none;
+  padding: 24px;
+}
+window.powermenu .powermenu-content button {
+  all: unset;
+  transition: 200ms;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  background-color: #282a2f;
+  color: #e2e2e9;
+  border-radius: 8px;
+  padding: 16px;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-out, box-shadow 0.2s ease-in-out, transform 0.1s ease, border-radius 0.2s ease-out;
+}
+window.powermenu .powermenu-content button:first-child {
+  border-top-left-radius: 28px;
+  border-bottom-left-radius: 28px;
+}
+window.powermenu .powermenu-content button:last-child {
+  border-top-right-radius: 28px;
+  border-bottom-right-radius: 28px;
+}
+window.powermenu .powermenu-content button:hover {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #44474e;
+  transform: scale(1.03);
+}
+window.powermenu .powermenu-content button:focus {
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+  background-color: #aac7ff;
+  border-radius: 20px;
+  outline: none;
+  color: #0a305f;
+  transform: scale(1.05);
+}
+window.powermenu .powermenu-content button:active {
+  transform: scale(0.97);
+}
+window.powermenu .powermenu-content button .material-icon {
+  font-family: "Material Symbols Rounded";
+  font-weight: 600;
+  font-size: 56px;
+  font-weight: 700;
+  opacity: 0.8;
+}
+window.powermenu .powermenu-content button .button-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.osd {
+  background-color: transparent;
+}
+.osd .osd-content {
+  background-color: #1d2024;
+  border: 1px solid #282a2f;
+  border-radius: 24px;
+  padding: 0.8rem 1rem;
+  margin: 20px;
+}
+.osd .osd-content .material-icon {
+  font-family: "Material Symbols Rounded";
+  font-weight: 600;
+  font-size: 32px;
+  color: #e2e2e9;
+  margin: 0;
+}
+.osd .osd-content .osd-slider scale {
+  all: unset;
+}
+.osd .osd-content .osd-slider scale trough {
+  all: unset;
+  border-radius: 16px;
+}
+.osd .osd-content .osd-slider scale trough slider {
+  all: unset;
+  padding: 8px;
+}
+.osd .osd-content .osd-slider scale trough highlight {
+  all: unset;
+}
+.osd .osd-content .osd-slider scale trough empty {
+  all: unset;
+}
+.osd .osd-content .osd-slider scale {
+  min-width: 8rem;
+}
+.osd .osd-content .osd-slider scale trough {
+  background-color: #3e4759;
+}
+.osd .osd-content .osd-slider scale trough highlight {
+  background-color: #aac7ff;
+}
+.osd .osd-content .osd-slider scale trough slider {
+  border-radius: 1rem;
+  background-color: #aac7ff;
+  box-shadow: 0 0 0 0.275rem #1d2024;
+  padding: 0.5rem 0.125rem;
+  margin: -0.2rem 0;
+}
+.osd .osd-content .percentage-label {
+  font-weight: 400;
+  color: #e2e2e9;
+}
+
+window.quicksettings .quicksettings-content {
+  padding: 16px;
+  border-radius: 24px;
+  background-color: #111318;
+  color: #e2e2e9;
+}
+window.quicksettings .quicksettings-content .header {
+  border-radius: 16px;
+  padding: 8px;
+}
+window.quicksettings .quicksettings-content .header .user-info .user-pic {
+  border-radius: 100%;
+}
+window.quicksettings .quicksettings-content .header .user-info .username {
+  font-weight: 600;
+  color: #e2e2e9;
+}
+window.quicksettings .quicksettings-content .header .user-info .uptime {
+  font-weight: 400;
+  color: #e2e2e9;
+}
+window.quicksettings .quicksettings-content .header .buttons {
+  margin: 8px;
+}
+window.quicksettings .quicksettings-content .header .buttons button {
+  all: unset;
+  transition: 200ms;
+  font-family: "Material Symbols Rounded";
+  font-weight: 600;
+  font-size: 32px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+  min-height: 3rem;
+  min-width: 3rem;
+}
+window.quicksettings .quicksettings-content .header .buttons button:hover {
+  background-color: rgb(38.1463414634, 42.6341463415, 53.8536585366);
+}
+window.quicksettings .quicksettings-content .header .buttons button:active {
+  background-color: #33353a;
+  transform: scale(1.1);
+}
+window.quicksettings .quicksettings-content .header .buttons .power-button {
+  color: #e25c5c;
+}
+window.quicksettings .quicksettings-content .sliders scale {
+  all: unset;
+}
+window.quicksettings .quicksettings-content .sliders scale trough {
+  all: unset;
+  border-radius: 16px;
+}
+window.quicksettings .quicksettings-content .sliders scale trough slider {
+  all: unset;
+  padding: 8px;
+}
+window.quicksettings .quicksettings-content .sliders scale trough highlight {
+  all: unset;
+}
+window.quicksettings .quicksettings-content .sliders scale trough empty {
+  all: unset;
+}
+window.quicksettings .quicksettings-content .sliders {
+  border-radius: 16px;
+}
+window.quicksettings .quicksettings-content .sliders .material-icon {
+  font-family: "Material Symbols Rounded";
+  font-weight: 600;
+  font-size: 24px;
+}
+window.quicksettings .quicksettings-content .sliders scale {
+  all: unset;
+  margin: 0.5rem;
+}
+window.quicksettings .quicksettings-content .sliders scale trough {
+  background-color: #3e4759;
+}
+window.quicksettings .quicksettings-content .sliders scale trough highlight {
+  background-color: #aac7ff;
+}
+window.quicksettings .quicksettings-content .sliders scale trough slider {
+  background-color: #aac7ff;
+  box-shadow: 0 0 0 0.275rem #111318;
+  padding: 0.8rem 0.125rem;
+  border-radius: 1rem;
+  margin: -0.2rem 0;
+}
+window.quicksettings .quicksettings-content .sliders .expand-button {
+  all: unset;
+  transition: 200ms;
+}
+window.quicksettings .quicksettings-content .audio-mixer {
+  padding: 16px;
+  border-radius: 16px;
+  background-color: #1d2024;
+}
+window.quicksettings .quicksettings-content .audio-mixer .stream-name {
+  font-weight: 500;
+}
+window.quicksettings .quicksettings-content .audio-mixer scale {
+  all: unset;
+  margin: 0.5rem;
+}
+window.quicksettings .quicksettings-content .audio-mixer scale trough {
+  background-color: #3e4759;
+}
+window.quicksettings .quicksettings-content .audio-mixer scale trough highlight {
+  background-color: #aac7ff;
+}
+window.quicksettings .quicksettings-content .audio-mixer scale trough slider {
+  background-color: #aac7ff;
+  box-shadow: 0 0 0 0.275rem #111318;
+  padding: 0.8rem 0.125rem;
+  border-radius: 1rem;
+  margin: -0.2rem 0;
+}
+window.quicksettings .quicksettings-content .audio-mixer .mute-button {
+  all: unset;
+  transition: 200ms;
+  border-radius: 32px;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+}
+window.quicksettings .quicksettings-content .audio-mixer .mute-button:hover {
+  background-color: #3e4759;
+}
+window.quicksettings .quicksettings-content .audio-mixer .mute-button.active {
+  background-color: #aac7ff;
+  color: #111318;
+}
+window.quicksettings .quicksettings-content .toggles {
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
+  background-color: #1d2024;
+  border-radius: 32px;
+  padding: 0.5rem;
+}
+window.quicksettings .quicksettings-content .toggles .qs-button {
+  all: unset;
+  transition: 200ms;
+  font-family: "Material Symbols Rounded";
+  font-weight: 600;
+  font-size: 28px;
+  padding: 0.4rem 0.6rem;
+  border-radius: 32px;
+}
+window.quicksettings .quicksettings-content .toggles .qs-button:hover {
+  background-color: #282a2f;
+}
+window.quicksettings .quicksettings-content .toggles .qs-button.active {
+  background-color: #aac7ff;
+  color: #111318;
+  border-radius: 24px;
+  padding: 0.4rem 1rem;
+}
+window.quicksettings .quicksettings-content .toggles .qs-button.active:hover {
+  background-color: rgba(170, 199, 255, 0.8);
+}
+window.quicksettings .quicksettings-content .toggles .qs-button:active {
+  border-radius: 16px;
+}
+window.quicksettings .quicksettings-content .notification-window {
+  padding: 8px;
+}
+window.quicksettings .quicksettings-content .notification-window .header .material-icon {
+  font-family: "Material Symbols Rounded";
+  font-weight: 600;
+  font-size: 24px;
+}
+window.quicksettings .quicksettings-content .notification-window .header {
+  font-weight: 500;
+}
+window.quicksettings .quicksettings-content .notification-window .header .clear-button {
+  all: unset;
+  transition: 200ms;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
+  background: #1d2024;
+  color: #ffb4ab;
+  border-radius: 32px;
+  padding: 8px 16px;
+}
+window.quicksettings .quicksettings-content .notification-window .header .clear-button:hover {
+  background-color: #282a2f;
+}
+window.quicksettings .quicksettings-content .notification-window .header .clear-button:active {
+  border-radius: 16px;
+  background-color: rgba(255, 180, 171, 0.3);
+  transform: scale(1.1);
+}
+window.quicksettings .quicksettings-content .notification-window .header .clear-button:disabled {
+  opacity: 0.6;
+}
+window.quicksettings .mediaplayer {
+  background-color: #1d2024;
+  border-radius: 16px;
+  padding: 8px;
+  color: #e2e2e9;
+}
+window.quicksettings .mediaplayer .cover-art {
+  border-radius: 16px;
+}
+window.quicksettings .mediaplayer .info .track {
+  font-weight: 700;
+}
+window.quicksettings .mediaplayer .info .artist {
+  font-weight: 400;
+}
+window.quicksettings .mediaplayer .info image {
+  color: white;
+  filter: grayscale(100%);
+}
+window.quicksettings .mediaplayer .buttons button {
+  outline: none;
+  border-radius: 16px;
+  background-color: transparent;
+}
+window.quicksettings .mediaplayer .progress progressbar trough progress {
+  background-color: #e2e2e9;
+}
+window.quicksettings .mediaplayer .material-icon {
+  font-family: "Material Symbols Rounded";
+  font-weight: 600;
+  font-size: 32px;
+}
+
+tooltip {
+  border-radius: 16px;
+  border: 1px solid #283141;
+  background-color: #1d2024;
+  color: #e2e2e9;
+  padding: 16px;
+  font-weight: 400;
+}
+
+.screendim {
+  background-color: transparent;
+}
+
+/*# sourceMappingURL=style.css.map */

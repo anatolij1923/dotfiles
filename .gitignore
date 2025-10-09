@@ -17,3 +17,4 @@ fish/.config/fish/functions/__fzfcmd.fish
 fish/.config/fish/functions/__fzf*
 fish/.config/fish/conf.d/fzf.fish
 fish/.config/fish/fish_variables
+fish/.config/fish/conf.d/rustup.fish

@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Shapes
 import QtQuick.Effects
@@ -20,6 +21,7 @@ WlSessionLockSurface {
     property bool showFailure: false
     property bool active: false
     property bool showInputField: active || context.currentText.length > 0
+    property bool startAnimation: false
 
     color: "transparent"
 
@@ -32,7 +34,7 @@ WlSessionLockSurface {
         layer.effect: MultiEffect {
             blurEnabled: true
             blur: 1
-            blurMax: 10
+            blurMax: 35
             blurMultiplier: 1
         }
     }
@@ -41,7 +43,7 @@ WlSessionLockSurface {
     Rectangle {
         color: "black"
         anchors.fill: background
-        opacity: 0.6
+        opacity: 0.3
     }
 
     Item {
@@ -128,6 +130,12 @@ WlSessionLockSurface {
                     target: root.context
                     function onCurrentTextChanged() {
                         passwordBox.text = root.context.currentText;
+                    }
+                }
+                Connections {
+                    target: root.context
+                    function onUnlocked() {
+                        startAnimation = false;
                     }
                 }
             }

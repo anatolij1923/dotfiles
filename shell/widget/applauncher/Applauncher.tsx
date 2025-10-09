@@ -1,4 +1,4 @@
-import { For, createState } from "ags";
+import { For, createState, onCleanup } from "ags";
 import { Astal, Gtk, Gdk } from "ags/gtk4";
 import AstalApps from "gi://AstalApps";
 import Window from "../common/Window";
@@ -6,6 +6,7 @@ import App from "ags/gtk4/app";
 import { evaluateExpression } from "../../utils/calculator";
 
 const { TOP, BOTTOM, LEFT, RIGHT } = Astal.WindowAnchor;
+const TRANSITION_DURATION = 130; // ms — держи синхронно с revealer's transitionDuration
 
 export default function Applauncher() {
   let searchentry: Gtk.Entry;
@@ -13,6 +14,26 @@ export default function Applauncher() {
   const apps = new AstalApps.Apps();
   const [list, setList] = createState(new Array<AstalApps.Application>());
   const [calcResult, setCalcResult] = createState("");
+  const [showList, setShowList] = createState(false);
+
+  let hideTimer: any = null;
+  function cancelClear() {
+    if (hideTimer !== null) {
+      clearTimeout(hideTimer);
+      hideTimer = null;
+    }
+  }
+  function clearListAfterDelay() {
+    cancelClear();
+    hideTimer = setTimeout(() => {
+      setList([]);
+      hideTimer = null;
+    }, TRANSITION_DURATION);
+  }
+
+  onCleanup(() => {
+    cancelClear();
+  });
 
   function isMathExpression(text: string) {
     return /^[0-9+\-*/().\s]|sqrt/.test(text);
@@ -20,8 +41,10 @@ export default function Applauncher() {
 
   function search(text: string) {
     if (text === "") {
-      setList([]);
+      // скрываем список (плавно), а очистку массива — после анимации
       setCalcResult("");
+      setShowList(false);
+      clearListAfterDelay();
       return;
     }
 
@@ -30,21 +53,31 @@ export default function Applauncher() {
         const result = evaluateExpression(text);
         if (typeof result === "number" && isFinite(result)) {
           setCalcResult(result.toString());
-          setList([]);
+          // прячем список, затем очищаем его после анимации
+          setShowList(false);
+          clearListAfterDelay();
           return;
         }
       } catch (e) {
-        // Optionally log the error for debugging, but don't show to user
-        // console.error("Calculator error:", e);
+        // silently ignore
       }
     }
-    setCalcResult("");
-    setList(apps.fuzzy_query(text).slice(0, 8));
+
+    // поиск приложений
+    const results = apps.fuzzy_query(text).slice(0, 8);
+    if (results.length > 0) {
+      cancelClear();
+      setList(results);
+      setShowList(true);
+    } else {
+      // нет результатов — спрятать список, а старые элементы очистить после анимации
+      setShowList(false);
+      clearListAfterDelay();
+    }
   }
 
   function launch(app?: AstalApps.Application) {
     if (app) {
-      // The common Window component will handle hiding the window
       app.launch();
       hide();
     }
@@ -58,7 +91,6 @@ export default function Applauncher() {
     App.get_window("launcher")?.hide();
   }
 
-  // handle alt + number key
   function onKey(
     _e: Gtk.EventControllerKey,
     keyval: number,
@@ -72,12 +104,6 @@ export default function Applauncher() {
         }
       }
     }
-    // if (keyval === Gdk.KEY_Return && calcResult.get() !== "") {
-    //   // Copy result to clipboard
-    //   Gtk.Clipboard.get_default()?.set_text(calcResult.get());
-    //   hide();
-    //   return;
-    // }
   }
 
   return (
@@ -93,6 +119,9 @@ export default function Applauncher() {
           searchentry.grab_focus();
         } else {
           searchentry.set_text("");
+          cancelClear();
+          setList([]);
+          setShowList(false);
         }
       }}
     >
@@ -109,17 +138,18 @@ export default function Applauncher() {
 
       <revealer
         revealChild={calcResult((r) => r !== "")}
-        transitionDuration={130}
-        transitionType={Gtk.RevealerTransitionType.SWING_DOWN}
+        transitionDuration={TRANSITION_DURATION}
+        transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
       >
         <box class="calculator-result">
           <label label={calcResult} xalign={0} />
         </box>
       </revealer>
+
       <revealer
-        revealChild={list((l) => l.length > 0)}
-        transitionDuration={130}
-        transitionType={Gtk.RevealerTransitionType.SWING_DOWN}
+        revealChild={showList((s) => s)}
+        transitionDuration={TRANSITION_DURATION}
+        transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
       >
         <box orientation={Gtk.Orientation.VERTICAL}>
           <For each={list}>

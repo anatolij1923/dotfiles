@@ -33,8 +33,6 @@ Scope {
                 powermenuRoot.hide();
             }
         }
-        // width: powerMenuContent.implicitWidth
-        // height: powerMenuContent.im
 
         Loader {
             active: GlobalStates.powerMenuOpened

@@ -5,31 +5,80 @@ return {
         local lualine = require("lualine")
         local devicons = require("nvim-web-devicons")
 
+        local function curr_dir()
+            local dir_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+            return "  " .. dir_name
+        end
+
+        local function file_with_icon()
+            local filename = vim.fn.expand("%:t")
+            local icon, icon_color = devicons.get_icon_color(filename, vim.bo.filetype, { default = true })
+            if filename == "" then
+                filename = "[No Name]"
+                icon = ""
+                icon_color = nil
+            end
+            local status = ""
+            if vim.bo.modified then
+                status = " ●" -- изменённый файл
+            elseif vim.bo.readonly then
+                status = " " -- только для чтения
+            end
+
+            return icon .. " " .. filename .. status, icon_color
+        end
+
+        local function hl_color(group)
+            local ok, hl = pcall(vim.api.nvim_get_hl_by_name, group, true)
+            if not ok then return nil end
+            return hl.foreground and string.format("#%06x", hl.foreground) or nil
+        end
+
         lualine.setup({
             options = {
                 -- section_separators = { left = "", right = "" },
                 section_separators = { left = "", right = "" },
                 component_separators = { left = "", right = "" },
+                theme = "auto"
             },
 
             sections = {
-                lualine_a = { "mode" },
+                lualine_a = { {
+                    "mode",
+                    color = { gui = "bold" }
+                } },
                 lualine_b = {
+                },
+                lualine_c = {
                     {
-                        "filetype",
+                        file_with_icon,
+                    },
+                },
+                lualine_x = {
+                    { curr_dir },
+
+                },
+                lualine_y = {
+                    {
+                        "diff",
+                        symbols = { added = " ", modified = " ", removed = " " },
+                    },
+                    {
+                        "diagnostics",
                         symbols = {
-                            modified = "●",
-                            readonly = "",
-                            unnamed = "[No Name]",
-                            newfile = "[New]",
+                            error = " ",
+                            warn = " ",
+                            info = " ",
+                            hint = " ",
                         },
                     },
-                    "diagnostics"
                 },
-                lualine_c = {},
-                lualine_x = {},
-                lualine_y = {"diff"},
-                lualine_z = { "branch" },
+                lualine_z = {
+
+                    {
+                        "branch",
+                        icon = ""
+                    } },
             },
         })
     end,

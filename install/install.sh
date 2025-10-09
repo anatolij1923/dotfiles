@@ -166,7 +166,6 @@ main() {
   try run_install_packages "Audio" "${AUDIO[@]}"
   try run_install_packages "CLI Utilities" "${CLI_UTILS[@]}"
   try run_install_packages "Extra Apps" "${EXTRA[@]}"
-  try run_install_packages "Browser" "${BROWSER[@]}"
   try run_install_packages "Bluetooth" "${BLUETOOTH[@]}"
   try run_install_packages "Development Tools" "${DEV_TOOLS[@]}"
   

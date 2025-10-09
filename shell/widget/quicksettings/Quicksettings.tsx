@@ -22,10 +22,7 @@ export default function Quicksettings(gdkmonitor: Gdk.Monitor) {
       anchor={TOP | BOTTOM | RIGHT}
       keymode={Astal.Keymode.EXCLUSIVE}
       gdkmonitor={gdkmonitor}
-      contentValign={Gtk.Align.FILL}
-      contentHalign={Gtk.Align.FILL}
-      contentHexpand={true}
-      contentVexpand={true}
+      valign={Gtk.Align.FILL}
       onVisibilityChange={(visible) => {
         setReveal(visible);
       }}

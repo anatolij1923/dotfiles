@@ -29,8 +29,8 @@ PanelWindow {
             Layout.fillWidth: true
         }
         ClockWidget {
-            // anchors.horizontalCenter: parent.horizontalCenter
-            Layout.alignment: Qt.AlignCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            // Layout.alignment: Qt.AlignCenter
         }
         Item {
             Layout.fillWidth: true

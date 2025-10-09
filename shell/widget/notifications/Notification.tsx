@@ -96,6 +96,7 @@ export default function Notification({
             <image
               valign={Gtk.Align.START}
               class="image"
+              pixel_size={80}
               file={n.image}
               overflow={Gtk.Overflow.HIDDEN}
             />
@@ -116,7 +117,7 @@ export default function Notification({
               xalign={0}
               label={n.summary}
               ellipsize={Pango.EllipsizeMode.END}
-              // maxWidthChars={19}
+            // maxWidthChars={19}
             />
             {n.body && (
               <>
@@ -157,7 +158,7 @@ export default function Notification({
             transitionType={Gtk.RevealerTransitionType.SWING_DOWN}
           >
             <box class="actions">
-              <button  hexpand onClicked={() => n.dismiss()} class="close-button">
+              <button hexpand onClicked={() => n.dismiss()} class="close-button">
                 <label label="close" class="close-button" />
               </button>
               {n.actions.map(({ label, id }) => (

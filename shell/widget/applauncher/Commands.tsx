@@ -7,6 +7,8 @@ import GLib from "gi://GLib?version=2.0";
 import { switchTheme } from "../../utils/switchTheme";
 import { timeout } from "ags/time";
 
+// TODO: add more commands
+
 export const [commands, setCommands] = createState<Command[]>([]);
 
 export interface Command {
@@ -78,7 +80,8 @@ export function searchCommands(text: string) {
   const query = text.slice(1).toLowerCase();
 
   const filtered = commandList.filter(
-    (c) => fuzzyMatch(c.name, query) || fuzzyMatch(c.description, query),
+    (c) => fuzzyMatch(c.name, query)
+    || fuzzyMatch(c.description, query),
   );
 
   filtered.sort((a, b) => {
@@ -87,7 +90,7 @@ export function searchCommands(text: string) {
     return 0;
   });
 
-  setCommands(filtered.slice(0, 8)); 
+  setCommands(filtered.slice(0, 8));
 }
 
 export default function Commands() {

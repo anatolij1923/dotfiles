@@ -70,7 +70,7 @@
       }
 
       &:checked {
-        background-color: $color-on_secondary_fixed_variant;
+        background-color: color.adjust($color-primary, $alpha: -0.75);
 
         // label {
         // color: $color-surface;
@@ -78,9 +78,7 @@
       }
 
       &:hover {
-        background-color: color.adjust($color-surface,
-            $lightness: 10%,
-          );
+        background-color: color.adjust($color-primary, $alpha: -0.9);
       }
     }
 
@@ -184,9 +182,8 @@
       padding: 0.5rem;
 
       &:hover {
-        background-color: color.adjust($color-surface,
-            $lightness: 10%,
-            $space: hsl);
+        background-color: color.adjust($color-primary, $alpha: -0.9);
+
       }
     }
 
@@ -196,7 +193,7 @@
         @include elevation(3);
         border-radius: 32px;
         padding: 8px;
-        background-color: $color-on_secondary_fixed_variant;
+        background-color: color.adjust($color-primary, $alpha: -0.75);
       }
     }
   }

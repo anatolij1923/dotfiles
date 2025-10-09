@@ -29,7 +29,7 @@ app.start({
       Bar(monitor);
 
       // Screencorners
-      ScreenCorners(monitor);
+      // ScreenCorners(monitor);
 
       //Applauncher
       app.add_window(Launcher(monitor) as Gtk.Window);

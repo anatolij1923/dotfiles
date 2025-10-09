@@ -12,7 +12,7 @@ Singleton {
     property bool wifiEnabled: false
     property int wifiStrength
 
-    property string icon: ethernet ? "lan" : wifiEnabled ? (wifiStrength > 80 ? "signal_wifi_4_bar" : wifiStrength > 60 ? "network_wifi_3_bar" : wifiStrength > 40 ? "network_wifi_2_bar" : wifiStrength > 20 ? "network_wifi_1_bar" : "signal_wifi_0_bar") : "signal_wifi_off"
+    property string icon: ethernet ? "lan" : wifiEnabled ? (wifiStrength > 80 ? "signal_wifi_4_bar" : wifiStrength > 60 ? "network_wifi_3_bar" : wifiStrength > 40 ? "network_wifi_2_bar" : wifiStrength > 20 ? "network_wifi_1_bar" : "signal_wifi_off") : "signal_wifi_off"
     function update() {
         // проверим тип соединения
         checkConnectionType.running = true;
