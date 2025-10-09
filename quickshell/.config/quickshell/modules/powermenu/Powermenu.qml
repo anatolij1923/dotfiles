@@ -10,38 +10,46 @@ import qs.services
 
 Scope {
     id: root
-    Loader {
-        id: powerMenuLoader
-        active: GlobalStates.powerMenuOpened
+    PanelWindow {
+        id: powermenuRoot
+        visible: GlobalStates.powerMenuOpened
 
-        sourceComponent: PanelWindow {
-            id: powermenuRoot
-            visible: powerMenuLoader.active
+        color: "transparent"
+        anchors {
+            top: true
+            bottom: true
+            left: true
+            right: true
+        }
 
+        function hide() {
+            GlobalStates.powerMenuOpened = false;
+        }
+
+        HyprlandFocusGrab {
+            windows: [powermenuRoot]
+            active: GlobalStates.powerMenuOpened
+            onCleared: () => {
+                powermenuRoot.hide();
+            }
+        }
+        // width: powerMenuContent.implicitWidth
+        // height: powerMenuContent.im
+
+        Loader {
+            active: GlobalStates.powerMenuOpened
             anchors {
-                top: true
-                left: true
-                right: true
-                bottom: true
+                // fill: parent
+                centerIn: parent
             }
-
-            function hide() {
-                GlobalStates.powerMenuOpened = false;
-            }
-            exclusionMode: ExclusionMode.Ignore
-            WlrLayershell.layer: WlrLayer.Overlay
-            WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
-
-            color: "transparent"
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
+            focus: GlobalStates.powerMenuOpened
+            Keys.onPressed: event => {
+                if (event.key === Qt.Key_Escape) {
                     powermenuRoot.hide();
                 }
             }
 
-            Rectangle {
+            sourceComponent: Rectangle {
                 id: powerMenuContent
                 anchors.centerIn: parent
                 implicitWidth: buttonsRow.implicitWidth + 50
@@ -62,6 +70,7 @@ Scope {
                             powermenuRoot.hide();
                         }
                     }
+
                     PowermenuButton {
                         buttonIcon: "power_settings_new"
                         buttonText: "Shutdown"
@@ -70,6 +79,7 @@ Scope {
                             powermenuRoot.hide();
                         }
                     }
+
                     PowermenuButton {
                         buttonIcon: "bedtime"
                         buttonText: "Suspend"
@@ -78,6 +88,7 @@ Scope {
                             powermenuRoot.hide();
                         }
                     }
+
                     PowermenuButton {
                         buttonIcon: "refresh"
                         buttonText: "Restart"
@@ -86,6 +97,7 @@ Scope {
                             powermenuRoot.hide();
                         }
                     }
+
                     PowermenuButton {
                         buttonIcon: "exit_to_app"
                         buttonText: "Logout"
@@ -96,6 +108,10 @@ Scope {
                     }
                 }
             }
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: powermenuRoot.hide()
         }
     }
 
