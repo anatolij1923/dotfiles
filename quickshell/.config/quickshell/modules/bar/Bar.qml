@@ -38,6 +38,6 @@ PanelWindow {
         Tray {}
         KbLayout {}
         NetworkWidget {}
-        Battery {}
+        BatteryWidget {}
     }
 }
