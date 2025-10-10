@@ -18,7 +18,7 @@ WlSessionLockSurface {
     required property LockContext context
     property string currentText: ""
     property bool unlockInProgress: false
-    property bool showFailure: false
+    property bool showFailure: context.showFailure
     property bool active: false
     property bool showInputField: active || context.currentText.length > 0
     property bool startAnimation: false
@@ -33,7 +33,13 @@ WlSessionLockSurface {
         layer.enabled: true
         layer.effect: MultiEffect {
             blurEnabled: true
-            blur: 1
+            blur: root.startAnimation ? 1 : 0
+            Behavior on blur {
+                NumberAnimation {
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            }
             blurMax: 35
             blurMultiplier: 1
         }
@@ -43,17 +49,23 @@ WlSessionLockSurface {
     Rectangle {
         color: "black"
         anchors.fill: background
-        opacity: 0.3
+        opacity: root.startAnimation ? 0.2 : 0
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 300
+                easing.type: Easing.InOutBack
+            }
+        }
     }
 
     Item {
         id: login
         anchors.fill: parent
-        opacity: GlobalStates.screenLocked ? 1 : 0
+        opacity: root.startAnimation ? 1 : 0
 
         Behavior on opacity {
             NumberAnimation {
-                duration: 5000
+                duration: 10
                 easing.type: Easing.InOutQuad
             }
         }
@@ -107,22 +119,58 @@ WlSessionLockSurface {
                 // opacity: root.showInputField ? 1 : 0
 
                 implicitWidth: 300
+                implicitHeight: 56
                 radius: 40
-                padding: 20
                 focus: true
                 echoMode: TextInput.Password
                 inputMethodHints: Qt.ImhSensitiveData
 
+                icon: "person"
+
                 onTextChanged: root.context.currentText = this.text
                 onAccepted: root.context.tryUnlock()
 
-                placeholder: "Enter password"
-                placeholderTextColor: Colors.surface_variant
+                placeholder: root.showFailure ? "Wrong password" : Quickshell.env("USER")
+                placeholderTextColor: Colors.on_surface_variant
 
                 Behavior on opacity {
                     NumberAnimation {
                         duration: 300
                         easing.type: Easing.OutQuad
+                    }
+                }
+
+                SequentialAnimation {
+                    id: shakeAnimation
+                    running: false
+                    loops: 1
+                    NumberAnimation {
+                        target: passwordBox
+                        property: "x"
+                        duration: 50
+                        from: 0
+                        to: 10
+                    }
+                    NumberAnimation {
+                        target: passwordBox
+                        property: "x"
+                        duration: 50
+                        from: 10
+                        to: -10
+                    }
+                    NumberAnimation {
+                        target: passwordBox
+                        property: "x"
+                        duration: 50
+                        from: -10
+                        to: 10
+                    }
+                    NumberAnimation {
+                        target: passwordBox
+                        property: "x"
+                        duration: 50
+                        from: 10
+                        to: 0
                     }
                 }
 
@@ -138,6 +186,17 @@ WlSessionLockSurface {
                         startAnimation = false;
                     }
                 }
+                Connections {
+                    target: root.context
+                    function onShowFailureChanged() {
+                        if (root.context.showFailure) {
+                            shakeAnimation.start();
+                        }
+                    }
+                }
+            }
+            Component.onCompleted: {
+                root.startAnimation = true;
             }
         }
     }

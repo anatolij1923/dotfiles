@@ -14,6 +14,15 @@ Scope {
     LockContext {
         id: lockContext
         onUnlocked: {
+            unlockTimer.start();
+        }
+    }
+
+    Timer {
+        id: unlockTimer
+        interval: 200
+        repeat: false
+        onTriggered: {
             GlobalStates.screenLocked = false;
 
             // refocus on window
@@ -38,13 +47,13 @@ Scope {
             property string targetMonitorName: modelData.name
             property int verticalMovementDistance: modelData.height
             property int horizontalSqueeze: modelData.width * 0.2
-            onShouldPushChanged: {
-                if (shouldPush) {
-                    Quickshell.execDetached(["bash", "-c", `hyprctl keyword monitor ${targetMonitorName}, addreserved, ${verticalMovementDistance}, ${-verticalMovementDistance}, ${horizontalSqueeze}, ${horizontalSqueeze}`]);
-                } else {
-                    Quickshell.execDetached(["bash", "-c", `hyprctl keyword monitor ${targetMonitorName}, addreserved, 0, 0, 0, 0`]);
-                }
-            }
+            // onShouldPushChanged: {
+            //     if (shouldPush) {
+            //         Quickshell.execDetached(["bash", "-c", `hyprctl keyword monitor ${targetMonitorName}, addreserved, ${verticalMovementDistance}, ${-verticalMovementDistance}, ${horizontalSqueeze}, ${horizontalSqueeze}`]);
+            //     } else {
+            //         Quickshell.execDetached(["bash", "-c", `hyprctl keyword monitor ${targetMonitorName}, addreserved, 0, 0, 0, 0`]);
+            //     }
+            // }
         }
     }
 

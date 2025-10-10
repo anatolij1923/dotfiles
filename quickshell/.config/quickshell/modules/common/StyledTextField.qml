@@ -9,7 +9,9 @@ TextField {
 
     property color backgroundColor: Colors.surface_container
     property real radius: 20
-    property string placeholder: "skibidi..."
+    property string placeholder: "Type..."
+    property string icon: ""
+    property real iconSize: icon === "" ? 0 : 25
 
     padding: 20
     focus: root.focus
@@ -19,6 +21,7 @@ TextField {
     font.pixelSize: 16
     font.family: "Rubik"
     font.weight: 500
+    leftPadding: icon !== "" ? iconSize + 35 : 20
 
     cursorDelegate: Rectangle {
         width: 2
@@ -47,5 +50,14 @@ TextField {
         radius: root.radius
         color: root.backgroundColor
     }
-
+    MaterialSymbol {
+        icon: root.icon
+        visible: root.icon !== ""
+        anchors {
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: parent.verticalCenter
+        }
+        color: Colors.on_surface
+    }
 }
