@@ -12,6 +12,7 @@ import qs
 import qs.modules.lock
 import qs.modules.common
 import qs.services
+import qs.modules.bar
 
 WlSessionLockSurface {
     id: root
@@ -25,30 +26,10 @@ WlSessionLockSurface {
 
     color: "transparent"
 
-    // blurred background
-    ScreencopyView {
-        id: background
-        anchors.fill: parent
-        captureSource: root.screen
-        layer.enabled: true
-        layer.effect: MultiEffect {
-            blurEnabled: true
-            blur: root.startAnimation ? 1 : 0
-            Behavior on blur {
-                NumberAnimation {
-                    duration: 200
-                    easing.type: Easing.InOutQuad
-                }
-            }
-            blurMax: 35
-            blurMultiplier: 1
-        }
-    }
-
-    // background dim
+    // Dim
     Rectangle {
+        anchors.fill: parent
         color: "black"
-        anchors.fill: background
         opacity: root.startAnimation ? 0.2 : 0
         Behavior on opacity {
             NumberAnimation {
@@ -106,7 +87,8 @@ WlSessionLockSurface {
             }
         }
 
-        ColumnLayout {
+        RowLayout {
+            spacing: 16
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 bottom: parent.bottom
@@ -195,6 +177,13 @@ WlSessionLockSurface {
                     }
                 }
             }
+
+            BatteryWidget {
+                height: 46
+                width: 80
+                radius: 100
+            }
+
             Component.onCompleted: {
                 root.startAnimation = true;
             }

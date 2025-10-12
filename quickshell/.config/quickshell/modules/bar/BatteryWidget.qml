@@ -9,6 +9,8 @@ import qs.modules.common
 Item {
     id: root
 
+    property int radius: 16
+
     visible: Battery.available
     implicitWidth: background.width
     implicitHeight: background.height
@@ -20,7 +22,7 @@ Item {
         width: 55
         height: 25
         color: Colors.outline
-        radius: 16
+        radius: root.radius
 
         Rectangle {
             id: bar

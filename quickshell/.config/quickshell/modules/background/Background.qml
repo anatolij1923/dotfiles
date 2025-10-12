@@ -5,6 +5,7 @@ import Quickshell.Wayland
 import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Effects
+import Qt5Compat.GraphicalEffects
 
 import qs
 import qs.services
@@ -28,6 +29,8 @@ Variants {
             return Math.max(10, maxId);
         }
         property int range: Math.max(1, lastWorkspaceId - firstWorkspaceId)
+
+        property bool startAnimation: false
 
         // Parallax calculation properties
         property real wallpaperScale: 1.1 // Zoom factor to enable parallax movement
@@ -71,7 +74,46 @@ Variants {
                 sourceSize: Qt.size(bgRoot.width * wallpaperScale, bgRoot.height * wallpaperScale)
                 width: bgRoot.width * wallpaperScale
                 height: bgRoot.height * wallpaperScale
-                source: "file:///home/anatolij1923/Изображения/wallpapers/Girls/gds.png"
+                source: "file:///home/anatolij1923/Изображения/wallpapers/Girls/random_wallpaper.jpg"
+
+            }
+
+            Loader {
+                id: blurLoader
+                active: GlobalStates.screenLocked
+                anchors.fill: wallpaper
+                scale: GlobalStates.screenLocked ? 1.05 : 1
+
+                Behavior on scale {
+                    NumberAnimation {
+                        duration: 200
+                        easing.type: Easing.InOutExpo
+                    }
+                }
+
+                sourceComponent: GaussianBlur {
+                    opacity: bgRoot.startAnimation ? 1 : 0
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: 150
+                            easing.type: Easing.InOutExpo
+                        }
+                    }
+                    source: wallpaper
+                    radius: 30
+                    samples: radius * 2
+                }
+
+                Connections {
+                    target: GlobalStates
+                    function onScreenLockedChanged() {
+                        if (GlobalStates.screenLocked) {
+                            bgRoot.startAnimation = true;
+                        } else {
+                            bgRoot.startAnimation = false;
+                        }
+                    }
+                }
             }
         }
     }
