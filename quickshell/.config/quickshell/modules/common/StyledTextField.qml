@@ -21,6 +21,7 @@ TextField {
     font.pixelSize: 16
     font.family: "Rubik"
     font.weight: 500
+    renderType: Text.NativeRendering
     leftPadding: icon !== "" ? iconSize + 35 : 20
 
     cursorDelegate: Rectangle {
