@@ -36,8 +36,8 @@ return {
 
         lualine.setup({
             options = {
-                -- section_separators = { left = "", right = "" },
-                section_separators = { left = "", right = "" },
+                section_separators = { left = "", right = "" },
+                -- section_separators = { left = "", right = "" },
                 component_separators = { left = "", right = "" },
                 theme = "auto"
             },
@@ -48,6 +48,16 @@ return {
                     color = { gui = "bold" }
                 } },
                 lualine_b = {
+                    {
+                        "branch",
+                        icon = ""
+                    },
+                    {
+                        "diff",
+                        symbols = { added = " ", modified = " ", removed = " " },
+                    },
+
+
                 },
                 lualine_c = {
                     {
@@ -55,14 +65,8 @@ return {
                     },
                 },
                 lualine_x = {
-                    { curr_dir },
-
                 },
                 lualine_y = {
-                    {
-                        "diff",
-                        symbols = { added = " ", modified = " ", removed = " " },
-                    },
                     {
                         "diagnostics",
                         symbols = {
@@ -72,13 +76,13 @@ return {
                             hint = " ",
                         },
                     },
+                    { curr_dir },
+
+
                 },
                 lualine_z = {
 
-                    {
-                        "branch",
-                        icon = ""
-                    } },
+                },
             },
         })
     end,

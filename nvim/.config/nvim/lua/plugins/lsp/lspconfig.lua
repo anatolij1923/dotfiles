@@ -163,13 +163,13 @@ return {
             filetypes = { "python" },
             capabilities = capabilities,
         }
-        -- rust
-        vim.lsp.config["rust_analyzer"] = {
-            capabilities = capabilities,
-            cmd = { "rust-analyzer" },
-            filetypes = { "rust" },
-            root_markers = { "Cargo.toml", "rust-project.json", ".git" },
-        }
+        -- rust. no need cuz rustaceanvim do its job
+        -- vim.lsp.config["rust_analyzer"] = {
+        --     capabilities = capabilities,
+        --     cmd = { "rust-analyzer" },
+        --     filetypes = { "rust" },
+        --     root_markers = { "Cargo.toml", "rust-project.json", ".git" },
+        -- }
         -- qml
         vim.lsp.config["qmlls"] = {
             cmd = { "qmlls6" },
@@ -185,7 +185,7 @@ return {
         vim.lsp.enable("ts_ls")
         vim.lsp.enable("clangd")
         vim.lsp.enable("pyright")
-        vim.lsp.enable("rust-analyzer")
+        -- vim.lsp.enable("rust-analyzer")
         vim.lsp.enable("qmlls")
     end,
 }
