@@ -59,6 +59,7 @@ Variants {
             Image {
                 id: wallpaper
                 asynchronous: true
+                cache: true
                 fillMode: Image.PreserveAspectCrop
 
                 x: -movableXSpace - (effectiveParallaxValue - 0.5) * 2 * movableXSpace
@@ -74,8 +75,7 @@ Variants {
                 sourceSize: Qt.size(bgRoot.width * wallpaperScale, bgRoot.height * wallpaperScale)
                 width: bgRoot.width * wallpaperScale
                 height: bgRoot.height * wallpaperScale
-                source: "file:///home/anatolij1923/Изображения/wallpapers/Girls/random_wallpaper.jpg"
-
+                source: "file:///home/anatolij1923/Изображения/wallpapers/1923 Pack/byrotek-sundown-landscape.png"
             }
 
             Loader {
@@ -86,7 +86,7 @@ Variants {
 
                 Behavior on scale {
                     NumberAnimation {
-                        duration: 200
+                        duration: 400
                         easing.type: Easing.InOutExpo
                     }
                 }
@@ -100,7 +100,7 @@ Variants {
                         }
                     }
                     source: wallpaper
-                    radius: 30
+                    radius: 15
                     samples: radius * 2
                 }
 

@@ -1,3 +1,4 @@
+//@ pragma UseQApplication
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Io
@@ -16,7 +17,7 @@ import qs.modules.quicksettings
 ShellRoot {
     property bool enableBackground: true
     property bool enableBar: true
-    property bool enableReloadPopup: true
+    property bool enableReloadPopup: false
     property bool enableScreenCorners: true
     property bool enableLock: true
     property bool enablePowermenu: true

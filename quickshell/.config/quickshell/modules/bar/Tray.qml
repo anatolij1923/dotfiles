@@ -17,35 +17,41 @@ Item {
         Repeater {
             model: SystemTray.items
 
-            delegate: Rectangle {
-                id: trayItem
-                color: "transparent"
-                width: 25
-                height: 25
-                radius: 4
+            delegate: TrayItem {}
 
-                IconImage {
-                    width: 18
-                    height: 18
-                    anchors.centerIn: parent
-                    source: modelData.icon
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onEntered: trayItem.color = Colors.secondary
-                    onExited: trayItem.color = "transparent"
-                }
-
-
-                Behavior on color {
-                    ColorAnimation {
-                        duration: 100
-                        easing.type: Easing.OutCubic
-                    }
-                }
-            }
+            // delegate: Rectangle {
+            //     id: trayItem
+            //     color: "transparent"
+            //     width: 25
+            //     height: 25
+            //     radius: 4
+            //
+            //     IconImage {
+            //         width: 18
+            //         height: 18
+            //         anchors.centerIn: parent
+            //         source: modelData.icon
+            //     }
+            //
+            //     MouseArea {
+            //         // required property SystemTrayItem modelData
+            //         anchors.fill: parent
+            //         hoverEnabled: true
+            //         onEntered: trayItem.color = Colors.secondary
+            //         onExited: trayItem.color = "transparent"
+            //         onClicked: event => {
+            //             modelData.display(null, x, y)
+            //         }
+            //     }
+            //
+            //
+            //     Behavior on color {
+            //         ColorAnimation {
+            //             duration: 100
+            //             easing.type: Easing.OutCubic
+            //         }
+            //     }
+            // }
         }
     }
 }

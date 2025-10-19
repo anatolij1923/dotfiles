@@ -43,7 +43,7 @@ Singleton {
     readonly property list<DesktopEntry> list: Array.from(DesktopEntries.applications.values).sort((a, b) => a.name.localeCompare(b.name))
 
     readonly property var preppedNames: list.map(a => ({
-                name: Fuzzy.prepare(`${a.name} `),
+                name: Fuzzy.prepare(`${a.name} ${a.genericName} ${a.comment} ${a.id} ${a.keywords.join(' ')}`),
                 entry: a
             }))
 

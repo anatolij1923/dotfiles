@@ -17,4 +17,5 @@ Singleton {
     property bool screenUnlockFailed: false
     property bool quicksettingsOpened: false
 
+    property  bool idleIngibitorToggled: false
 }

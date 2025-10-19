@@ -89,10 +89,39 @@ WlSessionLockSurface {
 
         RowLayout {
             spacing: 16
+
+            scale: root.startAnimation ? 1 : 0.95
+            opacity: root.startAnimation ? 1 : 0
+
+            Behavior on scale {
+                NumberAnimation {
+                    duration: 100
+                    easing.type: Easing.OutCubic
+                }
+            }
+
+            Behavior on opacity { 
+                NumberAnimation {
+                    duration: 300
+                    easing.type: Easing.OutCubic
+                }
+            }
+
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 bottom: parent.bottom
                 bottomMargin: 40
+            }
+
+            Rectangle {
+                color: Colors.surface_container
+                radius: 32
+                implicitWidth: kbLayout.implicitWidth + (passwordBox.implicitHeight * 0.5)
+                implicitHeight: passwordBox.implicitHeight
+                KbLayout {
+                    id: kbLayout
+                    anchors.centerIn: parent
+                }
             }
 
             StyledTextField {
@@ -100,7 +129,7 @@ WlSessionLockSurface {
 
                 // opacity: root.showInputField ? 1 : 0
 
-                implicitWidth: 300
+                implicitWidth: Math.max(300, parent.width * 0.3) // Адаптивно к размеру экрана
                 implicitHeight: 56
                 radius: 40
                 focus: true
@@ -126,30 +155,30 @@ WlSessionLockSurface {
                     id: shakeAnimation
                     running: false
                     loops: 1
-                    NumberAnimation {
+                    PropertyAnimation {
                         target: passwordBox
-                        property: "x"
+                        property: "Layout.leftMargin"
                         duration: 50
                         from: 0
                         to: 10
                     }
-                    NumberAnimation {
+                    PropertyAnimation {
                         target: passwordBox
-                        property: "x"
+                        property: "Layout.leftMargin"
                         duration: 50
                         from: 10
                         to: -10
                     }
-                    NumberAnimation {
+                    PropertyAnimation {
                         target: passwordBox
-                        property: "x"
+                        property: "Layout.leftMargin"
                         duration: 50
                         from: -10
                         to: 10
                     }
-                    NumberAnimation {
+                    PropertyAnimation {
                         target: passwordBox
-                        property: "x"
+                        property: "Layout.leftMargin"
                         duration: 50
                         from: 10
                         to: 0
@@ -178,10 +207,46 @@ WlSessionLockSurface {
                 }
             }
 
-            BatteryWidget {
-                height: 46
-                width: 80
-                radius: 100
+            Rectangle {
+                id: tools
+                implicitHeight: passwordBox.implicitHeight
+                implicitWidth: toolsRow.implicitWidth + 24
+                color: Colors.surface_container
+                radius: 32
+
+                RowLayout {
+                    id: toolsRow
+                    anchors.centerIn: parent
+                    spacing: 8
+
+                    IconButton {
+                        radius: Appearance.rounding.full
+                        icon: "bedtime"
+                        iconSize: 24
+                        implicitHeight: 40
+                        implicitWidth: 40
+                        onClicked: Session.suspend()
+                    }
+
+                    IconButton {
+                        radius: Appearance.rounding.full
+                        icon: "refresh"
+                        iconSize: 24
+                        implicitHeight: 40
+                        implicitWidth: 40
+                        // onClicked: Session.reboot()
+                    }
+                    IconButton {
+                        radius: Appearance.rounding.full
+                        icon: "power_settings_new"
+                        iconSize: 24
+                        implicitHeight: 40
+                        implicitWidth: 40
+                        // onClicked: Session.poweroff()
+                    }
+
+                    BatteryWidget {}
+                }
             }
 
             Component.onCompleted: {

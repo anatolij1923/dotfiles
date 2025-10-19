@@ -47,23 +47,14 @@ Scope {
                 color: Colors.surface
                 radius: 24
                 implicitWidth: 460
+
+                border.width: 1
+                border.color: Colors.surface_container_high
+
                 property int itemHeight: 40
                 property int maxListHeight: 350
 
-                implicitHeight: searchField.implicitHeight + (root.showResults ? Math.min(resultsView.contentHeight, maxListHeight) : 0) + content.spacing
-
-                // property real targetHeight: searchField.implicitHeight + (root.showResults ? Math.min(resultsView.contentHeight, maxListHeight) : 0) + content.spacing
-
-                // NumberAnimation on targetHeight {
-                //     duration: 1200
-                //     easing.type: Easing.InOutQuad
-                // }
-
-                // SmoothedAnimation on implicitHeight {
-                //     to: targetHeight
-                //     velocity: 600 // пикселей в секунду
-                //     easing.type: Easing.InOutCubic
-                // }
+                implicitHeight: searchField.implicitHeight + (root.showResults ? (content.spacing + 1 + content.spacing + Math.min(resultsView.contentHeight, maxListHeight)) : 0) + content.spacing
 
                 ColumnLayout {
                     id: content
@@ -77,7 +68,7 @@ Scope {
                             event.accepted = true;
                             break;
                         case Qt.Key_Up:
-                        case Qt.Key_Backtab: 
+                        case Qt.Key_Backtab:
                             resultsView.decrementCurrentIndex();
                             event.accepted = true;
                             break;
@@ -97,13 +88,15 @@ Scope {
                         }
                     }
 
-                    // Text field 
+                    // Text field
                     StyledTextField {
                         id: searchField
                         Layout.fillWidth: true
-                        implicitHeight: 56
+                        // implicitHeight: 56
                         focus: true
+                        icon: "search"
                         placeholderText: "Search..."
+                        font.pixelSize: 20
                         onTextChanged: root.searchingText = text
                         background: Rectangle {
                             color: "transparent"
@@ -111,20 +104,15 @@ Scope {
                     }
 
                     // Separator
-                    Rectangle {
-                        height: 1
-                        Layout.fillWidth: true
-                        color: Colors.outline
-                        opacity: 0.4
-                    }
+                    
 
                     // Results list
-                    ListView { 
+                    ListView {
                         id: resultsView
+                        visible: root.showResults && count > 0
                         Layout.fillWidth: true
                         height: Math.min(contentHeight, wrapper.maxListHeight)
                         clip: true
-                        visible: root.showResults && count > 0
                         model: AppSearch.fuzzyQuery(root.searchingText).slice(0, 15)
                         spacing: 2
                         currentIndex: 0
@@ -159,5 +147,9 @@ Scope {
                 GlobalStates.launcherOpened = false;
             }
         }
+    }
+
+    Component.onCompleted: {
+        AppSearch.fuzzyQuery("")
     }
 }

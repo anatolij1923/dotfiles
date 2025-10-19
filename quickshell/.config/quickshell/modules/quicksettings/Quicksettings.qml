@@ -14,6 +14,9 @@ Scope {
         }
         visible: GlobalStates.quicksettingsOpened
 
+        color: "transparent"
+        implicitWidth: 500
+
         anchors {
             top: true
             right: true
@@ -32,6 +35,10 @@ Scope {
 
         Loader {
             active: GlobalStates.quicksettingsOpened
+            anchors {
+                fill: parent
+                margins: 16
+            }
 
             focus: GlobalStates.quicksettingsOpened
             Keys.onPressed: event => {

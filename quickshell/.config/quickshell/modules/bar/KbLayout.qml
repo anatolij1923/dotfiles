@@ -13,7 +13,7 @@ Item {
     RowLayout {
         id: row
         spacing: 8
-        Layout.alignment: Qt.AlignVCenter  // выравнивание по вертикали
+        Layout.alignment: Qt.AlignVCenter  
 
         MaterialSymbol {
             icon: "language"
@@ -24,6 +24,7 @@ Item {
 
         StyledText {
             text: HyprlandXkb.currentLayoutCode
+            weight: 400
         }
     }
 }

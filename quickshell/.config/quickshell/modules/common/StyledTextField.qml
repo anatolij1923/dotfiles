@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import Quickshell
 import QtQuick
 import QtQuick.Controls
@@ -28,6 +29,7 @@ TextField {
         width: 2
         radius: 1
         color: Colors.on_surface
+        visible: root.focus
 
         SequentialAnimation on opacity {
             loops: Animation.Infinite

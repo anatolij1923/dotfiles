@@ -20,6 +20,19 @@ Singleton {
         checkStrength.running = true;
     }
 
+    function enableWifi(enabled = true): void {
+        const cmd = enabled ? "on" : "off";
+        enableWifiProc.exec(["nmcli", "radio", "wifi", cmd]);
+    }
+
+    function toggleWifi(): void {
+        enableWifi(!wifiEnabled);
+    }
+
+    Process {
+        id: enableWifiProc
+    }
+
     Process {
         id: checkConnectionType
         command: ["bash", "-c", "nmcli -t -f TYPE c show --active | head -1"]
@@ -51,7 +64,7 @@ Singleton {
     }
 
     Timer {
-        interval: 10000
+        interval: 3000
         running: true
         repeat: true
         onTriggered: root.update()

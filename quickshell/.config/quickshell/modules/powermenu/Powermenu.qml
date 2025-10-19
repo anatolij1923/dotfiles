@@ -41,11 +41,6 @@ Scope {
                 centerIn: parent
             }
             focus: GlobalStates.powerMenuOpened
-            Keys.onPressed: event => {
-                if (event.key === Qt.Key_Escape) {
-                    powermenuRoot.hide();
-                }
-            }
 
             sourceComponent: Rectangle {
                 id: powerMenuContent
@@ -54,6 +49,45 @@ Scope {
                 implicitHeight: buttonsRow.implicitHeight + 50
                 radius: 32
                 color: Colors.surface
+                focus: true // Ensure the content itself is focusable
+
+                // Add a property to keep track of the currently focused button index
+                property int focusedButtonIndex: 0
+
+                // Function to move focus to the next button
+                function focusNext() {
+                    let nextIndex = (focusedButtonIndex + 1) % buttonsRow.children.length;
+                    buttonsRow.children[nextIndex].forceActiveFocus();
+                    focusedButtonIndex = nextIndex;
+                }
+
+                // Function to move focus to the previous button
+                function focusPrevious() {
+                    let prevIndex = (focusedButtonIndex - 1 + buttonsRow.children.length) % buttonsRow.children.length;
+                    buttonsRow.children[prevIndex].forceActiveFocus();
+                    focusedButtonIndex = prevIndex;
+                }
+
+                Component.onCompleted: {
+                    // Set initial focus to the first button
+                    if (buttonsRow.children.length > 0) {
+                        buttonsRow.children[0].forceActiveFocus();
+                        focusedButtonIndex = 0;
+                    }
+                }
+
+                Keys.onPressed: event => {
+                    if (event.key === Qt.Key_Escape) {
+                        powermenuRoot.hide();
+                        event.accepted = true;
+                    } else if (event.key === Qt.Key_Left || event.key === Qt.Key_Backtab) {
+                        powerMenuContent.focusPrevious();
+                        event.accepted = true;
+                    } else if (event.key === Qt.Key_Right || event.key === Qt.Key_Tab) {
+                        powerMenuContent.focusNext();
+                        event.accepted = true;
+                    }
+                }
 
                 RowLayout {
                     id: buttonsRow
@@ -62,8 +96,7 @@ Scope {
                     PowermenuButton {
                         buttonIcon: "lock"
                         buttonText: "Lock"
-                        focus: true
-                        onClicked: {
+                        onClicked: () => {
                             Session.lock();
                             powermenuRoot.hide();
                         }
@@ -107,10 +140,10 @@ Scope {
                 }
             }
         }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: powermenuRoot.hide()
-        }
+        // MouseArea {
+        //     anchors.fill: parent
+        //     onClicked: powermenuRoot.hide()
+        // }
     }
 
     IpcHandler {

@@ -1,55 +1,29 @@
 import Quickshell
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
 import qs
 import qs.modules.common
+ // Import StyledButton
 
-Button {
+StyledButton {
     id: button
-    property string buttonIcon
-    property string buttonText
-    property bool keyboardDown: false
-    padding: 16
+    buttonIcon: buttonIcon
+    buttonText: buttonText
+    buttonPadding: 16
+    buttonRadius: 28
+    buttonIconSize: 56
+    buttonIconWeight: 700
+    buttonTextSize: 18
+    normalBg: Colors.surface_container_highest
+    // normalHover: Colors.surface_variant
+    // focusedBg: Colors.primary
+    // focusedTextColor: Colors.surface
+    // normalTextColor: Colors.on_surface
 
-    background: Rectangle {
-        color: button.hovered ? Colors.surface_variant : (button.focus ? Colors.primary : Colors.surface_container)
-        radius: 28
 
-    }
-
-    Keys.onPressed: event => {
-        if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-            keyboardDown = true;
-            button.clicked();
-            event.accepted = true;
-        }
-    }
-    Keys.onReleased: event => {
-        if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-            keyboardDown = false;
-            event.accepted = true;
-        }
-    }
-
-    contentItem: ColumnLayout {
-        anchors.centerIn: parent
-
-        MaterialSymbol {
-            Layout.alignment: Qt.AlignHCenter
-            icon: button.buttonIcon
-            size: 56
-            weight: 700
-            // color: Colors.on_surface
-            color: button.focus ? Colors.surface : Colors.on_surface
-        }
-
-        StyledText {
-            Layout.alignment: Qt.AlignHCenter
-
-            text: button.buttonText
-            color: button.focus ? Colors.surface : Colors.on_surface
-            weight: 600
-        }
-    }
+    
+    // StyledButton handles focus and keyboard interaction internally
+    // StyledButton's contentItem already uses ColumnLayout, MaterialSymbol, and StyledText
+    // We just need to pass the properties.
+    // The weights for icon and text are set within StyledButton's contentItem.
 }

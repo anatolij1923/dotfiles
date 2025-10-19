@@ -6,10 +6,13 @@ import Quickshell
 
 Singleton {
     id: root
-    property QtObject animationCurves
-    property QtObject animation
+    property QtObject animCurves
+    property QtObject anim
+    property QtObject animDuration
+    property QtObject rounding
+    property QtObject padding
 
-    animationCurves: QtObject {
+    animCurves: QtObject {
         readonly property list<real> expressiveFastSpatial: [0.42, 1.67, 0.21, 0.90, 1, 1] // Default, 350ms
         readonly property list<real> expressiveDefaultSpatial: [0.38, 1.21, 0.22, 1.00, 1, 1] // Default, 500ms
         readonly property list<real> expressiveSlowSpatial: [0.39, 1.29, 0.35, 0.98, 1, 1] // Default, 650ms
@@ -28,17 +31,17 @@ Singleton {
         readonly property real expressiveEffectsDuration: 200
     }
 
-    animation: QtObject {
+    anim: QtObject {
         property QtObject elementMove: QtObject {
-            property int duration: animationCurves.expressiveDefaultSpatialDuration
+            property int duration: animCurves.expressiveDefaultSpatialDuration
             property int type: Easing.BezierSpline
-            property list<real> bezierCurve: animationCurves.expressiveDefaultSpatial
+            property list<real> bezierCurve: animCurves.expressiveDefaultSpatial
             property int velocity: 650
             property Component numberAnimation: Component {
                 NumberAnimation {
-                    duration: root.animation.elementMove.duration
-                    easing.type: root.animation.elementMove.type
-                    easing.bezierCurve: root.animation.elementMove.bezierCurve
+                    duration: root.anim.elementMove.duration
+                    easing.type: root.anim.elementMove.type
+                    easing.bezierCurve: root.anim.elementMove.bezierCurve
                 }
             }
         }
@@ -46,7 +49,7 @@ Singleton {
         property QtObject elementMoveEnter: QtObject {
             property int duration: 400
             property int type: Easing.BezierSpline
-            property list<real> bezierCurve: animationCurves.emphasizedDecel
+            property list<real> bezierCurve: animCurves.emphasizedDecel
             property int velocity: 650
             property Component numberAnimation: Component {
                 NumberAnimation {
@@ -60,7 +63,7 @@ Singleton {
         property QtObject elementMoveExit: QtObject {
             property int duration: 200
             property int type: Easing.BezierSpline
-            property list<real> bezierCurve: animationCurves.emphasizedAccel
+            property list<real> bezierCurve: animCurves.emphasizedAccel
             property int velocity: 650
             property Component numberAnimation: Component {
                 NumberAnimation {
@@ -72,9 +75,9 @@ Singleton {
         }
 
         property QtObject elementMoveFast: QtObject {
-            property int duration: animationCurves.expressiveEffectsDuration
+            property int duration: animCurves.expressiveEffectsDuration
             property int type: Easing.BezierSpline
-            property list<real> bezierCurve: animationCurves.expressiveEffects
+            property list<real> bezierCurve: animCurves.expressiveEffects
             property int velocity: 850
             property Component colorAnimation: Component {
                 ColorAnimation {
@@ -95,7 +98,7 @@ Singleton {
         property QtObject elementResize: QtObject {
             property int duration: 400
             property int type: Easing.BezierSpline
-            property list<real> bezierCurve: animationCurves.emphasized
+            property list<real> bezierCurve: animCurves.emphasized
             property int velocity: 650
             property Component numberAnimation: Component {
                 NumberAnimation {
@@ -109,7 +112,7 @@ Singleton {
         property QtObject clickBounce: QtObject {
             property int duration: 200
             property int type: Easing.BezierSpline
-            property list<real> bezierCurve: animationCurves.expressiveFastSpatial
+            property list<real> bezierCurve: animCurves.expressiveFastSpatial
             property int velocity: 850
             property Component numberAnimation: Component {
                 NumberAnimation {
@@ -123,12 +126,41 @@ Singleton {
         property QtObject scroll: QtObject {
             property int duration: 200
             property int type: Easing.BezierSpline
-            property list<real> bezierCurve: animationCurves.standardDecel
+            property list<real> bezierCurve: animCurves.standardDecel
         }
 
         property QtObject menuDecel: QtObject {
             property int duration: 350
             property int type: Easing.OutExpo
         }
+    }
+    animDuration: QtObject {
+        property real scale: 1
+        property int smaller: 100 * scale
+        property int small: 200 * scale
+        property int normal: 400 * scale
+        property int large: 600 * scale
+        property int extraLarge: 1000 * scale
+        property int expressiveFastSpatial: 350 * scale
+        property int expressiveDefaultSpatial: 500 * scale
+        property int expressiveEffects: 200 * scale
+    }
+
+    rounding: QtObject {
+        property real scale: 1
+        property int small: 12 * scale
+        property int normal: 17 * scale
+        property int large: 20 * scale
+        property int huge: 25 * scale
+        property int full: 1000 * scale
+    }
+    padding: QtObject {
+        property real scale: 1
+        property int small: 5 * scale
+        property int smaller: 7 * scale
+        property int normal: 10 * scale
+        property int larger: 12 * scale
+        property int large: 15 * scale
+        property int huge: 24 * scale
     }
 }
