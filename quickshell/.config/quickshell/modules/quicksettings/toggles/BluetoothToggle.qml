@@ -16,11 +16,15 @@ QuickToggle {
             adapter.enabled = !adapter.enabled;
 
     }
+     onRightClicked: () => {
+        Quickshell.execDetached(["blueman-manager"]);
+        GlobalStates.quicksettingsOpened = false;
+    }
     // onAlt: () => {
     //     Quickshell.execDetached(["blueman-manager"]);
     //     GlobalStates.quicksettingsOpened = false;
     // }
-    // StyledTooltip {
-    //     text: "Toggle bluetooth. Right click to open blueman"
-    // }
+    StyledTooltip {
+        text: "Toggle bluetooth. Right click to open blueman"
+    }
 }

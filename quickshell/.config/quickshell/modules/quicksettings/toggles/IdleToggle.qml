@@ -10,4 +10,7 @@ QuickToggle {
     onClicked: () => {
         IdleInhibitor.toggle();
     }
+    StyledTooltip {
+        text: "Keep your system awake"
+    }
 }

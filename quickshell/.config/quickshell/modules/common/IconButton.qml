@@ -24,6 +24,8 @@ Rectangle {
     property alias stateLayer: stateLayer
 
     signal clicked
+    signal rightClicked
+    signal middleClicked
 
     onCheckedChanged: internalChecked = checked
 
@@ -43,6 +45,9 @@ Rectangle {
 
         onEntered: root.hovered = true 
         onExited: root.hovered = false 
+
+        onRightClicked: root.rightClicked()
+        onMiddleClicked: root.middleClicked()
 
         function onClicked(): void {
             if (root.toggle)

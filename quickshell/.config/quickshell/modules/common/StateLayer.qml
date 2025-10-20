@@ -13,6 +13,9 @@ MouseArea {
     property real radius: parent?.radius ?? 0
     property alias rect: hoverLayer
 
+    signal rightClicked
+    signal middleClicked
+
     function onClicked(): void {
     }
 
@@ -21,22 +24,32 @@ MouseArea {
     enabled: !disabled
     cursorShape: disabled ? undefined : Qt.PointingHandCursor
     hoverEnabled: true
+    acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
 
     onPressed: event => {
         if (disabled)
             return;
 
-        rippleAnim.x = event.x;
-        rippleAnim.y = event.y;
+        if (event.button === Qt.LeftButton) {
+            rippleAnim.x = event.x;
+            rippleAnim.y = event.y;
 
-        const dist = (ox, oy) => ox * ox + oy * oy;
-        rippleAnim.radius = Math.sqrt(Math.max(dist(event.x, event.y), dist(event.x, height - event.y), dist(width - event.x, event.y), dist(width - event.x, height - event.y)));
+            const dist = (ox, oy) => ox * ox + oy * oy;
+            rippleAnim.radius = Math.sqrt(Math.max(dist(event.x, event.y), dist(event.x, height - event.y), dist(width - event.x, event.y), dist(width - event.x, height - event.y)));
 
-        rippleAnim.restart();
+            rippleAnim.restart();
+        } else if (event.button === Qt.RightButton) {
+            rightClicked();
+        } else if (event.button === Qt.MiddleButton) {
+            middleClicked();
+        }
     }
 
-    onClicked: event => !disabled && onClicked(event)
-
+    onClicked: event => {
+        if (!disabled && event.button === Qt.LeftButton) {
+            onClicked(event);
+        }
+    }
 
     SequentialAnimation {
         id: rippleAnim
@@ -88,7 +101,6 @@ MouseArea {
             radius: Appearance.rounding.full
             color: root.color
             opacity: 0
-            
 
             transform: Translate {
                 x: -ripple.width / 2
@@ -97,4 +109,3 @@ MouseArea {
         }
     }
 }
-
