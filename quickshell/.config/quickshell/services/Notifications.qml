@@ -25,7 +25,8 @@ Singleton {
             notif.tracked = true;
 
             const comp = notifComp.createObject(root, {
-                popup: true, // Упрощено, всегда показывать как popup
+                popup: true // Упрощено, всегда показывать как popup
+                ,
                 notification: notif
             });
             root.list = [comp, ...root.list];
@@ -41,8 +42,20 @@ Singleton {
 
         property date time: new Date()
         readonly property string timeStr: {
-            // Упрощенная логика времени, если Quickshell.Time недоступен
-            return "now";
+            const diff = Time.date.getTime() - time.getTime();
+            const m = Math.floor(diff / 60000);
+
+            if (m < 1)
+                return qsTr("now");
+
+            const h = Math.floor(m / 60);
+            const d = Math.floor(h / 24);
+
+            if (d > 0)
+                return `${d}d`;
+            if (h > 0)
+                return `${h}h`;
+            return `${m}m`;
         }
 
         property Notification notification

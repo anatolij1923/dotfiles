@@ -1,116 +1,220 @@
+import Quickshell
+import Quickshell.Widgets
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import qs
 import qs.services
+import Quickshell.Services.Notifications
 import qs.modules.common
 
 Item {
     id: root
-    implicitWidth: 420
-    implicitHeight: columnLayout.implicitHeight + 20
+    implicitWidth: 450
+    implicitHeight: content.implicitHeight + 35
 
     property string title: ""
+    property string appIcon: ""
+    property string appName: ""
     property string body: ""
     property string image: ""
+    property string time: ""
     property var rawNotif
     property list<var> buttons: []
-    property int animDuration: 220
 
-    opacity: 0
-    scale: 0.98
-    visible: true
+    property bool expanded: false
 
-    // плавное появление
-    Component.onCompleted: enterAnim.running = true
 
-    ParallelAnimation {
-        id: enterAnim
-        running: false
-        PropertyAnimation { target: root; property: "opacity"; from: 0; to: 1; duration: root.animDuration; easing.type: Easing.OutCubic }
-        PropertyAnimation { target: root; property: "scale"; from: 0.98; to: 1.0; duration: root.animDuration; easing.type: Easing.OutBack }
-    }
-
-    function closeSmooth() {
-        exitAnim.running = true
-    }
-
-    ParallelAnimation {
-        id: exitAnim
-        running: false
-        PropertyAnimation { target: root; property: "opacity"; from: 1; to: 0; duration: root.animDuration; easing.type: Easing.InCubic }
-        PropertyAnimation { target: root; property: "scale"; from: 1.0; to: 0.97; duration: root.animDuration; easing.type: Easing.InCubic }
-        onStopped: root.visible = false
-    }
-
-    Rectangle {
+    ClippingRectangle {
         id: bg
         anchors.fill: parent
-        radius: Appearance.rounding.large
+        radius: Appearance.rounding.huge
         color: Colors.surface_container
-        border.color: Colors.outline_variant
+        border.color: Qt.alpha(Colors.outline_variant, 0.4)
         border.width: 1
-    }
 
-    ColumnLayout {
-        id: columnLayout
-        anchors.fill: parent
-        anchors.margins: 14
-        spacing: 8
-
-        RowLayout {
-            spacing: 10
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignVCenter
-
-            Image {
-                id: icon
-                source: root.image
-                width: 32
-                height: 32
-                fillMode: Image.PreserveAspectFit
-                visible: source !== ""
-            }
-
-            StyledText {
-                id: titleText
-                text: root.title
-                font.bold: true
-                font.pixelSize: 16
-                color: Colors.on_surface
+        ColumnLayout {
+            id: content
+            anchors.fill: parent
+            spacing: 16
+            Layout.fillHeight: true
+            anchors.margins: Appearance.padding.large
+            RowLayout {
+                id: header
                 Layout.fillWidth: true
-                elide: Text.ElideRight
-            }
-        }
+                spacing: 8
 
-        StyledText {
-            id: bodyText
-            text: root.body
-            font.pixelSize: 14
-            color: Colors.on_surface_variant
-            wrapMode: Text.WordWrap
-            Layout.fillWidth: true
-        }
+                Image {
+                    source: Quickshell.iconPath(root.appIcon)
+                    Layout.preferredHeight: 24
+                    Layout.preferredWidth: 24
+                    visible: root.appIcon !== ""
+                    smooth: true
+                }
 
-        Flow {
-            id: buttonRow
-            spacing: 6
-            Layout.alignment: Qt.AlignHCenter
+                StyledText {
+                    id: appName
+                    text: root.appName
+                    color: Qt.alpha(Colors.on_surface, 0.5)
+                    weight: 400
+                }
 
-            Repeater {
-                model: root.buttons
-                delegate: Button {
-                    text: modelData.label
-                    onClicked: modelData.onClick()
-                    implicitWidth: Math.max(80, contentWidth + 20)
+                Item {
+                    Layout.fillWidth: true
+                }
+
+                StyledText {
+                    id: time
+                    text: root.time
+                    weight: 400
+                    color: Qt.alpha(Colors.on_surface, 0.5)
+                }
+
+                IconButton {
+                    icon: root.expanded ? "keyboard_arrow_up" : "keyboard_arrow_down"
+                    implicitHeight: 24
+                    onClicked: () => {
+                        root.expanded = !root.expanded;
+                    }
                 }
             }
 
-            Button {
-                text: "Close"
-                onClicked: root.closeSmooth()
-                implicitWidth: 80
+            RowLayout {
+                id: body
+                spacing: 8
+
+                ClippingRectangle {
+                    radius: Appearance.rounding.normal
+                    Layout.preferredWidth: 80
+                    Layout.preferredHeight: 80
+                    visible: root.image !== ""
+
+                    Image {
+                        id: image
+                        anchors.fill: parent
+                        source: root.image
+                        fillMode: Image.PreserveAspectFit
+                        smooth: true
+                    }
+                }
+
+                ColumnLayout {
+                    Layout.fillWidth: true
+                    spacing: 4
+                    Layout.alignment: Qt.AlignTop
+
+                    StyledText {
+                        text: root.title
+                        // weight: 600
+                        size: 20
+                        wrapMode: Text.Wrap
+                        color: Colors.on_surface
+                    }
+
+                    StyledText {
+                        text: root.body
+                        weight: 400
+                        wrapMode: Text.Wrap
+                        color: Qt.alpha(Colors.on_surface, 0.85)
+                        visible: root.body !== ""
+                    }
+                }
+            }
+
+            RowLayout {
+                id: actions
+                Layout.alignment: Qt.AlignHCenter
+                visible: root.expanded ? true : false
+
+                states: [
+                    State {
+                        name: "expanded"
+                        when: root.expanded
+                        PropertyChanges {
+                            target: actions
+                            opacity: 1
+                            Layout.preferredHeight: actions.implicitHeight
+                        }
+                    },
+                    State {
+                        name: "collapsed"
+                        when: !root.expanded
+                        PropertyChanges {
+                            target: actions
+                            opacity: 0
+                            Layout.preferredHeight: 0
+                        }
+                    }
+                ]
+
+                transitions: [
+                    Transition {
+                        Anim {
+                            properties: "opacity, Layout.preferredHeight"
+                            duration: Appearance.animDuration.expressiveDefaultSpatial
+                            easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
+                        }
+                    }
+                ]
+
+                TextButton {
+                    text: "Close"
+                    onClicked: modelData.close()
+                    inactiveColor: Colors.surface_container_highest
+                    padding: Appearance.padding.larger
+                    Layout.fillWidth: true
+                }
+
+                Repeater {
+                    model: root.buttons
+                    delegate: TextButton {
+                        text: modelData.label
+                        onClicked: modelData.onClick()
+                        inactiveColor: Colors.surface_container_highest
+                        Layout.fillWidth: true
+
+                        padding: Appearance.padding.larger
+                    }
+                }
             }
         }
     }
 }
+
+// Rectangle {
+//     id: root
+//
+//
+//     // color: modelData.urgency === NotificationUrgency.DialogButtonBox.Critical ? Colors.secondary_container : Colors.surface_container
+//
+//     property bool expanded
+//     radius: Appearance.rounding.normal
+//     required property Notifications.Notif modelData
+//
+//     implicitWidth: 450 // TODO: move sizes in config or something
+//     implicitHeight: content.implicitHeight
+//
+//     MouseArea {
+//         anchors.fill: parent
+//         hoverEnabled: true
+//         cursorShape: Qt.ClosedHandCursor
+//
+//         Item {
+//             id: content
+//             property string title: ""
+//             property string appIcon: ""
+//             property string appName: ""
+//             property string body: ""
+//             property string image: ""
+//             property string time: ""
+//             property var rawNotif
+//             property list<var> buttons: []
+//
+//             StyledText {
+//                 id: appName
+//                 text: root.appName
+//             }
+//         }
+//     }
+// }
+
