@@ -24,6 +24,7 @@ Item {
 
         StyledText {
             text: HyprlandXkb.currentLayoutCode
+            animate: true
             weight: 400
         }
     }

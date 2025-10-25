@@ -1,11 +1,46 @@
 import qs
 import QtQuick
 import QtQuick.Layouts
+import qs.services
+import qs.modules.common
 
 Text {
     id: root
+
+    property string animateProp: "scale"
+    property real animateFrom: 0
+    property real animateTo: 1
+    property int animateDuration: Appearance.animDuration.small
     property int size: 18
     property int weight: 500
+    property bool animate: false
+
+    Behavior on color {
+        CAnim {}
+    }
+
+    Behavior on text {
+        enabled: root.animate
+        SequentialAnimation {
+            NumberAnimation {
+                target: root
+                property: root.animateProp
+                from: root.animateFrom
+                to: root.animateTo
+                duration: root.animateDuration / 2
+                easing.bezierCurve: Appearance.animCurves.standardAccel
+            }
+            NumberAnimation {
+                target: root
+                property: root.animateProp
+                from: root.animateFrom
+                to: root.animateTo
+                duration: root.animateDuration / 2
+                easing.bezierCurve: Appearance.animCurves.standardDecel
+            }
+        }
+    }
+
     Layout.alignment: Qt.AlignVCenter
     font.family: "Rubik"
     font.weight: weight
