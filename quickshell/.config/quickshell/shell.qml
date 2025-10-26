@@ -12,6 +12,8 @@ import qs.modules.corners
 import qs.modules.lock
 import qs.modules.powermenu
 import qs.modules.launcher
+import qs.modules.notifications
+import qs.modules.tit
 import qs.modules.quicksettings
 
 ShellRoot {
@@ -23,6 +25,8 @@ ShellRoot {
     property bool enablePowermenu: true
     property bool enableLauncher: true
     property bool enableQuicksettings: true
+    property bool enableNotifications: true
+    property bool enableTit: true
 
     LazyLoader {
         active: enableBackground
@@ -57,5 +61,13 @@ ShellRoot {
     LazyLoader {
         active: enableQuicksettings
         component: Quicksettings {}
+    }
+    LazyLoader {
+        active: enableNotifications
+        component: NotificationPopup {}
+    }
+    LazyLoader {
+        active: enableTit
+        component: Tit {}
     }
 }
