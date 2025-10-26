@@ -35,7 +35,7 @@ Rectangle {
         ? (root.internalChecked ? root.activeColor : root.inactiveColor)
         : Qt.alpha(root.inactiveColor, 0.5)
 
-    implicitWidth: label.implicitWidth + padding * 2
+    implicitWidth: implicitHeight
     implicitHeight: label.implicitHeight + padding * 2
 
     StateLayer {
