@@ -95,7 +95,7 @@ WlSessionLockSurface {
 
             Behavior on scale {
                 NumberAnimation {
-                    duration: 100
+                    duration: 200
                     easing.type: Easing.OutCubic
                 }
             }
@@ -121,6 +121,7 @@ WlSessionLockSurface {
                 KbLayout {
                     id: kbLayout
                     anchors.centerIn: parent
+                    showIcon: true
                 }
             }
 

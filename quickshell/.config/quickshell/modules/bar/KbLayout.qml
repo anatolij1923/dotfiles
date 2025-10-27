@@ -7,19 +7,21 @@ import qs.modules.common
 
 Item {
     id: root
-    implicitWidth: row.implicitWidth
+    implicitWidth: row.implicitWidth + 8
     implicitHeight: row.implicitHeight
+    property bool showIcon: false
 
     RowLayout {
         id: row
         spacing: 8
-        Layout.alignment: Qt.AlignVCenter  
+        Layout.alignment: Qt.AlignVCenter
 
         MaterialSymbol {
             icon: "language"
             font.pixelSize: 24
             color: Colors.on_surface
             Layout.alignment: Qt.AlignVCenter
+            visible: root.showIcon
         }
 
         StyledText {

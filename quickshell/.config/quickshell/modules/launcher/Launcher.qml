@@ -104,7 +104,6 @@ Scope {
                     }
 
                     // Separator
-                    
 
                     // Results list
                     ListView {
@@ -122,6 +121,20 @@ Scope {
                         rightMargin: 8
                         bottomMargin: 8
 
+                        highlight: Rectangle {
+                            color: Colors.on_secondary_fixed_variant
+                            radius: Appearance.rounding.normal
+
+                            y: root.currentIndex?.y ?? 0
+
+                            Behavior on y {
+                                Anim {
+                                    duration: Appearance.animDuration.expressiveDefaultSpatial
+                                    easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
+                                }
+                            }
+                        }
+
                         delegate: LauncherItem {
                             desktopEntry: modelData
                             isCurrent: resultsView.currentIndex === index
@@ -134,7 +147,6 @@ Scope {
             }
         }
 
-        // ────────────────────────────── IPC ──────────────────────────────
         IpcHandler {
             target: "launcher"
             function toggle(): void {
@@ -150,6 +162,6 @@ Scope {
     }
 
     Component.onCompleted: {
-        AppSearch.fuzzyQuery("")
+        AppSearch.fuzzyQuery("");
     }
 }

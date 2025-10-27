@@ -23,7 +23,7 @@ PanelWindow {
             rightMargin: 24
             fill: parent
         }
-        spacing: 16
+        spacing: 8
 
         Workspaces {}
         // FocusedWindow {}
@@ -49,10 +49,12 @@ PanelWindow {
         //     implicitHeight: parent.implicitHeight
         //     implicitWidth: 50
         // }
-        
-        Tray {}
+
         KbLayout {}
-        NetworkWidget {}
+        Tray {}
+        // NetworkWidget {}
+        // BluetoothWidget {}
+        QsButton {}
         BatteryWidget {}
     }
 }

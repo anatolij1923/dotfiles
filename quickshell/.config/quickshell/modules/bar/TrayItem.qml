@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Widgets
 import QtQuick
 import Quickshell.Services.SystemTray
 
@@ -17,7 +18,7 @@ MouseArea {
             modelData.display()
     }
 
-    Image {
+    IconImage {
         id: icon
         anchors.centerIn: parent
         source: root.modelData.icon 

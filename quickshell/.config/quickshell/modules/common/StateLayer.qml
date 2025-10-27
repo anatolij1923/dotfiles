@@ -5,6 +5,9 @@ import Quickshell
 import Quickshell.Widgets
 import Qt5Compat.GraphicalEffects
 
+// From https://github.com/caelestia-dots/shell 
+// License: GPLv3
+
 MouseArea {
     id: root
 

@@ -10,9 +10,9 @@ Text {
     property string animateProp: "scale"
     property real animateFrom: 0
     property real animateTo: 1
-    property int animateDuration: Appearance.animDuration.small
+    property int animateDuration: Appearance.animDuration.smaller
     property int size: 18
-    property int weight: 500
+    property int weight: 400
     property bool animate: false
 
     Behavior on color {
