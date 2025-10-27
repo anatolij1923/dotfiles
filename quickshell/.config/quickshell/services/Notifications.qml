@@ -3,12 +3,52 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.Notifications
+import qs.utils
 
 Singleton {
     id: root
 
     property list<Notif> list: []
+    readonly property list<Notif> popupList: list.filter(n => n.popup)
+    readonly property list<Notif> notClosed: list.filter(n => !n.popup)
+    property alias dnd: props.dnd
+
+    property bool loaded: false
+
+    onListChanged: if (loaded)
+        saveTimer.restart()
+
+    Timer {
+        id: saveTimer
+        interval: 1000
+        onTriggered: {
+            const toSave = root.list.filter(n => !n.closed).map(n => ({
+                        time: n.time,
+                        id: n.id,
+                        summary: n.summary,
+                        body: n.body,
+                        appIcon: n.appIcon,
+                        appName: n.appName,
+                        image: n.image,
+                        expireTimeout: n.expireTimeout,
+                        urgency: n.urgency,
+                        resident: n.resident,
+                        hasActionIcons: n.hasActionIcons,
+                        actions: n.actions
+                    }));
+            storage.setText(JSON.stringify(toSave));
+        }
+    }
+
+    PersistentProperties {
+        id: props
+
+        property bool dnd
+
+        reloadableId: "notifs"
+    }
 
     NotificationServer {
         id: server
@@ -25,12 +65,43 @@ Singleton {
             notif.tracked = true;
 
             const comp = notifComp.createObject(root, {
-                popup: true // Упрощено, всегда показывать как popup
-                ,
+                popup: true,
                 notification: notif
             });
+
             root.list = [comp, ...root.list];
         }
+    }
+
+    FileView {
+        id: storage
+
+        path: `${Paths.state}/notifs.json`
+
+        onLoaded: {
+            const data = JSON.parse(text());
+            for (const n of data) {
+                const obj = notifComp.createObject(root, n);
+                obj.popup = false; // восстановленные не popup
+                root.list.push(obj);
+            }
+            root.list.sort((a, b) => b.time - a.time);
+            root.loaded = true;
+        }
+
+        onLoadFailed: err => {
+            if (err === FileViewError.FileNotFound) {
+                root.loaded = true;
+                setText("[]");
+            }
+        }
+    }
+
+    function clearAll(): void {
+        for (const n of root.list)
+            n.close();
+        root.list = [];
+        storage.setText("[]");
     }
 
     component Notif: QtObject {
@@ -44,13 +115,10 @@ Singleton {
         readonly property string timeStr: {
             const diff = Time.date.getTime() - time.getTime();
             const m = Math.floor(diff / 60000);
-
             if (m < 1)
                 return qsTr("now");
-
             const h = Math.floor(m / 60);
             const d = Math.floor(h / 24);
-
             if (d > 0)
                 return `${d}d`;
             if (h > 0)
@@ -65,7 +133,7 @@ Singleton {
         property string appIcon
         property string appName
         property string image
-        property real expireTimeout: 5000 // Упрощено, жестко задано 5 секунд
+        property real expireTimeout: 5000
         property int urgency: NotificationUrgency.Normal
         property bool resident
         property bool hasActionIcons
@@ -74,55 +142,42 @@ Singleton {
         readonly property Timer timer: Timer {
             running: true
             interval: notif.expireTimeout > 0 ? notif.expireTimeout : 5000
-            onTriggered: {
-                notif.popup = false; // Просто закрываем popup
-            }
+            onTriggered: notif.popup = false
         }
 
         readonly property Connections conn: Connections {
             target: notif.notification
-
-            function onClosed(): void {
+            function onClosed() {
                 notif.close();
             }
-
-            function onSummaryChanged(): void {
+            function onSummaryChanged() {
                 notif.summary = notif.notification.summary;
             }
-
-            function onBodyChanged(): void {
+            function onBodyChanged() {
                 notif.body = notif.notification.body;
             }
-
-            function onAppIconChanged(): void {
+            function onAppIconChanged() {
                 notif.appIcon = notif.notification.appIcon;
             }
-
-            function onAppNameChanged(): void {
+            function onAppNameChanged() {
                 notif.appName = notif.notification.appName;
             }
-
-            function onImageChanged(): void {
+            function onImageChanged() {
                 notif.image = notif.notification.image;
             }
-
-            function onExpireTimeoutChanged(): void {
+            function onExpireTimeoutChanged() {
                 notif.expireTimeout = notif.notification.expireTimeout;
             }
-
-            function onUrgencyChanged(): void {
+            function onUrgencyChanged() {
                 notif.urgency = notif.notification.urgency;
             }
-
-            function onResidentChanged(): void {
+            function onResidentChanged() {
                 notif.resident = notif.notification.resident;
             }
-
-            function onHasActionIconsChanged(): void {
+            function onHasActionIconsChanged() {
                 notif.hasActionIcons = notif.notification.hasActionIcons;
             }
-
-            function onActionsChanged(): void {
+            function onActionsChanged() {
                 notif.actions = notif.notification.actions.map(a => ({
                             identifier: a.identifier,
                             text: a.text,
@@ -153,7 +208,6 @@ Singleton {
         Component.onCompleted: {
             if (!notification)
                 return;
-
             id = notification.id;
             summary = notification.summary;
             body = notification.body;
@@ -174,7 +228,6 @@ Singleton {
 
     Component {
         id: notifComp
-
         Notif {}
     }
 }

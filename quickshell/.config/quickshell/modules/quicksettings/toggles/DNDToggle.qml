@@ -1,17 +1,20 @@
 import Quickshell
 import QtQuick
 import qs
+import qs.services
 import qs.modules.common
 
 QuickToggle {
 
-    checked: false
+    checked: Notifications.dnd
     icon: "notifications"
     
     onClicked: () => {
-        console.warn("gsd");
+        Notifications.dnd = !Notifications.dnd
     }
     StyledTooltip {
         text: "Do not disturb"
+        verticalPadding: 8
+        horizontalPadding: 12
     }
 }

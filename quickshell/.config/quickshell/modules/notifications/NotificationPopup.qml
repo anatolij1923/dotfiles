@@ -3,37 +3,44 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
 import Quickshell.Wayland
+import qs
 import qs.services
 import qs.modules.common
 
 Scope {
-    PanelWindow {
-        id: root
-        WlrLayershell.layer: WlrLayer.Overlay
-        implicitHeight: listView.contentHeight
-        implicitWidth: 450
+    Loader {
+        active: Notifications.dnd ? 0 : 1
 
-        exclusiveZone: 0
+        sourceComponent: PanelWindow {
+            id: root
+            WlrLayershell.layer: WlrLayer.Overlay
+            implicitHeight: listView.contentHeight
+            implicitWidth: 450
 
-        anchors {
-            top: true
-            right: true
-            bottom: true
-        }
-        margins {
-            top: 16
-            right: 16
-        }
+            exclusiveZone: 0
 
-        color: "transparent"
+            anchors {
+                top: true
+                right: true
+                bottom: true
+            }
+            margins {
+                top: 16
+                right: 16
+            }
 
-        mask: Region {
-            item: listView.contentItem
-        }
+            color: "transparent"
 
-        NotificationListView {
-            id: listView
-            implicitWidth: parent.width
+            mask: Region {
+                item: listView.contentItem
+            }
+
+            NotificationListView {
+                id: listView
+                implicitWidth: parent.width
+                model: Notifications.popupList
+                opacity: GlobalStates.quicksettingsOpened ? 0 : 1
+            }
         }
     }
 }
