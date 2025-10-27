@@ -10,6 +10,7 @@ Item {
     id: root
 
     property int radius: 16
+    property real percentage: Battery.percentage
 
     visible: Battery.available
     implicitWidth: background.width
@@ -31,7 +32,7 @@ Item {
             anchors.bottom: parent.bottom
             width: Battery.percentage * parent.width / 100
             radius: 4
-            color: Battery.isCharging ? Colors.primary : (Battery.percentage >= 25 ? Colors.on_secondary_container : Colors.error)
+            color: Battery.isCharging ? Colors.primary : (Battery.percentage >= 35 ? Colors.on_secondary_container : Colors.error)
 
             Behavior on color {
                 ColorAnimation {
@@ -55,7 +56,7 @@ Item {
 
         StyledText {
             id: text
-            text: Battery.percentage
+            text: percentage
             color: Colors.surface
             anchors.centerIn: parent
             anchors.horizontalCenterOffset: icon.visible ? 4 : 0
