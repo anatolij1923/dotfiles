@@ -32,7 +32,7 @@ Item {
             anchors.bottom: parent.bottom
             width: Battery.percentage * parent.width / 100
             radius: 4
-            color: Battery.isCharging ? Colors.primary : (Battery.percentage >= 35 ? Colors.on_secondary_container : Colors.error)
+            color: Battery.isCharging ? Colors.primary : (Battery.percentage > 30 ? Colors.on_secondary_container : Colors.error)
 
             Behavior on color {
                 ColorAnimation {

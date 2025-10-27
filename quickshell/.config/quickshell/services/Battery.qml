@@ -9,8 +9,8 @@ Singleton {
     property bool isCharging: chargeState == UPowerDeviceState.Charging
     property int percentage: Math.round((UPower.displayDevice?.percentage ?? 0) * 100)
 
-    property bool isLow: available && (percentage <= 35)
-    property bool isCritical: available && (percentage <= isLow / 2)
+    property bool isLow: available && (percentage <= 30)
+    property bool isCritical: available && (percentage <= 15)
 
     property bool isLowAndDischarging: isLow && !isCharging
     property bool isCriticalAndDischarging: isCritical && !isCharging
