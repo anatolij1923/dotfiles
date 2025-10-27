@@ -1,15 +1,20 @@
 import Quickshell
+import Quickshell.Widgets
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Layouts
 import qs
 import qs.services
+import qs.modules.notifications
 import qs.modules.common
 import qs.modules.quicksettings.toggles
 import qs.modules.quicksettings.header
+import qs.modules.quicksettings.sliders
 
 Item {
     id: root
     property int padding: 24
+
     implicitWidth: background.implicitWidth
     implicitHeight: background.implicitHeight
 
@@ -19,7 +24,6 @@ Item {
         radius: 24
         color: Colors.surface
         implicitWidth: 550
-        implicitHeight: 1000
 
         ColumnLayout {
             anchors.fill: parent
@@ -35,11 +39,11 @@ Item {
                 ColumnLayout {
                     StyledText {
                         text: Quickshell.env("USER")
+                        weight: 500
                     }
                     StyledText {
                         text: `Uptime ${Time.uptime}`
                         size: 16
-                        weight: 400
                     }
                 }
 
@@ -52,6 +56,7 @@ Item {
                     implicitHeight: 52
                     icon: "power_settings_new"
                     radius: Appearance.rounding.large
+                    inactiveColor: Colors.surface
 
                     onClicked: {
                         GlobalStates.quicksettingsOpened = false;
@@ -71,8 +76,8 @@ Item {
                 Layout.alignment: Qt.AlignHCenter
                 // Layout.preferredHeight: 56
                 implicitWidth: buttonsRow.implicitWidth + 16
-                implicitHeight: buttonsRow.implicitHeight+ 16
-                radius: 24
+                implicitHeight: buttonsRow.implicitHeight + 16
+                radius: Appearance.rounding.huge
                 // Toggles {}
                 RowLayout {
                     id: buttonsRow
@@ -86,9 +91,53 @@ Item {
                 }
             }
 
+            Sliders {}
+
             // TODO: notifications
             Item {
+                id: notificationList
                 Layout.fillHeight: true
+                Layout.fillWidth: true
+
+                ColumnLayout {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    spacing: 12
+                    RowLayout {
+                        id: notificationListHeader
+                        Layout.fillWidth: true
+                        Layout.alignment: Qt.AlignHCenter
+
+                        Rectangle {
+                            Layout.fillWidth: true
+                            implicitHeight: clearButton.implicitHeight
+                            color: Qt.alpha(Colors.surface_container, 0.6)
+                            radius: Appearance.rounding.normal
+
+                            StyledText {
+                                id: counter
+                                anchors.centerIn: parent
+                                text: `${Notifications.list.length} Notifications`
+                                Layout.alignment: Qt.AlignHCenter
+                            }
+                        }
+
+                        TextButton {
+                            id: clearButton
+                            text: "Clear"
+                            onClicked: Notifications.clearAll()
+                            padding: Appearance.padding.normal
+                            inactiveColor: Qt.alpha(Colors.surface_container, 0.6)
+                        }
+                    }
+
+                    NotificationListView {
+                        id: persistentNotificationsView
+                        model: Notifications.list
+                        implicitWidth: parent.width
+                        implicitHeight: notificationList.height
+                    }
+                }
             }
         }
     }
