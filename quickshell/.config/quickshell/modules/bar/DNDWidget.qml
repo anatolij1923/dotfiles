@@ -11,7 +11,7 @@ Item {
 
     MaterialSymbol {
         id: icon
-        icon: BluetoothService.icon
+        icon: "notifications_off"
         color: Colors.on_surface
     }
 }

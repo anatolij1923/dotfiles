@@ -11,6 +11,13 @@ Rectangle {
     color: GlobalStates.quicksettingsOpened === true ? Qt.alpha(Colors.primary, 0.3) : "transparent"
     radius: Appearance.rounding.huge
 
+    Behavior on implicitWidth {
+        Anim {
+            duration: Appearance.animDuration.expressiveFastSpatial
+            easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
+        }
+    }
+
     Behavior on color {
         CAnim {
             duration: Appearance.animDuration.expressiveEffects
@@ -32,6 +39,19 @@ Rectangle {
 
         spacing: 16
 
+        Loader {
+            active: Notifications.dnd ? 1 : 0
+            visible: active
+            sourceComponent: DNDWidget {
+                opacity: parent.visible
+                Behavior on opacity {
+                    Anim {
+                        duration: Appearance.animDuration.expressiveFastSpatial
+                        easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
+                    }
+                }
+            }
+        }
         NetworkWidget {}
         BluetoothWidget {}
     }
