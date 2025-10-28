@@ -35,5 +35,7 @@ QuickToggle {
     }
     StyledTooltip {
         text: "Change power profiles"
+        verticalPadding: 8
+        horizontalPadding: 12
     }
 }

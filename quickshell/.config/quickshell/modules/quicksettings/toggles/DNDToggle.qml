@@ -7,10 +7,10 @@ import qs.modules.common
 QuickToggle {
 
     checked: Notifications.dnd
-    icon: "notifications"
-    
+    icon: checked ? "notifications_off" : "notifications"
+
     onClicked: () => {
-        Notifications.dnd = !Notifications.dnd
+        Notifications.dnd = !Notifications.dnd;
     }
     StyledTooltip {
         text: "Do not disturb"

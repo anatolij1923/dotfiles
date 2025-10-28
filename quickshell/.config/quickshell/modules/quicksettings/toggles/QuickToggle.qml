@@ -15,12 +15,11 @@ IconButton {
     iconSize: 28
 
     Behavior on Layout.preferredWidth {
-            Anim {
-                duration: Appearance.animDuration.expressiveFastSpatial
-                easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
-            }
+        Anim {
+            duration: Appearance.animDuration.expressiveFastSpatial
+            easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
         }
-
+    }
 }
 
 // StyledButton {
@@ -30,7 +29,7 @@ IconButton {
 //     Layout.preferredWidth: implicitWidth + (toggled ? (pressed ? 24 : 16) : (pressed ? 16 : 0))
 //     // implicitWidth: toggled ? (pressed ? 64 : 56) : (pressed ? 56 : 40)
 //     implicitWidth: 45
-    
+
 //     buttonRadius: toggled ? (pressed ? 12 : 24) : (pressed ? 12 : 32)
 //     buttonIconSize: 28
 

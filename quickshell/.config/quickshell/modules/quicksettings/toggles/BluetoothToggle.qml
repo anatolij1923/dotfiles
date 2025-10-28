@@ -8,15 +8,13 @@ import Quickshell.Bluetooth
 QuickToggle {
     checked: Bluetooth.defaultAdapter?.enabled ?? false
 
-
-    icon: "bluetooth"
+    icon: BluetoothService.icon
     onClicked: () => {
         const adapter = Bluetooth.defaultAdapter;
         if (adapter)
             adapter.enabled = !adapter.enabled;
-
     }
-     onRightClicked: () => {
+    onRightClicked: () => {
         Quickshell.execDetached(["blueman-manager"]);
         GlobalStates.quicksettingsOpened = false;
     }
@@ -26,5 +24,7 @@ QuickToggle {
     // }
     StyledTooltip {
         text: "Toggle bluetooth. Right click to open blueman"
+        verticalPadding: 8
+        horizontalPadding: 12
     }
 }

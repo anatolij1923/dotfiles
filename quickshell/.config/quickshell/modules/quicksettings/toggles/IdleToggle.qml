@@ -12,5 +12,7 @@ QuickToggle {
     }
     StyledTooltip {
         text: "Keep your system awake"
+        verticalPadding: 8
+        horizontalPadding: 12
     }
 }
