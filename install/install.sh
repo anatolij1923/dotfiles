@@ -159,7 +159,7 @@ main() {
   print_header "Installing Packages"
   try run_install_packages "Graphics Drivers" "${GRAPHICS[@]}"
   try run_install_packages "Window Manager" "${WINDOW_MANAGER[@]}"
-  try run_install_packages "Aylur's GTK Shell" "${ASTAL[@]}"
+  try run_install_packages "Aylur's GTK Shell" "${QUICKSHELL[@]}"
   try run_install_packages "File Management" "${FILE_MANAGEMENT[@]}"
   try run_install_packages "Video Codecs" "${CODECS[@]}"
   try run_install_packages "Fonts" "${FONTS[@]}"
