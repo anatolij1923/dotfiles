@@ -148,6 +148,7 @@ Singleton {
 
     rounding: QtObject {
         property real scale: 1
+        property int unsharpen: 2
         property int small: 12 * scale
         property int normal: 17 * scale
         property int large: 20 * scale
