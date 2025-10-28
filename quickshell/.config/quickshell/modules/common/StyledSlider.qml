@@ -86,7 +86,7 @@ Slider {
         anchors.verticalCenter: parent.verticalCenter
         width: parent.width
         implicitHeight: trackWidth
-        
+
         Loader {
             anchors {
                 verticalCenter: parent.verticalCenter
@@ -147,6 +147,8 @@ Slider {
         StyledTooltip {
             extraVisibleCondition: root.pressed
             text: root.tooltipContent
+            verticalPadding: 8
+            horizontalPadding: 12
         }
     }
 }

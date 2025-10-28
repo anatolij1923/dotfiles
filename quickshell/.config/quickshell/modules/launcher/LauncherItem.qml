@@ -12,7 +12,7 @@ Rectangle {
 
     width: parent ? parent.width : 460
     implicitHeight: containerItem.height + 32
-    color: isCurrent ? Colors.on_secondary_fixed_variant : "transparent"
+    color: "transparent"
     radius: 16
 
     StateLayer {
@@ -24,7 +24,8 @@ Rectangle {
                     root.activated();
                 }
             }
-            onEntered: resultsView.currentIndex = index // Обрабатываем наведение
+            // onEntered: resultsView.currentIndex = index // Обрабатываем наведение
+            onPressed: resultsView.currentIndex = index
         }
 
     signal activated
@@ -44,8 +45,8 @@ Rectangle {
 
             Image {
                 id: icon
-                Layout.preferredWidth: 35
-                Layout.preferredHeight: 35
+                Layout.preferredWidth: 30
+                Layout.preferredHeight: 30
                 fillMode: Image.PreserveAspectFit
                 source: Quickshell.iconPath(AppSearch.guessIcon(desktopEntry.icon || desktopEntry.name))
                 anchors.verticalCenter: parent.verticalCenter

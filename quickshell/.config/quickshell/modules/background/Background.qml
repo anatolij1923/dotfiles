@@ -75,7 +75,7 @@ Variants {
                 sourceSize: Qt.size(bgRoot.width * wallpaperScale, bgRoot.height * wallpaperScale)
                 width: bgRoot.width * wallpaperScale
                 height: bgRoot.height * wallpaperScale
-                source: "file:///home/anatolij1923/Изображения/wallpapers/1923 Pack/byrotek-sundown-landscape.png"
+                source: "file:///home/anatolij1923/Изображения/wallpapers/1923 Pack/minecraft-purple.png"
             }
 
             Loader {
