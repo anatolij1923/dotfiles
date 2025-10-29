@@ -40,9 +40,10 @@ Rectangle {
         spacing: 16
 
         Loader {
-            active: Notifications.dnd ? 1 : 0
+            active: Notifications.dnd || Notifications.list.length > 0
+
             visible: active
-            sourceComponent: DNDWidget {
+            sourceComponent: NotifWidget {
                 opacity: parent.visible
                 Behavior on opacity {
                     Anim {
