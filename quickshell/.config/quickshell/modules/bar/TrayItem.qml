@@ -2,6 +2,7 @@ import Quickshell
 import Quickshell.Widgets
 import QtQuick
 import Quickshell.Services.SystemTray
+import qs.utils
 
 MouseArea {
     id: root
@@ -21,7 +22,7 @@ MouseArea {
     IconImage {
         id: icon
         anchors.centerIn: parent
-        source: root.modelData.icon 
+        source: Icons.getTrayIcon(root.modelData.id, root.modelData.icon)
         width: 18
         height: 18
     }

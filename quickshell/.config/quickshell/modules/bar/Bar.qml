@@ -26,34 +26,19 @@ PanelWindow {
         spacing: 8
 
         Workspaces {}
-        // FocusedWindow {}
+        UsageInfo {}
         Item {
             Layout.fillWidth: true
         }
         ClockWidget {
             anchors.horizontalCenter: parent.horizontalCenter
-            // Layout.alignment: Qt.AlignCenter
         }
         Item {
             Layout.fillWidth: true
         }
-        // test buttons
-        // RippleButton {
-        //     toggled: true
-        //     buttonText: "fdsg"
-        //     implicitHeight: parent.implicitHeight
-        //     implicitWidth: 50
-        // }
-        // RippleButton {
-        //     buttonText: "fdsg"
-        //     implicitHeight: parent.implicitHeight
-        //     implicitWidth: 50
-        // }
 
         KbLayout {}
         Tray {}
-        // NetworkWidget {}
-        // BluetoothWidget {}
         QsButton {}
         BatteryWidget {}
     }

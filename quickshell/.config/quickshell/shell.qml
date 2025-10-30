@@ -1,4 +1,5 @@
 //@ pragma UseQApplication
+//@ pragma Env QT_SCALE_FACTOR=1
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Io

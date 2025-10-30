@@ -281,8 +281,7 @@ Rectangle {
                 icon: root.expanded ? "keyboard_arrow_down" : "keyboard_arrow_up"
                 anchors.right: parent.right
                 anchors.top: parent.top
-                // anchors.margins: Appearance.padding.normal
-                implicitHeight: time.implicitHeight
+                implicitHeight: time.implicitHeight + Appearance.padding.normal
 
                 color: root.modelData.urgency === NotificationUrgency.Critical ? Colors.secondary_container : Colors.surface_container
 

@@ -18,40 +18,6 @@ Item {
             model: SystemTray.items
 
             delegate: TrayItem {}
-
-            // delegate: Rectangle {
-            //     id: trayItem
-            //     color: "transparent"
-            //     width: 25
-            //     height: 25
-            //     radius: 4
-            //
-            //     IconImage {
-            //         width: 18
-            //         height: 18
-            //         anchors.centerIn: parent
-            //         source: modelData.icon
-            //     }
-            //
-            //     MouseArea {
-            //         // required property SystemTrayItem modelData
-            //         anchors.fill: parent
-            //         hoverEnabled: true
-            //         onEntered: trayItem.color = Colors.secondary
-            //         onExited: trayItem.color = "transparent"
-            //         onClicked: event => {
-            //             modelData.display(null, x, y)
-            //         }
-            //     }
-            //
-            //
-            //     Behavior on color {
-            //         ColorAnimation {
-            //             duration: 100
-            //             easing.type: Easing.OutCubic
-            //         }
-            //     }
-            // }
         }
     }
 }

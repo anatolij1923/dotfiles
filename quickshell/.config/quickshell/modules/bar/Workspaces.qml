@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import qs
 import qs.services
+import qs.modules.common
 
 Item {
     id: root
@@ -43,7 +44,6 @@ Item {
 
     Component.onCompleted: refreshWorkspaces()
 
-    // Подписка на все события, которые могут изменить состояние воркспейсов
     Connections {
         target: Hyprland
         function onActiveWsIdChanged() {
@@ -80,17 +80,16 @@ Item {
                 Layout.alignment: Qt.AlignVCenter
                 Layout.preferredWidth: width  // чтобы spacing учитывался
 
-                // Анимации на переключение воркспейсов
                 Behavior on width {
-                    NumberAnimation {
-                        duration: 200
-                        easing.type: Easing.OutCubic
+                    Anim {
+                        duration: Appearance.animDuration.expressiveFastSpatial
+                        easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
                     }
                 }
                 Behavior on color {
-                    ColorAnimation {
-                        duration: 200
-                        easing.type: Easing.OutCubic
+                    CAnim {
+                        duration: Appearance.animDuration.expressiveEffectsDuration
+                        easing.bezierCurve: Appearance.animCurves.expressiveEffects
                     }
                 }
 

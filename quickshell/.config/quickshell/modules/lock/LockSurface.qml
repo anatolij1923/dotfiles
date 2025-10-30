@@ -32,9 +32,9 @@ WlSessionLockSurface {
         color: "black"
         opacity: root.startAnimation ? 0.2 : 0
         Behavior on opacity {
-            NumberAnimation {
-                duration: 300
-                easing.type: Easing.InOutBack
+            Anim {
+                duration: Appearance.animDuration.expressiveFastSpatial
+                easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
             }
         }
     }
@@ -45,15 +45,11 @@ WlSessionLockSurface {
         opacity: root.startAnimation ? 1 : 0
 
         Behavior on opacity {
-            NumberAnimation {
-                duration: 10
-                easing.type: Easing.InOutQuad
+            Anim {
+                duration: Appearance.animDuration.expressiveFastSpatial
+                easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
             }
         }
-
-        // Button {
-        //     onClicked: context.unlocked()
-        // }
 
         Item {
             id: clock
@@ -94,16 +90,16 @@ WlSessionLockSurface {
             opacity: root.startAnimation ? 1 : 0
 
             Behavior on scale {
-                NumberAnimation {
-                    duration: 200
-                    easing.type: Easing.OutCubic
+                Anim {
+                    duration: Appearance.animDuration.expressiveFastSpatial
+                    easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
                 }
             }
 
-            Behavior on opacity { 
-                NumberAnimation {
-                    duration: 300
-                    easing.type: Easing.OutCubic
+            Behavior on opacity {
+                Anim {
+                    duration: Appearance.animDuration.expressiveFastSpatial
+                    easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
                 }
             }
 
@@ -146,9 +142,9 @@ WlSessionLockSurface {
                 placeholderTextColor: Colors.on_surface_variant
 
                 Behavior on opacity {
-                    NumberAnimation {
-                        duration: 300
-                        easing.type: Easing.OutQuad
+                    Anim {
+                        duration: Appearance.animDuration.expressiveFastSpatial
+                        easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
                     }
                 }
 

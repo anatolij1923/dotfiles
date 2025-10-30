@@ -7,6 +7,21 @@ import Quickshell.Services.Notifications
 Singleton {
     id: root
 
+    function getTrayIcon(id: string, icon: string): string {
+        if (icon.includes("?path=")) {
+            const [name, path] = icon.split("?path=");
+            icon = Qt.resolvedUrl(`${path}/${name.slice(name.lastIndexOf("/") + 1)}`);
+        }
+        return icon;
+    }
+
+    function getAppIcon(name: string, fallback: string): string {
+        const icon = DesktopEntries.heuristicLookup(name)?.icon;
+        if (fallback !== "undefined")
+            return Quickshell.iconPath(icon, fallback);
+        return Quickshell.iconPath(icon);
+    }
+
     function getNotifIcon(summary: string, urgency: int): string {
         summary = summary.toLowerCase();
         if (summary.includes("reboot"))

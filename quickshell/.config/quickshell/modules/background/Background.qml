@@ -6,6 +6,7 @@ import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Effects
 import Qt5Compat.GraphicalEffects
+import qs.utils
 
 import qs
 import qs.services
@@ -75,7 +76,7 @@ Variants {
                 sourceSize: Qt.size(bgRoot.width * wallpaperScale, bgRoot.height * wallpaperScale)
                 width: bgRoot.width * wallpaperScale
                 height: bgRoot.height * wallpaperScale
-                source: "file:///home/anatolij1923/Изображения/wallpapers/1923 Pack/minecraft-purple.png"
+                source: `${Paths.pictures}/wallpapers/1923\ Pack/minecraft-purple.png`
             }
 
             Loader {

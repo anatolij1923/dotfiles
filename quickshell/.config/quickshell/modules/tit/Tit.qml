@@ -42,10 +42,10 @@ Scope {
                 fill: parent
                 margins: 10
             }
-            color: "#1F1B13"
+            color: Colors.surface_container
             radius: 20
             border.width: 1
-            border.color: "#4D4639"
+            border.color: Colors.surface_container_highest
 
             Text {
                 anchors {
@@ -56,7 +56,7 @@ Scope {
                 renderType: Text.NativeRendering
                 font.pixelSize: 16
                 text: "мощни сискэ"
-                color: "#F5E0BA"
+                color: Colors.on_surface
             }
 
             /* --- Begin Add stuff here --- */
@@ -137,14 +137,14 @@ Scope {
                         var x = xMin + (xMax - xMin) * (i / samples);
                         var y = f(x);
                         if (y < yMin)
-                        yMin = y;
+                            yMin = y;
                         if (y > yMax)
-                        yMax = y;
+                            yMax = y;
                     }
                     // padding
                     var yPad = (yMax - yMin) * 0.1;
                     if (!isFinite(yPad) || yPad === 0)
-                    yPad = 1;
+                        yPad = 1;
                     yMin -= yPad;
                     yMax += yPad;
 
@@ -170,7 +170,7 @@ Scope {
 
                     // draw axes (use tw/th)
                     ctx.lineWidth = 1;
-                    ctx.strokeStyle = "#4D4639";
+                    ctx.strokeStyle = Colors.on_surface;
                     if (0 >= yMin && 0 <= yMax) {
                         var y0 = mapY(0);
                         ctx.beginPath();
@@ -187,7 +187,7 @@ Scope {
                     }
 
                     // draw the function curve using the same mapping and tw as effective width
-                    ctx.strokeStyle = "#F5E0BA";
+                    ctx.strokeStyle = Colors.primary;
                     ctx.lineWidth = 2;
                     ctx.beginPath();
                     var first = true;
@@ -201,7 +201,7 @@ Scope {
                             ctx.moveTo(pxm, py);
                             first = false;
                         } else
-                        ctx.lineTo(pxm, py);
+                            ctx.lineTo(pxm, py);
                     }
                     ctx.stroke();
 
@@ -243,7 +243,7 @@ Scope {
                         root.zoom /= 1.1;
                     }
                     if (root.zoom < 0.1)
-                    root.zoom = 0.1;
+                        root.zoom = 0.1;
                     funcCanvas.requestPaint();
                 }
             }
@@ -251,11 +251,10 @@ Scope {
     }
 
     IpcHandler {
-        target: "tit" 
+        target: "tit"
 
-        function toggle (): void  {
-            GlobalStates.titOpened = !GlobalStates.titOpened
+        function toggle(): void {
+            GlobalStates.titOpened = !GlobalStates.titOpened;
         }
     }
 }
-
