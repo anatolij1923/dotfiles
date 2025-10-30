@@ -69,6 +69,32 @@ Item {
                 }
             }
 
+            RowLayout {
+                Layout.fillWidth: true
+                BigQuickToggle {
+                    title: "Network"
+                    substring: "Network name"
+                    icon: Network.icon
+                    Layout.fillWidth: true
+                }
+                BigQuickToggle {
+                    title: "Bluetooth"
+                    // substring: "Network name"
+                    icon: BluetoothService.icon
+                    Layout.fillWidth: true
+                    checked: BluetoothService.enabled
+                    // onClicked: () => {
+                    //     const adapter = Bluetooth.defaultAdapter;
+                    //     if (adapter)
+                    //         adapter.enabled = !adapter.enabled;
+                    // }
+                    // onRightClicked: () => {
+                    //     Quickshell.execDetached(["blueman-manager"]);
+                    //     GlobalStates.quicksettingsOpened = false;
+                    // }
+                }
+            }
+
             Rectangle {
                 id: toggles
                 color: Colors.surface_container
