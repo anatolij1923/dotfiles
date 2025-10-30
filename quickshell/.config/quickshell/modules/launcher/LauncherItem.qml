@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.common
@@ -43,11 +44,10 @@ Rectangle {
             anchors.fill: parent
             spacing: 10
 
-            Image {
+            IconImage {
                 id: icon
                 Layout.preferredWidth: 30
                 Layout.preferredHeight: 30
-                fillMode: Image.PreserveAspectFit
                 source: Quickshell.iconPath(AppSearch.guessIcon(desktopEntry.icon || desktopEntry.name))
                 anchors.verticalCenter: parent.verticalCenter
             }

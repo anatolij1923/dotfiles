@@ -42,6 +42,7 @@ Scope {
             anchors.fill: parent
             active: GlobalStates.launcherOpened
             focus: GlobalStates.launcherOpened
+
             sourceComponent: Rectangle {
                 id: wrapper
                 color: Colors.surface
@@ -122,7 +123,7 @@ Scope {
                         bottomMargin: 8
 
                         highlight: Rectangle {
-                            color: Colors.on_secondary_fixed_variant
+                            color: Colors.secondary_container
                             radius: Appearance.rounding.normal
 
                             y: root.currentIndex?.y ?? 0
