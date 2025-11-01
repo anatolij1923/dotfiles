@@ -11,6 +11,7 @@ Singleton {
     property QtObject animDuration
     property QtObject rounding
     property QtObject padding
+    property QtObject sizes 
 
     animCurves: QtObject {
         readonly property list<real> expressiveFastSpatial: [0.42, 1.67, 0.21, 0.90, 1, 1] // Default, 350ms
@@ -164,5 +165,11 @@ Singleton {
         property int larger: 12 * scale
         property int large: 15 * scale
         property int huge: 24 * scale
+    }
+
+    sizes: QtObject {
+        property int barHeight: 50
+
+        property int osdWidth: 250
     }
 }

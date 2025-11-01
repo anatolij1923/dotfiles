@@ -16,6 +16,7 @@ import qs.modules.launcher
 import qs.modules.notifications
 import qs.modules.tit
 import qs.modules.quicksettings
+import qs.modules.osd
 
 ShellRoot {
     property bool enableBackground: true
@@ -28,6 +29,7 @@ ShellRoot {
     property bool enableQuicksettings: true
     property bool enableNotifications: true
     property bool enableTit: true
+    property bool enableOsd: true
 
     LazyLoader {
         active: enableBackground
@@ -70,5 +72,9 @@ ShellRoot {
     LazyLoader {
         active: enableTit
         component: Tit {}
+    }
+    LazyLoader {
+        active: enableOsd
+        component: OSD {}
     }
 }

@@ -51,7 +51,8 @@ Slider {
     Behavior on value {
         // This makes the adjusted value (like volume) shift smoothly
         Anim {
-            duration: Appearance.animDuration.smaller
+            duration: Appearance.animDuration.expressiveFastSpatial
+            easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
         }
         // SmoothedAnimation {
         //     velocity: 800

@@ -16,8 +16,11 @@ Singleton {
     property bool screenLockContainsCharacters: false
     property bool screenUnlockFailed: false
     property bool quicksettingsOpened: false
+    property bool osdOpened: false
 
     property bool titOpened: false
 
-    property  bool idleIngibitorToggled: false
+    property bool shloonixActivated: true
+
+    property bool idleIngibitorToggled: false
 }

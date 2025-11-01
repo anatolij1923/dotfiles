@@ -13,7 +13,7 @@ PanelWindow {
         left: true
         right: true
     }
-    implicitHeight: 50
+    implicitHeight: Appearance.sizes.barHeight
     WlrLayershell.layer: WlrLayer.Top
     color: Colors.surface
 
