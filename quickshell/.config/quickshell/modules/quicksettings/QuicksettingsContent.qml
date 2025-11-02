@@ -11,6 +11,9 @@ import qs.modules.quicksettings.toggles
 import qs.modules.quicksettings.header
 import qs.modules.quicksettings.sliders
 
+import Quickshell.Bluetooth
+
+
 Item {
     id: root
     property int padding: 24
@@ -74,7 +77,12 @@ Item {
                 BigQuickToggle {
                     title: "Network"
                     substring: "Network name"
+                    checked: Network.wifiEnabled
                     icon: Network.icon
+                    onClicked: () => {
+                        Network.toggleWifi();
+                    }
+
                     Layout.fillWidth: true
                 }
                 BigQuickToggle {
@@ -83,15 +91,15 @@ Item {
                     icon: BluetoothService.icon
                     Layout.fillWidth: true
                     checked: BluetoothService.enabled
-                    // onClicked: () => {
-                    //     const adapter = Bluetooth.defaultAdapter;
-                    //     if (adapter)
-                    //         adapter.enabled = !adapter.enabled;
-                    // }
-                    // onRightClicked: () => {
-                    //     Quickshell.execDetached(["blueman-manager"]);
-                    //     GlobalStates.quicksettingsOpened = false;
-                    // }
+                    onClicked: () => {
+                        const adapter = Bluetooth.defaultAdapter;
+                        if (adapter)
+                            adapter.enabled = !adapter.enabled;
+                    }
+                    onRightClicked: () => {
+                        Quickshell.execDetached(["blueman-manager"]);
+                        GlobalStates.quicksettingsOpened = false;
+                    }
                 }
             }
 

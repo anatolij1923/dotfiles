@@ -9,11 +9,18 @@ Rectangle {
     property alias title: title.text
     property alias substring: substring.text
     property alias icon: button.icon
-    property int padding: Appearance.padding.normal
     property alias checked: button.checked
+    property alias toggle: button.toggle
+    property alias enabled: button.enabled
+    property int padding: Appearance.padding.normal
+
+    signal clicked
+    signal rightClicked
+    signal middleClicked
+
     radius: Appearance.rounding.huge
 
-    color: Colors.surface_container_high
+    color: Colors.surface_container
 
     implicitWidth: content.implicitWidth + padding * 2
     implicitHeight: content.implicitHeight + padding * 2
@@ -27,9 +34,25 @@ Rectangle {
         IconButton {
             id: button
             padding: Appearance.padding.normal
-            radius: checked ? Appearance.rounding.normal : Appearance.rounding.full
+            // radius: checked ? Appearance.rounding.normal : Appearance.rounding.full
+            radius: checked
+            ? (stateLayer.pressed ? Appearance.rounding.huge : Appearance.rounding.normal)
+            : (stateLayer.pressed ? Appearance.rounding.small : Appearance.rounding.huge)
+
+            Behavior on radius {
+                Anim {
+                    duration: Appearance.animDuration.expressiveFastSpatial
+                    easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
+                }
+            }
             checked: true
             iconSize: 32
+
+            inactiveColor: Colors.surface_container_high
+
+            onClicked: root.clicked()
+            onRightClicked: root.rightClicked()
+            onMiddleClicked: root.middleClicked()
 
             // Behavior on radius {
             //     Anim {
