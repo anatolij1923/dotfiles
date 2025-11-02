@@ -1,0 +1,85 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "minimap": {
+    "show": "never"
+  },
+  "agent": {
+    "default_model": {
+      "provider": "google",
+      "model": "gemini-2.5-flash"
+    }
+  },
+  "vim_mode": false,
+
+  // font settings
+  "ui_font_size": 20,
+  "buffer_font_size": 20,
+  "agent_ui_font_size": 22,
+  "ui_font_family": "JetBrains Mono",
+  "ui_font_weight": 500,
+  "buffer_font_family": "JetBrainsMonoNL Nerd Font Propo",
+
+  // theme settings
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Kanagawa Wave"
+  },
+  "icon_theme": "Warm Charmed Icons",
+
+  // project panel
+  "project_panel": {
+    "default_width": 300,
+    "auto_fold_dirs": false,
+    "indent_size": 25,
+    "entry_spacing": "comfortable",
+    "indent_guides": {
+      "show": "never"
+    }
+  },
+
+  // terminal settings
+  "terminal": {
+    "default_height": 400
+  },
+
+  // extensions to install
+  "auto_install_extensions": {
+    "kanagawa-themes": true,
+    "charmed-icons": true
+  },
+
+  "languages": {
+    "SCSS": {
+      "tab_size": 2
+    },
+    "HTML": {
+      "tab_size": 2
+    }
+  },
+
+  // diagnostics
+  "diagnostics": {
+    "button": true,
+    "include_warnings": true,
+    "lsp_pull_diagnostics": {
+      "enabled": true,
+      "debounce_ms": 50
+    },
+    "inline": {
+      "enabled": true,
+      "update_debounce_ms": 50,
+      "padding": 4,
+      "min_column": 0,
+      "max_severity": null
+    },
+    "cargo": null
+  }
+}

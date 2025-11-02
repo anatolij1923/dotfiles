@@ -1,0 +1,69 @@
+@use "../colors" as *;
+@use "mixins/material.scss" as *;
+@use "mixins/button.scss" as *;
+@use "mixins/elevation.scss" as *;
+
+window.powermenu {
+  .powermenu-content {
+    background-color: $color-surface;
+    border-radius: 48px;
+    box-shadow: none;
+    padding: 24px;
+
+    button {
+      @include button;
+      @include elevation(2);
+      background-color: $color-surface_container_high;
+      color: $color-on_surface;
+      border-radius: 8px;
+      padding: 16px;
+      transition:
+        background-color 0.2s ease-in-out,
+        color 0.2s ease-out,
+        box-shadow 0.2s ease-in-out,
+        transform 0.1s ease,
+        border-radius 0.2s ease-out;
+
+      &:first-child {
+        border-top-left-radius: 28px;
+        border-bottom-left-radius: 28px;
+      }
+
+      &:last-child {
+        border-top-right-radius: 28px;
+        border-bottom-right-radius: 28px;
+      }
+
+      &:hover {
+        @include elevation(4);
+        background-color: $color-surface_variant;
+        transform: scale(1.03);
+      }
+
+      &:focus {
+        @include elevation(6);
+        background-color: $color-primary;
+        border-radius: 20px;
+        outline: none;
+        color: $color-on_primary;
+        // box-shadow: 0 0 10px 3px rgba($color-primary, 0.35);
+        transform: scale(1.05);
+      }
+
+      &:active {
+        transform: scale(0.97);
+      }
+
+      .material-icon {
+        @include material-icon(56px);
+        font-weight: 700;
+        opacity: 0.8;
+      }
+
+      .button-name {
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}

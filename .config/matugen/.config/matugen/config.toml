@@ -1,0 +1,35 @@
+[config]
+
+[templates.hyprland]
+input_path = '~/.config/matugen/templates/hyprland-colors.conf'
+output_path = '~/.config/hypr/colors.conf'
+post_hook = 'hyprctl reload'
+
+[templates.cava]
+input_path = '~/.config/matugen/templates/cava-colors'
+output_path = '~/.config/cava/config'
+
+[templates.rofi]
+input_path = '~/.config/matugen/templates/rofi-colors.rasi'
+output_path = '~/.config/rofi/colors.rasi'
+
+[templates.kitty]
+input_path = '~/.config/matugen/templates/kitty-colors.conf'
+output_path = '~/.config/kitty/colors.conf'
+# post_hook = "kitty @ set-colors -a -c ~/.config/kitty/colors.conf"
+
+# [templates.ags]
+# input_path = '~/.config/matugen/templates/colors.scss'
+# output_path = '~/.config/ags/colors.scss'
+
+[templates.shell]
+input_path = '~/.config/matugen/templates/colors.scss'
+output_path = '~/dotfiles/shell/colors.scss'
+
+[templates.ghostty]
+input_path = '~/.config/matugen/templates/ghostty.conf'
+output_path = '~/.config/ghostty/colors'
+
+[templates.quickshell]
+input_path = '~/.config/matugen/templates/colors.qml'
+output_path = '~/.config/quickshell/Colors.qml'

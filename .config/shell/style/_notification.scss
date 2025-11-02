@@ -1,0 +1,164 @@
+@use "sass:string";
+@use "sass:color";
+@use "../colors" as *;
+@use "mixins/material.scss" as *;
+@use "mixins/button.scss" as *;
+
+@function gtkalpha($c, $a) {
+  @return string.unquote("alpha(#{$c},#{$a})");
+}
+
+// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+
+window.NotificationPopups {
+  all: unset;
+  margin: 0.5rem 1rem;
+}
+
+.Notification {
+  border-radius: 24px;
+  background-color: $color-surface_container;
+  margin: 0.20rem 0rem;
+
+  &.critical {
+    // border: 1pt solid gtkalpha($color-error, 0.4);
+    background-color: color.mix($color-surface_container, $color-primary, $weight: 50%);
+
+    .header {
+      .app-name {
+        color: gtkalpha($color-error, 0.8);
+      }
+
+      .app-icon {
+        color: $color-error;
+      }
+
+      .expand-button {
+        @include button;
+        @include material-icon;
+
+        background-color: color.mix($color-surface_container_high, $color-primary, $weight: 40%);
+        padding: 2px 8px;
+        margin: 0 4px;
+        border-radius: 16px;
+
+        &:hover {
+          background-color: color.mix($color-surface_container_high, $color-primary, $weight: 25%);
+        }
+      }
+    }
+
+    .actions {
+      button {
+        background-color: color.mix($color-surface_container_highest, $color-primary, $weight: 40%);
+
+        &:hover {
+          background-color: color.mix($color-surface_container_high, $color-primary, $weight: 25%);
+        }
+      }
+    }
+  }
+
+  .header {
+    padding: 0.5rem;
+    color: gtkalpha($color-on_surface, 0.5);
+
+    .app-icon {
+      margin: 0 0.4rem;
+    }
+
+    .app-name {
+      margin-right: 0.3rem;
+      font-weight: bold;
+
+      &:first-child {
+        margin-left: 0.4rem;
+      }
+    }
+
+    .time {
+      margin: 0 0.5rem;
+      font-weight: 400;
+    }
+
+    .expand-button {
+      @include button;
+      @include material-icon;
+
+      background-color: $color-surface_container_high;
+      padding: 2px 8px;
+      margin: 0 4px;
+      border-radius: 16px;
+
+      &:hover {
+        background-color: $color-surface_container_highest;
+      }
+    }
+
+    .close-button {
+      @include button;
+      // background-color: $color-surface_container_high;
+      background-color: transparent;
+      color: #d05050;
+      border-radius: 16px;
+      padding: 0 0.5rem;
+      min-width: 0;
+      min-height: 0;
+    }
+  }
+
+  .content {
+    margin: 1rem;
+    margin-top: 0.5rem;
+
+    .summary {
+      font-size: 1.2em;
+      color: $color-on_surface;
+    }
+
+    .body {
+      color: gtkalpha($color-on_surface, 0.8);
+    }
+
+    .image {
+      margin-right: 0.5rem;
+      border-radius: 16px;
+      min-width: 80px;
+      min-height: 80px;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  .actions {
+    margin: 1rem;
+    margin-top: 0;
+
+    button {
+      @include button;
+      background-color: $color-surface_container_high;
+      color: $color-on_surface;
+      margin: 0 0.3rem;
+      padding: 0.5rem;
+      border-radius: 24px;
+
+      font-weight: 500;
+
+      .close-button {
+        @include material-icon;
+      }
+
+      &:hover {
+        background-color: $color-surface_container_highest;
+      }
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+@use "../colors" as *;
+@use "mixins/material.scss" as *;
+@use "mixins/scale.scss" as *;
+
+.osd {
+  background-color: transparent;
+
+  .osd-content {
+    background-color: $color-surface_container;
+    border: 1px solid $color-surface_container_high;
+    border-radius: 24px;
+    padding: 0.8rem 1rem;
+    margin: 20px;
+
+    .material-icon {
+      @include material-icon(32px);
+      color: $color-on_surface;
+      margin: 0;
+    }
+
+    .osd-slider {
+      @include scale;
+
+      scale {
+        min-width: 8rem;
+
+        trough {
+          background-color: $color-on_secondary_fixed_variant;
+
+          highlight {
+            background-color: $color-primary;
+          }
+
+          slider {
+            border-radius: 1rem;
+            background-color: $color-primary;
+            box-shadow: 0 0 0 0.275rem $color-surface_container;
+            padding: 0.5rem 0.125rem;
+            margin: -0.2rem 0;
+
+          }
+        }
+      }
+    }
+
+    .percentage-label {
+      font-weight: 400;
+      color: $color-on_surface;
+    }
+  }
+}
