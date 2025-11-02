@@ -4,10 +4,12 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Effects
 import Qt5Compat.GraphicalEffects
 import qs.utils
 
+import qs.modules.common
 import qs
 import qs.services
 
@@ -114,6 +116,30 @@ Variants {
                             bgRoot.startAnimation = false;
                         }
                     }
+                }
+            }
+        }
+
+        Item {
+            id: activateLinux
+            visible: !GlobalStates.shloonixActivated && !GlobalStates.screenLocked
+            anchors.fill: parent
+            opacity: 0.7
+
+            ColumnLayout {
+                anchors {
+                    right: parent.right
+                    bottom: parent.bottom
+                    margins: 32
+                }
+                StyledText {
+                    text: "Activate Linux"
+                    size: 26
+                }
+
+                StyledText {
+                    text: "Go to settings to activate Linux"
+                    size: 20
                 }
             }
         }
