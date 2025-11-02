@@ -25,6 +25,13 @@ Scope {
         implicitWidth: contentLoader.item ? contentLoader.item.implicitWidth : 460
         implicitHeight: contentLoader.item ? contentLoader.item.implicitHeight : 40
 
+        // Behavior on implicitHeight {
+        //     Anim {
+        //         duration: Appearance.animDuration.expressiveSlowSpatial 
+        //         easing.bezierCurve: Appearance.animCurves.expressiveSlowSpatial
+        //     }
+        // }
+
         function hide() {
             GlobalStates.launcherOpened = false;
             root.searchingText = "";

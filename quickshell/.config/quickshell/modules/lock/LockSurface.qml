@@ -52,6 +52,33 @@ WlSessionLockSurface {
         }
 
         Item {
+            id: lockIcon
+            anchors {
+                top: parent.top
+                horizontalCenter: parent.horizontalCenter
+                topMargin: 64
+            }
+            opacity: 0.85
+
+            ColumnLayout {
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: 12
+
+                MaterialSymbol {
+                    icon: "lock"
+                    color: Colors.on_surface
+                    size: 32
+                    Layout.alignment: Qt.AlignHCenter
+                }
+
+                StyledText {
+                    text: "Locked"
+                    size: 20
+                }
+            }
+        }
+
+        Item {
             id: clock
             anchors {
                 // centerIn: parent
@@ -60,12 +87,6 @@ WlSessionLockSurface {
                 topMargin: 180
             }
 
-            // Rectangle {
-            //     width: 100
-            //     height: 50
-            //     color: "red"
-            // }
-            //
             ColumnLayout {
                 anchors.horizontalCenter: parent.horizontalCenter
                 StyledText {

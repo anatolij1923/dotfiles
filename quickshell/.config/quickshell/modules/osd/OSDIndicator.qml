@@ -55,7 +55,7 @@ Item {
             StyledSlider {
                 configuration: StyledSlider.Configuration.XS
                 value: root.value
-                // handleHeight: 20
+                handleHeight: 25
             }
 
             StyledText {
