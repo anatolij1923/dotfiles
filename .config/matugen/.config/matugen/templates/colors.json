@@ -1,8 +1,0 @@
-{
-  "blur-background": "{{colors.surface.default.rgba | set_alpha: 0.3}}",
-  "blur-background8": "{{colors.surface.default.rgba | set_alpha: 0.8}}"
-  <* for name, value in colors *>,
-  "{{name}}": "{{value.default.hex}}"
-  <* endfor *>
-}
-
