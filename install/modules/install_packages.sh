@@ -150,7 +150,7 @@ enable_services() {
         log_info "Enabling services from group: $var_name"
         for service in "${current_array[@]}"; do
           log_info "Enabling service: $service"
-          try sudo systemctl enable --now "$service" || services_enabled_successfully=false
+          try sudo systemctl enable now "$service" || services_enabled_successfully=false
         done
       else
         log_warn "No services found in group: $var_name"
