@@ -13,6 +13,7 @@ Rectangle {
     property alias toggle: button.toggle
     property alias enabled: button.enabled
     property int padding: Appearance.padding.normal
+    property string tooltipText: ""
 
     signal clicked
     signal rightClicked
@@ -25,6 +26,13 @@ Rectangle {
     implicitWidth: content.implicitWidth + padding * 2
     implicitHeight: content.implicitHeight + padding * 2
 
+    Behavior on implicitWidth {
+        Anim {
+            duration: Appearance.animDuration.expressiveFastSpatial
+            easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
+        }
+    }
+
     RowLayout {
         id: content
         anchors.fill: parent
@@ -35,9 +43,7 @@ Rectangle {
             id: button
             padding: Appearance.padding.normal
             // radius: checked ? Appearance.rounding.normal : Appearance.rounding.full
-            radius: checked
-            ? (stateLayer.pressed ? Appearance.rounding.huge : Appearance.rounding.normal)
-            : (stateLayer.pressed ? Appearance.rounding.small : Appearance.rounding.huge)
+            radius: checked ? (stateLayer.pressed ? Appearance.rounding.small : Appearance.rounding.normal) : (stateLayer.pressed ? Appearance.rounding.small : Appearance.rounding.huge)
 
             Behavior on radius {
                 Anim {
@@ -60,6 +66,12 @@ Rectangle {
             //         easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
             //     }
             // }
+            //
+            StyledTooltip {
+                text: root.tooltipText
+                verticalPadding: 8
+                horizontalPadding: 12
+            }
         }
 
         Column {
@@ -73,6 +85,7 @@ Rectangle {
             StyledText {
                 id: substring
                 size: 15
+                animate: true
             }
         }
     }

@@ -8,6 +8,7 @@ IconButton {
     id: root
     toggle: false
     Layout.preferredWidth: implicitWidth + (stateLayer.pressed ? Appearance.padding.huge : internalChecked ? Appearance.padding.smaller : 0)
+    Layout.fillWidth: true
 
     implicitHeight: 45
     implicitWidth: 45
