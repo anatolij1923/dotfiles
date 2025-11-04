@@ -25,12 +25,13 @@ Item {
         anchors.fill: parent
         radius: 24
         color: Colors.surface
+        clip: true
         // implicitWidth: 500
 
         ColumnLayout {
             anchors.fill: parent
             anchors.margins: root.padding
-            spacing: 24
+            spacing: 18
             Layout.fillHeight: true
             // Header
             RowLayout {

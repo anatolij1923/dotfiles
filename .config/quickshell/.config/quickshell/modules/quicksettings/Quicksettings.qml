@@ -5,6 +5,7 @@ import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 import qs
+import qs.services
 
 Scope {
     PanelWindow {
@@ -15,7 +16,7 @@ Scope {
         visible: GlobalStates.quicksettingsOpened
 
         color: "transparent"
-        implicitWidth: 500
+        implicitWidth: Appearance.sizes.quicksettingsWidth
 
         anchors {
             top: true
