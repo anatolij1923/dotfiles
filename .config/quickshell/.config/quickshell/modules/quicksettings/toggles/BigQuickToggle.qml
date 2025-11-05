@@ -84,8 +84,11 @@ Rectangle {
             }
             StyledText {
                 id: substring
+                visible: root.substring !== ""
                 size: 15
                 animate: true
+                width: 115
+                elide: Text.ElideRight
             }
         }
     }

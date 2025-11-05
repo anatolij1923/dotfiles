@@ -6,6 +6,7 @@ import QtQuick.Layouts
 
 IconButton {
     id: root
+    property string tooltipText: ""
     toggle: false
     Layout.preferredWidth: implicitWidth + (stateLayer.pressed ? Appearance.padding.huge : internalChecked ? Appearance.padding.smaller : 0)
     Layout.fillWidth: true

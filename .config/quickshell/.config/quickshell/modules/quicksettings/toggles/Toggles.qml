@@ -34,16 +34,15 @@ Rectangle {
                     Network.toggleWifi();
                 }
 
-                Layout.fillWidth: true
-
                 tooltipText: "Click to toggle Wi-Fi"
+                Layout.fillWidth: true
             }
 
             BigQuickToggle {
-                title: "Bluetooth"
-                // substring: "Network name"
-                icon: BluetoothService.icon
                 Layout.fillWidth: true
+                title: "Bluetooth"
+                substring: BluetoothService.firstActiveDevice.name
+                icon: BluetoothService.icon
                 checked: BluetoothService.enabled
                 onClicked: () => {
                     const adapter = Bluetooth.defaultAdapter;
@@ -62,11 +61,15 @@ Rectangle {
         RowLayout {
             id: buttonsRow
             spacing: 4
-            // NetworkToggle {}
-            // BluetoothToggle {}
             DNDToggle {}
             IdleToggle {}
+            // DarkModeToggle {}
+            SleepToggle {}
+        }
+
+        RowLayout {
             PowerprofilesToggle {}
+            ScreenRecordToggle {}
         }
     }
 }
