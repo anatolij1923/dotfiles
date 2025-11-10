@@ -1,29 +1,64 @@
 pragma Singleton
 
 import Quickshell
+import Quickshell.Io
 import Quickshell.Wayland
 import QtQuick
 import qs
+import qs.utils
 
 Singleton {
     id: root
 
     // property bool toggled: GlobalStates.idleIngibitorToggled
-    property alias enabled: props.enabled
-    PersistentProperties {
-        id: props
+    property bool enabled: false
 
-        property bool enabled
-        reloadableId: "idleInhibitor"
+    FileView {
+        id: state
+        path: `${Paths.state}/idleInhibitor.json`
+
+        onLoaded: {
+            if (text() === "true") {
+                root.enabled = true
+            } else {
+                root.enabled = false
+            }
+        }
+        onLoadFailed: err => {
+            // Если файл не найден, устанавливаем enabled в false и создаем файл с false
+            if (err === FileViewError.FileNotFound) {
+                root.enabled = false
+                setText("false")
+            }
+        }
     }
 
+    Timer {
+        id: saveTimer
+        interval: 100
+        onTriggered: {
+            state.setText(root.enabled ? "true" : "false")
+        }
+    }
+
+    onEnabledChanged: {
+        saveTimer.restart()
+    }
+
+    // PersistentProperties {
+    //     id: props
+
+    //     property bool enabled
+    //     reloadableId: "idleInhibitor"
+    // }
+
     function toggle() {
-        props.enabled = !props.enabled
+        root.enabled = !root.enabled
     }
 
     IdleInhibitor {
         id: idleInhibitor
-        enabled: props.enabled
+        enabled: root.enabled
         window: PanelWindow {
             color: "transparent"
             mask: Region {

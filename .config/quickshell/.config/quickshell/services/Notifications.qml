@@ -6,6 +6,7 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Notifications
 import qs.utils
+import qs.config
 
 Singleton {
     id: root
@@ -133,7 +134,7 @@ Singleton {
         property string appIcon
         property string appName
         property string image
-        property real expireTimeout: 5000
+        property int expireTimeout: 10
         property int urgency: NotificationUrgency.Normal
         property bool resident
         property bool hasActionIcons
@@ -141,7 +142,7 @@ Singleton {
 
         readonly property Timer timer: Timer {
             running: true
-            interval: notif.expireTimeout > 0 ? notif.expireTimeout : 5000
+            interval: Config.notification.timeout
             onTriggered: notif.popup = false
         }
 

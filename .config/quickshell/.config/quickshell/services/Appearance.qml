@@ -144,7 +144,7 @@ Singleton {
         property int extraLarge: 1000 * scale
         property int expressiveFastSpatial: 350 * scale
         property int expressiveDefaultSpatial: 500 * scale
-        property int expressiveSlowSpatialDuration: 650 * scale
+        property int expressiveSlowSpatial: 650 * scale
         property int expressiveEffects: 200 * scale
     }
 
