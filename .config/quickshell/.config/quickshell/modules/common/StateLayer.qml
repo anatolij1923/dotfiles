@@ -5,14 +5,14 @@ import Quickshell
 import Quickshell.Widgets
 import Qt5Compat.GraphicalEffects
 
-// From https://github.com/caelestia-dots/shell 
+// From https://github.com/caelestia-dots/shell
 // License: GPLv3
 
 MouseArea {
     id: root
 
     property bool disabled
-    property color color: Colors.on_surface
+    property color color: Colors.palette.m3onSurface
     property real radius: parent?.radius ?? 0
     property alias rect: hoverLayer
 
@@ -109,6 +109,24 @@ MouseArea {
                 x: -ripple.width / 2
                 y: -ripple.height / 2
             }
+
+            // ShaderEffect {
+            //     id: rippleNoise
+            //     anchors.fill: parent
+            //     visible: ripple.opacity > 0
+            //     property real time: 0.0
+            //     property real intensity: 0.96 // интенсивность шума
+            //     property color tint: root.color
+            //     property real alpha: ripple.opacity
+            //
+            //
+            //     NumberAnimation on time {
+            //         from: 0
+            //         to: 100
+            //         loops: Animation.Infinite
+            //         duration: 8000
+            //     }
+            // }
         }
     }
 }

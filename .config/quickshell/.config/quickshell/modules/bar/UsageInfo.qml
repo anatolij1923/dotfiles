@@ -31,7 +31,7 @@ Item {
                 implicitSize: 28
                 MaterialSymbol {
                     anchors.centerIn: parent
-                    color: Colors.on_surface
+                    color: Colors.palette.m3onSurface
                     icon: "device_thermostat"
                     size: 22
                 }
@@ -48,7 +48,7 @@ Item {
                 implicitSize: 28
                 MaterialSymbol {
                     anchors.centerIn: parent
-                    color: Colors.on_surface
+                    color: Colors.palette.m3onSurface
                     icon: "memory"
                     size: 24
                 }

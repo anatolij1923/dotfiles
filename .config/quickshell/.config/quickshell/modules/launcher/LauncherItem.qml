@@ -56,7 +56,7 @@ Rectangle {
                 id: label
                 Layout.fillWidth: true
                 text: desktopEntry.name
-                color: Colors.on_surface
+                color: Colors.palette.m3onSurface
                 size: 18
                 weight: 400
                 elide: Text.ElideRight

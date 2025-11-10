@@ -19,7 +19,7 @@ Item {
         MaterialSymbol {
             icon: "language"
             font.pixelSize: 24
-            color: Colors.on_surface
+            color: Colors.palette.m3onSurface
             Layout.alignment: Qt.AlignVCenter
             visible: root.showIcon
         }

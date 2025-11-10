@@ -4,11 +4,12 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Effects
 import qs
+import  qs.services
 
 TextField {
     id: root
 
-    property color backgroundColor: Colors.surface_container
+    property color backgroundColor: Colors.palette.m3surfaceContainer
     property real radius: 20
     property string placeholder: "Type..."
     property string icon: ""
@@ -16,9 +17,9 @@ TextField {
 
     padding: 20
     focus: root.focus
-    color: Colors.on_surface
+    color: Colors.palette.m3onSurface
     placeholderText: placeholder
-    placeholderTextColor: Colors.on_surface
+    placeholderTextColor: Colors.palette.m3onSurface
     font.pixelSize: 16
     font.family: "Rubik"
     font.weight: 500
@@ -28,7 +29,7 @@ TextField {
     cursorDelegate: Rectangle {
         width: 2
         radius: 1
-        color: Colors.on_surface
+        color: Colors.palette.m3onSurface
         visible: root.focus
 
         SequentialAnimation on opacity {
@@ -61,6 +62,6 @@ TextField {
             leftMargin: 20
             verticalCenter: parent.verticalCenter
         }
-        color: Colors.on_surface
+        color: Colors.palette.m3onSurface
     }
 }

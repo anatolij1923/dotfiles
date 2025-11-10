@@ -34,7 +34,7 @@ Rectangle {
 
     property bool expanded: false
 
-    color: root.modelData.urgency === NotificationUrgency.Critical ? Colors.secondary_container : Colors.surface_container
+    color: root.modelData.urgency === NotificationUrgency.Critical ? Colors.palette.m3secondaryContainer : Colors.palette.m3surfaceContainer
     radius: Appearance.rounding.large
 
     MouseArea {
@@ -136,7 +136,7 @@ Rectangle {
 
                 sourceComponent: Rectangle {
                     radius: Appearance.rounding.full
-                    color: root.modelData.urgency === NotificationUrgency.Critical ? Colors.error : root.modelData.urgency === NotificationUrgency.Low ? Colors.surface_container_highest : Colors.secondary_container
+                    color: root.modelData.urgency === NotificationUrgency.Critical ? Colors.palette.m3error : root.modelData.urgency === NotificationUrgency.Low ? Colors.palette.m3surfaceContainerHighest : Colors.palette.m3secondaryContainer
                     implicitWidth: 48
                     implicitHeight: 48
 
@@ -169,7 +169,7 @@ Rectangle {
                         sourceComponent: MaterialSymbol {
                             icon: Icons.getNotifIcon(root.modelData.summary, root.modelData.urgency)
 
-                            color: root.modelData.urgency === NotificationUrgency.Critical ? Colors.on_error : root.modelData.urgency === NotificationUrgency.Low ? Colors.on_surface : Colors.on_secondary_container
+                            color: root.modelData.urgency === NotificationUrgency.Critical ? Colors.palette.m3onError : root.modelData.urgency === NotificationUrgency.Low ? Colors.palette.m3onSurface : Colors.palette.m3onSecondaryContainer
                             // font.pointSize: Appearance.font.size.large
                         }
                     }
@@ -183,7 +183,7 @@ Rectangle {
                 anchors.top: parent.top
                 anchors.left: image.right
                 anchors.leftMargin: Appearance.padding.normal
-                color: Qt.alpha(Colors.on_surface, 0.7)
+                color: Qt.alpha(Colors.palette.m3onSurface, 0.7)
 
                 animate: true
                 opacity: root.expanded ? 1 : 0
@@ -243,7 +243,7 @@ Rectangle {
                 anchors.top: parent.top
                 anchors.left: summary.right
                 anchors.leftMargin: Appearance.padding.small
-                color: Qt.alpha(Colors.on_surface, 0.7)
+                color: Qt.alpha(Colors.palette.m3onSurface, 0.7)
 
                 states: State {
                     name: "expanded"
@@ -273,7 +273,7 @@ Rectangle {
                 anchors.top: parent.top
                 anchors.left: timeSep.right
                 anchors.leftMargin: Appearance.padding.small
-                color: Qt.alpha(Colors.on_surface, 0.7)
+                color: Qt.alpha(Colors.palette.m3onSurface, 0.7)
             }
 
             IconButton {
@@ -283,7 +283,7 @@ Rectangle {
                 anchors.top: parent.top
                 implicitHeight: time.implicitHeight + Appearance.padding.normal
 
-                color: root.modelData.urgency === NotificationUrgency.Critical ? Colors.secondary_container : Colors.surface_container
+                color: root.modelData.urgency === NotificationUrgency.Critical ? Colors.palette.m3secondaryContainer : Colors.palette.m3surfaceContainer
 
                 onClicked: root.expanded = !root.expanded
             }
@@ -295,7 +295,7 @@ Rectangle {
                 anchors.right: expandButton.left
                 anchors.top: summary.bottom
                 anchors.rightMargin: Appearance.padding.normal
-                color: Qt.alpha(Colors.on_surface, 0.7)
+                color: Qt.alpha(Colors.palette.m3onSurface, 0.7)
                 wrapMode: Text.Wrap
                 maximumLineCount: 1
                 elide: Text.ElideRight
@@ -313,7 +313,7 @@ Rectangle {
                 anchors.right: expandButton.left
                 anchors.top: summary.bottom
                 anchors.rightMargin: Appearance.padding.normal
-                color: Qt.alpha(Colors.on_surface, 0.7)
+                color: Qt.alpha(Colors.palette.m3onSurface, 0.7)
                 wrapMode: Text.Wrap
                 visible: root.expanded
                 opacity: root.expanded ? 1 : 0
@@ -338,7 +338,7 @@ Rectangle {
 
                 IconButton {
                     icon: "close"
-                    inactiveColor: Colors.surface_container_high
+                    inactiveColor: Colors.palette.m3surfaceContainerHigh
                     onClicked: root.modelData.close()
                     padding: Appearance.padding.smaller
                 }
@@ -349,7 +349,7 @@ Rectangle {
 
                     delegate: TextButton {
                         text: modelData.text
-                        inactiveColor: Colors.surface_container_high
+                        inactiveColor: Colors.palette.m3surfaceContainerHigh
                         padding: Appearance.padding.smaller
                         onClicked: () => {
                             modelData.invoke();

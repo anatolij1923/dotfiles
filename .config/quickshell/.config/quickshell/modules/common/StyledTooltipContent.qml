@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import qs
+import qs.services
 
 Item {
     id: root
@@ -20,7 +20,7 @@ Item {
             bottom: root.bottom
             horizontalCenter: root.horizontalCenter
         }
-        color: Colors.surface_container
+        color: Colors.palette.m3surfaceContainer
         implicitWidth: root.shown ? (tooltipTextObject.implicitWidth + 2 * root.horizontalPadding) : 0
         implicitHeight: root.shown ? (tooltipTextObject.implicitHeight + 2 * root.verticalPadding) : 0
         clip: true
@@ -46,7 +46,7 @@ Item {
 
         border {
             width: 1
-            color: Colors.on_secondary
+            color: Colors.palette.m3onSecondary
         }
         radius: 16
 

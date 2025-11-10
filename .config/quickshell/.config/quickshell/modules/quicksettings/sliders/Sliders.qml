@@ -9,17 +9,21 @@ import qs
 Rectangle {
     id: root
 
+    property int padding: Appearance.padding.normal
     property var screen: root.QsWindow.window?.screen
     property var brightnessMonitor: Brightness.getMonitorForScreen(screen)
 
-    implicitHeight: content.implicitHeight
-    implicitWidth: content.implicitWidth
-    color: "transparent"
+    implicitHeight: content.implicitHeight + padding * 2
+    implicitWidth: content.implicitWidth + padding + 2
+    color: Qt.alpha(Colors.palette.m3surfaceContainer, 0.4)
+    radius: Appearance.rounding.huge
+
     Layout.fillWidth: true
 
     ColumnLayout {
         id: content
         anchors.fill: parent
+        anchors.margins: root.padding
         Loader {
             anchors {
                 left: parent.left
@@ -53,7 +57,7 @@ Rectangle {
         id: root
         property alias icon: icon.icon
         property alias value: slider.value
-        property color iconColor: Colors.on_surface
+        property color iconColor: Colors.palette.m3onSurface
         property var onMovedHandler
         spacing: 16
 

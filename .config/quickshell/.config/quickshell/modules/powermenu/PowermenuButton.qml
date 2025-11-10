@@ -1,7 +1,7 @@
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
-import qs
+import qs.services
 import qs.modules.common
  // Import StyledButton
 
@@ -14,11 +14,11 @@ StyledButton {
     buttonIconSize: 56
     buttonIconWeight: 700
     buttonTextSize: 18
-    normalBg: Colors.surface_container_highest
-    // normalHover: Colors.surface_variant
-    // focusedBg: Colors.primary
-    // focusedTextColor: Colors.surface
-    // normalTextColor: Colors.on_surface
+    normalBg: Colors.palette.m3surfaceContainerHighest
+    // normalHover: Colors.palette.m3surfaceVariant
+    // focusedBg: Colors.palette.m3primary
+    // focusedTextColor: Colors.palette.m3surface
+    // normalTextColor: Colors.palette.m3onSurface
 
 
     

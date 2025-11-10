@@ -5,6 +5,7 @@ import QtQuick
 import QtQuick.Layouts
 import qs.modules.common
 import qs.services
+import qs.config
 import qs
 
 PanelWindow {
@@ -15,7 +16,8 @@ PanelWindow {
     }
     implicitHeight: Appearance.sizes.barHeight
     WlrLayershell.layer: WlrLayer.Top
-    color: Colors.surface
+    color: Colors.palette.m3surface
+    property bool e: Config.bar
 
     RowLayout {
         anchors {
@@ -31,7 +33,7 @@ PanelWindow {
             Layout.fillWidth: true
         }
         ClockWidget {
-            anchors.horizontalCenter: parent.horizontalCenter
+            // anchors.horizontalCenter: parent.horizontalCenter
         }
         Item {
             Layout.fillWidth: true

@@ -24,9 +24,12 @@ Item {
         id: background
         anchors.fill: parent
         radius: 24
-        color: Colors.surface
+        color: Colors.palette.m3surface
         clip: true
         // implicitWidth: 500
+
+        border.width: 1
+        border.color: Colors.palette.m3surfaceContainerHigh
 
         ColumnLayout {
             anchors.fill: parent
@@ -59,7 +62,7 @@ Item {
                     implicitHeight: 52
                     icon: "power_settings_new"
                     radius: Appearance.rounding.large
-                    inactiveColor: Colors.surface
+                    inactiveColor: Colors.palette.m3surface
 
                     onClicked: {
                         GlobalStates.quicksettingsOpened = false;
@@ -72,8 +75,7 @@ Item {
                 }
             }
 
-            Toggles {
-            }
+            Toggles {}
             // RowLayout {
             //     Layout.fillWidth: true
             //     BigQuickToggle {
@@ -114,7 +116,7 @@ Item {
             //
             // Rectangle {
             //     id: toggles
-            //     color: Colors.surface_container
+            //     color: Colors.palette.m3surfaceContainer
             //     // // Layout.fillWidth: true
             //     Layout.alignment: Qt.AlignHCenter
             //     // Layout.preferredHeight: 56
@@ -154,7 +156,7 @@ Item {
                         Rectangle {
                             Layout.fillWidth: true
                             implicitHeight: clearButton.implicitHeight
-                            color: Qt.alpha(Colors.surface_container, 0.6)
+                            color: Qt.alpha(Colors.palette.m3surfaceContainer, 0.4)
                             radius: Appearance.rounding.normal
 
                             StyledText {
@@ -170,7 +172,7 @@ Item {
                             text: "Clear"
                             onClicked: Notifications.clearAll()
                             padding: Appearance.padding.normal
-                            inactiveColor: Qt.alpha(Colors.surface_container, 0.6)
+                            inactiveColor: Qt.alpha(Colors.palette.m3surfaceContainer, 0.6)
                         }
                     }
 

@@ -16,10 +16,10 @@ Rectangle {
     property bool internalChecked
 
     property real padding: Appearance.padding.small
-    property color inactiveColor: Colors.surface_container
-    property color inactiveOnColor: Colors.on_surface
-    property color activeColor: Colors.primary
-    property color activeOnColor: Colors.surface
+    property color inactiveColor: Colors.palette.m3surfaceContainer
+    property color inactiveOnColor: Colors.palette.m3onSurface
+    property color activeColor: Colors.palette.m3primary
+    property color activeOnColor: Colors.palette.m3surface
 
     property alias stateLayer: stateLayer
 
@@ -31,9 +31,14 @@ Rectangle {
 
     radius: internalChecked ? Appearance.rounding.normal : implicitHeight / 2
 
-    color: root.enabled
-        ? (root.internalChecked ? root.activeColor : root.inactiveColor)
-        : Qt.alpha(root.inactiveColor, 0.5)
+    Behavior on radius {
+        Anim {
+            duration: Appearance.animDuration.expressiveFastSpatial
+            easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
+        }
+    }
+
+    color: root.enabled ? (root.internalChecked ? root.activeColor : root.inactiveColor) : Qt.alpha(root.inactiveColor, 0.5)
 
     implicitWidth: implicitHeight
     implicitHeight: label.implicitHeight + padding * 2
@@ -43,16 +48,16 @@ Rectangle {
         color: root.internalChecked ? root.activeOnColor : root.inactiveOnColor
         disabled: !root.enabled
 
-        onEntered: root.hovered = true 
-        onExited: root.hovered = false 
+        onEntered: root.hovered = true
+        onExited: root.hovered = false
 
         onRightClicked: root.rightClicked()
         onMiddleClicked: root.middleClicked()
 
         function onClicked(): void {
             if (root.toggle)
-                root.internalChecked = !root.internalChecked
-            root.clicked()
+                root.internalChecked = !root.internalChecked;
+            root.clicked();
         }
     }
 
@@ -64,7 +69,8 @@ Rectangle {
 
         Behavior on fill {
             Anim {
-                duration: Appearance.animDuration.small
+                duration: Appearance.animDuration.expressiveDefaultSpatial
+                easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
             }
         }
     }

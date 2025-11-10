@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Shapes
 import qs
+import  qs.modules.common
 
 /**
  * Material 3 circular progress. See https://m3.material.io/components/progress-indicators/specs
@@ -11,8 +12,8 @@ Item {
     property int implicitSize: 30
     property int lineWidth: 2
     property real value: 0
-    property color colPrimary: Colors.on_secondary_container
-    property color colSecondary: Colors.secondary_container    
+    property color colPrimary: Colors.palette.m3onSecondaryContainer
+    property color colSecondary: Colors.palette.m3secondaryContainer
     property real gapAngle: 360 / 18
     property bool fill: false
     property int fillOverflow: 2

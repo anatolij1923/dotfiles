@@ -8,7 +8,7 @@ Rectangle {
     id: qsButton
     implicitWidth: content.implicitWidth + 24
     implicitHeight: parent.height - 8
-    color: GlobalStates.quicksettingsOpened === true ? Qt.alpha(Colors.primary, 0.3) : "transparent"
+    color: GlobalStates.quicksettingsOpened === true ? Qt.alpha(Colors.palette.m3primary, 0.3) : "transparent"
     radius: Appearance.rounding.huge
 
     Behavior on implicitWidth {

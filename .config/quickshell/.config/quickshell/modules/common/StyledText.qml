@@ -45,6 +45,6 @@ Text {
     font.family: "Rubik"
     font.weight: weight
     font.pixelSize: size
-    color: Colors.on_surface
+    color: Colors.palette.m3onSurface
     renderType: Text.NativeRendering
 }

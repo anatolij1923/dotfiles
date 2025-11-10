@@ -52,12 +52,12 @@ Scope {
 
             sourceComponent: Rectangle {
                 id: wrapper
-                color: Colors.surface
+                color: Colors.palette.m3surface
                 radius: 24
                 implicitWidth: 460
 
                 border.width: 1
-                border.color: Colors.surface_container_high
+                border.color: Colors.palette.m3surfaceContainerHigh
 
                 property int itemHeight: 40
                 property int maxListHeight: 350
@@ -130,7 +130,7 @@ Scope {
                         bottomMargin: 8
 
                         highlight: Rectangle {
-                            color: Colors.secondary_container
+                            color: Colors.palette.m3secondaryContainer
                             radius: Appearance.rounding.normal
 
                             y: root.currentIndex?.y ?? 0

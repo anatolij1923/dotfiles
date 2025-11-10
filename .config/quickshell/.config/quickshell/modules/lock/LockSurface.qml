@@ -9,6 +9,7 @@ import Quickshell.Wayland
 import Quickshell.Io
 import Quickshell.Widgets
 import qs
+import qs.config
 import qs.modules.lock
 import qs.modules.common
 import qs.services
@@ -66,7 +67,7 @@ WlSessionLockSurface {
 
                 MaterialSymbol {
                     icon: "lock"
-                    color: Colors.on_surface
+                    color: Colors.palette.m3onSurface
                     size: 32
                     Layout.alignment: Qt.AlignHCenter
                 }
@@ -91,7 +92,7 @@ WlSessionLockSurface {
                 anchors.horizontalCenter: parent.horizontalCenter
                 StyledText {
                     Layout.alignment: Qt.AlignCenter
-                    text: Time.format("hh:mm")
+                    text: Time.format(Config.time.format)
                     size: 128
                     weight: 600
                 }
@@ -131,7 +132,7 @@ WlSessionLockSurface {
             }
 
             Rectangle {
-                color: Colors.surface_container
+                color: Colors.palette.m3surfaceContainer
                 radius: 32
                 implicitWidth: kbLayout.implicitWidth + (passwordBox.implicitHeight * 0.5)
                 implicitHeight: passwordBox.implicitHeight
@@ -160,7 +161,7 @@ WlSessionLockSurface {
                 onAccepted: root.context.tryUnlock()
 
                 placeholder: root.showFailure ? "Wrong password" : Quickshell.env("USER")
-                placeholderTextColor: Colors.on_surface_variant
+                placeholderTextColor: Colors.palette.m3onSurfaceVariant
 
                 Behavior on opacity {
                     Anim {
@@ -229,7 +230,7 @@ WlSessionLockSurface {
                 id: tools
                 implicitHeight: passwordBox.implicitHeight
                 implicitWidth: toolsRow.implicitWidth + 24
-                color: Colors.surface_container
+                color: Colors.palette.m3surfaceContainer
                 radius: 32
 
                 RowLayout {

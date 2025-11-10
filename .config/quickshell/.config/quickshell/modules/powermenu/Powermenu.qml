@@ -48,7 +48,7 @@ Scope {
                 implicitWidth: buttonsRow.implicitWidth + 50
                 implicitHeight: buttonsRow.implicitHeight + 50
                 radius: 32
-                color: Colors.surface
+                color: Colors.palette.m3surface
                 focus: true // Ensure the content itself is focusable
 
                 // Add a property to keep track of the currently focused button index

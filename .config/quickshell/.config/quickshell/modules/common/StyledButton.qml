@@ -3,7 +3,7 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls // Используем Control вместо Button
-import qs
+import qs.services
 import qs.modules.common
 import Qt5Compat.GraphicalEffects
 
@@ -29,19 +29,19 @@ Control {
     //    `pressed` и `hovered` теперь - это чистые, надежные свойства.
     property bool pressed: mouseArea.pressed
 
-    property color normalTextColor: Colors.on_surface
-    property color normalBg: Colors.surface_container
-    property color normalHover: Colors.surface_container_highest
+    property color normalTextColor: Colors.palette.m3onSurface
+    property color normalBg: Colors.palette.m3surfaceContainer
+    property color normalHover: Colors.palette.m3surfaceContainerHighest
     // ✅ Используем наше надежное свойство `pressed`
-    property color normalPress: Qt.lighter(Colors.surface_container_highest, 1.4)
+    property color normalPress: Qt.lighter(Colors.palette.m3surfaceContainerHighest, 1.4)
 
-    property color toggledTextColor: Colors.surface
-    property color toggledBg: Colors.primary
-    property color toggledHover: Qt.darker(Colors.primary, 1.2)
-    property color toggledPress: Qt.darker(Colors.primary, 1.4)
+    property color toggledTextColor: Colors.palette.m3surface
+    property color toggledBg: Colors.palette.m3primary
+    property color toggledHover: Qt.darker(Colors.palette.m3primary, 1.2)
+    property color toggledPress: Qt.darker(Colors.palette.m3primary, 1.4)
 
-    property color focusedBg: Colors.primary
-    property color focusedTextColor: Colors.surface
+    property color focusedBg: Colors.palette.m3primary
+    property color focusedTextColor: Colors.palette.m3surface
 
     property color textColor: root.focus ? focusedTextColor : (toggled ? toggledTextColor : normalTextColor)
     // ✅ Эта формула теперь работает на 100% предсказуемых данных

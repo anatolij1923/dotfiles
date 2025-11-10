@@ -21,7 +21,7 @@ Rectangle {
 
     radius: Appearance.rounding.huge
 
-    color: Colors.surface_container
+    color: Colors.palette.m3surfaceContainer
 
     implicitWidth: content.implicitWidth + padding * 2
     implicitHeight: content.implicitHeight + padding * 2
@@ -54,7 +54,7 @@ Rectangle {
             checked: true
             iconSize: 32
 
-            inactiveColor: Colors.surface_container_high
+            inactiveColor: Colors.palette.m3surfaceContainerHigh
 
             onClicked: root.clicked()
             onRightClicked: root.rightClicked()

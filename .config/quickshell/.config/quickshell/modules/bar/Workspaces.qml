@@ -3,13 +3,14 @@ import QtQuick.Layouts
 import qs
 import qs.services
 import qs.modules.common
+import qs.config
 
 Item {
     id: root
     implicitHeight: pills.implicitHeight
     implicitWidth: pills.implicitWidth + 20
 
-    property int minWorkspaces: 5
+    property int minWorkspaces: Config.bar.workspaces.shown
     property int currentWorkspace: Hyprland.activeWsId
 
     ListModel {
@@ -76,7 +77,7 @@ Item {
                 width: focused ? 32 : 16
                 height: 16
                 radius: 8
-                color: focused ? Colors.primary : (empty ? Colors.surface_variant : Colors.secondary)
+                color: focused ? Colors.palette.m3primary : (empty ? Colors.palette.m3surfaceVariant : Colors.palette.m3secondary)
                 Layout.alignment: Qt.AlignVCenter
                 Layout.preferredWidth: width  // чтобы spacing учитывался
 

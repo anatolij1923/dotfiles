@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Wayland
 import qs
 import qs.services
+import qs.config
 
 Scope {
     id: root
@@ -26,7 +27,7 @@ Scope {
 
     Timer {
         id: osdTimeout
-        interval: 3000
+        interval: Config.osd.timeout
         repeat: false
         running: false
 
@@ -67,7 +68,7 @@ Scope {
 
     Loader {
         id: osdLoader
-        active: GlobalStates.osdOpened
+        active: GlobalStates.osdOpened && !GlobalStates.screenLocked
 
         sourceComponent: PanelWindow {
             id: osdRoot

@@ -12,6 +12,6 @@ Item {
     MaterialSymbol {
         id: icon
         icon: BluetoothService.icon
-        color: Colors.on_surface
+        color: Colors.palette.m3onSurface
     }
 }

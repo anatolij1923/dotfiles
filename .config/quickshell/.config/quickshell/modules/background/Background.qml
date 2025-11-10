@@ -12,6 +12,7 @@ import qs.utils
 import qs.modules.common
 import qs
 import qs.services
+import qs.config
 
 Variants {
     id: root
@@ -35,8 +36,11 @@ Variants {
 
         property bool startAnimation: false
 
+        property string wallpaperPath: Config.background.wallpaperPath
+
         // Parallax calculation properties
-        property real wallpaperScale: 1.1 // Zoom factor to enable parallax movement
+        property bool parallaxEnabled: Config.background.parallax.enabled
+        property real wallpaperScale: Config.background.parallax.wallpaperScale // Zoom factor to enable parallax movement
         property real movableXSpace: (bgRoot.width * wallpaperScale - bgRoot.width) / 2
         property real movableYSpace: (bgRoot.height * wallpaperScale - bgRoot.height) / 2
         property real parallaxValue: range > 0 ? (Hyprland.focusedWorkspace.id - firstWorkspaceId) / range : 0.5
@@ -65,7 +69,7 @@ Variants {
                 cache: true
                 fillMode: Image.PreserveAspectCrop
 
-                x: -movableXSpace - (effectiveParallaxValue - 0.5) * 2 * movableXSpace
+                x: parallaxEnabled ? -movableXSpace - (effectiveParallaxValue - 0.5) * 2 * movableXSpace : -movableXSpace
                 y: -movableYSpace
 
                 Behavior on x {
@@ -78,7 +82,7 @@ Variants {
                 sourceSize: Qt.size(bgRoot.width * wallpaperScale, bgRoot.height * wallpaperScale)
                 width: bgRoot.width * wallpaperScale
                 height: bgRoot.height * wallpaperScale
-                source: `${Paths.pictures}/wallpapers/1923\ Pack/minecraft-purple.png`
+                source: bgRoot.wallpaperPath
             }
 
             Loader {

@@ -42,10 +42,10 @@ Scope {
                 fill: parent
                 margins: 10
             }
-            color: Colors.surface_container
+            color: Colors.palette.m3surfaceContainer
             radius: 20
             border.width: 1
-            border.color: Colors.surface_container_highest
+            border.color: Colors.palette.m3surfaceContainerHighest
 
             Text {
                 anchors {
@@ -56,7 +56,7 @@ Scope {
                 renderType: Text.NativeRendering
                 font.pixelSize: 16
                 text: "мощни сискэ"
-                color: Colors.on_surface
+                color: Colors.palette.m3onSurface
             }
 
             /* --- Begin Add stuff here --- */
@@ -170,7 +170,7 @@ Scope {
 
                     // draw axes (use tw/th)
                     ctx.lineWidth = 1;
-                    ctx.strokeStyle = Colors.on_surface;
+                    ctx.strokeStyle = Colors.palette.m3onSurface;
                     if (0 >= yMin && 0 <= yMax) {
                         var y0 = mapY(0);
                         ctx.beginPath();
@@ -187,7 +187,7 @@ Scope {
                     }
 
                     // draw the function curve using the same mapping and tw as effective width
-                    ctx.strokeStyle = Colors.primary;
+                    ctx.strokeStyle = Colors.palette.m3primary
                     ctx.lineWidth = 2;
                     ctx.beginPath();
                     var first = true;

@@ -16,10 +16,10 @@ Rectangle {
     property bool internalChecked
 
     property real padding: Appearance.padding.small
-    property color inactiveColor: Colors.surface_container
-    property color inactiveOnColor: Colors.on_surface
-    property color activeColor: Colors.primary
-    property color activeOnColor: Colors.surface
+    property color inactiveColor: Colors.palette.m3surfaceContainer
+    property color inactiveOnColor: Colors.palette.m3onSurface
+    property color activeColor: Colors.palette.m3primary
+    property color activeOnColor: Colors.palette.m3surface
 
     property alias stateLayer: stateLayer
 

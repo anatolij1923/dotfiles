@@ -19,9 +19,6 @@ QuickToggle {
     icon: "timer"
     onClicked: () => {
         SleepTimer.cycleTimer();
-    // SleepTimer.nextMode();
-    // (mode % timers.length) + 1
-
     }
     onRightClicked: () => {
         SleepTimer.stopTimer();

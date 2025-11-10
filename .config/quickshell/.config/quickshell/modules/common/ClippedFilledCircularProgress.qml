@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Shapes
 import Qt5Compat.GraphicalEffects
 import qs
+import  qs.services
 
 Item {
     id: root
@@ -9,7 +10,7 @@ Item {
     property int implicitSize: 18
     property int lineWidth: 2
     property real value: 0
-    property color colPrimary: Colors.on_secondary_container 
+    property color colPrimary: Colors.palette.m3onSecondaryContainer 
     property color colSecondary: Qt.alpha(colPrimary, 0.5)
     property real gapAngle: 360 / 18
     property bool fill: true

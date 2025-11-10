@@ -22,7 +22,7 @@ Item {
         anchors.fill: parent
         width: 55
         height: 25
-        color: Colors.outline
+        color: Colors.palette.m3outline
         radius: root.radius
 
         Rectangle {
@@ -32,7 +32,7 @@ Item {
             anchors.bottom: parent.bottom
             width: Battery.percentage * parent.width / 100
             radius: 4
-            color: Battery.isCharging ? Colors.primary : (Battery.percentage > 30 ? Colors.on_secondary_container : Colors.error)
+            color: Battery.isCharging ? Colors.palette.m3primary : (Battery.percentage > 30 ? Colors.palette.m3onSecondaryContainer : Colors.palette.m3error)
 
             Behavior on color {
                 ColorAnimation {
@@ -57,7 +57,7 @@ Item {
         StyledText {
             id: text
             text: percentage
-            color: Colors.surface
+            color: Colors.palette.m3surface
             anchors.centerIn: parent
             anchors.horizontalCenterOffset: icon.visible ? 4 : 0
             font.weight: 600

@@ -13,7 +13,7 @@ Item {
 
     RowLayout {
         id: tray
-        spacing: 8
+        spacing: 0
         Repeater {
             model: SystemTray.items
 

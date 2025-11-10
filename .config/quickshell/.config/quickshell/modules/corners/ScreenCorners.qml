@@ -2,7 +2,7 @@ import Quickshell
 import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
-import qs
+import qs.services
 import qs.modules.corners
 
 PanelWindow {
@@ -21,6 +21,6 @@ PanelWindow {
         corners: [0, 1]
         cornerHeight: 30
         cornerType: "inverted"
-        color: Colors.surface
+        color: Colors.palette.m3surface
     }
 }

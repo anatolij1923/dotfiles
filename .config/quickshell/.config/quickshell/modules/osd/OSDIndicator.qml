@@ -17,14 +17,14 @@ Item {
     implicitHeight: content.implicitHeight + padding * 2
 
     Rectangle {
-        color: Colors.surface_container
+        color: Colors.palette.m3surfaceContainer
         anchors.fill: parent
         implicitWidth: content.implicitWidth
         implicitHeight: content.implicitHeight * 2
         radius: Appearance.rounding.huge
         border {
             width: 1
-            color: Colors.surface_container_highest
+            color: Colors.palette.m3surfaceContainerHighest
         }
 
         RowLayout {
@@ -36,7 +36,7 @@ Item {
                 icon: root.icon
                 size: 32
                 rotation: 180 * (root.rotateIcon ? value : 0)
-                color: Colors.on_surface
+                color: Colors.palette.m3onSurface
                 Layout.leftMargin: root.padding
 
                 Behavior on size {
