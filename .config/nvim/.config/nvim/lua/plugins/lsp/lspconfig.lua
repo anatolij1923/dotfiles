@@ -125,7 +125,7 @@ return {
             init_options = {
                 configurationSection = { "html" },
                 embeddedLanguages = {
-                    css = true,
+                    -- css = true,
                     javascript = true,
                 },
                 provideFormatter = true,
@@ -177,15 +177,22 @@ return {
             capabilities = capabilities,
         }
 
+        vim.lsp.config["nil_ls"] = {
+            capabilities = capabilities,
+            filetypes = { "nix" },
+            root_markers = { "flake.nix" }
+        }
+
         -- enable lsp servers
         vim.lsp.enable("lua_ls")
         vim.lsp.enable("html-lsp")
-        vim.lsp.enable("emmet_language_server")
+        -- vim.lsp.enable("emmet_language_server")
         vim.lsp.enable("cssls")
         vim.lsp.enable("ts_ls")
         vim.lsp.enable("clangd")
         vim.lsp.enable("pyright")
         -- vim.lsp.enable("rust-analyzer")
         vim.lsp.enable("qmlls")
+        vim.lsp.enable("nil_ls")
     end,
 }

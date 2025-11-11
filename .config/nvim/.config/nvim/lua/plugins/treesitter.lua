@@ -42,6 +42,7 @@ return {
 					"vimdoc",
 					"c",
 					"java",
+                    "nix",
 					"rust",
 				},
 

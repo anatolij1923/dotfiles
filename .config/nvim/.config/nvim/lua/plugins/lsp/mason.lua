@@ -37,6 +37,7 @@ return {
                 "emmet_ls",
                 "emmet_language_server",
                 "pyright",
+                "nil_ls"
             },
         })
 
@@ -51,6 +52,7 @@ return {
                 "pylint",
                 "rust-analyzer",
                 "qmlls",
+                "nixfmt"
             },
         })
     end,
