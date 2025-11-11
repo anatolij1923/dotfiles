@@ -86,7 +86,7 @@ Variants {
             }
 
             Loader {
-                id: blurLoader
+                id: scaleLoader 
                 active: GlobalStates.screenLocked
                 anchors.fill: wallpaper
                 scale: GlobalStates.screenLocked ? 1.05 : 1
@@ -98,17 +98,22 @@ Variants {
                     }
                 }
 
-                sourceComponent: GaussianBlur {
-                    opacity: bgRoot.startAnimation ? 1 : 0
-                    Behavior on opacity {
-                        NumberAnimation {
-                            duration: 150
-                            easing.type: Easing.InOutExpo
+                Loader {
+                    id: blurLoader
+                    active: GlobalStates.screenLocked && Config.lock.blur.enabled
+                    anchors.fill: parent
+                    sourceComponent: GaussianBlur {
+                        opacity: bgRoot.startAnimation ? 1 : 0
+                        Behavior on opacity {
+                            NumberAnimation {
+                                duration: 150
+                                easing.type: Easing.InOutExpo
+                            }
                         }
+                        source: wallpaper
+                        radius: Config.lock.blur.radius
+                        samples: radius * 2
                     }
-                    source: wallpaper
-                    radius: 15
-                    samples: radius * 2
                 }
 
                 Connections {

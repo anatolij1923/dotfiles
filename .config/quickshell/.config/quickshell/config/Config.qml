@@ -12,6 +12,20 @@ Singleton {
     property alias osd: adapter.osd
     property alias notification: adapter.notification
     property alias background: adapter.background
+    property alias appearance: adapter.appearance
+    property alias lock: adapter.lock
+
+    Timer {
+        id: fileWriteTimer
+        interval: 300 // Задержка в миллисекундах перед сохранением
+        repeat: false
+        onTriggered: {
+            // Эта команда физически записывает данные в config.json
+            fileView.writeAdapter();
+            console.info("💾 Config saved to disk.");
+        }
+    }
+
     FileView {
         id: fileView
         path: `${Paths.config}/config.json`
@@ -21,23 +35,26 @@ Singleton {
         onLoadFailed: error => {
             if (error == FileViewError.FileNotFound) {
                 console.warn("Config not found, creating default one.");
-                writeAdapter(); // Создаем файл с дефолтными значениями
+                writeAdapter();
             } else {
                 console.error("Failed to load config:", error);
             }
         }
 
+        onAdapterUpdated: {
+            fileWriteTimer.restart()
+        }
+
         JsonAdapter {
             id: adapter
 
-            // --- "Подключаем" наши модули ---
-            // Имя свойства (bar) станет ключом в JSON
-            // Тип (Bar) - это имя QML-файла (Bar.qml)
             property BarConfig bar: BarConfig {}
             property TimeConfig time: TimeConfig {}
             property OsdConfig osd: OsdConfig {}
             property NotificationConfig notification: NotificationConfig {}
             property BackgroundConfig background: BackgroundConfig {}
+            property AppearanceConfig appearance: AppearanceConfig {}
+            property LockConfig lock: LockConfig {}
         }
     }
 }
