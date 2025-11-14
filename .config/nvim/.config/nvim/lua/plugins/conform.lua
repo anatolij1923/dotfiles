@@ -44,7 +44,9 @@ return {
                 c = { "clang-format" },
                 cpp = { "clang-format" },
                 qml = { "qmlls" },
-                nix = { "nixfmt" }
+                nix = { "nixfmt" },
+                bash = { "shfmt" },
+                sh = { "shfmt" },
             },
             formatters = custom_formatters
             -- format_on_save = {
