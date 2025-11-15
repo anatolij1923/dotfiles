@@ -3,6 +3,7 @@ pragma ComponentBehavior: Bound
 import qs.modules.common
 import QtQuick
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.Pipewire
 
 /**
@@ -66,4 +67,11 @@ Singleton {
     //     command = ["ffplay", "-nodisp", "-autoexit", oggPath];
     //     Quickshell.execDetached(command);
     // }
+
+    IpcHandler {
+        target: "audio"
+        function micToggle(): void {
+            Audio.source.audio.muted = !Audio.source.audio.muted;
+        }
+    }
 }

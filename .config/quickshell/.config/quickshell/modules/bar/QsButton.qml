@@ -55,5 +55,19 @@ Rectangle {
         }
         NetworkWidget {}
         BluetoothWidget {}
+
+        Loader {
+            active: Audio.source?.audio?.muted
+            visible: active
+            sourceComponent: MicWidget {
+                opacity: parent.visible
+                Behavior on opacity {
+                    Anim {
+                        duration: Appearance.animDuration.expressiveFastSpatial
+                        easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
+                    }
+                }
+            }
+        }
     }
 }
