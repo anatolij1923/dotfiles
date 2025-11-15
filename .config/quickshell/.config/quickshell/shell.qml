@@ -1,11 +1,8 @@
 //@ pragma UseQApplication
 //@ pragma Env QT_SCALE_FACTOR=1
 import Quickshell
-import Quickshell.Wayland
-import Quickshell.Io
 import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
+import qs.services
 
 import qs.modules.background
 import qs.modules.bar
@@ -31,6 +28,11 @@ ShellRoot {
     property bool enableTit: true
     property bool enableOsd: true
 
+    Component.onCompleted: {
+        Idle.init();
+    }
+
+    // WallpaperSelector {}
     LazyLoader {
         active: enableBackground
         component: Background {}

@@ -11,7 +11,7 @@ Singleton {
     id: root
 
     // property bool toggled: GlobalStates.idleIngibitorToggled
-    property bool enabled: false
+    property alias enabled: idleInhibitor.enabled
 
     FileView {
         id: state
@@ -19,16 +19,15 @@ Singleton {
 
         onLoaded: {
             if (text() === "true") {
-                root.enabled = true
+                root.enabled = true;
             } else {
-                root.enabled = false
+                root.enabled = false;
             }
         }
         onLoadFailed: err => {
-            // Если файл не найден, устанавливаем enabled в false и создаем файл с false
             if (err === FileViewError.FileNotFound) {
-                root.enabled = false
-                setText("false")
+                root.enabled = false;
+                setText("false");
             }
         }
     }
@@ -37,12 +36,12 @@ Singleton {
         id: saveTimer
         interval: 100
         onTriggered: {
-            state.setText(root.enabled ? "true" : "false")
+            state.setText(root.enabled ? "true" : "false");
         }
     }
 
     onEnabledChanged: {
-        saveTimer.restart()
+        saveTimer.restart();
     }
 
     // PersistentProperties {
@@ -53,7 +52,10 @@ Singleton {
     // }
 
     function toggle() {
-        root.enabled = !root.enabled
+        root.enabled = !root.enabled;
+    }
+
+    function init() {
     }
 
     IdleInhibitor {
@@ -61,6 +63,12 @@ Singleton {
         enabled: root.enabled
         window: PanelWindow {
             color: "transparent"
+            implicitWidth: 0
+            implicitHeight: 0
+            anchors {
+                right: true
+                bottom: true
+            }
             mask: Region {
                 item: null
             }
