@@ -30,6 +30,10 @@ output_path = '~/dotfiles/shell/colors.scss'
 input_path = '~/.config/matugen/templates/ghostty.conf'
 output_path = '~/.config/ghostty/colors'
 
+[templates.wezterm]
+input_path = '~/.config/matugen/templates/wezterm.lua'
+output_path = '~/.config/wezterm/colors.lua'
+
 [templates.quickshell]
 input_path = '~/.config/matugen/templates/colors.json'
 output_path = '~/.config/quickshell/colors.json'

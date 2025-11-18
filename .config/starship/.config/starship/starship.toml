@@ -3,6 +3,7 @@ add_newline = true
 format = """\
 $directory\
 $python\
+$nix_shell\
 $fill\
 $git_branch\
 $git_status
@@ -25,6 +26,11 @@ format = '[$path]($style)[$read_only]($read_only_style) '
 
 [python]
 format = '[ (${version}) (\($virtualenv\))]($style)'
+
+[nix_shell]
+format = '[$symbol$state( \($name\))]($style)'
+symbol = '❄️ '
+style = 'bold blue'
 
 [git_branch]
 symbol = " "

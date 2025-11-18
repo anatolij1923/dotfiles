@@ -48,12 +48,12 @@ return {
                 bash = { "shfmt" },
                 sh = { "shfmt" },
             },
-            formatters = custom_formatters
-            -- format_on_save = {
-            -- 	lsp_fallback = true,
-            -- 	async = false,
-            -- 	timeout_ms = 1000,
-            -- },
+            formatters = custom_formatters,
+            format_on_save = {
+            	lsp_fallback = true,
+            	async = false,
+            	timeout_ms = 1000,
+            },
         })
 
         -- Configure individual formatters

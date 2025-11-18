@@ -24,6 +24,11 @@ alias gp="git push"
 alias gu="git pull"
 alias lg="lazygit" 
 
+
+alias gcomm 'gemini -m gemini-2.5-flash "You are a commit generator. Do not use tools. Git diff: (git diff --cached). Write a CONCISE commit message (Conventional Commits). Max 50 chars for title. Short bullet points only."'
+
+
+
 # Misc
 alias update-mirrors="reflector --sort rate --number 10 --threads 100 --protocol https | sudo tee /etc/pacman.d/mirrorlist"
 alias c="clear"
