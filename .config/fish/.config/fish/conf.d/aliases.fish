@@ -25,7 +25,7 @@ alias gu="git pull"
 alias lg="lazygit" 
 
 
-alias gcomm 'gemini -m gemini-2.5-flash "You are a commit generator. Do not use tools. Git diff: (git diff --cached). Write a CONCISE commit message (Conventional Commits). Max 50 chars for title. Short bullet points only."'
+# alias gcomm 'gemini -m gemini-2.5-flash "You are a commit generator. Do not use tools. Git diff: $(git diff --cached). Write a CONCISE commit message (Conventional Commits). Max 50 chars for title. Short bullet points only."'
 
 
 

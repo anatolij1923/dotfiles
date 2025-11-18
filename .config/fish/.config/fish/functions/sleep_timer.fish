@@ -5,6 +5,6 @@ function sleep_timer
         return 1
     end
     echo "Pausing media and suspend in $argv[1]..."
-   sleep $argv[1] && playerctl -a pause 
-   systemctl suspend -f
+    sleep $argv[1] && playerctl -a pause 
+    systemctl suspend -f
 end

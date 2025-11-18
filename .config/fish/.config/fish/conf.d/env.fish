@@ -23,3 +23,9 @@ set -g fish_color_command green
 set -Ux XDG_PICTURES_DIR "$HOME/Изображения"
 
 set -Ux LIBVIRT_DEFAULT_URI "qemu:///system"
+
+set -Ux ESP_PATH /boot/EFI/limine/
+
+set -Ux fish_user_paths $HOME/.npm-global/bin $fish_user_paths
+
+set -Ux fish_user_paths $HOME/.local/bin/winapps $fish_user_paths
