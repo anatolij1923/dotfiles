@@ -63,4 +63,15 @@ Item {
             font.weight: 600
         }
     }
+
+    MouseArea {
+        id: mouseArea
+        anchors.fill: parent
+        hoverEnabled: true
+    }
+
+    BatteryPopup {
+        id: batteryPopup
+        hoverTarget: mouseArea
+    }
 }
