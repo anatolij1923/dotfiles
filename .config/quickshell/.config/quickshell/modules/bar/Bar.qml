@@ -16,6 +16,7 @@ PanelWindow {
     }
     implicitHeight: Appearance.sizes.barHeight
     WlrLayershell.layer: WlrLayer.Top
+    WlrLayershell.namespace: "quickshell:bar"
     color: Colors.palette.m3surface
     property bool e: Config.bar
 
@@ -33,12 +34,13 @@ PanelWindow {
             Layout.fillWidth: true
         }
         ClockWidget {
-            // anchors.horizontalCenter: parent.horizontalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
         }
         Item {
             Layout.fillWidth: true
         }
 
+        WeatherWidget {}
         KbLayout {}
         Tray {}
         QsButton {}

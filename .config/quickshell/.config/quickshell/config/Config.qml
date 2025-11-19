@@ -14,13 +14,13 @@ Singleton {
     property alias background: adapter.background
     property alias appearance: adapter.appearance
     property alias lock: adapter.lock
+    property alias weather: adapter.weather
 
     Timer {
         id: fileWriteTimer
-        interval: 300 // Задержка в миллисекундах перед сохранением
+        interval: 300
         repeat: false
         onTriggered: {
-            // Эта команда физически записывает данные в config.json
             fileView.writeAdapter();
             console.info("💾 Config saved to disk.");
         }
@@ -42,7 +42,7 @@ Singleton {
         }
 
         onAdapterUpdated: {
-            fileWriteTimer.restart()
+            fileWriteTimer.restart();
         }
 
         JsonAdapter {
@@ -55,6 +55,7 @@ Singleton {
             property BackgroundConfig background: BackgroundConfig {}
             property AppearanceConfig appearance: AppearanceConfig {}
             property LockConfig lock: LockConfig {}
+            property WeatherConfig weather: WeatherConfig {}
         }
     }
 }
