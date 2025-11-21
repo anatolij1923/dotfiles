@@ -5,7 +5,7 @@ import Quickshell
 import Quickshell.Widgets
 import Qt5Compat.GraphicalEffects
 
-// From https://github.com/caelestia-dots/shell
+// From https://github.com/caelestia-dots/shell with modifiacations
 // License: GPLv3
 
 MouseArea {
@@ -34,18 +34,30 @@ MouseArea {
             return;
 
         if (event.button === Qt.LeftButton) {
-            rippleAnim.x = event.x;
-            rippleAnim.y = event.y;
+            rippleExitAnim.stop();
+
+            rippleEnterAnim.startX = event.x;
+            rippleEnterAnim.startY = event.y;
 
             const dist = (ox, oy) => ox * ox + oy * oy;
-            rippleAnim.radius = Math.sqrt(Math.max(dist(event.x, event.y), dist(event.x, height - event.y), dist(width - event.x, event.y), dist(width - event.x, height - event.y)));
+            rippleEnterAnim.targetRadius = Math.sqrt(Math.max(dist(event.x, event.y), dist(event.x, height - event.y), dist(width - event.x, event.y), dist(width - event.x, height - event.y))) * 2;
 
-            rippleAnim.restart();
+            rippleEnterAnim.restart();
         } else if (event.button === Qt.RightButton) {
             rightClicked();
         } else if (event.button === Qt.MiddleButton) {
             middleClicked();
         }
+    }
+
+    onReleased: event => {
+        if (event.button === Qt.LeftButton) {
+            rippleExitAnim.restart();
+        }
+    }
+
+    onCanceled: {
+        rippleExitAnim.restart();
     }
 
     onClicked: event => {
@@ -55,39 +67,36 @@ MouseArea {
     }
 
     SequentialAnimation {
-        id: rippleAnim
+        id: rippleEnterAnim
 
-        property real x
-        property real y
-        property real radius
+        property real startX
+        property real startY
+        property real targetRadius
 
-        PropertyAction {
-            target: ripple
-            property: "x"
-            value: rippleAnim.x
+        ScriptAction {
+            script: {
+                ripple.x = rippleEnterAnim.startX;
+                ripple.y = rippleEnterAnim.startY;
+                ripple.opacity = 0.15;
+                ripple.implicitWidth = 0;
+                ripple.implicitHeight = 0;
+            }
         }
-        PropertyAction {
-            target: ripple
-            property: "y"
-            value: rippleAnim.y
-        }
-        PropertyAction {
-            target: ripple
-            property: "opacity"
-            value: 0.08
-        }
+
         Anim {
             target: ripple
             properties: "implicitWidth,implicitHeight"
-            from: 0
-            to: rippleAnim.radius * 2
+            to: rippleEnterAnim.targetRadius * 2
+            duration: 1000
             easing.bezierCurve: Appearance.animCurves.standardDecel
         }
-        Anim {
-            target: ripple
-            property: "opacity"
-            to: 0
-        }
+    }
+
+    Anim {
+        id: rippleExitAnim
+        target: ripple
+        property: "opacity"
+        to: 0
     }
 
     ClippingRectangle {
@@ -95,38 +104,42 @@ MouseArea {
 
         anchors.fill: parent
 
-        color: Qt.alpha(root.color, root.disabled ? 0 : root.pressed ? 0.1 : root.containsMouse ? 0.08 : 0)
+        color: Qt.alpha(root.color, root.disabled ? 0 : root.containsMouse ? 0.08 : 0)
         radius: root.radius
 
-        Rectangle {
+        Item {
             id: ripple
 
-            radius: Appearance.rounding.full
-            color: root.color
+            property real implicitWidth: 0
+            property real implicitHeight: 0
+            width: implicitWidth
+            height: implicitHeight
+
             opacity: 0
+            visible: opacity > 0
+
+            RadialGradient {
+                anchors.fill: parent
+                gradient: Gradient {
+                    GradientStop {
+                        position: 0.0
+                        color: root.color
+                    }
+                    GradientStop {
+                        position: 0.25
+                        color: root.color
+                    }
+                    GradientStop {
+                        position: 0.5
+                        color: Qt.rgba(root.color.r, root.color.g, root.color.b, 0)
+                    }
+                }
+            }
 
             transform: Translate {
                 x: -ripple.width / 2
                 y: -ripple.height / 2
             }
-
-            // ShaderEffect {
-            //     id: rippleNoise
-            //     anchors.fill: parent
-            //     visible: ripple.opacity > 0
-            //     property real time: 0.0
-            //     property real intensity: 0.96 // интенсивность шума
-            //     property color tint: root.color
-            //     property real alpha: ripple.opacity
-            //
-            //
-            //     NumberAnimation on time {
-            //         from: 0
-            //         to: 100
-            //         loops: Animation.Infinite
-            //         duration: 8000
-            //     }
-            // }
         }
     }
 }
