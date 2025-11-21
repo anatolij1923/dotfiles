@@ -9,7 +9,7 @@ import qs.config
 Singleton {
     id: root
 
-    readonly property bool isDarkMode: true
+    property bool isDarkMode: true
     readonly property var colors: JSON.parse(colorsFile.text()).colors[isDarkMode ? "dark" : "light"]
 
     readonly property Palette palette: Palette {}

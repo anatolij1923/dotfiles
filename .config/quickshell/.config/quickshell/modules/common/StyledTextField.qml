@@ -4,7 +4,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Effects
 import qs
-import  qs.services
+import qs.services
 
 TextField {
     id: root

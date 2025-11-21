@@ -8,11 +8,11 @@ import qs.modules.common
 
 QuickToggle {
 
-    checked: true
+    checked: Colors.isDarkMode
     icon: "contrast"
 
     onClicked: () => {
-        // Notifications.dnd = !Notifications.dnd;
+        Colors.isDarkMode = !Colors.isDarkMode
     }
     StyledTooltip {
         text: "Enable Dark Mode"

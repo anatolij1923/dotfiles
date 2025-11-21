@@ -15,24 +15,18 @@ Singleton {
     property bool isLowAndDischarging: isLow && !isCharging
     property bool isCriticalAndDischarging: isCritical && !isCharging
 
+    property real energyRate: UPower.displayDevice.changeRate
+    property real timeToEmpty: UPower.displayDevice.timeToEmpty
+    property real timeToFull: UPower.displayDevice.timeToFull
+
     onIsLowAndDischargingChanged: {
-        if (available &&  isLowAndDischarging) {
-            Quickshell.execDetached([
-                "notify-send",
-                "-u", "critical",
-                "Low battery",
-                "Plug in charger"
-            ])
+        if (available && isLowAndDischarging) {
+            Quickshell.execDetached(["notify-send", "-u", "critical", "Low battery", "Plug in charger"]);
         }
     }
     onIsCriticalAndDischargingChanged: {
-        if (available &&  isLowAndDischarging) {
-            Quickshell.execDetached([
-                "notify-send",
-                "-u", "critical",
-                "Critical low battery",
-                "Plug in charger now"
-            ])
+        if (available && isLowAndDischarging) {
+            Quickshell.execDetached(["notify-send", "-u", "critical", "Critical low battery", "Plug in charger now"]);
         }
     }
 }

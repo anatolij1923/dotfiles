@@ -8,11 +8,45 @@ import QtQuick.Controls
 import qs
 import qs.services
 import qs.modules.common
+import qs.modules.launcher.items
 
 Scope {
     id: root
     property string searchingText: ""
     property bool showResults: searchingText.trim().length > 0
+    property var customCommands: [
+        {
+            id: "wallpaper",
+            name: "Change Wallpaper",
+            description: "Open wallpaper selector",
+            icon: "preferences-desktop-wallpaper" // Используем иконку из стандартной темы
+            ,
+            action: () => {
+                // Здесь будет логика открытия твоего WallpaperSelector
+                console.log("TODO: Open wallpaper selector window");
+            }
+        },
+        {
+            id: "settings",
+            name: "Settings",
+            description: "Open shell settings",
+            icon: "preferences-system",
+            action: () => {
+                console.log("TODO: Open settings window");
+            }
+        },
+        {
+            id: "reboot",
+            name: "Reboot",
+            description: "Reboot the system",
+            icon: "system-reboot",
+            action: () => {
+                Quickshell.execDetached({
+                    command: ["systemctl", "reboot"]
+                });
+            }
+        }
+    ]
 
     PanelWindow {
         id: launcherRoot
@@ -27,7 +61,7 @@ Scope {
 
         // Behavior on implicitHeight {
         //     Anim {
-        //         duration: Appearance.animDuration.expressiveSlowSpatial 
+        //         duration: Appearance.animDuration.expressiveSlowSpatial
         //         easing.bezierCurve: Appearance.animCurves.expressiveSlowSpatial
         //     }
         // }
@@ -121,6 +155,25 @@ Scope {
                         height: Math.min(contentHeight, wrapper.maxListHeight)
                         clip: true
                         model: AppSearch.fuzzyQuery(root.searchingText).slice(0, 15)
+                        // model: ScriptModel {
+                        //
+                        //     values: {
+                        //         if (root.searchingText.startsWith(":")) {
+                        //             const query = root.searchingText.substring(1).toLowerCase();
+                        //             const filteredCommands = root.customCommands.filter(cmd => cmd.name.toLowerCase().includes(query));
+                        //
+                        //             return filteredCommands.map(cmd => ({
+                        //                         type: "command",
+                        //                         data: cmd
+                        //                     }));
+                        //         } else {
+                        //             return AppSearch.fuzzyQuery(root.searchingText).slice(0, 15);
+                        //         }
+                        //     }
+                        // }
+
+                        // return text.startsWith(":")
+                        //     ?
                         spacing: 2
                         currentIndex: 0
                         focus: true
@@ -143,7 +196,7 @@ Scope {
                             }
                         }
 
-                        delegate: LauncherItem {
+                        delegate: AppItem {
                             desktopEntry: modelData
                             isCurrent: resultsView.currentIndex === index
                             onActivated: launcherRoot.hide()

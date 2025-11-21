@@ -24,6 +24,7 @@ Scope {
             bottom: true
         }
         exclusiveZone: 0
+        WlrLayershell.namespace: "quickshell:quicksettings"
 
         HyprlandFocusGrab {
             windows: [quicksettingsRoot]
@@ -48,7 +49,12 @@ Scope {
                 }
             }
 
-            sourceComponent: QuicksettingsContent {}
+            sourceComponent: GlobalStates.quicksettingsOpened ? quicksettingsComponent : null
+
+            Component {
+                id: quicksettingsComponent
+                QuicksettingsContent {}
+            }
         }
     }
 

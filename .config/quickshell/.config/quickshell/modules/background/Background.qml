@@ -66,8 +66,14 @@ Variants {
             Image {
                 id: wallpaper
                 asynchronous: true
+                retainWhileLoading: true
                 cache: true
                 fillMode: Image.PreserveAspectCrop
+                opacity: (status === Image.Ready) ? 1 : 0
+
+                Behavior on opacity {
+                    Anim {}
+                }
 
                 x: parallaxEnabled ? -movableXSpace - (effectiveParallaxValue - 0.5) * 2 * movableXSpace : -movableXSpace
                 y: -movableYSpace
@@ -86,7 +92,7 @@ Variants {
             }
 
             Loader {
-                id: scaleLoader 
+                id: scaleLoader
                 active: GlobalStates.screenLocked
                 anchors.fill: wallpaper
                 scale: GlobalStates.screenLocked ? 1.05 : 1

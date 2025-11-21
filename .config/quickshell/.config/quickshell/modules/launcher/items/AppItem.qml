@@ -17,17 +17,18 @@ Rectangle {
     radius: 16
 
     StateLayer {
-            anchors.fill: parent // Занимает всю область родителя (containerItem)
-            radius: root.radius // Передаем радиус из корневого элемента LauncherItem
-            onClicked: { // Обрабатываем клик
-                if (root.desktopEntry) {
-                    root.desktopEntry.execute();
-                    root.activated();
-                }
+        anchors.fill: parent // Занимает всю область родителя (containerItem)
+        radius: root.radius // Передаем радиус из корневого элемента LauncherItem
+        onClicked: {
+            // Обрабатываем клик
+            if (root.desktopEntry) {
+                root.desktopEntry.execute();
+                root.activated();
             }
-            // onEntered: resultsView.currentIndex = index // Обрабатываем наведение
-            onPressed: resultsView.currentIndex = index
         }
+        // onEntered: resultsView.currentIndex = index // Обрабатываем наведение
+        onPressed: resultsView.currentIndex = index
+    }
 
     signal activated
 
@@ -63,9 +64,6 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
             }
         }
-
-        
-
     }
 
     // MouseArea {

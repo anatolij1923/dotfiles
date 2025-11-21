@@ -83,7 +83,7 @@ BarPopup {
             // 1. Статус
             MaterialSymbol {
                 icon: "info"
-                color: Colors.palette.m3onSurface
+                color: Colors.palette.m3secondary
             }
             StyledText {
                 Layout.fillWidth: true
@@ -93,7 +93,7 @@ BarPopup {
             // 2. Время
             MaterialSymbol {
                 icon: "hourglass_bottom"
-                color: Colors.palette.m3onSurface
+                color: Colors.palette.m3secondary
             }
             StyledText {
                 Layout.fillWidth: true
@@ -112,7 +112,7 @@ BarPopup {
             // 3. Мощность (Ватты)
             MaterialSymbol {
                 icon: "bolt" // Или "speed", "flash_on"
-                color: Colors.palette.m3onSurfaceVariant
+                color: Colors.palette.m3secondary
                 visible: Battery.energyRate > 0 // Скрываем, если данных нет
                 fill: 1
             }

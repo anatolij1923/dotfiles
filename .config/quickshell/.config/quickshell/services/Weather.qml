@@ -14,13 +14,32 @@ Singleton {
             temp: "-",
             tempFeelsLike: "-",
             city: 0,
-            icon: "clear_day"
+            icon: "clear_day",
+            desc: "",
+            wind: "0",
+            humidity: "0",
+            minTemp: "-",
+            maxTemp: "-"
         })
 
     function getData() {
         let formattedCity = root.city.trim().split(/\s+/).join('+');
 
-        let cmd = `curl -s "wttr.in/${formattedCity}?format=j1" | jq -c '{temp: .current_condition[0].temp_C, feelsLike: .current_condition[0].FeelsLikeC, city: .nearest_area[0].areaName[0].value, code: .current_condition[0].weatherCode}'`;
+        let filter = "{ \
+            temp: .current_condition[0].temp_C, \
+            tempFeelsLike: .current_condition[0].FeelsLikeC, \
+            city: .nearest_area[0].areaName[0].value, \
+            code: .current_condition[0].weatherCode, \
+            desc: .current_condition[0].weatherDesc[0].value, \
+            wind: .current_condition[0].windspeedKmph, \
+            humidity: .current_condition[0].humidity, \
+            minTemp: .weather[0].mintempC, \
+            maxTemp: .weather[0].maxtempC \
+        }";
+
+        let flatFilter = filter.replace(/\s+/g, ' ');
+
+        let cmd = `curl -s "wttr.in/${formattedCity}?format=j1" | jq -c '${flatFilter}'`;
 
         fetcher.command = ["bash", "-c", cmd];
         fetcher.running = true;

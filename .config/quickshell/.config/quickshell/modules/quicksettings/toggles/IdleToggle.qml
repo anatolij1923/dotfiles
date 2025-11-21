@@ -6,9 +6,9 @@ import qs.modules.common
 
 QuickToggle {
     icon: "coffee"
-    checked: IdleInhibitor.enabled
+    checked: Idle.enabled
     onClicked: () => {
-        IdleInhibitor.toggle();
+        Idle.toggle();
     }
     StyledTooltip {
         text: "Keep your system awake"

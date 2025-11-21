@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Wayland
 import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
@@ -15,6 +16,7 @@ PanelWindow {
         bottom: true
     }
     exclusionMode: ExclusionMode.Auto
+    WlrLayershell.namespace: "quickshell:corners"
     mask: Region {}
 
     Corners {
