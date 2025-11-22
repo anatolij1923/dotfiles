@@ -60,7 +60,7 @@ Item {
             color: Colors.palette.m3surface
             anchors.centerIn: parent
             anchors.horizontalCenterOffset: icon.visible ? 4 : 0
-            font.weight: 500
+            font.weight: 700
         }
     }
 
