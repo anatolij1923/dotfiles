@@ -133,12 +133,11 @@ try() {
             log_warn "Retrying command: $*"
         fi
 
-        # Выполняем команду, используя все переданные аргументы
         "$@"
         local status=$?
 
         if [ $status -ne 0 ]; then
-            log_error "Command failed with status $status: \"$cmd\"" # Используем log_error, но без exit 1
+            log_error "Command failed with status $status: \"$cmd\""
             echo "Options: (R)etry, (S)kip, (E)xit script? [R/s/e]"
             read -p "Choose an option (default: R): " choice
             choice=${choice:-R} # Default to Retry
@@ -149,11 +148,11 @@ try() {
                 ;;
             [Ss]*)
                 log_warn "Skipping command: \"$cmd\""
-                return 1 # Возвращаем 1, чтобы вызывающая функция знала, что команда была пропущена
+                return 1
                 ;;
             [Ee]*)
                 log_error "Exiting script due to user choice after command failure: \"$cmd\""
-                exit 1 # Выходим из всего скрипта
+                exit 1
                 ;;
             *)
                 log_warn "Invalid choice. Please enter 'r', 's', or 'e'. Retrying by default."
