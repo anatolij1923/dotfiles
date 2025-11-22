@@ -79,7 +79,7 @@ return {
 				lualine_x = {
 					{
 						lsp_name,
-						icon = " LSP:",
+						icon = " LSP -",
 					},
 				},
 				lualine_y = {

@@ -18,13 +18,22 @@ input_path = '~/.config/matugen/templates/kitty-colors.conf'
 output_path = '~/.config/kitty/colors.conf'
 # post_hook = "kitty @ set-colors -a -c ~/.config/kitty/colors.conf"
 
+[templates.gtk3]
+input_path = '~/.config/matugen/templates/gtk.css'
+output_path = '~/.config/gtk-3.0/colors.css'
+post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-{{mode}}'
+
+[templates.gtk4]
+input_path = '~/.config/matugen/templates/gtk.css'
+output_path = '~/.config/gtk-4.0/colors.css'
+
 # [templates.ags]
 # input_path = '~/.config/matugen/templates/colors.scss'
 # output_path = '~/.config/ags/colors.scss'
 
-[templates.shell]
-input_path = '~/.config/matugen/templates/colors.scss'
-output_path = '~/dotfiles/shell/colors.scss'
+# [templates.shell]
+# input_path = '~/.config/matugen/templates/colors.scss'
+# output_path = '~/dotfiles/shell/colors.scss'
 
 [templates.ghostty]
 input_path = '~/.config/matugen/templates/ghostty.conf'

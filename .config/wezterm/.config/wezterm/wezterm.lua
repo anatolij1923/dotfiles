@@ -14,7 +14,7 @@ config.color_scheme = "Kanagawa Dragon (Gogh)"
 local colors = require("colors")
 config.colors = colors
 
-config.enable_scroll_bar = true
+config.enable_scroll_bar = false
 
 config.window_padding = {
 	top = 0,
@@ -23,6 +23,6 @@ config.window_padding = {
 	right = 0,
 }
 
-config.window_background_opacity = 0.8
+config.window_background_opacity = 1
 
 return config
