@@ -3,6 +3,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import qs
+import qs.services
 
 Scope {
 
@@ -187,7 +188,7 @@ Scope {
                     }
 
                     // draw the function curve using the same mapping and tw as effective width
-                    ctx.strokeStyle = Colors.palette.m3primary
+                    ctx.strokeStyle = Colors.palette.m3primary;
                     ctx.lineWidth = 2;
                     ctx.beginPath();
                     var first = true;
