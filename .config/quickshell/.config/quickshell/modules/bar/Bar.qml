@@ -21,6 +21,7 @@ PanelWindow {
     property bool e: Config.bar
 
     RowLayout {
+        id: ws
         anchors {
             left: parent.left
             top: parent.top
@@ -30,6 +31,13 @@ PanelWindow {
         spacing: 8
 
         Workspaces {}
+    }
+
+    Media {
+        anchors {
+            left: ws.right
+            verticalCenter: parent.verticalCenter
+        }
     }
 
     RowLayout {

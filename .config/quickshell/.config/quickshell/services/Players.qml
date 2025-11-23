@@ -1,5 +1,6 @@
 pragma Singleton
 import Quickshell
+import QtQuick
 import Quickshell.Services.Mpris
 
 Singleton {
