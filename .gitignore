@@ -9,11 +9,11 @@
 .config/kitty/.config/kitty/colors.conf
 .config/hypr/.config/hypr/colors.conf
 .config/shell/colors.scss
-.config/wezterm/colors.lua
-.config/quickshell/colors.json
-.config/qt6ct/matugen.conf
-.config/ghostty/colors
-.config/yazi/theme.toml
+.config/wezterm/.config/wezterm/colors.lua
+.config/quickshell/.config/quickshell/colors.json
+.config/qt6ct/.config/qt6ct/colors/matugen.conf
+.config/ghostty/.config/ghostty/colors
+.config/yazi/.config/yazi/theme.toml
 
 # fish
 .config/fish/.config/fish/completions/fisher.fish
