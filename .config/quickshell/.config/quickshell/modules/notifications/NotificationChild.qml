@@ -222,7 +222,7 @@ Rectangle {
                     AnchorAnimation {
                         duration: Appearance.animDuration.normal
                         easing.type: Easing.BezierSpline
-                        easing.bezierCurve: Appearance.animCurves.standard
+                        easing.bezierCurve: Appearance.animCurves.standart
                     }
                 }
             }
@@ -262,7 +262,7 @@ Rectangle {
                     AnchorAnimation {
                         duration: Appearance.animDuration.normal
                         easing.type: Easing.BezierSpline
-                        easing.bezierCurve: Appearance.animCurves.standard
+                        easing.bezierCurve: Appearance.animCurves.standart
                     }
                 }
             }
