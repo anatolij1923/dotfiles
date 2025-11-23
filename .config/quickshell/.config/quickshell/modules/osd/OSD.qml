@@ -61,8 +61,8 @@ Scope {
         target: Audio.sink?.audio ?? null
 
         function onMutedChanged() {
-            root.currentIndicator = "volume"
-            root.triggerOsd()
+            root.currentIndicator = "volume";
+            root.triggerOsd();
         }
     }
 
@@ -81,7 +81,7 @@ Scope {
             }
 
             margins {
-                top: Appearance.sizes.barHeight + Appearance.padding.huge
+                top: Config.bar.height + Appearance.padding.huge
             }
 
             WlrLayershell.layer: WlrLayer.Overlay
