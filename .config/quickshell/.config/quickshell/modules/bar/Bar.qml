@@ -22,23 +22,27 @@ PanelWindow {
 
     RowLayout {
         anchors {
+            left: parent.left
             leftMargin: 24
-            rightMargin: 24
-            fill: parent
+            verticalCenter: parent.verticalCenter
         }
         spacing: 8
 
         Workspaces {}
         UsageInfo {}
-        Item {
-            Layout.fillWidth: true
+    }
+
+    ClockWidget {
+        anchors.centerIn: parent
+    }
+
+    RowLayout {
+        anchors {
+            right: parent.right
+            rightMargin: 24
+            verticalCenter: parent.verticalCenter
         }
-        ClockWidget {
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-        Item {
-            Layout.fillWidth: true
-        }
+        spacing: 8
 
         WeatherWidget {}
         KbLayout {}
