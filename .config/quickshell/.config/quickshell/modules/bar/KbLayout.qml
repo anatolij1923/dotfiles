@@ -7,7 +7,7 @@ import qs.modules.common
 
 Item {
     id: root
-    implicitWidth: row.implicitWidth + 8
+    implicitWidth: row.implicitWidth
     implicitHeight: row.implicitHeight
     property bool showIcon: false
 

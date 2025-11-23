@@ -3,14 +3,17 @@ import QtQuick.Layouts
 import qs.modules.common
 import qs.services
 
-Item {
+Rectangle {
     id: root
-    implicitHeight: content.implicitHeight
-    implicitWidth: content.implicitWidth
+    implicitHeight: parent.height - 8
+    implicitWidth: content.implicitWidth + Appearance.padding.normal * 2
+    radius: Appearance.rounding.normal
+
+    color: Colors.palette.m3surfaceContainerLow
 
     RowLayout {
         id: content
-        anchors.fill: parent
+        anchors.centerIn: parent
 
         MaterialSymbol {
             icon: Weather.data.icon

@@ -23,8 +23,9 @@ PanelWindow {
     RowLayout {
         anchors {
             left: parent.left
+            top: parent.top
+            bottom: parent.bottom
             leftMargin: 24
-            verticalCenter: parent.verticalCenter
         }
         spacing: 8
 
@@ -39,13 +40,13 @@ PanelWindow {
     RowLayout {
         anchors {
             right: parent.right
+            top: parent.top
+            bottom: parent.bottom
             rightMargin: 24
-            verticalCenter: parent.verticalCenter
         }
         spacing: 8
 
         WeatherWidget {}
-        KbLayout {}
         Tray {}
         QsButton {}
         BatteryWidget {}

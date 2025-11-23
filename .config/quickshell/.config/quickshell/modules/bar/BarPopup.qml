@@ -12,7 +12,7 @@ LazyLoader {
 
     // Styling properties
     property int padding: 10
-    property int radius: 12
+    property int radius: Appearance.rounding.large
 
     // Activate when mouse is over the target
     active: hoverTarget && hoverTarget.containsMouse

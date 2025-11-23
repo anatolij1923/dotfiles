@@ -39,6 +39,8 @@ Rectangle {
 
         spacing: 16
 
+        KbLayout {}
+
         Loader {
             active: Notifications.dnd || Notifications.list.length > 0
 
@@ -53,6 +55,7 @@ Rectangle {
                 }
             }
         }
+
         NetworkWidget {}
         BluetoothWidget {}
 
