@@ -14,6 +14,7 @@ alias sv="sudo nvim"
 alias update-mirrors="reflector --sort rate --number 10 --threads 100 --protocol https | sudo tee /etc/pacman.d/mirrorlist"
 alias c="clear"
 alias cleanup="yay -Sc"
+alias zr="source $ZDOTDIR/.zshrc"
 
 # git
 alias lg="lazygit"
