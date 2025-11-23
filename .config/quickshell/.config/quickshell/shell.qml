@@ -7,7 +7,6 @@ import qs.services
 
 import qs.modules.background
 import qs.modules.bar
-import qs.modules.dock
 import qs.modules.corners
 import qs.modules.lock
 import qs.modules.powermenu
@@ -20,7 +19,6 @@ import qs.modules.osd
 ShellRoot {
     property bool enableBackground: true
     property bool enableBar: true
-    property bool enableDock: true
     property bool enableReloadPopup: false
     property bool enableScreenCorners: true
     property bool enableLock: true
@@ -45,10 +43,6 @@ ShellRoot {
     LazyLoader {
         active: enableBar
         component: Bar {}
-    }
-    LazyLoader {
-        active: enableDock
-        component: Dock {}
     }
     LazyLoader {
         active: enableReloadPopup
