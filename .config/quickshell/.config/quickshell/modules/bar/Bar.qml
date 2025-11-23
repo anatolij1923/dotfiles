@@ -33,14 +33,24 @@ PanelWindow {
         Workspaces {}
     }
 
-    Media {
+    Item {
         anchors {
             left: ws.right
-            verticalCenter: parent.verticalCenter
+            right: usage.left
+            top: parent.top
+            bottom: parent.bottom
+        }
+
+        Loader {
+            active: !!Players.active
+            anchors.centerIn: parent
+
+            sourceComponent: Media {}
         }
     }
 
     RowLayout {
+        id: usage
         anchors {
             top: parent.top
             bottom: parent.bottom

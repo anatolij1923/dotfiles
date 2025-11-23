@@ -9,6 +9,7 @@ Item {
     id: root
 
     property var player: Players.active
+    visible: !!root.player
 
     property string trackTitle: player?.trackTitle
     property string trackArtist: player?.trackArtist
@@ -54,16 +55,21 @@ Item {
                 anchors.fill: parent
                 color: "transparent"
                 onClicked: {
-                    if (Players.active?.isPlaying) {
-                        Players.active.pause();
+                    if (root.player) {
+                        if (root.player.isPlaying) {
+                            root.player.pause();
+                        } else {
+                            root.player.play();
+                        }
                     }
-                    Players.active.play();
                 }
             }
         }
 
         StyledText {
             text: `${root.trackArtist} - ${root.trackTitle}`
+            elide: Text.ElideRight
+            Layout.maximumWidth: 300
             opacity: 0.8
             weight: 500
         }
