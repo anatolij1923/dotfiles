@@ -22,6 +22,9 @@ TextField {
     placeholderTextColor: Colors.palette.m3onSurface
     font.pixelSize: 16
     font.family: "Rubik"
+    font.variableAxes: {
+        "wght": root.font.weight
+    }
     font.weight: 500
     renderType: Text.NativeRendering
     leftPadding: icon !== "" ? iconSize + 35 : 20
