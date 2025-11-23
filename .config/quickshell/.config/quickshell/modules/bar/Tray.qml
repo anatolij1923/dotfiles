@@ -21,7 +21,10 @@ MouseArea {
     property int trayWidth: (root.containsMouse ? tray.implicitWidth : singleItemSize + dot.implicitWidth)
 
     Behavior on implicitWidth {
-        Anim {}
+        Anim {
+            duration: Appearance.animDuration.expressiveFastSpatial
+            easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
+        }
     }
 
     hoverEnabled: true
