@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Shapes
-import qs
-import  qs.modules.common
+import qs.services
+import qs.modules.common
 
 /**
  * Material 3 circular progress. See https://m3.material.io/components/progress-indicators/specs

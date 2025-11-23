@@ -4,10 +4,9 @@ import qs
 import qs.services
 import qs.modules.common
 
-Item {
+BarWidget {
     id: root
-    implicitWidth: content.implicitWidth
-    implicitHeight: content.implicitHeight
+    padding: Appearance.padding.huge
 
     RowLayout {
         id: content
@@ -27,13 +26,13 @@ Item {
 
         RowLayout {
             id: temp
-            ClippedFilledCircularProgress {
-                implicitSize: 28
+            CircularProgress {
+                implicitSize: 30
                 MaterialSymbol {
                     anchors.centerIn: parent
                     color: Colors.palette.m3onSurface
                     icon: "device_thermostat"
-                    size: 22
+                    size: 20
                 }
                 value: Math.min(SystemUsage.cpuTemp / 100, 1)
             }
@@ -44,13 +43,13 @@ Item {
 
         RowLayout {
             id: mem
-            ClippedFilledCircularProgress {
-                implicitSize: 28
+            CircularProgress {
+                implicitSize: 30
                 MaterialSymbol {
                     anchors.centerIn: parent
                     color: Colors.palette.m3onSurface
                     icon: "memory"
-                    size: 24
+                    size: 20
                 }
                 value: SystemUsage.memoryUsedPercentage
             }

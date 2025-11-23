@@ -30,11 +30,31 @@ PanelWindow {
         spacing: 8
 
         Workspaces {}
+    }
+
+    RowLayout {
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            right: clock.left
+            rightMargin: 4
+        }
         UsageInfo {}
     }
 
     ClockWidget {
+        id: clock
         anchors.centerIn: parent
+    }
+
+    RowLayout {
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            left: clock.right
+            leftMargin: 4
+        }
+        WeatherWidget {}
     }
 
     RowLayout {
@@ -46,7 +66,6 @@ PanelWindow {
         }
         spacing: 8
 
-        WeatherWidget {}
         Tray {}
         QsButton {}
         BatteryWidget {}

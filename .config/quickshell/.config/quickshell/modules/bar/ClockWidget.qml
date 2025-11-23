@@ -7,12 +7,22 @@ import qs.modules.common
 import qs.services
 import qs.config
 
-StyledText {
-    property string format: Config.time.format
+BarWidget {
+    id: root
+    property string timeFormat: Config.time.format
     property string dateFormat: Config.time.dateFormat
 
-    text: Time.format(`${format} • ${dateFormat}`)
-    visible: Config.bar.clock.enabled
-    size: 18
-    weight: 400
+    padding: Appearance.padding.huge
+    // implicitWidth: content.implicitWidth
+    // implicitHeight: content.implicitHeight
+
+    RowLayout {
+        id: content
+        anchors.fill: parent
+
+        StyledText {
+            id: timeSection
+            text: Time.format(`${timeFormat} • ${dateFormat}`)
+        }
+    }
 }
