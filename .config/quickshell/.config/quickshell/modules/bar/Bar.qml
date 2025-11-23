@@ -17,8 +17,17 @@ PanelWindow {
     implicitHeight: Config.bar.height
     WlrLayershell.layer: WlrLayer.Top
     WlrLayershell.namespace: "quickshell:bar"
-    color: Colors.palette.m3surface
+    // color: Colors.palette.m3surface
+
+    property real alpha: Config.appearance.transparency.alpha
+    property bool transparent: Config.appearance.transparency.enabled
+    color: transparent ? Qt.alpha(Colors.palette.m3surface, alpha) : Colors.palette.m3surface
+
     property bool e: Config.bar
+
+    Component.onCompleted: {
+        console.log("[BAR TRANSPARECNY] " + transparent);
+    }
 
     RowLayout {
         id: ws

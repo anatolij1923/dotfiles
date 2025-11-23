@@ -5,9 +5,12 @@ import QtQuick
 import QtQuick.Layouts
 import qs.services
 import qs.modules.corners
+import qs.config
 
 PanelWindow {
     id: root
+    property real alpha: Config.appearance.transparency.alpha
+    property bool transparent: Config.appearance.transparency.enabled
     color: "transparent"
     anchors {
         top: true
@@ -23,6 +26,6 @@ PanelWindow {
         corners: [0, 1]
         cornerHeight: 30
         cornerType: "inverted"
-        color: Colors.palette.m3surface
+        color: root.transparent ? Qt.alpha(Colors.palette.m3surface, root.alpha) : Colors.palette.m3surface
     }
 }

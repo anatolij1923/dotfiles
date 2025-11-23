@@ -85,6 +85,8 @@ Scope {
             }
 
             WlrLayershell.layer: WlrLayer.Overlay
+            WlrLayershell.namespace: "quickshell:osd"
+
             exclusionMode: ExclusionMode.Ignore
             exclusiveZone: 0
 

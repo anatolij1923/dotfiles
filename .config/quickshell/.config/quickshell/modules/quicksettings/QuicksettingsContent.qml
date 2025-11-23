@@ -4,6 +4,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import qs
+import qs.config
 import qs.services
 import qs.modules.notifications
 import qs.modules.common
@@ -17,6 +18,9 @@ Item {
     id: root
     property int padding: 24
 
+    property real alpha: Config.appearance.transparency.alpha
+    property bool transparent: Config.appearance.transparency.enabled
+
     implicitWidth: background.implicitWidth
     implicitHeight: background.implicitHeight
 
@@ -24,7 +28,7 @@ Item {
         id: background
         anchors.fill: parent
         radius: 24
-        color: Colors.palette.m3surface
+        color: root.transparent ? Qt.alpha(Colors.palette.m3surface, root.alpha) : Colors.palette.m3surface
         clip: true
         // implicitWidth: 500
 

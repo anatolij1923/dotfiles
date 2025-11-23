@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs
+import qs.config
 import qs.services
 import qs.modules.common
 
@@ -13,11 +14,14 @@ Item {
     property string icon
     property int padding: Appearance.padding.large
 
+    property real alpha: Config.appearance.transparency.alpha
+    property bool transparent: Config.appearance.transparency.enabled
+
     implicitWidth: Appearance.sizes.osdWidth + padding * 2
     implicitHeight: content.implicitHeight + padding * 2
 
     Rectangle {
-        color: Colors.palette.m3surfaceContainer
+        color: transparent ? Qt.alpha(Colors.palette.m3surfaceContainer, alpha) : Colors.palette.m3surfaceContainer
         anchors.fill: parent
         implicitWidth: content.implicitWidth
         implicitHeight: content.implicitHeight * 2
