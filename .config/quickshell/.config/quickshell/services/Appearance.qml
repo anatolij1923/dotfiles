@@ -168,7 +168,6 @@ Singleton {
     }
 
     sizes: QtObject {
-        property int barHeight: 50
         property int osdWidth: 250
         property int quicksettingsWidth: 500
     }

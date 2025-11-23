@@ -14,7 +14,7 @@ PanelWindow {
         left: true
         right: true
     }
-    implicitHeight: Appearance.sizes.barHeight
+    implicitHeight: Config.bar.height
     WlrLayershell.layer: WlrLayer.Top
     WlrLayershell.namespace: "quickshell:bar"
     color: Colors.palette.m3surface
