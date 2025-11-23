@@ -9,6 +9,11 @@
 .config/kitty/.config/kitty/colors.conf
 .config/hypr/.config/hypr/colors.conf
 .config/shell/colors.scss
+.config/wezterm/colors.lua
+.config/quickshell/colors.json
+.config/qt6ct/matugen.conf
+.config/ghostty/colors
+.config/yazi/theme.toml
 
 # fish
 .config/fish/.config/fish/completions/fisher.fish
