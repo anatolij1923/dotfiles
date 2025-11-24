@@ -7,62 +7,11 @@ import qs.config
 
 Item {
     id: root
+
+    // FIXME: fix rendering on startup
+
     implicitHeight: pills.implicitHeight
     implicitWidth: pills.implicitWidth + 20
-
-    property int minWorkspaces: Config.bar.workspaces.shown
-    property int currentWorkspace: Hyprland.activeWsId
-
-    ListModel {
-        id: wsModel
-    }
-
-    function refreshWorkspaces() {
-        const real = Hyprland.workspaces?.values || [];
-        const sorted = real.slice().sort((a, b) => a.id - b.id);
-
-        const maxCount = Math.max(minWorkspaces, ...sorted.map(w => w.id));
-        const data = [];
-
-        for (let i = 1; i <= maxCount; i++) {
-            const ws = sorted.find(w => w.id === i);
-            data.push({
-                id: i,
-                focused: ws ? ws.focused : (currentWorkspace === i),
-                name: ws ? ws.name : "",
-                empty: ws ? (ws.toplevels?.values.length === 0) : true
-            });
-        }
-
-        if (wsModel.count !== data.length) {
-            wsModel.clear();
-            data.forEach(item => wsModel.append(item));
-        } else {
-            for (let i = 0; i < data.length; i++)
-                wsModel.set(i, data[i]);
-        }
-    }
-
-    Component.onCompleted: refreshWorkspaces()
-
-    Connections {
-        target: Hyprland
-        function onActiveWsIdChanged() {
-            refreshWorkspaces();
-        }
-        function onWorkspacesChanged() {
-            refreshWorkspaces();
-        }
-        function onToplevelsChanged() {
-            refreshWorkspaces();
-        }
-        function onWindowMoved() {
-            refreshWorkspaces();
-        }
-        function onWorkspaceUpdated() {
-            refreshWorkspaces();
-        } // общий сигнал из singleton
-    }
 
     RowLayout {
         id: pills
@@ -70,25 +19,28 @@ Item {
         Layout.alignment: Qt.AlignVCenter
 
         Repeater {
-            model: wsModel
+            model: HyprlandData.fullWorkspaces
 
             delegate: Rectangle {
                 id: pill
-                width: focused ? 32 : 16
+
+                width: model.focused ? 32 : 16
                 height: 16
                 radius: 8
-                color: focused ? Colors.palette.m3primary : (empty ? Colors.palette.m3surfaceVariant : Colors.palette.m3secondary)
+
+                color: model.focused ? Colors.palette.m3primary : (model.occupied ? Colors.palette.m3secondary : Colors.palette.m3surfaceVariant)
+
                 Layout.alignment: Qt.AlignVCenter
-                Layout.preferredWidth: width  // чтобы spacing учитывался
+                Layout.preferredWidth: width
 
                 Behavior on width {
-                    Anim {
+                    NumberAnimation {
                         duration: Appearance.animDuration.expressiveFastSpatial
                         easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
                     }
                 }
                 Behavior on color {
-                    CAnim {
+                    ColorAnimation {
                         duration: Appearance.animDuration.expressiveEffectsDuration
                         easing.bezierCurve: Appearance.animCurves.expressiveEffects
                     }
@@ -98,16 +50,18 @@ Item {
                     acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
                     onWheel: event => {
                         if (event.angleDelta.y < 0)
-                            Hyprland.dispatch(`workspace r+1`);
+                            HyprlandData.dispatch(`workspace r+1`);
                         else if (event.angleDelta.y > 0)
-                            Hyprland.dispatch(`workspace r-1`);
+                            HyprlandData.dispatch(`workspace r-1`);
                     }
                 }
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: if (Hyprland.activeWsId !== id)
-                        Hyprland.dispatch(`workspace ${id}`)
+                    onClicked: {
+                        if (HyprlandData.activeWsId !== model.id)
+                            HyprlandData.dispatch(`workspace ${model.id}`);
+                    }
                 }
             }
         }
