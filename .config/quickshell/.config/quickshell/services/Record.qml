@@ -28,10 +28,13 @@ Singleton {
     }
 
     function start() {
+        root.startTime = Date.now();
+        root.duration = "00:00";
         root.isRecording = true;
     }
     function stop() {
         root.isRecording = false;
+        root.duration = "00:00";
     }
 
     function updateDuration() {

@@ -93,6 +93,7 @@ PanelWindow {
         }
         spacing: 8
 
+        RecordWidget {}
         Tray {}
         QsButton {}
         BatteryWidget {}
