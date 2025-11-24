@@ -21,6 +21,10 @@ Scope {
         // TODO: add ScreencopyView
 
         visible: GlobalStates.overviewOpened
+
+        property real alpha: Config.appearance.transparency.alpha
+        property bool transparent: Config.appearance.transparency.enabled
+
         property int columns: 4
         property int rows: 2
         property real gap: Appearance.padding.normal
@@ -32,15 +36,17 @@ Scope {
         property int dragSourceWorkspace: -1
         property int dragTargetWorkspace: -1
 
-        implicitWidth: screenW * 0.7
         property real cardWidthCalc: (implicitWidth - (outerPadding * 2) - (gap * (columns - 1))) / columns
         property real cardHeightCalc: cardWidthCalc / (screen.width / screen.height)
+
+        implicitWidth: screenW * 0.7
         implicitHeight: (cardHeightCalc * rows) + (outerPadding * 2) + (gap * (rows - 1))
 
         anchors.top: true
         margins.top: 10
         color: "transparent"
         exclusiveZone: 0
+        WlrLayershell.namespace: "quickshell:overview"
 
         function hide() {
             GlobalStates.overviewOpened = false;
@@ -54,8 +60,10 @@ Scope {
         }
 
         Rectangle {
+            id: background
             anchors.fill: parent
-            color: Colors.palette.m3surface
+            color: overviewRoot.transparent ? Qt.alpha(Colors.palette.m3surface, overviewRoot.alpha) : Colors.palette.m3surface
+
             radius: Appearance.rounding.large
         }
 
@@ -100,9 +108,10 @@ Scope {
                     property real workspaceOffsetY: wsMon ? wsMon.y : 0
 
                     // property real hoverScale: cardHoverHandler.hovered ? 1.02 : 1
+                    property color baseColor: model.focused ? Colors.palette.m3surfaceContainerHigh : Colors.palette.m3surfaceContainer
 
                     radius: Appearance.rounding.small
-                    color: model.focused ? Colors.palette.m3surfaceContainerHigh : Colors.palette.m3surfaceContainer
+                    color: overviewRoot.transparent ? Qt.alpha(baseColor, overviewRoot.alpha) : baseColor
                     border.width: model.focused || cardHoverHandler.hovered ? 2 : 1
                     border.color: model.focused ? Colors.palette.m3primary : Colors.palette.m3outline
                     // scale: hoverScale
@@ -177,7 +186,6 @@ Scope {
                             //     }
                             // }
 
-                            // --- КООРДИНАТЫ ---
                             width: computedWidth
                             height: computedHeight
                             z: windowMouseArea.drag.active ? 1000 : (isFloating ? 10 : 1)
@@ -203,16 +211,15 @@ Scope {
                                 when: !windowMouseArea.drag.active
                             }
 
-                            // --- 1. ЗАЛИВКА ОКНА (визуальный placeholder) ---
                             Rectangle {
                                 anchors.fill: parent
                                 radius: 6 * wsCard.scaleFactor
                                 color: Colors.palette.m3surfaceVariant
+
                                 opacity: 0.85
                                 visible: winContainer.visible
                             }
 
-                            // --- 2. РАМКА ---
                             Rectangle {
                                 anchors.fill: parent
                                 color: "transparent"
@@ -222,7 +229,6 @@ Scope {
                                 opacity: 0.55
                             }
 
-                            // --- 3. ИКОНКА ПО ЦЕНТРУ ---
                             Rectangle {
                                 anchors.centerIn: parent
                                 width: windowMouseArea.containsMouse ? 40 : 30
@@ -245,38 +251,37 @@ Scope {
                                 }
                             }
 
-                            // --- 4. ИНФО-ПАНЕЛЬ С НАЗВАНИЕМ ---
-                            Rectangle {
-                                anchors.left: parent.left
-                                anchors.right: parent.right
-                                anchors.bottom: parent.bottom
-                                anchors.margins: 2
-                                radius: 4
-                                color: Colors.palette.m3surface
-                                opacity: 0.75
-                                visible: winContainer.visible
-
-                                Column {
-                                    anchors.fill: parent
-                                    anchors.margins: 4
-                                    spacing: 2
-
-                                    StyledText {
-                                        text: winContainer.windowTitle
-                                        size: 10
-                                        elide: Text.ElideRight
-                                        weight: 600
-                                    }
-
-                                    StyledText {
-                                        text: winContainer.windowApp
-                                        size: 9
-                                        opacity: 0.7
-                                        elide: Text.ElideRight
-                                        visible: windowApp.length > 0
-                                    }
-                                }
-                            }
+                            // Rectangle {
+                            //     anchors.left: parent.left
+                            //     anchors.right: parent.right
+                            //     anchors.bottom: parent.bottom
+                            //     anchors.margins: 2
+                            //     radius: 4
+                            //     color: Colors.palette.m3surface
+                            //     opacity: 0.75
+                            //     visible: winContainer.visible
+                            //
+                            //     Column {
+                            //         anchors.fill: parent
+                            //         anchors.margins: 4
+                            //         spacing: 2
+                            //
+                            //         StyledText {
+                            //             text: winContainer.windowTitle
+                            //             size: 10
+                            //             elide: Text.ElideRight
+                            //             weight: 600
+                            //         }
+                            //
+                            //         StyledText {
+                            //             text: winContainer.windowApp
+                            //             size: 9
+                            //             opacity: 0.7
+                            //             elide: Text.ElideRight
+                            //             visible: windowApp.length > 0
+                            //         }
+                            //     }
+                            // }
 
                             StyledTooltip {
                                 text: winContainer.windowTitle
