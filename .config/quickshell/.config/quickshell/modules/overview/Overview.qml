@@ -134,7 +134,7 @@ Scope {
                         anchors.centerIn: parent
                         text: currentCardId
                         opacity: 0.08
-                        size: 32
+                        size: 48
                         weight: 700
                     }
 
