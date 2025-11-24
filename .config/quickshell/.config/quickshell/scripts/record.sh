@@ -5,3 +5,5 @@ RECORDING_DIR=""
 get_date() {
     date '+%Y-%m-%d_%H.%M.%S'
 }
+
+notify-send "WASSUP"
