@@ -15,6 +15,7 @@ import qs.modules.notifications
 import qs.modules.tit
 import qs.modules.quicksettings
 import qs.modules.osd
+import qs.modules.overview
 
 ShellRoot {
     property bool enableBackground: true
@@ -28,10 +29,14 @@ ShellRoot {
     property bool enableNotifications: true
     property bool enableTit: true
     property bool enableOsd: true
+    property bool enableOverview: true
 
     Component.onCompleted: {
         Idle.init();
     }
+
+    // WorkspacePreview {}
+    //
 
     // WallpaperSelector {}
     //
@@ -81,5 +86,9 @@ ShellRoot {
     LazyLoader {
         active: enableOsd
         component: OSD {}
+    }
+    LazyLoader {
+        active: enableOverview
+        component: Overview {}
     }
 }
