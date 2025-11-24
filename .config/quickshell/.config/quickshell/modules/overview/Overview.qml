@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
+import Quickshell.Hyprland
 import Quickshell.Widgets
 import Quickshell.Wayland
 import qs
@@ -17,11 +18,9 @@ Scope {
     PanelWindow {
         id: overviewRoot
 
-        // NOTE: Живые превью (ScreencopyView) пока отключены. Сначала показываем
-        // геометрию окон в миниатюрах, а Screencopy добавим после отладки макета.
+        // TODO: add ScreencopyView
 
         visible: GlobalStates.overviewOpened
-        // --- НАСТРОЙКИ ---
         property int columns: 4
         property int rows: 2
         property real gap: Appearance.padding.normal
@@ -30,7 +29,6 @@ Scope {
         property real screenW: screen.width
         property real screenH: screen.height
 
-        // --- Drag'n'drop state ---
         property int dragSourceWorkspace: -1
         property int dragTargetWorkspace: -1
 
@@ -43,6 +41,17 @@ Scope {
         margins.top: 10
         color: "transparent"
         exclusiveZone: 0
+
+        function hide() {
+            GlobalStates.overviewOpened = false;
+        }
+
+        HyprlandFocusGrab {
+            windows: [overviewRoot]
+            active: GlobalStates.overviewOpened
+            onCleared: if (!active)
+                overviewRoot.hide()
+        }
 
         Rectangle {
             anchors.fill: parent
@@ -59,8 +68,7 @@ Scope {
             columnSpacing: overviewRoot.gap
 
             Repeater {
-                // Используем отдельную модель для Overview (страница по 4x2)
-                model: Hyprland.overviewWorkspaces
+                model: HyprlandData.overviewWorkspaces
 
                 delegate: Rectangle {
                     id: wsCard
@@ -71,11 +79,11 @@ Scope {
 
                     property var realWs: null
                     function syncWorkspace() {
-                        realWs = Hyprland.getWorkspace(currentCardId);
+                        realWs = HyprlandData.getWorkspace(currentCardId);
                     }
                     Component.onCompleted: syncWorkspace()
                     Connections {
-                        target: Hyprland
+                        target: HyprlandData
                         function onWorkspaceUpdated() {
                             wsCard.syncWorkspace();
                         }
@@ -91,21 +99,21 @@ Scope {
                     property real workspaceOffsetX: wsMon ? wsMon.x : 0
                     property real workspaceOffsetY: wsMon ? wsMon.y : 0
 
-                    property real hoverScale: cardHoverHandler.hovered ? 1.02 : 1
+                    // property real hoverScale: cardHoverHandler.hovered ? 1.02 : 1
 
-                    radius: Appearance.rounding.medium
+                    radius: Appearance.rounding.small
                     color: model.focused ? Colors.palette.m3surfaceContainerHigh : Colors.palette.m3surfaceContainer
                     border.width: model.focused || cardHoverHandler.hovered ? 2 : 1
                     border.color: model.focused ? Colors.palette.m3primary : Colors.palette.m3outline
-                    scale: hoverScale
+                    // scale: hoverScale
                     clip: true
 
-                    Behavior on scale {
-                        NumberAnimation {
-                            duration: 120
-                            easing.type: Easing.OutQuad
-                        }
-                    }
+                    // Behavior on scale {
+                    //     NumberAnimation {
+                    //         duration: 120
+                    //         easing.type: Easing.OutQuad
+                    //     }
+                    // }
 
                     Behavior on border.width {
                         NumberAnimation {
@@ -121,9 +129,7 @@ Scope {
                         weight: 700
                     }
 
-                    // --- ОКНА ---
                     Repeater {
-                        // Привязываемся к реальному списку окон текущего воркспейса (UntypedObjectModel)
                         model: wsCard.realWs && wsCard.realWs.toplevels ? wsCard.realWs.toplevels : null
                         onModelChanged: {
                             if (!model && wsCard.realWs) {
@@ -162,15 +168,14 @@ Scope {
                             property real computedWidth: hasData ? Math.max(4, ipc.size[0] * wsCard.scaleX) : 0
                             property real computedHeight: hasData ? Math.max(4, ipc.size[1] * wsCard.scaleY) : 0
 
-                            // Показываем, если окно принадлежит этому воркспейсу
                             visible: hasData
 
-                            Component.onCompleted: {
-                                console.log("[WorkspacePreview] Окно ws", wsCard.currentCardId, "title:", windowTitle, "hasData:", hasData, "ipc:", ipc);
-                                if (!hasData) {
-                                    console.warn("[WorkspacePreview] Нет lastIpcObject для окна", modelData?.title, "ws", wsCard.currentCardId, modelData);
-                                }
-                            }
+                            // Component.onCompleted: {
+                            //     console.log("[WorkspacePreview] Window ws", wsCard.currentCardId, "title:", windowTitle, "hasData:", hasData, "ipc:", ipc);
+                            //     if (!hasData) {
+                            //         console.warn("[WorkspacePreview] No lastIpcObject for window", modelData?.title, "ws", wsCard.currentCardId, modelData);
+                            //     }
+                            // }
 
                             // --- КООРДИНАТЫ ---
                             width: computedWidth
@@ -308,7 +313,7 @@ Scope {
                                         const targetWorkspace = overviewRoot.dragTargetWorkspace;
                                         if (targetWorkspace !== -1 && targetWorkspace !== overviewRoot.dragSourceWorkspace) {
                                             console.log("[WorkspacePreview] movetoworkspacesilent", targetWorkspace, winContainer.windowAddress);
-                                            Hyprland.dispatch(`movetoworkspacesilent ${targetWorkspace},address:${winContainer.windowAddress}`);
+                                            HyprlandData.dispatch(`movetoworkspacesilent ${targetWorkspace},address:${winContainer.windowAddress}`);
                                         } else if (targetWorkspace === overviewRoot.dragSourceWorkspace) {
                                             if (winContainer.isFloating && wsCard.scaleX > 0 && wsCard.scaleY > 0) {
                                                 const centerX = winContainer.x + winContainer.width / 2;
@@ -316,7 +321,7 @@ Scope {
                                                 const dropX = (centerX / wsCard.scaleX) - (ipc.size[0] / 2) + winContainer.offsetX;
                                                 const dropY = (centerY / wsCard.scaleY) - (ipc.size[1] / 2) + winContainer.offsetY;
                                                 console.log("[WorkspacePreview] movewindowpixel", dropX, dropY, winContainer.windowAddress);
-                                                Hyprland.dispatch(`movewindowpixel exact ${Math.round(dropX)} ${Math.round(dropY)},address:${winContainer.windowAddress}`);
+                                                HyprlandData.dispatch(`movewindowpixel exact ${Math.round(dropX)} ${Math.round(dropY)},address:${winContainer.windowAddress}`);
                                             } else {
                                                 const relX = wsCard.width > 0 ? (winContainer.x + winContainer.width / 2) / wsCard.width : 0.5;
                                                 const relY = wsCard.height > 0 ? (winContainer.y + winContainer.height / 2) / wsCard.height : 0.5;
@@ -333,14 +338,14 @@ Scope {
                                                 const movedEnough = Math.abs(winContainer.x - winContainer.computedX) > 10 || Math.abs(winContainer.y - winContainer.computedY) > 10;
                                                 if (direction && movedEnough) {
                                                     console.log("[WorkspacePreview] movewindow", direction, winContainer.windowAddress);
-                                                    Hyprland.dispatch(`movewindow ${direction},address:${winContainer.windowAddress}`);
+                                                    HyprlandData.dispatch(`movewindow ${direction},address:${winContainer.windowAddress}`);
                                                 }
                                             }
                                         }
                                     } else if (dragging && winContainer.windowAddressRaw.length === 0) {
                                         console.warn("[WorkspacePreview] Dragged window without address", winContainer.windowTitle, modelData);
                                     } else if (!dragging) {
-                                        Hyprland.dispatch("workspace " + wsCard.currentCardId);
+                                        HyprlandData.dispatch("workspace " + wsCard.currentCardId);
                                     }
 
                                     Qt.callLater(function () {
@@ -356,25 +361,25 @@ Scope {
                         }
                     }
 
-                    Row {
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        anchors.bottom: parent.bottom
-                        anchors.margins: Appearance.padding.small
-                        spacing: Appearance.padding.small
-
-                        StyledText {
-                            text: wsCard.realWs ? wsCard.realWs.name : qsTr("Workspace %1").arg(wsCard.currentCardId)
-                            size: 12
-                            weight: 600
-                        }
-
-                        StyledText {
-                            text: qsTr("%1 окна").arg(wsCard.realWs ? wsCard.realWs.toplevels.values.length : 0)
-                            opacity: 0.7
-                            size: 11
-                        }
-                    }
+                    // Row {
+                    //     anchors.left: parent.left
+                    //     anchors.right: parent.right
+                    //     anchors.bottom: parent.bottom
+                    //     anchors.margins: Appearance.padding.small
+                    //     spacing: Appearance.padding.small
+                    //
+                    //     StyledText {
+                    //         text: wsCard.realWs ? wsCard.realWs.name : qsTr("Workspace %1").arg(wsCard.currentCardId)
+                    //         size: 12
+                    //         weight: 600
+                    //     }
+                    //
+                    //     StyledText {
+                    //         text: qsTr("%1 окн").arg(wsCard.realWs ? wsCard.realWs.toplevels.values.length : 0)
+                    //         opacity: 0.7
+                    //         size: 11
+                    //     }
+                    // }
 
                     HoverHandler {
                         id: cardHoverHandler
@@ -382,17 +387,17 @@ Scope {
 
                     TapHandler {
                         acceptedButtons: Qt.LeftButton
-                        onTapped: Hyprland.dispatch("workspace " + wsCard.currentCardId)
+                        onTapped: HyprlandData.dispatch("workspace " + wsCard.currentCardId)
                     }
 
-                    StyledTooltip {
-                        text: qsTr("Switch to workspace %1").arg(wsCard.currentCardId)
-                        visible: cardHoverHandler.hovered
-                    }
+                    // StyledTooltip {
+                    //     text: qsTr("Switch to workspace %1").arg(wsCard.currentCardId)
+                    //     visible: cardHoverHandler.hovered
+                    // }
 
                     Rectangle {
                         anchors.fill: parent
-                        radius: Appearance.rounding.medium
+                        radius: Appearance.rounding.normal
                         color: Colors.palette.m3primary
                         opacity: overviewRoot.dragTargetWorkspace === wsCard.currentCardId ? 0.15 : 0
                         visible: opacity > 0
@@ -420,7 +425,7 @@ Scope {
     }
 
     IpcHandler {
-        target: "workspacePreview"
+        target: "overview"
 
         function toggle(): void {
             GlobalStates.overviewOpened = !GlobalStates.overviewOpened;

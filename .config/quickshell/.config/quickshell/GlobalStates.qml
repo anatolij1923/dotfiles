@@ -17,6 +17,7 @@ Singleton {
     property bool screenUnlockFailed: false
     property bool quicksettingsOpened: false
     property bool osdOpened: false
+    property bool overviewOpened: false
 
     property bool titOpened: false
 
