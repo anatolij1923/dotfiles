@@ -19,10 +19,8 @@ Scope {
             id: "wallpaper",
             name: "Change Wallpaper",
             description: "Open wallpaper selector",
-            icon: "preferences-desktop-wallpaper" // Используем иконку из стандартной темы
-            ,
+            icon: "preferences-desktop-wallpaper",
             action: () => {
-                // Здесь будет логика открытия твоего WallpaperSelector
                 console.log("TODO: Open wallpaper selector window");
             }
         },

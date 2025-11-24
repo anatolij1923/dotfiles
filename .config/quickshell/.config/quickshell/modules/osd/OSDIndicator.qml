@@ -21,7 +21,7 @@ Item {
     implicitHeight: content.implicitHeight + padding * 2
 
     Rectangle {
-        color: transparent ? Qt.alpha(Colors.palette.m3surfaceContainer, alpha) : Colors.palette.m3surfaceContainer
+        color: root.transparent ? Qt.alpha(Colors.palette.m3surfaceContainer, root.alpha) : Colors.palette.m3surfaceContainer
         anchors.fill: parent
         implicitWidth: content.implicitWidth
         implicitHeight: content.implicitHeight * 2
