@@ -26,7 +26,7 @@ Rectangle {
 
     StateLayer {
         anchors.fill: parent
-        onClicked: Record.stop()
+        onClicked: Record.toggle()
     }
 
     RowLayout {

@@ -32,6 +32,7 @@ Singleton {
         root.duration = "00:00";
         root.isRecording = true;
     }
+
     function stop() {
         root.isRecording = false;
         root.duration = "00:00";
@@ -40,6 +41,7 @@ Singleton {
     function updateDuration() {
         if (!root.isRecording)
             return;
+
         let diff = Date.now() - root.startTime;
         let seconds = Math.floor((diff / 1000) % 60);
         let minutes = Math.floor((diff / (1000 * 60)) % 60);
