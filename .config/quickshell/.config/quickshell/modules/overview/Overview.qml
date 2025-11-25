@@ -248,6 +248,13 @@ Scope {
                                     width: windowMouseArea.containsMouse ? 64 : 48
                                     height: width
                                     source: winContainer.windowIconSource
+
+                                    Behavior on width {
+                                        Anim {
+                                            duration: Appearance.animDuration.expressiveFastSpatial
+                                            easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
+                                        }
+                                    }
                                 }
                             }
 

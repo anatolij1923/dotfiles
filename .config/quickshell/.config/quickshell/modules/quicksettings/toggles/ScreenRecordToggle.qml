@@ -7,11 +7,11 @@ import qs.modules.common
 // TODO: Add screen recording
 
 QuickToggle {
-    checked: false
+    checked: Record.isRecording
     icon: "screen_record"
 
     onClicked: () => {
-    // Notifications.dnd = !Notifications.dnd;
+        Record.toggle();
     }
     StyledTooltip {
         text: "Enable screen recording"

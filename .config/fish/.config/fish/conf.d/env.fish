@@ -22,7 +22,9 @@ set -Ux STARSHIP_CONFIG ~/.config/starship/starship.toml
 # colors
 set -g fish_color_command green
 
+# xdg dirs
 set -Ux XDG_PICTURES_DIR "$HOME/Изображения"
+set -Ux XDG_VIDEOS_DIR "$HOME/Видео"
 
 set -Ux LIBVIRT_DEFAULT_URI "qemu:///system"
 
