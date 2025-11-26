@@ -142,7 +142,6 @@ Item {
 
             Sliders {}
 
-            // TODO: notifications
             Item {
                 id: notificationList
                 Layout.fillHeight: true
