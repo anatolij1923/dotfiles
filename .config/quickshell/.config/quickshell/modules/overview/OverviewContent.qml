@@ -10,6 +10,8 @@ import qs.services
 import qs.modules.common
 import qs.config
 
+// TODO: add moving windows between each other in workspace
+
 Item {
     id: root
 
@@ -57,7 +59,6 @@ Item {
                 Layout.preferredHeight: Layout.preferredWidth / wsCard.aspectRatio
 
                 z: root.dragSourceWorkspace === currentCardId ? 100 : 1
-
                 property int currentCardId: model.id
 
                 property var realWs: null

@@ -8,8 +8,6 @@ import qs.config
 Item {
     id: root
 
-    // FIXME: fix rendering on startup
-
     implicitHeight: pills.implicitHeight
     implicitWidth: pills.implicitWidth + 20
 
