@@ -19,6 +19,7 @@ Scope {
         id: overviewRoot
 
         // TODO: add ScreencopyView
+        // TODO: split component into 2 modules - Overview and OverviewContent, and load content with Loader
 
         visible: GlobalStates.overviewOpened
 
@@ -65,6 +66,14 @@ Scope {
             color: overviewRoot.transparent ? Qt.alpha(Colors.palette.m3surface, overviewRoot.alpha) : Colors.palette.m3surface
 
             radius: Appearance.rounding.large
+
+            focus: true
+
+            Keys.onPressed: event => {
+                if (event.key === Qt.Key_Escape) {
+                    overviewRoot.hide();
+                }
+            }
         }
 
         GridLayout {
