@@ -149,7 +149,7 @@ Singleton {
 
             root.rawEvent(event);
 
-            const triggers = ["workspace", "createworkspace", "destroyworkspace", "moveworkspace", "focusedmon", "openwindow", "closewindow", "movewindow", "fullscreen", "changefloatingmode", "pin"];
+            const triggers = ["workspace", "createworkspace", "destroyworkspace", "moveworkspace", "focusedmon", "openwindow", "closewindow", "movewindow", "activewindow", "fullscreen", "changefloatingmode", "pin"];
 
             if (triggers.some(t => n.includes(t))) {
                 // Force refresh native objects if needed
