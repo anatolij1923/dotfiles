@@ -89,9 +89,7 @@ Item {
                 clip: true
 
                 Behavior on border.width {
-                    NumberAnimation {
-                        duration: 120
-                    }
+                    Anim {}
                 }
 
                 StyledText {
@@ -115,17 +113,18 @@ Item {
 
                         property var ipc: modelData.lastIpcObject
                         property bool hasData: ipc !== undefined && ipc.at !== undefined
+
                         property string windowTitle: modelData.title || modelData.appId || qsTr("Window")
                         property string windowApp: modelData.class ? modelData.class.toUpperCase() : ""
                         property bool isFloating: hasData && ipc.floating === true
-                        property string windowAddressRaw: {
-                            if (modelData.address !== undefined && modelData.address !== null)
-                                return modelData.address;
-                            if (ipc && ipc.address !== undefined)
-                                return ipc.address;
-                            return "";
+
+                        property string windowAddress: {
+                            let addr = modelData.address || (ipc ? ipc.address : "");
+                            if (!addr)
+                                return "";
+                            return addr.toString().startsWith("0x") ? addr : ("0x" + addr);
                         }
-                        property string windowAddress: windowAddressRaw && windowAddressRaw.toString().startsWith("0x") ? windowAddressRaw : ("0x" + windowAddressRaw)
+
                         property string windowIconSource: {
                             const iconId = modelData.appId || modelData.class || (ipc && ipc.class) || modelData.title || "";
                             try {
@@ -134,17 +133,19 @@ Item {
                                 return Quickshell.iconPath(iconId);
                             }
                         }
+
                         property real offsetX: wsCard.workspaceOffsetX
                         property real offsetY: wsCard.workspaceOffsetY
+
                         property real computedX: hasData ? (ipc.at[0] - offsetX) * wsCard.scaleX : 0
                         property real computedY: hasData ? (ipc.at[1] - offsetY) * wsCard.scaleY : 0
                         property real computedWidth: hasData ? Math.max(4, ipc.size[0] * wsCard.scaleX) : 0
                         property real computedHeight: hasData ? Math.max(4, ipc.size[1] * wsCard.scaleY) : 0
 
                         visible: hasData
-
                         width: computedWidth
                         height: computedHeight
+
                         z: windowMouseArea.drag.active ? 1000 : (isFloating ? 10 : 1)
 
                         Drag.active: windowMouseArea.drag.active
@@ -153,50 +154,41 @@ Item {
                         Drag.hotSpot.y: height / 2
 
                         Binding {
-                            id: xBinding
                             target: winContainer
                             property: "x"
                             value: winContainer.computedX
                             when: !windowMouseArea.drag.active
                         }
-
                         Binding {
-                            id: yBinding
                             target: winContainer
                             property: "y"
                             value: winContainer.computedY
                             when: !windowMouseArea.drag.active
                         }
 
-                        Rectangle {
+                        ClippingRectangle {
+                            id: visualCard
                             anchors.fill: parent
-                            radius: 6 * wsCard.scaleFactor
                             color: Colors.palette.m3surfaceVariant
+                            radius: Appearance.rounding.small
+                            clip: true
 
-                            opacity: 0.85
-                            visible: winContainer.visible
-                        }
+                            ScreencopyView {
+                                id: preview
+                                anchors.fill: parent
+                                live: true
+                                captureSource: modelData && modelData.wayland ? modelData.wayland : null
+                                visible: winContainer.visible
+                            }
 
-                        Rectangle {
-                            anchors.fill: parent
-                            color: "transparent"
-                            radius: 4 * wsCard.scaleFactor
-                            border.color: Colors.palette.m3primary
-                            border.width: 1
-                            opacity: 0.55
-                        }
+                            Rectangle {
+                                anchors.fill: parent
+                                color: "black"
+                                opacity: windowMouseArea.containsMouse ? 0.2 : 0.0
+                                visible: windowMouseArea.containsMouse
 
-                        Rectangle {
-                            anchors.centerIn: parent
-                            width: windowMouseArea.containsMouse ? 40 : 30
-                            height: width
-                            radius: width / 2
-                            color: "transparent"
-                            visible: winContainer.visible
-
-                            Behavior on width {
-                                NumberAnimation {
-                                    duration: 100
+                                Behavior on opacity {
+                                    Anim {}
                                 }
                             }
 
@@ -213,25 +205,33 @@ Item {
                                     }
                                 }
                             }
-                        }
 
+                            Rectangle {
+                                anchors.fill: parent
+                                color: "transparent"
+                                radius: Appearance.rounding.small
+                                border.width: 1
+                                border.color: Colors.palette.m3outlineVariant
+                            }
+                        }
                         StyledTooltip {
                             text: winContainer.windowTitle
-                            visible: windowMouseArea.containsMouse
+                            visible: windowMouseArea.containsMouse && !windowMouseArea.drag.active
                         }
-
                         MouseArea {
                             id: windowMouseArea
                             anchors.fill: parent
                             hoverEnabled: true
                             cursorShape: drag.active ? Qt.ClosedHandCursor : Qt.PointingHandCursor
+
                             drag.target: winContainer
                             drag.axis: Drag.XAndYAxis
+
                             property real pressX: 0
                             property real pressY: 0
                             property bool dragging: false
 
-                            onPressed: function (mouse) {
+                            onPressed: mouse => {
                                 pressX = mouse.x;
                                 pressY = mouse.y;
                                 dragging = false;
@@ -239,61 +239,65 @@ Item {
                                 root.dragTargetWorkspace = wsCard.currentCardId;
                             }
 
-                            onPositionChanged: function (mouse) {
+                            onPositionChanged: mouse => {
                                 if (!dragging && (Math.abs(mouse.x - pressX) > 5 || Math.abs(mouse.y - pressY) > 5)) {
                                     dragging = true;
                                 }
                             }
 
-                            onReleased: function () {
-                                if (dragging && winContainer.windowAddressRaw.length > 0) {
-                                    const targetWorkspace = root.dragTargetWorkspace;
-                                    if (targetWorkspace !== -1 && targetWorkspace !== root.dragSourceWorkspace) {
-                                        console.log("[WorkspacePreview] movetoworkspacesilent", targetWorkspace, winContainer.windowAddress);
-                                        HyprlandData.dispatch(`movetoworkspacesilent ${targetWorkspace},address:${winContainer.windowAddress}`);
-                                    } else if (targetWorkspace === root.dragSourceWorkspace) {
-                                        if (winContainer.isFloating && wsCard.scaleX > 0 && wsCard.scaleY > 0) {
-                                            const centerX = winContainer.x + winContainer.width / 2;
-                                            const centerY = winContainer.y + winContainer.height / 2;
-                                            const dropX = (centerX / wsCard.scaleX) - (ipc.size[0] / 2) + winContainer.offsetX;
-                                            const dropY = (centerY / wsCard.scaleY) - (ipc.size[1] / 2) + winContainer.offsetY;
-                                            console.log("[WorkspacePreview] movewindowpixel", dropX, dropY, winContainer.windowAddress);
-                                            HyprlandData.dispatch(`movewindowpixel exact ${Math.round(dropX)} ${Math.round(dropY)},address:${winContainer.windowAddress}`);
-                                        } else {
-                                            const relX = wsCard.width > 0 ? (winContainer.x + winContainer.width / 2) / wsCard.width : 0.5;
-                                            const relY = wsCard.height > 0 ? (winContainer.y + winContainer.height / 2) / wsCard.height : 0.5;
-                                            let direction = "";
-                                            if (relX < 0.25)
-                                                direction = "l";
-                                            else if (relX > 0.75)
-                                                direction = "r";
-                                            else if (relY < 0.25)
-                                                direction = "u";
-                                            else if (relY > 0.75)
-                                                direction = "d";
+                            onReleased: handleDragRelease()
+                        }
 
-                                            const movedEnough = Math.abs(winContainer.x - winContainer.computedX) > 10 || Math.abs(winContainer.y - winContainer.computedY) > 10;
-                                            if (direction && movedEnough) {
-                                                console.log("[WorkspacePreview] movewindow", direction, winContainer.windowAddress);
-                                                HyprlandData.dispatch(`movewindow ${direction},address:${winContainer.windowAddress}`);
-                                            }
+                        function handleDragRelease() {
+                            if (windowMouseArea.dragging && winContainer.windowAddress.length > 0) {
+                                const targetWs = root.dragTargetWorkspace;
+
+                                if (targetWs !== -1 && targetWs !== root.dragSourceWorkspace) {
+                                    console.log(`[WorkspacePreview] Move to workspace ${targetWs}: ${winContainer.windowAddress}`);
+                                    HyprlandData.dispatch(`movetoworkspacesilent ${targetWs},address:${winContainer.windowAddress}`);
+                                } else if (targetWs === root.dragSourceWorkspace) {
+                                    if (winContainer.isFloating && wsCard.scaleX > 0) {
+                                        const centerX = winContainer.x + winContainer.width / 2;
+                                        const centerY = winContainer.y + winContainer.height / 2;
+                                        const dropX = (centerX / wsCard.scaleX) - (ipc.size[0] / 2) + winContainer.offsetX;
+                                        const dropY = (centerY / wsCard.scaleY) - (ipc.size[1] / 2) + winContainer.offsetY;
+
+                                        HyprlandData.dispatch(`movewindowpixel exact ${Math.round(dropX)} ${Math.round(dropY)},address:${winContainer.windowAddress}`);
+                                    } else {
+                                        const relX = wsCard.width > 0 ? (winContainer.x + winContainer.width / 2) / wsCard.width : 0.5;
+                                        const relY = wsCard.height > 0 ? (winContainer.y + winContainer.height / 2) / wsCard.height : 0.5;
+
+                                        let direction = "";
+                                        if (relX < 0.25)
+                                            direction = "l";
+                                        else if (relX > 0.75)
+                                            direction = "r";
+                                        else if (relY < 0.25)
+                                            direction = "u";
+                                        else if (relY > 0.75)
+                                            direction = "d";
+
+                                        const movedEnough = Math.abs(winContainer.x - winContainer.computedX) > 10 || Math.abs(winContainer.y - winContainer.computedY) > 10;
+
+                                        if (direction && movedEnough) {
+                                            HyprlandData.dispatch(`movewindow ${direction},address:${winContainer.windowAddress}`);
                                         }
                                     }
-                                } else if (dragging && winContainer.windowAddressRaw.length === 0) {
-                                    console.warn("[WorkspacePreview] Dragged window without address", winContainer.windowTitle, modelData);
-                                } else if (!dragging) {
-                                    HyprlandData.dispatch("workspace " + wsCard.currentCardId);
                                 }
-
-                                Qt.callLater(function () {
-                                    winContainer.x = winContainer.computedX;
-                                    winContainer.y = winContainer.computedY;
-                                });
-
-                                dragging = false;
-                                root.dragSourceWorkspace = -1;
-                                root.dragTargetWorkspace = -1;
+                            } else if (windowMouseArea.dragging) {
+                                console.warn("[WorkspacePreview] Dragged window without valid address", winContainer.windowTitle);
+                            } else {
+                                HyprlandData.dispatch("workspace " + wsCard.currentCardId);
                             }
+
+                            Qt.callLater(() => {
+                                winContainer.x = winContainer.computedX;
+                                winContainer.y = winContainer.computedY;
+                            });
+
+                            windowMouseArea.dragging = false;
+                            root.dragSourceWorkspace = -1;
+                            root.dragTargetWorkspace = -1;
                         }
                     }
                 }
