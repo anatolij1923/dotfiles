@@ -16,6 +16,9 @@ Rectangle {
 
     radius: Appearance.rounding.small
     color: Colors.palette.m3surfaceContainerLow
+    Behavior on color {
+        CAnim {}
+    }
 
     default property alias content: layout.data
 

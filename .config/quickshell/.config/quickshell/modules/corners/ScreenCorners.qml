@@ -5,6 +5,7 @@ import QtQuick
 import QtQuick.Layouts
 import qs.services
 import qs.modules.corners
+import qs.modules.common
 import qs.config
 
 PanelWindow {
@@ -27,5 +28,8 @@ PanelWindow {
         cornerHeight: 30
         cornerType: "inverted"
         color: root.transparent ? Qt.alpha(Colors.palette.m3surface, root.alpha) : Colors.palette.m3surface
+        Behavior on color {
+            CAnim {}
+        }
     }
 }

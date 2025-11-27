@@ -30,10 +30,17 @@ Item {
         radius: 24
         color: root.transparent ? Qt.alpha(Colors.palette.m3surface, root.alpha) : Colors.palette.m3surface
         clip: true
+        Behavior on color {
+            CAnim {}
+        }
         // implicitWidth: 500
 
         border.width: 1
         border.color: Colors.palette.m3surfaceContainerHigh
+
+        Behavior on border.color {
+            CAnim {}
+        }
 
         ColumnLayout {
             anchors.fill: parent

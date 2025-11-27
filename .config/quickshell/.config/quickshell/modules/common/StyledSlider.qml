@@ -60,7 +60,7 @@ Slider {
     }
 
     Behavior on handleMargins {
-        animation: Appearance.anim.elementMoveFast.numberAnimation.createObject(this)
+        Anim {}
     }
     MouseArea {
         anchors.fill: parent
@@ -79,7 +79,7 @@ Slider {
         color: normalizedValue > root.visualPosition ? root.dotColor : root.dotColorHighlighted
 
         Behavior on color {
-            animation: Appearance.anim.elementMoveFast.colorAnimation.createObject(this)
+            CAnim {}
         }
     }
 
@@ -98,6 +98,9 @@ Slider {
             height: root.trackWidth
             sourceComponent: Rectangle {
                 color: root.highlightColor
+                Behavior on color {
+                    CAnim {}
+                }
                 topLeftRadius: root.trackRadius
                 bottomLeftRadius: root.trackRadius
                 topRightRadius: root.unsharpenRadius
@@ -113,6 +116,9 @@ Slider {
             width: root.handleMargins + ((1 - root.visualPosition) * root.effectiveDraggingWidth) - (root.handleWidth / 2 + root.handleMargins)
             height: trackWidth
             color: root.trackColor
+            Behavior on color {
+                CAnim {}
+            }
             topRightRadius: root.trackRadius
             bottomRightRadius: root.trackRadius
             topLeftRadius: root.unsharpenRadius
@@ -138,6 +144,9 @@ Slider {
         anchors.verticalCenter: parent.verticalCenter
         radius: Appearance.rounding.full
         color: root.handleColor
+        Behavior on color {
+            CAnim {}
+        }
 
         Behavior on implicitWidth {
             Anim {

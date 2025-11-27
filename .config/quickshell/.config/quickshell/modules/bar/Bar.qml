@@ -21,7 +21,11 @@ PanelWindow {
 
     property real alpha: Config.appearance.transparency.alpha
     property bool transparent: Config.appearance.transparency.enabled
+
     color: transparent ? Qt.alpha(Colors.palette.m3surface, alpha) : Colors.palette.m3surface
+    Behavior on color {
+        CAnim {}
+    }
 
     property bool e: Config.bar
 

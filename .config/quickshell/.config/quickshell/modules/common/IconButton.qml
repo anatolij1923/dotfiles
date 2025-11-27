@@ -39,6 +39,9 @@ Rectangle {
     }
 
     color: root.enabled ? (root.internalChecked ? root.activeColor : root.inactiveColor) : Qt.alpha(root.inactiveColor, 0.5)
+    Behavior on color {
+        CAnim {}
+    }
 
     implicitWidth: implicitHeight
     implicitHeight: label.implicitHeight + padding * 2
