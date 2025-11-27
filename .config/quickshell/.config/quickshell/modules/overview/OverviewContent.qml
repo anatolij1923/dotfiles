@@ -89,11 +89,6 @@ Item {
                 color: root.transparent ? Qt.alpha(baseColor, root.alpha) : baseColor
                 border.width: model.focused || cardHoverHandler.hovered ? 2 : 1
                 border.color: model.focused ? Colors.palette.m3primary : Colors.palette.m3outline
-                // clip: true
-
-                Behavior on border.width {
-                    Anim {}
-                }
 
                 StyledText {
                     anchors.centerIn: parent

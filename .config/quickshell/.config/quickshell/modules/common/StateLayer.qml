@@ -87,7 +87,7 @@ MouseArea {
             target: ripple
             properties: "implicitWidth,implicitHeight"
             to: rippleEnterAnim.targetRadius * 2
-            duration: 1000
+            duration: 800
             easing.bezierCurve: Appearance.animCurves.standardDecel
         }
     }
