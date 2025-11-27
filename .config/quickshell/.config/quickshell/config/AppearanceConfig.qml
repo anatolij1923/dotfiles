@@ -2,6 +2,7 @@ import Quickshell.Io
 
 JsonObject {
     property Transparency transparency: Transparency {}
+    property bool darkMode: true
 
     // TODO: make transparency support
     component Transparency: JsonObject {

@@ -4,15 +4,13 @@ import qs
 import qs.services
 import qs.modules.common
 
-// TODO: Add dark mode switching
-
 QuickToggle {
 
     checked: Colors.isDarkMode
     icon: "contrast"
 
     onClicked: () => {
-        Colors.isDarkMode = !Colors.isDarkMode
+        Colors.switchDarkLightMode();
     }
     StyledTooltip {
         text: "Enable Dark Mode"

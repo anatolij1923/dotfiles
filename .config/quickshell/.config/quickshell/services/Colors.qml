@@ -9,7 +9,7 @@ import qs.config
 Singleton {
     id: root
 
-    property bool isDarkMode: true
+    property bool isDarkMode: Config.appearance.darkMode
     readonly property var colors: JSON.parse(colorsFile.text()).colors[isDarkMode ? "dark" : "light"]
 
     readonly property Palette palette: Palette {}
@@ -37,6 +37,10 @@ Singleton {
         return Qt.lighter(color.r, color.g, color.b, alpha);
     }
 
+    function switchDarkLightMode() {
+        Config.appearance.darkMode = !Config.appearance.darkMode;
+    }
+
     function generateColors() {
         console.log("[COLORS] Generating material palette");
         matugenProcess.running = true;
@@ -47,7 +51,7 @@ Singleton {
         target: Config.background
 
         function onWallpaperPathChanged() {
-            generateColors();
+            // generateColors();
             console.log("fsd");
         }
     }
