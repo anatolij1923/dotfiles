@@ -9,6 +9,8 @@ import qs.modules.common
 
 Scope {
     id: root
+    property int padding: Appearance.padding.normal
+    property int rounding: Appearance.rounding.normal
 
     Loader {
         active: GlobalStates.launcherOpened
@@ -18,7 +20,8 @@ Scope {
             visible: GlobalStates.launcherOpened
 
             implicitWidth: 400
-            implicitHeight: searchWrapper.implicitHeight
+            implicitHeight: searchWrapper.height + root.padding * 2
+            color: "transparent"
 
             anchors {
                 top: true
@@ -51,8 +54,12 @@ Scope {
                         top: parent.top
                         left: parent.left
                         right: parent.right
+                        margins: root.padding
                     }
                     implicitHeight: Math.max(icon.implicitHeight, searchField.implicitHeight)
+
+                    radius: Appearance.rounding.full
+                    color: "red"
 
                     MaterialSymbol {
                         id: icon
@@ -75,7 +82,17 @@ Scope {
                         anchors {
                             left: icon.right
                             right: parent.right
+                            rightMargin: root.padding
                         }
+
+                        topPadding: Appearance.padding.large
+                        bottomPadding: Appearance.padding.large
+
+                        placeholderText: `Search or run commands with ":"`
+
+                        fontSize: 18
+                        fontWeight: 400
+                        placeholderTextColor: Colors.palette.m3outline
                     }
                 }
             }
