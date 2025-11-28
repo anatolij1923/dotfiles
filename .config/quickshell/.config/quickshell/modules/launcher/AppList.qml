@@ -18,6 +18,4 @@ ListView {
     model: AppSearch.fuzzyQuery(search)
 
     delegate: AppItem {}
-
-    
 }

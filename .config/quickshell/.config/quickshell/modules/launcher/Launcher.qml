@@ -30,9 +30,9 @@ Scope {
                 top: true
             }
 
-            Behavior on implicitHeight {
-                // Добавьте анимацию, если необходимо, аналогично референсному Wrapper.qml
-            }
+            // Behavior on implicitHeight {
+            //     // Добавьте анимацию, если необходимо, аналогично референсному Wrapper.qml
+            // }
             margins {
                 top: Appearance.padding.huge
             }
@@ -121,10 +121,10 @@ Scope {
 
                     anchors {
                         top: searchWrapper.bottom
-                        // left: parent.left
-                        // right: parent.right
+                        left: parent.left
+                        right: parent.right
                         // bottom: parent.bottom
-                        // margins: root.padding
+                        margins: root.padding
                     }
 
                     ContentList {
