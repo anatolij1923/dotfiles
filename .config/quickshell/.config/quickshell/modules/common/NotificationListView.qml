@@ -12,6 +12,7 @@ ListView {
 
     spacing: 8
     ScrollBar.vertical: ScrollBar {}
+    clip: true
 
     model: ScriptModel {
         values: Notifications.list.filter(n => n.popup)
