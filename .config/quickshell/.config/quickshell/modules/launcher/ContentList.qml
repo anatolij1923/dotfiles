@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
 import qs.modules.common
@@ -12,7 +13,6 @@ Item {
     property bool showWallpaper: search.startsWith(":wallpaper")
     readonly property Item currentList: appList.item // Добавьте это свойство
 
-    // anchors.fill: parent
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.top: parent.top
 
@@ -41,8 +41,9 @@ Item {
 
         active: false
 
-        anchors.top: parent.top
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.fill: parent
+        // anchors.top: parent.top
+        // anchors.horizontalCenter: parent.horizontalCenter
 
         sourceComponent: AppList {
             search: root.search
@@ -61,15 +62,15 @@ Item {
         opacity: root.currentList?.count === 0 ? 1 : 0
         scale: root.currentList?.count === 0 ? 1 : 0.5
 
-        spacing: Appearance.spacing.normal
+        spacing: Appearance.padding.normal
         padding: Appearance.padding.large
 
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.fill: parent
+        // anchors.horizontalCenter: parent.horizontalCenter
         // anchors.verticalCenter: parent.verticalCenter
 
-        anchors.centerIn: parent
-
-        MaterialSymbol { // Используйте MaterialSymbol, так как MaterialIcon не был предоставлен в вашем коде
+        MaterialSymbol {
+            // Используйте MaterialSymbol, так как MaterialIcon не был предоставлен в вашем коде
             icon: root.state === "wallpapers" ? "wallpaper_slideshow" : "manage_search"
             color: Colors.palette.m3onSurfaceVariant
             size: 23
@@ -93,12 +94,8 @@ Item {
             }
         }
 
-        Behavior on opacity {
-            // Добавьте анимацию, если необходимо, как в референсном коде
-        }
+        Behavior on opacity {}
 
-        Behavior on scale {
-            // Добавьте анимацию, если необходимо, как в референсном коде
-        }
+        Behavior on scale {}
     }
 }
