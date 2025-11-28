@@ -16,6 +16,7 @@ Singleton {
     property alias lock: adapter.lock
     property alias weather: adapter.weather
     property alias dock: adapter.dock
+    property alias launcher: adapter.launcher
 
     Timer {
         id: fileWriteTimer
@@ -58,6 +59,7 @@ Singleton {
             property LockConfig lock: LockConfig {}
             property WeatherConfig weather: WeatherConfig {}
             property DockConfig dock: DockConfig {}
+            property LauncherConfig launcher: LauncherConfig {}
         }
     }
 }

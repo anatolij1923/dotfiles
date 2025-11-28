@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
 import Quickshell.Hyprland
@@ -10,21 +11,27 @@ import qs.modules.common
 Scope {
     id: root
     property int padding: Appearance.padding.normal
-    property int rounding: Appearance.rounding.normal
+    property int rounding: Appearance.rounding.huge
+    property string searchingText: ""
 
     Loader {
         active: GlobalStates.launcherOpened
 
         sourceComponent: PanelWindow {
             id: launcherRoot
+            property real maxHeight: screen.height * 0.35
             visible: GlobalStates.launcherOpened
 
-            implicitWidth: 400
-            implicitHeight: searchWrapper.height + root.padding * 2
+            implicitWidth: 450
+            implicitHeight: Math.min(launcherRoot.maxHeight, searchWrapper.implicitHeight + listWrapper.implicitHeight + root.padding * 2)
             color: "transparent"
 
             anchors {
                 top: true
+            }
+
+            Behavior on implicitHeight {
+                // Добавьте анимацию, если необходимо, аналогично референсному Wrapper.qml
             }
             margins {
                 top: Appearance.padding.huge
@@ -43,6 +50,13 @@ Scope {
                     launcherRoot.hide()
             }
 
+            Rectangle {
+                id: background
+                anchors.fill: parent
+                color: Colors.palette.m3surface
+                radius: root.rounding
+            }
+
             Item {
                 id: wrapper
                 anchors.fill: parent
@@ -58,16 +72,18 @@ Scope {
                     }
                     implicitHeight: Math.max(icon.implicitHeight, searchField.implicitHeight)
 
-                    radius: Appearance.rounding.full
-                    color: "red"
+                    radius: Appearance.rounding.normal
+                    color: Colors.palette.m3surfaceContainer
 
                     MaterialSymbol {
                         id: icon
                         icon: "search"
+                        color: Colors.palette.m3onSurfaceVariant
 
                         anchors {
                             left: parent.left
                             verticalCenter: parent.verticalCenter
+                            leftMargin: root.padding
                         }
                     }
 
@@ -90,9 +106,31 @@ Scope {
 
                         placeholderText: `Search or run commands with ":"`
 
-                        fontSize: 18
+                        fontSize: 20
                         fontWeight: 400
                         placeholderTextColor: Colors.palette.m3outline
+
+                        onTextChanged: root.searchingText = text
+                    }
+                }
+
+                Item {
+                    id: listWrapper
+
+                    implicitHeight: contentList.height
+
+                    anchors {
+                        top: searchWrapper.bottom
+                        // left: parent.left
+                        // right: parent.right
+                        // bottom: parent.bottom
+                        // margins: root.padding
+                    }
+
+                    ContentList {
+                        id: contentList
+                        maxHeight: launcherRoot.maxHeight
+                        search: root.searchingText
                     }
                 }
             }
