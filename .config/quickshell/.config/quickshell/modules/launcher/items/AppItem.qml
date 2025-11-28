@@ -4,6 +4,7 @@ import Quickshell.Widgets
 import qs.modules.common
 import qs.services
 import qs.config
+import qs
 
 Item {
     id: root
@@ -19,7 +20,11 @@ Item {
         anchors.fill: parent
         radius: Appearance.rounding.normal
 
-        onClicked: {}
+        onClicked: {
+            root.modelData.execute(
+            )
+            GlobalStates.launcherOpened = false
+        }
     }
 
     Item {
@@ -35,6 +40,7 @@ Item {
             anchors {
                 verticalCenter: parent.verticalCenter
                 left: parent.left
+                leftMargin: Appearance.padding.normal
             }
         }
 
@@ -43,6 +49,7 @@ Item {
             anchors {
                 left: icon.right
                 verticalCenter: icon.verticalCenter
+                leftMargin: Appearance.padding.small
             }
         }
     }

@@ -94,6 +94,8 @@ Scope {
                         onAccepted: {}
 
                         Keys.onEscapePressed: launcherRoot.hide()
+                        Keys.onUpPressed: contentList.currentList?.decrementCurrentIndex()
+                        Keys.onDownPressed: contentList.currentList?.incrementCurrentIndex()
 
                         anchors {
                             left: icon.right
@@ -118,6 +120,8 @@ Scope {
                     id: listWrapper
 
                     implicitHeight: contentList.height
+
+                    clip: true
 
                     anchors {
                         top: searchWrapper.bottom
