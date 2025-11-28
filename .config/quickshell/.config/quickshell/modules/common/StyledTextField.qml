@@ -14,18 +14,20 @@ TextField {
     property string placeholder: "Type..."
     property string icon: ""
     property real iconSize: icon === "" ? 0 : 25
+    property int fontSize: 16
+    property int fontWeight: 500
 
     padding: 20
     focus: root.focus
     color: Colors.palette.m3onSurface
     placeholderText: placeholder
     placeholderTextColor: Colors.palette.m3onSurface
-    font.pixelSize: 16
+    font.pixelSize: root.fontSize
     font.family: "Rubik"
     font.variableAxes: {
         "wght": root.font.weight
     }
-    font.weight: 500
+    font.weight: root.fontWeight
     renderType: Text.NativeRendering
     leftPadding: icon !== "" ? iconSize + 35 : 20
 
