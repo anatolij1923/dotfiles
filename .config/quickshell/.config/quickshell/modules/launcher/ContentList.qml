@@ -67,14 +67,11 @@ Item {
         padding: Appearance.padding.large
 
         anchors.fill: parent
-        // anchors.horizontalCenter: parent.horizontalCenter
-        // anchors.verticalCenter: parent.verticalCenter
 
         MaterialSymbol {
-            // Используйте MaterialSymbol, так как MaterialIcon не был предоставлен в вашем коде
-            icon: root.state === "wallpapers" ? "wallpaper_slideshow" : "manage_search"
+            icon: root.state === "wallpapers" ? "wallpaper_slideshow" : "sentiment_sad"
             color: Colors.palette.m3onSurfaceVariant
-            size: 23
+            size: 48
 
             anchors.verticalCenter: parent.verticalCenter
         }
@@ -89,7 +86,7 @@ Item {
             }
 
             StyledText {
-                text: root.state === "wallpapers" ? "Try putting some wallpapers" : "Try searching for something else"
+                text: root.state === "wallpapers" ? "Smart man in glasses download wallpaper" : "Try something else"
                 color: Colors.palette.m3onSurface
                 size: 20
             }

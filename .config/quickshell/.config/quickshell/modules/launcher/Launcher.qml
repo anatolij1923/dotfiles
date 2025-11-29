@@ -19,8 +19,12 @@ Scope {
 
         sourceComponent: PanelWindow {
             id: launcherRoot
-            property real maxHeight: screen.height * 0.35
+            property real maxHeight: screen.height * 0.8
             visible: GlobalStates.launcherOpened
+
+            onVisibleChanged: {
+                root.searchingText = "";
+            }
 
             implicitWidth: 450
             implicitHeight: Math.min(launcherRoot.maxHeight, searchWrapper.implicitHeight + listWrapper.implicitHeight + root.padding * 2)
@@ -97,6 +101,14 @@ Scope {
                         Keys.onUpPressed: contentList.currentList?.decrementCurrentIndex()
                         Keys.onDownPressed: contentList.currentList?.incrementCurrentIndex()
 
+                        Keys.onPressed: event => {
+                            if (event.key === Qt.Key_Tab) {
+                                contentList.currentList?.incrementCurrentIndex();
+                            } else if (event.key === Qt.Key_Backtab) {
+                                contentList.currentList?.decrementCurrentIndex();
+                            }
+                        }
+
                         anchors {
                             left: icon.right
                             right: parent.right
@@ -152,5 +164,9 @@ Scope {
         function close(): void {
             GlobalStates.launcherOpened = false;
         }
+    }
+
+    Component.onCompleted: {
+        AppSearch.fuzzyQuery("");
     }
 }
