@@ -35,12 +35,6 @@ ShellRoot {
         Idle.init();
     }
 
-    // WorkspacePreview {}
-    //
-
-    // WallpaperSelector {}
-    //
-    // Test {}
     LazyLoader {
         active: enableBackground
         component: Background {}
