@@ -19,6 +19,7 @@ Item {
     }
 
     StateLayer {
+        id: stateLayer
         anchors.fill: parent
         radius: Appearance.rounding.normal
 
@@ -26,7 +27,7 @@ Item {
 
         onClicked: {
             Wallpapers.setWallpaper(root.wallpaperPath);
-            GlobalStates.launcherOpened = false;
+            // GlobalStates.launcherOpened = false;
         }
     }
 
@@ -97,5 +98,10 @@ Item {
                 }
             }
         }
+    }
+
+    StyledTooltip {
+        text: root.wallpaperPath
+        extraVisibleCondition: stateLayer.containsMouse
     }
 }
