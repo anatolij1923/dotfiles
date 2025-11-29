@@ -1,80 +1,91 @@
-import Quickshell
-import Quickshell.Widgets
 import QtQuick
-import QtQuick.Layouts
+import Quickshell
 import qs.modules.common
+import qs.config
 import qs.services
 import qs
 
-Rectangle {
+Item {
     id: root
-    property var desktopEntry: null
-    property bool isCurrent: false
 
-    width: parent ? parent.width : 460
-    implicitHeight: containerItem.height + 32
-    color: "transparent"
-    radius: 16
+    required property var modelData
+    property var searchField
 
-    StateLayer {
-        anchors.fill: parent // Занимает всю область родителя (containerItem)
-        radius: root.radius // Передаем радиус из корневого элемента LauncherItem
-        onClicked: {
-            // Обрабатываем клик
-            if (root.desktopEntry) {
-                root.desktopEntry.execute();
-                root.activated();
-            }
+    implicitHeight: Config.launcher.sizes.itemHeight
+
+    anchors.left: parent?.left
+    anchors.right: parent?.right
+
+    function execute() {
+        if (!root.modelData?.command || root.modelData.command.length === 0) {
+            return;
         }
-        // onEntered: resultsView.currentIndex = index // Обрабатываем наведение
-        onPressed: resultsView.currentIndex = index
+
+        if (root.modelData.command[0] === "autocomplete" && root.modelData.command.length > 1) {
+            if (root.searchField) {
+                root.searchField.text = `:${root.modelData.command[1]} `;
+            }
+        } else {
+            Quickshell.execDetached(root.modelData.command);
+            GlobalStates.launcherOpened = false;
+        }
     }
 
-    signal activated
+    StateLayer {
+        anchors.fill: parent
+        radius: Appearance.rounding.normal
+
+        onClicked: {
+            root.execute();
+        }
+    }
 
     Item {
-        id: containerItem
+        id: content
+        anchors.fill: parent
+        anchors.leftMargin: Appearance.padding.normal
+        anchors.rightMargin: Appearance.padding.normal
 
-        anchors {
-            fill: parent
-            margins: 8
+        MaterialSymbol {
+            id: icon
+            icon: root.modelData?.icon ?? "help_outline"
+            color: Colors.palette.m3onSurfaceVariant
+            size: parent.height * 0.75
+
+            anchors {
+                verticalCenter: parent.verticalCenter
+                left: parent.left
+                leftMargin: Appearance.padding.normal
+            }
         }
 
-        RowLayout {
-            id: row
-            anchors.fill: parent
-            spacing: 10
-
-            IconImage {
-                id: icon
-                Layout.preferredWidth: 30
-                Layout.preferredHeight: 30
-                source: Quickshell.iconPath(AppSearch.guessIcon(desktopEntry.icon || desktopEntry.name))
-                anchors.verticalCenter: parent.verticalCenter
+        Column {
+            id: textColumn
+            anchors {
+                left: icon.right
+                leftMargin: Appearance.padding.normal
+                verticalCenter: parent.verticalCenter
+                right: parent.right
             }
 
             StyledText {
-                id: label
-                Layout.fillWidth: true
-                text: desktopEntry.name
+                id: nameText
+                text: root.modelData?.name ?? "Unnamed Command"
                 color: Colors.palette.m3onSurface
-                size: 18
-                weight: 400
+                size: 20
+                weight: 500
+            }
+
+            StyledText {
+                id: descText
+                text: root.modelData?.description ?? ""
+                color: Colors.palette.m3onSurfaceVariant
+                size: 16
+                opacity: 0.8
                 elide: Text.ElideRight
-                anchors.verticalCenter: parent.verticalCenter
+                width: parent.width
+                visible: text.length > 0
             }
         }
     }
-
-    // MouseArea {
-    //     anchors.fill: parent
-    //     hoverEnabled: true
-    //     onClicked: {
-    //         if (desktopEntry) {
-    //             desktopEntry.execute();
-    //             root.activated();
-    //         }
-    //     }
-    //     onEntered: resultsView.currentIndex = index
-    // }
 }

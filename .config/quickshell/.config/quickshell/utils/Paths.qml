@@ -1,5 +1,7 @@
 pragma Singleton
 import Quickshell
+import QtQuick
+import QtCore
 
 // From https://github.com/caelestia-dots/shell with modifications.
 // License: GPLv3
@@ -7,8 +9,19 @@ import Quickshell
 Singleton {
     id: root
 
+    function getPath(type) {
+        const urls = StandardPaths.standardLocations(type);
+
+        if (urls.length === 0)
+            return "";
+
+        const url = urls[0];
+
+        return url.toString().replace("file://", "");
+    }
+
     readonly property string home: Quickshell.env("HOME")
-    readonly property string pictures: Quickshell.env("XDG_PICTURES_DIR") || `${home}/Pictures`
+    readonly property string pictures: getPath(StandardPaths.PicturesLocation)
     readonly property string videos: Quickshell.env("XDG_VIDEOS_DIR") || `${home}/Videos`
 
     readonly property string data: `${Quickshell.env("XDG_DATA_HOME") || `${home}/.local/share`}/caelestia`

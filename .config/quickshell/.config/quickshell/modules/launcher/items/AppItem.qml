@@ -1,80 +1,56 @@
+import QtQuick
 import Quickshell
 import Quickshell.Widgets
-import QtQuick
-import QtQuick.Layouts
 import qs.modules.common
 import qs.services
+import qs.config
 import qs
 
-Rectangle {
+Item {
     id: root
-    property var desktopEntry: null
-    property bool isCurrent: false
 
-    width: parent ? parent.width : 460
-    implicitHeight: containerItem.height + 32
-    color: "transparent"
-    radius: 16
+    required property DesktopEntry modelData
+
+    implicitHeight: Config.launcher.sizes.itemHeight
+
+    anchors.left: parent?.left
+    anchors.right: parent?.right
 
     StateLayer {
-        anchors.fill: parent // Занимает всю область родителя (containerItem)
-        radius: root.radius // Передаем радиус из корневого элемента LauncherItem
-        onClicked: {
-            // Обрабатываем клик
-            if (root.desktopEntry) {
-                root.desktopEntry.execute();
-                root.activated();
-            }
-        }
-        // onEntered: resultsView.currentIndex = index // Обрабатываем наведение
-        onPressed: resultsView.currentIndex = index
-    }
+        anchors.fill: parent
+        radius: Appearance.rounding.normal
 
-    signal activated
+        onClicked: {
+            root.modelData.execute();
+            GlobalStates.launcherOpened = false;
+        }
+    }
 
     Item {
-        id: containerItem
+        id: content
+        anchors.fill: parent
 
-        anchors {
-            fill: parent
-            margins: 8
+        IconImage {
+            id: icon
+            source: Quickshell.iconPath(AppSearch.guessIcon(root.modelData.icon || root.modelData.name))
+
+            implicitSize: parent.height * 0.75
+
+            anchors {
+                verticalCenter: parent.verticalCenter
+                left: parent.left
+                leftMargin: Appearance.padding.normal
+            }
         }
 
-        RowLayout {
-            id: row
-            anchors.fill: parent
-            spacing: 10
-
-            IconImage {
-                id: icon
-                Layout.preferredWidth: 30
-                Layout.preferredHeight: 30
-                source: Quickshell.iconPath(AppSearch.guessIcon(desktopEntry.icon || desktopEntry.name))
-                anchors.verticalCenter: parent.verticalCenter
-            }
-
-            StyledText {
-                id: label
-                Layout.fillWidth: true
-                text: desktopEntry.name
-                color: Colors.palette.m3onSurface
-                size: 18
-                weight: 400
-                elide: Text.ElideRight
-                anchors.verticalCenter: parent.verticalCenter
+        StyledText {
+            text: root.modelData.name
+            weight: 500
+            anchors {
+                left: icon.right
+                verticalCenter: icon.verticalCenter
+                leftMargin: Appearance.padding.small
             }
         }
     }
-
-    // MouseArea {
-    //     anchors.fill: parent
-    //     hoverEnabled: true
-    //     onClicked: {
-    //         if (desktopEntry) {
-    //             desktopEntry.execute();
-    //             root.activated();
-    //         }
-    //     }
-    //     onEntered: resultsView.currentIndex = index
-    // }
 }

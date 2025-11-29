@@ -6,11 +6,13 @@ import QtQuick.Controls
 import Quickshell
 import Quickshell.Io
 import qs.config
+import qs.utils
+import qs.modules.common
 
 Scope {
     id: root
 
-    property string wallpaperDir: "/home/anatolij1923/Изображения/wallpapers/Nature/" // Change this
+    property string wallpaperDir: `${Paths.pictures}/wallpapers`
     property string searchQuery: ""
     property var wallpaperList: []
     property var filteredWallpaperList: {
@@ -65,6 +67,16 @@ Scope {
                 Keys.onEscapePressed: Qt.quit()
             }
 
+            StyledText {
+                text: root.wallpaperDir
+                Layout.fillWidth: true
+            }
+
+            StyledText {
+                text: Quickshell.env("XDG_PICTURES_DIR")
+                Layout.fillWidth: true
+            }
+
             PathView {
                 id: pathView
 
@@ -94,7 +106,7 @@ Scope {
                         Image {
                             anchors.fill: parent
                             anchors.margins: 3
-                            source: "file://" + delegateItem.modelData
+                            source: delegateItem.modelData
                             fillMode: Image.PreserveAspectCrop
                             asynchronous: true
                             smooth: true

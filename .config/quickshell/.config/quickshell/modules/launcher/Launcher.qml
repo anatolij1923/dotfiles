@@ -1,222 +1,219 @@
+pragma ComponentBehavior: Bound
+import QtQuick
 import Quickshell
-import Quickshell.Wayland
 import Quickshell.Hyprland
 import Quickshell.Io
-import QtQuick
-import QtQuick.Layouts
-import QtQuick.Controls
 import qs
+import qs.config
 import qs.services
 import qs.modules.common
-import qs.modules.launcher.items
+
+// Based on https://github.com/caelestia-dots/shell with modifications
 
 Scope {
     id: root
+    property int padding: Appearance.padding.normal
+    property int rounding: Appearance.rounding.huge
     property string searchingText: ""
-    property bool showResults: searchingText.trim().length > 0
-    property var customCommands: [
-        {
-            id: "wallpaper",
-            name: "Change Wallpaper",
-            description: "Open wallpaper selector",
-            icon: "preferences-desktop-wallpaper",
-            action: () => {
-                console.log("TODO: Open wallpaper selector window");
+
+    Loader {
+        active: GlobalStates.launcherOpened
+
+        sourceComponent: PanelWindow {
+            id: launcherRoot
+            property real maxHeight: screen.height * 0.8
+            visible: GlobalStates.launcherOpened
+
+            onVisibleChanged: {
+                root.searchingText = "";
             }
-        },
-        {
-            id: "settings",
-            name: "Settings",
-            description: "Open shell settings",
-            icon: "preferences-system",
-            action: () => {
-                console.log("TODO: Open settings window");
+
+            implicitWidth: {
+                if (root.searchingText.startsWith(":wallpaper")) {
+                    const wallWidth = Config.launcher.sizes.wallWidth;
+                    const spacing = Appearance.padding.small;
+                    const columns = 3;
+                    return (wallWidth * columns) + (spacing * (columns - 1)) + (root.padding * 2);
+                }
+                return 450;
             }
-        },
-        {
-            id: "reboot",
-            name: "Reboot",
-            description: "Reboot the system",
-            icon: "system-reboot",
-            action: () => {
-                Quickshell.execDetached({
-                    command: ["systemctl", "reboot"]
-                });
+            implicitHeight: Math.min(launcherRoot.maxHeight, searchWrapper.implicitHeight + listWrapper.implicitHeight + root.padding * 2) + root.padding
+
+            // Behavior on implicitWidth {
+            //     Anim {
+            //         duration: 200
+            //         easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
+            //     }
+            // }
+            color: "transparent"
+
+            anchors {
+                top: true
             }
-        }
-    ]
 
-    PanelWindow {
-        id: launcherRoot
-        visible: GlobalStates.launcherOpened
-        anchors.top: true
-        margins.top: 40
-        exclusiveZone: 0
-        color: "transparent"
+            margins {
+                top: Appearance.padding.huge
+            }
+            exclusiveZone: 0
 
-        implicitWidth: contentLoader.item ? contentLoader.item.implicitWidth : 460
-        implicitHeight: contentLoader.item ? contentLoader.item.implicitHeight : 40
+            function hide() {
+                GlobalStates.launcherOpened = false;
+                root.searchingText = "";
+            }
 
-        // Behavior on implicitHeight {
-        //     Anim {
-        //         duration: Appearance.animDuration.expressiveSlowSpatial
-        //         easing.bezierCurve: Appearance.animCurves.expressiveSlowSpatial
-        //     }
-        // }
+            HyprlandFocusGrab {
+                windows: [launcherRoot]
+                active: GlobalStates.launcherOpened
+                onCleared: if (!active)
+                    launcherRoot.hide()
+            }
 
-        function hide() {
-            GlobalStates.launcherOpened = false;
-            root.searchingText = "";
-        }
-
-        HyprlandFocusGrab {
-            windows: [launcherRoot]
-            active: GlobalStates.launcherOpened
-            onCleared: if (!active)
-                launcherRoot.hide()
-        }
-
-        Loader {
-            id: contentLoader
-            anchors.fill: parent
-            active: GlobalStates.launcherOpened
-            focus: GlobalStates.launcherOpened
-
-            sourceComponent: Rectangle {
-                id: wrapper
+            Rectangle {
+                id: background
+                anchors.fill: parent
                 color: Colors.palette.m3surface
-                radius: 24
-                implicitWidth: 460
+                radius: root.rounding
+                smooth: true
+            }
 
-                border.width: 1
-                border.color: Colors.palette.m3surfaceContainerHigh
+            Item {
+                id: wrapper
+                anchors.fill: parent
 
-                property int itemHeight: 40
-                property int maxListHeight: 350
+                Rectangle {
+                    id: searchWrapper
 
-                implicitHeight: searchField.implicitHeight + (root.showResults ? (content.spacing + 1 + content.spacing + Math.min(resultsView.contentHeight, maxListHeight)) : 0) + content.spacing
+                    anchors {
+                        top: parent.top
+                        left: parent.left
+                        right: parent.right
+                        margins: root.padding
+                    }
+                    implicitHeight: Math.max(icon.implicitHeight, searchField.implicitHeight)
 
-                ColumnLayout {
-                    id: content
-                    anchors.fill: parent
-                    spacing: 6
+                    radius: Appearance.rounding.normal
+                    color: Colors.palette.m3surfaceContainer
 
-                    Keys.onPressed: event => {
-                        switch (event.key) {
-                        case Qt.Key_Escape:
-                            launcherRoot.hide();
-                            event.accepted = true;
-                            break;
-                        case Qt.Key_Up:
-                        case Qt.Key_Backtab:
-                            resultsView.decrementCurrentIndex();
-                            event.accepted = true;
-                            break;
-                        case Qt.Key_Down:
-                        case Qt.Key_Tab:
-                            resultsView.incrementCurrentIndex();
-                            event.accepted = true;
-                            break;
-                        case Qt.Key_Return:
-                        case Qt.Key_Enter:
-                            if (resultsView.currentIndex >= 0 && resultsView.count > 0) {
-                                resultsView.model[resultsView.currentIndex].execute();
-                                launcherRoot.hide();
-                                event.accepted = true;
-                            }
-                            break;
+                    MaterialSymbol {
+                        id: icon
+                        icon: "search"
+                        color: Colors.palette.m3onSurfaceVariant
+
+                        anchors {
+                            left: parent.left
+                            verticalCenter: parent.verticalCenter
+                            leftMargin: root.padding
                         }
                     }
 
-                    // Text field
                     StyledTextField {
                         id: searchField
-                        Layout.fillWidth: true
-                        // implicitHeight: 56
                         focus: true
-                        icon: "search"
-                        placeholderText: "Search..."
-                        font.pixelSize: 20
-                        onTextChanged: root.searchingText = text
-                        background: Rectangle {
-                            color: "transparent"
-                        }
-                    }
 
-                    // Separator
+                        onAccepted: {
+                            const currentList = contentList.currentList;
+                            if (!currentList) {
+                                return;
+                            }
 
-                    // Results list
-                    ListView {
-                        id: resultsView
-                        visible: root.showResults && count > 0
-                        Layout.fillWidth: true
-                        height: Math.min(contentHeight, wrapper.maxListHeight)
-                        clip: true
-                        model: AppSearch.fuzzyQuery(root.searchingText).slice(0, 15)
-                        // model: ScriptModel {
-                        //
-                        //     values: {
-                        //         if (root.searchingText.startsWith(":")) {
-                        //             const query = root.searchingText.substring(1).toLowerCase();
-                        //             const filteredCommands = root.customCommands.filter(cmd => cmd.name.toLowerCase().includes(query));
-                        //
-                        //             return filteredCommands.map(cmd => ({
-                        //                         type: "command",
-                        //                         data: cmd
-                        //                     }));
-                        //         } else {
-                        //             return AppSearch.fuzzyQuery(root.searchingText).slice(0, 15);
-                        //         }
-                        //     }
-                        // }
+                            const currentItem = currentList.currentItem;
+                            if (!currentItem) {
+                                return;
+                            }
 
-                        // return text.startsWith(":")
-                        //     ?
-                        spacing: 2
-                        currentIndex: 0
-                        focus: true
-                        ScrollBar.vertical: ScrollBar {}
-                        leftMargin: 8
-                        rightMargin: 8
-                        bottomMargin: 8
-
-                        highlight: Rectangle {
-                            color: Colors.palette.m3secondaryContainer
-                            radius: Appearance.rounding.normal
-
-                            y: root.currentIndex?.y ?? 0
-
-                            Behavior on y {
-                                Anim {
-                                    duration: Appearance.animDuration.expressiveDefaultSpatial
-                                    easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
+                            if (contentList.showWallpaper) {
+                                const wallpaperPath = currentItem.wallpaperPath || currentItem.modelData;
+                                if (wallpaperPath) {
+                                    Wallpapers.setWallpaper(String(wallpaperPath));
+                                    launcherRoot.hide();
+                                }
+                            } else if (contentList.showCommands) {
+                                if (typeof currentItem.execute === "function") {
+                                    currentItem.execute();
+                                } else if (currentItem.modelData?.command) {
+                                    const cmd = currentItem.modelData.command;
+                                    if (cmd[0] === "autocomplete" && cmd.length > 1) {
+                                        searchField.text = `:${cmd[1]} `;
+                                    } else {
+                                        Quickshell.execDetached(cmd);
+                                        launcherRoot.hide();
+                                    }
+                                }
+                            } else {
+                                if (currentItem.modelData && typeof currentItem.modelData.execute === "function") {
+                                    currentItem.modelData.execute();
+                                    launcherRoot.hide();
                                 }
                             }
                         }
 
-                        delegate: AppItem {
-                            desktopEntry: modelData
-                            isCurrent: resultsView.currentIndex === index
-                            onActivated: launcherRoot.hide()
+                        Keys.onEscapePressed: launcherRoot.hide()
+                        Keys.onUpPressed: contentList.currentList?.decrementCurrentIndex()
+                        Keys.onDownPressed: contentList.currentList?.incrementCurrentIndex()
+
+                        Keys.onPressed: event => {
+                            if (event.key === Qt.Key_Tab) {
+                                contentList.currentList?.incrementCurrentIndex();
+                            } else if (event.key === Qt.Key_Backtab) {
+                                contentList.currentList?.decrementCurrentIndex();
+                            }
                         }
 
-                        Keys.forwardTo: [searchField]
+                        anchors {
+                            left: icon.right
+                            right: parent.right
+                            rightMargin: root.padding
+                        }
+
+                        topPadding: Appearance.padding.large
+                        bottomPadding: Appearance.padding.large
+
+                        placeholderText: `Search or run commands with ":"`
+
+                        fontSize: 20
+                        fontWeight: 400
+                        placeholderTextColor: Colors.palette.m3outline
+
+                        onTextChanged: root.searchingText = text
+                    }
+                }
+
+                Item {
+                    id: listWrapper
+
+                    implicitHeight: contentList.height
+
+                    clip: true
+
+                    anchors {
+                        top: searchWrapper.bottom
+                        left: parent.left
+                        right: parent.right
+                        // bottom: parent.bottom
+                        margins: root.padding
+                    }
+
+                    ContentList {
+                        id: contentList
+                        maxHeight: launcherRoot.maxHeight
+                        search: root.searchingText
+                        searchField: searchField
                     }
                 }
             }
         }
+    }
 
-        IpcHandler {
-            target: "launcher"
-            function toggle(): void {
-                GlobalStates.launcherOpened = !GlobalStates.launcherOpened;
-            }
-            function open(): void {
-                GlobalStates.launcherOpened = true;
-            }
-            function close(): void {
-                GlobalStates.launcherOpened = false;
-            }
+    IpcHandler {
+        target: "launcher"
+        function toggle(): void {
+            GlobalStates.launcherOpened = !GlobalStates.launcherOpened;
+        }
+        function open(): void {
+            GlobalStates.launcherOpened = true;
+        }
+        function close(): void {
+            GlobalStates.launcherOpened = false;
         }
     }
 

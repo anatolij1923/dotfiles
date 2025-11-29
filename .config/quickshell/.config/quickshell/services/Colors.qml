@@ -51,7 +51,7 @@ Singleton {
         target: Config.background
 
         function onWallpaperPathChanged() {
-            // generateColors();
+            generateColors();
             console.log("fsd");
         }
     }
