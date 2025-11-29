@@ -18,6 +18,12 @@ JsonObject {
             description: "Just say hello!",
             icon: "waving_hand",
             action: ["notify-send", "Hello from Quickshell!"]
+        },
+        {
+            name: "wallpaper",
+            description: "Open wallpaper selector",
+            icon: "wallpaper",
+            action: ["autocomplete", "wallpaper"]
         }
     ]
 }
