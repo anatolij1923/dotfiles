@@ -14,7 +14,7 @@ Singleton {
 
     function getCommandsList() {
         try {
-            const cmd = Config.launcher.command;
+            const cmd = Config.launcher.commands;
             console.log("Commands.qml: Config.launcher.command =", JSON.stringify(cmd));
 
             let commands = [];
