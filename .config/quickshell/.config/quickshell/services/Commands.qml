@@ -15,7 +15,7 @@ Singleton {
     function getCommandsList() {
         try {
             const cmd = Config.launcher.commands;
-            console.log("Commands.qml: Config.launcher.command =", JSON.stringify(cmd));
+            // console.log("Commands.qml: Config.launcher.command =", JSON.stringify(cmd));
 
             let commands = [];
 
@@ -26,10 +26,10 @@ Singleton {
                 commands = [cmd];
             }
 
-            console.log("Commands.qml: commands array length =", commands.length);
+            // console.log("Commands.qml: commands array length =", commands.length);
 
             if (!commands || commands.length === 0) {
-                console.log("Commands.qml: No commands found");
+                // console.log("Commands.qml: No commands found");
                 return [];
             }
 
@@ -38,30 +38,30 @@ Singleton {
             let plainCommands;
             try {
                 const jsonStr = JSON.stringify(commands);
-                console.log("Commands.qml: JSON string =", jsonStr);
+                // console.log("Commands.qml: JSON string =", jsonStr);
                 plainCommands = JSON.parse(jsonStr);
                 // If it's nested array, flatten it
                 if (Array.isArray(plainCommands) && plainCommands.length > 0 && Array.isArray(plainCommands[0])) {
-                    console.log("Commands.qml: Detected nested array, flattening");
+                    // console.log("Commands.qml: Detected nested array, flattening");
                     plainCommands = plainCommands[0];
                 }
             } catch (e) {
-                console.error("Commands.qml: JSON parse error:", e);
+                // console.error("Commands.qml: JSON parse error:", e);
                 // Fallback: try to access properties directly
                 plainCommands = commands;
             }
 
-            console.log("Commands.qml: plainCommands =", JSON.stringify(plainCommands));
-            console.log("Commands.qml: plainCommands type =", typeof plainCommands, "isArray =", Array.isArray(plainCommands));
+            // console.log("Commands.qml: plainCommands =", JSON.stringify(plainCommands));
+            // console.log("Commands.qml: plainCommands type =", typeof plainCommands, "isArray =", Array.isArray(plainCommands));
 
             if (!Array.isArray(plainCommands)) {
-                console.log("Commands.qml: plainCommands is not an array, converting");
+                // console.log("Commands.qml: plainCommands is not an array, converting");
                 plainCommands = [plainCommands];
             }
 
             const filtered = plainCommands.filter(cmd => {
                 if (!cmd || typeof cmd !== "object") {
-                    console.log("Commands.qml: skipping invalid cmd");
+                    // console.log("Commands.qml: skipping invalid cmd");
                     return false;
                 }
 
@@ -70,11 +70,11 @@ Singleton {
                 const commandField = cmd.command;
                 const command = commandField || action || [];
 
-                console.log("Commands.qml: checking cmd:", name, "action:", JSON.stringify(action), "command:", JSON.stringify(commandField));
+                // console.log("Commands.qml: checking cmd:", name, "action:", JSON.stringify(action), "command:", JSON.stringify(commandField));
 
                 // Check that name is not empty
                 if (!name || name.length === 0) {
-                    console.log("Commands.qml: name is empty");
+                    // console.log("Commands.qml: name is empty");
                     return false;
                 }
 
@@ -87,7 +87,7 @@ Singleton {
                 }
 
                 if (commandArray.length === 0) {
-                    console.log("Commands.qml: command array is empty");
+                    // console.log("Commands.qml: command array is empty");
                     return false;
                 }
 
@@ -95,11 +95,11 @@ Singleton {
                     const str = String(c || "");
                     return str.trim().length > 0;
                 });
-                console.log("Commands.qml: hasValidCommand =", hasValidCommand);
+                // console.log("Commands.qml: hasValidCommand =", hasValidCommand);
                 return hasValidCommand;
             });
 
-            console.log("Commands.qml: filtered commands count =", filtered.length);
+            // console.log("Commands.qml: filtered commands count =", filtered.length);
 
             const mappedCommands = filtered.map(cmd => ({
                         name: (cmd.name || "").trim(),
@@ -108,7 +108,6 @@ Singleton {
                         command: cmd.command || cmd.action || []
                     }));
 
-            // Добавляем команду wallpaper с автодополнением
             // mappedCommands.push({
             //     name: "wallpaper",
             //     description: "Open wallpaper selector",
@@ -118,18 +117,18 @@ Singleton {
 
             return mappedCommands;
         } catch (e) {
-            console.error("Commands.qml: Error in getCommandsList:", e);
+            // console.error("Commands.qml: Error in getCommandsList:", e);
             return [];
         }
     }
 
     function query(search: string): var {
-        console.log("Commands.qml: query called with search =", search);
+        // console.log("Commands.qml: query called with search =", search);
         const list = getCommandsList();
-        console.log("Commands.qml: list length =", list.length);
+        // console.log("Commands.qml: list length =", list.length);
 
         if (!search || search.length === 0) {
-            console.log("Commands.qml: returning full list");
+            // console.log("Commands.qml: returning full list");
             return list;
         }
 
@@ -145,7 +144,7 @@ Singleton {
             return r.obj.command;
         });
 
-        console.log("Commands.qml: search results count =", results.length);
+        // console.log("Commands.qml: search results count =", results.length);
         return results;
     }
 }
