@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import Quickshell.Widgets
 import qs.modules.common
 import qs.config
 import qs.services
@@ -12,7 +13,7 @@ Item {
 
     implicitWidth: Config.launcher.sizes.wallWidth
     implicitHeight: Config.launcher.sizes.wallHeight
-    
+
     Component.onCompleted: {
         console.log("WallpaperItem.qml: Component created with path =", wallpaperPath);
     }
@@ -27,7 +28,7 @@ Item {
         }
     }
 
-    Rectangle {
+    ClippingRectangle {
         id: imageContainer
         anchors.fill: parent
         radius: Appearance.rounding.normal
@@ -41,6 +42,7 @@ Item {
             fillMode: Image.PreserveAspectCrop
             asynchronous: true
             smooth: true
+            cache: true
 
             Component.onCompleted: {
                 console.log("WallpaperItem.qml: Image component created, source =", root.wallpaperPath);
@@ -56,7 +58,7 @@ Item {
                     console.error("WallpaperItem.qml: Failed to load image from", root.wallpaperPath);
                 }
             }
-            
+
             onSourceChanged: {
                 console.log("WallpaperItem.qml: Image source changed to", source);
             }
