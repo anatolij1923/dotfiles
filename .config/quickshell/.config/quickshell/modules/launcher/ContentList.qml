@@ -79,10 +79,13 @@ Item {
 
         active: false
 
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
 
         sourceComponent: WallpaperList {
             search: root.search
+            maxHeight: root.maxHeight
         }
     }
 

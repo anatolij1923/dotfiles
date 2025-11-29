@@ -26,8 +26,24 @@ Scope {
                 root.searchingText = "";
             }
 
-            implicitWidth: 450
+            implicitWidth: {
+                if (root.searchingText.startsWith(":wallpaper")) {
+                    // Для обоев: 3 столбца * wallWidth + 2 * spacing между столбцами + padding
+                    const wallWidth = Config.launcher.sizes.wallWidth;
+                    const spacing = Appearance.padding.small;
+                    const columns = 3;
+                    return (wallWidth * columns) + (spacing * (columns - 1)) + (root.padding * 2);
+                }
+                return 450; // Фиксированная ширина для приложений и команд
+            }
             implicitHeight: Math.min(launcherRoot.maxHeight, searchWrapper.implicitHeight + listWrapper.implicitHeight + root.padding * 2)
+
+            // Behavior on implicitWidth {
+            //     Anim {
+            //         duration: 200
+            //         easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
+            //     }
+            // }
             color: "transparent"
 
             anchors {
@@ -59,6 +75,7 @@ Scope {
                 anchors.fill: parent
                 color: Colors.palette.m3surface
                 radius: root.rounding
+                smooth: true
             }
 
             Item {
