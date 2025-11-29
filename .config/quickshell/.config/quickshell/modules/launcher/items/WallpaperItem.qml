@@ -22,6 +22,8 @@ Item {
         anchors.fill: parent
         radius: Appearance.rounding.normal
 
+        z: 100
+
         onClicked: {
             Wallpapers.setWallpaper(root.wallpaperPath);
             GlobalStates.launcherOpened = false;

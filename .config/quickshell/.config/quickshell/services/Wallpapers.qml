@@ -34,8 +34,7 @@ Singleton {
 
         const searchLower = search.toLowerCase();
         const filtered = list.filter(path => {
-            const filename = path.split('/').pop().toLowerCase();
-            return filename.includes(searchLower);
+            return path.toLowerCase().includes(searchLower);
         });
         // console.log("Wallpapers.qml: filtered list count =", filtered.length);
         return filtered;

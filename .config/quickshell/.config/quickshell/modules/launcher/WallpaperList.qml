@@ -15,7 +15,7 @@ Item {
     required property real maxHeight
 
     readonly property int columns: 3
-    readonly property int referenceShown: Config.launcher.wallsShown // Используется только для расчета размера ячеек
+    readonly property int referenceShown: Config.launcher.wallsShown
     readonly property int referenceRows: Math.ceil(referenceShown / columns)
     readonly property string searchQuery: search.startsWith(":wallpaper") ? search.slice(":wallpaper".length).trim() : ""
     readonly property real spacing: Appearance.padding.small
@@ -64,7 +64,6 @@ Item {
         anchors.right: parent.right
         anchors.top: parent.top
 
-        width: parent.width
         height: root.gridViewHeight
 
         cellWidth: root.cellWidth
