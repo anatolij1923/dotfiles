@@ -10,4 +10,12 @@ JsonObject {
         property int wallWidth: 250
         property int wallHeight: 200
     }
+
+    property list<var> commands: [
+        {
+            name: "",
+            icon: "",
+            action: [""]
+        }
+    ]
 }
