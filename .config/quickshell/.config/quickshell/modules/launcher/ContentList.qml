@@ -11,7 +11,7 @@ Item {
     required property real maxHeight
     required property string search
     property bool showWallpaper: search.startsWith(":wallpaper")
-    readonly property Item currentList: appList.item
+    readonly property Item currentList: showWallpaper ? wallpapersList.item : appList.item
 
     anchors.top: parent.top
     anchors.left: parent.left
