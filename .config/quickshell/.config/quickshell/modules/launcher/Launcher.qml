@@ -30,13 +30,12 @@ Scope {
 
             implicitWidth: {
                 if (root.searchingText.startsWith(":wallpaper")) {
-                    // Для обоев: 3 столбца * wallWidth + 2 * spacing между столбцами + padding
                     const wallWidth = Config.launcher.sizes.wallWidth;
                     const spacing = Appearance.padding.small;
                     const columns = 3;
                     return (wallWidth * columns) + (spacing * (columns - 1)) + (root.padding * 2);
                 }
-                return 450; // Фиксированная ширина для приложений и команд
+                return 450;
             }
             implicitHeight: Math.min(launcherRoot.maxHeight, searchWrapper.implicitHeight + listWrapper.implicitHeight + root.padding * 2) + root.padding
 
@@ -52,9 +51,6 @@ Scope {
                 top: true
             }
 
-            // Behavior on implicitHeight {
-            //     // Добавьте анимацию, если необходимо, аналогично референсному Wrapper.qml
-            // }
             margins {
                 top: Appearance.padding.huge
             }
@@ -125,20 +121,16 @@ Scope {
                                 return;
                             }
 
-                            // Обработка в зависимости от типа списка
                             if (contentList.showWallpaper) {
-                                // Для обоев: используем wallpaperPath из WallpaperItem
                                 const wallpaperPath = currentItem.wallpaperPath || currentItem.modelData;
                                 if (wallpaperPath) {
                                     Wallpapers.setWallpaper(String(wallpaperPath));
                                     launcherRoot.hide();
                                 }
                             } else if (contentList.showCommands) {
-                                // Для команд: вызываем execute() если есть
                                 if (typeof currentItem.execute === "function") {
                                     currentItem.execute();
                                 } else if (currentItem.modelData?.command) {
-                                    // Fallback: прямая обработка команды
                                     const cmd = currentItem.modelData.command;
                                     if (cmd[0] === "autocomplete" && cmd.length > 1) {
                                         searchField.text = `:${cmd[1]} `;
@@ -148,7 +140,6 @@ Scope {
                                     }
                                 }
                             } else {
-                                // Для приложений: вызываем execute() на modelData (DesktopEntry)
                                 if (currentItem.modelData && typeof currentItem.modelData.execute === "function") {
                                     currentItem.modelData.execute();
                                     launcherRoot.hide();

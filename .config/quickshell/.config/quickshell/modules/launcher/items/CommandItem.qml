@@ -21,13 +21,11 @@ Item {
             return;
         }
 
-        // Поддержка автодополнения (как в референсном ActionItem)
         if (root.modelData.command[0] === "autocomplete" && root.modelData.command.length > 1) {
             if (root.searchField) {
                 root.searchField.text = `:${root.modelData.command[1]} `;
             }
         } else {
-            // Обычная команда - выполняем и закрываем лаунчер
             Quickshell.execDetached(root.modelData.command);
             GlobalStates.launcherOpened = false;
         }
@@ -69,7 +67,6 @@ Item {
                 verticalCenter: parent.verticalCenter
                 right: parent.right
             }
-            // spacing: Appearance.padding.small || 2
 
             StyledText {
                 id: nameText

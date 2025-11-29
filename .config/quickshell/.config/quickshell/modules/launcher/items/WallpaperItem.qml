@@ -44,24 +44,27 @@ Item {
             smooth: true
             cache: true
 
-            Component.onCompleted: {
-                console.log("WallpaperItem.qml: Image component created, source =", root.wallpaperPath);
-            }
+            sourceSize.width: root.implicitWidth
+            sourceSize.height: root.implicitHeight
 
-            onStatusChanged: {
-                console.log("WallpaperItem.qml: Image status changed to", status, "for", root.wallpaperPath);
-                if (status === Image.Loading) {
-                    console.log("WallpaperItem.qml: Loading image from", root.wallpaperPath);
-                } else if (status === Image.Ready) {
-                    console.log("WallpaperItem.qml: Image loaded successfully, size =", sourceSize.width, "x", sourceSize.height);
-                } else if (status === Image.Error) {
-                    console.error("WallpaperItem.qml: Failed to load image from", root.wallpaperPath);
-                }
-            }
-
-            onSourceChanged: {
-                console.log("WallpaperItem.qml: Image source changed to", source);
-            }
+            // Component.onCompleted: {
+            //     console.log("WallpaperItem.qml: Image component created, source =", root.wallpaperPath);
+            // }
+            //
+            // onStatusChanged: {
+            //     console.log("WallpaperItem.qml: Image status changed to", status, "for", root.wallpaperPath);
+            //     if (status === Image.Loading) {
+            //         console.log("WallpaperItem.qml: Loading image from", root.wallpaperPath);
+            //     } else if (status === Image.Ready) {
+            //         console.log("WallpaperItem.qml: Image loaded successfully, size =", sourceSize.width, "x", sourceSize.height);
+            //     } else if (status === Image.Error) {
+            //         console.error("WallpaperItem.qml: Failed to load image from", root.wallpaperPath);
+            //     }
+            // }
+            //
+            // onSourceChanged: {
+            //     console.log("WallpaperItem.qml: Image source changed to", source);
+            // }
         }
 
         // Overlay for current wallpaper indicator

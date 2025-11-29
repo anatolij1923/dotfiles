@@ -42,20 +42,19 @@ Item {
     anchors.right: parent.right
     anchors.top: parent.top
 
-    // Размеры ячеек - напрямую из конфига
+    // cell sizes
     readonly property real cellWidth: Config.launcher.sizes.wallWidth
     readonly property real cellHeight: Config.launcher.sizes.wallHeight
 
-    // Высота СЕТКИ: wallHeight * количество строк + spacing между строками
+    // grid height
     readonly property real referenceHeight: (cellHeight + spacing) * referenceRows - spacing
 
-    // Высота GridView: referenceHeight, но не больше maxHeight с учетом footer
+    // gridView height
     readonly property real gridViewHeight: {
-        const footerApproxHeight = 40; // Примерная высота footer
+        const footerApproxHeight = 40;
         return Math.min(maxHeight - footerApproxHeight - spacing, referenceHeight);
     }
 
-    // Общая высота: GridView + spacing + footer
     implicitHeight: gridView.height + spacing + footerLayout.implicitHeight
 
     GridView {
@@ -85,8 +84,6 @@ Item {
             wallpaperPath: String(modelData || "")
             width: root.cellWidth - root.spacing
             height: root.cellHeight - root.spacing
-
-            // Центрирование элемента внутри выделенной ячейки
         }
 
         ScrollBar.vertical: ScrollBar {}
