@@ -36,7 +36,7 @@ Scope {
                 }
                 return 450; // Фиксированная ширина для приложений и команд
             }
-            implicitHeight: Math.min(launcherRoot.maxHeight, searchWrapper.implicitHeight + listWrapper.implicitHeight + root.padding * 2)
+            implicitHeight: Math.min(launcherRoot.maxHeight, searchWrapper.implicitHeight + listWrapper.implicitHeight + root.padding * 2) + root.padding
 
             // Behavior on implicitWidth {
             //     Anim {
@@ -112,7 +112,47 @@ Scope {
                         id: searchField
                         focus: true
 
-                        onAccepted: {}
+                        onAccepted: {
+                            const currentList = contentList.currentList;
+                            if (!currentList) {
+                                return;
+                            }
+
+                            const currentItem = currentList.currentItem;
+                            if (!currentItem) {
+                                return;
+                            }
+
+                            // Обработка в зависимости от типа списка
+                            if (contentList.showWallpaper) {
+                                // Для обоев: используем wallpaperPath из WallpaperItem
+                                const wallpaperPath = currentItem.wallpaperPath || currentItem.modelData;
+                                if (wallpaperPath) {
+                                    Wallpapers.setWallpaper(String(wallpaperPath));
+                                    launcherRoot.hide();
+                                }
+                            } else if (contentList.showCommands) {
+                                // Для команд: вызываем execute() если есть
+                                if (typeof currentItem.execute === "function") {
+                                    currentItem.execute();
+                                } else if (currentItem.modelData?.command) {
+                                    // Fallback: прямая обработка команды
+                                    const cmd = currentItem.modelData.command;
+                                    if (cmd[0] === "autocomplete" && cmd.length > 1) {
+                                        searchField.text = `:${cmd[1]} `;
+                                    } else {
+                                        Quickshell.execDetached(cmd);
+                                        launcherRoot.hide();
+                                    }
+                                }
+                            } else {
+                                // Для приложений: вызываем execute() на modelData (DesktopEntry)
+                                if (currentItem.modelData && typeof currentItem.modelData.execute === "function") {
+                                    currentItem.modelData.execute();
+                                    launcherRoot.hide();
+                                }
+                            }
+                        }
 
                         Keys.onEscapePressed: launcherRoot.hide()
                         Keys.onUpPressed: contentList.currentList?.decrementCurrentIndex()
@@ -164,6 +204,7 @@ Scope {
                         id: contentList
                         maxHeight: launcherRoot.maxHeight
                         search: root.searchingText
+                        searchField: searchField
                     }
                 }
             }

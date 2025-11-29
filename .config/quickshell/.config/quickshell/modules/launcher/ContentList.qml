@@ -11,6 +11,7 @@ Item {
 
     required property real maxHeight
     required property string search
+    property var searchField
     property bool showCommands: search.startsWith(":")
     property bool showWallpaper: search.startsWith(":wallpaper")
     readonly property Item currentList: showWallpaper ? wallpapersList.item : (showCommands ? commandsList.item : appList.item)
@@ -71,6 +72,7 @@ Item {
 
         sourceComponent: CommandList {
             search: root.search
+            searchField: root.searchField
         }
     }
 

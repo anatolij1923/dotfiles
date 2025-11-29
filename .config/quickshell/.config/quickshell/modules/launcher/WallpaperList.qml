@@ -2,13 +2,14 @@ pragma ComponentBehavior: Bound
 import Quickshell
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 import qs.config
 import qs.services
 import qs.modules.launcher.items
 import qs.modules.common
 import qs.utils
 
-GridView {
+Item {
     id: root
     required property string search
     required property real maxHeight
@@ -42,55 +43,102 @@ GridView {
     anchors.top: parent.top
 
     // Размеры ячеек - напрямую из конфига
-    cellWidth: Config.launcher.sizes.wallWidth
-    cellHeight: Config.launcher.sizes.wallHeight
+    readonly property real cellWidth: Config.launcher.sizes.wallWidth
+    readonly property real cellHeight: Config.launcher.sizes.wallHeight
 
     // Высота СЕТКИ: wallHeight * количество строк + spacing между строками
     readonly property real referenceHeight: (cellHeight + spacing) * referenceRows - spacing
 
-    // Высота GridView: referenceHeight, но не больше maxHeight
-    implicitHeight: Math.min(maxHeight, referenceHeight)
-
-    model: wallpaperModel
-    currentIndex: 0
-
-    Component.onCompleted: {
-        updateModel();
+    // Высота GridView: referenceHeight, но не больше maxHeight с учетом footer
+    readonly property real gridViewHeight: {
+        const footerApproxHeight = 40; // Примерная высота footer
+        return Math.min(maxHeight - footerApproxHeight - spacing, referenceHeight);
     }
 
-    clip: true
+    // Общая высота: GridView + spacing + footer
+    implicitHeight: gridView.height + spacing + footerLayout.implicitHeight
 
-    delegate: WallpaperItem {
-        required property var modelData
-        wallpaperPath: String(modelData || "")
-        width: root.cellWidth - root.spacing
-        height: root.cellHeight - root.spacing
+    GridView {
+        id: gridView
 
-        // Центрирование элемента внутри выделенной ячейки
-    }
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
 
-    ScrollBar.vertical: ScrollBar {}
+        width: parent.width
+        height: root.gridViewHeight
 
-    highlight: Rectangle {
-        color: Colors.palette.m3onSurface
-        opacity: 0.1
-        radius: Appearance.rounding.normal
-        width: root.cellWidth
-        height: root.cellHeight
+        cellWidth: root.cellWidth
+        cellHeight: root.cellHeight
 
-        x: root.currentItem?.x ?? 0
-        y: root.currentItem?.y ?? 0
+        model: root.wallpaperModel
+        currentIndex: 0
 
-        Behavior on x {
-            Anim {
-                duration: Appearance.animDuration.expressiveDefaultSpatial
-                easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
+        Component.onCompleted: {
+            root.updateModel();
+        }
+
+        clip: true
+
+        delegate: WallpaperItem {
+            required property var modelData
+            wallpaperPath: String(modelData || "")
+            width: root.cellWidth - root.spacing
+            height: root.cellHeight - root.spacing
+
+            // Центрирование элемента внутри выделенной ячейки
+        }
+
+        ScrollBar.vertical: ScrollBar {}
+
+        highlight: Rectangle {
+            color: Colors.palette.m3onSurface
+            opacity: 0.1
+            radius: Appearance.rounding.normal
+            width: root.cellWidth
+            height: root.cellHeight
+
+            x: gridView.currentItem?.x ?? 0
+            y: gridView.currentItem?.y ?? 0
+
+            Behavior on x {
+                Anim {
+                    duration: Appearance.animDuration.expressiveDefaultSpatial
+                    easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
+                }
+            }
+            Behavior on y {
+                Anim {
+                    duration: Appearance.animDuration.expressiveDefaultSpatial
+                    easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
+                }
             }
         }
-        Behavior on y {
-            Anim {
-                duration: Appearance.animDuration.expressiveDefaultSpatial
-                easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
+    }
+
+    RowLayout {
+        id: footerLayout
+
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: gridView.bottom
+        anchors.topMargin: root.spacing
+
+        StyledText {
+            text: `${root.wallpaperModel.length} wallpaper${root.wallpaperModel.length !== 1 ? 's' : ''}`
+            color: Colors.palette.m3onSurfaceVariant
+            size: 18
+        }
+
+        Item {
+            Layout.fillWidth: true
+        }
+
+        TextButton {
+            text: "Random"
+            padding: Appearance.padding.normal
+            onClicked: {
+                Wallpapers.setRandomWallpaper();
             }
         }
     }

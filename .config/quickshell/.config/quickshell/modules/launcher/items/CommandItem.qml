@@ -9,21 +9,36 @@ Item {
     id: root
 
     required property var modelData
+    property var searchField
 
     implicitHeight: Config.launcher.sizes.itemHeight
 
     anchors.left: parent?.left
     anchors.right: parent?.right
 
+    function execute() {
+        if (!root.modelData?.command || root.modelData.command.length === 0) {
+            return;
+        }
+
+        // Поддержка автодополнения (как в референсном ActionItem)
+        if (root.modelData.command[0] === "autocomplete" && root.modelData.command.length > 1) {
+            if (root.searchField) {
+                root.searchField.text = `:${root.modelData.command[1]} `;
+            }
+        } else {
+            // Обычная команда - выполняем и закрываем лаунчер
+            Quickshell.execDetached(root.modelData.command);
+            GlobalStates.launcherOpened = false;
+        }
+    }
+
     StateLayer {
         anchors.fill: parent
         radius: Appearance.rounding.normal
 
         onClicked: {
-            if (root.modelData?.command && root.modelData.command.length > 0) {
-                Quickshell.execDetached(root.modelData.command);
-            }
-            GlobalStates.launcherOpened = false;
+            root.execute();
         }
     }
 

@@ -80,4 +80,14 @@ Singleton {
         Config.background.wallpaperPath = path;
         root.actualCurrent = path;
     }
+
+    function setRandomWallpaper(): void {
+        if (root.list.length === 0) {
+            console.warn("Wallpapers.qml: No wallpapers available for random selection");
+            return;
+        }
+        const randomIndex = Math.floor(Math.random() * root.list.length);
+        const randomWallpaper = root.list[randomIndex];
+        root.setWallpaper(randomWallpaper);
+    }
 }

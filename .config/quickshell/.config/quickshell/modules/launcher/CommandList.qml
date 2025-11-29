@@ -9,6 +9,7 @@ import qs.modules.common
 ListView {
     id: root
     required property string search
+    property var searchField
 
     spacing: Appearance.padding.small
 
@@ -39,5 +40,7 @@ ListView {
         }
     }
 
-    delegate: CommandItem {}
+    delegate: CommandItem {
+        searchField: root.searchField
+    }
 }
