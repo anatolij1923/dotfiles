@@ -65,7 +65,7 @@ Item {
             id: textColumn
             anchors {
                 left: icon.right
-                leftMargin: Appearance.padding.small
+                leftMargin: Appearance.padding.normal
                 verticalCenter: parent.verticalCenter
                 right: parent.right
             }

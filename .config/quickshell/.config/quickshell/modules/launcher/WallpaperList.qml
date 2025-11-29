@@ -122,7 +122,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: gridView.bottom
-        anchors.topMargin: root.spacing
+        anchors.topMargin: Appearance.padding.smaller
 
         StyledText {
             text: `${root.wallpaperModel.length} wallpaper${root.wallpaperModel.length !== 1 ? 's' : ''}`

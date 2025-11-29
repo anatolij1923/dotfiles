@@ -21,9 +21,8 @@ Item {
         radius: Appearance.rounding.normal
 
         onClicked: {
-            root.modelData.execute(
-            )
-            GlobalStates.launcherOpened = false
+            root.modelData.execute();
+            GlobalStates.launcherOpened = false;
         }
     }
 
@@ -46,6 +45,7 @@ Item {
 
         StyledText {
             text: root.modelData.name
+            weight: 500
             anchors {
                 left: icon.right
                 verticalCenter: icon.verticalCenter

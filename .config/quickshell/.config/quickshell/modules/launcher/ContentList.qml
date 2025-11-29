@@ -103,11 +103,12 @@ Item {
         anchors.fill: parent
 
         MaterialSymbol {
-            icon: {
-                if (root.state === "wallpapers") return "wallpaper_slideshow";
-                if (root.state === "commands") return "terminal";
-                return "sentiment_sad";
-            }
+            icon: "sentiment_sad"
+            // icon: {
+            //     if (root.state === "wallpapers") return "wallpaper_slideshow";
+            //     if (root.state === "commands") return "terminal";
+            //     return "sentiment_sad";
+            // }
             color: Colors.palette.m3onSurfaceVariant
             size: 48
 
@@ -119,8 +120,10 @@ Item {
 
             StyledText {
                 text: {
-                    if (root.state === "wallpapers") return "No wallpapers found";
-                    if (root.state === "commands") return "No commands found";
+                    if (root.state === "wallpapers")
+                        return "No wallpapers found";
+                    if (root.state === "commands")
+                        return "No commands found";
                     return "No results";
                 }
                 color: Colors.palette.m3onSurface
@@ -129,8 +132,10 @@ Item {
 
             StyledText {
                 text: {
-                    if (root.state === "wallpapers") return "Smart man in glasses download wallpaper";
-                    if (root.state === "commands") return "Try searching for a different command";
+                    if (root.state === "wallpapers")
+                        return "Smart man in glasses download wallpaper";
+                    if (root.state === "commands")
+                        return "Try searching for a different command";
                     return "Try something else";
                 }
                 color: Colors.palette.m3onSurface

@@ -8,6 +8,8 @@ import qs.config
 import qs.services
 import qs.modules.common
 
+// Based on https://github.com/caelestia-dots/shell with modifications
+
 Scope {
     id: root
     property int padding: Appearance.padding.normal
