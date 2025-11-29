@@ -4,20 +4,22 @@ import Quickshell
 import qs.modules.common
 import qs.utils
 import qs.services
+import qs.modules.launcher
 
 Item {
     id: root
 
     required property real maxHeight
     required property string search
+    property bool showCommands: search.startsWith(":")
     property bool showWallpaper: search.startsWith(":wallpaper")
-    readonly property Item currentList: showWallpaper ? wallpapersList.item : appList.item
+    readonly property Item currentList: showWallpaper ? wallpapersList.item : (showCommands ? commandsList.item : appList.item)
 
     anchors.top: parent.top
     anchors.left: parent.left
     anchors.right: parent.right
 
-    state: showWallpaper ? "wallpapers" : "apps"
+    state: showWallpaper ? "wallpapers" : (showCommands ? "commands" : "apps")
 
     states: [
         State {
@@ -29,9 +31,18 @@ Item {
             }
         },
         State {
+            name: "commands"
+
+            PropertyChanges {
+                root.implicitHeight: Math.min(root.maxHeight, commandsList.implicitHeight > 0 ? commandsList.implicitHeight : empty.implicitHeight)
+                commandsList.active: true
+            }
+        },
+        State {
             name: "wallpapers"
 
             PropertyChanges {
+                root.implicitHeight: Math.min(root.maxHeight, wallpapersList.implicitHeight > 0 ? wallpapersList.implicitHeight : empty.implicitHeight)
                 wallpapersList.active: true
             }
         }
@@ -52,9 +63,27 @@ Item {
     }
 
     Loader {
+        id: commandsList
+
+        active: false
+
+        anchors.fill: parent
+
+        sourceComponent: CommandList {
+            search: root.search
+        }
+    }
+
+    Loader {
         id: wallpapersList
 
-        sourceComponent: Item {}
+        active: false
+
+        anchors.fill: parent
+
+        sourceComponent: WallpaperList {
+            search: root.search
+        }
     }
 
     Row {
@@ -69,7 +98,11 @@ Item {
         anchors.fill: parent
 
         MaterialSymbol {
-            icon: root.state === "wallpapers" ? "wallpaper_slideshow" : "sentiment_sad"
+            icon: {
+                if (root.state === "wallpapers") return "wallpaper_slideshow";
+                if (root.state === "commands") return "terminal";
+                return "sentiment_sad";
+            }
             color: Colors.palette.m3onSurfaceVariant
             size: 48
 
@@ -80,13 +113,21 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
 
             StyledText {
-                text: root.state === "wallpapers" ? "No wallpapers found" : "No results"
+                text: {
+                    if (root.state === "wallpapers") return "No wallpapers found";
+                    if (root.state === "commands") return "No commands found";
+                    return "No results";
+                }
                 color: Colors.palette.m3onSurface
                 weight: 500
             }
 
             StyledText {
-                text: root.state === "wallpapers" ? "Smart man in glasses download wallpaper" : "Try something else"
+                text: {
+                    if (root.state === "wallpapers") return "Smart man in glasses download wallpaper";
+                    if (root.state === "commands") return "Try searching for a different command";
+                    return "Try something else";
+                }
                 color: Colors.palette.m3onSurface
                 size: 20
             }
