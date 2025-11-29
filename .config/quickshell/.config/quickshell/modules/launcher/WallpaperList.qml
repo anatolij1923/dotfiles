@@ -86,8 +86,6 @@ Item {
             height: root.cellHeight - root.spacing
         }
 
-        ScrollBar.vertical: ScrollBar {}
-
         highlight: Rectangle {
             color: Colors.palette.m3onSurface
             opacity: 0.1

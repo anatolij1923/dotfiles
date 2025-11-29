@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
+import Quickshell.Wayland
 import Quickshell.Hyprland
 import Quickshell.Io
 import qs
@@ -15,6 +16,9 @@ Scope {
     property int padding: Appearance.padding.normal
     property int rounding: Appearance.rounding.huge
     property string searchingText: ""
+
+    property real alpha: Config.appearance.transparency.alpha
+    property bool transparent: Config.appearance.transparency.enabled
 
     Loader {
         active: GlobalStates.launcherOpened
@@ -47,6 +51,8 @@ Scope {
             // }
             color: "transparent"
 
+            WlrLayershell.namespace: "quickshell:launcher"
+
             anchors {
                 top: true
             }
@@ -71,7 +77,7 @@ Scope {
             Rectangle {
                 id: background
                 anchors.fill: parent
-                color: Colors.palette.m3surface
+                color: root.transparent ? Qt.alpha(Colors.palette.m3surface, root.alpha) : Colors.palette.m3surface
                 radius: root.rounding
                 smooth: true
             }
@@ -92,7 +98,7 @@ Scope {
                     implicitHeight: Math.max(icon.implicitHeight, searchField.implicitHeight)
 
                     radius: Appearance.rounding.normal
-                    color: Colors.palette.m3surfaceContainer
+                    color: root.transparent ? Qt.alpha(Colors.palette.m3surfaceContainer, root.alpha) : Colors.palette.m3surfaceContainer
 
                     MaterialSymbol {
                         id: icon
@@ -109,6 +115,8 @@ Scope {
                     StyledTextField {
                         id: searchField
                         focus: true
+
+                        background: null
 
                         onAccepted: {
                             const currentList = contentList.currentList;
@@ -175,6 +183,26 @@ Scope {
                         placeholderTextColor: Colors.palette.m3outline
 
                         onTextChanged: root.searchingText = text
+                    }
+
+                    MaterialSymbol {
+                        id: modeIcon
+                        anchors {
+                            right: parent.right
+                            verticalCenter: parent.verticalCenter
+                            rightMargin: root.padding
+                        }
+
+                        icon: {
+                            if (contentList.showWallpaper) {
+                                return "wallpaper";
+                            } else if (contentList.showCommands) {
+                                return "terminal";
+                            } else {
+                                return "apps";
+                            }
+                        }
+                        color: Colors.palette.m3onSurfaceVariant
                     }
                 }
 
