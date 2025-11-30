@@ -73,11 +73,7 @@ Item {
             opacity: Wallpapers.actualCurrent === root.wallpaperPath ? 0.3 : 0
             radius: Appearance.rounding.normal
 
-            Behavior on opacity {
-                Anim {
-                    duration: Appearance.animDuration.standard
-                }
-            }
+            Behavior on opacity {}
         }
 
         // Border for current wallpaper
@@ -88,11 +84,7 @@ Item {
             border.width: Wallpapers.actualCurrent === root.wallpaperPath ? 2 : 0
             radius: Appearance.rounding.normal
 
-            Behavior on border.width {
-                Anim {
-                    duration: Appearance.animDuration.standard
-                }
-            }
+            Behavior on border.width {}
         }
     }
 
