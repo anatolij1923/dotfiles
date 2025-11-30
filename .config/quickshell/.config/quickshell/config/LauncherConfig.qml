@@ -4,7 +4,6 @@ JsonObject {
     property Sizes sizes: Sizes {}
     property int maxShown: 8
     property int wallsShown: 12
-    property string actionPrefix: ":"
 
     component Sizes: JsonObject {
         property int itemHeight: 60
@@ -17,7 +16,7 @@ JsonObject {
             name: "Hello",
             description: "Just say hello!",
             icon: "waving_hand",
-            action: ["notify-send", "Hello from Quickshell!"]
+            action: ["notify-send", "Welcome!", "Hello from Quickshell"]
         },
         {
             name: "Wallpaper",

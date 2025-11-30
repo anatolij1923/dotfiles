@@ -14,10 +14,6 @@ Item {
     implicitWidth: Config.launcher.sizes.wallWidth
     implicitHeight: Config.launcher.sizes.wallHeight
 
-    Component.onCompleted: {
-        console.log("WallpaperItem.qml: Component created with path =", wallpaperPath);
-    }
-
     StateLayer {
         id: stateLayer
         anchors.fill: parent
@@ -64,7 +60,7 @@ Item {
             //         console.error("WallpaperItem.qml: Failed to load image from", root.wallpaperPath);
             //     }
             // }
-            //
+            // //
             // onSourceChanged: {
             //     console.log("WallpaperItem.qml: Image source changed to", source);
             // }
