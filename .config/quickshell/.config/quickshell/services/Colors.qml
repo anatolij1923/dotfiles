@@ -5,12 +5,16 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 import qs.config
+import qs.utils
 
 Singleton {
     id: root
 
     property bool isDarkMode: Config.appearance.darkMode
     readonly property var colors: JSON.parse(colorsFile.text()).colors[isDarkMode ? "dark" : "light"]
+
+    property string wallpaperPath: Config.background.wallpaperPath
+    property string compressedWallpaperPath: `${Paths.cache}/compressed_wallpaper`
 
     readonly property Palette palette: Palette {}
 
@@ -21,7 +25,7 @@ Singleton {
         watchChanges: true
         onFileChanged: reload()
         onLoaded: {
-            console.log("colors.json loaded", path);
+            console.log("[COLORS] colors.json loaded.", path);
         }
     }
 
@@ -42,23 +46,57 @@ Singleton {
     }
 
     function generateColors() {
-        console.log("[COLORS] Generating material palette");
+        console.log("[COLORS] Generating material palette with matugen.");
         matugenProcess.running = true;
-        console.log("[COLORS] Palette generation completed");
+    }
+
+    function compressImage() {
+        console.log("[COLORS] Starting wallpaper compression (128x128).")
+        convertProcess.running = true
     }
 
     Connections {
         target: Config.background
 
         function onWallpaperPathChanged() {
-            generateColors();
-            console.log("fsd");
+            // generateColors(); // Removed comment and unnecessary call
+            compressImage()
+            // Removed redundant log "fsd"
         }
     }
 
     Process {
         id: matugenProcess
-        command: ["matugen", "image", `${Config.background.wallpaperPath}`]
+        command: ["matugen", "image", `${root.compressedWallpaperPath}`]
+        onStarted: {
+            console.log(`[COLORS] Matugen command started: ${matugenProcess.command.toString().replace(/,/g, " ")}`);
+        }
+        onExited: {
+            if (exitCode === 0) {
+                console.log("[COLORS] Matugen finished successfully. Colors updated via FileView.");
+            } else {
+                console.error(`[COLORS] Matugen failed! Exit Code: ${exitCode}. Status: ${exitStatus}.`);
+                console.error("[COLORS] Matugen Output:", standardOutput);
+            }
+        }
+    }
+
+    Process {
+        id: convertProcess
+        command: ["convert", root.wallpaperPath, "-resize", "128x128", root.compressedWallpaperPath]
+        onStarted: {
+            console.log(`[COLORS] ImageMagick 'convert' started for: ${root.wallpaperPath}`)
+        }
+
+        onExited: {
+            if (exitCode === 0) {
+                console.log(`[COLORS] Wallpaper compressed successfully. Output path: ${root.compressedWallpaperPath}`);
+                generateColors()
+            } else {
+                console.error(`[COLORS] Failed to compress wallpaper! Exit Code: ${exitCode}. Status: ${exitStatus}.`);
+                console.error("[COLORS] ImageMagick Output:", standardOutput);
+            }
+        }
     }
 
     component Palette: QtObject {
