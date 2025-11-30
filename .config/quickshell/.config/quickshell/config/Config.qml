@@ -7,6 +7,8 @@ import QtQuick
 Singleton {
     id: root
 
+    property bool ready: false
+
     property alias bar: adapter.bar
     property alias time: adapter.time
     property alias osd: adapter.osd
@@ -32,7 +34,7 @@ Singleton {
         path: `${Paths.config}/config.json`
         watchChanges: true
         onFileChanged: reload()
-        onLoaded: console.info("Config loaded")
+        onLoaded: root.ready = true
         onLoadFailed: error => {
             if (error == FileViewError.FileNotFound) {
                 console.warn("Config not found, creating default one.");
