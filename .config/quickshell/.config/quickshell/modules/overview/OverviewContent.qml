@@ -10,7 +10,6 @@ import qs.services
 import qs.modules.common
 import qs.config
 
-// TODO: add moving windows between each other in workspace
 
 Item {
     id: root

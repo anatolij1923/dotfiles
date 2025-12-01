@@ -19,8 +19,8 @@ PanelWindow {
     WlrLayershell.namespace: "quickshell:bar"
     // color: Colors.palette.m3surface
 
-    property real alpha: Config.ready && Config.appearance.transparency.alpha
-    property bool transparent: Config.ready && Config.appearance.transparency.enabled
+    property real alpha: Config.appearance.transparency.alpha
+    property bool transparent: Config.appearance.transparency.enabled
 
     color: transparent ? Qt.alpha(Colors.palette.m3surface, alpha) : Colors.palette.m3surface
     Behavior on color {
