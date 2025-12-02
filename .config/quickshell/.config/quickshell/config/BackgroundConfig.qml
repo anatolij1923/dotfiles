@@ -10,7 +10,7 @@ JsonObject {
 
     component Dim: JsonObject {
         property bool enabled: true
-        property real transparency: 0.4
+        property real transparency: 0.25
     }
 
     component Parallax: JsonObject {
