@@ -21,7 +21,7 @@ Item {
             horizontalCenter: root.horizontalCenter
         }
 
-        color: Colors.palette.m3surfaceContainer
+        color: Qt.lighter(Colors.palette.m3surfaceContainer, 1.25)
         Behavior on color {
             CAnim {}
         }
