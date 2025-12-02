@@ -21,5 +21,10 @@ IconButton {
             easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
         }
     }
-}
 
+    StyledTooltip {
+        text: root.tooltipText
+        verticalPadding: Appearance.padding.normal
+        horizontalPadding: Appearance.padding.normal
+    }
+}

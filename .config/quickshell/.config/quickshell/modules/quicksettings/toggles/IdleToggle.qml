@@ -10,9 +10,5 @@ QuickToggle {
     onClicked: () => {
         Idle.toggle();
     }
-    StyledTooltip {
-        text: "Keep your system awake"
-        verticalPadding: 8
-        horizontalPadding: 12
-    }
+    tooltipText: "Keep your system awake"
 }

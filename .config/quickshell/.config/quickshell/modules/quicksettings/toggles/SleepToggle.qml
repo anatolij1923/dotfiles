@@ -24,16 +24,11 @@ QuickToggle {
         SleepTimer.stopTimer();
     }
 
-    StyledTooltip {
-        // text: `${SleepTimer.modeIndex}\n${SleepTimer.remaining}`
-        text: {
-            if (SleepTimer.enabled) {
-                "Sleep timer. Right click to cancel\n" + `Remaining: ${root.formatTime(SleepTimer.remaining)}`;
-            } else {
-                "Sleep timer. Right click to cancel";
-            }
+    tooltipText: {
+        if (SleepTimer.enabled) {
+            "Sleep timer. Right click to cancel\n" + `Remaining: ${root.formatTime(SleepTimer.remaining)}`;
+        } else {
+            "Sleep timer. Right click to cancel";
         }
-        verticalPadding: 8
-        horizontalPadding: 12
     }
 }

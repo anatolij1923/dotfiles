@@ -12,7 +12,5 @@ QuickToggle {
     }
     StyledTooltip {
         text: "Click to toggle Wi-Fi"
-        verticalPadding: 8
-        horizontalPadding: 12
     }
 }

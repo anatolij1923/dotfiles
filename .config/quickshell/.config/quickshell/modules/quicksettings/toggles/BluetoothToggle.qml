@@ -24,7 +24,5 @@ QuickToggle {
     // }
     StyledTooltip {
         text: "Toggle bluetooth. Right click to open blueman"
-        verticalPadding: 8
-        horizontalPadding: 12
     }
 }

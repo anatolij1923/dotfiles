@@ -33,9 +33,5 @@ QuickToggle {
             PowerProfiles.profile = PowerProfiles.profile == PowerProfile.Balanced ? PowerProfile.PowerSaver : PowerProfile.Balanced;
         }
     }
-    StyledTooltip {
-        text: "Change power profiles"
-        verticalPadding: 8
-        horizontalPadding: 12
-    }
+    tooltipText: "Change power profiles"
 }

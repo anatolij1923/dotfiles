@@ -69,8 +69,8 @@ Rectangle {
             //
             StyledTooltip {
                 text: root.tooltipText
-                verticalPadding: 8
-                horizontalPadding: 12
+                verticalPadding: Appearance.padding.normal
+                horizontalPadding: Appearance.padding.normal
             }
         }
 

@@ -12,9 +12,5 @@ QuickToggle {
     onClicked: () => {
         Colors.switchDarkLightMode();
     }
-    StyledTooltip {
-        text: "Enable Dark Mode"
-        verticalPadding: 8
-        horizontalPadding: 12
-    }
+    tooltipText: "Enable Dark Mode"
 }

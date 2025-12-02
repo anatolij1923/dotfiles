@@ -11,11 +11,8 @@ QuickToggle {
 
     onClicked: () => {
         // Notifications.dnd = !Notifications.dnd;
-        Gamemode.enable()
+        Gamemode.enable();
     }
-    StyledTooltip {
-        text: "Enable game mode"
-        verticalPadding: 8
-        horizontalPadding: 12
-    }
+
+    tooltipText: "Enable game mode"
 }

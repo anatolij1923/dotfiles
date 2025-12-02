@@ -12,9 +12,6 @@ QuickToggle {
     onClicked: () => {
         Notifications.dnd = !Notifications.dnd;
     }
-    StyledTooltip {
-        text: "Do not disturb"
-        verticalPadding: 8
-        horizontalPadding: 12
-    }
+
+    tooltipText: "Do not disturb"
 }

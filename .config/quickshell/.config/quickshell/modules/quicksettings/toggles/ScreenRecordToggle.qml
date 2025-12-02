@@ -11,9 +11,5 @@ QuickToggle {
     onClicked: () => {
         Record.toggle();
     }
-    StyledTooltip {
-        text: "Enable screen recording"
-        verticalPadding: 8
-        horizontalPadding: 12
-    }
+    tooltipText: "Enable screen recording"
 }
