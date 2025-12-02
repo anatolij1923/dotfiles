@@ -92,6 +92,25 @@ Variants {
             }
 
             Loader {
+                id: dimLoader
+                property bool shouldShow: GlobalStates.launcherOpened || GlobalStates.overviewOpened || GlobalStates.quicksettingsOpened || GlobalStates.powerMenuOpened
+
+                active: Config.background.dim.enabled && (shouldShow || opacity > 0)
+                anchors.fill: wallpaper
+
+                opacity: shouldShow ? 1 : 0
+
+                Behavior on opacity {
+                    Anim {}
+                }
+                sourceComponent: Rectangle {
+                    id: dim
+                    anchors.fill: parent
+                    color: Qt.alpha("black", Config.background.dim.transparency)
+                }
+            }
+
+            Loader {
                 id: scaleLoader
                 active: GlobalStates.screenLocked
                 anchors.fill: wallpaper
