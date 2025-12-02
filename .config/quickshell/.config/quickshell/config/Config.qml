@@ -18,6 +18,7 @@ Singleton {
     property alias lock: adapter.lock
     property alias weather: adapter.weather
     property alias launcher: adapter.launcher
+    property alias gamemode: adapter.gamemode
 
     Timer {
         id: fileWriteTimer
@@ -60,6 +61,7 @@ Singleton {
             property LockConfig lock: LockConfig {}
             property WeatherConfig weather: WeatherConfig {}
             property LauncherConfig launcher: LauncherConfig {}
+            property GamemodeConfig gamemode: GamemodeConfig {}
         }
     }
 }

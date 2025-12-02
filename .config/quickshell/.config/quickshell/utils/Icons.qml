@@ -52,44 +52,32 @@ Singleton {
     }
 
     function getWeatherIcon(code) {
-        // Код приходит строкой из JSON, преобразуем в число
         var c = parseInt(code);
 
-        // Коды WWO: https://worldweatheronline.com/weather-api/api/docs/weather-icons.aspx
-
-        // Ясно / Солнечно
         if (c === 113)
             return "sunny";
 
-        // Переменная облачность
         if (c === 116)
             return "partly_cloudy_day";
 
-        // Пасмурно / Облачно
         if (c === 119 || c === 122)
             return "cloud";
 
-        // Туман / Дымка
         if (c === 143 || c === 248 || c === 260)
             return "foggy";
 
-        // Дождь (легкий, средний, ливень)
         if ([176, 263, 266, 293, 296, 299, 302, 305, 308, 311, 314, 353, 356, 359].includes(c))
             return "rainy";
 
-        // Снег / Метель
         if ([227, 230, 323, 326, 329, 332, 335, 338, 368, 371, 392, 395].includes(c))
             return "weather_snowy";
 
-        // Снег с дождем / Град
         if ([281, 284, 317, 320, 350, 362, 365, 374, 377].includes(c))
             return "weather_mix";
 
-        // Гроза
         if ([386, 389].includes(c))
             return "thunderstorm";
 
-        // Если код неизвестен
         return "question_mark";
     }
 }

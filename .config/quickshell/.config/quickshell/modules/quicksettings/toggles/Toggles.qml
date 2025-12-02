@@ -63,7 +63,8 @@ Rectangle {
             spacing: 4
             DNDToggle {}
             IdleToggle {}
-            DarkModeToggle {}
+            GamemodeToggle {}
+            // DarkModeToggle {}
             SleepToggle {}
         }
 
