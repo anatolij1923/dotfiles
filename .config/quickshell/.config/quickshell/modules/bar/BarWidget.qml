@@ -2,11 +2,15 @@ import QtQuick
 import QtQuick.Layouts
 import qs.modules.common
 import qs.services
+import qs.config
 
 Rectangle {
     id: root
 
     property alias spacing: layout.spacing
+
+    property real alpha: Config.appearance.transparency.alpha
+    property bool transparent: Config.appearance.transparency.enabled
 
     implicitHeight: parent.height - 12
 
@@ -15,7 +19,7 @@ Rectangle {
     property int padding: Appearance.padding.normal
 
     radius: Appearance.rounding.small
-    color: Colors.palette.m3surfaceContainerLow
+    color: transparent ? Qt.alpha(Colors.palette.m3surfaceContainerLow, alpha - 0.2) : Colors.palette.m3surfaceContainerLow
     Behavior on color {
         CAnim {}
     }

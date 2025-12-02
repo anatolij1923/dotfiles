@@ -2,9 +2,12 @@ import QtQuick
 import Quickshell
 import Quickshell.Wayland
 import qs.services
+import qs.config
 
 LazyLoader {
     id: root
+    property real alpha: Config.appearance.transparency.alpha
+    property bool transparent: Config.appearance.transparency.enabled
 
     // Input properties
     property Item hoverTarget
@@ -29,6 +32,7 @@ LazyLoader {
         }
 
         WlrLayershell.layer: WlrLayer.Overlay
+        WlrLayershell.namespace: "quickshell:barPopup"
         exclusiveZone: -1 // Don't shift other windows
 
         // Window size tracks the background size
@@ -85,7 +89,8 @@ LazyLoader {
             implicitWidth: (root.contentItem?.implicitWidth ?? 0) + root.padding * 2
             implicitHeight: (root.contentItem?.implicitHeight ?? 0) + root.padding * 2
 
-            color: Colors.palette.m3surfaceContainer
+            color: root.transparent ? Qt.alpha(Colors.palette.m3surfaceContainer, root.alpha) : Colors.palette.m3surfaceContainer
+
             radius: root.radius
 
             border {
