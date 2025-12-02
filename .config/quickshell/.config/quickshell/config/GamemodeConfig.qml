@@ -8,6 +8,8 @@ JsonObject {
 
     property Blur blur: Blur {}
 
+    property bool sendNotification: true
+
     component Blur: JsonObject {
         property bool disableBlur: true
         property int blurSize: 0
