@@ -16,7 +16,7 @@ JsonObject {
             name: "Hello",
             description: "Just say hello!",
             icon: "waving_hand",
-            action: ["notify-send", "Welcome!", "Hello from Quickshell"]
+            action: ["notify-send", "-a", "shell", "Welcome!", "Hello from Quickshell"]
         },
         {
             name: "Wallpaper",

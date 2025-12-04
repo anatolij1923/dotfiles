@@ -11,6 +11,8 @@ import qs.modules.common
 import qs.config
 
 
+// TODO: add more interactions, e.g. kill app on RMB, focus on it with LMB, not just switch ws
+
 Item {
     id: root
 

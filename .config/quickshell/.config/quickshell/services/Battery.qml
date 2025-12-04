@@ -21,12 +21,12 @@ Singleton {
 
     onIsLowAndDischargingChanged: {
         if (available && isLowAndDischarging) {
-            Quickshell.execDetached(["notify-send", "-u", "critical", "Low battery", "Plug in charger"]);
+            Quickshell.execDetached(["notify-send", "-u", "critical", "-a", "shell", "Low battery", "Plug in charger"]);
         }
     }
     onIsCriticalAndDischargingChanged: {
         if (available && isLowAndDischarging) {
-            Quickshell.execDetached(["notify-send", "-u", "critical", "Critical low battery", "Plug in charger now"]);
+            Quickshell.execDetached(["notify-send", "-u", "critical", "-a", "shell", "Critical low battery", "Plug in charger now"]);
         }
     }
 }
