@@ -32,6 +32,6 @@ Singleton {
     function logout() {
         // closeAllWindows();
         // Quickshell.execDetached(["pkill", "Hyprland"]);
-        Hyprland.dispatch("exit");
+        HyprlandData.dispatch("exit");
     }
 }
