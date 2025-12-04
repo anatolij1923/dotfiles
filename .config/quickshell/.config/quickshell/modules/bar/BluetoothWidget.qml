@@ -6,8 +6,6 @@ import qs
 import qs.services
 import qs.modules.common
 
-// FIXME: prolly a bad idea to wrap it into mouse area cuz i cant toggle qsButton when hovered bluetooth widget
-
 Item {
     id: root
     implicitWidth: content.implicitWidth
@@ -30,7 +28,7 @@ Item {
 
         StyledText {
             text: ` ${BluetoothService.battery * 100}%`
-            visible: hoverHandler.hovered
+            visible: BluetoothService.connected && hoverHandler.hovered
             weight: 500
         }
 
