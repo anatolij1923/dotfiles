@@ -54,7 +54,7 @@ Rectangle {
                     GlobalStates.quicksettingsOpened = false;
                 }
 
-                tooltipText: "Click to toggle Bluetooth. Right click to open Blueman"
+                tooltipText: BluetoothService.connected ? `Toggle bluetooth. Right click to open blueman\nConnected: ${BluetoothService.battery * 100}%` : "Toggle bluetooth. Right click to open blueman"
             }
         }
 

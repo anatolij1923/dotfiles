@@ -25,16 +25,6 @@ Item {
             implicitWidth: 4
             battery: BluetoothService.battery
         }
-
-        StyledText {
-            text: ` ${BluetoothService.battery * 100}%`
-            visible: BluetoothService.connected && hoverHandler.hovered
-            weight: 500
-        }
-
-        HoverHandler {
-            id: hoverHandler
-        }
     }
 
     component BatteryProgress: Item {
