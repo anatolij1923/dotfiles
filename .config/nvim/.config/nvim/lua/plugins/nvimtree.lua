@@ -1,7 +1,6 @@
 return {
 	"nvim-tree/nvim-tree.lua",
 	version = "*",
-	lazy = false,
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
@@ -17,11 +16,9 @@ return {
 			view = {
 				width = 30,
 			},
-            renderer = {
-                icons = {
-
-                }
-            }
+			renderer = {
+				icons = {},
+			},
 		})
 	end,
 }
