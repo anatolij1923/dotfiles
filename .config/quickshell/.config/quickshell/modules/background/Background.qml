@@ -88,7 +88,7 @@ Variants {
                 sourceSize: Qt.size(bgRoot.width * wallpaperScale, bgRoot.height * wallpaperScale)
                 width: bgRoot.width * wallpaperScale
                 height: bgRoot.height * wallpaperScale
-                source: bgRoot.wallpaperPath || `/home/${Quickshell.env("USER")}/.config/quickshell/assets/fallback.png`
+                source: bgRoot.wallpaperPath || Quickshell.shellPath("assets/fallback.png")
             }
 
             Loader {
