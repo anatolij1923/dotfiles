@@ -10,7 +10,7 @@ BarWidget {
 
     RowLayout {
         id: content
-        anchors.fill: parent
+        // anchors.fill: parent
         spacing: 12
 
         // RowLayout {

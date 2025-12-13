@@ -18,7 +18,7 @@ BarWidget {
 
     RowLayout {
         id: content
-        anchors.fill: parent
+        // anchors.fill: parent
 
         StyledText {
             id: timeSection

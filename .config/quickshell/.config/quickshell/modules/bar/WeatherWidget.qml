@@ -8,7 +8,7 @@ BarWidget {
 
     RowLayout {
         id: content
-        anchors.centerIn: parent
+        // anchors.centerIn: parent
 
         MaterialSymbol {
             icon: Weather.data.icon
