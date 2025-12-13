@@ -21,7 +21,7 @@ Item {
             Rectangle {
                 Layout.fillWidth: true
                 implicitHeight: clearButton.implicitHeight
-                color: Qt.alpha(Colors.palette.m3surfaceContainer, 0.4)
+                color: Colors.palette.m3surfaceContainer
                 radius: Appearance.rounding.normal
 
                 StyledText {
@@ -30,6 +30,13 @@ Item {
                     text: `${Notifications.list.length} Notifications`
                     Layout.alignment: Qt.AlignHCenter
                 }
+                Elevation {
+                    anchors.fill: parent
+                    level: 3
+                    z: -1
+                    radius: parent.radius
+                    opacity: 0.5
+                }
             }
 
             TextButton {
@@ -37,7 +44,15 @@ Item {
                 text: "Clear"
                 onClicked: Notifications.clearAll()
                 padding: Appearance.padding.normal
-                inactiveColor: Qt.alpha(Colors.palette.m3surfaceContainer, 0.6)
+                // inactiveColor: Qt.alpha(Colors.palette.m3surfaceContainer, 0.6)
+
+                Elevation {
+                    anchors.fill: parent
+                    level: 3
+                    z: -1
+                    radius: parent.radius
+                    opacity: 0.5
+                }
             }
         }
 

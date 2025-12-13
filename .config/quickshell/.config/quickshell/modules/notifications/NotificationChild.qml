@@ -341,6 +341,14 @@ Rectangle {
                     inactiveColor: Colors.palette.m3surfaceContainerHigh
                     onClicked: root.modelData.close()
                     padding: Appearance.padding.smaller
+
+                    Elevation {
+                        anchors.fill: parent
+                        level: 3
+                        z: -1
+                        radius: parent.radius
+                        opacity: 0.5
+                    }
                 }
 
                 Repeater {
@@ -353,6 +361,13 @@ Rectangle {
                         padding: Appearance.padding.smaller
                         onClicked: () => {
                             modelData.invoke();
+                        }
+                        Elevation {
+                            anchors.fill: parent
+                            level: 3
+                            z: -1
+                            radius: parent.radius
+                            opacity: 0.5
                         }
                     }
                 }

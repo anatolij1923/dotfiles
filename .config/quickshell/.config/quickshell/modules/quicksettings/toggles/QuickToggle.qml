@@ -29,4 +29,12 @@ IconButton {
         verticalPadding: Appearance.padding.normal
         horizontalPadding: Appearance.padding.normal
     }
+
+    Elevation {
+        anchors.fill: parent
+        level: 3
+        radius: parent.radius
+        opacity: 0.5
+        z: -1
+    }
 }

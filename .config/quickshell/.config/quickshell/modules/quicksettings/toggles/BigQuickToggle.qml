@@ -33,6 +33,14 @@ Rectangle {
         }
     }
 
+    Elevation {
+        anchors.fill: parent
+        level: 3
+        z: -1
+        radius: parent.radius
+        opacity: 0.5
+    }
+
     RowLayout {
         id: content
         anchors.fill: parent
