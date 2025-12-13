@@ -31,15 +31,14 @@ Singleton {
         running: true
         command: ["bash", "-c", `test "$(hyprctl getoption animations:enabled -j | jq ".int")" -ne 0`]
         onExited: exitCode => {
-            root.toggled = exitCode !== 0;
+            root.enabled = exitCode !== 0;
         }
+    }
+    function init(): void {
     }
 
     IpcHandler {
         target: "gamemode"
-
-        function init(): void {
-        }
 
         function toggle(): void {
             root.enable();
