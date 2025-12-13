@@ -19,21 +19,6 @@ import qs.modules.tit
 import qs.modules.quicksettings
 import qs.modules.osd
 import qs.modules.overview
-import Quickshell
-import QtQuick
-import qs.services
-
-import qs.modules.background
-import qs.modules.bar
-import qs.modules.corners
-import qs.modules.lock
-import qs.modules.powermenu
-import qs.modules.launcher
-import qs.modules.notifications
-import qs.modules.tit
-import qs.modules.quicksettings
-import qs.modules.osd
-import qs.modules.overview
 
 ShellRoot {
     property bool enableBackground: true
