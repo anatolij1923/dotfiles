@@ -83,7 +83,7 @@ Singleton {
             const data = JSON.parse(text());
             for (const n of data) {
                 const obj = notifComp.createObject(root, n);
-                obj.popup = false; // восстановленные не popup
+                obj.popup = false;
                 root.list.push(obj);
             }
             root.list.sort((a, b) => b.time - a.time);

@@ -18,12 +18,12 @@ Singleton {
     id: root
     property real minimumBrightnessAllowed: 0.00001 // Setting to 0 would kind of turn off the screen. We don't want that.
 
-    signal brightnessChanged()
+    signal brightnessChanged
 
     property var ddcMonitors: []
     readonly property list<BrightnessMonitor> monitors: Quickshell.screens.map(screen => monitorComp.createObject(root, {
-        screen
-    }))
+            screen
+        }))
 
     function getMonitorForScreen(screen: ShellScreen): var {
         return monitors.find(m => m.screen === screen);
@@ -93,7 +93,8 @@ Singleton {
         property bool animateChanges: !monitor.isDdc
 
         onBrightnessChanged: {
-            if (!monitor.ready) return;
+            if (!monitor.ready)
+                return;
             root.brightnessChanged();
         }
 
@@ -106,8 +107,10 @@ Singleton {
             }
         }
         onMultipliedBrightnessChanged: {
-            if (monitor.animationEnabled) syncBrightness();
-            else setTimer.restart();
+            if (monitor.animationEnabled)
+                syncBrightness();
+            else
+                setTimer.restart();
         }
 
         function initialize() {
@@ -137,7 +140,7 @@ Singleton {
         }
 
         function syncBrightness() {
-            const brightnessValue = Math.max(monitor.multipliedBrightness, root.minimumBrightnessAllowed)
+            const brightnessValue = Math.max(monitor.multipliedBrightness, root.minimumBrightnessAllowed);
             const rounded = Math.round(brightnessValue * monitor.rawMaxBrightness);
             setProc.command = isDdc ? ["ddcutil", "-b", busNum, "setvcp", "10", rounded] : ["brightnessctl", "--class", "backlight", "s", rounded, "--quiet"];
             setProc.startDetached();
@@ -209,18 +212,14 @@ Singleton {
 
             Process {
                 id: screenshotProc
-                command: ["bash", "-c", 
-                    `mkdir -p '${StringUtils.shellSingleQuoteEscape(root.screenshotDir)}'`
-                    + ` && grim -o '${StringUtils.shellSingleQuoteEscape(screenScope.screenName)}' -`
-                    + ` | magick png:- -colorspace Gray -format "%[fx:mean*100]" info:`
-                ]
+                command: ["bash", "-c", `mkdir -p '${StringUtils.shellSingleQuoteEscape(root.screenshotDir)}'` + ` && grim -o '${StringUtils.shellSingleQuoteEscape(screenScope.screenName)}' -` + ` | magick png:- -colorspace Gray -format "%[fx:mean*100]" info:`]
                 stdout: StdioCollector {
                     id: lightnessCollector
                     onStreamFinished: {
                         Quickshell.execDetached(["rm", screenScope.screenshotPath]); // Cleanup
-                        const lightness = lightnessCollector.text
-                        const newMultiplier = root.brightnessMultiplierForLightness(parseFloat(lightness))
-                        Brightness.getMonitorForScreen(screenScope.modelData).setBrightnessMultiplier(newMultiplier)
+                        const lightness = lightnessCollector.text;
+                        const newMultiplier = root.brightnessMultiplierForLightness(parseFloat(lightness));
+                        Brightness.getMonitorForScreen(screenScope.modelData).setBrightnessMultiplier(newMultiplier);
                     }
                 }
             }
@@ -233,11 +232,11 @@ Singleton {
         target: "brightness"
 
         function increment() {
-            onPressed: root.increaseBrightness()
+            onPressed: root.increaseBrightness();
         }
 
         function decrement() {
-            onPressed: root.decreaseBrightness()
+            onPressed: root.decreaseBrightness();
         }
     }
 

@@ -14,7 +14,7 @@ Rectangle {
     property var brightnessMonitor: Brightness.getMonitorForScreen(screen)
 
     implicitHeight: content.implicitHeight + padding * 2
-    implicitWidth: content.implicitWidth + padding + 2
+    implicitWidth: content.implicitWidth + padding * 2
     color: Qt.alpha(Colors.palette.m3surfaceContainer, 0.4)
     radius: Appearance.rounding.huge
 
@@ -53,28 +53,30 @@ Rectangle {
         }
     }
 
-    component QuickSlider: RowLayout {
+    component QuickSlider: StyledSlider {
         id: root
-        property alias icon: icon.icon
-        property alias value: slider.value
-        property color iconColor: Colors.palette.m3onSurface
-        property var onMovedHandler
-        spacing: 16
 
-        MaterialSymbol {
-            id: icon
-            color: root.iconColor
+        property alias icon: iconItem.icon
+        property color iconColor: value > 0.08 ? Colors.palette.m3surface : Colors.palette.m3onSurface
+        property var onMovedHandler
+
+        stopIndicatorValues: []
+        configuration: StyledSlider.Configuration.M
+
+        onMoved: {
+            if (typeof root.onMovedHandler === "function") {
+                root.onMovedHandler(value);
+            }
         }
 
-        StyledSlider {
-            id: slider
-            stopIndicatorValues: []
-            configuration: StyledSlider.Configuration.M
+        MaterialSymbol {
+            id: iconItem
+            color: root.iconColor
 
-            onMoved: {
-                if (typeof root.onMovedHandler === "function")
-                    root.onMovedHandler(value);
-            }
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+
+            anchors.leftMargin: Appearance.padding.normal
         }
     }
 }
