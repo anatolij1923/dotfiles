@@ -18,7 +18,7 @@ Singleton {
     Timer {
         id: batteryFetch
         interval: 3000
-        running: true
+        running: root.enabled
         repeat: true
         onTriggered: {
             root.battery = root.firstActiveDevice.battery;

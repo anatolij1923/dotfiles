@@ -3,17 +3,17 @@ pragma Singleton
 
 import QtQuick
 import Quickshell
+import Quickshell.Io
 
 Singleton {
     id: root
-    property QtObject animCurves
-    property QtObject anim
-    property QtObject animDuration
-    property QtObject rounding
-    property QtObject padding
-    property QtObject sizes
+    property AnimCurves animCurves: AnimCurves {}
+    property AnimDuration animDuration: AnimDuration {}
+    property Rounding rounding: Rounding {}
+    property Padding padding: Padding {}
+    property Sizes sizes: Sizes {}
 
-    animCurves: QtObject {
+    component AnimCurves: JsonObject {
         readonly property list<real> expressiveFastSpatial: [0.42, 1.67, 0.21, 0.90, 1, 1] // Default, 350ms
         readonly property list<real> expressiveDefaultSpatial: [0.38, 1.21, 0.22, 1.00, 1, 1] // Default, 500ms
         readonly property list<real> expressiveSlowSpatial: [0.39, 1.29, 0.35, 0.98, 1, 1] // Default, 650ms
@@ -32,7 +32,7 @@ Singleton {
         readonly property real expressiveEffectsDuration: 200
     }
 
-    anim: QtObject {
+    component Anim: QtObject {
         property QtObject elementMove: QtObject {
             property int duration: animCurves.expressiveDefaultSpatialDuration
             property int type: Easing.BezierSpline
@@ -135,7 +135,7 @@ Singleton {
             property int type: Easing.OutExpo
         }
     }
-    animDuration: QtObject {
+    component AnimDuration: JsonObject {
         property real scale: 1
         property int smaller: 100 * scale
         property int small: 200 * scale
@@ -148,7 +148,7 @@ Singleton {
         property int expressiveEffects: 200 * scale
     }
 
-    rounding: QtObject {
+    component Rounding: JsonObject {
         property real scale: 1
         property int unsharpen: 2
         property int small: 12 * scale
@@ -157,7 +157,8 @@ Singleton {
         property int huge: 25 * scale
         property int full: 1000 * scale
     }
-    padding: QtObject {
+    component Padding: JsonObject {
+
         property real scale: 1
         property int small: 5 * scale
         property int smaller: 7 * scale
@@ -167,7 +168,7 @@ Singleton {
         property int huge: 24 * scale
     }
 
-    sizes: QtObject {
+    component Sizes: JsonObject {
         property int osdWidth: 250
         property int quicksettingsWidth: 500
     }
