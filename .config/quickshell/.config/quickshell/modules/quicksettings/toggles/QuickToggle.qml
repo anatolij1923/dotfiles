@@ -11,9 +11,11 @@ IconButton {
     Layout.preferredWidth: implicitWidth + (stateLayer.pressed ? Appearance.padding.huge : internalChecked ? Appearance.padding.smaller : 0)
     Layout.fillWidth: true
 
-    implicitHeight: 55
-    // enabled: true
-    iconSize: 28
+    iconSize: 30
+
+    padding: Appearance.padding.larger
+
+    // radius: checked ? Appearance.rounding.normal : Appearance.rounding.huge
 
     Behavior on Layout.preferredWidth {
         Anim {

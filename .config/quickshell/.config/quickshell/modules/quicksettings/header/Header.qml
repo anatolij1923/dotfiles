@@ -11,16 +11,31 @@ RowLayout {
     Layout.fillHeight: false
     Layout.alignment: Qt.AlignTop
 
-    ColumnLayout {
+    Rectangle {
+        implicitWidth: uptime.implicitWidth + Appearance.padding.normal * 2
+        implicitHeight: uptime.implicitHeight + Appearance.padding.normal * 2
+
+        color: Colors.palette.m3surfaceContainer
+        radius: Appearance.rounding.huge
+
         StyledText {
-            text: Quickshell.env("USER")
-            weight: 500
-        }
-        StyledText {
-            text: `Uptime ${Time.uptime}`
-            size: 16
+            id: uptime
+            text: `${Time.uptime}`
+            anchors.centerIn: parent
+            size: 20
         }
     }
+
+    // ColumnLayout {
+    //     StyledText {
+    //         text: Quickshell.env("USER")
+    //         weight: 500
+    //     }
+    //     StyledText {
+    //         text: `Uptime ${Time.uptime}`
+    //         size: 16
+    //     }
+    // }
 
     Item {
         Layout.fillWidth: true

@@ -46,7 +46,7 @@ Item {
         ColumnLayout {
             anchors.fill: parent
             anchors.margins: root.padding
-            spacing: 18
+            spacing: Appearance.padding.normal
             Layout.fillHeight: true
             // Header
             Header {}

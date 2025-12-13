@@ -10,7 +10,6 @@ import qs.services
 import qs.modules.common
 import qs.config
 
-
 // TODO: add more interactions, e.g. kill app on RMB, focus on it with LMB, not just switch ws
 
 Item {
@@ -113,7 +112,7 @@ Item {
                         property var ipc: modelData.lastIpcObject
                         property bool hasData: ipc !== undefined && ipc.at !== undefined
 
-                        property string windowTitle: modelData.title || modelData.appId || qsTr("Window")
+                        property string windowTitle: modelData.title || modelData.appId || "Window"
                         property string windowApp: modelData.class ? modelData.class.toUpperCase() : ""
                         property bool isFloating: hasData && ipc.floating === true
 
@@ -222,13 +221,24 @@ Item {
                             anchors.fill: parent
                             hoverEnabled: true
                             cursorShape: drag.active ? Qt.ClosedHandCursor : Qt.PointingHandCursor
-
+                            acceptedButtons: Qt.LeftButton | Qt.RightButton
                             drag.target: winContainer
                             drag.axis: Drag.XAndYAxis
 
                             property real pressX: 0
                             property real pressY: 0
                             property bool dragging: false
+
+                            // FIXME: fix closing windows
+                            onClicked: mouse => {
+                                if (mouse.button === Qt.RightButton) {
+                                    // Quickshell.execDetached(["notify-send", "RMB"]);
+                                    HyprlandData.dispatch("closewindow:" + winContainer.windowAddress);
+                                } else {
+                                    // Quickshell.execDetached(["notify-send", "LMB"]);
+                                    HyprlandData.dispatch("focuswindow address:" + winContainer.windowAddress);
+                                }
+                            }
 
                             onPressed: mouse => {
                                 pressX = mouse.x;

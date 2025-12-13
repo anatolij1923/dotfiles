@@ -8,7 +8,7 @@ Rectangle {
     id: root
     property alias text: label.text
     property alias size: label.size
-    property bool hovered: stateLayer.hovered
+    property bool hovered: stateLayer.containsMouse
 
     property bool checked: false
     property bool toggle: false
