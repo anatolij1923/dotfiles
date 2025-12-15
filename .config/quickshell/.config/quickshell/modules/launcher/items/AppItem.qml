@@ -18,7 +18,7 @@ Item {
 
     StateLayer {
         anchors.fill: parent
-        radius: Appearance.rounding.normal
+        radius: Appearance.rounding.huge
 
         onClicked: {
             root.modelData.execute();

@@ -13,8 +13,8 @@ import qs.modules.common
 
 Scope {
     id: root
-    property int padding: Appearance.padding.normal
-    property int rounding: Appearance.rounding.huge
+    property int padding: Appearance.padding.large
+    property int rounding: Appearance.rounding.hugeass
     property string searchingText: ""
 
     property real alpha: Config.appearance.transparency.alpha
@@ -39,7 +39,7 @@ Scope {
                     const columns = 3;
                     return (wallWidth * columns) + (spacing * (columns - 1)) + (root.padding * 2);
                 }
-                return 450;
+                return 550;
             }
             implicitHeight: Math.min(launcherRoot.maxHeight, searchWrapper.implicitHeight + listWrapper.implicitHeight + root.padding * 2) + root.padding
 
@@ -97,7 +97,7 @@ Scope {
                     }
                     implicitHeight: Math.max(icon.implicitHeight, searchField.implicitHeight)
 
-                    radius: Appearance.rounding.normal
+                    radius: Appearance.rounding.hugeass
                     color: root.transparent ? Qt.alpha(Colors.palette.m3surfaceContainer, root.alpha) : Colors.palette.m3surfaceContainer
 
                     MaterialSymbol {

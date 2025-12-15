@@ -155,6 +155,7 @@ Singleton {
         property int normal: 17 * scale
         property int large: 20 * scale
         property int huge: 25 * scale
+        property int hugeass: 30 * scale
         property int full: 1000 * scale
     }
     component Padding: JsonObject {
