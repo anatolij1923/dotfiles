@@ -34,7 +34,7 @@ BarPopup {
 
             StyledText {
                 text: "Battery"
-                weight: 500
+                weight: 600
                 size: 22
             }
             Layout.alignment: Qt.AlignHCenter

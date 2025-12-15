@@ -6,7 +6,7 @@ import qs.modules.common
 
 BarWidget {
     id: root
-    padding: Appearance.padding.huge
+    // padding: Appearance.padding.huge
 
     RowLayout {
         id: content
@@ -24,22 +24,22 @@ BarWidget {
         //     }
         // }
 
-        RowLayout {
-            id: temp
-            CircularProgress {
-                implicitSize: 30
-                MaterialSymbol {
-                    anchors.centerIn: parent
-                    color: Colors.palette.m3onSurface
-                    icon: "device_thermostat"
-                    size: 20
-                }
-                value: Math.min(SystemUsage.cpuTemp / 100, 1)
-            }
-            StyledText {
-                text: `${SystemUsage.cpuTemp.toFixed(0)}`
-            }
-        }
+        // RowLayout {
+        //     id: temp
+        //     CircularProgress {
+        //         implicitSize: 30
+        //         MaterialSymbol {
+        //             anchors.centerIn: parent
+        //             color: Colors.palette.m3onSurface
+        //             icon: "device_thermostat"
+        //             size: 20
+        //         }
+        //         value: Math.min(SystemUsage.cpuTemp / 100, 1)
+        //     }
+        //     StyledText {
+        //         text: `${SystemUsage.cpuTemp.toFixed(0)}`
+        //     }
+        // }
 
         RowLayout {
             id: mem
@@ -57,5 +57,15 @@ BarWidget {
                 text: `${Math.round(SystemUsage.memoryUsedPercentage * 100).toString()}`
             }
         }
+    }
+
+    MouseArea {
+        id: mouseArea
+        hoverEnabled: true
+        anchors.fill: parent
+    }
+
+    UsageInfoPopup {
+        hoverTarget: mouseArea
     }
 }
