@@ -80,6 +80,8 @@ Scope {
                 color: root.transparent ? Qt.alpha(Colors.palette.m3surface, root.alpha) : Colors.palette.m3surface
                 radius: root.rounding
                 smooth: true
+                border.width: 1
+                border.color: Colors.palette.m3surfaceContainerHigh
             }
 
             Item {
