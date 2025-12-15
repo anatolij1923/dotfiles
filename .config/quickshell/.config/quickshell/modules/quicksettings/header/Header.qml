@@ -42,11 +42,44 @@ RowLayout {
     }
 
     IconButton {
-        implicitWidth: 52
-        implicitHeight: 52
-        icon: "power_settings_new"
-        radius: Appearance.rounding.large
+        icon: "restart_alt"
+        padding: Appearance.padding.smaller
         inactiveColor: Colors.palette.m3surface
+
+        onClicked: {
+            GlobalStates.quicksettingsOpened = false;
+            Quickshell.execDetached(["bash", "-c", "killall qs; qs -d"]);
+        }
+
+        StyledTooltip {
+            text: "Restart Quickshell"
+            verticalPadding: Appearance.padding.normal
+            horizontalPadding: Appearance.padding.normal
+        }
+    }
+
+    IconButton {
+        icon: "settings"
+        padding: Appearance.padding.smaller
+        inactiveColor: Colors.palette.m3surface
+
+        onClicked: {
+            GlobalStates.quicksettingsOpened = false;
+        }
+
+        // TODO: make settings app
+        StyledTooltip {
+            text: "Open settings"
+            verticalPadding: Appearance.padding.normal
+            horizontalPadding: Appearance.padding.normal
+        }
+    }
+
+    IconButton {
+        icon: "power_settings_new"
+        padding: Appearance.padding.smaller
+        inactiveColor: Colors.palette.m3surface
+        // radius: Appearance.rounding.large
 
         onClicked: {
             GlobalStates.quicksettingsOpened = false;
@@ -55,6 +88,8 @@ RowLayout {
 
         StyledTooltip {
             text: "Open power menu"
+            verticalPadding: Appearance.padding.normal
+            horizontalPadding: Appearance.padding.normal
         }
     }
 }

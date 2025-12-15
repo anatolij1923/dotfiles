@@ -48,7 +48,8 @@ BarPopup {
 
         CircularProgress {
             id: circProgress
-            implicitSize: 40
+            implicitSize: 50
+            lineWidth: 4
 
             MaterialSymbol {
                 icon: usageWidget.icon
