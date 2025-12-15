@@ -48,7 +48,7 @@ BarWidget {
                 MaterialSymbol {
                     anchors.centerIn: parent
                     color: Colors.palette.m3onSurface
-                    icon: "memory"
+                    icon: "memory_alt"
                     size: 20
                 }
                 value: SystemUsage.memoryUsedPercentage
