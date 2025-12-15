@@ -44,8 +44,8 @@ format = "[$symbol$branch]($style)"
 format = " [$all_status]($style) "
 
 [character]
-success_symbol = "[ ->](bold green)"
-error_symbol = "[ ->](bold red)"
+success_symbol = "[ ~>](bold green)"
+error_symbol = "[ ~>](bold red)"
 format = '$symbol '
 
 [cmd_duration]
