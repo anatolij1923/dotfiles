@@ -245,8 +245,8 @@ Item {
         anchors.fill: parent
         radius: Appearance.rounding.huge
         color: root.transparent ? Qt.alpha(Colors.palette.m3surfaceContainer, root.alpha) : Colors.palette.m3surfaceContainer
-        border.width: 1
-        border.color: Colors.palette.m3surfaceContainerHigh
+        // border.width: 1
+        // border.color: Colors.palette.m3surfaceContainerHigh
 
         Row {
             id: row
