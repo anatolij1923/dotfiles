@@ -121,11 +121,17 @@ Scope {
                         background: null
 
                         onAccepted: {
-                            if (contentList.showCalc) {
-                                return;
-                            }
                             const currentList = contentList.currentList;
                             if (!currentList) {
+                                return;
+                            }
+
+                            if (contentList.showCalc) {
+                                const res = currentList.result;
+                                if (res && res.ok) {
+                                    Quickshell.execDetached(["wl-copy", String(res.message)]);
+                                    launcherRoot.hide();
+                                }
                                 return;
                             }
 
