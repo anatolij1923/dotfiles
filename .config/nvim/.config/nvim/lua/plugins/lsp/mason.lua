@@ -38,6 +38,7 @@ return {
 				"emmet_language_server",
 				"pyright",
 				"nil_ls",
+				"marksman",
 			},
 		})
 

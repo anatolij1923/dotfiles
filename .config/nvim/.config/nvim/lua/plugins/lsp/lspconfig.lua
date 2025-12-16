@@ -187,6 +187,11 @@ return {
 			cmd = { "bash-language-server", "start" },
 			filetypes = { "bash", "sh" },
 		}
+		-- markdown
+		vim.lsp.config["marksman"] = {
+			capabilities = capabilities,
+			filetypes = { "markdown" },
+		}
 
 		-- enable lsp servers
 		vim.lsp.enable("lua_ls")
@@ -200,5 +205,6 @@ return {
 		vim.lsp.enable("qmlls")
 		vim.lsp.enable("nil_ls")
 		vim.lsp.enable("bashls")
+		vim.lsp.enable("marksman")
 	end,
 }
