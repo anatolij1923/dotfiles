@@ -126,6 +126,15 @@ Scope {
                                 return;
                             }
 
+                            if (contentList.showCalc) {
+                                const res = currentList.result;
+                                if (res && res.ok) {
+                                    Quickshell.execDetached(["wl-copy", String(res.message)]);
+                                    launcherRoot.hide();
+                                }
+                                return;
+                            }
+
                             const currentItem = currentList.currentItem;
                             if (!currentItem) {
                                 return;
@@ -200,6 +209,8 @@ Scope {
                                 return "wallpaper";
                             } else if (contentList.showCommands) {
                                 return "terminal";
+                            } else if (contentList.showCalc) {
+                                return "calculate";
                             } else {
                                 return "apps";
                             }

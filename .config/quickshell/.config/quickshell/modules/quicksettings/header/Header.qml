@@ -69,7 +69,7 @@ RowLayout {
 
         // TODO: make settings app
         StyledTooltip {
-            text: "Open settings"
+            text: "Open settings [WIP]"
             verticalPadding: Appearance.padding.normal
             horizontalPadding: Appearance.padding.normal
         }
