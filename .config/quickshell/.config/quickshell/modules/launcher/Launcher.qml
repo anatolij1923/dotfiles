@@ -121,6 +121,9 @@ Scope {
                         background: null
 
                         onAccepted: {
+                            if (contentList.showCalc) {
+                                return;
+                            }
                             const currentList = contentList.currentList;
                             if (!currentList) {
                                 return;
@@ -200,6 +203,8 @@ Scope {
                                 return "wallpaper";
                             } else if (contentList.showCommands) {
                                 return "terminal";
+                            } else if (contentList.showCalc) {
+                                return "calculate";
                             } else {
                                 return "apps";
                             }

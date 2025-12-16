@@ -14,13 +14,14 @@ Item {
     property var searchField
     property bool showCommands: search.startsWith(":")
     property bool showWallpaper: search.startsWith(":wallpaper")
-    readonly property Item currentList: showWallpaper ? wallpapersList.item : (showCommands ? commandsList.item : appList.item)
+    property bool showCalc: !showCommands && !showWallpaper && isMathExpression(search)
+    readonly property Item currentList: showCalc ? calcResult.item : (showWallpaper ? wallpapersList.item : (showCommands ? commandsList.item : appList.item))
 
     anchors.top: parent.top
     anchors.left: parent.left
     anchors.right: parent.right
 
-    state: showWallpaper ? "wallpapers" : (showCommands ? "commands" : "apps")
+    state: showCalc ? "calc" : (showWallpaper ? "wallpapers" : (showCommands ? "commands" : "apps"))
 
     states: [
         State {
@@ -46,8 +47,33 @@ Item {
                 root.implicitHeight: Math.min(root.maxHeight, wallpapersList.implicitHeight > 0 ? wallpapersList.implicitHeight : empty.implicitHeight)
                 wallpapersList.active: true
             }
+        },
+        State {
+            name: "calc"
+
+            PropertyChanges {
+                root.implicitHeight: Math.min(
+                    root.maxHeight,
+                    calcResult.item && calcResult.item.implicitHeight > 0
+                        ? calcResult.item.implicitHeight
+                        : empty.implicitHeight
+                )
+                calcResult.active: true
+            }
         }
     ]
+
+    function isMathExpression(text) {
+        const trimmed = text.trim();
+        if (trimmed.length === 0)
+            return false;
+        // Only allow digits, operators, spaces, dot and parentheses
+        const mathOnly = /^[\d\.\s\+\-\*\/\^%()]+$/.test(trimmed);
+        console.log("[ContentList] isMathExpression:", JSON.stringify(trimmed), "mathOnly:", mathOnly, "hasDigit:", /\d/.test(trimmed));
+        if (!mathOnly)
+            return false;
+        return /\d/.test(trimmed);
+    }
 
     Loader {
         id: appList
@@ -88,6 +114,24 @@ Item {
         sourceComponent: WallpaperList {
             search: root.search
             maxHeight: root.maxHeight
+        }
+    }
+
+    Loader {
+        id: calcResult
+
+        active: false
+
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+
+        sourceComponent: CalcResult {
+            expression: root.search
+        }
+
+        onLoaded: {
+            console.log("[ContentList] CalcResult loaded. item:", calcResult.item, "implicitHeight:", calcResult.item && calcResult.item.implicitHeight);
         }
     }
 
