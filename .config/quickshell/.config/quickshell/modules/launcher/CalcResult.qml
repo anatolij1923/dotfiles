@@ -27,6 +27,7 @@ Item {
 
         try {
             const tokens = tokenize(trimmed);
+            console.log("Tokens:", JSON.stringify(tokens));
             const rpn = toRpn(tokens);
             const value = evalRpn(rpn);
             if (!isFinite(value))
@@ -83,7 +84,7 @@ Item {
                 if (!prev || (prev.type === "op" && prev.value !== "%") || (prev.type === "paren" && prev.value === "(")) {
                     let num = ch;
                     i++;
-                    while (i < str.length && /[\\d.]/.test(str[i])) {
+                    while (i < str.length && /[0-9.]/.test(str[i])) {
                         num += str[i++];
                     }
                     pushNumber(num);

@@ -52,12 +52,7 @@ Item {
             name: "calc"
 
             PropertyChanges {
-                root.implicitHeight: Math.min(
-                    root.maxHeight,
-                    calcResult.item && calcResult.item.implicitHeight > 0
-                        ? calcResult.item.implicitHeight
-                        : empty.implicitHeight
-                )
+                root.implicitHeight: Math.min(root.maxHeight, calcResult.item && calcResult.item.implicitHeight > 0 ? calcResult.item.implicitHeight : empty.implicitHeight)
                 calcResult.active: true
             }
         }
