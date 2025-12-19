@@ -9,6 +9,7 @@ import Quickshell.Io
  * Simple polled resource usage service with RAM, Swap, and CPU usage.
  */
 Singleton {
+    id: root
     property double memoryTotal: 1
     property double memoryFree: 1
     property double memoryUsed: memoryTotal - memoryFree
@@ -20,6 +21,9 @@ Singleton {
     property double cpuUsage: 0
     property var previousCpuStats
     property double cpuTemp: 0
+    property real storageUsed
+    property real storageTotal
+    property real storagePerc: storageTotal > 0 ? storageUsed / storageTotal : 0
 
     Process {
         id: tempProcess
@@ -30,6 +34,48 @@ Singleton {
                 const match = text.match(/Tctl:\s+\+([\d.]+)°C/);
                 if (match)
                     cpuTemp = Number(match[1]);
+            }
+        }
+    }
+
+    Process {
+        id: storage
+
+        command: ["sh", "-c", "df | grep '^/dev/' | awk '{print $1, $3, $4}'"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                const deviceMap = new Map();
+
+                for (const line of text.trim().split("\n")) {
+                    if (line.trim() === "")
+                        continue;
+
+                    const parts = line.trim().split(/\s+/);
+                    if (parts.length >= 3) {
+                        const device = parts[0];
+                        const used = parseInt(parts[1], 10) || 0;
+                        const avail = parseInt(parts[2], 10) || 0;
+
+                        // Only keep the entry with the largest total space for each device
+                        if (!deviceMap.has(device) || (used + avail) > (deviceMap.get(device).used + deviceMap.get(device).avail)) {
+                            deviceMap.set(device, {
+                                used: used,
+                                avail: avail
+                            });
+                        }
+                    }
+                }
+
+                let totalUsed = 0;
+                let totalAvail = 0;
+
+                for (const [device, stats] of deviceMap) {
+                    totalUsed += stats.used;
+                    totalAvail += stats.avail;
+                }
+
+                root.storageUsed = totalUsed;
+                root.storageTotal = totalUsed + totalAvail;
             }
         }
     }
@@ -73,6 +119,8 @@ Singleton {
             // Parse CPU temp
 
             tempProcess.running = true;
+
+            storage.running = true;
         }
     }
 

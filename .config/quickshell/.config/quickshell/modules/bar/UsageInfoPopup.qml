@@ -17,13 +17,13 @@ BarPopup {
         UsageWidget {
             icon: "memory_alt"
             value: SystemUsage.memoryUsedPercentage
-            desc: `Memory - ${Math.round(SystemUsage.memoryUsedPercentage * 100)}% ` + `${(SystemUsage.memoryTotal / 1024 / 1024).toFixed(1)}/${(SystemUsage.memoryUsed / 1024 / 1024).toFixed(1)}`
+            desc: `Memory - ${Math.round(SystemUsage.memoryUsedPercentage * 100)}% ` + `${(SystemUsage.memoryTotal / 1024 / 1024).toFixed(1)} / ${(SystemUsage.memoryUsed / 1024 / 1024).toFixed(1)}`
         }
 
         UsageWidget {
             icon: "swap_horiz"
             value: SystemUsage.swapUsedPercentage
-            desc: `Swap - ${Math.round(SystemUsage.swapUsedPercentage * 100)}% ` + `${(SystemUsage.swapTotal / 1024 / 1024).toFixed(1)}/${(SystemUsage.swapUsed / 1024 / 1024).toFixed(1)}`
+            desc: `Swap - ${Math.round(SystemUsage.swapUsedPercentage * 100)}% ` + `${(SystemUsage.swapTotal / 1024 / 1024).toFixed(1)} / ${(SystemUsage.swapUsed / 1024 / 1024).toFixed(1)}`
         }
 
         UsageWidget {
@@ -36,6 +36,12 @@ BarPopup {
             icon: "memory"
             value: SystemUsage.cpuUsage
             desc: `CPU Usage - ${Math.round(SystemUsage.cpuUsage * 100)}%`
+        }
+
+        UsageWidget {
+            icon: "hard_disk"
+            value: SystemUsage.storagePerc
+            desc: `Disk - ${Math.round(SystemUsage.storagePerc * 100)}% ` + `${(SystemUsage.storageUsed / 1024 / 1024).toFixed(1)} / ` + `${(SystemUsage.storageTotal / 1024 / 1024).toFixed(1)} GB`
         }
     }
 
