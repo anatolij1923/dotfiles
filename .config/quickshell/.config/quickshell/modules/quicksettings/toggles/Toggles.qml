@@ -33,8 +33,12 @@ Rectangle {
                 onClicked: () => {
                     Network.toggleWifi();
                 }
+                onRightClicked: () => {
+                    Quickshell.execDetached("nmgui");
+                    GlobalStates.quicksettingsOpened = false;
+                }
 
-                tooltipText: "Click to toggle Wi-Fi"
+                tooltipText: "Click to toggle Wi-Fi. Right click to open nmgui"
                 Layout.fillWidth: true
             }
 
