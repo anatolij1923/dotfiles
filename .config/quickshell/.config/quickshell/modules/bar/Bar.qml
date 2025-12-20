@@ -10,7 +10,8 @@ import qs
 
 PanelWindow {
     anchors {
-        top: true
+        top: !Config.bar.bottom
+        bottom: Config.bar.bottom
         left: true
         right: true
     }

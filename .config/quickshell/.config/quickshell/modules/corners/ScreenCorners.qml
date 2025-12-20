@@ -12,6 +12,7 @@ PanelWindow {
     id: root
     property real alpha: Config.appearance.transparency.alpha
     property bool transparent: Config.appearance.transparency.enabled
+
     color: "transparent"
     anchors {
         top: true
@@ -24,7 +25,7 @@ PanelWindow {
     mask: Region {}
 
     Corners {
-        corners: [0, 1]
+        corners: [0, 1, 2, 3]
         cornerHeight: 24
         cornerType: "inverted"
         color: root.transparent ? Qt.alpha(Colors.palette.m3surface, root.alpha) : Colors.palette.m3surface

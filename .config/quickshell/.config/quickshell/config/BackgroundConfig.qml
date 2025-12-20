@@ -1,8 +1,9 @@
 import Quickshell.Io
+import Quickshell
 
 JsonObject {
 
-    property string wallpaperPath: ""
+    property string wallpaperPath: `${Quickshell.env("HOME")}/.config/quickshell/assets/fallback.png`
 
     property Parallax parallax: Parallax {}
 
