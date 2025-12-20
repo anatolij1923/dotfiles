@@ -19,8 +19,8 @@ install_from_config() {
     . "$config_file"
 
     # Explicitly call install_packages for each expected array
-    # This list should cover all possible package arrays in essential.conf and extra.conf
-    local package_array_names=("WINDOW_MANAGER" "QUICKSHELL" "FILE_MANAGEMENT" "CORE_UTILS" "CODECS" "FONTS" "AUDIO" "CLI_UTILS" "EXTRA" "BLUETOOTH" "DEV_TOOLS")
+    # This list should cover all package arrays in essential.conf and extra.conf
+    local package_array_names=("WINDOW_MANAGER" "QUICKSHELL" "FILE_MANAGEMENT" "CORE_UTILS" "CODECS" "FONTS" "AUDIO" "CLI_UTILS" "EXTRA" "BLUETOOTH" "WIFI" "DEV_TOOLS")
 
     local packages_installed_successfully=true
 
