@@ -25,7 +25,7 @@ PanelWindow {
 
     Corners {
         corners: [0, 1]
-        cornerHeight: 30
+        cornerHeight: 24
         cornerType: "inverted"
         color: root.transparent ? Qt.alpha(Colors.palette.m3surface, root.alpha) : Colors.palette.m3surface
         Behavior on color {

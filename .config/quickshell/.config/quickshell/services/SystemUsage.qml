@@ -117,7 +117,6 @@ Singleton {
             }
 
             // Parse CPU temp
-
             tempProcess.running = true;
 
             storage.running = true;
