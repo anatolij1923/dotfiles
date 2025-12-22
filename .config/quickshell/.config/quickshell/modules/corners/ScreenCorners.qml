@@ -25,7 +25,7 @@ PanelWindow {
     mask: Region {}
 
     Corners {
-        corners: [0, 1, 2, 3]
+        corners: Config.bar.bottom ? [2, 3] : [0, 1]
         cornerHeight: 24
         cornerType: "inverted"
         color: root.transparent ? Qt.alpha(Colors.palette.m3surface, root.alpha) : Colors.palette.m3surface
