@@ -56,7 +56,7 @@ Scope {
                 }
                 renderType: Text.NativeRendering
                 font.pixelSize: 16
-                text: "мощни сискэ"
+                text: "( * ) ( * )"
                 color: Colors.palette.m3onSurface
             }
 
