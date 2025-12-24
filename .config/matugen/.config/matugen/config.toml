@@ -55,6 +55,10 @@ output_path = '~/.config/yazi/theme.toml'
 input_path = '~/.config/matugen/templates/wezterm.lua'
 output_path = '~/.config/wezterm/colors.lua'
 
+[templates.chroma-shell]
+input_path = '~/.config/matugen/templates/colors.json'
+output_path = '~/.config/chroma/colors.json'
+
 [templates.quickshell]
 input_path = '~/.config/matugen/templates/colors.json'
 output_path = '~/.config/quickshell/colors.json'

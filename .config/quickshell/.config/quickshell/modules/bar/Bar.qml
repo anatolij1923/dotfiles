@@ -47,21 +47,21 @@ PanelWindow {
         Workspaces {}
     }
 
-    Item {
-        anchors {
-            left: ws.right
-            right: usage.left
-            top: parent.top
-            bottom: parent.bottom
-        }
-
-        Loader {
-            active: !!Players.active
-            anchors.centerIn: parent
-
-            sourceComponent: Media {}
-        }
-    }
+    // Item {
+    //     anchors {
+    //         left: ws.right
+    //         right: usage.left
+    //         top: parent.top
+    //         bottom: parent.bottom
+    //     }
+    //
+    //     Loader {
+    //         active: !!Players.active
+    //         anchors.centerIn: parent
+    //
+    //         sourceComponent: Media {}
+    //     }
+    // }
 
     RowLayout {
         id: usage

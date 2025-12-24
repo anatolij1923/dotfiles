@@ -100,7 +100,7 @@ return {
 		-- emmet_language_server
 		vim.lsp.config["emmet_language_server"] = {
 			capabilities = capabilities,
-			filetypes = { "html" },
+			filetypes = { "html", "typescriptreact", "javascriptreact" },
 			init_options = {
 				includeLanguages = {},
 				excludeLanguages = {},
@@ -161,14 +161,6 @@ return {
 			filetypes = { "python" },
 			capabilities = capabilities,
 		}
-		-- rust. no need cuz rustaceanvim do its job
-		-- vim.lsp.config["rust_analyzer"] = {
-		--     capabilities = capabilities,
-		--     cmd = { "rust-analyzer" },
-		--     filetypes = { "rust" },
-		--     root_markers = { "Cargo.toml", "rust-project.json", ".git" },
-		-- }
-		-- qml
 		vim.lsp.config["qmlls"] = {
 			cmd = { "qmlls6" },
 			filetypes = { "qml" },
@@ -181,7 +173,7 @@ return {
 			root_markers = { "flake.nix" },
 		}
 
-		--bash
+		-- bash
 		vim.lsp.config["bashls"] = {
 			capabilities = capabilities,
 			cmd = { "bash-language-server", "start" },
@@ -194,17 +186,19 @@ return {
 		}
 
 		-- enable lsp servers
-		vim.lsp.enable("lua_ls")
-		vim.lsp.enable("html-lsp")
-		-- vim.lsp.enable("emmet_language_server")
-		vim.lsp.enable("cssls")
-		vim.lsp.enable("ts_ls")
-		vim.lsp.enable("clangd")
-		vim.lsp.enable("pyright")
-		-- vim.lsp.enable("rust-analyzer")
-		vim.lsp.enable("qmlls")
-		vim.lsp.enable("nil_ls")
-		vim.lsp.enable("bashls")
-		vim.lsp.enable("marksman")
+		vim.lsp.enable({
+			"lua_ls",
+			"html-lsp",
+			"emmet_language_server",
+			"cssls",
+			"ts_ls",
+			"clangd",
+			"pyright",
+			-- "rust-analyzer",
+			"qmlls",
+			"nil_ls",
+			"bashls",
+			"marksman",
+		})
 	end,
 }
