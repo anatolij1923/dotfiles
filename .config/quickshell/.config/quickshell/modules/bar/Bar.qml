@@ -8,6 +8,7 @@ import qs.services
 import qs.config
 
 PanelWindow {
+    id: root
     anchors {
         top: !Config.bar.bottom
         bottom: Config.bar.bottom
@@ -24,14 +25,18 @@ PanelWindow {
         CAnim {}
     }
 
-    property bool e: Config.bar
+    property bool floating: Config.bar.floating
+    property bool bottom: Config.bar.bottom
+    property var m: Config.bar.margins
 
     Loader {
         active: true
         anchors {
             fill: parent
-            margins: Config.bar.floating ? Appearance.padding.small : 0
-            bottomMargin: 0
+            topMargin: root.floating && !root.bottom ? root.m.top : 0
+            bottomMargin: root.floating && root.bottom ? root.m.bottom : 0
+            leftMargin: root.floating ? root.m.left : 0
+            rightMargin: root.floating ? root.m.right : 0
         }
         sourceComponent: BarContent {}
     }
