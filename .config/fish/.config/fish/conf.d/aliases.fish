@@ -27,3 +27,6 @@ alias lg="lazygit"
 # Misc
 alias update-mirrors="reflector --sort rate --number 10 --threads 100 --protocol https | sudo tee /etc/pacman.d/mirrorlist"
 alias c="clear"
+
+# Pnpm
+alias p="pnpm"
