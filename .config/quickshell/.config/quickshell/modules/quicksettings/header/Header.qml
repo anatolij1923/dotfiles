@@ -12,8 +12,8 @@ RowLayout {
     Layout.alignment: Qt.AlignTop
 
     Rectangle {
-        implicitWidth: uptime.implicitWidth + Appearance.padding.normal * 2
-        implicitHeight: uptime.implicitHeight + Appearance.padding.normal * 2
+        implicitWidth: buttons.implicitWidth + Appearance.padding.normal * 2
+        implicitHeight: buttons.implicitHeight + Appearance.padding.normal
 
         color: Colors.palette.m3surfaceContainer
         radius: Appearance.rounding.huge
@@ -26,70 +26,75 @@ RowLayout {
         }
     }
 
-    // ColumnLayout {
-    //     StyledText {
-    //         text: Quickshell.env("USER")
-    //         weight: 500
-    //     }
-    //     StyledText {
-    //         text: `Uptime ${Time.uptime}`
-    //         size: 16
-    //     }
-    // }
-
     Item {
         Layout.fillWidth: true
     }
 
-    IconButton {
-        icon: "restart_alt"
-        padding: Appearance.padding.smaller
-        inactiveColor: Colors.palette.m3surface
+    Rectangle {
+        color: Colors.palette.m3surfaceContainer
 
-        onClicked: {
-            GlobalStates.quicksettingsOpened = false;
-            Quickshell.execDetached(["bash", "-c", "killall qs; qs -d"]);
-        }
+        implicitWidth: buttons.implicitWidth + Appearance.padding.normal * 2
+        implicitHeight: buttons.implicitHeight + Appearance.padding.normal
 
-        StyledTooltip {
-            text: "Restart Quickshell"
-            verticalPadding: Appearance.padding.normal
-            horizontalPadding: Appearance.padding.normal
-        }
-    }
+        radius: Appearance.rounding.huge
 
-    IconButton {
-        icon: "settings"
-        padding: Appearance.padding.smaller
-        inactiveColor: Colors.palette.m3surface
+        RowLayout {
+            id: buttons
+            anchors.centerIn: parent
 
-        onClicked: {
-            GlobalStates.quicksettingsOpened = false;
-        }
+            spacing: Appearance.padding.small
 
-        // TODO: make settings app
-        StyledTooltip {
-            text: "Open settings [WIP]"
-            verticalPadding: Appearance.padding.normal
-            horizontalPadding: Appearance.padding.normal
-        }
-    }
+            IconButton {
+                icon: "restart_alt"
+                padding: Appearance.padding.smaller
+                // inactiveColor: Colors.palette.m3surface
 
-    IconButton {
-        icon: "power_settings_new"
-        padding: Appearance.padding.smaller
-        inactiveColor: Colors.palette.m3surface
-        // radius: Appearance.rounding.large
+                onClicked: {
+                    GlobalStates.quicksettingsOpened = false;
+                    Quickshell.execDetached(["bash", "-c", "killall qs; qs -d"]);
+                }
 
-        onClicked: {
-            GlobalStates.quicksettingsOpened = false;
-            GlobalStates.powerMenuOpened = true;
-        }
+                StyledTooltip {
+                    text: "Restart Quickshell"
+                    verticalPadding: Appearance.padding.normal
+                    horizontalPadding: Appearance.padding.normal
+                }
+            }
 
-        StyledTooltip {
-            text: "Open power menu"
-            verticalPadding: Appearance.padding.normal
-            horizontalPadding: Appearance.padding.normal
+            IconButton {
+                icon: "settings"
+                padding: Appearance.padding.smaller
+                // inactiveColor: Colors.palette.m3surface
+
+                onClicked: {
+                    GlobalStates.quicksettingsOpened = false;
+                }
+
+                // TODO: make settings app
+                StyledTooltip {
+                    text: "Open settings [WIP]"
+                    verticalPadding: Appearance.padding.normal
+                    horizontalPadding: Appearance.padding.normal
+                }
+            }
+
+            IconButton {
+                icon: "power_settings_new"
+                padding: Appearance.padding.smaller
+                // inactiveColor: Colors.palette.m3surface
+                // radius: Appearance.rounding.large
+
+                onClicked: {
+                    GlobalStates.quicksettingsOpened = false;
+                    GlobalStates.powerMenuOpened = true;
+                }
+
+                StyledTooltip {
+                    text: "Open power menu"
+                    verticalPadding: Appearance.padding.normal
+                    horizontalPadding: Appearance.padding.normal
+                }
+            }
         }
     }
 }
