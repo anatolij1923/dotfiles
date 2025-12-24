@@ -6,6 +6,7 @@
 //@ pragma Env QT_SCALE_FACTOR=1
 import Quickshell
 import QtQuick
+import qs.config
 import qs.services
 
 import qs.modules.background
@@ -53,7 +54,8 @@ ShellRoot {
     }
 
     LazyLoader {
-        active: enableScreenCorners
+        active: enableScreenCorners & !Config.bar.floating
+
         component: ScreenCorners {}
     }
 
