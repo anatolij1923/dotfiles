@@ -54,7 +54,7 @@ ShellRoot {
     }
 
     LazyLoader {
-        active: enableScreenCorners & !Config.bar.floating
+        active: enableScreenCorners && !Config.bar.floating
 
         component: ScreenCorners {}
     }
