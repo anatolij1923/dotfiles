@@ -18,7 +18,7 @@ Rectangle {
 
     readonly property int totalRowWidth: (HyprlandData.fullWorkspaces.count * (root.itemSize + root.spacing)) - root.spacing
 
-    implicitWidth: root.totalRowWidth + (root.internalPadding * 4)
+    implicitWidth: root.totalRowWidth + (root.internalPadding * 2)
     implicitHeight: root.height
 
     property real alpha: Config.appearance.transparency.alpha
