@@ -80,12 +80,6 @@ Rectangle {
                     color: root.isOccupied(index) ? Colors.palette.m3secondaryContainer : "transparent"
                     antialiasing: true
                     z: 1
-
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: Appearance.animDuration.expressiveEffects
-                        }
-                    }
                 }
             }
         }
@@ -104,9 +98,8 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
 
         Behavior on x {
-            NumberAnimation {
+            Anim {
                 duration: Appearance.animDuration.expressiveFastSpatial
-                easing.type: Easing.BezierSpline
                 easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
             }
         }
