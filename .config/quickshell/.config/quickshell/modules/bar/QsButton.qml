@@ -6,7 +6,7 @@ import qs
 
 Rectangle {
     id: qsButton
-    implicitWidth: content.implicitWidth + 24
+    implicitWidth: content.implicitWidth + Appearance.padding.smaller * 2
     implicitHeight: parent.height - 8
     color: GlobalStates.quicksettingsOpened === true ? Qt.alpha(Colors.palette.m3primary, 0.3) : "transparent"
     radius: Appearance.rounding.huge

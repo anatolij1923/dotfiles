@@ -7,22 +7,35 @@ import qs.modules.common
 import qs.services
 import qs.config
 
-BarWidget {
-    id: root
+Item {
     property string timeFormat: Config.time.format
     property string dateFormat: Config.time.dateFormat
 
-    padding: Appearance.padding.huge
-    // implicitWidth: content.implicitWidth
-    // implicitHeight: content.implicitHeight
+    implicitWidth: clock.implicitWidth
+    implicitHeight: clock.implicitHeight
 
-    RowLayout {
-        id: content
-        // anchors.fill: parent
-
-        StyledText {
-            id: timeSection
-            text: Time.format(`${timeFormat} • ${dateFormat}`)
-        }
+    StyledText {
+        id: clock
+        text: Time.format(`${timeFormat}`)
     }
 }
+
+// BarWidget {
+//     id: root
+//     property string timeFormat: Config.time.format
+//     property string dateFormat: Config.time.dateFormat
+//
+//     padding: Appearance.padding.huge
+//     // implicitWidth: content.implicitWidth
+//     // implicitHeight: content.implicitHeight
+//
+//     RowLayout {
+//         id: content
+//         // anchors.fill: parent
+//
+//         StyledText {
+//             id: timeSection
+//             text: Time.format(`${timeFormat} • ${dateFormat}`)
+//         }
+//     }
+// }
