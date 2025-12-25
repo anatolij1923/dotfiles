@@ -17,7 +17,7 @@ import Quickshell.Bluetooth
 
 Item {
     id: root
-    property int padding: 24
+    property int padding: 16
 
     property real alpha: Config.appearance.transparency.alpha
     property bool transparent: Config.appearance.transparency.enabled
