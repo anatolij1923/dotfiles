@@ -8,19 +8,27 @@ import qs.config
 Rectangle {
     id: root
 
-    // --- Настройки из Figma ---
-    readonly property int itemSize: 36
-    readonly property int activeSize: 32
-    readonly property int spacing: 4
+    readonly property int internalPadding: 4
 
-    implicitHeight: root.itemSize + 8
-    implicitWidth: (HyprlandData.fullWorkspaces.count * (root.itemSize + root.spacing)) + root.spacing
+    height: (parent && parent.height) ? parent.height - 8 : 36
 
-    radius: height / 2
+    readonly property int itemSize: root.height - (root.internalPadding * 2)
+
+    readonly property int activeSize: itemSize - 4
+
+    readonly property int spacing: Appearance.padding.small
+
+    implicitWidth: (HyprlandData.fullWorkspaces.count * (root.itemSize + root.spacing)) - root.spacing + (root.internalPadding * 4)
+
+    implicitHeight: root.height
+
+    radius: Appearance.rounding.full
     color: Colors.palette.m3surfaceContainer
 
     property int currentIndex: 0
     function updateIndex() {
+        if (!HyprlandData.fullWorkspaces)
+            return;
         for (let i = 0; i < HyprlandData.fullWorkspaces.count; i++) {
             if (HyprlandData.fullWorkspaces.get(i).id === HyprlandData.activeWsId) {
                 currentIndex = i;
@@ -30,7 +38,7 @@ Rectangle {
     }
 
     function isOccupied(index) {
-        if (index < 0 || index >= HyprlandData.fullWorkspaces.count)
+        if (!HyprlandData.fullWorkspaces || index < 0 || index >= HyprlandData.fullWorkspaces.count)
             return false;
         return HyprlandData.fullWorkspaces.get(index).occupied;
     }
@@ -43,7 +51,6 @@ Rectangle {
     }
     Component.onCompleted: updateIndex()
 
-    // 1. СЛОЙ ПОДЛОЖЕК
     Row {
         id: backgroundRow
         anchors.centerIn: parent
@@ -56,36 +63,27 @@ Rectangle {
                 width: root.itemSize
                 height: root.itemSize
 
-                // Мостик (рисуем его ПЕРВЫМ, чтобы он был под кругом текущего элемента)
                 Rectangle {
                     id: bridge
-                    // Ширина мостика = размер одного элемента + отступ между ними
-                    // Это позволяет ему дотянуться от центра текущего до центра следующего
                     width: root.itemSize + root.spacing
                     height: parent.height
-                    x: parent.width / 2 // Начинаем из центра текущего круга
-
+                    x: parent.width / 2
                     color: Colors.palette.m3secondaryContainer
-
-                    // Мостик виден, только если ТЕКУЩИЙ и СЛЕДУЮЩИЙ заняты
                     visible: root.isOccupied(index) && root.isOccupied(index + 1)
-
-                    // Важно: отключаем сглаживание, чтобы не было "грязных" стыков
                     antialiasing: false
                     z: 0
                 }
 
-                // Основной круг
                 Rectangle {
                     anchors.fill: parent
-                    radius: width / 2
+                    radius: Appearance.rounding.full
                     color: root.isOccupied(index) ? Colors.palette.m3secondaryContainer : "transparent"
                     antialiasing: true
-                    z: 1 // Поверх мостика своего элемента
+                    z: 1
 
                     Behavior on color {
                         ColorAnimation {
-                            duration: 200
+                            duration: Appearance.animDuration.expressiveEffects
                         }
                     }
                 }
@@ -93,29 +91,27 @@ Rectangle {
         }
     }
 
-    // 2. АКТИВНЫЙ ИНДИКАТОР (Flying Pill)
     Rectangle {
         id: activeIndicator
         width: root.activeSize
         height: root.activeSize
-        radius: width / 2
+        radius: Appearance.rounding.full
         color: Colors.palette.m3primary
         z: 2
-        antialiasing: true
 
         x: ((root.width - backgroundRow.width) / 2) + (root.currentIndex * (root.itemSize + root.spacing)) + (root.itemSize - root.activeSize) / 2
 
         anchors.verticalCenter: parent.verticalCenter
 
         Behavior on x {
-            Anim {
+            NumberAnimation {
                 duration: Appearance.animDuration.expressiveFastSpatial
+                easing.type: Easing.BezierSpline
                 easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
             }
         }
     }
 
-    // 3. СЛОЙ ТЕКСТА
     Row {
         anchors.centerIn: parent
         spacing: root.spacing
@@ -131,11 +127,12 @@ Rectangle {
                     anchors.centerIn: parent
                     text: model.id
                     font.weight: (root.currentIndex === index) ? Font.Bold : Font.Normal
+
                     color: (root.currentIndex === index) ? Colors.palette.m3onPrimary : Colors.palette.m3onSurface
 
                     Behavior on color {
                         ColorAnimation {
-                            duration: 200
+                            duration: Appearance.animDuration.expressiveEffects
                         }
                     }
                 }
