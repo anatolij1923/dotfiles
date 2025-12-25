@@ -8,22 +8,24 @@ import qs.config
 Rectangle {
     id: root
 
+    readonly property bool highlightEnabled: Config.bar?.workspaces?.highlightOccupied ?? true
     readonly property int internalPadding: 4
-
     height: (parent && parent.height) ? parent.height - 8 : 36
 
     readonly property int itemSize: root.height - (root.internalPadding * 2)
-
     readonly property int activeSize: itemSize - 4
-
     readonly property int spacing: Appearance.padding.small
 
-    implicitWidth: (HyprlandData.fullWorkspaces.count * (root.itemSize + root.spacing)) - root.spacing + (root.internalPadding * 4)
+    readonly property int totalRowWidth: (HyprlandData.fullWorkspaces.count * (root.itemSize + root.spacing)) - root.spacing
 
+    implicitWidth: root.totalRowWidth + (root.internalPadding * 4)
     implicitHeight: root.height
 
+    property real alpha: Config.appearance.transparency.alpha
+    property bool transparent: Config.appearance.transparency.enabled
+
     radius: Appearance.rounding.full
-    color: Colors.palette.m3surfaceContainer
+    color: transparent ? Qt.alpha(Colors.palette.m3surfaceContainerLow, alpha) : Colors.palette.m3surfaceContainerLow
 
     property int currentIndex: 0
     function updateIndex() {
@@ -51,35 +53,41 @@ Rectangle {
     }
     Component.onCompleted: updateIndex()
 
-    Row {
-        id: backgroundRow
+    Loader {
+        id: occupiedHighlightLoader
         anchors.centerIn: parent
-        spacing: root.spacing
+        active: root.highlightEnabled
         z: 1
 
-        Repeater {
-            model: HyprlandData.fullWorkspaces
-            delegate: Item {
-                width: root.itemSize
-                height: root.itemSize
+        sourceComponent: Component {
+            Row {
+                spacing: root.spacing
 
-                Rectangle {
-                    id: bridge
-                    width: root.itemSize + root.spacing
-                    height: parent.height
-                    x: parent.width / 2
-                    color: Colors.palette.m3secondaryContainer
-                    visible: root.isOccupied(index) && root.isOccupied(index + 1)
-                    antialiasing: false
-                    z: 0
-                }
+                Repeater {
+                    model: HyprlandData.fullWorkspaces
+                    delegate: Item {
+                        width: root.itemSize
+                        height: root.itemSize
 
-                Rectangle {
-                    anchors.fill: parent
-                    radius: Appearance.rounding.full
-                    color: root.isOccupied(index) ? Colors.palette.m3secondaryContainer : "transparent"
-                    antialiasing: true
-                    z: 1
+                        Rectangle {
+                            id: bridge
+                            width: root.itemSize + root.spacing
+                            height: parent.height
+                            x: parent.width / 2
+                            color: Colors.palette.m3secondaryContainer
+                            visible: root.isOccupied(index) && root.isOccupied(index + 1)
+                            antialiasing: false
+                            z: 0
+                        }
+
+                        Rectangle {
+                            anchors.fill: parent
+                            radius: Appearance.rounding.full
+                            color: root.isOccupied(index) ? Colors.palette.m3secondaryContainer : "transparent"
+                            antialiasing: true
+                            z: 1
+                        }
+                    }
                 }
             }
         }
@@ -92,8 +100,9 @@ Rectangle {
         radius: Appearance.rounding.full
         color: Colors.palette.m3primary
         z: 2
+        antialiasing: true
 
-        x: ((root.width - backgroundRow.width) / 2) + (root.currentIndex * (root.itemSize + root.spacing)) + (root.itemSize - root.activeSize) / 2
+        x: ((root.width - root.totalRowWidth) / 2) + (root.currentIndex * (root.itemSize + root.spacing)) + (root.itemSize - root.activeSize) / 2
 
         anchors.verticalCenter: parent.verticalCenter
 
@@ -120,13 +129,10 @@ Rectangle {
                     anchors.centerIn: parent
                     text: model.id
                     font.weight: (root.currentIndex === index) ? Font.Bold : Font.Normal
-
-                    color: (root.currentIndex === index) ? Colors.palette.m3onPrimary : Colors.palette.m3onSurface
+                    color: (root.currentIndex === index) ? Colors.palette.m3onPrimary : (model.occupied ? Colors.palette.m3onSurface : Colors.palette.m3outline)
 
                     Behavior on color {
-                        ColorAnimation {
-                            duration: Appearance.animDuration.expressiveEffects
-                        }
+                        CAnim {}
                     }
                 }
 

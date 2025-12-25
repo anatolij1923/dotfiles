@@ -16,5 +16,6 @@ JsonObject {
 
     component Workspaces: JsonObject {
         property int shown: 5
+        property bool highlightOccupied: true
     }
 }
