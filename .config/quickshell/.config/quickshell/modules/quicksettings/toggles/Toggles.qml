@@ -74,6 +74,7 @@ Rectangle {
 
         RowLayout {
             PowerprofilesToggle {}
+            TrasparencyToggle {}
             ScreenRecordToggle {}
         }
     }
