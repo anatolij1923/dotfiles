@@ -15,8 +15,45 @@ Rectangle {
 
     color: transparent ? Qt.alpha(Colors.palette.m3surface, alpha) : Colors.palette.m3surface
 
-    Workspaces {
-        anchors.centerIn: parent
+    RowLayout {
+        anchors {
+            left: parent.left
+            leftMargin: 32
+            top: parent.top
+            bottom: parent.bottom
+        }
+
+        spacing: Appearance.padding.normal
+
+        LogoWidget {}
+
+        Workspaces {}
+    }
+
+    UsageInfo {
+        anchors {
+            right: clock.left
+            rightMargin: Appearance.padding.small
+            verticalCenter: parent.verticalCenter
+        }
+    }
+
+    ClockWidget {
+        id: clock
+        anchors {
+            centerIn: parent
+            top: parent.top
+            bottom: parent.bottom
+        }
+    }
+
+    WeatherWidget {
+        id: weather
+        anchors {
+            left: clock.right
+            leftMargin: Appearance.padding.small
+            verticalCenter: parent.verticalCenter
+        }
     }
 
     RowLayout {
@@ -32,25 +69,8 @@ Rectangle {
         spacing: Appearance.padding.large
 
         Tray {}
+        RecordWidget {}
         QsButton {}
         BatteryWidget {}
-        ClockWidget {}
     }
-
-    // QsButton {
-    //     id: qsButton
-    //     anchors {
-    //         verticalCenter: parent.verticalCenter
-    //         right: clock.left
-    //     }
-    // }
-    //
-    // ClockWidget {
-    //     id: clock
-    //     anchors {
-    //         right: parent.right
-    //         verticalCenter: parent.verticalCenter
-    //         rightMargin: 32
-    //     }
-    // }
 }
