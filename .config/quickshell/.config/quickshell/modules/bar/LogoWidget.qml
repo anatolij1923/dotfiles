@@ -13,10 +13,13 @@ Rectangle {
     implicitWidth: implicitHeight
     implicitHeight: parent.height - 8
 
-    color: GlobalStates.launcherOpened ? Qt.alpha(Colors.palette.m3primary, 0.3) : "transparent"
-    Behavior on color {
-        CAnim {}
-    }
+    property color iconColor: GlobalStates.launcherOpened ? Colors.palette.m3primary : Colors.palette.m3secondary
+
+    color: "transparent"
+    // color: GlobalStates.launcherOpened ? Qt.alpha(Colors.palette.m3primary, 0.3) : "transparent"
+    // Behavior on color {
+    //     CAnim {}
+    // }
 
     radius: Appearance.rounding.normal
 
@@ -43,6 +46,9 @@ Rectangle {
     ColorOverlay {
         anchors.fill: icon
         source: icon
-        color: Colors.palette.m3secondary
+        color: root.iconColor
+        Behavior on color {
+            CAnim {}
+        }
     }
 }
