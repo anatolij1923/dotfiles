@@ -26,6 +26,9 @@ Scope {
         sourceComponent: PanelWindow {
             id: launcherRoot
             property real maxHeight: screen.height * 0.8
+
+            WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
+
             visible: GlobalStates.launcherOpened
 
             onVisibleChanged: {
