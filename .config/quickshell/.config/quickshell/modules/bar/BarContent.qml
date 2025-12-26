@@ -26,7 +26,6 @@ Rectangle {
         spacing: Appearance.padding.normal
 
         LogoWidget {}
-
         Workspaces {}
     }
 

@@ -15,7 +15,6 @@ Singleton {
     readonly property var colors: JSON.parse(colorsFile.text()).colors[isDarkMode ? "dark" : "light"]
 
     property string wallpaperPath: Config.background.wallpaperPath
-    property string compressedWallpaperPath: `${Paths.cache}/compressed_wallpaper`
 
     FileView {
         id: colorsFile
@@ -47,24 +46,18 @@ Singleton {
         matugenProcess.running = true;
     }
 
-    function compressImage() {
-        console.log("[COLORS] Starting wallpaper compression (128x128).");
-        convertProcess.running = true;
-    }
-
     Connections {
         target: Config.background
 
         function onWallpaperPathChanged() {
-            // generateColors(); // Removed comment and unnecessary call
-            compressImage();
+            generateColors(); // Removed comment and unnecessary call
         // Removed redundant log "fsd"
         }
     }
 
     Process {
         id: matugenProcess
-        command: ["matugen", "image", `${root.compressedWallpaperPath}`]
+        command: ["matugen", "image", `${root.wallpaperPath}`]
         onStarted: {
             console.log(`[COLORS] Matugen command started: ${matugenProcess.command.toString().replace(/,/g, " ")}`);
         }
@@ -74,24 +67,6 @@ Singleton {
             } else {
                 console.error(`[COLORS] Matugen failed! Exit Code: ${exitCode}. Status: ${exitStatus}.`);
                 console.error("[COLORS] Matugen Output:", standardOutput);
-            }
-        }
-    }
-
-    Process {
-        id: convertProcess
-        command: ["convert", root.wallpaperPath, "-resize", "128x128", root.compressedWallpaperPath]
-        onStarted: {
-            console.log(`[COLORS] ImageMagick 'convert' started for: ${root.wallpaperPath}`);
-        }
-
-        onExited: {
-            if (exitCode === 0) {
-                console.log(`[COLORS] Wallpaper compressed successfully. Output path: ${root.compressedWallpaperPath}`);
-                generateColors();
-            } else {
-                console.error(`[COLORS] Failed to compress wallpaper! Exit Code: ${exitCode}. Status: ${exitStatus}.`);
-                console.error("[COLORS] ImageMagick Output:", standardOutput);
             }
         }
     }
