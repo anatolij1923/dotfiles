@@ -18,7 +18,6 @@ Singleton {
     readonly property HyprlandWorkspace focusedWorkspace: Hyprland.focusedWorkspace
     readonly property int activeWsId: focusedWorkspace ? focusedWorkspace.id : 1
 
-    // Models for bar and overview
     readonly property ListModel fullWorkspaces: ListModel {}
     readonly property ListModel overviewWorkspaces: ListModel {}
 
@@ -30,7 +29,6 @@ Singleton {
         }
     }
 
-    // Helper to get workspace object safely
     function getWorkspace(id: int): HyprlandWorkspace {
         try {
             if (!root.workspaces)
@@ -41,28 +39,25 @@ Singleton {
         }
     }
 
-    // Helper to dispatch hyprland commands
     function dispatch(request: string): void {
         Hyprland.dispatch(request);
     }
 
-    // Main logic to refresh bar workspaces
     function refreshWorkspaces() {
         try {
             const real = root.workspaces ? root.workspaces.values : [];
             const sorted = real.slice().sort((a, b) => a.id - b.id);
 
-            let maxId = 0;
-            if (sorted.length > 0)
-                maxId = sorted[sorted.length - 1].id;
+            const pageSize = Config.bar?.workspaces?.shown || 8;
+            const active = Math.max(root.activeWsId, 1);
+            const pageIndex = Math.floor((active - 1) / pageSize);
+            const startId = pageIndex * pageSize + 1;
+            const endId = startId + pageSize;
 
-            const showCount = Math.max(Config.bar.workspaces.shown || 5, maxId);
             const data = [];
 
-            for (let i = 1; i <= showCount; i++) {
+            for (let i = startId; i < endId; i++) {
                 const ws = sorted.find(w => w.id === i);
-
-                // Check occupancy based on window count
                 const hasWindows = ws ? (ws.toplevels.values.length > 0) : false;
 
                 data.push({
@@ -75,19 +70,21 @@ Singleton {
                 });
             }
 
-            // Smart update to prevent flickering
+            // Умное обновление Бара
             if (fullWorkspaces.count !== data.length) {
                 fullWorkspaces.clear();
                 data.forEach(item => fullWorkspaces.append(item));
             } else {
                 for (let i = 0; i < data.length; i++) {
                     let cur = fullWorkspaces.get(i);
-                    if (cur.focused !== data[i].focused || cur.occupied !== data[i].occupied || cur.exists !== data[i].exists) {
+                    // ОБЯЗАТЕЛЬНО проверяем cur.id, чтобы при смене страницы цифры менялись!
+                    if (cur.id !== data[i].id || cur.focused !== data[i].focused || cur.occupied !== data[i].occupied || cur.exists !== data[i].exists) {
                         fullWorkspaces.set(i, data[i]);
                     }
                 }
             }
 
+            // Оставляем овервью в покое, вызываем твою старую функцию
             root.refreshOverviewWorkspaces(sorted);
             root.workspaceUpdated();
         } catch (e) {
@@ -95,7 +92,7 @@ Singleton {
         }
     }
 
-    // Logic to refresh overview pagination
+    // --- ТВОЙ ОРИГИНАЛЬНЫЙ OVERVIEW (не трогаем) ---
     function refreshOverviewWorkspaces(sortedList) {
         try {
             const sorted = sortedList || (root.workspaces ? root.workspaces.values.slice().sort((a, b) => a.id - b.id) : []);
@@ -134,43 +131,34 @@ Singleton {
         }
     }
 
-    // Main Hyprland event listeners
+    // Listeners
     Connections {
         target: Hyprland
-
         function onFocusedWorkspaceChanged() {
             root.refreshWorkspaces();
         }
-
         function onRawEvent(event: HyprlandEvent): void {
             const n = event.name;
             if (!n)
                 return;
-
             root.rawEvent(event);
-
             const triggers = ["workspace", "createworkspace", "destroyworkspace", "moveworkspace", "focusedmon", "openwindow", "closewindow", "movewindow", "activewindow", "fullscreen", "changefloatingmode", "pin"];
-
             if (triggers.some(t => n.includes(t))) {
-                // Force refresh native objects if needed
                 if (n.includes("window"))
                     Hyprland.refreshToplevels();
                 if (n.includes("workspace"))
                     Hyprland.refreshWorkspaces();
-
                 root.refreshWorkspaces();
             }
         }
     }
 
-    // Direct listeners for collection changes
     Connections {
         target: Hyprland.workspaces
         function onCountChanged() {
             root.refreshWorkspaces();
         }
     }
-
     Connections {
         target: Hyprland.toplevels
         function onCountChanged() {
@@ -178,7 +166,6 @@ Singleton {
         }
     }
 
-    // hack: ts fixing windows not tracked on shell startup
     Timer {
         interval: 100
         running: true

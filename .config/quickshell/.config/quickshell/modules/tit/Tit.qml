@@ -1,20 +1,19 @@
 // https://www.youtube.com/watch?v=sqcHd4tI99Y&t=499s
 import QtQuick
 import Quickshell
+import Quickshell.Wayland
 import Quickshell.Io
 import qs
+import qs.config
 import qs.services
 
 Scope {
 
     PanelWindow {
         id: root
-        // anchors {
-        //     right: true
-        //     top: true
-        //     bottom: true
-        //     left: true
-        // }
+        property real alpha: Config.appearance.transparency.alpha
+        property bool transparent: Config.appearance.transparency.enabled
+        WlrLayershell.namespace: "quickshell:tit"
         exclusiveZone: 0
         color: "transparent"
 
@@ -43,7 +42,8 @@ Scope {
                 fill: parent
                 margins: 10
             }
-            color: Colors.palette.m3surfaceContainer
+            color: root.transparent ? Qt.alpha(Colors.palette.m3surface, root.alpha) : Colors.palette.m3surface
+
             radius: 20
             border.width: 1
             border.color: Colors.palette.m3surfaceContainerHighest
@@ -56,7 +56,7 @@ Scope {
                 }
                 renderType: Text.NativeRendering
                 font.pixelSize: 16
-                text: "мощни сискэ"
+                text: "( * ) ( * )"
                 color: Colors.palette.m3onSurface
             }
 
