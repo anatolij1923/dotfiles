@@ -6,6 +6,7 @@ import qs.modules.common
 import qs.services
 import Qt5Compat.GraphicalEffects
 
+// TODO: Add support for others distros
 Rectangle {
     id: root
 
