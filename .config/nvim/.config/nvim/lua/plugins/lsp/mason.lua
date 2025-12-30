@@ -38,6 +38,7 @@ return {
 				"pyright",
 				"nil_ls",
 				"marksman",
+				"hyprls",
 			},
 		})
 

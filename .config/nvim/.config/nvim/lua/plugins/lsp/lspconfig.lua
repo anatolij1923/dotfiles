@@ -185,6 +185,19 @@ return {
 			filetypes = { "markdown" },
 		}
 
+		vim.lsp.config["hyprls"] = {
+			capabilities = capabilities,
+			cmd = { "hyprls" },
+			filetypes = { "hyprlang" }, -- *.hl и hypr*.conf уже мапятся плагином
+			root_markers = { ".git", ".hyprlsignore" },
+			settings = {
+				hyprls = {
+					preferIgnoreFile = true, -- или false
+					ignore = { "hyprlock.conf", "hypridle.conf" },
+				},
+			},
+		}
+
 		-- enable lsp servers
 		vim.lsp.enable({
 			"lua_ls",
@@ -199,6 +212,7 @@ return {
 			"nil_ls",
 			"bashls",
 			"marksman",
+			"hyprls",
 		})
 	end,
 }
