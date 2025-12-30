@@ -5,7 +5,7 @@ return {
 	config = function()
 		local lint = require("lint")
 		local lint_autogroupt = vim.api.nvim_create_augroup("lint", { clear = true })
-        local eslint = lint.linters.eslint_d
+		local eslint = lint.linters.eslint_d
 
 		lint.linters_by_ft = {
 			javascript = { "eslint_d" },

@@ -14,6 +14,7 @@
 .config/qt6ct/.config/qt6ct/colors/matugen.conf
 .config/ghostty/.config/ghostty/colors
 .config/yazi/.config/yazi/theme.toml
+.config/zellij/.config/zellij/themes/matugen.kdl
 
 # fish
 .config/fish/.config/fish/completions/fisher.fish
