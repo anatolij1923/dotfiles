@@ -17,12 +17,12 @@ config.colors = colors
 config.enable_scroll_bar = false
 
 config.window_padding = {
-	top = 0,
-	bottom = 0,
-	left = 0,
-	right = 0,
+	top = 5,
+	bottom = 5,
+	left = 5,
+	right = 5,
 }
 
-config.window_background_opacity = 0.8
+config.window_background_opacity = 1
 
 return config
