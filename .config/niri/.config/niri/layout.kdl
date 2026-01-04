@@ -1,0 +1,56 @@
+layout {
+    gaps 12;
+
+    // When to center a column when changing focus, options are:
+    // - "never", default behavior, focusing an off-screen column will keep at the left
+    //   or right edge of the screen.
+    // - "always", the focused column will always be centered.
+    // - "on-overflow", focusing a column will center it if it doesn't fit
+    //   together with the previously focused column.
+    center-focused-column "always"
+
+    default-column-width { proportion 0.5; }
+
+    preset-column-widths {
+        proportion 0.33
+        proportion 0.5
+        proportion 0.66
+
+    }
+
+    preset-window-heights {
+        proportion 0.33
+        proportion 0.5
+        proportion 0.66
+    }
+
+    focus-ring {
+        width 2
+    }
+
+    border {
+        off
+        width 4
+    }
+
+    shadow {
+        on
+
+        // Softness controls the shadow blur radius.
+        softness 30
+
+        // Spread expands the shadow.
+        spread 5
+
+        // Offset moves the shadow relative to the window.
+        offset x=0 y=5
+
+        // You can also change the shadow color and opacity.
+        color "#0007"
+    }
+
+    struts {
+        // right 16
+        // left 16
+    }
+}

@@ -1,0 +1,27 @@
+input {
+    keyboard {
+        xkb {
+            layout "us,ru"
+            options "grp:alt_shift_toggle,compose:ralt,ctrl:nocaps"
+        }
+
+        numlock
+
+        repeat-delay 300
+        repeat-rate 40
+    }
+
+    touchpad {
+        tap
+        natural-scroll
+        accel-profile "flat"
+        accel-speed 0.5
+        scroll-factor 0.3
+        // sensitivity 0.2
+    }
+
+    mouse {
+        accel-profile "flat"
+    }
+    focus-follows-mouse max-scroll-amount="0%"
+}
