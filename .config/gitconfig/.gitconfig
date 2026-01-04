@@ -1,0 +1,22 @@
+[user]
+	name = anatolij1923
+	email = kostyahaustow@gmail.com
+
+[alias]
+    log = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    light = false
+    side-by-side = true
+    line-numbers = true
+    hyperlinks = true 
+
+[merge]
+    conflictstyle = zdiff3
