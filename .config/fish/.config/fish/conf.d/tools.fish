@@ -14,3 +14,6 @@ set -gx FZF_ALT_C_OPTS "--preview 'eza -al --color=always {} | head -100'"
 set -gx FZF_ALT_C_COMMAND "fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 
 fzf --fish | source
+
+# autism
+atuin init fish | source
