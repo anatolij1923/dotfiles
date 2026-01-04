@@ -10,6 +10,7 @@ binds {
     // Apps
     Mod+E { spawn "nautilus"; }
     Mod+T { spawn "Telegram"; }
+    Mod+P { spawn "pavucontrol"; }
 
     // Actions
     Mod+Return hotkey-overlay-title="Open a Terminal: wezterm" { spawn "wezterm"; }
