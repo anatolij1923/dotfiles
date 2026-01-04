@@ -9,27 +9,23 @@ end
 set -gx EDITOR nvim
 
 # For quickshell
-set -Ux QML_IMPORT_PATH /usr/lib/qt6/qml
+set -gx QML_IMPORT_PATH /usr/lib/qt6/qml
 
 # Fzf tab
 set -gx FZF_COMPLETE 2
 
-set -U FZF_DISABLE_KEYBINDINGS 0
+set -g FZF_DISABLE_KEYBINDINGS 0
 
 # Starship config path
-set -Ux STARSHIP_CONFIG ~/.config/starship/starship.toml
+set -gx STARSHIP_CONFIG ~/.config/starship/starship.toml
 
 # colors
 set -g fish_color_command green
 
 # xdg dirs
-set -Ux XDG_PICTURES_DIR "$HOME/Изображения"
-set -Ux XDG_VIDEOS_DIR "$HOME/Видео"
+set -gx XDG_PICTURES_DIR "$HOME/Изображения"
+set -gx XDG_VIDEOS_DIR "$HOME/Видео"
 
-set -Ux LIBVIRT_DEFAULT_URI "qemu:///system"
+set -gx LIBVIRT_DEFAULT_URI "qemu:///system"
 
-set -Ux ESP_PATH /boot/EFI/limine/
-
-set -Ux fish_user_paths $HOME/.npm-global/bin $fish_user_paths
-
-set -Ux fish_user_paths $HOME/.local/bin/winapps $fish_user_paths
+set -gx ESP_PATH /boot/EFI/limine/
