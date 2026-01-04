@@ -1,9 +1,10 @@
 [user]
-	name = anatolij1923
-	email = kostyahaustow@gmail.com
+    name = anatolij1923
+    email = kostyahaustow@gmail.com
 
 [alias]
-    log = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    st = status
 
 [core]
     pager = delta
@@ -13,10 +14,34 @@
 
 [delta]
     navigate = true
-    light = false
+    hyperlinks = true 
+    syntax-theme = Monokai Extended
+
+    file-decoration-style = none
+    hunk-header-decoration-style = none
+    hunk-header-style = syntax bold italic
+
+    minus-style = syntax "#3f221d"
+    plus-style = syntax "#253921"
+    minus-emph-style = bold red "#60312d"
+    plus-emph-style = bold green "#3d5236"
+
+    features = fancy
+
+[delta "fancy"]
     side-by-side = true
     line-numbers = true
-    hyperlinks = true 
+    line-numbers-left-format = "{nm:^4} "
+    line-numbers-right-format = "{np:^4} "
+
+[diff]
+    tool = difftastic
+
+[difftool]
+    prompt = false
+
+[difftool "difftastic"]
+    cmd = difft --color always --background dark --display side-by-side "$LOCAL" "$REMOTE"
 
 [merge]
     conflictstyle = zdiff3
