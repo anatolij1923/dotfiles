@@ -28,6 +28,11 @@ window-rule {
 }
 
 window-rule {
+    match app-id="zen"
+    open-maximized true
+}
+
+window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
     match app-id="org.telegram.desktop"
@@ -38,3 +43,8 @@ window-rule {
     // block-out-from "screencast"
 }
 
+
+layer-rule {
+    match namespace="chroma:background"
+    place-within-backdrop true
+}

@@ -1,6 +1,6 @@
 include "keybinds.kdl"
 include "layout.kdl"
-include "windowrules.kdl"
+include "rules.kdl"
 include "outputs.kdl"
 include "environment.kdl"
 include "input.kdl"

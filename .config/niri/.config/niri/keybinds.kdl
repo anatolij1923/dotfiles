@@ -3,6 +3,7 @@ binds {
 
     // Quickshell
     Mod+D { spawn-sh "qs -c $CHROMA_DIR ipc call launcher toggle"; }
+    Mod+V { spawn-sh "qs -c $CHROMA_DIR ipc call launcher openInClipboardMode"; }
     Mod+Shift+L { spawn-sh "qs -c $CHROMA_DIR ipc call lock activate"; }
     Mod+S { spawn-sh "qs -c $CHROMA_DIR ipc call quicksettings toggle"; }
 
