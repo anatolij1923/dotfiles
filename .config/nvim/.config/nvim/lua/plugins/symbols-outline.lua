@@ -11,8 +11,7 @@ return {
 			auto_preview = false,
 			position = "right", -- можно left
 			width = 25,
-            symbols = {
-            }
+			symbols = {},
 		})
 	end,
 }

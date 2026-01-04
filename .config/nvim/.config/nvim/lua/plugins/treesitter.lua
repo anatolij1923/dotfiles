@@ -42,7 +42,7 @@ return {
 					"vimdoc",
 					"c",
 					"java",
-                    "nix",
+					"nix",
 					"rust",
 				},
 
@@ -50,13 +50,12 @@ return {
 					enabled = true,
 					keymaps = {
 						init_selection = "<C-space>",
-                        node_incremental = "<C-space>",
-                        node_decremental = "<BS>",
+						node_incremental = "<C-space>",
+						node_decremental = "<BS>",
 						-- node_selection = "<C-space>",
 						scope_incremental = false,
 					},
 				},
-
 
 				additional_vim_regex_highlighting = false,
 			})
