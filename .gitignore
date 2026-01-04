@@ -15,6 +15,7 @@
 .config/ghostty/.config/ghostty/colors
 .config/yazi/.config/yazi/theme.toml
 .config/zellij/.config/zellij/themes/matugen.kdl
+.config/niri/.config/niri/niri-colors.kdl
 
 # fish
 .config/fish/.config/fish/completions/fisher.fish
