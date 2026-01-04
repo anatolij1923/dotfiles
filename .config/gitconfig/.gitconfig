@@ -16,7 +16,7 @@
     navigate = true
     hyperlinks = true 
     syntax-theme = Monokai Extended
-
+    
     file-decoration-style = none
     hunk-header-decoration-style = none
     hunk-header-style = syntax bold italic
@@ -34,14 +34,7 @@
     line-numbers-left-format = "{nm:^4} "
     line-numbers-right-format = "{np:^4} "
 
-[diff]
-    tool = difftastic
 
-[difftool]
-    prompt = false
-
-[difftool "difftastic"]
-    cmd = difft --color always --background dark --display side-by-side "$LOCAL" "$REMOTE"
 
 [merge]
     conflictstyle = zdiff3
