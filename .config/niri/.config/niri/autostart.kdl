@@ -9,4 +9,7 @@ spawn-at-startup "easyeffects" "--gapplication-service"
 
 spawn-sh-at-startup "qs -c $CHROMA_DIR -d"
     
+spawn-at-startup "hypridle"
+
+spawn-at-startup "stasis"
 

@@ -7,7 +7,7 @@ layout {
     // - "always", the focused column will always be centered.
     // - "on-overflow", focusing a column will center it if it doesn't fit
     //   together with the previously focused column.
-    center-focused-column "always"
+    center-focused-column "on-overflow"
 
     default-column-width { proportion 0.5; }
 
@@ -15,7 +15,6 @@ layout {
         proportion 0.33
         proportion 0.5
         proportion 0.66
-
     }
 
     preset-window-heights {
