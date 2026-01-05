@@ -1,3 +1,0 @@
-return {
-    "tiagovla/tokyodark.nvim"
-}
