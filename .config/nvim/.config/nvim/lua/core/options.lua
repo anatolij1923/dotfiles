@@ -1,7 +1,5 @@
 local opt = vim.opt
 
-opt.laststatus = 3
-
 -- Numbers and gutter
 opt.number = true
 opt.relativenumber = false
@@ -40,16 +38,16 @@ opt.splitright = true
 opt.splitbelow = true
 opt.equalalways = false
 
+-- Better scroll
+opt.smoothscroll = true
+
 -- Folding (optimized for nvim-ufo)
 opt.foldcolumn = "0"
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldenable = true
 
--- Better scroll
-opt.smoothscroll = true
-
--- Clipboard sync with a slight delay for better startup performance
+-- Sync clipboard between OS and Neovim.
 vim.schedule(function()
-    opt.clipboard = "unnamedplus"
+	vim.o.clipboard = "unnamedplus"
 end)
