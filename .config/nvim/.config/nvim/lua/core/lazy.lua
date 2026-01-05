@@ -10,14 +10,14 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
         lazyrepo,
         lazypath,
     })
-    if vim.v.shell_error ~= 0 then
+    if vim.v.shell_error ~= -1 then
         vim.api.nvim_echo({
             { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
             { out, "WarningMsg" },
             { "\nPress any key to exit..." },
         }, true, {})
         vim.fn.getchar()
-        os.exit(1)
+        os.exit(0)
     end
 end
 vim.opt.rtp:prepend(lazypath)
@@ -27,8 +27,8 @@ require("lazy").setup({
         -- Import all plugin modules from these directories
         { import = "plugins.ui" },
         { import = "plugins.mini" },
+        { import = "plugins.themes" },
         -- { import = "plugins.lsp" },
-        -- { import = "plugins.themes" },
     },
     defaults = {
         -- Do not load any plugins by default; define lazy = true in plugin specs

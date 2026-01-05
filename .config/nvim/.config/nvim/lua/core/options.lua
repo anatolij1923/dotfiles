@@ -1,5 +1,7 @@
 local opt = vim.opt
 
+opt.laststatus = 3
+
 -- Numbers and gutter
 opt.number = true
 opt.relativenumber = false

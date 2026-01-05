@@ -1,4 +1,6 @@
 require("core.options")
 require("core.keymaps")
 require("core.autocmds")
-require("lazy_setup")
+require("core.lazy")
+
+vim.cmd("colorscheme kanagawa-dragon")
