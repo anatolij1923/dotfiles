@@ -25,7 +25,7 @@ return {
 
 			indent = { enabled = true },
 
-			notifier = { enabled = true },
+			-- notifier = { enabled = true },
 
 			input = { enabled = true },
 
@@ -37,7 +37,7 @@ return {
 		keys = {
 			-- Lazygit
 			{
-				"<leader>lg",
+				"<leader>gg",
 				function()
 					Snacks.lazygit()
 				end,
