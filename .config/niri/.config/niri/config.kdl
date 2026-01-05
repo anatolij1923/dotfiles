@@ -9,6 +9,17 @@ include "niri-colors.kdl"
 
 overview {
     zoom 0.4
+    workspace-shadow {
+        off
+    }
+}
+
+
+
+recent-windows {
+    highlight {
+        corner-radius 20
+    }
 }
 
 hotkey-overlay {

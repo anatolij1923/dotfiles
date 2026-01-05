@@ -13,6 +13,8 @@ window-rule {
     match app-id="com.network.manager"
     match app-id="blueman-manager"
     match title="chroma-settings"
+    match app-id="org.gnome.NautilusPreviewer"
+    match app-id="org.gnome.Loupe"
     open-floating true
     default-column-width { fixed 1200; }
     default-window-height { fixed 800; }
@@ -43,6 +45,10 @@ window-rule {
     // block-out-from "screencast"
 }
 
+window-rule {
+    match is-active=false
+    opacity 0.97
+}
 
 layer-rule {
     match namespace="chroma:background"
