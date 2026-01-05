@@ -21,7 +21,9 @@ return {
 		end)
 
 		-- mini.icons
-		require("mini.icons").setup()
+		local icons = require("mini.icons")
+		icons.setup()
+		icons.mock_nvim_web_devicons()
 
 		-- mini.pairs
 		require("mini.pairs").setup()

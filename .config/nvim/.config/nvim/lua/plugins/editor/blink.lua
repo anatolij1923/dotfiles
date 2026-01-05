@@ -1,7 +1,7 @@
 return {
 	"saghen/blink.cmp",
 	-- optional: provides snippets for the snippet source
-	dependencies = { "rafamadriz/friendly-snippets", "onsails/lspkind.nvim" },
+	dependencies = { "rafamadriz/friendly-snippets" },
 	event = "BufReadPre",
 
 	-- use a release tag to download pre-built binaries
@@ -42,9 +42,35 @@ return {
 			["<CR>"] = { "select_and_accept", "fallback" },
 		},
 		appearance = {
-			-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-			-- Adjusts spacing to ensure icons are aligned
 			nerd_font_variant = "mono",
+			-- Integrate mini.icons for a consistent look
+			kind_icons = {
+				Text = "󰉿 ",
+				Method = "󰆧 ",
+				Function = "󰊕 ",
+				Constructor = " ",
+				Field = "󰜢 ",
+				Variable = "󰀫 ",
+				Class = "󰠱 ",
+				Interface = " ",
+				Module = " ",
+				Property = "󰜢 ",
+				Unit = "󰑭 ",
+				Value = "󰎟 ",
+				Enum = " ",
+				Keyword = "󰌋 ",
+				Snippet = " ",
+				Color = "󰏘 ",
+				File = "󰈙 ",
+				Reference = "󰈇 ",
+				Folder = "󰉋 ",
+				EnumMember = " ",
+				Constant = "󰏿 ",
+				Struct = "󰙅 ",
+				Event = " ",
+				Operator = "󰆕 ",
+				TypeParameter = "󰅲 ",
+			},
 		},
 
 		-- (Default) Only show the documentation popup when manually triggered
