@@ -93,6 +93,20 @@ return {
 				end,
 				desc = "Terminal",
 			},
+			{
+				"<leader>fb",
+				function()
+					Snacks.picker.buffers()
+				end,
+				desc = "Buffers",
+			},
+			{
+				"<leader>fp",
+				function()
+					Snacks.picker.projects()
+				end,
+				desc = "Projects",
+			},
 		},
 	},
 }

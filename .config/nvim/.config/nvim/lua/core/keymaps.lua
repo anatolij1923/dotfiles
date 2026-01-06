@@ -38,7 +38,9 @@ map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 -- Buffer management (placeholders for bufferline/snacks)
 map("n", "<Tab>", "<cmd>bn<CR>", { desc = "Next buffer" })
 map("n", "<S-Tab>", "<cmd>bp<CR>", { desc = "Previous buffer" })
-map("n", "<leader>q", "<cmd>bdelete<CR>", { desc = "Close current buffer" })
+map("n", "<leader>q", function()
+	Snacks.bufdelete()
+end, { desc = "Close current buffer" })
 
 -- Terminal
 map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })

@@ -189,11 +189,11 @@ return {
 		vim.lsp.config["hyprls"] = {
 			capabilities = capabilities,
 			cmd = { "hyprls" },
-			filetypes = { "hyprlang" }, -- *.hl и hypr*.conf уже мапятся плагином
+			filetypes = { "hyprlang" },
 			root_markers = { ".git", ".hyprlsignore" },
 			settings = {
 				hyprls = {
-					preferIgnoreFile = true, -- или false
+					preferIgnoreFile = true,
 					ignore = { "hyprlock.conf", "hypridle.conf" },
 				},
 			},
