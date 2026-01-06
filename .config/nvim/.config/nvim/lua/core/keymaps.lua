@@ -1,62 +1,46 @@
 local map = vim.keymap.set
-
 local opts = { noremap = true, silent = true }
 
--- Sync clipboard
-vim.api.nvim_set_keymap("v", "<C-c>", '"+y', opts)
-
-map("n", ";", ":")
-
-map("n", "<Space>", "", opts)
+-- Set leader keys
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- map("n", "<leader>ff", ":Telescope find_files<CR>", opts)
-map("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
+-- General
+map("n", ";", ":", { desc = "Enter command mode" })
+map("i", "jk", "<Esc>", { desc = "Exit insert mode" })
+map("n", "<C-c>", "<cmd>nohl<CR>", { desc = "Clear search highlight" })
+map("v", "<C-c>", '"+y', { desc = "Copy to system clipboard" })
 
--- Move lines
-map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected region down" })
-map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selected region up" })
+-- Better movement
+map("n", "n", "nzzzv", { desc = "Center search next" })
+map("n", "N", "Nzzzv", { desc = "Center search previous" })
 
--- Move lines left and right
-vim.keymap.set("v", ">", ">gv", opts)
-vim.keymap.set("v", "<", "<gv", opts)
+-- Visual mode line shifting
+map("v", "<", "<gv", { desc = "Indent left and keep selection" })
+map("v", ">", ">gv", { desc = "Indent right and keep selection" })
 
--- Center in search
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+-- Move lines in visual mode
+map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move block down" })
+map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move block up" })
 
--- Remove search highlight
-vim.keymap.set("n", "<C-c>", ":nohl<CR>")
+-- Window management
+map("n", "<leader>v", "<C-w>v", { desc = "Split vertically" })
+map("n", "<leader>h", "<C-w>s", { desc = "Split horizontally" })
+map("n", "<leader>e", "<C-w>=", { desc = "Equalize splits" })
+map("n", "<leader>x", "<cmd>close<CR>", { desc = "Close current split" })
 
--- split management
--- split window vertically
-vim.keymap.set("n", "<leader>v", "<C-w>v", { desc = "Split window vertically" })
--- split window horizontally
-vim.keymap.set("n", "<leader>h", "<C-w>s", { desc = "Split window horizontally" })
--- make split windows equal width & height
-vim.keymap.set("n", "<leader>e", "<C-w>=", { desc = "Make splits equal size" })
--- close current split window
-vim.keymap.set("n", "<leader>x", "<cmd>close<CR>", { desc = "Close current split" })
+-- Window navigation
+map("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
+map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
+map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
+map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 
--- Switch tabs
-vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", opts)
-vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", opts)
+-- Buffer management (placeholders for bufferline/snacks)
+map("n", "<Tab>", "<cmd>bn<CR>", { desc = "Next buffer" })
+map("n", "<S-Tab>", "<cmd>bp<CR>", { desc = "Previous buffer" })
+map("n", "<leader>q", function()
+	Snacks.bufdelete()
+end, { desc = "Close current buffer" })
 
--- Close tab
-map("n", "<leader>q", "<Cmd>bdelete<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Buffer: Close current",
-})
-
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
-
-vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit from insert mode to normal" })
+-- Terminal
+map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })

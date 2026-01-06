@@ -35,21 +35,28 @@ return {
 		},
 
 		keys = {
-			-- Lazygit
 			{
-				"<leader>lg",
+				"<leader>gg",
 				function()
 					Snacks.lazygit()
 				end,
 				desc = "Lazygit",
 			},
-			-- {
-			-- 	"\\",
-			-- 	function()
-			-- 		Snacks.explorer()
-			-- 	end,
-			-- 	desc = "File Explorer",
-			-- },
+
+			{
+				"<leader>:",
+				function()
+					Snacks.picker.command_history()
+				end,
+				desc = "Command history",
+			},
+			{
+				"<leader>th",
+				function()
+					Snacks.picker.colorschemes()
+				end,
+				desc = "Choose colorschemes",
+			},
 			{
 				"<leader>ff",
 				function()
@@ -57,6 +64,14 @@ return {
 				end,
 				desc = "Find Files",
 			},
+			{
+				"<leader>fr",
+				function()
+					Snacks.picker.recent()
+				end,
+				desc = "Recent Files",
+			},
+
 			{
 				"<leader>/",
 				function()
@@ -72,18 +87,25 @@ return {
 				desc = "Notification History",
 			},
 			{
-				"<leader>ks",
-				function()
-					Snacks.picker.keymaps()
-				end,
-				desc = "Keymaps",
-			},
-			{
 				"<C-t>",
 				function()
 					Snacks.terminal.toggle()
 				end,
 				desc = "Terminal",
+			},
+			{
+				"<leader>fb",
+				function()
+					Snacks.picker.buffers()
+				end,
+				desc = "Buffers",
+			},
+			{
+				"<leader>fp",
+				function()
+					Snacks.picker.projects()
+				end,
+				desc = "Projects",
 			},
 		},
 	},
