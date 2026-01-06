@@ -2,6 +2,26 @@ local function augroup(name)
 	return vim.api.nvim_create_augroup("user_" .. name, { clear = true })
 end
 
+-- Save colorscheme when changed
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+	callback = function()
+		local theme_file = vim.fn.stdpath("config") .. "/lua/colorscheme.lua"
+		local name = vim.g.colors_name
+		if not name then
+			return
+		end
+
+		local f = io.open(theme_file, "w")
+		if not f then
+			return
+		end
+
+		f:write(string.format('vim.cmd("colorscheme %s")\n', name))
+		f:close()
+	end,
+})
+
 -- Return to last edit position when opening a file
 vim.api.nvim_create_autocmd("BufReadPost", {
 	group = augroup("last_loc"),

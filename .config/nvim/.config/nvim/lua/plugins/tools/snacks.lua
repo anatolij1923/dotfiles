@@ -25,7 +25,7 @@ return {
 
 			indent = { enabled = true },
 
-			-- notifier = { enabled = true },
+			notifier = { enabled = true },
 
 			input = { enabled = true },
 
@@ -43,13 +43,19 @@ return {
 				end,
 				desc = "Lazygit",
 			},
-			-- {
-			-- 	"\\",
-			-- 	function()
-			-- 		Snacks.explorer()
-			-- 	end,
-			-- 	desc = "File Explorer",
-			-- },
+
+			{
+				"<leader>:",
+				function()
+					Snacks.picker.command_history()
+				end,
+			},
+			{
+				"<leader>th",
+				function()
+					Snacks.picker.colorschemes()
+				end,
+			},
 			{
 				"<leader>ff",
 				function()
