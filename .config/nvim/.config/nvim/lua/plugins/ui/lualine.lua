@@ -1,6 +1,7 @@
 return {
 	"nvim-lualine/lualine.nvim",
 	event = "BufReadPre",
+
 	config = function()
 		local lualine = require("lualine")
 
