@@ -11,42 +11,43 @@ return {
 				-- Buffer local mappings
 				-- Check `:help vim.lsp.*` for documentation on any of the below functions
 				local opts = { buffer = ev.buf, silent = true }
+				local map = function(keys, func, desc)
+					vim.keymap.set("n", keys, func, { buffer = ev.buf, desc = "LSP: " .. desc })
+				end
 
-				-- keymaps
-				opts.desc = "Show LSP references"
-				vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
+				map("gr", function()
+					Snacks.picker.lsp_references()
+				end, "References")
 
-				opts.desc = "Go to declaration"
-				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
+				map("gD", function()
+					Snacks.picker.lsp_declarations()
+				end, "Go to Declaration")
 
-				opts.desc = "Show LSP definitions"
-				vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
+				map("gd", function()
+					Snacks.picker.lsp_definitions()
+				end, "Go to Definition")
 
-				opts.desc = "Show LSP implementations"
-				vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
+				map("gi", function()
+					Snacks.picker.lsp_implementations()
+				end, "Implementations")
 
-				opts.desc = "Show LSP type definitions"
-				vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
+				map("gt", function()
+					Snacks.picker.lsp_type_definitions()
+				end, "Type Definition")
 
-				opts.desc = "See available code actions"
-				vim.keymap.set({ "n", "v" }, "<leader>vca", function()
-					vim.lsp.buf.code_action()
-				end, opts) -- see available code actions, in visual mode will apply to selection
+				map("<leader>vca", vim.lsp.buf.code_action, "Code Action")
 
-				opts.desc = "Smart rename"
-				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
+				map("<leader>rn", vim.lsp.buf.rename, "Rename")
 
-				opts.desc = "Show buffer diagnostics"
-				vim.keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
+				map("<leader>D", function()
+					Snacks.picker.diagnostics_buffer()
+				end, "Buffer diagnostics")
 
-				opts.desc = "Show line diagnostics"
-				vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
+				map("<leader>d", vim.diagnostic.open_float, "Show line diagnostics")
 
-				opts.desc = "Show documentation for what is under cursor"
-				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
+				map("K", vim.lsp.buf.hover, "Hover Documentation")
 
-				opts.desc = "Restart LSP"
-				vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+				map("<leader>rs", ":LspRestart<CR>", "Restart LSP")
 
 				vim.keymap.set("i", "<C-h>", function()
 					vim.lsp.buf.signature_help()

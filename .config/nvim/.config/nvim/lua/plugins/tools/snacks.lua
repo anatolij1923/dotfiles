@@ -35,7 +35,6 @@ return {
 		},
 
 		keys = {
-			-- Lazygit
 			{
 				"<leader>gg",
 				function()
@@ -49,12 +48,14 @@ return {
 				function()
 					Snacks.picker.command_history()
 				end,
+				desc = "Command history",
 			},
 			{
 				"<leader>th",
 				function()
 					Snacks.picker.colorschemes()
 				end,
+				desc = "Choose colorschemes",
 			},
 			{
 				"<leader>ff",
@@ -63,6 +64,14 @@ return {
 				end,
 				desc = "Find Files",
 			},
+			{
+				"<leader>fr",
+				function()
+					Snacks.picker.recent()
+				end,
+				desc = "Recent Files",
+			},
+
 			{
 				"<leader>/",
 				function()
@@ -76,13 +85,6 @@ return {
 					Snacks.picker.notifications()
 				end,
 				desc = "Notification History",
-			},
-			{
-				"<leader>ks",
-				function()
-					Snacks.picker.keymaps()
-				end,
-				desc = "Keymaps",
 			},
 			{
 				"<C-t>",
