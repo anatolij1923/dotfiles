@@ -3,7 +3,6 @@ local function augroup(name)
 end
 
 -- Save colorscheme when changed
-
 vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function()
 		local theme_file = vim.fn.stdpath("config") .. "/lua/colorscheme.lua"
@@ -19,6 +18,16 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 
 		f:write(string.format('vim.cmd("colorscheme %s")\n', name))
 		f:close()
+	end,
+})
+
+-- Check if we need to reload the file when it changed
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+	group = augroup("checktime"),
+	callback = function()
+		if vim.o.buftype ~= "nofile" then
+			vim.cmd("checktime")
+		end
 	end,
 })
 
