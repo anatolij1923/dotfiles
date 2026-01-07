@@ -3,7 +3,7 @@ local opt = vim.opt
 -- Numbers and gutter
 opt.number = true
 opt.relativenumber = false
-opt.signcolumn = "no"
+opt.signcolumn = "yes"
 
 -- Search behavior
 opt.ignorecase = true
