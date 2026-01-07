@@ -6,6 +6,7 @@ binds {
     Mod+V { spawn-sh "qs -c $CHROMA_DIR ipc call launcher openInClipboardMode"; }
     Mod+Shift+L { spawn-sh "qs -c $CHROMA_DIR ipc call lock activate"; }
     Mod+S { spawn-sh "qs -c $CHROMA_DIR ipc call quicksettings toggle"; }
+    Mod+I { spawn-sh "qs -c $CHROMA_DIR ipc call settings toggle"; }
 
     // Apps
     Mod+E { spawn "nautilus"; }

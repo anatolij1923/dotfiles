@@ -15,6 +15,7 @@ window-rule {
     match title="chroma-settings"
     match app-id="org.gnome.NautilusPreviewer"
     match app-id="org.gnome.Loupe"
+    match app-id="com.github.wwmm.easyeffects"
     open-floating true
     default-column-width { fixed 1200; }
     default-window-height { fixed 800; }
