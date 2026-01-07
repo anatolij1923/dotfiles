@@ -13,6 +13,7 @@ window-rule {
     match app-id="com.network.manager"
     match app-id="blueman-manager"
     match title="chroma-settings"
+    match title="chroma-test"
     match app-id="org.gnome.NautilusPreviewer"
     match app-id="org.gnome.Loupe"
     match app-id="com.github.wwmm.easyeffects"

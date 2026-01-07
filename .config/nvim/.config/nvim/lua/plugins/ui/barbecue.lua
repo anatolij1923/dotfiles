@@ -4,7 +4,6 @@ return {
 	event = "VeryLazy",
 	dependencies = {
 		"SmiteshP/nvim-navic",
-		"nvim-mini/mini.nvim",
 	},
 	opts = {
 		-- Icons are handled via mini.icons mock
