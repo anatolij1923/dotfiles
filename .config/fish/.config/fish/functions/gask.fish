@@ -1,10 +1,15 @@
 function gask
+    if not set -q GEMINI_API_KEY
+        echo "API Key not found!"
+        return 1
+    end
+
     if test -z "$argv"
-        echo "❌ Usage: gask <question>"
+        echo " Usage: gask <question>"
         return 1
     end
     
-    echo "🤔 Asking Gemini..."
+    echo "Asking Gemini..."
     
     # Combine arguments into a single string
     set -x QUESTION "$argv"
@@ -29,6 +34,6 @@ try:
     resp = json.load(sys.stdin)
     print(resp["candidates"][0]["content"]["parts"][0]["text"])
 except:
-    print("❌ Error parsing response")
+    print("Error parsing response")
 '
 end

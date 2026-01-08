@@ -1,10 +1,16 @@
 function gdo
-    if test -z "$argv"
-        echo "❌ Usage: gdo <request>"
+    if not set -q GEMINI_API_KEY
+        echo "API Key not found!"
         return 1
     end
 
-    echo -n "🤖 Thinking..."
+    if test -z "$argv"
+        echo "Usage: gdo <request>"
+        return 1
+    end
+
+
+    echo -n "Thinking..."
     
     set -x CMD_REQ "$argv"
     
@@ -90,7 +96,7 @@ except:
     echo -ne "\r\033[K"
 
     if test -z "$SUGGESTED_CMD"
-        echo "❌ Failed to generate command."
+        echo "Failed to generate command."
         return 1
     end
 
@@ -112,17 +118,17 @@ except:
         # Try to detect clipboard tool (Wayland/X11/Mac)
         if type -q wl-copy
             echo -n "$SUGGESTED_CMD" | wl-copy
-            echo "📋 Copied to clipboard (wl-copy)."
+            echo "Copied to clipboard (wl-copy)."
         else if type -q xclip
             echo -n "$SUGGESTED_CMD" | xclip -selection clipboard
-            echo "📋 Copied to clipboard (xclip)."
+            echo "Copied to clipboard (xclip)."
         else if type -q pbcopy
             echo -n "$SUGGESTED_CMD" | pbcopy
-            echo "📋 Copied to clipboard."
+            echo "Copied to clipboard."
         else
-            echo "⚠️ No clipboard utility found (install wl-copy or xclip)."
+            echo "No clipboard utility found (install wl-copy or xclip)."
         end
     else
-        echo "🚫 Cancelled."
+        echo "Cancelled."
     end
 end

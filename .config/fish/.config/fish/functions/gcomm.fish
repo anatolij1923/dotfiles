@@ -1,7 +1,7 @@
 function gcomm
     # 1. Check if there are staged changes
     if git diff --cached --quiet
-        echo "🔴 Nothing to commit (staging area is empty)."
+        echo "Nothing to commit (staging area is empty)."
         return 1
     end
 
@@ -9,7 +9,7 @@ function gcomm
 
     # 2. Check API Key
     if not set -q GEMINI_API_KEY
-        echo "❌ Error: GEMINI_API_KEY environment variable is not set!"
+        echo "API Key not found!"
         return 1
     end
 
@@ -37,6 +37,6 @@ try:
     resp = json.load(sys.stdin)
     print(resp["candidates"][0]["content"]["parts"][0]["text"])
 except Exception as e:
-    print("❌ Error: " + str(resp) if "resp" in locals() else str(e))
+    print("Error: " + str(resp) if "resp" in locals() else str(e))
 '
 end

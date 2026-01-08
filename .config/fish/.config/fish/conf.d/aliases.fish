@@ -1,32 +1,32 @@
-# --- Aliases ---
+# --- abbr -aes ---
 
 # List directories
-alias ls="eza -1  --color=always --icons=always --no-user"
-alias ll="eza -la --color=always --icons=always --git"
-alias tree="eza --tree"
+abbr -a ls "eza -1  --color=always --icons=always --no-user"
+abbr -a ll "eza -la --color=always --icons=always --git"
+abbr -a tree "eza --tree"
 
 # Utilities
-alias cat="bat"
-alias ff="fastfetch"
+abbr -a cat "bat"
+abbr -a ff "fastfetch"
 
 # Zellij
-alias zj="zellij"
+abbr -a zj "zellij"
 
 # Neovim
-alias svim="sudo -E nvim"
-alias v="nvim"
+abbr -a svim "sudo -E nvim"
+abbr -a v "nvim"
 
 # Git
-alias gcl="git clone"
-alias ga="git add"
-alias gc="git commit"
-alias gp="git push"
-alias gu="git pull"
-alias lg="lazygit" 
+abbr -a gcl "git clone"
+abbr -a ga "git add"
+abbr -a gc "git commit"
+abbr -a gp "git push"
+abbr -a gu "git pull"
+abbr -a lg "lazygit" 
 
 # Misc
-alias update-mirrors="reflector --sort rate --number 10 --threads 100 --protocol https | sudo tee /etc/pacman.d/mirrorlist"
-alias c="clear"
+abbr -a update-mirrors "reflector --sort rate --number 10 --threads 100 --protocol https | sudo tee /etc/pacman.d/mirrorlist"
+abbr -a c "clear"
 
 # Pnpm
-alias p="pnpm"
+abbr -a p "pnpm"
