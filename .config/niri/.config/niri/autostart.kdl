@@ -3,7 +3,7 @@ spawn-at-startup "dbus-update-activation-environment" "--all"
 spawn-sh-at-startup "wl-paste --type text --watch cliphist store" 
 spawn-sh-at-startup "wl-paste --type image --watch cliphist store"  
 
-spawn-sh-at-startup "swaylock -w"
+spawn-sh-at-startup "swayidle -w"
 spawn-at-startup "sunsetr"
 
 spawn-at-startup "easyeffects" "--gapplication-service"

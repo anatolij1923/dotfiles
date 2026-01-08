@@ -7,4 +7,5 @@ environment {
     CHROMA_DIR "/home/anatolij1923/chroma/quickshell"
     _JAVA_AWT_WM_NONREPARENTING "1"
     SDL_VIDEODRIVER "wayland"
+    EDITOR "nvim"
 }
