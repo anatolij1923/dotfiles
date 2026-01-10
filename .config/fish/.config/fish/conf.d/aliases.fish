@@ -1,5 +1,3 @@
-# --- abbr -aes ---
-
 # List directories
 abbr -a ls "eza -1  --color=always --icons=always --no-user"
 abbr -a ll "eza -la --color=always --icons=always --git"
@@ -25,7 +23,7 @@ abbr -a gu "git pull"
 abbr -a lg "lazygit" 
 
 # Misc
-abbr -a update-mirrors "reflector --sort rate --number 10 --threads 100 --protocol https | sudo tee /etc/pacman.d/mirrorlist"
+abbr -a update-mirrors "sudo reflector --sort rate --number 10 --threads 100 --protocol https --save /etc/pacman.d/mirrorlist"
 abbr -a c "clear"
 
 # Pnpm
