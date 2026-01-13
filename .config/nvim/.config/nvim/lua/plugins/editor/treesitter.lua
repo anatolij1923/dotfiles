@@ -1,86 +1,39 @@
 return {
-	{
-		"nvim-treesitter/nvim-treesitter",
-		event = { "BufReadPre", "BufNewFile" },
-		build = ":TSUpdate",
+    "nvim-treesitter/nvim-treesitter",
+    branch = "main", -- убеждаемся, что на main
+    build = ":TSUpdate",
+    config = function()
+        local ts = require('nvim-treesitter')
 
-		config = function()
-			local treesitter = require("nvim-treesitter.configs")
+        -- ts.install({ "lua", "python", "rust", "javascript", "vimdoc", "query", "markdown", "markdown_inline" })
+        vim.treesitter.language.register('tsx', 'typescript')
+        ts.install({ "tsx", "typescript" })
 
-			-- configuring treesitter
-			treesitter.setup({
-				highlight = {
-					enable = true,
-				},
+        vim.api.nvim_create_autocmd('FileType', {
+            callback = function(args)
+                local buf = args.buf
+                local ft = vim.bo[buf].filetype
 
-				indent = {
-					enable = true,
-				},
+                if ft == "" or ft:match("snacks_") then return end
 
-				ensure_installed = {
-					"json",
-					"javascript",
-					"typescript",
-					"tsx",
-					"go",
-					"yaml",
-					"html",
-					"css",
-					"python",
-					"http",
-					"prisma",
-					"markdown",
-					"markdown_inline",
-					"svelte",
-					"graphql",
-					"bash",
-					"lua",
-					"vim",
-					"dockerfile",
-					"gitignore",
-					"query",
-					"vimdoc",
-					"c",
-					"java",
-					"nix",
-					"rust",
-				},
+                local lang = vim.treesitter.language.get_lang(ft) or ft
 
-				incremental_selection = {
-					enabled = true,
-					keymaps = {
-						init_selection = "<C-space>",
-						node_incremental = "<C-space>",
-						node_decremental = "<BS>",
-						-- node_selection = "<C-space>",
-						scope_incremental = false,
-					},
-				},
+                local ok, parser_info = pcall(vim.treesitter.language.add, lang)
+                if not ok or not parser_info then
+                    return 
+                end
 
-				additional_vim_regex_highlighting = false,
-			})
-		end,
-	},
-	{
-		"windwp/nvim-ts-autotag",
-		ft = { "html", "xml", "javascript", "typescript", "javascriptreact", "typescriptreact", "svelte" },
-		config = function()
-			-- Independent nvim-ts-autotag setup
-			require("nvim-ts-autotag").setup({
-				opts = {
-					enable_close = true, -- Auto-close tags
-					enable_rename = true, -- Auto-rename pairs
-					enable_close_on_slash = false, -- Disable auto-close on trailing `</`
-				},
-				per_filetype = {
-					["html"] = {
-						enable_close = true, -- Disable auto-closing for HTML
-					},
-					["typescriptreact"] = {
-						enable_close = true, -- Explicitly enable auto-closing (optional, defaults to `true`)
-					},
-				},
-			})
-		end,
-	},
+                pcall(vim.treesitter.start, buf, lang)
+            end,
+        })
+    end
 }
+-- vim.keymap.set("n", "<C-space>", function()
+--     local node = vim.treesitter.get_node()
+--     if node then
+--         local start_row, start_col, end_row, end_col = node:range()
+--         vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col })
+--         vim.cmd("normal! v")
+--         vim.api.nvim_win_set_cursor(0, { end_row + 1, end_col - 1 })
+--     end
+-- end)
