@@ -1,13 +1,32 @@
 return {
     "nvim-treesitter/nvim-treesitter",
-    branch = "main", -- убеждаемся, что на main
+    branch = "main",
     build = ":TSUpdate",
     config = function()
         local ts = require('nvim-treesitter')
 
-        -- ts.install({ "lua", "python", "rust", "javascript", "vimdoc", "query", "markdown", "markdown_inline" })
-        vim.treesitter.language.register('tsx', 'typescript')
-        ts.install({ "tsx", "typescript" })
+        ts.install({
+            -- nvim basics
+            "lua", "vim", "vimdoc", "query", "luadoc", "luap",
+
+            --- web
+            "tsx", "typescript", "javascript", "html", "css", "scss", "graphql",
+
+            --- some common langs
+            "rust", "python", "bash", "fish", "go", "ninja", "cpp", "c",
+
+            --- configs and data
+            "json", "jsonc", "yaml", "toml", "kdl", "ron", "dockerfile", "terraform",
+
+            --- md and other
+            "markdown", "markdown_inline", "mermaid", "latex",
+
+            --- git stuff
+            "git_config", "git_rebase", "gitcommit", "gitignore", "diff",
+
+            --- whatever why not
+            "regex", "printf", "sql", "make"
+        })
 
         vim.api.nvim_create_autocmd('FileType', {
             callback = function(args)
@@ -20,7 +39,7 @@ return {
 
                 local ok, parser_info = pcall(vim.treesitter.language.add, lang)
                 if not ok or not parser_info then
-                    return 
+                    return
                 end
 
                 pcall(vim.treesitter.start, buf, lang)
@@ -37,3 +56,32 @@ return {
 --         vim.api.nvim_win_set_cursor(0, { end_row + 1, end_col - 1 })
 --     end
 -- end)
+-- ensure_installed = {
+-- 	"json",
+-- 	"javascript",
+-- 	"typescript",
+-- 	"tsx",
+-- 	"go",
+-- 	"yaml",
+-- 	"html",
+-- 	"css",
+-- 	"python",
+-- 	"http",
+-- 	"prisma",
+-- 	"markdown",
+-- 	"markdown_inline",
+-- 	"svelte",
+-- 	"graphql",
+-- 	"bash",
+-- 	"lua",
+-- 	"vim",
+-- 	"dockerfile",
+-- 	"gitignore",
+-- 	"query",
+-- 	"vimdoc",
+-- 	"c",
+-- 	"java",
+-- 	"nix",
+-- 	"rust",
+-- },
+--
