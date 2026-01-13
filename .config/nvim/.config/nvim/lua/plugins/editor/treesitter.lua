@@ -48,15 +48,64 @@ return {
                 end
             end
         })
+
+        local selection_stack = {}
+
+        vim.keymap.set({ "n", "x" }, "<CR>", function()
+            local buf = vim.api.nvim_get_current_buf()
+            local mode = vim.fn.mode()
+
+            local node = vim.treesitter.get_node()
+            if not node then return end
+
+            if mode == "n" then
+                selection_stack = {}
+            end
+
+            local sr, sc, er, ec = node:range()
+            local curr_range = { sr, sc, er, ec }
+
+            if mode == "v" or mode == "V" then
+                local parent = node:parent()
+                while parent and vim.deep_equal({ parent:range() }, curr_range) do
+                    parent = parent:parent()
+                end
+
+                if parent then
+                    table.insert(selection_stack, curr_range)
+                    node = parent
+                else
+                    return
+                end
+            end
+
+            local n_sr, n_sc, n_er, n_ec = node:range()
+
+            if vim.fn.mode() ~= "v" then
+                vim.cmd("normal! v")
+            end
+
+            vim.api.nvim_win_set_cursor(0, { n_sr + 1, n_sc })
+            vim.cmd("normal! o")
+            vim.api.nvim_win_set_cursor(0, { n_er + 1, math.max(0, n_ec - 1) })
+        end, { desc = "TS: Expand selection" })
+
+        vim.keymap.set("x", "<BS>", function()
+            if #selection_stack == 0 then
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+                return
+            end
+
+            local prev_range = table.remove(selection_stack)
+
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+            vim.schedule(function()
+                vim.cmd("normal! v")
+                vim.api.nvim_win_set_cursor(0, { prev_range[1] + 1, prev_range[2] })
+                vim.cmd("normal! o")
+                vim.api.nvim_win_set_cursor(0, { prev_range[3] + 1, math.max(0, prev_range[4] - 1) })
+            end)
+        end, { desc = "TS: Shrink selection" })
     end
 }
--- vim.keymap.set("n", "<C-space>", function()
---     local node = vim.treesitter.get_node()
---     if node then
---         local start_row, start_col, end_row, end_col = node:range()
---         vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col })
---         vim.cmd("normal! v")
---         vim.api.nvim_win_set_cursor(0, { end_row + 1, end_col - 1 })
---     end
--- end)
 --
