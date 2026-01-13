@@ -3,47 +3,50 @@ return {
     branch = "main",
     build = ":TSUpdate",
     config = function()
-        local ts = require('nvim-treesitter')
+        local ts = require("nvim-treesitter")
 
-        ts.install({
-            -- nvim basics
-            "lua", "vim", "vimdoc", "query", "luadoc", "luap",
+        vim.api.nvim_create_autocmd("FileType", {
+            group = vim.api.nvim_create_augroup("ts_smart_install", { clear = true }),
+            callback = function(event)
+                local buf = event.buf
 
-            --- web
-            "tsx", "typescript", "javascript", "html", "css", "scss", "graphql",
+                if vim.bo[buf].buftype ~= "" then return end
 
-            --- some common langs
-            "rust", "python", "bash", "fish", "go", "ninja", "cpp", "c",
-
-            --- configs and data
-            "json", "jsonc", "yaml", "toml", "kdl", "ron", "dockerfile", "terraform",
-
-            --- md and other
-            "markdown", "markdown_inline", "mermaid", "latex",
-
-            --- git stuff
-            "git_config", "git_rebase", "gitcommit", "gitignore", "diff",
-
-            --- whatever why not
-            "regex", "printf", "sql", "make"
-        })
-
-        vim.api.nvim_create_autocmd('FileType', {
-            callback = function(args)
-                local buf = args.buf
                 local ft = vim.bo[buf].filetype
-
-                if ft == "" or ft:match("snacks_") then return end
+                if ft == "" or ft == "gitcommit" then return end
 
                 local lang = vim.treesitter.language.get_lang(ft) or ft
+                -- if ft == "typescriptreact" then lang = "tsx" end
+                -- if ft == "javascriptreact" then lang = "jsx" end
 
-                local ok, parser_info = pcall(vim.treesitter.language.add, lang)
-                if not ok or not parser_info then
-                    return
+                local all_parsers = ts.get_available()
+                if not vim.tbl_contains(all_parsers, lang) then return end
+
+                local parser_exists = #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".so", false) > 0
+
+                if not parser_exists then
+                    vim.notify("Treesitter: installing parser for " .. lang, vim.log.levels.INFO)
+
+                    local ok, job = pcall(ts.install, lang)
+                    if ok and job then
+                        job:wait(5000)
+
+                        vim.schedule(function()
+                            if vim.api.nvim_buf_is_valid(buf) then
+                                pcall(vim.treesitter.start, buf, lang)
+                            end
+                        end)
+                    end
+                else
+                    pcall(vim.treesitter.start, buf, lang)
                 end
 
-                pcall(vim.treesitter.start, buf, lang)
-            end,
+                if parser_exists or not parser_exists then -- проверяем еще раз после возможной установки
+                    vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                    vim.wo.foldmethod = 'expr'
+                    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+                end
+            end
         })
     end
 }
