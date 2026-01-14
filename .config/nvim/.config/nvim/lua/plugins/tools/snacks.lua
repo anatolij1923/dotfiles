@@ -3,13 +3,15 @@ return {
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
-
 		opts = {
 			dashboard = {
 				enabled = true,
 				preset = {
-					header = {
-						[[
+					pick = function(cmd, opts)
+						return Snacks.picker[cmd](opts)
+					end,
+
+					header = [[
          ▄▄    ▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄   ▄▄ ▄▄▄ ▄▄   ▄▄ 
         █  █  █ █       █       █  █ █  █   █  █▄█  █
         █   █▄█ █    ▄▄▄█   ▄   █  █▄█  █   █       █
@@ -17,23 +19,36 @@ return {
         █  ▄    █    ▄▄▄█  █▄█  █       █   █       █
         █ █ █   █   █▄▄▄█       ██     ██   █ ██▄██ █
         █▄█  █▄▄█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█ █▄▄▄█ █▄▄▄█▄█   █▄█
+          ]],
 
-                        ]],
+					keys = {
+						{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.picker.files()" },
+						{ icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.picker.recent()" },
+						{ icon = " ", key = "g", desc = "Grep", action = ":lua Snacks.picker.grep()" },
+						{ icon = " ", key = "p", desc = "Projects", action = ":lua Snacks.picker.projects()" },
+						{ icon = " ", key = "b", desc = "Buffers", action = ":lua Snacks.picker.buffers()" },
+						{
+							icon = "󰒲 ",
+							key = "L",
+							desc = "Lazy",
+							action = ":Lazy",
+							enabled = package.loaded.lazy ~= nil,
+						},
+						{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
 					},
 				},
+				sections = {
+					{ section = "header" },
+					{ section = "keys", gap = 1, padding = 1 },
+					{ section = "startup" },
+				},
 			},
-
 			indent = { enabled = true },
-
 			notifier = { enabled = true },
-
 			input = { enabled = true },
-
 			terminal = { enabled = true },
-
 			animate = { enabled = true },
 		},
-
 		keys = {
 			{
 				"<leader>gg",
@@ -42,7 +57,6 @@ return {
 				end,
 				desc = "Lazygit",
 			},
-
 			{
 				"<leader>:",
 				function()
@@ -71,7 +85,6 @@ return {
 				end,
 				desc = "Recent Files",
 			},
-
 			{
 				"<leader>/",
 				function()
