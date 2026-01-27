@@ -143,6 +143,34 @@ return {
 			},
 		}
 
+		-- tailwindcss
+		vim.lsp.config["tailwindcss"] = {
+			cmd = { "tailwindcss-language-server", "--stdio" },
+			filetypes = { "html", "typescriptreact", "javascriptreact", "vue", "svelte", "css", "scss" },
+			-- root_dir = function(fname)
+			-- 	return require("lspconfig.util").root_pattern("tailwind.config.js", "package.json", ".git")(fname)
+			-- end,
+			settings = {
+				tailwindCSS = {
+					lint = {
+						cssConflict = "warning",
+						invalidApply = "error",
+						invalidScreen = "error",
+						invalidVariant = "error",
+					},
+					validate = true,
+					experimental = {
+						classRegex = {
+							-- Для React/Vue
+							'className="([^"]*)"',
+							"class:([\\w-]+)",
+						},
+					},
+				},
+			},
+			capabilities = capabilities,
+		}
+
 		-- clangd
 		vim.lsp.config["clangd"] = {
 			cmd = { "clangd" },
@@ -154,7 +182,48 @@ return {
 		vim.lsp.config["ts_ls"] = {
 			capabilities = capabilities,
 			filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+			settings = {
+				typescript = {
+					preferences = {
+						includePackageJsonAutoImports = "on",
+						includeCompletionsForModuleExports = true,
+						importModuleSpecifierPreference = "non-relative",
+					},
+				},
+			},
+
 			cmd = { "typescript-language-server", "--stdio" },
+		}
+
+		vim.lsp.config["vtsls"] = {
+			cmd = { "vtsls", "--stdio" },
+			filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+			-- root_dir = function(fname)
+			-- 	return util.root_pattern(
+			-- 		"apps/server/tsconfig.json",
+			-- 		"apps/player/tsconfig.json",
+			-- 		"apps/host/tsconfig.json",
+			-- 		"packages/schema/tsconfig.json",
+			-- 		"package.json"
+			-- 	)(fname)
+			-- end,
+			settings = {
+				typescript = {
+					preferences = {
+						includePackageJsonAutoImports = "on",
+						includeCompletionsForModuleExports = true,
+						importModuleSpecifierPreference = "non-relative",
+					},
+				},
+				javascript = {
+					preferences = {
+						includePackageJsonAutoImports = "on",
+						includeCompletionsForModuleExports = true,
+						importModuleSpecifierPreference = "non-relative",
+					},
+				},
+			},
+			capabilities = capabilities,
 		}
 		--
 		-- python
@@ -205,7 +274,9 @@ return {
 			"html-lsp",
 			"emmet_language_server",
 			"cssls",
-			"ts_ls",
+			"tailwindcss",
+			-- "ts_ls",
+			"vtsls",
 			"clangd",
 			"pyright",
 			-- "rust-analyzer",

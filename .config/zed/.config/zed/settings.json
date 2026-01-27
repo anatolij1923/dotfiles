@@ -7,31 +7,39 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "agent_servers": {
+    "Qwen CLI": {
+      "type": "custom",
+      "command": "qwen",
+      "args": ["--experimental-acp"],
+      "env": {},
+      "favorite_models": [],
+      "default_config_options": {},
+      "favorite_config_option_values": {},
+    },
+  },
+  "buffer_line_height": "comfortable",
+  "buffer_font_size": 20.0,
   "minimap": {
-    "show": "never"
+    "show": "never",
   },
   "agent": {
     "default_model": {
       "provider": "google",
-      "model": "gemini-2.5-flash"
-    }
+      "model": "gemini-2.5-flash",
+    },
   },
   "vim_mode": false,
 
   // font settings
   "ui_font_size": 20,
-  "buffer_font_size": 20,
   "agent_ui_font_size": 22,
   "ui_font_family": "JetBrains Mono",
   "ui_font_weight": 500,
-  "buffer_font_family": "JetBrainsMonoNL Nerd Font Propo",
+  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
 
   // theme settings
-  "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "Kanagawa Wave"
-  },
+  "theme": "Kanagawa Wave",
   "icon_theme": "Warm Charmed Icons",
 
   // project panel
@@ -41,28 +49,28 @@
     "indent_size": 25,
     "entry_spacing": "comfortable",
     "indent_guides": {
-      "show": "never"
-    }
+      "show": "never",
+    },
   },
 
   // terminal settings
   "terminal": {
-    "default_height": 400
+    "default_height": 400,
   },
 
   // extensions to install
   "auto_install_extensions": {
     "kanagawa-themes": true,
-    "charmed-icons": true
+    "charmed-icons": true,
   },
 
   "languages": {
     "SCSS": {
-      "tab_size": 2
+      "tab_size": 2,
     },
     "HTML": {
-      "tab_size": 2
-    }
+      "tab_size": 2,
+    },
   },
 
   // diagnostics
@@ -71,15 +79,15 @@
     "include_warnings": true,
     "lsp_pull_diagnostics": {
       "enabled": true,
-      "debounce_ms": 50
+      "debounce_ms": 50,
     },
     "inline": {
       "enabled": true,
       "update_debounce_ms": 50,
       "padding": 4,
       "min_column": 0,
-      "max_severity": null
+      "max_severity": null,
     },
-    "cargo": null
-  }
+    "cargo": null,
+  },
 }

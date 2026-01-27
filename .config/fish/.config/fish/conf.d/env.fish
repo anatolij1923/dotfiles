@@ -6,8 +6,6 @@ if test -f ~/.env.fish
     source ~/.env.fish
 end
 
-set -gx EDITOR nvim
-
 # For quickshell
 set -gx QML_IMPORT_PATH /usr/lib/qt6/qml
 

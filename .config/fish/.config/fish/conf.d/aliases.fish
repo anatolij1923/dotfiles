@@ -1,5 +1,5 @@
 # List directories
-abbr -a ls "eza -1  --color=always --icons=always --no-user"
+abbr -a ls "eza -1  --color=always --icons=always"
 abbr -a ll "eza -la --color=always --icons=always --git"
 abbr -a tree "eza --tree"
 
@@ -28,3 +28,4 @@ abbr -a c "clear"
 
 # Pnpm
 abbr -a p "pnpm"
+abbr -a px "pnpx"
