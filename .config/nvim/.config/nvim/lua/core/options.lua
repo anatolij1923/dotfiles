@@ -49,5 +49,5 @@ opt.foldenable = true
 
 -- Sync clipboard between OS and Neovim.
 vim.schedule(function()
-	vim.o.clipboard = "unnamedplus"
+    vim.o.clipboard = "unnamedplus"
 end)
