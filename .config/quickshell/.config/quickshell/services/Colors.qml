@@ -27,13 +27,13 @@ Singleton {
         if (wallpaperPath === "")
             return;
 
-        if (kmycProc.running) {
-            kmycProc.running = false;
-        }
+        // if (kmycProc.running) {
+        //     kmycProc.running = false;
+        // }
 
         if (Config.ready) {
             matugenProc.running = true;
-            kmycProc.running = true;
+            // kmycProc.running = true;
         }
     }
 
@@ -55,22 +55,22 @@ Singleton {
         }
     }
 
-    Process {
-        id: kmycProc
-        command: ["kde-material-you-colors", "--file", root.wallpaperPath]
-
-        onStarted: {
-            Logger.i("COLORS", "Generating colors with kde-material-colors");
-        }
-
-        onExited: (exitCode, exitStatus) => {
-            if (exitCode === 0) {
-                Logger.s("COLORS", "KDE colors updated successfully");
-            } else {
-                Logger.e("COLORS", `KMYC failed. Code: ${exitCode}`);
-            }
-        }
-    }
+    // Process {
+    //     id: kmycProc
+    //     command: ["kde-material-you-colors", "--file", root.wallpaperPath]
+    //
+    //     onStarted: {
+    //         Logger.i("COLORS", "Generating colors with kde-material-colors");
+    //     }
+    //
+    //     onExited: (exitCode, exitStatus) => {
+    //         if (exitCode === 0) {
+    //             Logger.s("COLORS", "KDE colors updated successfully");
+    //         } else {
+    //             Logger.e("COLORS", `KMYC failed. Code: ${exitCode}`);
+    //         }
+    //     }
+    // }
 
     Connections {
         target: Config.background

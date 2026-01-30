@@ -25,3 +25,5 @@
 .config/fish/.config/fish/conf.d/fzf.fish
 .config/fish/.config/fish/fish_variables*
 .config/fish/.config/fish/conf.d/rustup.fish
+.config/quickshell/.config/quickshell/config.json
+.config/quickshell/.config/quickshell/config.json
