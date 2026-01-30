@@ -11,6 +11,7 @@ Rectangle {
     anchors.fill: parent
 
     property int sideMargins: Appearance.padding.huge
+    property int contentSpacing: Appearance.padding.large
 
     property real alpha: Config.appearance.transparency.alpha
     property bool transparent: Config.appearance.transparency.enabled
@@ -27,7 +28,7 @@ Rectangle {
             bottom: parent.bottom
         }
 
-        spacing: Appearance.padding.normal
+        spacing: root.contentSpacing
 
         // LogoWidget {}
         Workspaces {}
@@ -70,7 +71,7 @@ Rectangle {
             rightMargin: root.sideMargins
         }
 
-        spacing: Appearance.padding.normal
+        spacing: root.contentSpacing
 
         RecordWidget {}
         Tray {}
