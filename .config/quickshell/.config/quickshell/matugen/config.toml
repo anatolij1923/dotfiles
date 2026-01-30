@@ -1,0 +1,26 @@
+[config]
+
+[templates.quickshell]
+input_path = 'templates/colors.json'
+output_path = '~/.config/quickshell/colors.json'
+
+[templates.kitty]
+input_path = 'templates/kitty.conf'
+output_path = '~/.config/kitty/colors.conf'
+post_hook = 'pkill -SIGUSR1 kitty'
+
+[templates.hyprland]
+input_path = 'templates/hyprland-colors.conf'
+output_path = '~/.config/hypr/colors.conf'
+
+[templates.zellij]
+input_path = 'templates/zellij.kdl'
+output_path = '~/.config/zellij/themes/matugen.kdl'
+
+[templates.yazi]
+input_path = 'templates/yazi.toml'
+output_path = '~/.config/yazi/theme.toml'
+
+# [templates.niri]
+# input_path = 'templates/niri-colors.kdl'
+# output_path = '~/.config/niri/niri-colors.kdl'
