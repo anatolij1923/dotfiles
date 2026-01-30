@@ -15,7 +15,7 @@ Singleton {
 
     FileView {
         id: state
-        path: `${Paths.state}/idleInhibitor.json`
+        path: `${Paths.state}/quickshell/idleInhibitor.json`
 
         onLoaded: {
             if (text() === "true") {

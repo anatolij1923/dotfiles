@@ -77,7 +77,7 @@ Singleton {
     FileView {
         id: storage
 
-        path: `${Paths.state}/notifs.json`
+        path: `${Paths.state}/quickshell/notifs.json`
 
         onLoaded: {
             const data = JSON.parse(text());
