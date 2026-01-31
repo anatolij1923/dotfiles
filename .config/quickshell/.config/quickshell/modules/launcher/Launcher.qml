@@ -178,10 +178,13 @@ Scope {
 
                                 Keys.onPressed: event => {
                                     // Tab navigation
-                                    if (event.key === Qt.Key_Tab) {
+                                    //
+                                    const isCtrl = event.modifiers & Qt.ControlModifier
+
+                                    if (event.key === Qt.Key_Tab || (isCtrl && event.key === Qt.Key_J)) {
                                         contentList.currentList?.incrementCurrentIndex();
                                         event.accepted = true;
-                                    } else if (event.key === Qt.Key_Backtab) {
+                                    } else if (event.key === Qt.Key_Backtab || (isCtrl && event.key === Qt.Key_K)) {
                                         contentList.currentList?.decrementCurrentIndex();
                                         event.accepted = true;
                                     } else
