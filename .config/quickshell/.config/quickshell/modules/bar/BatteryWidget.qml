@@ -21,7 +21,7 @@ Item {
     Loader {
         id: batteryLoader
         anchors.centerIn: parent
-        sourceComponent: root.useClassicStyle ? classicComp : pillComp
+        sourceComponent: Battery.available && root.useClassicStyle ? classicComp : pillComp
     }
 
     Component {

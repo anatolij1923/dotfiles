@@ -76,11 +76,8 @@ Rectangle {
         RecordWidget {}
         Tray {}
         SysButton {}
-        Loader {
-            active: Battery.available
-            sourceComponent: BatteryWidget {
-                showPopup: true
-            }
+        BatteryWidget {
+            showPopup: true
         }
     }
 }
