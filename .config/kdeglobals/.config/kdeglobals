@@ -7,6 +7,10 @@ font=Rubik,12,-1,5,50,0,0,0,0,0
 menuFont=Rubik,12,-1,5,50,0,0,0,0,0
 smallestReadableFont=Rubik,10,-1,5,50,0,0,0,0,0
 
+[General]
+ColorScheme=Matugen
+TerminalApplication=kitty -1
+
 [Icons]
 Theme=Papirus-Dark
 
