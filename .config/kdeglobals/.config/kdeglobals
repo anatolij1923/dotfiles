@@ -1,0 +1,18 @@
+[General]
+XftAntialias=true
+XftHintStyle=hintslight
+XftSubPixel=rgb
+fixed=JetBrainsMono Nerd Font,12,-1,5,50,0,0,0,0,0
+font=Rubik,12,-1,5,50,0,0,0,0,0
+menuFont=Rubik,12,-1,5,50,0,0,0,0,0
+smallestReadableFont=Rubik,10,-1,5,50,0,0,0,0,0
+
+[Icons]
+Theme=Papirus-Dark
+
+[KDE]
+widgetStyle=darkly
+
+[PreviewSettings]
+EnableRemoteFolderThumbnail=false
+MaximumRemoteSize=0
