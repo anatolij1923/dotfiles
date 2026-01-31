@@ -29,7 +29,7 @@ StyledWindow {
         corners: Config.bar.bottom ? [2, 3] : [0, 1]
         cornerHeight: 24
         cornerType: "inverted"
-        color: root.transparent ? Qt.alpha(Colors.palette.m3surface, root.alpha - 0.17) : Colors.palette.m3surface // -0.17 cuz corners not matching with bar
+        color: root.transparent ? Qt.alpha(Colors.palette.m3surface, root.alpha) : Colors.palette.m3surface
         Behavior on color {
             CAnim {}
         }
