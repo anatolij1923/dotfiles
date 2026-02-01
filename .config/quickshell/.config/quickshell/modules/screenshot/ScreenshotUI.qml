@@ -196,17 +196,20 @@ PanelWindow {
             TextIconButton {
                 icon: "content_copy"
                 text: "Copy"
-                onClicked: captureAction("copy")
+                onClicked: {
+                    root.prepareCapture("copy");
+                }
                 padding: Appearance.padding.small
             }
 
             TextIconButton {
                 icon: "save_as"
                 text: "Save"
-                onClicked: captureAction("save")
+                onClicked: {
+                    root.prepareCapture("save");
+                }
                 padding: Appearance.padding.small
             }
-
             TextIconButton {
                 icon: "edit"
                 text: "Edit"
@@ -214,6 +217,28 @@ PanelWindow {
                 padding: Appearance.padding.small
             }
         }
+    }
+
+    Timer {
+        id: captureTimer
+        interval: 100
+        repeat: false
+
+        property string mode: ""
+
+        onTriggered: {
+            root.captureAction(mode);
+        }
+    }
+
+    function prepareCapture(mode) {
+        Logger.i("SCREENSHOT", `Preparing mode: ${mode}`);
+
+        root.hasSelection = false;
+        root.dragging = false;
+
+        captureTimer.mode = mode;
+        captureTimer.start();
     }
 
     function captureAction(mode) {
