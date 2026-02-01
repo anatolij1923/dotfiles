@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Wayland
 import Quickshell.Io
 
@@ -22,7 +23,7 @@ StyledWindow {
 
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
-
+    // Ignore exclusive zones (like bars) to cover the full screen
     exclusionMode: ExclusionMode.Ignore
 
     color: "transparent"
@@ -35,24 +36,40 @@ StyledWindow {
 
     readonly property real screenScale: root.screen.devicePixelRatio || 1.0
 
+    // Filter windows belonging to the current monitor and active workspace
+    readonly property var windows: {
+        if (!Hyprland || !Hyprland.toplevels) return [];
+
+        const activeWs = Hyprland.focusedWorkspace;
+        const activeWorkspaceId = activeWs ? activeWs.id : -1;
+
+        return Hyprland.toplevels.values.filter(w => {
+            return w.monitor && 
+                   w.monitor.name === root.screen.name && 
+                   w.workspace && 
+                   w.workspace.id === activeWorkspaceId;
+        });
+    }
+
     Component.onCompleted: {
-        Logger.i("SCREENSHOT", `UI opened on screen ${root.screen.name} (Scale: ${screenScale})`);
+        Logger.i("SCREENSHOT", `Initialized on ${root.screen.name} (Scale: ${screenScale})`);
     }
 
     ScreencopyView {
         anchors.fill: parent
         captureSource: root.screen
-        live: false
+        live: false 
         focus: true
 
         Keys.onPressed: event => {
             if (event.key === Qt.Key_Escape) {
-                Logger.w("SCREENSHOT", "Cancelled by user (Escape)");
+                Logger.w("SCREENSHOT", "Cancelled");
                 GlobalStates.screenshotOpened = false;
             }
         }
     }
 
+    // Selection state
     property int startX: 0
     property int startY: 0
     property int currentX: 0
@@ -68,49 +85,76 @@ StyledWindow {
     readonly property color overlayColor: "#80000000"
     readonly property bool showOverlay: root.dragging || root.hasSelection
 
+    // --- GEOMETRY HELPERS ---
+
+    // Magnets current point to window borders if nearby
+    function getSnappedPoint(rawX, rawY) {
+        let snapDist = 20;
+        let bestX = rawX;
+        let bestY = rawY;
+
+        if (windows.length === 0) return { x: rawX, y: rawY };
+
+        for (let i = 0; i < windows.length; i++) {
+            let data = windows[i].lastIpcObject; // Raw hyprctl data
+            if (!data) continue;
+
+            let winX = data.at[0] - root.screen.x;
+            let winY = data.at[1] - root.screen.y;
+            let winR = winX + data.size[0];
+            let winB = winY + data.size[1];
+
+            if (Math.abs(rawX - winX) < snapDist) bestX = winX;
+            else if (Math.abs(rawX - winR) < snapDist) bestX = winR;
+
+            if (Math.abs(rawY - winY) < snapDist) bestY = winY;
+            else if (Math.abs(rawY - winB) < snapDist) bestY = winB;
+        }
+        return { x: bestX, y: bestY };
+    }
+
+    // Identifies a window at specific coordinates (for single-click selection)
+    function findWindowAt(mx, my) {
+        for (let i = windows.length - 1; i >= 0; i--) {
+            let data = windows[i].lastIpcObject;
+            if (!data) continue;
+
+            let winX = data.at[0] - root.screen.x;
+            let winY = data.at[1] - root.screen.y;
+
+            if (mx >= winX && mx <= winX + data.size[0] && 
+                my >= winY && my <= winY + data.size[1]) {
+                Logger.s("SCREENSHOT", `Window detected: [${data.class}]`);
+                return { x: data.at[0], y: data.at[1], w: data.size[0], h: data.size[1] };
+            }
+        }
+        return null;
+    }
+
+    // Darkens the screen outside the selection area
     Rectangle {
         id: topDim
-        anchors {
-            top: parent.top
-            bottom: selectionRect.top
-            left: parent.left
-            right: parent.right
-        }
         color: root.overlayColor
         visible: root.showOverlay
+        anchors { top: parent.top; bottom: selectionRect.top; left: parent.left; right: parent.right }
     }
     Rectangle {
         id: bottomDim
-        anchors {
-            top: selectionRect.bottom
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-        }
         color: root.overlayColor
         visible: root.showOverlay
+        anchors { top: selectionRect.bottom; bottom: parent.bottom; left: parent.left; right: parent.right }
     }
     Rectangle {
         id: leftDim
-        anchors {
-            top: selectionRect.top
-            bottom: selectionRect.bottom
-            left: parent.left
-            right: selectionRect.left
-        }
         color: root.overlayColor
         visible: root.showOverlay
+        anchors { top: selectionRect.top; bottom: selectionRect.bottom; left: parent.left; right: selectionRect.left }
     }
     Rectangle {
         id: rightDim
-        anchors {
-            top: selectionRect.top
-            bottom: selectionRect.bottom
-            left: selectionRect.right
-            right: parent.right
-        }
         color: root.overlayColor
         visible: root.showOverlay
+        anchors { top: selectionRect.top; bottom: selectionRect.bottom; left: selectionRect.right; right: parent.right }
     }
 
     MouseArea {
@@ -119,26 +163,44 @@ StyledWindow {
         cursorShape: Qt.CrossCursor
 
         onPressed: mouse => {
-            root.startX = mouse.x;
-            root.startY = mouse.y;
-            root.currentX = mouse.x;
-            root.currentY = mouse.y;
+            let snapped = root.getSnappedPoint(mouse.x, mouse.y);
+            root.startX = snapped.x;
+            root.startY = snapped.y;
+            root.currentX = snapped.x;
+            root.currentY = snapped.y;
             root.dragging = true;
             root.hasSelection = false;
         }
 
         onPositionChanged: mouse => {
             if (dragging) {
-                root.currentX = mouse.x;
-                root.currentY = mouse.y;
+                let snapped = root.getSnappedPoint(mouse.x, mouse.y);
+                root.currentX = snapped.x;
+                root.currentY = snapped.y;
             }
         }
 
-        onReleased: {
+        onReleased: mouse => {
             root.dragging = false;
+
+            // Handle single click (select window automatically)
+            if (rectW < 10 && rectH < 10) {
+                let winData = root.findWindowAt(mouse.x, mouse.y);
+                if (winData) {
+                    root.startX = winData.x - root.screen.x;
+                    root.startY = winData.y - root.screen.y;
+                    root.currentX = root.startX + winData.w;
+                    root.currentY = root.startY + winData.h;
+                    root.hasSelection = true;
+                    return;
+                }
+            }
+
             if (rectW > 5 && rectH > 5) {
                 root.hasSelection = true;
                 Logger.i("SCREENSHOT", `Region fixed: ${rectW}x${rectH}`);
+            } else {
+                root.hasSelection = false;
             }
         }
     }
@@ -170,10 +232,13 @@ StyledWindow {
         border.color: Colors.palette.m3outlineVariant
         border.width: 1
 
-        anchors.horizontalCenter: selectionRect.horizontalCenter
-        anchors.top: selectionRect.bottom
-        anchors.topMargin: 10
+        anchors {
+            horizontalCenter: selectionRect.horizontalCenter
+            top: selectionRect.bottom
+            topMargin: 10
+        }
 
+        // Adaptive positioning: move toolbar above the selection if bottom edge is reached
         states: [
             State {
                 name: "TOP"
@@ -198,20 +263,17 @@ StyledWindow {
             TextIconButton {
                 icon: "content_copy"
                 text: "Copy"
-                onClicked: {
-                    root.prepareCapture("copy");
-                }
+                onClicked: root.prepareCapture("copy")
                 padding: Appearance.padding.small
             }
 
             TextIconButton {
                 icon: "save_as"
                 text: "Save"
-                onClicked: {
-                    root.prepareCapture("save");
-                }
+                onClicked: root.prepareCapture("save")
                 padding: Appearance.padding.small
             }
+
             TextIconButton {
                 icon: "edit"
                 text: "Edit"
@@ -221,27 +283,19 @@ StyledWindow {
         }
     }
 
+
     Timer {
         id: captureTimer
-        interval: 100
+        interval: 150 // Small delay 
         repeat: false
-
         property string mode: ""
-
-        onTriggered: {
-            root.captureAction(mode);
-        }
+        onTriggered: root.captureAction(mode)
     }
 
     function prepareCapture(mode) {
-        if (rectW < 2 || rectH < 2) {
-            GlobalStates.screenshotOpened = false;
-            return;
-        }
-
+        // hide ui before shot
         root.hasSelection = false;
         root.dragging = false;
-
         captureTimer.mode = mode;
         captureTimer.start();
     }
@@ -262,18 +316,18 @@ StyledWindow {
         let cmd = "";
 
         switch (mode) {
-        case "copy":
-            cmd = `${prepareDir} && grim -g "${geometry}" - | wl-copy && notify-send -a "shell" "Screenshot" "Copied to clipboard"`;
-            break;
-        case "save":
-            cmd = `${prepareDir} && grim -g "${geometry}" "${fullPath}" && notify-send -a "shell" "Screenshot" "Saved at: ${fullPath}"`;
-            break;
-        case "edit":
-            cmd = `grim -g "${geometry}" - | satty --filename -`;
-            break;
+            case "copy":
+                cmd = `${prepareDir} && grim -g "${geometry}" - | wl-copy && notify-send -a "shell" "Screenshot" "Copied to clipboard"`;
+                break;
+            case "save":
+                cmd = `${prepareDir} && grim -g "${geometry}" "${fullPath}" && notify-send -a "shell" "Screenshot" "Saved at: ${fullPath}"`;
+                break;
+            case "edit":
+                cmd = `grim -g "${geometry}" - | satty --filename -`;
+                break;
         }
 
-        Logger.i("SCREENSHOT", `Capture: ${mode} [${geometry}]`);
+        Logger.s("SCREENSHOT", `Action: ${mode.toUpperCase()} | Geo: ${geometry}`);
         Quickshell.execDetached(["sh", "-c", cmd]);
 
         GlobalStates.screenshotOpened = false;
