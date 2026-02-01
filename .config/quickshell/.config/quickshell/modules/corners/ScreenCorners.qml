@@ -23,6 +23,7 @@ StyledWindow {
         bottom: true
     }
     exclusionMode: ExclusionMode.Auto
+    WlrLayershell.layer: WlrLayer.Top
     mask: Region {}
 
     Corners {

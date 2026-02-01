@@ -69,8 +69,8 @@ ContentPage {
             value: Config.bar.tray.desaturation
             from: 0
             to: 1
-            // step: 99
-            // suffix: "%"
+            step: 100
+            suffix: "%"
             onValueChanged: Config.bar.tray.desaturation = value
         }
 
@@ -245,6 +245,7 @@ ContentPage {
             value: Config.lock.dimOpacity
             from: 0
             to: 1
+            step: 100
             suffix: "%"
             onValueChanged: Config.lock.dimOpacity = value
         }

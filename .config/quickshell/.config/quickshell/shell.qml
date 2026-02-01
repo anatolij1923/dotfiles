@@ -25,22 +25,21 @@ ShellRoot {
     property bool enableBackground: true
     property bool enableBar: true
     property bool enableReloadPopup: false
-    property bool enableScreenCorners: true
+    property bool enableScreenCorners: false
     property bool enableLock: true
     property bool enablePowermenu: true
     property bool enableLauncher: true
     property bool enableQuicksettings: true
     property bool enableNotifications: true
-    property bool enableTit: true
+    property bool enableTit: false
     property bool enableOsd: true
-    property bool enableOverview: true
+    property bool enableOverview: false
     property bool enablePolkit: true
     property bool enableSettings: true
 
     Component.onCompleted: {
         Idle.init();
     }
-
 
     LazyLoader {
         active: root.enableBackground
