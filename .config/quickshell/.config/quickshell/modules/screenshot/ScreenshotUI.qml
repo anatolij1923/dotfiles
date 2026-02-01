@@ -10,8 +10,10 @@ import qs.common
 import qs.widgets
 import qs.services
 
-PanelWindow {
+StyledWindow {
     id: root
+
+    name: "screenshot"
 
     required property var modelData
     screen: modelData
@@ -258,10 +260,10 @@ PanelWindow {
 
         switch (mode) {
         case "copy":
-            cmd = `${prepareDir} && grim -g "${geometry}" - | wl-copy`;
+            cmd = `${prepareDir} && grim -g "${geometry}" - | wl-copy && notify-send -a "shell" "Screenshot" "Copied to clipboard"`;
             break;
         case "save":
-            cmd = `${prepareDir} && grim -g "${geometry}" "${fullPath}"`;
+            cmd = `${prepareDir} && grim -g "${geometry}" "${fullPath}" && notify-send -a "shell" "Screenshot" "Saved to ${fullPath}"`;
             break;
         case "edit":
             cmd = `grim -g "${geometry}" - | satty --filename -`;
