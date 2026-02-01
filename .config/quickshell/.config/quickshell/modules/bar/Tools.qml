@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import qs.services
 import qs.common
 import qs.widgets
@@ -12,6 +13,10 @@ BarWidget {
                 icon: "colorize"
                 inactiveColor: "transparent"
                 iconSize: 24
+
+                onClicked: {
+                    Quickshell.execDetached([`${Quickshell.shellDir}/scripts/colorpicker.sh`]);
+                }
             }
             IconButton {
                 icon: "screenshot_region"
