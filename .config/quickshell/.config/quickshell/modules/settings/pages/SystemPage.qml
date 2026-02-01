@@ -237,9 +237,8 @@ ContentPage {
         SliderRow {
             label: "Dim opacity"
             value: Config.lock.dimOpacity
-            from: -1
-            to: 0
-            step: 99
+            from: 0
+            to: 1
             suffix: "%"
             onValueChanged: Config.lock.dimOpacity = value
         }
