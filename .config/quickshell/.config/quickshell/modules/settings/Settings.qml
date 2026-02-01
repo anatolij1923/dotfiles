@@ -18,7 +18,7 @@ Scope {
 
         sourceComponent: FloatingWindow {
             id: settingsRoot
-            title: "chroma-settings"
+            title: "quickshell-settings"
             visible: true
 
             color: Colors.palette.m3surface
