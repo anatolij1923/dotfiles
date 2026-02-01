@@ -15,6 +15,8 @@ Rectangle {
     property real alpha: Config.appearance.transparency.alpha
     property bool transparent: Config.appearance.transparency.enabled
 
+    property bool transparentWidgets: Config.bar.transparentCenterWidgets
+
     implicitHeight: parent.height * 0.8
 
     implicitWidth: layout.implicitWidth + (padding * 2)
@@ -22,7 +24,8 @@ Rectangle {
     property int padding: Appearance.padding.normal
 
     radius: Appearance.rounding.normal
-    color: transparent ? Qt.alpha(Colors.palette.m3surfaceContainerLow, alpha - 0.2) : Colors.palette.m3surfaceContainerLow
+    color: transparentWidgets ? "transparent" : transparent ? Qt.alpha(Colors.palette.m3surfaceContainerLow, alpha - 0.2) : Colors.palette.m3surfaceContainerLow
+
     Behavior on color {
         CAnim {}
     }

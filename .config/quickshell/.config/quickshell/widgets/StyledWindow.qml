@@ -4,6 +4,6 @@ import Quickshell.Wayland
 PanelWindow {
     required property string name
 
-    WlrLayershell.namespace: `chroma:${name}`
+    WlrLayershell.namespace: `quickshell:${name}`
     color: "transparent"
 }

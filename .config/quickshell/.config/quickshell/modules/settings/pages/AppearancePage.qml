@@ -102,8 +102,8 @@ ContentPage {
         SliderRow {
             label: "Dim transparency"
             value: Config.background.dim.opacity
-            from: 0
-            to: 1
+            from: 0.1
+            to: 0.8
             step: 100
             suffix: "%"
             onValueChanged: Config.background.dim.opacity = value

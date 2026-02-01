@@ -17,6 +17,15 @@ BarWidget {
                 inactiveColor: "transparent"
                 iconSize: 24
             }
+            IconButton {
+                icon: "mic"
+                inactiveColor: "transparent"
+                iconSize: 24
+
+                onClicked: {
+                    Audio.source.audio.muted = !Audio.source.audio.muted;
+                }
+            }
         }
     ]
 }
