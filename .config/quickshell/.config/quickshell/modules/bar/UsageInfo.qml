@@ -17,12 +17,12 @@ BarWidget {
             RowLayout {
                 id: mem
                 CircularProgress {
-                    implicitSize: 30
+                    implicitSize: 32
                     MaterialSymbol {
                         anchors.centerIn: parent
                         color: Colors.palette.m3onSurface
                         icon: "memory_alt"
-                        size: 20
+                        size: 22
                     }
                     value: SystemUsage.memoryUsedPercentage
                 }

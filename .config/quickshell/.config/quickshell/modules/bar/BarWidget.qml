@@ -29,6 +29,7 @@ Rectangle {
 
     RowLayout {
         id: layout
+        z: 100
         anchors.centerIn: parent
         spacing: 4
     }
