@@ -3,6 +3,7 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 import qs.services
+import qs.common
 import qs.common.functions
 
 Singleton {

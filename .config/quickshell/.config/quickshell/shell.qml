@@ -19,6 +19,7 @@ import qs.modules.osd
 import qs.modules.overview
 import qs.modules.polkit
 import qs.modules.settings
+import qs.modules.screenshot
 
 ShellRoot {
     id: root
@@ -36,6 +37,7 @@ ShellRoot {
     property bool enableOverview: false
     property bool enablePolkit: true
     property bool enableSettings: true
+    property bool enableScreenshot: true
 
     Component.onCompleted: {
         Idle.init();
@@ -103,5 +105,10 @@ ShellRoot {
     LazyLoader {
         active: root.enableSettings
         component: Settings {}
+    }
+
+    LazyLoader {
+        active: root.enableScreenshot
+        component: ScreenshotManager {}
     }
 }
