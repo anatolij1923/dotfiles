@@ -22,19 +22,18 @@ BarPopup {
     }
 
     padding: Appearance.padding.larger
-    
+
     ColumnLayout {
         spacing: 12
 
         RowLayout {
             spacing: 8
-            
+
             StyledText {
                 text: `${Battery.percentage}%`
-                size: 32
+                size: Appearance.font.size.huge
                 weight: 600
-                                color: Colors.palette.m3onSurface
-
+                color: Colors.palette.m3onSurface
             }
 
             Item {
@@ -43,39 +42,36 @@ BarPopup {
 
             StyledText {
                 text: Battery.isCharging ? "Charging" : "Discharging"
-                size: 20
+                size: Appearance.font.size.large
                 weight: 500
 
                 color: Colors.palette.m3onSurface
-                
             }
         }
 
         RowLayout {
             Layout.fillWidth: true
-            
+
             Rectangle {
                 id: progressBarBg
                 Layout.fillWidth: true
-                height: 8
+                implicitHeight: 8
                 radius: 4
                 color: Colors.palette.m3surfaceVariant
                 border.color: Colors.palette.m3outline
                 border.width: 1
-                
+
                 Rectangle {
                     id: progressBarFill
-                    height: parent.height
+                    implicitHeight: parent.height
                     width: (Battery.percentage / 100) * parent.width
                     radius: 4
-                    color: Battery.isCharging ? Colors.palette.m3primary : 
-                           (Battery.percentage <= Config.battery.low ? Colors.palette.m3error : 
-                            (Battery.percentage <= Config.battery.critical ? Colors.palette.m3error : Colors.palette.m3secondary))
-                    
+                    color: Battery.isCharging ? Colors.palette.m3primary : Colors.palette.m3secondary
+
                     Behavior on color {
                         CAnim {}
                     }
-                    
+
                     Behavior on width {
                         Anim {}
                     }
@@ -85,13 +81,13 @@ BarPopup {
 
         RowLayout {
             spacing: 8
-            
+
             Rectangle {
                 implicitWidth: 36
                 implicitHeight: 36
                 radius: Appearance.rounding.full
                 color: Colors.palette.m3secondaryContainer
-                
+
                 MaterialSymbol {
                     icon: Battery.isCharging ? "bolt" : "schedule"
                     anchors.centerIn: parent
@@ -110,32 +106,29 @@ BarPopup {
                         return root.formatTime(Battery.timeToEmpty) + " remaining";
                     }
                 }
-                size: 16
-                                color: Colors.palette.m3onSurface
-
+                size: Appearance.font.size.normal
+                color: Colors.palette.m3onSurface
             }
-            
+
             Item {
                 Layout.fillWidth: true
             }
-            
+
             RowLayout {
                 visible: Battery.energyRate > 0
-                
+
                 MaterialSymbol {
                     icon: "power"
                     color: Colors.palette.m3secondary
                     size: 20
                 }
-                
+
                 StyledText {
                     text: Battery.energyRate.toFixed(1) + " W"
-                    size: 16
+                    size: Appearance.font.size.normal
                     color: Colors.palette.m3onSurfaceVariant
                 }
             }
         }
-
-        
     }
 }
