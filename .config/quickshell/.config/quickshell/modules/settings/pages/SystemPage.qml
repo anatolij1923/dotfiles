@@ -85,6 +85,12 @@ ContentPage {
             value: Config.bar.battery.showPercentage
             onToggled: Config.bar.battery.showPercentage = value
         }
+
+        SwitchRow {
+            label: "Trasparent center widgets"
+            value: Config.bar.transparentCenterWidgets
+            onToggled: Config.bar.transparentCenterWidgets = value
+        }
     }
 
     ContentItem {

@@ -8,6 +8,8 @@ JsonObject {
     property bool floating: false
     property bool monochromeTrayIcons: false
 
+    property bool transparentCenterWidgets: false
+
     property Tray tray: Tray {}
     property Battery battery: Battery {}
 
