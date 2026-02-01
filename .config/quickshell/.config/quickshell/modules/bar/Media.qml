@@ -76,7 +76,7 @@ BarWidget {
             }
 
             StyledText {
-                text: `${root.trackArtist} - ${root.trackTitle}`
+                text: !!root.player ? `${root.trackArtist} - ${root.trackTitle}` : "No media"
                 elide: Text.ElideRight
                 Layout.maximumWidth: 200
             }

@@ -26,7 +26,7 @@ ShellRoot {
     property bool enableBackground: true
     property bool enableBar: true
     property bool enableReloadPopup: false
-    property bool enableScreenCorners: false
+    property bool enableScreenCorners: true
     property bool enableLock: true
     property bool enablePowermenu: true
     property bool enableLauncher: true
