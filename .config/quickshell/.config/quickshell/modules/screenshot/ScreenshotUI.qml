@@ -38,16 +38,14 @@ StyledWindow {
 
     // Filter windows belonging to the current monitor and active workspace
     readonly property var windows: {
-        if (!Hyprland || !Hyprland.toplevels) return [];
+        if (!Hyprland || !Hyprland.toplevels)
+            return [];
 
         const activeWs = Hyprland.focusedWorkspace;
         const activeWorkspaceId = activeWs ? activeWs.id : -1;
 
         return Hyprland.toplevels.values.filter(w => {
-            return w.monitor && 
-                   w.monitor.name === root.screen.name && 
-                   w.workspace && 
-                   w.workspace.id === activeWorkspaceId;
+            return w.monitor && w.monitor.name === root.screen.name && w.workspace && w.workspace.id === activeWorkspaceId;
         });
     }
 
@@ -58,13 +56,17 @@ StyledWindow {
     ScreencopyView {
         anchors.fill: parent
         captureSource: root.screen
-        live: false 
+        live: false
         focus: true
 
         Keys.onPressed: event => {
             if (event.key === Qt.Key_Escape) {
                 Logger.w("SCREENSHOT", "Cancelled");
                 GlobalStates.screenshotOpened = false;
+            }
+
+            if ((event.key === Qt.Key_Return || event.key === Qt.Key_Enter) && root.hasSelection) {
+                root.prepareCapture("copy");
             }
         }
     }
@@ -93,39 +95,56 @@ StyledWindow {
         let bestX = rawX;
         let bestY = rawY;
 
-        if (windows.length === 0) return { x: rawX, y: rawY };
+        if (windows.length === 0)
+            return {
+                x: rawX,
+                y: rawY
+            };
 
         for (let i = 0; i < windows.length; i++) {
             let data = windows[i].lastIpcObject; // Raw hyprctl data
-            if (!data) continue;
+            if (!data)
+                continue;
 
             let winX = data.at[0] - root.screen.x;
             let winY = data.at[1] - root.screen.y;
             let winR = winX + data.size[0];
             let winB = winY + data.size[1];
 
-            if (Math.abs(rawX - winX) < snapDist) bestX = winX;
-            else if (Math.abs(rawX - winR) < snapDist) bestX = winR;
+            if (Math.abs(rawX - winX) < snapDist)
+                bestX = winX;
+            else if (Math.abs(rawX - winR) < snapDist)
+                bestX = winR;
 
-            if (Math.abs(rawY - winY) < snapDist) bestY = winY;
-            else if (Math.abs(rawY - winB) < snapDist) bestY = winB;
+            if (Math.abs(rawY - winY) < snapDist)
+                bestY = winY;
+            else if (Math.abs(rawY - winB) < snapDist)
+                bestY = winB;
         }
-        return { x: bestX, y: bestY };
+        return {
+            x: bestX,
+            y: bestY
+        };
     }
 
     // Identifies a window at specific coordinates (for single-click selection)
     function findWindowAt(mx, my) {
         for (let i = windows.length - 1; i >= 0; i--) {
             let data = windows[i].lastIpcObject;
-            if (!data) continue;
+            if (!data)
+                continue;
 
             let winX = data.at[0] - root.screen.x;
             let winY = data.at[1] - root.screen.y;
 
-            if (mx >= winX && mx <= winX + data.size[0] && 
-                my >= winY && my <= winY + data.size[1]) {
+            if (mx >= winX && mx <= winX + data.size[0] && my >= winY && my <= winY + data.size[1]) {
                 Logger.s("SCREENSHOT", `Window detected: [${data.class}]`);
-                return { x: data.at[0], y: data.at[1], w: data.size[0], h: data.size[1] };
+                return {
+                    x: data.at[0],
+                    y: data.at[1],
+                    w: data.size[0],
+                    h: data.size[1]
+                };
             }
         }
         return null;
@@ -136,25 +155,45 @@ StyledWindow {
         id: topDim
         color: root.overlayColor
         visible: root.showOverlay
-        anchors { top: parent.top; bottom: selectionRect.top; left: parent.left; right: parent.right }
+        anchors {
+            top: parent.top
+            bottom: selectionRect.top
+            left: parent.left
+            right: parent.right
+        }
     }
     Rectangle {
         id: bottomDim
         color: root.overlayColor
         visible: root.showOverlay
-        anchors { top: selectionRect.bottom; bottom: parent.bottom; left: parent.left; right: parent.right }
+        anchors {
+            top: selectionRect.bottom
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+        }
     }
     Rectangle {
         id: leftDim
         color: root.overlayColor
         visible: root.showOverlay
-        anchors { top: selectionRect.top; bottom: selectionRect.bottom; left: parent.left; right: selectionRect.left }
+        anchors {
+            top: selectionRect.top
+            bottom: selectionRect.bottom
+            left: parent.left
+            right: selectionRect.left
+        }
     }
     Rectangle {
         id: rightDim
         color: root.overlayColor
         visible: root.showOverlay
-        anchors { top: selectionRect.top; bottom: selectionRect.bottom; left: selectionRect.right; right: parent.right }
+        anchors {
+            top: selectionRect.top
+            bottom: selectionRect.bottom
+            left: selectionRect.right
+            right: parent.right
+        }
     }
 
     MouseArea {
@@ -232,28 +271,19 @@ StyledWindow {
         border.color: Colors.palette.m3outlineVariant
         border.width: 1
 
-        anchors {
-            horizontalCenter: selectionRect.horizontalCenter
-            top: selectionRect.bottom
-            topMargin: 10
-        }
+        anchors.horizontalCenter: selectionRect.horizontalCenter
 
-        // Adaptive positioning: move toolbar above the selection if bottom edge is reached
-        states: [
-            State {
-                name: "TOP"
-                when: (selectionRect.y + selectionRect.height + toolbar.height + 20) > root.height
-                AnchorChanges {
-                    target: toolbar
-                    anchors.top: undefined
-                    anchors.bottom: selectionRect.top
-                }
-                PropertyChanges {
-                    target: toolbar
-                    anchors.bottomMargin: 10
-                }
+        // Task 1: Fix Toolbar Overflow
+        // We use a manual y coordinate clamped to screen boundaries
+        y: {
+            let preferredY = selectionRect.y + selectionRect.height + 10;
+            // If the selection reaches the bottom, move toolbar above it
+            if (preferredY + height + 20 > root.height) {
+                preferredY = selectionRect.y - height - 10;
             }
-        ]
+            // Final clamp to ensure it's always visible within screen margins
+            return Math.min(Math.max(preferredY, 20), root.height - height - 20);
+        }
 
         RowLayout {
             id: toolbarContent
@@ -283,10 +313,9 @@ StyledWindow {
         }
     }
 
-
     Timer {
         id: captureTimer
-        interval: 150 // Small delay 
+        interval: 150 // Small delay
         repeat: false
         property string mode: ""
         onTriggered: root.captureAction(mode)
@@ -298,6 +327,16 @@ StyledWindow {
         root.dragging = false;
         captureTimer.mode = mode;
         captureTimer.start();
+    }
+
+    function captureFullscreen(mode) {
+        Logger.i("SCREENSHOT", `Fullscreen capture triggered: ${mode}`);
+        // Reset selection properties to full screen dimensions
+        root.startX = 0;
+        root.startY = 0;
+        root.currentX = root.width;
+        root.currentY = root.height;
+        root.prepareCapture(mode);
     }
 
     function captureAction(mode) {
@@ -316,15 +355,15 @@ StyledWindow {
         let cmd = "";
 
         switch (mode) {
-            case "copy":
-                cmd = `${prepareDir} && grim -g "${geometry}" - | wl-copy && notify-send -a "shell" "Screenshot" "Copied to clipboard"`;
-                break;
-            case "save":
-                cmd = `${prepareDir} && grim -g "${geometry}" "${fullPath}" && notify-send -a "shell" "Screenshot" "Saved at: ${fullPath}"`;
-                break;
-            case "edit":
-                cmd = `grim -g "${geometry}" - | satty --filename -`;
-                break;
+        case "copy":
+            cmd = `${prepareDir} && grim -g "${geometry}" - | wl-copy && notify-send -a "shell" "Screenshot" "Copied to clipboard"`;
+            break;
+        case "save":
+            cmd = `${prepareDir} && grim -g "${geometry}" "${fullPath}" && notify-send -a "shell" "Screenshot" "Saved at: ${fullPath}"`;
+            break;
+        case "edit":
+            cmd = `grim -g "${geometry}" - | satty --filename -`;
+            break;
         }
 
         Logger.s("SCREENSHOT", `Action: ${mode.toUpperCase()} | Geo: ${geometry}`);
