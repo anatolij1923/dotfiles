@@ -213,7 +213,7 @@ PanelWindow {
             TextIconButton {
                 icon: "edit"
                 text: "Edit"
-                onClicked: captureAction("edit")
+                onClicked: root.prepareCapture("edit")
                 padding: Appearance.padding.small
             }
         }
