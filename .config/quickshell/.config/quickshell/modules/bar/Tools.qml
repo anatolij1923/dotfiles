@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import qs.services
 import qs.common
 import qs.widgets
+import qs
 
 BarWidget {
     rowContent: [
@@ -16,6 +17,10 @@ BarWidget {
                 icon: "screenshot_region"
                 inactiveColor: "transparent"
                 iconSize: 24
+
+                onClicked: {
+                    GlobalStates.screenshotOpened = true;
+                }
             }
             IconButton {
                 icon: "mic"
