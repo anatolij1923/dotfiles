@@ -47,6 +47,10 @@ Item {
             text: root.getAppName(root.activeWindow)
             weight: 400
             size: Appearance.font.size.normal
+            opacity: text === "Desktop" ? 0.7 : 1
+            Behavior on opacity {
+                Anim {}
+            }
         }
 
         Rectangle {
