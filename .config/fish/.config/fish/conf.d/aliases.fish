@@ -1,5 +1,5 @@
 # List directories
-abbr -a ls "eza -1  --color=always --icons=always"
+alias ls="eza -1  --color=always --group-directories-first --icons=always"
 abbr -a ll "eza -la --color=always --icons=always --git"
 abbr -a tree "eza --tree"
 
