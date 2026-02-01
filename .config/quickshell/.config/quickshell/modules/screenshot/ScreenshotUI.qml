@@ -184,7 +184,7 @@ StyledWindow {
         }
         onReleased: mouse => {
             root.dragging = false;
-            if (rectW < 10 && rectH < 10) {
+            if (root.rectW < 10 && root.rectH < 10) {
                 let win = root.findWindowAt(mouse.x, mouse.y);
                 if (win) {
                     root.startX = win.x - root.screen.x;
@@ -195,16 +195,16 @@ StyledWindow {
                     return;
                 }
             }
-            root.hasSelection = (rectW > 5 && rectH > 5);
+            root.hasSelection = (root.rectW > 5 && root.rectH > 5);
         }
     }
 
     Rectangle {
         id: selectionRect
-        x: rectX
-        y: rectY
-        width: rectW
-        height: rectH
+        x: root.rectX
+        y: root.rectY
+        width: root.rectW
+        height: root.rectH
         color: "transparent"
         border.color: Colors.palette.m3primary
         border.width: 2
@@ -272,11 +272,11 @@ StyledWindow {
         repeat: false
         property string mode: ""
         onTriggered: {
-            manager.capture(root.screen, {
-                x: rectX,
-                y: rectY,
-                w: rectW,
-                h: rectH
+            root.manager.capture(root.screen, {
+                x: root.rectX,
+                y: root.rectY,
+                w: root.rectW,
+                h: root.rectH
             }, mode);
             GlobalStates.screenshotOpened = false;
         }
