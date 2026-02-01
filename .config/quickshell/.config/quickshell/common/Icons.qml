@@ -46,6 +46,8 @@ Singleton {
             return "person";
         if (summary.includes("file"))
             return "folder_copy";
+        if (summary.includes("color"))
+            return "colorize";
         if (urgency === NotificationUrgency.Critical)
             return "release_alert";
         return "chat";
