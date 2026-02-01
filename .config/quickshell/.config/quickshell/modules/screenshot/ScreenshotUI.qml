@@ -234,7 +234,10 @@ StyledWindow {
     }
 
     function prepareCapture(mode) {
-        Logger.i("SCREENSHOT", `Preparing mode: ${mode}`);
+        if (rectW < 2 || rectH < 2) {
+            GlobalStates.screenshotOpened = false;
+            return;
+        }
 
         root.hasSelection = false;
         root.dragging = false;
@@ -244,33 +247,33 @@ StyledWindow {
     }
 
     function captureAction(mode) {
-        let s = root.screenScale;
-        let x = Math.round((root.screen.x + rectX) * s);
-        let y = Math.round((root.screen.y + rectY) * s);
-        let w = Math.round(rectW * s);
-        let h = Math.round(rectH * s);
+        const s = root.screenScale;
+        const x = Math.round((root.screen.x + rectX) * s);
+        const y = Math.round((root.screen.y + rectY) * s);
+        const w = Math.round(rectW * s);
+        const h = Math.round(rectH * s);
 
-        let geometry = `${x},${y} ${w}x${h}`;
-        let timestamp = Qt.formatDateTime(new Date(), "yyyyMMdd_HHmmss");
-        let fileName = `Screenshot_${timestamp}.png`;
-        let fullPath = `${screenshotDir}/${fileName}`;
+        const geometry = `${x},${y} ${w}x${h}`;
+        const timestamp = Qt.formatDateTime(new Date(), "yyyyMMdd_HHmmss");
+        const fileName = `Screenshot_${timestamp}.png`;
+        const fullPath = `${screenshotDir}/${fileName}`;
+        const prepareDir = `mkdir -p "${screenshotDir}"`;
 
         let cmd = "";
-        let prepareDir = `mkdir -p "${screenshotDir}"`;
 
         switch (mode) {
         case "copy":
             cmd = `${prepareDir} && grim -g "${geometry}" - | wl-copy && notify-send -a "shell" "Screenshot" "Copied to clipboard"`;
             break;
         case "save":
-            cmd = `${prepareDir} && grim -g "${geometry}" "${fullPath}" && notify-send -a "shell" "Screenshot" "Saved to ${fullPath}"`;
+            cmd = `${prepareDir} && grim -g "${geometry}" "${fullPath}" && notify-send -a "shell" "Screenshot" "Saved at: ${fullPath}"`;
             break;
         case "edit":
             cmd = `grim -g "${geometry}" - | satty --filename -`;
             break;
         }
 
-        Logger.i("SCREENSHOT", `Action: ${mode} | Cmd: ${cmd}`);
+        Logger.i("SCREENSHOT", `Capture: ${mode} [${geometry}]`);
         Quickshell.execDetached(["sh", "-c", cmd]);
 
         GlobalStates.screenshotOpened = false;
