@@ -13,8 +13,15 @@ import qs.services
 PanelWindow {
     id: root
 
+    required property var modelData
+    screen: modelData
+
+    property string screenshotDir: `${Paths.strip(Paths.pictures)}/Screenshots`
+
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
+
+    exclusionMode: ExclusionMode.Ignore
 
     color: "transparent"
     anchors {
@@ -24,34 +31,40 @@ PanelWindow {
         left: true
     }
 
-    // Закрытие на Escape
+    readonly property real screenScale: root.screen.devicePixelRatio || 1.0
+
+    Component.onCompleted: {
+        Logger.i("SCREENSHOT", `UI opened on screen ${root.screen.name} (Scale: ${screenScale})`);
+    }
 
     ScreencopyView {
         anchors.fill: parent
         captureSource: root.screen
         live: false
         focus: true
+
         Keys.onPressed: event => {
-            if (event.key === Qt.Key_Escape)
+            if (event.key === Qt.Key_Escape) {
+                Logger.w("SCREENSHOT", "Cancelled by user (Escape)");
                 GlobalStates.screenshotOpened = false;
+            }
         }
     }
 
-    // --- ЛОГИКА ВЫДЕЛЕНИЯ ---
     property int startX: 0
     property int startY: 0
     property int currentX: 0
     property int currentY: 0
     property bool dragging: false
-    property bool hasSelection: false // Фиксируем, что выбор сделан
+    property bool hasSelection: false
 
     readonly property int rectX: Math.min(startX, currentX)
     readonly property int rectY: Math.min(startY, currentY)
     readonly property int rectW: Math.abs(currentX - startX)
     readonly property int rectH: Math.abs(currentY - startY)
 
-    // --- ВИЗУАЛ: ЗАТЕМНЕНИЕ (4 прямоугольника вокруг выбора) ---
     readonly property color overlayColor: "#80000000"
+    readonly property bool showOverlay: root.dragging || root.hasSelection
 
     Rectangle {
         id: topDim
@@ -61,7 +74,8 @@ PanelWindow {
             left: parent.left
             right: parent.right
         }
-        color: overlayColor
+        color: root.overlayColor
+        visible: root.showOverlay
     }
     Rectangle {
         id: bottomDim
@@ -71,7 +85,8 @@ PanelWindow {
             left: parent.left
             right: parent.right
         }
-        color: overlayColor
+        color: root.overlayColor
+        visible: root.showOverlay
     }
     Rectangle {
         id: leftDim
@@ -81,7 +96,8 @@ PanelWindow {
             left: parent.left
             right: selectionRect.left
         }
-        color: overlayColor
+        color: root.overlayColor
+        visible: root.showOverlay
     }
     Rectangle {
         id: rightDim
@@ -91,7 +107,8 @@ PanelWindow {
             left: selectionRect.right
             right: parent.right
         }
-        color: overlayColor
+        color: root.overlayColor
+        visible: root.showOverlay
     }
 
     MouseArea {
@@ -119,11 +136,11 @@ PanelWindow {
             root.dragging = false;
             if (rectW > 5 && rectH > 5) {
                 root.hasSelection = true;
+                Logger.i("SCREENSHOT", `Region fixed: ${rectW}x${rectH}`);
             }
         }
     }
 
-    // Рамка выбора
     Rectangle {
         id: selectionRect
         x: rectX
@@ -134,14 +151,13 @@ PanelWindow {
         border.color: Colors.palette.m3primary
         border.width: 2
         radius: Appearance.rounding.small
-        visible: root.dragging || root.hasSelection
+        visible: root.showOverlay
     }
 
-    // --- ТУЛБАР ---
     Rectangle {
         id: toolbar
         z: 15
-        visible: root.hasSelection && !root.dragging // Показываем только когда выбор готов
+        visible: root.hasSelection && !root.dragging
 
         property int padding: Appearance.padding.normal
         implicitWidth: toolbarContent.implicitWidth + padding * 2
@@ -152,16 +168,14 @@ PanelWindow {
         border.color: Colors.palette.m3outlineVariant
         border.width: 1
 
-        anchors {
-            top: selectionRect.bottom
-            topMargin: 10
-            horizontalCenter: selectionRect.horizontalCenter
-        }
+        anchors.horizontalCenter: selectionRect.horizontalCenter
+        anchors.top: selectionRect.bottom
+        anchors.topMargin: 10
 
-        // Если тулбар вылетает за границы экрана снизу - перекидываем его наверх
         states: [
             State {
-                when: (toolbar.y + toolbar.height) > root.height
+                name: "TOP"
+                when: (selectionRect.y + selectionRect.height + toolbar.height + 20) > root.height
                 AnchorChanges {
                     target: toolbar
                     anchors.top: undefined
@@ -203,25 +217,35 @@ PanelWindow {
     }
 
     function captureAction(mode) {
-        let x = rectX;
-        let y = rectY;
-        let w = rectW;
-        let h = rectH;
+        let s = root.screenScale;
+        let x = Math.round((root.screen.x + rectX) * s);
+        let y = Math.round((root.screen.y + rectY) * s);
+        let w = Math.round(rectW * s);
+        let h = Math.round(rectH * s);
+
         let geometry = `${x},${y} ${w}x${h}`;
-        let timestamp = new Date().getTime();
-        let path = `/tmp/screenshot_${timestamp}.png`;
+        let timestamp = Qt.formatDateTime(new Date(), "yyyyMMdd_HHmmss");
+        let fileName = `Screenshot_${timestamp}.png`;
+        let fullPath = `${screenshotDir}/${fileName}`;
 
         let cmd = "";
-        if (mode === "copy") {
-            cmd = `grim -g "${geometry}" - | wl-copy`;
-        } else if (mode === "save") {
-            // Тут можно добавить диалог или просто сохранять в ~/Pictures
-            cmd = `grim -g "${geometry}" ~/Pictures/Screenshot_${timestamp}.png`;
-        } else if (mode === "edit") {
+        let prepareDir = `mkdir -p "${screenshotDir}"`;
+
+        switch (mode) {
+        case "copy":
+            cmd = `${prepareDir} && grim -g "${geometry}" - | wl-copy`;
+            break;
+        case "save":
+            cmd = `${prepareDir} && grim -g "${geometry}" "${fullPath}"`;
+            break;
+        case "edit":
             cmd = `grim -g "${geometry}" - | satty --filename -`;
+            break;
         }
 
+        Logger.i("SCREENSHOT", `Action: ${mode} | Cmd: ${cmd}`);
         Quickshell.execDetached(["sh", "-c", cmd]);
-        GlobalStates.screenshotOpened = false; // Закрываем всё
+
+        GlobalStates.screenshotOpened = false;
     }
 }
