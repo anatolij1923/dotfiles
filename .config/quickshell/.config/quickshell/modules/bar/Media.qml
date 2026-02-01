@@ -78,7 +78,7 @@ BarWidget {
             StyledText {
                 text: `${root.trackArtist} - ${root.trackTitle}`
                 elide: Text.ElideRight
-                Layout.maximumWidth: 250
+                Layout.maximumWidth: 200
             }
         }
     ]
