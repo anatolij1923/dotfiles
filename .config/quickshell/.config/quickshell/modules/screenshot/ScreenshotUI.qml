@@ -257,6 +257,12 @@ StyledWindow {
                 onClicked: root.prepareCapture("edit")
                 padding: Appearance.padding.small
             }
+            TextIconButton {
+                icon: "dictionary"
+                text: "OCR"
+                onClicked: root.prepareCapture("ocr")
+                padding: Appearance.padding.small
+            }
         }
     }
 

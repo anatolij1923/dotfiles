@@ -35,6 +35,15 @@ Scope {
         case "edit":
             cmd = `grim -g "${geometry}" - | satty --filename -`;
             break;
+        case "ocr":
+            // 1. Get the list of languages: tesseract --list-langs
+            // 2. Skip first line: awk 'NR>1{print $1}'
+            // 3. Join with '+': tr '\n' '+'
+            // 4. Remove trailing plus: sed 's/+$//'
+            let getLangs = "tesseract --list-langs | awk 'NR>1{print $1}' | tr '\\n' '+' | sed 's/+$//'";
+            // tesseract stdin stdout - outputs directly to pipes
+            cmd = `grim -g "${geometry}" - | tesseract stdin stdout -l "$(${getLangs})" | wl-copy && notify-send -a "shell" "Screenshot" "Text copied to clipboard"`;
+            break;
         }
 
         Logger.s("SCREENSHOT", `Capture [${mode.toUpperCase()}]: ${geometry}`);
