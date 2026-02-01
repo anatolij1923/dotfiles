@@ -35,14 +35,23 @@ Rectangle {
         AppName {}
     }
 
+    Media {
+        anchors {
+            right: usageInfo.left
+            verticalCenter: parent.verticalCenter
+            rightMargin: Appearance.padding.smaller
+        }
+    }
+
     UsageInfo {
+        id: usageInfo
         anchors {
             right: clock.left
             rightMargin: Appearance.padding.smaller
             verticalCenter: parent.verticalCenter
         }
     }
-    //
+
     ClockWidget {
         id: clock
         anchors {
@@ -51,11 +60,20 @@ Rectangle {
             bottom: parent.bottom
         }
     }
-    //
+
     WeatherWidget {
         id: weather
         anchors {
             left: clock.right
+            leftMargin: Appearance.padding.smaller
+            verticalCenter: parent.verticalCenter
+        }
+    }
+
+    Tools {
+        id: tools
+        anchors {
+            left: weather.right
             leftMargin: Appearance.padding.smaller
             verticalCenter: parent.verticalCenter
         }
