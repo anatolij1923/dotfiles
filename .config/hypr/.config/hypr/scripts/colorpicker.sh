@@ -1,14 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-color=$(hyprpicker)
+color="$(hyprpicker -a)"
 
-if [[ color == "" ]]; then
-    echo Selection canceled
-    pkill hyprpicker
+if [[ -z "$color" ]]; then
     exit 0
 fi
 
-if [[ -n "$color"]]; then
-    notify-send -i color-select-symbolic -a Color\ Picker $color
-    wl-copy $color
-fi
+printf '%s' "$color" | wl-copy
+
+notify-send \
+    -a "Color Picker" \
+    "Color copied" "$color"
