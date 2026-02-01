@@ -20,7 +20,7 @@ Singleton {
     property bool osdOpened: false
     property bool overviewOpened: false
     property bool settingsOpened: false
-    property bool testOpened: false
+    property bool screenshotOpened: false
 
     property bool titOpened: false
 
