@@ -21,7 +21,7 @@ Scope {
             title: "quickshell-settings"
             visible: true
 
-            color: Colors.palette.m3surface
+            color: Colors.palette.m3surfaceContainer
 
             onVisibleChanged: {
                 if (!visible) {
@@ -41,10 +41,17 @@ Scope {
                     Layout.fillHeight: true
                 }
 
-                SettingsPage {
+                Item {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    currentPage: settingsRoot.currentPage
+
+                    // Эти отступы создадут ту самую "рамку"
+                    Layout.margins: Appearance.padding.normal
+
+                    SettingsPage {
+                        anchors.fill: parent
+                        currentPage: settingsRoot.currentPage
+                    }
                 }
             }
         }

@@ -22,14 +22,14 @@ Rectangle {
     }
     color: Colors.palette.m3surfaceContainer
 
-    Rectangle {
-        id: separator
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        width: 1
-        color: Colors.palette.m3surfaceContainerHigh
-    }
+    // Rectangle {
+    //     id: separator
+    //     anchors.right: parent.right
+    //     anchors.top: parent.top
+    //     anchors.bottom: parent.bottom
+    //     width: 1
+    //     color: Colors.palette.m3surfaceContainerHigh
+    // }
 
     ColumnLayout {
         anchors {
