@@ -79,6 +79,7 @@ BarWidget {
                 text: !!root.player ? `${root.trackArtist} - ${root.trackTitle}` : "No media"
                 elide: Text.ElideRight
                 Layout.maximumWidth: 200
+                animate: true
             }
         }
     ]

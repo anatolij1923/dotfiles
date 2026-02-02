@@ -16,23 +16,23 @@ import qs.config
 Item {
     id: root
 
-    property real screenW
-    property real screenH
-    property int columns
-    property int rows
-    property real gap
-    property real outerPadding
+    property real screenW: QsWindow.window?.screen.width || 0
+    property real screenH: QsWindow.window?.screen.height || 0
+    property int columns: 4
+    property int rows: 2
+    property real gap: Appearance.padding.small
+    property real outerPadding: Appearance.padding.large
+
     property int dragSourceWorkspace: -1
     property int dragTargetWorkspace: -1
 
     property real alpha: Config.appearance.transparency.alpha
     property bool transparent: Config.appearance.transparency.enabled
 
-    // Calculated properties
     property real cardWidthCalc: (implicitWidth - (outerPadding * 2) - (gap * (columns - 1))) / columns
     property real cardHeightCalc: cardWidthCalc / (screenW / screenH)
 
-    implicitWidth: screenW * 0.7
+    implicitWidth: screenW * 0.8
     implicitHeight: (cardHeightCalc * rows) + (outerPadding * 2) + (gap * (rows - 1))
 
     Rectangle {
