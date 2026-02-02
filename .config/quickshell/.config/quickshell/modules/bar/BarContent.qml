@@ -30,7 +30,7 @@ Rectangle {
 
         spacing: root.contentSpacing
 
-        // LogoWidget {}
+        LauncherButton {}
         Workspaces {}
         AppName {}
     }
