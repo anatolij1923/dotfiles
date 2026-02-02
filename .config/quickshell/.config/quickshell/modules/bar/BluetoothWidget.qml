@@ -15,7 +15,7 @@ Item {
     RowLayout {
         id: content
 
-        spacing: 4
+        spacing: 2
 
         MaterialSymbol {
             id: icon

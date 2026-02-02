@@ -9,7 +9,7 @@ import qs.widgets
 BarWidget {
     id: root
 
-    padding: Appearance.padding.large
+    // padding: Appearance.padding.large
 
     property var player: Players.active
 
@@ -60,7 +60,7 @@ BarWidget {
                     id: button
                     icon: Players.active?.isPlaying ? "pause" : "play_arrow"
 
-                    iconSize: 22
+                    iconSize: 20
                     anchors.fill: parent
                     color: "transparent"
                     onClicked: {

@@ -78,7 +78,6 @@ Item {
                     fillMode: Image.PreserveAspectCrop
                     asynchronous: true
                     smooth: true
-                    // Берем с запасом для четкости при увеличении
                     sourceSize {
                         width: Config.launcher.wallWidth + 100
                         height: Config.launcher.wallHeight + 100

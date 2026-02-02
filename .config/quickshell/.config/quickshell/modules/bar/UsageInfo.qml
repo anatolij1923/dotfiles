@@ -22,7 +22,7 @@ BarWidget {
                         anchors.centerIn: parent
                         color: Colors.palette.m3onSurface
                         icon: "memory_alt"
-                        size: 22
+                        size: 20
                     }
                     value: SystemUsage.memoryUsedPercentage
                 }

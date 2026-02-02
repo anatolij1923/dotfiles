@@ -34,8 +34,7 @@ Item {
     readonly property int itemHeight: 16
     readonly property int spacing: Appearance.padding.smaller
 
-    height: 32
-    implicitWidth: layout.width + (Appearance.padding.normal * 2)
+    implicitWidth: layout.width
 
     Row {
         id: layout
