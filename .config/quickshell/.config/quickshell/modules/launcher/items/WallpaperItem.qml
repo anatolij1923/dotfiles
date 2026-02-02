@@ -13,16 +13,14 @@ Item {
     required property string wallpaperPath
     readonly property bool isCurrent: ListView.isCurrentItem
 
-    // Calculate relative path from the base wallpaper directory
     readonly property string relativePath: wallpaperPath.replace(Wallpapers.wallpaperDir + "/", "")
 
     implicitWidth: Config.launcher.sizes.wallWidth
-    // Extra height for text label and animation padding
-    implicitHeight: Config.launcher.sizes.wallHeight + 60
+    implicitHeight: Config.launcher.sizes.wallHeight + 80
 
     z: isCurrent ? 10 : 1
-    opacity: isCurrent ? 1.0 : 0.7
 
+    opacity: isCurrent ? 1.0 : 0.8
     Behavior on opacity {
         Anim {}
     }
@@ -31,69 +29,81 @@ Item {
         Wallpapers.setWallpaper(root.wallpaperPath);
     }
 
-    StateLayer {
+    MouseArea {
         anchors.fill: parent
-        radius: Appearance.rounding.normal
-        z: 100
+        cursorShape: Qt.PointingHandCursor
         onClicked: root.execute()
     }
 
-    Column {
+    Item {
+        id: visualContainer
         anchors.centerIn: parent
-        width: parent.width
-        spacing: 10
 
-        ClippingRectangle {
-            id: imgContainer
-            width: parent.width
+        width: isCurrent ? root.implicitWidth * 1.1 : root.implicitWidth
+        height: isCurrent ? Config.launcher.sizes.wallHeight * 1.2 : Config.launcher.sizes.wallHeight
 
-            height: Config.launcher.sizes.wallHeight
+        y: isCurrent ? -15 : 0
 
-            radius: Appearance.rounding.normal
-            color: Colors.palette.m3surfaceContainer
-            clip: true
-
-            border.color: Colors.palette.m3primary
-            border.width: isCurrent ? 3 : 0
-
-            Image {
-                anchors.fill: parent
-                source: root.wallpaperPath.startsWith("/") ? "file://" + root.wallpaperPath : root.wallpaperPath
-                fillMode: Image.PreserveAspectCrop
-                asynchronous: true
-                smooth: true
-                sourceSize {
-                    width: Config.launcher.wallWidth
-                    height: Config.launcher.wallHeight
-                }
+        Behavior on width {
+            Anim {
+                duration: 350
             }
-
-            // Indicator for currently active wallpaper
-            Rectangle {
-                anchors.fill: parent
-                color: Colors.palette.m3primary
-                opacity: Wallpapers.actualCurrent === root.wallpaperPath ? 0.2 : 0
-                radius: Appearance.rounding.normal
+        }
+        Behavior on height {
+            Anim {
+                duration: 350
+            }
+        }
+        Behavior on y {
+            Anim {
+                duration: 350
             }
         }
 
-        StyledText {
-            id: label
-            width: parent.width
-            text: root.relativePath
+        Column {
+            anchors.fill: parent
+            spacing: 12
 
-            // Change font size and weight based on focus state
-            size: isCurrent ? 18 : 16
-            weight: isCurrent ? 600 : 400
+            ClippingRectangle {
+                width: parent.width
+                height: parent.height - (label.height + parent.spacing)
 
-            color: isCurrent ? Colors.palette.m3onSurface : Colors.palette.m3onSurfaceVariant
-            horizontalAlignment: Text.AlignHCenter
-            elide: Text.ElideMiddle
-            maximumLineCount: 1
+                radius: Appearance.rounding.normal
+                color: Colors.palette.m3surfaceContainer
+                clip: true
 
-            // Behavior on size {
-            //     Anim {}
-            // }
+                Image {
+                    anchors.fill: parent
+                    source: root.wallpaperPath.startsWith("/") ? "file://" + root.wallpaperPath : root.wallpaperPath
+                    fillMode: Image.PreserveAspectCrop
+                    asynchronous: true
+                    smooth: true
+                    // Берем с запасом для четкости при увеличении
+                    sourceSize {
+                        width: Config.launcher.wallWidth + 100
+                        height: Config.launcher.wallHeight + 100
+                    }
+                }
+            }
+
+            StyledText {
+                id: label
+                width: parent.width
+                text: root.relativePath
+
+                size: isCurrent ? Appearance.font.size.normal : Appearance.font.size.small
+                weight: isCurrent ? 600 : 400
+
+                color: isCurrent ? Colors.palette.m3onSurface : Colors.palette.m3onSurfaceVariant
+
+                horizontalAlignment: Text.AlignHCenter
+                elide: Text.ElideMiddle
+                maximumLineCount: 1
+
+                Behavior on size {
+                    Anim {}
+                }
+            }
         }
     }
 }

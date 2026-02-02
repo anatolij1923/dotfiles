@@ -6,8 +6,8 @@ JsonObject {
 
     component Sizes: JsonObject {
         property int itemHeight: 60
-        property int wallWidth: 350
-        property int wallHeight: 230
+        property int wallWidth: 300
+        property int wallHeight: 210
     }
 
     property list<var> commands: [

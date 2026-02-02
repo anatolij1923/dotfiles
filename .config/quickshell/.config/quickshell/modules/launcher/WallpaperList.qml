@@ -33,7 +33,7 @@ Item {
     }
 
     readonly property string searchQuery: search.startsWith(":wallpaper") ? search.slice(":wallpaper".length).trim() : ""
-    readonly property real spacing: Appearance.padding.large
+    readonly property real spacing: Appearance.padding.normal
 
     property var wallpaperModel: []
 
