@@ -9,10 +9,18 @@ Rectangle {
     id: root
 
     property int padding: Appearance.padding.small
+    property bool quicksettingsOpened
+
+    Connections {
+        target: GlobalStates
+        function onQuicksettingsOpenedChanged() {
+            root.quicksettingsOpened = !root.quicksettingsOpened;
+        }
+    }
 
     implicitWidth: content.implicitWidth + Appearance.padding.small * 2
     implicitHeight: parent.height * 0.8
-    color: GlobalStates.quicksettingsOpened === true ? Qt.alpha(Colors.palette.m3primary, 0.3) : "transparent"
+    color: root.quicksettingsOpened ? Colors.palette.m3secondaryContainer : "transparent"
     radius: Appearance.rounding.huge
 
     Behavior on implicitWidth {
