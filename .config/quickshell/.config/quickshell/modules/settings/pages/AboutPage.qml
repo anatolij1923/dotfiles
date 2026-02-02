@@ -1,6 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.settings
+import qs.modules.settings.components
+import qs.config
 import qs.common
 import qs.widgets
 import qs.services
@@ -26,6 +28,12 @@ ContentPage {
             wrapMode: Text.WordWrap
             Layout.fillWidth: true
             Layout.topMargin: Appearance.padding.normal
+        }
+
+        SwitchRow {
+            label: "Activate dotfiles"
+            value: Config.background.dotfilesActivated
+            onToggled: Config.background.dotfilesActivated = value
         }
     }
 }
