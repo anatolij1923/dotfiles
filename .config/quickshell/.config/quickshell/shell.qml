@@ -34,7 +34,7 @@ ShellRoot {
     property bool enableNotifications: true
     property bool enableTit: false
     property bool enableOsd: true
-    property bool enableOverview: false
+    property bool enableOverview: true
     property bool enablePolkit: true
     property bool enableSettings: true
     property bool enableScreenshot: true
