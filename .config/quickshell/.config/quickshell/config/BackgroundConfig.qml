@@ -5,6 +5,8 @@ JsonObject {
 
     property string wallpaperPath: ""
 
+    property bool dotfilesActivated: false
+
     property Parallax parallax: Parallax {}
 
     property Dim dim: Dim {}

@@ -111,4 +111,9 @@ ShellRoot {
         active: root.enableScreenshot
         component: ScreenshotManager {}
     }
+
+    LazyLoader {
+        active: !Config.background.dotfilesActivated
+        component: ActivateDotfiles {}
+    }
 }

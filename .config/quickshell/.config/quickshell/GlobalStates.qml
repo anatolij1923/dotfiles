@@ -24,8 +24,6 @@ Singleton {
 
     property bool titOpened: false
 
-    property bool shloonixActivated: true
-
     property bool idleIngibitorToggled: false
     property bool sleepTimerToggled: false
 }

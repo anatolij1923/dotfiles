@@ -8,7 +8,7 @@ JsonObject {
     property bool enableScreenCorners: true
 
     component Transparency: JsonObject {
-        property bool enabled: true // idk why ts dont wanna work when set up in false by default
+        property bool enabled: false
         property real alpha: 0.8
     }
 
