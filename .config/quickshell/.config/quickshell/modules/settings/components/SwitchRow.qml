@@ -19,16 +19,16 @@ Item {
 
     implicitHeight: content.implicitHeight + padding * 2
 
-    StateLayer {
-        anchors.fill: parent
-
-        radius: Appearance.rounding.normal
-
-        onClicked: {
-            sw.checked = !sw.checked;
-            root.toggled(sw.checked);
-        }
-    }
+    // StateLayer {
+    //     anchors.fill: parent
+    //
+    //     radius: Appearance.rounding.normal
+    //
+    //     onClicked: {
+    //         sw.checked = !sw.checked;
+    //         root.toggled(sw.checked);
+    //     }
+    // }
 
     RowLayout {
         id: content

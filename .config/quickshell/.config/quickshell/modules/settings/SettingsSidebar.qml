@@ -11,15 +11,19 @@ import qs.services
 Rectangle {
     id: root
 
-    property bool collapsed: false
+    property bool collapsed: true
+    readonly property bool expanded: !collapsed
+
     required property int currentPage
     signal pageSelected(int page)
 
     readonly property int railWidth: 120
-    readonly property int drawerWidth: 280
+    readonly property int drawerWidth: 240
 
-    implicitWidth: root.collapsed ? railWidth : drawerWidth
     color: Colors.palette.m3surfaceContainer
+
+    implicitWidth: collapsed ? railWidth : drawerWidth
+    implicitHeight: layout.implicitHeight + Appearance.padding.large * 2
 
     Behavior on implicitWidth {
         Anim {
@@ -27,216 +31,216 @@ Rectangle {
             easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
         }
     }
+    Behavior on implicitHeight {
+        Anim {
+            duration: Appearance.animDuration.expressiveDefaultSpatial
+            easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
+        }
+    }
 
-    Column {
+    ColumnLayout {
         id: layout
-        anchors.fill: parent
-        anchors.margins: Appearance.padding.normal
+
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.leftMargin: Appearance.padding.large
+        anchors.rightMargin: Appearance.padding.small
+        anchors.topMargin: Appearance.padding.large
         spacing: Appearance.padding.normal
+
+        // states: State {
+        //     name: "expanded"
+        //     when: root.expanded
+        //
+        //     PropertyChanges {
+        //         layout.spacing: Appearance.padding.small
+        //     }
+        // }
+        //
+        // transitions: Transition {
+        //     Anim {
+        //         properties: "spacing"
+        //         duration: Appearance.animDuration.expressiveFastSpatial
+        //         easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
+        //     }
+        // }
 
         IconButton {
             id: menuBtn
+            Layout.alignment: Qt.AlignLeft
+            Layout.leftMargin: Appearance.padding.large
             icon: root.collapsed ? "menu" : "menu_open"
             onClicked: root.collapsed = !root.collapsed
         }
 
-        // 2. FAB / Action Button
         Rectangle {
             id: fab
-            width: root.collapsed ? 56 : parent.width
-            height: 56
-            radius: Appearance.rounding.normal
+
+            readonly property int fabSize: 64
+
+            Layout.alignment: root.collapsed ? Qt.AlignHCenter : Qt.AlignLeft
+            // Layout.leftMargin: root.collapsed ? 0 : Appearance.padding.small
+
+            implicitHeight: fabSize
+            implicitWidth: root.collapsed ? fabSize : expandedRow.implicitWidth + Appearance.padding.large * 2
+
             color: Colors.palette.m3primaryContainer
+            radius: Appearance.rounding.normal
             clip: true
 
-            x: root.collapsed ? (parent.width - width) / 2 : 0
-
-            Behavior on width {
+            Behavior on implicitWidth {
                 Anim {
-                    duration: Appearance.animDuration.expressiveFastSpatial
-                    easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
-                }
-            }
-            Behavior on x {
-                Anim {
-                    duration: Appearance.animDuration.expressiveFastSpatial
-                    easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
+                    duration: Appearance.animDuration.expressiveDefaultSpatial
+                    easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
                 }
             }
 
             StateLayer {
-                anchors.fill: parent
-                onClicked: Quickshell.execDetached(["kitty", "-e", `${Quickshell.env("EDITOR")}`, `${Paths.strip(Paths.config)}/config.json`])
-            }
-
-            MaterialSymbol {
-                id: fabIcon
-                x: root.collapsed ? (parent.width - width) / 2 : Appearance.padding.large
-                anchors.verticalCenter: parent.verticalCenter
-                icon: "edit"
+                id: fabState
                 color: Colors.palette.m3onPrimaryContainer
-                Behavior on x {
-                    Anim {
-                        duration: Appearance.animDuration.expressiveFastSpatial
-                        easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
-                    }
+                onClicked: {
+                    Quickshell.execDetached(["kitty", "-e", Quickshell.env("EDITOR") || "nvim", `${Quickshell.shellDir}/config.json`]);
                 }
             }
 
-            StyledText {
-                anchors.left: parent.left
-                anchors.leftMargin: Appearance.padding.large + 32
+            Row {
+                id: expandedRow
                 anchors.verticalCenter: parent.verticalCenter
-                text: "Edit Config"
-                size: Appearance.font.size.small
-                color: Colors.palette.m3onPrimaryContainer
-                opacity: root.collapsed ? 0 : 1
-                visible: opacity > 0
-                Behavior on opacity {
-                    Anim {
-                        duration: Appearance.animDuration.expressiveFastSpatial
-                        easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
+                leftPadding: (fab.fabSize - editIcon.width) / 2
+                spacing: Appearance.padding.normal
+
+                MaterialSymbol {
+                    id: editIcon
+                    icon: "edit"
+                    size: 24
+                    color: Colors.palette.m3onPrimaryContainer
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+
+                StyledText {
+                    id: editLabel
+                    text: "Edit config"
+                    color: Colors.palette.m3onPrimaryContainer
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    // Текст плавно исчезает/появляется
+                    opacity: root.expanded ? 1 : 0
+                    visible: opacity > 0
+
+                    Behavior on opacity {
+                        Anim {
+                            duration: Appearance.animDuration.expressiveFastSpatial
+                        }
                     }
                 }
             }
         }
 
-        // 3. NAVIGATION ITEMS
-        Column {
-            width: parent.width
-            spacing: 8
+        Item {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 12
+        }
 
-            Repeater {
-                model: SettingsModel {}
-                delegate: NavItem {
-                    required property var modelData
-                    required property int index
+        Repeater {
+            model: SettingsModel {}
 
-                    width: parent.width
-                    icon: modelData.icon
-                    label: modelData.text
-                    active: index === root.currentPage
-                    expanded: !root.collapsed
-                    onClicked: root.pageSelected(index)
-                }
-            }
+            delegate: NavItem {}
         }
     }
 
     component NavItem: Item {
         id: item
-        required property string icon
-        required property string label
-        required property bool active
-        required property bool expanded
-        signal clicked
 
-        // В Rail моде даем чуть больше места по высоте (64), чтобы влез текст
-        height: expanded ? 56 : 64
+        required property var modelData
+        required property int index
 
-        Behavior on height {
-            Anim {
-                duration: Appearance.animDuration.expressiveFastSpatial
-                easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
+        readonly property string icon: modelData.icon
+        readonly property string label: modelData.text
+
+        readonly property bool active: root.currentPage === index
+
+        implicitWidth: background.implicitWidth
+        implicitHeight: background.implicitHeight + smallLabel.implicitHeight + smallLabel.anchors.topMargin
+
+        Layout.alignment: root.collapsed ? Qt.AlignHCenter : Qt.AlignLeft
+
+        states: State {
+            name: "expanded"
+            when: root.expanded
+
+            PropertyChanges {
+                expandedLabel.opacity: 1
+                smallLabel.opacity: 0
+                background.implicitWidth: iconItem.implicitWidth + iconItem.anchors.leftMargin * 2 + expandedLabel.anchors.leftMargin + expandedLabel.implicitWidth
+                background.implicitHeight: iconItem.implicitHeight + Appearance.padding.normal * 2
+                item.implicitHeight: background.implicitHeight
             }
         }
 
-        // Индикатор (Pill)
+        transitions: Transition {
+            Anim {
+                property: "opacity"
+                duration: Appearance.animDuration.expressiveFastSpatial
+                easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
+            }
+
+            Anim {
+                properties: "implicitWidth,implicitHeight"
+                duration: Appearance.animDuration.expressiveDefaultSpatial
+                easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
+            }
+        }
+
         Rectangle {
-            id: indicator
+            id: background
+
             radius: Appearance.rounding.full
-            color: item.active ? Colors.palette.m3secondaryContainer : "transparent"
+            color: Qt.alpha(Colors.palette.m3secondaryContainer, item.active ? 1 : 0)
 
-            height: item.expanded ? 56 : 32
-            width: item.expanded ? parent.width : 56
+            implicitWidth: iconItem.implicitWidth + iconItem.anchors.leftMargin * 2
+            implicitHeight: iconItem.implicitHeight + Appearance.padding.small
 
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            // В Rail моде (свернуто) отодвигаем пилюлю чуть от края, чтобы не слипалось
-            anchors.topMargin: item.expanded ? 0 : 4
+            StateLayer {
+                color: item.active ? Colors.palette.m3onSecondaryContainer : Colors.palette.m3onSurface
 
-            Behavior on width {
-                Anim {
-                    duration: Appearance.animDuration.expressiveFastSpatial
-                    easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
-                }
-            }
-            Behavior on height {
-                Anim {
-                    duration: Appearance.animDuration.expressiveFastSpatial
-                    easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
-                }
-            }
-            Behavior on anchors.topMargin {
-                Anim {
-                    duration: Appearance.animDuration.expressiveFastSpatial
-                    easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
+                function onClicked(): void {
+                    root.pageSelected(item.index);
                 }
             }
 
             MaterialSymbol {
                 id: iconItem
-                x: item.expanded ? Appearance.padding.normal : (parent.width - width) / 2
-                anchors.verticalCenter: parent.verticalCenter
-                icon: item.icon
-                color: item.active ? Colors.palette.m3onSecondaryContainer : Colors.palette.m3onSurfaceVariant
 
-                Behavior on x {
-                    Anim {
-                        duration: Appearance.animDuration.expressiveFastSpatial
-                        easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
-                    }
-                }
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.leftMargin: Appearance.padding.large
+
+                icon: item.icon
+                color: item.active ? Colors.palette.m3onSecondaryContainer : Colors.palette.m3onSurface
             }
 
             StyledText {
-                id: drawerLabel
+                id: expandedLabel
+
                 anchors.left: iconItem.right
-                anchors.leftMargin: Appearance.padding.normal
                 anchors.verticalCenter: parent.verticalCenter
+                anchors.leftMargin: Appearance.padding.normal
+
+                opacity: 0
                 text: item.label
-                size: Appearance.font.size.small // 16px
-                opacity: item.expanded ? 1 : 0
-                visible: opacity > 0
-                elide: Text.ElideRight
-                color: item.active ? Colors.palette.m3onSecondaryContainer : Colors.palette.m3onSurfaceVariant
-
-                Behavior on opacity {
-                    Anim {
-                        duration: Appearance.animDuration.expressiveFastSpatial
-                        easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
-                    }
-                }
+                color: item.active ? Colors.palette.m3onSecondaryContainer : Colors.palette.m3onSurface
             }
 
-            StateLayer {
-                anchors.fill: parent
-                onClicked: item.clicked()
-            }
-        }
+            StyledText {
+                id: smallLabel
 
-        // Текст под иконкой (только Rail)
-        StyledText {
-            id: railLabel
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: indicator.bottom
-            anchors.topMargin: 2
-            width: parent.width
-            horizontalAlignment: Text.AlignHCenter
+                anchors.horizontalCenter: iconItem.horizontalCenter
+                anchors.top: iconItem.bottom
+                anchors.topMargin: Appearance.padding.small / 2
 
-            text: item.label
-            size: Appearance.font.size.small
-
-            opacity: item.expanded ? 0 : 1
-            visible: opacity > 0
-            elide: Text.ElideRight
-            color: item.active ? Colors.palette.m3onSurface : Colors.palette.m3onSurfaceVariant
-
-            Behavior on opacity {
-                Anim {
-                    duration: Appearance.animDuration.expressiveFastSpatial
-                    easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
-                }
+                text: item.label
+                size: Appearance.font.size.small
             }
         }
     }

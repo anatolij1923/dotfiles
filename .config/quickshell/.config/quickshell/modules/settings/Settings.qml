@@ -37,7 +37,7 @@ Scope {
 
                 SettingsSidebar {
                     currentPage: settingsRoot.currentPage
-                    onPageSelected: settingsRoot.currentPage = page
+                    onPageSelected: page => settingsRoot.currentPage = page
                     Layout.fillHeight: true
                 }
 
@@ -45,8 +45,7 @@ Scope {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
-                    // Эти отступы создадут ту самую "рамку"
-                    Layout.margins: Appearance.padding.normal
+                    Layout.margins: Appearance.padding.small
 
                     SettingsPage {
                         anchors.fill: parent
