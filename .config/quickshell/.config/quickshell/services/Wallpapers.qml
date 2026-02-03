@@ -77,6 +77,7 @@ Singleton {
     function setWallpaper(path: string): void {
         Config.background.wallpaperPath = path;
         root.actualCurrent = path;
+        Colors.generateColors();
     }
 
     function setRandomWallpaper(): void {

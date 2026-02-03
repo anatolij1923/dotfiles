@@ -72,13 +72,13 @@ Singleton {
     //     }
     // }
 
-    Connections {
-        target: Config.background
-
-        function onWallpaperPathChanged() {
-            generateColors();
-        }
-    }
+    // Connections {
+    //     target: Config.background
+    //
+    //     function onWallpaperPathChanged() {
+    //         generateColors();
+    //     }
+    // }
 
     FileView {
         id: colorsFile
