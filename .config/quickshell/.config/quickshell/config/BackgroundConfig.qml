@@ -3,7 +3,7 @@ import Quickshell
 
 JsonObject {
 
-    property string wallpaperPath: ""
+    property string wallpaperPath: `${Quickshell.shellDir}/assets/fallback.png`
 
     property bool dotfilesActivated: false
 

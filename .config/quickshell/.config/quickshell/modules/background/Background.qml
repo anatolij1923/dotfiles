@@ -34,7 +34,7 @@ Variants {
         }
         property int range: Math.max(1, lastWorkspaceId - firstWorkspaceId)
 
-        property string wallpaperPath: Config.background.wallpaperPath
+        property string wallpaperPath: Config.ready && Config.background.wallpaperPath
         property bool isFirstImageActive: true
 
         onWallpaperPathChanged: {

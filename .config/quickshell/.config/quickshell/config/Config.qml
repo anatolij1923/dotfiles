@@ -40,6 +40,7 @@ Singleton {
         onLoaded: {
             root.ready = true;
             Logger.i("CONFIG", "Config loaded");
+            Logger.i("CONFIG", `Path: ${path}`);
         }
         onLoadFailed: error => {
             if (error == FileViewError.FileNotFound) {

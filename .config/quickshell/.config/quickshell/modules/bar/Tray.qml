@@ -111,9 +111,4 @@ Item {
             active = true;
         }
     }
-
-    Component.onCompleted: {
-        Logger.i("TRAY", `initialized, repeater items: ${SystemTray.items}`)
-        Logger.i("TRAY", `status: ${SystemTray.status}`)
-    }
 }
