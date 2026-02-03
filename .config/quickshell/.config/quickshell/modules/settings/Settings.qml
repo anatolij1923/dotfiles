@@ -21,7 +21,7 @@ Scope {
             title: "quickshell-settings"
             visible: true
 
-            color: Colors.palette.m3surface
+            color: Colors.palette.m3surfaceContainer
 
             onVisibleChanged: {
                 if (!visible) {
@@ -37,14 +37,20 @@ Scope {
 
                 SettingsSidebar {
                     currentPage: settingsRoot.currentPage
-                    onPageSelected: settingsRoot.currentPage = page
+                    onPageSelected: page => settingsRoot.currentPage = page
                     Layout.fillHeight: true
                 }
 
-                SettingsPage {
+                Item {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    currentPage: settingsRoot.currentPage
+
+                    Layout.margins: Appearance.padding.small
+
+                    SettingsPage {
+                        anchors.fill: parent
+                        currentPage: settingsRoot.currentPage
+                    }
                 }
             }
         }

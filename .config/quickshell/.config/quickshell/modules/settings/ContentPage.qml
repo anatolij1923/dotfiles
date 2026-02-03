@@ -5,46 +5,37 @@ import qs.common
 import qs.widgets
 import qs.services
 
-Item {
+Rectangle {
     id: root
 
     required property string title
-
     default property alias content: contentColumn.children
+
+    color: Colors.palette.m3surface
+    radius: Appearance.rounding.huge
+    clip: true
 
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
 
-        // Fixed header
-        Rectangle {
+        Item {
             Layout.fillWidth: true
             Layout.preferredHeight: headerRow.implicitHeight + Appearance.padding.large * 2
-            color: Colors.palette.m3surface
 
             RowLayout {
                 id: headerRow
                 anchors.centerIn: parent
-                width: parent.width
-
-                Item {
-                    Layout.fillWidth: true
-                }
 
                 StyledText {
                     text: root.title
-                    size: 30
+                    size: Appearance.font.size.xlarge
                     weight: 500
                     color: Colors.palette.m3onSurface
-                }
-
-                Item {
-                    Layout.fillWidth: true
                 }
             }
         }
 
-        // Scrollable content
         Flickable {
             id: flickable
             Layout.fillWidth: true
@@ -52,10 +43,11 @@ Item {
             clip: true
 
             contentWidth: width
-            contentHeight: Math.max(contentColumn.childrenRect.height, contentColumn.implicitHeight)
+            contentHeight: contentColumn.implicitHeight + Appearance.padding.huge
 
             ScrollBar.vertical: ScrollBar {
                 policy: ScrollBar.AsNeeded
+                anchors.rightMargin: 2
             }
 
             ColumnLayout {
