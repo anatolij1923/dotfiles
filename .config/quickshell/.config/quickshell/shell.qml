@@ -38,6 +38,7 @@ ShellRoot {
     property bool enablePolkit: true
     property bool enableSettings: true
     property bool enableScreenshot: true
+    property bool enableMediaplayer: true
     //
     Component.onCompleted: {
         Idle.init();
@@ -117,5 +118,10 @@ ShellRoot {
     LazyLoader {
         active: Config.ready && !Config.background.dotfilesActivated
         component: ActivateDotfiles {}
+    }
+
+    LazyLoader {
+        active: root.enableMediaplayer
+        component: MediaPlayer {}
     }
 }

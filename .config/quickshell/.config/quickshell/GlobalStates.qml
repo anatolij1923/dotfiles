@@ -21,8 +21,11 @@ Singleton {
     property bool overviewOpened: false
     property bool settingsOpened: false
     property bool screenshotOpened: false
+    property bool mediaplayerOpened: false
 
     property bool titOpened: false
+
+    property var lastClickX
 
     property bool idleIngibitorToggled: false
     property bool sleepTimerToggled: false
