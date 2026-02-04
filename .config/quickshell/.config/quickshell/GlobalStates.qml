@@ -25,6 +25,8 @@ Singleton {
 
     property bool titOpened: false
 
+    property var lastClickX
+
     property bool idleIngibitorToggled: false
     property bool sleepTimerToggled: false
 }
