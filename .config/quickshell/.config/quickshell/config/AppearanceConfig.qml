@@ -15,7 +15,7 @@ JsonObject {
     component Theming: JsonObject {
         property Templates templates: Templates {}
 
-        property string matugenMode: "scheme-tonal-spot"
+        property string schemeType: "scheme-tonal-spot"
     }
 
     component Templates: JsonObject {
