@@ -20,7 +20,7 @@ Rectangle {
     implicitWidth: icon.implicitWidth + padding * 2
     implicitHeight: implicitWidth
 
-    color: root.launcherOpened ? Colors.palette.m3secondaryContainer : "transparent"
+    color: root.launcherOpened ? Colors.palette.m3secondaryContainer : Colors.palette.m3surface
 
     Behavior on color {
         CAnim {}

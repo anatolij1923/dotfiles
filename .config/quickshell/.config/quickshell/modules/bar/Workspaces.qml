@@ -53,7 +53,7 @@ Item {
                 height: root.itemHeight
                 radius: height / 2
 
-                color: isFocused ? Colors.palette.m3primary : (occupied ? Colors.palette.m3onPrimaryContainer : Qt.alpha(Colors.palette.m3onSurface, 0.25))
+                color: isFocused ? Colors.palette.m3primary : (occupied ? Colors.palette.m3secondary : Colors.mix(Colors.palette.m3surface, Colors.palette.m3primary, 0.25))
 
                 Behavior on width {
                     Anim {

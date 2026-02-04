@@ -13,7 +13,7 @@ Rectangle {
 
     implicitWidth: content.implicitWidth + Appearance.padding.small * 2
     implicitHeight: parent.height * 0.8
-    color: quicksettingsOpened ? Colors.palette.m3secondaryContainer : "transparent"
+    color: quicksettingsOpened ? Colors.palette.m3secondaryContainer : Colors.palette.m3surface
     radius: Appearance.rounding.huge
 
     Behavior on color {
