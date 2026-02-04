@@ -14,5 +14,6 @@ Item {
         id: icon
         icon: Network.icon
         color: Colors.palette.m3onSurface
+        size: 22
     }
 }

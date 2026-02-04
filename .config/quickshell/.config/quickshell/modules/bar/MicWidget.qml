@@ -9,5 +9,6 @@ Item {
         id: icon
         icon: "mic_off"
         color: Colors.palette.m3onSurface
+        size: 22
     }
 }

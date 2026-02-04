@@ -13,7 +13,7 @@ Item {
 
     RowLayout {
         id: content
-        spacing: 0
+        spacing: 2
 
         StyledText {
             id: counter
@@ -25,6 +25,7 @@ Item {
             id: icon
             icon: Notifications.dnd ? "notifications_off" : "notifications_unread"
             color: Colors.palette.m3onSurface
+            size: 22
         }
     }
 }

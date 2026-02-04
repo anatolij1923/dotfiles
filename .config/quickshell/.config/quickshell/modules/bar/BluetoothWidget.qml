@@ -21,6 +21,7 @@ Item {
             id: icon
             icon: BluetoothService.icon
             color: Colors.palette.m3onSurface
+            size: 22
         }
 
         BatteryProgress {
