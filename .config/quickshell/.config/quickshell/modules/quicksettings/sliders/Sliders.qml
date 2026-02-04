@@ -33,8 +33,12 @@ Rectangle {
         }
         QuickSlider {
             icon: "brightness_6"
-            value: root.brightnessMonitor.brightness
-            onMovedHandler: v => root.brightnessMonitor.setBrightness(v)
+            value: root.brightnessMonitor ? root.brightnessMonitor.brightness : 0
+            onMovedHandler: v => {
+                if (root.brightnessMonitor) {
+                    root.brightnessMonitor.setBrightness(v);
+                }
+            }
         }
     }
 
