@@ -9,7 +9,6 @@ Item {
         id: icon
         icon: "coffee"
         color: Colors.palette.m3onSurface
-        weight: 500
         size: 22
     }
 }

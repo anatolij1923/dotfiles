@@ -16,14 +16,6 @@ Rectangle {
     color: quicksettingsOpened ? Colors.palette.m3secondaryContainer : "transparent"
     radius: Appearance.rounding.huge
 
-    // Главная ширина плашки: используем Decel для быстрого, но мягкого торможения
-    // Behavior on implicitWidth {
-    //     Anim {
-    //         duration: Appearance.animDuration.small // 200ms - золотой стандарт
-    //         easing.bezierCurve: Appearance.animCurves.emphasizedDecel
-    //     }
-    // }
-
     Behavior on color {
         CAnim {}
     }
@@ -38,8 +30,6 @@ Rectangle {
     RowLayout {
         id: content
         anchors.centerIn: parent
-        // Важно: если иконки исчезают, spacing может давать микро-прыжок.
-        // Но с Decel-кривой это будет почти незаметно.
         spacing: root.padding
 
         KbLayout {}
