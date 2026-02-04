@@ -23,13 +23,13 @@ import qs.modules.screenshot
 
 ShellRoot {
     id: root
-    property bool enableBackground: true
     property bool enableBar: true
-    property bool enableReloadPopup: false
+    property bool enableLauncher: true
+    property bool enableBackground: true
+    // property bool enableReloadPopup: false
     property bool enableScreenCorners: true
     property bool enableLock: true
     property bool enablePowermenu: true
-    property bool enableLauncher: true
     property bool enableQuicksettings: true
     property bool enableNotifications: true
     property bool enableTit: false
@@ -38,24 +38,34 @@ ShellRoot {
     property bool enablePolkit: true
     property bool enableSettings: true
     property bool enableScreenshot: true
-
+    //
     Component.onCompleted: {
         Idle.init();
+    }
+
+    LazyLoader {
+        active: root.enableBar
+        component: Bar {}
+    }
+    LazyLoader {
+        active: root.enableLauncher
+        component: Launcher {}
+    }
+
+    LazyLoader {
+        active: root.enableQuicksettings
+        component: Quicksettings {}
     }
 
     LazyLoader {
         active: root.enableBackground
         component: Background {}
     }
-    LazyLoader {
-        active: root.enableBar
-        component: Bar {}
-    }
-    LazyLoader {
-        active: root.enableReloadPopup
-
-        component: ReloadPopup {}
-    }
+    // LazyLoader {
+    //     active: root.enableReloadPopup
+    //
+    //     component: ReloadPopup {}
+    // }
 
     LazyLoader {
         active: root.enableScreenCorners && !Config.bar.floating
@@ -71,14 +81,6 @@ ShellRoot {
     LazyLoader {
         active: root.enablePowermenu
         component: Powermenu {}
-    }
-    LazyLoader {
-        active: root.enableLauncher
-        component: Launcher {}
-    }
-    LazyLoader {
-        active: root.enableQuicksettings
-        component: Quicksettings {}
     }
     LazyLoader {
         active: root.enableNotifications
@@ -113,7 +115,7 @@ ShellRoot {
     }
 
     LazyLoader {
-        active: !Config.background.dotfilesActivated
+        active: Config.ready && !Config.background.dotfilesActivated
         component: ActivateDotfiles {}
     }
 }

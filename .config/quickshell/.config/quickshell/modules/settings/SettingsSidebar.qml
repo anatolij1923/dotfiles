@@ -100,7 +100,7 @@ Rectangle {
                 id: fabState
                 color: Colors.palette.m3onPrimaryContainer
                 onClicked: {
-                    Quickshell.execDetached(["kitty", "-e", Quickshell.env("EDITOR") || "nvim", `${Quickshell.shellDir}/config.json`]);
+                    Quickshell.execDetached(["wezterm", "-e", Quickshell.env("EDITOR") || "nvim", `${Quickshell.shellDir}/config.json`]);
                 }
             }
 

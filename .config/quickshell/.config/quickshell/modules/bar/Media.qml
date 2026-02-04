@@ -60,7 +60,7 @@ BarWidget {
                     id: button
                     icon: Players.active?.isPlaying ? "pause" : "play_arrow"
 
-                    iconSize: 20
+                    iconSize: 19
                     anchors.fill: parent
                     color: "transparent"
                     onClicked: {

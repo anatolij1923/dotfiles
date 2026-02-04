@@ -35,13 +35,13 @@ Rectangle {
         AppName {}
     }
 
-    // Media {
-    //     anchors {
-    //         right: usageInfo.left
-    //         verticalCenter: parent.verticalCenter
-    //         rightMargin: Appearance.padding.smaller
-    //     }
-    // }
+    Media {
+        anchors {
+            right: usageInfo.left
+            verticalCenter: parent.verticalCenter
+            rightMargin: Appearance.padding.smaller
+        }
+    }
 
     UsageInfo {
         id: usageInfo

@@ -80,7 +80,7 @@ Scope {
                 }
 
                 sourceComponent: QuicksettingsContent {
-                    implicitWidth: quicksettingsRoot.screen.width * 0.25
+                    implicitWidth: quicksettingsRoot.screen.width * 0.27
                 }
             }
         }

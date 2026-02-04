@@ -13,6 +13,7 @@ import qs.modules.quicksettings.toggles
 import qs.modules.quicksettings.header
 import qs.modules.quicksettings.sliders
 import qs.modules.quicksettings.notificationsList
+import qs.modules.quicksettings.media
 
 import Quickshell.Bluetooth
 
@@ -57,6 +58,7 @@ Item {
             Header {}
             Toggles {}
             Sliders {}
+            MediaPlayer {}
             NotificationsList {}
         }
     }

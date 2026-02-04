@@ -15,7 +15,7 @@ Rectangle {
     Layout.fillHeight: true
     Layout.fillWidth: true
 
-    color: Qt.alpha(Colors.palette.m3surfaceContainer, 0.4)
+    color: Colors.alpha(Colors.palette.m3surfaceContainer, 0.4)
     radius: Appearance.rounding.huge
 
     ColumnLayout {
@@ -46,7 +46,7 @@ Rectangle {
         //             onClicked: Notifications.dnd = !Notifications.dnd
         //             horizontalPadding: Appearance.padding.larger
         //             verticalPadding: Appearance.padding.small
-                    
+
         //             StyledTooltip {
         //                 text: "Do not disturb"
         //             }
@@ -67,7 +67,7 @@ Rectangle {
             id: notificationsContainer
             Layout.fillWidth: true
             Layout.fillHeight: true
-            
+
             // Show empty state when no notifications
             Item {
                 id: noNotifs
@@ -105,23 +105,22 @@ Rectangle {
     }
 
     // Overlay "Clear all" button positioned at bottom right
-    
+
     TextIconButton {
         id: clearAllButton
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.margins: Appearance.padding.normal
-        
+
         text: "Clear"
         icon: "delete_sweep"
         enabled: Notifications.list.length > 0
 
-        
         onClicked: Notifications.clearAll()
-        
+
         horizontalPadding: Appearance.padding.larger
         verticalPadding: Appearance.padding.small
-        
+
         // Make it appear as an overlay with elevation
         // Elevation {
         //     anchors.fill: parent
@@ -129,7 +128,7 @@ Rectangle {
         //     z: -1
         //     radius: parent.radius
         // }
-        
+
         StyledTooltip {
             text: "Clear all notifications"
         }
