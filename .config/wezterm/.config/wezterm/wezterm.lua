@@ -19,10 +19,10 @@ config.colors = colors
 config.enable_scroll_bar = false
 
 config.window_padding = {
-    top = 5,
-    bottom = 5,
-    left = 5,
-    right = 5,
+    top = 0,
+    bottom = 0,
+    left = 0,
+    right = 0,
 }
 
 config.window_background_opacity = 1
