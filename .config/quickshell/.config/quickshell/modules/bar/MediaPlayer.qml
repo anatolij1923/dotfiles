@@ -19,7 +19,6 @@ Scope {
     property string trackArtist: (player && player.trackArtist) || "Unknown"
     property string trackArtUrl: (player && player.trackArtUrl) || ""
 
-    // Эти свойства обновляются таймером и делают интерфейс реактивным
     property real currentProgress: 0
     property real currentSeconds: 0
 
@@ -42,10 +41,8 @@ Scope {
 
         onTriggered: {
             if (root.player) {
-                // Записываем текущую позицию в нашу переменную
                 root.currentSeconds = root.player.position;
 
-                // Рассчитываем прогресс для слайдера
                 if (root.player.length > 0) {
                     root.currentProgress = root.currentSeconds / root.player.length;
                 } else {
@@ -210,7 +207,6 @@ Scope {
                     }
                 }
 
-                // Текущее время (обновляется через currentSeconds)
                 StyledText {
                     anchors {
                         bottom: progressSlider.top
@@ -221,7 +217,6 @@ Scope {
                     text: root.formatTime(root.currentSeconds)
                 }
 
-                // Общее время трека
                 StyledText {
                     anchors {
                         bottom: progressSlider.top
@@ -240,8 +235,6 @@ Scope {
                         right: textGroup.right
                     }
 
-                    // Привязываем значение слайдера к нашему рассчитанному прогрессу
-
                     tooltipContent: root.formatTime(value * (root.player?.length || 0))
 
                     value: pressed ? value : root.currentProgress
@@ -251,17 +244,13 @@ Scope {
 
                     onPressedChanged: {
                         if (pressed) {
-                            // Задержка в один цикл событий, чтобы position успел обновиться
                             Qt.callLater(() => {
                                 value = position;
                             });
                         } else {
-                            // Когда отпустили — перематываем
                             if (root.player && root.player.length > 0) {
                                 let newPos = value * root.player.length;
                                 root.player.position = newPos;
-
-                                // Сразу обновляем наши переменные, чтобы не было "отскока"
                                 root.currentSeconds = newPos;
                             }
                         }
