@@ -81,7 +81,7 @@ WlSessionLockSurface {
 
                 MaterialSymbol {
                     icon: "lock"
-                    color: Colors.palette.m3onSurface
+                    color: Colors.isDarkMode ? Colors.palette.m3onSurface : Colors.palette.m3surface
                     size: 32
                     Layout.alignment: Qt.AlignHCenter
                 }
@@ -89,7 +89,7 @@ WlSessionLockSurface {
                 StyledText {
                     text: "Locked"
                     size: 20
-                    color: Colors.palette.m3onSurface
+                    color: Colors.isDarkMode ? Colors.palette.m3onSurface : Colors.palette.m3surface
                 }
             }
 
@@ -113,14 +113,14 @@ WlSessionLockSurface {
                     text: Time.format(Config.time.format)
                     size: 128
                     weight: 600
-                    color: Colors.palette.m3onSurface
+                    color: Colors.isDarkMode ? Colors.palette.m3onSurface : Colors.palette.m3surface
                 }
                 StyledText {
                     Layout.alignment: Qt.AlignCenter
                     text: Time.format("dddd dd MMMM")
                     size: 24
                     weight: 600
-                    color: Colors.palette.m3onSurface
+                    color: Colors.isDarkMode ? Colors.palette.m3onSurface : Colors.palette.m3surface
                     opacity: 0.7
                 }
             }
