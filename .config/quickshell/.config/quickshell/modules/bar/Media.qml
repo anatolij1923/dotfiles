@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Mpris
+import qs
 import qs.services
 import qs.common
 import qs.widgets
@@ -17,17 +18,22 @@ BarWidget {
 
     StateLayer {
         anchors.fill: parent
+
+        onClicked: {
+            GlobalStates.mediaplayerOpened = !GlobalStates.mediaplayerOpened;
+        }
     }
 
-    property string trackTitle: player?.trackTitle
-    property string trackArtist: player?.trackArtist
+    property string trackTitle: (player && player.trackTitle) || "Unknown"
+    property string trackArtist: (player && player.trackArtist) || "Unknown"
+    property string trackArtUrl: (player && player.trackArtUrl) || ""
 
     property real currentProgress: 0
 
     Timer {
         id: progressTimer
         interval: 1000
-        running: root.player?.isPlaying
+        running: root.player?.isPlaying || false
         repeat: true
 
         onTriggered: {
@@ -60,7 +66,7 @@ BarWidget {
                     id: button
                     icon: Players.active?.isPlaying ? "pause" : "play_arrow"
 
-                    iconSize: 19
+                    iconSize: 22
                     anchors.fill: parent
                     color: "transparent"
                     onClicked: {

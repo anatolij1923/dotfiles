@@ -50,7 +50,7 @@ Rectangle {
         }
 
         AnimatedItem {
-            condition: Audio.source?.audio?.muted
+            condition: Audio.source?.audio?.muted || false
             contentItem: MicWidget {}
         }
 
