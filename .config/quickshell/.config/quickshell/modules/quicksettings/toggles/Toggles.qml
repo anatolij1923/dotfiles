@@ -70,12 +70,13 @@ Rectangle {
             IdleToggle {}
             // GamemodeToggle {}
             SleepToggle {}
+            MicToggle {}
         }
 
         RowLayout {
             spacing: Appearance.padding.smaller
             PowerprofilesToggle {}
-            // DarkModeToggle {}
+            DarkModeToggle {}
             // TrasparencyToggle {}
             ScreenRecordToggle {}
         }
