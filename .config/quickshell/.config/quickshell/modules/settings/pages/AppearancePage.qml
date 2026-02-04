@@ -65,7 +65,7 @@ ContentPage {
                     }
 
                     StyledTooltip {
-                        text: "ass tits pussies"
+                        text: "Download random anime wallpaper from Konachan"
                     }
                 }
             }
