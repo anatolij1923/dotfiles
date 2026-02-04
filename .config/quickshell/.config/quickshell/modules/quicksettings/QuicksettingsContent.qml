@@ -58,7 +58,7 @@ Item {
             Header {}
             Toggles {}
             Sliders {}
-            MediaPlayer {}
+            // MediaPlayer {}
             NotificationsList {}
         }
     }
