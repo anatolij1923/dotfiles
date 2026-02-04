@@ -326,8 +326,12 @@ Rectangle {
 
             RowLayout {
                 id: actions
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: body.bottom
+                // anchors.horizontalCenter: parent.horizontalCenter
+                anchors {
+                    top: body.bottom
+                    left: parent.left
+                    right: parent.right
+                }
                 anchors.topMargin: Appearance.padding.small
                 opacity: root.expanded ? 1 : 0
 
@@ -342,15 +346,8 @@ Rectangle {
                     icon: "close"
                     inactiveColor: Colors.palette.m3surfaceContainerHigh
                     onClicked: root.modelData.close()
-                    padding: Appearance.padding.smaller
-
-                    Elevation {
-                        anchors.fill: parent
-                        level: 3
-                        z: -1
-                        radius: parent.radius
-                        opacity: 0.5
-                    }
+                    padding: Appearance.padding.small
+                    Layout.fillWidth: true
                 }
 
                 Repeater {
@@ -360,16 +357,9 @@ Rectangle {
                     delegate: TextButton {
                         text: modelData.text
                         inactiveColor: Colors.palette.m3surfaceContainerHigh
-                        padding: Appearance.padding.smaller
+                        padding: Appearance.padding.normal
                         onClicked: () => {
                             modelData.invoke();
-                        }
-                        Elevation {
-                            anchors.fill: parent
-                            level: 3
-                            z: -1
-                            radius: parent.radius
-                            opacity: 0.5
                         }
                     }
                 }
