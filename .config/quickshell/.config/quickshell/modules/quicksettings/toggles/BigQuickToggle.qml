@@ -76,6 +76,7 @@ Rectangle {
             iconSize: 32
 
             inactiveColor: Colors.palette.m3surfaceContainerHigh
+            activeColor: Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3primary, 0.8)
 
             onClicked: root.clicked()
             onRightClicked: root.rightClicked()
