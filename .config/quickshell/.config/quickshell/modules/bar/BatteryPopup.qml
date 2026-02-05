@@ -58,8 +58,6 @@ BarPopup {
                 implicitHeight: 8
                 radius: 4
                 color: Colors.palette.m3surfaceVariant
-                border.color: Colors.palette.m3outline
-                border.width: 1
 
                 Rectangle {
                     id: progressBarFill
