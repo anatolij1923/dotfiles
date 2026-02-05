@@ -3,6 +3,7 @@ pragma Singleton
 import qs.common.functions
 import Quickshell
 import QtQuick
+import qs.common
 
 /**
  * Service for application searching and icon resolution with caching.
@@ -51,6 +52,11 @@ Singleton {
                 entry: a
             }))
 
+    readonly property var preppedNamesOnly: list.map(a => ({
+                name: Fuzzy.prepare(a.name),
+                entry: a
+            }))
+
     readonly property var preppedIcons: list.map(a => ({
                 name: Fuzzy.prepare(`${a.icon} `),
                 entry: a
@@ -60,13 +66,48 @@ Singleton {
      * Fuzzy search for applications.
      */
     function fuzzyQuery(search: string): var {
-        if (!search || search.trim() === "")
+        if (!search || search.trim() === "") {
+            // Clear the highlightedName property when search is empty
+            list.forEach(entry => {
+                entry.highlightedName = undefined;
+            });
             return list;
+        }
 
-        return Fuzzy.go(search, preppedNames, {
+        const searchResults = Fuzzy.go(search, preppedNames, {
             all: true,
             key: "name"
-        }).map(r => r.obj.entry);
+        });
+        
+        // Get name-only results for highlighting purposes
+        const nameOnlyResults = Fuzzy.go(search, preppedNamesOnly, {
+            all: true,
+            key: "name"
+        });
+        
+        // Create a map from entry to its name-only result for highlighting
+        const nameHighlightMap = {};
+        nameOnlyResults.forEach(nameResult => {
+            const entryId = nameResult.obj.entry.id;
+            nameHighlightMap[entryId] = nameResult;
+        });
+        
+        // Add highlighted versions of the app names with both bold and underline
+        return searchResults.map(r => {
+            const entry = r.obj.entry;
+            const nameResult = nameHighlightMap[entry.id];
+            let highlighted = entry.name; // fallback to original name
+            
+            if (nameResult) {
+                // Use theme color for highlighting instead of bold
+                highlighted = nameResult.highlight(`<u><font color="${Colors.palette.m3primary}">`, "</font></u>");
+            }
+            
+            entry.highlightedName = highlighted;
+            // Log for debugging
+            // Logger.i("APPSEARCH", `Search: "${search}", Name: "${entry.name}", Highlighted: "${highlighted}"`);
+            // return entry;
+        });
     }
 
     /**

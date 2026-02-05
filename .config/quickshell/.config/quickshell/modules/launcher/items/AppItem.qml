@@ -46,7 +46,7 @@ Item {
         }
 
         StyledText {
-            text: root.modelData.name
+            text: (root.modelData.highlightedName !== undefined) ? root.modelData.highlightedName : root.modelData.name
             weight: 400
             anchors {
                 left: icon.right
