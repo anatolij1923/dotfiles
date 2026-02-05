@@ -106,7 +106,7 @@ Singleton {
             entry.highlightedName = highlighted;
             // Log for debugging
             // Logger.i("APPSEARCH", `Search: "${search}", Name: "${entry.name}", Highlighted: "${highlighted}"`);
-            // return entry;
+            return entry;
         });
     }
 
@@ -198,3 +198,4 @@ Singleton {
         fuzzyQuery("");
     }
 }
+
