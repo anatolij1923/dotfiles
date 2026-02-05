@@ -39,8 +39,8 @@ Item {
         id: visualContainer
         anchors.centerIn: parent
 
-        width: isCurrent ? root.implicitWidth * 1.1 : root.implicitWidth
-        height: isCurrent ? Config.launcher.sizes.wallHeight * 1.2 : Config.launcher.sizes.wallHeight
+        width: isCurrent ? Math.round(root.implicitWidth * 1.1) : root.implicitWidth
+        height: isCurrent ? Math.round(Config.launcher.sizes.wallHeight * 1.2) : Config.launcher.sizes.wallHeight
 
         y: isCurrent ? -15 : 0
 
@@ -79,8 +79,8 @@ Item {
                     asynchronous: true
                     smooth: true
                     sourceSize {
-                        width: Config.launcher.wallWidth + 100
-                        height: Config.launcher.wallHeight + 100
+                        width: Math.round(Config.launcher.sizes.wallWidth + 100)
+                        height: Math.round(Config.launcher.sizes.wallHeight + 100)
                     }
                 }
             }
