@@ -34,7 +34,7 @@ Scope {
 
     Timer {
         id: progressTimer
-        interval: 1000
+        interval: 500
         running: !!root.player && root.player.isPlaying
         repeat: true
         triggeredOnStart: true
@@ -89,6 +89,11 @@ Scope {
                 anchors.fill: parent
                 color: Colors.palette.m3surfaceContainer
                 radius: Appearance.rounding.huge
+
+                focus: true
+                Keys.onEscapePressed: {
+                    playerRoot.hide();
+                }
 
                 Image {
                     id: blurredArt
@@ -234,6 +239,8 @@ Scope {
                         left: textGroup.left
                         right: textGroup.right
                     }
+
+                    stopIndicatorValues: []
 
                     tooltipContent: root.formatTime(value * (root.player?.length || 0))
 
