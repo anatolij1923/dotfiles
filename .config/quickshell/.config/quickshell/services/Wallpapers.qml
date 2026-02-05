@@ -55,7 +55,7 @@ Singleton {
     Process {
         id: findProcess
         workingDirectory: root.wallpaperDir
-        command: ["sh", "-c", `find -L ${root.wallpaperDir} -type d -path */.* -prune -o -not -name .* -type f -print 2>/dev/null`]
+        command: ["fd", ".", root.wallpaperDir, "-L", "-t", "f", "-e", "jpg", "-e", "png", "-e", "jpeg", "-e", "webp"]
         running: true
 
         stdout: StdioCollector {
