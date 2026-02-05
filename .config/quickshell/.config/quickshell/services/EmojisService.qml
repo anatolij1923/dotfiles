@@ -4,6 +4,7 @@ import Quickshell.Io
 import QtQuick
 import qs.common.functions
 import qs
+import qs.common
 
 Singleton {
     id: root
@@ -50,6 +51,10 @@ Singleton {
         const term = search.replace(/^:emoji\s*/, "").toLowerCase().trim();
 
         if (term === "") {
+            // Clear any highlight properties when search is empty
+            root.emojiData.forEach(item => {
+                item.highlightedDescription = undefined;
+            });
             return root.emojiData.slice(0, 100);
         }
 
@@ -65,15 +70,30 @@ Singleton {
             }
         }
 
+        // Perform fuzzy search on other data
         const fuzzyResults = Fuzzy.go(term, otherData, {
             key: "prepared",
             limit: 30,
             threshold: -500
         });
 
-        const fuzzyMatches = fuzzyResults.map(r => r.obj);
+        // Apply highlighting to fuzzy matches
+        const fuzzyMatches = fuzzyResults.map(r => {
+            const item = r.obj;
+            // Highlight the description using the theme color and underlining
+            item.highlightedDescription = r.highlight(`<u><font color="${Colors.palette.m3primary}">`, "</font></u>");
+            return item;
+        });
 
-        return exactMatches.concat(fuzzyMatches).slice(0, 100);
+        // Apply highlighting to exact matches
+        const exactMatchesWithHighlight = exactMatches.map(item => {
+            // Manually highlight the matching part in the description
+            const regex = new RegExp(`(${term})`, 'gi');
+            item.highlightedDescription = item.description.replace(regex, `<u><font color="${Colors.palette.m3primary}">$1</font></u>`);
+            return item;
+        });
+
+        return exactMatchesWithHighlight.concat(fuzzyMatches).slice(0, 100);
     }
 
     function copyAndType(emoji) {

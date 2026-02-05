@@ -71,7 +71,7 @@ Item {
 
             StyledText {
                 id: nameText
-                text: root.modelData?.name ?? "Unnamed Command"
+                text: (root.modelData?.highlightedName !== undefined) ? root.modelData.highlightedName : (root.modelData?.name ?? "Unnamed Command")
                 color: Colors.palette.m3onSurface
                 size: 20
                 weight: 400
@@ -79,7 +79,7 @@ Item {
 
             StyledText {
                 id: descText
-                text: root.modelData?.description ?? ""
+                text: (root.modelData?.highlightedDescription !== undefined && root.modelData.highlightedDescription !== root.modelData.description) ? root.modelData.highlightedDescription : (root.modelData?.description ?? "")
                 color: Colors.palette.m3onSurfaceVariant
                 size: 16
                 opacity: 0.8

@@ -37,7 +37,7 @@ Item {
         }
 
         StyledText {
-            text: modelData.description
+            text: (modelData.highlightedDescription !== undefined) ? modelData.highlightedDescription : modelData.description
             color: Colors.palette.m3onSurface
             elide: Text.ElideRight
             anchors.verticalCenter: parent.verticalCenter

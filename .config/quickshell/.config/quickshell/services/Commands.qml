@@ -127,23 +127,70 @@ Singleton {
         // console.log("Commands.qml: list length =", list.length);
 
         if (!search || search.length === 0) {
+            // Clear any highlight properties when search is empty
+            list.forEach(cmd => {
+                cmd.highlightedName = undefined;
+                cmd.highlightedDescription = undefined;
+            });
             // console.log("Commands.qml: returning full list");
             return list;
         }
 
-        const preppedCommands = list.map(cmd => ({
+        // Create separate prepared lists for names and descriptions
+        const preppedNames = list.map(cmd => ({
+                    name: Fuzzy.prepare(cmd.name),
+                    command: cmd
+                }));
+                
+        const preppedDescriptions = list.map(cmd => ({
+                    name: Fuzzy.prepare(cmd.description),
+                    command: cmd
+                }));
+
+        // Perform fuzzy search on combined name + description for results
+        const preppedCombined = list.map(cmd => ({
                     name: Fuzzy.prepare(`${cmd.name ?? ""} ${cmd.description ?? ""}`),
                     command: cmd
                 }));
 
-        const results = Fuzzy.go(search, preppedCommands, {
+        const results = Fuzzy.go(search, preppedCombined, {
             all: true,
             key: "name"
-        }).map(r => {
-            return r.obj.command;
+        });
+
+        // Create maps to store name and description highlights
+        const nameHighlightMap = {};
+        const descHighlightMap = {};
+
+        // Process name highlights
+        const nameResults = Fuzzy.go(search, preppedNames, {
+            all: true,
+            key: "name"
+        });
+        nameResults.forEach(r => {
+            const cmd = r.obj.command;
+            nameHighlightMap[cmd.name] = r.highlight(`<u><font color="${Colors.palette.m3primary}">`, "</font></u>");
+        });
+
+        // Process description highlights
+        const descResults = Fuzzy.go(search, preppedDescriptions, {
+            all: true,
+            key: "name"
+        });
+        descResults.forEach(r => {
+            const cmd = r.obj.command;
+            descHighlightMap[cmd.description] = r.highlight(`<u><font color="${Colors.palette.m3primary}">`, "</font></u>");
+        });
+
+        // Apply highlights to the results
+        const highlightedResults = results.map(r => {
+            const cmd = r.obj.command;
+            cmd.highlightedName = nameHighlightMap[cmd.name] || cmd.name;
+            cmd.highlightedDescription = descHighlightMap[cmd.description] || cmd.description;
+            return cmd;
         });
 
         // console.log("Commands.qml: search results count =", results.length);
-        return results;
+        return highlightedResults;
     }
 }

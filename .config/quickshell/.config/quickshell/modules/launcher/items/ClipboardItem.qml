@@ -49,7 +49,7 @@ Item {
             StyledText {
                 id: headerText
                 width: parent.width
-                text: root.cleanText
+                text: (ClipboardService.searchResultsMap[root.modelData] !== undefined) ? ClipboardService.searchResultsMap[root.modelData] : root.cleanText
                 color: Colors.palette.m3onSurface
                 weight: 400
                 size: root.isImage ? 16 : 18

@@ -14,6 +14,7 @@ Singleton {
 
     property list<string> entries: []
     property var preparedEntries: []
+    property var searchResultsMap: ({})
 
     onEntriesChanged: {
         const startTime = Date.now();
@@ -34,15 +35,37 @@ Singleton {
     }
 
     function query(search) {
-        if (!search || search.trim() === "")
+        if (!search || search.trim() === "") {
+            // Clear any highlight properties when search is empty
+            preparedEntries.forEach(item => {
+                item.highlightedClean = undefined;
+            });
             return entries;
+        }
         try {
+            // Clear the search results map when search is empty
+            if (!search || search.trim() === "") {
+                root.searchResultsMap = {};
+                return entries;
+            }
             const results = Fuzzy.go(search, preparedEntries, {
                 key: "prepared",
                 limit: 100,
                 threshold: -10000
             });
-            return results.map(r => r.obj.original);
+            // Create a new search results map for this search
+            const newSearchResultsMap = {};
+            // Apply highlighting to the results
+            const returnResults = results.map(r => {
+                const item = r.obj;
+                item.highlightedClean = r.highlight(`<u><font color="${Colors.palette.m3primary}">`, "</font></u>");
+                // Store the highlighted version in the map using the original entry as key
+                newSearchResultsMap[item.original] = item.highlightedClean;
+                return item.original;
+            });
+            // Update the search results map
+            root.searchResultsMap = newSearchResultsMap;
+            return returnResults;
         } catch (e) {
             return [];
         }
