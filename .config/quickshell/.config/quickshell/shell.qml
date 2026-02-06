@@ -20,6 +20,7 @@ import qs.modules.overview
 import qs.modules.polkit
 import qs.modules.settings
 import qs.modules.screenshot
+import qs.modules.dashboard
 
 ShellRoot {
     id: root
@@ -39,7 +40,8 @@ ShellRoot {
     property bool enableSettings: true
     property bool enableScreenshot: true
     property bool enableMediaplayer: true
-    //
+    property bool enableDashboard: true
+
     Component.onCompleted: {
         Idle.init();
     }
@@ -123,5 +125,10 @@ ShellRoot {
     LazyLoader {
         active: root.enableMediaplayer
         component: MediaPlayer {}
+    }
+
+    LazyLoader {
+        active: root.enableDashboard
+        component: Dashboard {}
     }
 }

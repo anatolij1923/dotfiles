@@ -22,11 +22,9 @@ Singleton {
     property bool settingsOpened: false
     property bool screenshotOpened: false
     property bool mediaplayerOpened: false
+    property bool dashboardOpened: false
 
     property bool titOpened: false
 
     property var lastClickX
-
-    property bool idleIngibitorToggled: false
-    property bool sleepTimerToggled: false
 }
