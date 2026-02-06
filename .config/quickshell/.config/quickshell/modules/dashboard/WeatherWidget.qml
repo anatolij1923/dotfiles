@@ -134,7 +134,7 @@ Item {
             }
             StyledText {
                 Layout.alignment: Qt.AlignRight
-                text: "Sunny"
+                text: Weather.data.desc
                 size: Appearance.font.size.xlarge
                 color: Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3primary, 0.4)
                 weight: 500
