@@ -13,32 +13,43 @@ Singleton {
     property var data: ({
             temp: "-",
             tempFeelsLike: "-",
-            city: 0,
+            city: "Loading...",
             icon: "clear_day",
             desc: "",
             wind: "0",
             humidity: "0",
             minTemp: "-",
-            maxTemp: "-"
+            maxTemp: "-",
+            forecast: []
         })
 
     function getData() {
+        if (!root.city)
+            return;
         let formattedCity = root.city.trim().split(/\s+/).join('+');
 
         let filter = "{ \
-            temp: .current_condition[0].temp_C, \
-            tempFeelsLike: .current_condition[0].FeelsLikeC, \
-            city: .nearest_area[0].areaName[0].value, \
-            code: .current_condition[0].weatherCode, \
-            desc: .current_condition[0].weatherDesc[0].value, \
-            wind: .current_condition[0].windspeedKmph, \
-            humidity: .current_condition[0].humidity, \
-            minTemp: .weather[0].mintempC, \
-            maxTemp: .weather[0].maxtempC \
+            current: { \
+                temp: .current_condition[0].temp_C, \
+                tempFeelsLike: .current_condition[0].FeelsLikeC, \
+                city: .nearest_area[0].areaName[0].value, \
+                code: .current_condition[0].weatherCode, \
+                desc: .current_condition[0].weatherDesc[0].value, \
+                wind: .current_condition[0].windspeedKmph, \
+                humidity: .current_condition[0].humidity, \
+                minTemp: .weather[0].mintempC, \
+                maxTemp: .weather[0].maxtempC \
+            }, \
+            forecast: [.weather[] | { \
+                date: .date, \
+                avg: .avgtempC, \
+                max: .maxtempC, \
+                min: .mintempC, \
+                code: .hourly[4].weatherCode \
+            }] \
         }";
 
         let flatFilter = filter.replace(/\s+/g, ' ');
-
         let cmd = `curl -s "wttr.in/${formattedCity}?format=j1" | jq -c '${flatFilter}'`;
 
         fetcher.command = ["bash", "-c", cmd];
@@ -53,16 +64,37 @@ Singleton {
                     return;
                 try {
                     let parsed = JSON.parse(text);
+                    let result = parsed.current;
 
-                    if (parsed.temp == "-0")
-                        parsed.temp = "0";
+                    if (result.temp === "-0")
+                        result.temp = "0";
+                    result.icon = Icons.getWeatherIcon(result.code);
 
-                    parsed.icon = Icons.getWeatherIcon(parsed.code);
+                    const daysShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-                    root.data = parsed;
-                    console.info(`[WEATHER] Updated: ${parsed.temp}°C, Icon: ${parsed.icon}`);
+                    result.forecast = parsed.forecast.map((item, index) => {
+                        let dayName = "";
+                        if (index === 0) {
+                            dayName = "Today";
+                        } else {
+                            let dateParts = item.date.split('-');
+                            let d = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+                            dayName = daysShort[d.getDay()];
+                        }
+
+                        return {
+                            day: dayName,
+                            icon: Icons.getWeatherIcon(item.code),
+                            avg: item.avg,
+                            max: item.max,
+                            min: item.min
+                        };
+                    });
+
+                    root.data = result;
+                    Logger.i("WEATHER", `Updated for ${result.city}`);
                 } catch (e) {
-                    console.error("[WEATHER] Parse error: " + e.message);
+                    Logger.e("WEATHER", "Parse error: " + e.message);
                 }
             }
         }
