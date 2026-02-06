@@ -20,7 +20,7 @@ BarWidget {
 
             StyledText {
                 id: timeSection
-                text: Time.format(`${timeFormat} • ${dateFormat}`)
+                text: Time.format(`${root.timeFormat} • ${root.dateFormat}`)
             }
         }
     ]
