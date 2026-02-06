@@ -13,7 +13,7 @@ Singleton {
     property string uptime: "0h, 0m"
 
     function format(fmt: string): string {
-        return Qt.formatDateTime(clock.date, fmt);
+        return clock.date.toLocaleString(Qt.locale(), fmt);
     }
 
     SystemClock {
