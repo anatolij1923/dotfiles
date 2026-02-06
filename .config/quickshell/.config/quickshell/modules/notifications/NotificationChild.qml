@@ -344,7 +344,8 @@ Rectangle {
 
                 IconButton {
                     icon: "close"
-                    inactiveColor: root.modelData.urgency === NotificationUrgency.Critical ? Colors.mix(Colors.palette.m3secondaryContainer, Colors.palette.m3surfaceContainerHigh, 0.2) : Colors.palette.m3surfaceContainerHigh
+                    inactiveColor: root.modelData.urgency === NotificationUrgency.Critical ? Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3secondaryContainer, 0.3) : Colors.palette.m3surfaceContainerHigh
+                    inactiveOnColor: root.modelData.urgency === NotificationUrgency.Critical ? Colors.palette.m3secondaryContainer : Colors.palette.m3onSurface
                     onClicked: root.modelData.close()
                     padding: Appearance.padding.small
                     Layout.fillWidth: true
@@ -356,7 +357,9 @@ Rectangle {
 
                     delegate: TextButton {
                         text: modelData.text
-                        inactiveColor: root.modelData.urgency === NotificationUrgency.Critical ? Colors.mix(Colors.palette.m3secondaryContainer, Colors.palette.m3surfaceContainerHigh, 0.2) : Colors.palette.m3surfaceContainerHigh
+                        inactiveColor: root.modelData.urgency === NotificationUrgency.Critical ? Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3secondaryContainer, 0.3) : Colors.palette.m3surfaceContainerHigh
+                        inactiveOnColor: root.modelData.urgency === NotificationUrgency.Critical ? Colors.palette.m3secondaryContainer : Colors.palette.m3onSurface
+
                         padding: Appearance.padding.normal
                         onClicked: () => {
                             modelData.invoke();
