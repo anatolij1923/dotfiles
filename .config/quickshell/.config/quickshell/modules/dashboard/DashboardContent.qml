@@ -19,7 +19,7 @@ Rectangle {
     property int marginInner: Appearance.padding.small
 
     property int widgetBaseSize: 200
-    property int sidebarWidth: 240
+    property int sidebarWidth: 200
     property int playerCollapsedWidth: 180
 
     property bool isBottom: false
@@ -113,6 +113,10 @@ Rectangle {
                 top: parent.top
                 right: parent.right
                 bottom: parent.bottom
+            }
+
+            UsageInfo {
+                anchors.centerIn: parent
             }
         }
 
