@@ -25,6 +25,9 @@ Rectangle {
     property bool isBottom: false
     property bool weatherExpanded: false
 
+    property real alpha: Config.appearance.transparency.alpha
+    property bool transparent: Config.appearance.transparency.enabled
+
     focus: true
     Keys.onEscapePressed: {
         if (weatherExpanded)
@@ -33,7 +36,7 @@ Rectangle {
             GlobalStates.dashboardOpened = false;
     }
 
-    color: Colors.palette.m3surface
+    color: transparent ? Qt.alpha(Colors.palette.m3surface, alpha) : Colors.palette.m3surface
 
     bottomLeftRadius: isBottom ? 0 : roundingOuter
     bottomRightRadius: isBottom ? 0 : roundingOuter
@@ -73,10 +76,9 @@ Rectangle {
                 onClicked: root.weatherExpanded = !root.weatherExpanded
             }
 
-            Text {
-                anchors.centerIn: parent
-                text: "Weather"
-                color: "white"
+            WeatherWidget {
+                anchors.fill: parent
+                expanded: root.weatherExpanded
             }
         }
 
