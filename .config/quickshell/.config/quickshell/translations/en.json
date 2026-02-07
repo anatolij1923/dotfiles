@@ -142,12 +142,10 @@
   "bar": {
     "back": "‹ Back"
   },
-    "launcher": {
-        "random": "Random",
-        "wallpapers": "wallpapers"
-        "wipe": "Wipe"
-        "entries": "entries"
-
-    }
-    
+  "launcher": {
+    "random": "Random",
+    "wallpapers": "wallpapers",
+    "wipe": "Wipe",
+    "entries": "entries"
+  }
 }

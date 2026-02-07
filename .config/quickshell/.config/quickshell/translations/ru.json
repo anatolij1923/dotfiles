@@ -142,13 +142,11 @@
   "bar": {
     "back": "‹ Назад"
   },
-        "launcher": {
-        "random": "Случайно",
-        "wallpapers": "обоев",
-        "wipe": "Очистить",
-        "entries": "элементов"
+  "launcher": {
+    "random": "Случайно",
+    "wallpapers": "обоев",
+    "wipe": "Очистить",
+    "entries": "элементов"
+  }
+}
 
-    }
-
-
-} 
