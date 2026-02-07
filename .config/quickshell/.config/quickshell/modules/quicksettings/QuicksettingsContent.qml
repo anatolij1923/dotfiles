@@ -32,7 +32,7 @@ Item {
     //     radius: background.radius
     // }
 
-    Rectangle {
+    ClippingRectangle {
         id: background
         anchors.fill: parent
         radius: Appearance.rounding.hugeass
@@ -56,10 +56,34 @@ Item {
             spacing: Appearance.padding.normal
             Layout.fillHeight: true
             Header {}
-            Toggles {}
+            Toggles {
+                id: toggles
+                onOpenMicDialogRequested: () => micDialog.open()
+            }
             Sliders {}
             // MediaPlayer {}
             NotificationsList {}
+        }
+
+        M3Dialog {
+            id: micDialog
+            anchors.fill: parent
+            visible: false
+            title: Translation.tr("quicksettings.dialogs.mic.title")
+
+            DialogDivider {}
+            DialogSwitchRow {
+                label: Translation.tr("quicksettings.dialogs.mic.input_volume")
+                checked: Audio.source.audio.muted
+                onToggled: (v) => Audio.source.audio.muted = !v
+            }
+            DialogDivider {}
+            DialogSliderRow {
+                label: Translation.tr("quicksettings.dialogs.mic.input_volume")
+                value: 0.7
+                stopIndicatorValues: [0, 0.25, 0.5, 0.75, 1]
+                onValueChanged: () => { /* placeholder */ }
+            }
         }
     }
 }

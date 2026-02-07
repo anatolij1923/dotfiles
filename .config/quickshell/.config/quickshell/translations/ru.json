@@ -24,6 +24,12 @@
       "transparency": "Прозрачность",
       "gamemode": "Игровой режим"
     },
+    "dialogs": {
+      "mic": {
+        "title": "Микрофон",
+        "input_volume": "Громкость входа"
+      }      
+    },
     "notifications": {
       "everything_quiet": "Уведомлений нет",
       "clear": "Очистить",

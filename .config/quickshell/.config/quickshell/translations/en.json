@@ -24,6 +24,12 @@
       "transparency": "Toggle transparency",
       "gamemode": "Enable game mode"
     },
+    "dialogs": {
+      "mic": {
+        "title": "Microphone",
+        "input_volume": "Input volume"
+      }      
+    },
     "notifications": {
       "everything_quiet": "Everything is quiet",
       "clear": "Clear",

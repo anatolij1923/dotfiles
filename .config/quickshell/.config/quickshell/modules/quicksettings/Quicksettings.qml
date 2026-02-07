@@ -83,10 +83,10 @@ Scope {
                 implicitWidth: {
                 const sw = quicksettingsRoot.screen.width
 
-    if (sw < 1100) return 300   // мелкие ноуты
-    if (sw < 1600) return 400   // обычные
-    if (sw < 2200) return 500   // QHD
-    return 650                  // 4K+
+                if (sw < 1100) return 300   
+                if (sw < 1600) return 400   
+                if (sw < 2200) return 500   
+                return 650                  
 
                 }
                 // implicitWidth: Math.min(
@@ -96,9 +96,7 @@ Scope {
                 }
             }
 
-            Component.onCompleted: {
-                Logger.i(`${quicksettingsRoot.screen.width}`)
-            }
+            
         }
     }
 

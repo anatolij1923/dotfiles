@@ -11,6 +11,7 @@ Rectangle {
     id: root
 
     property int padding: Appearance.padding.normal
+    signal openMicDialogRequested
 
     implicitHeight: content.implicitHeight + padding * 2
     implicitWidth: content.implicitWidth + padding * 2
@@ -70,7 +71,9 @@ Rectangle {
             IdleToggle {}
             // GamemodeToggle {}
             SleepToggle {}
-            MicToggle {}
+            MicToggle {
+                onRightClicked: root.openMicDialogRequested()
+            }
         }
 
         RowLayout {
