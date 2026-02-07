@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
+import qs
 import qs.widgets
 import qs.common
 import qs.services
@@ -13,6 +14,13 @@ BarWidget {
     property string dateFormat: Config.time.dateFormat
 
     padding: Appearance.padding.huge
+
+    StateLayer {
+        anchors.fill: parent
+        onClicked: {
+            GlobalStates.dashboardOpened = !GlobalStates.dashboardOpened
+        }
+    }
 
     rowContent: [
         RowLayout {
