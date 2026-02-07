@@ -16,7 +16,10 @@ Item {
     property real contentWidthRatio: 0.8
     property int maxContentHeight: 50
 
-    signal closed()
+    signal closed
+
+    focus: true
+    Keys.onEscapePressed: close()
 
     property bool _animShownValue: false
 
@@ -25,11 +28,13 @@ Item {
 
     SequentialAnimation {
         id: closeSeq
-        PauseAnimation { duration: Appearance.animDuration.expressiveFastSpatial }
+        PauseAnimation {
+            duration: Appearance.animDuration.expressiveFastSpatial
+        }
         ScriptAction {
             script: {
-                root.visible = false
-                root.closed()
+                root.visible = false;
+                root.closed();
             }
         }
     }
@@ -51,9 +56,9 @@ Item {
         MouseArea {
             anchors.fill: parent
             acceptedButtons: Qt.AllButtons
-            onPressed: (mouse) => {
-                mouse.accepted = true
-                root.close()
+            onPressed: mouse => {
+                mouse.accepted = true;
+                root.close();
             }
         }
     }
@@ -91,7 +96,7 @@ Item {
         MouseArea {
             anchors.fill: parent
             acceptedButtons: Qt.AllButtons
-            onPressed: (mouse) => mouse.accepted = true
+            onPressed: mouse => mouse.accepted = true
         }
 
         ColumnLayout {
@@ -115,14 +120,16 @@ Item {
     default property alias contentData: contentLayout.data
 
     function open() {
-        root.visible = true
-        root._animShownValue = false
-        Qt.callLater(() => root._animShownValue = true)
+        root.visible = true;
+        root._animShownValue = false;
+        Qt.callLater(() => {
+            root._animShownValue = true;
+            root.forceActiveFocus();
+        });
     }
 
     function close() {
-        root._animShownValue = false
-        closeSeq.restart()
+        root._animShownValue = false;
+        closeSeq.restart();
     }
 }
-
