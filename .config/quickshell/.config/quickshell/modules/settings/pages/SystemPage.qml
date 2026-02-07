@@ -8,13 +8,13 @@ import qs.services
 import qs.config
 
 ContentPage {
-    title: "System"
+    title: Translation.tr("settings.system.title")
 
     ContentItem {
-        title: "Bar"
+        title: Translation.tr("settings.system.bar")
 
         SpinBoxRow {
-            label: "Height"
+            label: Translation.tr("settings.system.height")
             value: Config.bar.height
             from: 30
             to: 100
@@ -23,19 +23,19 @@ ContentPage {
         }
 
         SwitchRow {
-            label: "Bottom position"
+            label: Translation.tr("settings.system.bottom_position")
             value: Config.bar.bottom
             onToggled: Config.bar.bottom = value
         }
 
         SwitchRow {
-            label: "Floating"
+            label: Translation.tr("settings.system.floating")
             value: Config.bar.floating
             onToggled: Config.bar.floating = value
         }
 
         SpinBoxRow {
-            label: "Vertical Margins"
+            label: Translation.tr("settings.system.vertical_margins")
             value: Config.bar.margins.vertical
             from: 0
             to: 50
@@ -43,7 +43,7 @@ ContentPage {
         }
 
         SpinBoxRow {
-            label: "Horizontal Margins"
+            label: Translation.tr("settings.system.horizontal_margins")
             value: Config.bar.margins.horizontal
             from: 0
             to: 50
@@ -51,7 +51,7 @@ ContentPage {
         }
 
         SpinBoxRow {
-            label: "Workspaces shown"
+            label: Translation.tr("settings.system.workspaces_shown")
             value: Config.bar.workspaces.shown
             from: 1
             to: 10
@@ -59,13 +59,13 @@ ContentPage {
         }
 
         SwitchRow {
-            label: "Make tray icons monochrome"
+            label: Translation.tr("settings.system.make_tray_monochrome")
             value: Config.bar.tray.monochromeTrayIcons
             onToggled: Config.bar.tray.monochromeTrayIcons = value
         }
 
         SliderRow {
-            label: "Icon desaturation"
+            label: Translation.tr("settings.system.icon_desaturation")
             value: Config.bar.tray.desaturation
             from: 0
             to: 1
@@ -75,36 +75,36 @@ ContentPage {
         }
 
         SwitchRow {
-            label: "Use classic battery style"
+            label: Translation.tr("settings.system.classic_battery")
             value: Config.bar.battery.classicBatteryStyle
             onToggled: Config.bar.battery.classicBatteryStyle = value
         }
 
         SwitchRow {
-            label: "Show percentage"
+            label: Translation.tr("settings.system.show_percentage")
             value: Config.bar.battery.showPercentage
             onToggled: Config.bar.battery.showPercentage = value
         }
 
         SwitchRow {
-            label: "Trasparent center widgets"
+            label: Translation.tr("settings.system.transparent_center_widgets")
             value: Config.bar.transparentCenterWidgets
             onToggled: Config.bar.transparentCenterWidgets = value
         }
     }
 
     ContentItem {
-        title: "Time"
+        title: Translation.tr("settings.system.time")
 
         TextFieldRow {
-            label: "Time format"
+            label: Translation.tr("settings.system.time_format")
             value: Config.time.format
             placeholder: "hh:mm"
             onValueChanged: Config.time.format = value
         }
 
         TextFieldRow {
-            label: "Date format"
+            label: Translation.tr("settings.system.date_format")
             value: Config.time.dateFormat
             placeholder: "ddd, dd MMM"
             onValueChanged: Config.time.dateFormat = value
@@ -112,10 +112,10 @@ ContentPage {
     }
 
     ContentItem {
-        title: "Gamemode"
+        title: Translation.tr("settings.system.gamemode")
 
         SpinBoxRow {
-            label: "Gaps in"
+            label: Translation.tr("settings.system.gaps_in")
             value: Config.gamemode.gapsIn
             from: 0
             to: 50
@@ -123,7 +123,7 @@ ContentPage {
         }
 
         SpinBoxRow {
-            label: "Gaps out"
+            label: Translation.tr("settings.system.gaps_out")
             value: Config.gamemode.gapsOut
             from: 0
             to: 50
@@ -131,7 +131,7 @@ ContentPage {
         }
 
         SpinBoxRow {
-            label: "Border size"
+            label: Translation.tr("settings.system.border_size")
             value: Config.gamemode.borderSize
             from: 0
             to: 20
@@ -139,7 +139,7 @@ ContentPage {
         }
 
         SpinBoxRow {
-            label: "Rounding"
+            label: Translation.tr("settings.system.rounding")
             value: Config.gamemode.rounding
             from: 0
             to: 50
@@ -147,19 +147,19 @@ ContentPage {
         }
 
         SwitchRow {
-            label: "Send notification"
+            label: Translation.tr("settings.system.send_notification")
             value: Config.gamemode.sendNotification
             onToggled: Config.gamemode.sendNotification = value
         }
 
         SwitchRow {
-            label: "Disable blur"
+            label: Translation.tr("settings.system.disable_blur")
             value: Config.gamemode.blur.disableBlur
             onToggled: Config.gamemode.blur.disableBlur = value
         }
 
         SpinBoxRow {
-            label: "Blur size"
+            label: Translation.tr("settings.system.blur_size")
             value: Config.gamemode.blur.blurSize
             from: 0
             to: 50
@@ -168,7 +168,7 @@ ContentPage {
         }
 
         SpinBoxRow {
-            label: "Blur passes"
+            label: Translation.tr("settings.system.blur_passes")
             value: Config.gamemode.blur.blurPasses
             from: 0
             to: 10
@@ -178,10 +178,10 @@ ContentPage {
     }
 
     ContentItem {
-        title: "Weather"
+        title: Translation.tr("settings.system.weather")
 
         SpinBoxRow {
-            label: "Update interval (minutes)"
+            label: Translation.tr("settings.system.update_interval_minutes")
             value: Config.weather.updateInterval
             from: 1
             to: 60
@@ -189,18 +189,18 @@ ContentPage {
         }
 
         TextFieldRow {
-            label: "City"
+            label: Translation.tr("settings.system.city")
             value: Config.weather.city
-            placeholder: "Enter city name"
+            placeholder: Translation.tr("settings.system.city_placeholder")
             onValueChanged: Config.weather.city = value
         }
     }
 
     ContentItem {
-        title: "Notifications"
+        title: Translation.tr("settings.system.notifications")
 
         SpinBoxRow {
-            label: "Timeout (ms)"
+            label: Translation.tr("settings.system.timeout_ms")
             value: Config.notification.timeout
             from: 1000
             to: 30000
@@ -210,10 +210,10 @@ ContentPage {
     }
 
     ContentItem {
-        title: "OSD"
+        title: Translation.tr("settings.system.osd")
 
         SpinBoxRow {
-            label: "Timeout (ms)"
+            label: Translation.tr("settings.system.timeout_ms")
             value: Config.osd.timeout
             from: 500
             to: 5000
@@ -223,16 +223,16 @@ ContentPage {
     }
 
     ContentItem {
-        title: "Lock Screen"
+        title: Translation.tr("settings.system.lock_screen")
 
         SwitchRow {
-            label: "Blur enabled"
+            label: Translation.tr("settings.system.blur_enabled")
             value: Config.lock.blur.enabled
             onToggled: Config.lock.blur.enabled = value
         }
 
         SliderRow {
-            label: "Blur radius"
+            label: Translation.tr("settings.system.blur_radius")
             value: Config.lock.blur.radius
             from: 0
             to: 50
@@ -241,7 +241,7 @@ ContentPage {
         }
 
         SliderRow {
-            label: "Dim opacity"
+            label: Translation.tr("settings.system.dim_opacity")
             value: Config.lock.dimOpacity
             from: 0
             to: 1

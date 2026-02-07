@@ -3,27 +3,27 @@ import QtQuick
 ListModel {
     ListElement {
         pageId: "appearance"
-        text: "Appearance"
+        textKey: "settings.sidebar.appearance"
         icon: "palette"
     }
     ListElement {
         pageId: "general"
-        text: "General"
+        textKey: "settings.sidebar.general"
         icon: "settings"
     }
     ListElement {
         pageId: "launcher"
-        text: "Launcher"
+        textKey: "settings.sidebar.launcher"
         icon: "apps"
     }
     ListElement {
         pageId: "system"
-        text: "System"
+        textKey: "settings.sidebar.system"
         icon: "manufacturing"
     }
     ListElement {
         pageId: "about"
-        text: "About"
+        textKey: "settings.sidebar.about"
         icon: "info"
     }
 }

@@ -80,8 +80,24 @@ Scope {
                 }
 
                 sourceComponent: QuicksettingsContent {
-                    implicitWidth: quicksettingsRoot.screen.width * 0.27
+                implicitWidth: {
+                const sw = quicksettingsRoot.screen.width
+
+    if (sw < 1100) return 300   // мелкие ноуты
+    if (sw < 1600) return 400   // обычные
+    if (sw < 2200) return 500   // QHD
+    return 650                  // 4K+
+
                 }
+                // implicitWidth: Math.min(
+                //     Math.max(quicksettingsRoot.screen.width * 0.25, 320),
+                //     550
+                // )
+                }
+            }
+
+            Component.onCompleted: {
+                Logger.i(`${quicksettingsRoot.screen.width}`)
             }
         }
     }

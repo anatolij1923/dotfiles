@@ -12,5 +12,5 @@ QuickToggle {
     onClicked: () => {
         Record.toggle();
     }
-    tooltipText: "Enable screen recording"
+    tooltipText: Translation.tr("quicksettings.toggles.screen_record")
 }

@@ -15,5 +15,5 @@ QuickToggle {
         Gamemode.enable();
     }
 
-    tooltipText: "Enable game mode"
+    tooltipText: Translation.tr("quicksettings.toggles.gamemode")
 }

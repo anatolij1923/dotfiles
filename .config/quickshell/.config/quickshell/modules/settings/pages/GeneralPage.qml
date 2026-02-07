@@ -6,13 +6,13 @@ import qs.widgets
 import qs.services
 
 ContentPage {
-    title: "General"
+    title: Translation.tr("settings.general.title")
 
     ContentItem {
-        title: "Information"
+        title: Translation.tr("settings.general.information")
 
         StyledText {
-            text: "Welcome to Chroma Settings"
+            text: Translation.tr("settings.general.welcome")
             size: 18
             weight: 500
             color: Colors.palette.m3onSurface
@@ -20,7 +20,7 @@ ContentPage {
         }
 
         StyledText {
-            text: "Configure your shell environment from here. All changes are saved automatically to config.json"
+            text: Translation.tr("settings.general.configure_hint")
             size: 14
             color: Colors.palette.m3onSurfaceVariant
             wrapMode: Text.WordWrap

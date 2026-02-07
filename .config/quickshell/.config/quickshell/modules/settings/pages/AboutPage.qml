@@ -8,13 +8,13 @@ import qs.widgets
 import qs.services
 
 ContentPage {
-    title: "About"
+    title: Translation.tr("settings.about.title")
 
     ContentItem {
-        title: "Chroma Shell"
+        title: Translation.tr("settings.about.chroma_shell")
 
         StyledText {
-            text: "Chroma Shell Settings"
+            text: Translation.tr("settings.about.chroma_settings")
             size: 18
             weight: 500
             color: Colors.palette.m3onSurface
@@ -22,7 +22,7 @@ ContentPage {
         }
 
         StyledText {
-            text: "A modern, customizable shell environment built with Quickshell"
+            text: Translation.tr("settings.about.description")
             size: 14
             color: Colors.palette.m3onSurfaceVariant
             wrapMode: Text.WordWrap
@@ -31,9 +31,9 @@ ContentPage {
         }
 
         SwitchRow {
-            label: "Activate dotfiles"
-            value: Config.background.dotfilesActivated
-            onToggled: Config.background.dotfilesActivated = value
+            label: Translation.tr("settings.about.activate_dotfiles")
+            value: Config.system.dotfilesActivated
+            onToggled: Config.system.dotfilesActivated = value
         }
     }
 }

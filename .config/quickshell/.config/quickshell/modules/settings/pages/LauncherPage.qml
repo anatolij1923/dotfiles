@@ -8,13 +8,13 @@ import qs.services
 import qs.config
 
 ContentPage {
-    title: "Launcher"
+    title: Translation.tr("settings.launcher.title")
 
     ContentItem {
-        title: "Display"
+        title: Translation.tr("settings.launcher.display")
 
         SpinBoxRow {
-            label: "Max items shown"
+            label: Translation.tr("settings.launcher.max_items_shown")
             value: Config.launcher.maxShown
             from: 1
             to: 20
@@ -22,7 +22,7 @@ ContentPage {
         }
 
         SpinBoxRow {
-            label: "Item height"
+            label: Translation.tr("settings.launcher.item_height")
             value: Config.launcher.sizes.itemHeight
             from: 40
             to: 100
@@ -31,7 +31,7 @@ ContentPage {
         }
 
         SpinBoxRow {
-            label: "Wallpaper width"
+            label: Translation.tr("settings.launcher.wallpaper_width")
             value: Config.launcher.sizes.wallWidth
             from: 200
             to: 600
@@ -40,7 +40,7 @@ ContentPage {
         }
 
         SpinBoxRow {
-            label: "Wallpaper height"
+            label: Translation.tr("settings.launcher.wallpaper_height")
             value: Config.launcher.sizes.wallHeight
             from: 150
             to: 400
@@ -50,10 +50,10 @@ ContentPage {
     }
 
     ContentItem {
-        title: "Commands"
+        title: Translation.tr("settings.launcher.commands")
 
         StyledText {
-            text: "Commands configuration is available in config.json file"
+            text: Translation.tr("settings.launcher.commands_hint")
             color: Colors.palette.m3onSurfaceVariant
             size: 14
             wrapMode: Text.WordWrap
@@ -61,7 +61,7 @@ ContentPage {
         }
 
         StyledText {
-            text: "Total commands: " + Config.launcher.commands.length
+            text: Translation.tr("settings.launcher.total_commands").replace("%1", Config.launcher.commands.length)
             color: Colors.palette.m3onSurfaceVariant
             size: 14
         }

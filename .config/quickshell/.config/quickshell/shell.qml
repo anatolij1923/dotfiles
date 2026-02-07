@@ -118,7 +118,7 @@ ShellRoot {
     }
 
     LazyLoader {
-        active: Config.ready && !Config.background.dotfilesActivated
+        active: Config.ready && !Config.system.dotfilesActivated
         component: ActivateDotfiles {}
     }
 

@@ -18,7 +18,7 @@ Scope {
 
         sourceComponent: FloatingWindow {
             id: settingsRoot
-            title: "quickshell-settings"
+            title: Translation.tr("settings.window_title")
             visible: true
 
             color: Colors.palette.m3surfaceContainer

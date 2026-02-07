@@ -151,7 +151,7 @@ Scope {
                                 text: root.searchingText
                                 topPadding: Appearance.padding.larger
                                 bottomPadding: Appearance.padding.larger
-                                placeholderText: "Search or run commands with \":\""
+                                placeholderText: `Search or run commands with ":"`
                                 fontSize: 20
                                 fontWeight: 500
                                 placeholderTextColor: Colors.palette.m3outline

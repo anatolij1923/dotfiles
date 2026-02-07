@@ -6,6 +6,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import qs
+import qs.common
 import qs.services
 
 Scope {
@@ -95,7 +96,7 @@ Scope {
 
                     PowermenuButton {
                         buttonIcon: "lock"
-                        buttonText: "Lock"
+                        buttonText: Translation.tr("powermenu.lock")
                         onClicked: () => {
                             Session.lock();
                             powermenuRoot.hide();
@@ -104,7 +105,7 @@ Scope {
 
                     PowermenuButton {
                         buttonIcon: "power_settings_new"
-                        buttonText: "Shutdown"
+                        buttonText: Translation.tr("powermenu.shutdown")
                         onClicked: {
                             Session.poweroff();
                             powermenuRoot.hide();
@@ -113,7 +114,7 @@ Scope {
 
                     PowermenuButton {
                         buttonIcon: "bedtime"
-                        buttonText: "Suspend"
+                        buttonText: Translation.tr("powermenu.suspend")
                         onClicked: {
                             Session.suspend();
                             powermenuRoot.hide();
@@ -122,7 +123,7 @@ Scope {
 
                     PowermenuButton {
                         buttonIcon: "refresh"
-                        buttonText: "Restart"
+                        buttonText: Translation.tr("powermenu.restart")
                         onClicked: {
                             Session.reboot();
                             powermenuRoot.hide();
@@ -131,7 +132,7 @@ Scope {
 
                     PowermenuButton {
                         buttonIcon: "exit_to_app"
-                        buttonText: "Logout"
+                        buttonText: Translation.tr("powermenu.logout")
                         onClicked: {
                             Session.logout();
                             powermenuRoot.hide();

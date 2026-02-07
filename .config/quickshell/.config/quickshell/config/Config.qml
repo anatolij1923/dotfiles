@@ -21,6 +21,7 @@ Singleton {
     property alias launcher: adapter.launcher
     property alias gamemode: adapter.gamemode
     property alias battery: adapter.battery
+    property alias system: adapter.system
 
     Timer {
         id: fileWriteTimer
@@ -69,6 +70,7 @@ Singleton {
             property LauncherConfig launcher: LauncherConfig {}
             property GamemodeConfig gamemode: GamemodeConfig {}
             property BatteryConfig battery: BatteryConfig {}
+            property SystemConfig system: SystemConfig {}
         }
     }
 }

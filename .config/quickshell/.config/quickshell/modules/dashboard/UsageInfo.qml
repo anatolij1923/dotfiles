@@ -27,7 +27,7 @@ Item {
 
         UsageWidget {
             icon: "memory"
-            label: "CPU"
+            label: Translation.tr("dashboard.usage.cpu")
             valueText: Math.round(SystemUsage.cpuUsage * 100) + "%"
             progressValue: SystemUsage.cpuUsage
             baseColor: Colors.palette.m3tertiary
@@ -35,7 +35,7 @@ Item {
 
         UsageWidget {
             icon: "device_thermostat"
-            label: "TEMP"
+            label: Translation.tr("dashboard.usage.temperature")
             valueText: Math.round(SystemUsage.cpuTemp) + "°C"
             progressValue: Math.min(SystemUsage.cpuTemp / 100, 1)
             baseColor: Colors.palette.m3error
@@ -69,7 +69,7 @@ Item {
             UsageWidget {
                 width: switcher.width
                 icon: "memory_alt"
-                label: "RAM"
+                label: Translation.tr("dashboard.usage.memory")
                 valueText: Math.round(SystemUsage.memoryUsedPercentage * 100) + "%"
                 progressValue: SystemUsage.memoryUsedPercentage
                 baseColor: Colors.palette.m3primary
@@ -78,7 +78,7 @@ Item {
             UsageWidget {
                 width: switcher.width
                 icon: "swap_horiz"
-                label: "SWAP"
+                label: Translation.tr("dashboard.usage.swap")
                 valueText: Math.round(SystemUsage.swapUsedPercentage * 100) + "%"
                 progressValue: SystemUsage.swapUsedPercentage
                 baseColor: Colors.palette.m3secondary

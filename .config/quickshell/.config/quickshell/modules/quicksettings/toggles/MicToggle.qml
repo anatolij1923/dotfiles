@@ -13,5 +13,5 @@ QuickToggle {
         Audio.source.audio.muted = !Audio.source.audio.muted;
     }
 
-    tooltipText: "Mute microphone"
+    tooltipText: Translation.tr("quicksettings.toggles.mic")
 }

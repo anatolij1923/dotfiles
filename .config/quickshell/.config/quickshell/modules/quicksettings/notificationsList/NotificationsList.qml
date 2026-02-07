@@ -86,7 +86,7 @@ Rectangle {
                     }
 
                     StyledText {
-                        text: "Everything is quiet"
+                        text: Translation.tr("quicksettings.notifications.everything_quiet")
                         size: 18
                         color: Qt.alpha(Colors.palette.m3onSurface, 0.4)
                         Layout.alignment: Qt.AlignHCenter
@@ -112,7 +112,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.margins: Appearance.padding.normal
 
-        text: "Clear"
+        text: Translation.tr("quicksettings.notifications.clear")
         icon: "delete_sweep"
         enabled: Notifications.list.length > 0
 
@@ -130,7 +130,7 @@ Rectangle {
         // }
 
         StyledTooltip {
-            text: "Clear all notifications"
+            text: Translation.tr("quicksettings.notifications.clear_all")
         }
     }
 }

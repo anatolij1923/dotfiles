@@ -25,11 +25,7 @@ QuickToggle {
         SleepTimer.stopTimer();
     }
 
-    tooltipText: {
-        if (SleepTimer.enabled) {
-            "Sleep timer. Right click to cancel\n" + `Remaining: ${root.formatTime(SleepTimer.remaining)}`;
-        } else {
-            "Sleep timer. Right click to cancel";
-        }
-    }
+    tooltipText: SleepTimer.enabled
+        ? Translation.tr("quicksettings.toggles.sleep_tooltip") + "\n" + Translation.tr("quicksettings.toggles.sleep_remaining") + ": " + root.formatTime(SleepTimer.remaining)
+        : Translation.tr("quicksettings.toggles.sleep_tooltip")
 }

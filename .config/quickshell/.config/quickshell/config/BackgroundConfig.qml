@@ -5,8 +5,6 @@ JsonObject {
 
     property string wallpaperPath: `${Quickshell.shellDir}/assets/fallback.png`
 
-    property bool dotfilesActivated: false
-
     property Parallax parallax: Parallax {}
 
     property Dim dim: Dim {}

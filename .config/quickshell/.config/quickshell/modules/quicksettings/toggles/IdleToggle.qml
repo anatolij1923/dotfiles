@@ -11,5 +11,5 @@ QuickToggle {
     onClicked: () => {
         Idle.toggle();
     }
-    tooltipText: "Keep your system awake"
+    tooltipText: Translation.tr("quicksettings.toggles.idle")
 }

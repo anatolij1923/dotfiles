@@ -64,12 +64,13 @@ Singleton {
     component Font: JsonObject {
 
         property JsonObject size: JsonObject {
-            property int tiny: 14
-            property int small: 16
-            property int normal: 18
-            property int large: 22
-            property int xlarge: 28
-            property int huge: 32
+            property int scale: 1
+            property int tiny: 14 * scale
+            property int small: 16 * scale
+            property int normal: 18 * scale
+            property int large: 22 * scale
+            property int xlarge: 28 * scale
+            property int huge: 32 * scale
         }
     }
 

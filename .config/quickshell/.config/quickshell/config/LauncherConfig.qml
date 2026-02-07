@@ -4,6 +4,8 @@ JsonObject {
     property Sizes sizes: Sizes {}
     property int maxShown: 8
 
+    property string prefix: ":"
+
     component Sizes: JsonObject {
         property int itemHeight: 60
         property int wallWidth: 300

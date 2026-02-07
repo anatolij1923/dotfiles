@@ -21,6 +21,7 @@ StyledWindow {
     }
 
     implicitHeight: Config.bar.height
+
     WlrLayershell.layer: WlrLayer.Top
 
     color: "transparent"

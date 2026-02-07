@@ -100,7 +100,7 @@ Rectangle {
                 id: fabState
                 color: Colors.palette.m3onPrimaryContainer
                 onClicked: {
-                    Quickshell.execDetached(["wezterm", "-e", Quickshell.env("EDITOR") || "nvim", `${Quickshell.shellDir}/config.json`]);
+                    Quickshell.execDetached(["kitty", "-e", Quickshell.env("EDITOR") || "nvim", `${Quickshell.shellDir}/config.json`]);
                 }
             }
 
@@ -120,7 +120,7 @@ Rectangle {
 
                 StyledText {
                     id: editLabel
-                    text: "Edit config"
+                    text: Translation.tr("settings.edit_config")
                     color: Colors.palette.m3onPrimaryContainer
                     anchors.verticalCenter: parent.verticalCenter
 
@@ -156,7 +156,7 @@ Rectangle {
         required property int index
 
         readonly property string icon: modelData.icon
-        readonly property string label: modelData.text
+        readonly property string label: Translation.tr(modelData.textKey)
 
         readonly property bool active: root.currentPage === index
 

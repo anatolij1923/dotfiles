@@ -57,7 +57,7 @@ RowLayout {
                 }
 
                 StyledTooltip {
-                    text: "Restart Quickshell"
+                    text: Translation.tr("quicksettings.header.restart")
                 }
             }
 
@@ -72,7 +72,7 @@ RowLayout {
                 }
 
                 StyledTooltip {
-                    text: "Open settings"
+                    text: Translation.tr("quicksettings.header.open_settings")
                 }
             }
 
@@ -88,7 +88,7 @@ RowLayout {
                 }
 
                 StyledTooltip {
-                    text: "Open power menu"
+                    text: Translation.tr("quicksettings.header.open_power_menu")
                 }
             }
         }

@@ -13,5 +13,5 @@ QuickToggle {
     onClicked: () => {
         Colors.switchDarkLightMode();
     }
-    tooltipText: checked ? "Enable light mode" : "Enable dark mode"
+    tooltipText: checked ? Translation.tr("quicksettings.toggles.light_mode") : Translation.tr("quicksettings.toggles.dark_mode")
 }

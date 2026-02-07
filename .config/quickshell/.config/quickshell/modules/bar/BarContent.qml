@@ -35,22 +35,22 @@ Rectangle {
         AppName {}
     }
 
-    Media {
-        anchors {
-            right: usageInfo.left
-            verticalCenter: parent.verticalCenter
-            rightMargin: Appearance.padding.smaller
-        }
-    }
+    // Media {
+    //     anchors {
+    //         right: clock.left
+    //         verticalCenter: parent.verticalCenter
+    //         rightMargin: Appearance.padding.smaller
+    //     }
+    // }
 
-    UsageInfo {
-        id: usageInfo
-        anchors {
-            right: clock.left
-            rightMargin: Appearance.padding.smaller
-            verticalCenter: parent.verticalCenter
-        }
-    }
+    // UsageInfo {
+    //     id: usageInfo
+    //     anchors {
+    //         right: clock.left
+    //         rightMargin: Appearance.padding.smaller
+    //         verticalCenter: parent.verticalCenter
+    //     }
+    // }
 
     ClockWidget {
         id: clock
@@ -61,14 +61,14 @@ Rectangle {
         }
     }
 
-    WeatherWidget {
-        id: weather
-        anchors {
-            left: clock.right
-            leftMargin: Appearance.padding.smaller
-            verticalCenter: parent.verticalCenter
-        }
-    }
+    // WeatherWidget {
+    //     id: weather
+    //     anchors {
+    //         left: clock.right
+    //         leftMargin: Appearance.padding.smaller
+    //         verticalCenter: parent.verticalCenter
+    //     }
+    // }
 
     // Tools {
     //     id: tools

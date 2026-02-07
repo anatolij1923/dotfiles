@@ -12,6 +12,6 @@ QuickToggle {
         Network.toggleWifi();
     }
     StyledTooltip {
-        text: "Click to toggle Wi-Fi"
+        text: Translation.tr("quicksettings.toggles.wifi_tooltip")
     }
 }

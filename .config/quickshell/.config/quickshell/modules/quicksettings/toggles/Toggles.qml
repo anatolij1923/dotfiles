@@ -27,7 +27,7 @@ Rectangle {
 
         RowLayout {
             BigQuickToggle {
-                title: "Network"
+                title: Translation.tr("quicksettings.toggles.network")
                 substring: Network.networkName
                 checked: Network.wifiEnabled
                 icon: Network.icon
@@ -39,13 +39,13 @@ Rectangle {
                     GlobalStates.quicksettingsOpened = false;
                 }
 
-                tooltipText: "Click to toggle Wi-Fi. Right click to open nmgui"
+                tooltipText: Translation.tr("quicksettings.toggles.network_tooltip")
                 Layout.fillWidth: true
             }
 
             BigQuickToggle {
                 Layout.fillWidth: true
-                title: "Bluetooth"
+                title: Translation.tr("quicksettings.toggles.bluetooth")
                 substring: BluetoothService.firstActiveDevice.name
                 icon: BluetoothService.icon
                 checked: BluetoothService.enabled
@@ -59,7 +59,7 @@ Rectangle {
                     GlobalStates.quicksettingsOpened = false;
                 }
 
-                tooltipText: BluetoothService.connected ? `Toggle bluetooth. Right click to open blueman\nConnected: ${BluetoothService.battery * 100}%` : "Toggle bluetooth. Right click to open blueman"
+                tooltipText: BluetoothService.connected ? Translation.tr("quicksettings.toggles.bluetooth_tooltip_connected").replace("%1", BluetoothService.battery * 100) : Translation.tr("quicksettings.toggles.bluetooth_tooltip")
             }
         }
 

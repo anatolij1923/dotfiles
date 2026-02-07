@@ -14,5 +14,5 @@ QuickToggle {
         Notifications.dnd = !Notifications.dnd;
     }
 
-    tooltipText: "Do not disturb"
+    tooltipText: Translation.tr("quicksettings.toggles.dnd")
 }

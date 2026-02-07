@@ -2,7 +2,9 @@ import Quickshell
 import QtQuick
 import qs
 import qs.services
+import qs.common
 import qs.config
+import qs.widgets
 
 QuickToggle {
     id: root
@@ -15,5 +17,5 @@ QuickToggle {
         Config.appearance.transparency.enabled = !Config.appearance.transparency.enabled;
     }
 
-    tooltipText: "Toggle transparency"
+    tooltipText: Translation.tr("quicksettings.toggles.transparency")
 }
