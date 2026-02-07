@@ -14,6 +14,7 @@ Item {
     property real to: 1
     property list<real> stopIndicatorValues: [0, 0.25, 0.5, 0.75, 1]
     property string valueSuffix: ""
+    property string tooltipContent: ""
 
     implicitHeight: column.implicitHeight
     Layout.fillWidth: true
@@ -44,6 +45,7 @@ Item {
             stopIndicatorValues: root.stopIndicatorValues
             configuration: StyledSlider.Configuration.M
             Layout.fillWidth: true
+            tooltipContent: root.tooltipContent !== "" ? root.tooltipContent : `${Math.round(slider.value * 100)}%`
             onValueChanged: () => root.value = slider.value
         }
     }

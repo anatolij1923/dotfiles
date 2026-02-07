@@ -12,6 +12,7 @@ Rectangle {
 
     property int padding: Appearance.padding.normal
     signal openMicDialogRequested
+    signal openNightLightDialogRequested
 
     implicitHeight: content.implicitHeight + padding * 2
     implicitWidth: content.implicitWidth + padding * 2
@@ -82,6 +83,11 @@ Rectangle {
             DarkModeToggle {}
             // TrasparencyToggle {}
             ScreenRecordToggle {}
+            NightLightToggle {
+                onRightClicked: {
+                    root.openNightLightDialogRequested();
+                }
+            }
         }
     }
 }

@@ -59,6 +59,7 @@ Item {
             Toggles {
                 id: toggles
                 onOpenMicDialogRequested: () => micDialog.open()
+                onOpenNightLightDialogRequested: () => nightLightDialog.open()
             }
             Sliders {}
             // MediaPlayer {}
@@ -73,9 +74,9 @@ Item {
 
             DialogDivider {}
             DialogSwitchRow {
-                label: Translation.tr("quicksettings.dialogs.mic.input_volume")
-                checked: Audio.source.audio.muted
-                onToggled: (v) => Audio.source.audio.muted = !v
+                label: Translation.tr("quicksettings.dialogs.mic.mute")
+                value: Audio.source.audio.muted
+                onToggled: (v) => Audio.source.audio.muted = v
             }
             DialogDivider {}
             DialogSliderRow {
@@ -83,6 +84,45 @@ Item {
                 value: 0.7
                 stopIndicatorValues: [0, 0.25, 0.5, 0.75, 1]
                 onValueChanged: () => { /* placeholder */ }
+            }
+        }
+        M3Dialog {
+            id: nightLightDialog
+            anchors.fill: parent
+            visible: false
+            title: Translation.tr("quicksettings.dialogs.night_light.title")
+
+            onVisibleChanged: if (visible) NightLightService.refreshConfig()
+
+            DialogDivider {}
+            DialogSwitchRow {
+                label: Translation.tr("quicksettings.dialogs.night_light.enable")
+                value: NightLightService.running
+                onToggled: (v) => v ? NightLightService.start() : NightLightService.stop()
+            }
+            DialogDivider {}
+            DialogSliderRow {
+                id: nightTempRow
+                label: Translation.tr("quicksettings.dialogs.night_light.temperature")
+                value: NightLightService.temperature
+                from: 1000
+                to: 6500
+                stopIndicatorValues: [1000, 2000, 3000, 4000, 5000, 6000]
+                valueSuffix: " K"
+                tooltipContent: Math.round(NightLightService.temperature) + " K"
+                onValueChanged: () => NightLightService.setTemperature(nightTempRow.value)
+            }
+            DialogDivider {}
+            DialogSliderRow {
+                id: nightGammaRow
+                label: Translation.tr("quicksettings.dialogs.night_light.night_gamma")
+                value: NightLightService.gamma
+                from: 10
+                to: 100
+                stopIndicatorValues: [25, 50, 75, 100]
+                valueSuffix: " %"
+                tooltipContent: (NightLightService.gamma).toFixed(1) + " %"
+                onValueChanged: () => NightLightService.setGamma(nightGammaRow.value)
             }
         }
     }

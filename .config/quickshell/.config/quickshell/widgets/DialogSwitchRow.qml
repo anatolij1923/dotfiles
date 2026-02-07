@@ -8,8 +8,8 @@ import qs.services
 Item {
     id: root
 
-    property string label: ""
-    property bool checked: false
+    property string label
+    property bool value
     signal toggled(bool value)
 
     implicitHeight: row.implicitHeight
@@ -25,7 +25,7 @@ Item {
         StyledText { text: root.label }
         Item { Layout.fillWidth: true }
         StyledSwitch {
-            checked: root.checked
+            checked: root.value
             onToggled: root.toggled(checked)
         }
     }
