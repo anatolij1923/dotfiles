@@ -1,0 +1,145 @@
+{
+  "quicksettings": {
+    "header": {
+      "restart": "Перезапустить Quickshell",
+      "open_settings": "Открыть настройки",
+      "open_power_menu": "Меню питания"
+    },
+    "toggles": {
+      "network": "Сеть",
+      "network_tooltip": "Нажмите, чтобы переключить Wi-Fi. Правый клик — открыть nmgui",
+      "bluetooth": "Bluetooth",
+      "bluetooth_tooltip": "Переключить Bluetooth. Правый клик — открыть blueman",
+      "bluetooth_tooltip_connected": "Переключить Bluetooth. Правый клик — открыть blueman\nПодключено: %1%",
+      "wifi_tooltip": "Нажмите, чтобы переключить Wi-Fi",
+      "dark_mode": "Тёмная тема",
+      "light_mode": "Светлая тема",
+      "dnd": "Не беспокоить",
+      "idle": "Не давать системе уснуть",
+      "sleep_tooltip": "Таймер сна. Правый клик — отмена",
+      "sleep_remaining": "Осталось",
+      "mic": "Выключить микрофон",
+      "power_profiles": "Профили питания",
+      "screen_record": "Запись экрана",
+      "transparency": "Прозрачность",
+      "gamemode": "Игровой режим"
+    },
+    "notifications": {
+      "everything_quiet": "Уведомлений нет",
+      "clear": "Очистить",
+      "clear_all": "Очистить все уведомления"
+    }
+  },
+  "powermenu": {
+    "lock": "Заблокировать",
+    "shutdown": "Выключить",
+    "suspend": "Спящий режим",
+    "restart": "Перезагрузка",
+    "logout": "Выйти"
+  },
+  "settings": {
+    "window_title": "quickshell-settings",
+    "edit_config": "Изменить конфиг",
+    "sidebar": {
+      "appearance": "Внешний вид",
+      "general": "Общие",
+      "launcher": "Лаунчер",
+      "system": "Система",
+      "about": "О программе"
+    },
+    "appearance": {
+      "title": "Внешний вид",
+      "background": "Фон",
+      "random_wallhaven": "Случайные: Wallhaven",
+      "random_wallhaven_tooltip": "Скачать случайные обои с Wallhaven.cc",
+      "random_konachan": "Случайные: Konachan",
+      "random_konachan_tooltip": "Скачать случайные аниме-обои с Konachan",
+      "wallpaper": "Обои",
+      "parallax_effect": "Эффект параллакса",
+      "parallax_scale": "Масштаб параллакса",
+      "dim_effect": "Эффект затемнения",
+      "dim_transparency": "Прозрачность затемнения",
+      "theme": "Тема",
+      "dark_mode": "Тёмный режим",
+      "transparency": "Прозрачность",
+      "enable": "Включить",
+      "alpha": "Прозрачность (Alpha)"
+    },
+    "general": {
+      "title": "Общие",
+      "information": "Информация",
+      "welcome": "Добро пожаловать в настройки Chroma",
+      "configure_hint": "Настройте вашу оболочку здесь. Все изменения автоматически сохраняются в файл config.json"
+    },
+    "launcher": {
+      "title": "Лаунчер",
+      "display": "Отображение",
+      "max_items_shown": "Макс. элементов",
+      "item_height": "Высота элемента",
+      "wallpaper_width": "Ширина обоев",
+      "wallpaper_height": "Высота обоев",
+      "commands": "Команды",
+      "commands_hint": "Настройка команд доступна в файле config.json",
+      "total_commands": "Всего команд: %1"
+    },
+    "system": {
+      "title": "Система",
+      "bar": "Панель",
+      "height": "Высота",
+      "bottom_position": "Расположение снизу",
+      "floating": "Плавающая панель",
+      "vertical_margins": "Вертикальные отступы",
+      "horizontal_margins": "Горизонтальные отступы",
+      "workspaces_shown": "Рабочих столов отображено",
+      "make_tray_monochrome": "Монохромные иконки трея",
+      "icon_desaturation": "Обесцвечивание иконок",
+      "classic_battery": "Классический стиль батареи",
+      "show_percentage": "Показывать проценты",
+      "transparent_center_widgets": "Прозрачные центр. виджеты",
+      "time": "Время",
+      "time_format": "Формат времени",
+      "date_format": "Формат даты",
+      "gamemode": "Игровой режим",
+      "gaps_in": "Внутренние отступы",
+      "gaps_out": "Внешние отступы",
+      "border_size": "Размер границ",
+      "rounding": "Скругление",
+      "send_notification": "Отправить уведомление",
+      "disable_blur": "Отключить размытие",
+      "blur_size": "Сила размытия",
+      "blur_passes": "Проходы размытия",
+      "weather": "Погода",
+      "update_interval_minutes": "Интервал обновления (мин)",
+      "city": "Город",
+      "city_placeholder": "Введите название города",
+      "notifications": "Уведомления",
+      "timeout_ms": "Тайм-аут (мс)",
+      "osd": "OSD (Экранное меню)",
+      "lock_screen": "Экран блокировки",
+      "blur_enabled": "Размытие включено",
+      "blur_radius": "Радиус размытия",
+      "dim_opacity": "Непрозрачность затемнения"
+    },
+    "about": {
+      "title": "О программе",
+      "chroma_shell": "Chroma Shell",
+      "chroma_settings": "Настройки Chroma Shell",
+      "description": "Современная настраиваемая оболочка, созданная на базе Quickshell",
+      "activate_dotfiles": "Активировать dotfiles"
+    }
+  },
+  "lock": {
+    "locked": "Заблокировано"
+  },
+  "dashboard": {
+    "usage": {
+      "cpu": "Процессор",
+      "memory": "Память",
+      "swap": "Swap",
+      "temperature": "Температура"
+    }
+  },
+  "bar": {
+    "back": "‹ Назад"
+  }
+} 

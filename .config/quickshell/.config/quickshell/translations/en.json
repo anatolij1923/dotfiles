@@ -1,0 +1,145 @@
+{
+  "quicksettings": {
+    "header": {
+      "restart": "Restart Quickshell",
+      "open_settings": "Open settings",
+      "open_power_menu": "Open power menu"
+    },
+    "toggles": {
+      "network": "Network",
+      "network_tooltip": "Click to toggle Wi-Fi. Right click to open nmgui",
+      "bluetooth": "Bluetooth",
+      "bluetooth_tooltip": "Toggle bluetooth. Right click to open blueman",
+      "bluetooth_tooltip_connected": "Toggle bluetooth. Right click to open blueman\nConnected: %1%",
+      "wifi_tooltip": "Click to toggle Wi-Fi",
+      "dark_mode": "Enable dark mode",
+      "light_mode": "Enable light mode",
+      "dnd": "Do not disturb",
+      "idle": "Keep your system awake",
+      "sleep_tooltip": "Sleep timer. Right click to cancel",
+      "sleep_remaining": "Remaining",
+      "mic": "Mute microphone",
+      "power_profiles": "Change power profiles",
+      "screen_record": "Enable screen recording",
+      "transparency": "Toggle transparency",
+      "gamemode": "Enable game mode"
+    },
+    "notifications": {
+      "everything_quiet": "Everything is quiet",
+      "clear": "Clear",
+      "clear_all": "Clear all notifications"
+    }
+  },
+  "powermenu": {
+    "lock": "Lock",
+    "shutdown": "Shutdown",
+    "suspend": "Suspend",
+    "restart": "Restart",
+    "logout": "Logout"
+  },
+  "settings": {
+    "window_title": "quickshell-settings",
+    "edit_config": "Edit config",
+    "sidebar": {
+      "appearance": "Appearance",
+      "general": "General",
+      "launcher": "Launcher",
+      "system": "System",
+      "about": "About"
+    },
+    "appearance": {
+      "title": "Appearance",
+      "background": "Background",
+      "random_wallhaven": "Random: Wallhaven",
+      "random_wallhaven_tooltip": "Download random wallpaper from Wallhavem.cc",
+      "random_konachan": "Random: Konachan",
+      "random_konachan_tooltip": "Download random anime wallpaper from Konachan",
+      "wallpaper": "Wallpaper",
+      "parallax_effect": "Parallax effect",
+      "parallax_scale": "Parallax scale",
+      "dim_effect": "Dim effect",
+      "dim_transparency": "Dim transparency",
+      "theme": "Theme",
+      "dark_mode": "Dark mode",
+      "transparency": "Transparency",
+      "enable": "Enable",
+      "alpha": "Alpha"
+    },
+    "general": {
+      "title": "General",
+      "information": "Information",
+      "welcome": "Welcome to Chroma Settings",
+      "configure_hint": "Configure your shell environment from here. All changes are saved automatically to config.json"
+    },
+    "launcher": {
+      "title": "Launcher",
+      "display": "Display",
+      "max_items_shown": "Max items shown",
+      "item_height": "Item height",
+      "wallpaper_width": "Wallpaper width",
+      "wallpaper_height": "Wallpaper height",
+      "commands": "Commands",
+      "commands_hint": "Commands configuration is available in config.json file",
+      "total_commands": "Total commands: %1"
+    },
+    "system": {
+      "title": "System",
+      "bar": "Bar",
+      "height": "Height",
+      "bottom_position": "Bottom position",
+      "floating": "Floating",
+      "vertical_margins": "Vertical Margins",
+      "horizontal_margins": "Horizontal Margins",
+      "workspaces_shown": "Workspaces shown",
+      "make_tray_monochrome": "Make tray icons monochrome",
+      "icon_desaturation": "Icon desaturation",
+      "classic_battery": "Use classic battery style",
+      "show_percentage": "Show percentage",
+      "transparent_center_widgets": "Trasparent center widgets",
+      "time": "Time",
+      "time_format": "Time format",
+      "date_format": "Date format",
+      "gamemode": "Gamemode",
+      "gaps_in": "Gaps in",
+      "gaps_out": "Gaps out",
+      "border_size": "Border size",
+      "rounding": "Rounding",
+      "send_notification": "Send notification",
+      "disable_blur": "Disable blur",
+      "blur_size": "Blur size",
+      "blur_passes": "Blur passes",
+      "weather": "Weather",
+      "update_interval_minutes": "Update interval (minutes)",
+      "city": "City",
+      "city_placeholder": "Enter city name",
+      "notifications": "Notifications",
+      "timeout_ms": "Timeout (ms)",
+      "osd": "OSD",
+      "lock_screen": "Lock Screen",
+      "blur_enabled": "Blur enabled",
+      "blur_radius": "Blur radius",
+      "dim_opacity": "Dim opacity"
+    },
+    "about": {
+      "title": "About",
+      "chroma_shell": "Chroma Shell",
+      "chroma_settings": "Chroma Shell Settings",
+      "description": "A modern, customizable shell environment built with Quickshell",
+      "activate_dotfiles": "Activate dotfiles"
+    }
+  },
+  "lock": {
+    "locked": "Locked"
+  },
+  "dashboard": {
+    "usage": {
+      "cpu": "Cpu",
+      "memory": "Memory",
+      "swap": "Swap",
+      "temperature": "Temperature"
+    }
+  },
+  "bar": {
+    "back": "‹ Back"
+  }
+}
