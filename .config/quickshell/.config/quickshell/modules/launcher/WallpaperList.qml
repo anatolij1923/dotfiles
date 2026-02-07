@@ -124,7 +124,7 @@ Item {
         height: randomButton.implicitHeight
 
         StyledText {
-            text: `${root.wallpaperModel.length} wallpapers`
+            text: `${root.wallpaperModel.length} ${Translation.tr("launcher.wallpapers")}`
             color: Colors.palette.m3onSurfaceVariant
             size: 18
             anchors {
@@ -139,7 +139,7 @@ Item {
 
             icon: "casino"
             iconSize: 32
-            text: "Random"
+            text: Translation.tr("launcher.random")
             textSize: 18
             textWeight: 500
             horizontalPadding: Appearance.padding.large

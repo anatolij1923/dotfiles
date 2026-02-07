@@ -90,7 +90,7 @@ Item {
 
         StyledText {
             id: countText
-            text: `${listView.count} entries`
+            text: `${listView.count} ${Translation.tr("launcher.entries")}`
             color: Colors.palette.m3onSurfaceVariant
 
             anchors {
@@ -105,7 +105,7 @@ Item {
 
             icon: "delete_sweep"
             iconSize: 32
-            text: "Wipe"
+            text: Translation.tr("launcher.wipe")
             textSize: 18
             textWeight: 500
 
