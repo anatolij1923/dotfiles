@@ -20,7 +20,7 @@ Rectangle {
 
     property int widgetBaseSize: 200
     property int sidebarWidth: 200
-    property int playerCollapsedWidth: 180
+    property int playerCollapsedWidth: 220
 
     property bool isBottom: false
     property bool weatherExpanded: false
@@ -64,8 +64,6 @@ Rectangle {
             width: root.widgetBaseSize
             height: root.widgetBaseSize
 
-            clip: true
-
             anchors {
                 top: parent.top
                 left: parent.left
@@ -80,6 +78,14 @@ Rectangle {
                 anchors.fill: parent
                 expanded: root.weatherExpanded
             }
+
+            Elevation {
+                anchors.fill: parent
+                level: 3
+                z: -1
+                radius: parent.radius
+                opacity: 0.5
+            }
         }
 
         Rectangle {
@@ -91,12 +97,19 @@ Rectangle {
             width: root.widgetBaseSize
             height: root.widgetBaseSize
 
-            clip: true
+            z: 10
 
-            Text {
-                anchors.centerIn: parent
-                text: "Media"
-                color: "white"
+            Elevation {
+                anchors.fill: parent
+                level: 3
+                z: -1
+                radius: parent.radius
+                opacity: 0.5
+            }
+
+            MediaPlayerWidget {
+                anchors.fill: parent
+                expanded: !root.weatherExpanded
             }
         }
 
@@ -109,7 +122,13 @@ Rectangle {
 
             width: root.sidebarWidth
 
-            clip: true
+            Elevation {
+                anchors.fill: parent
+                level: 3
+                z: -1
+                radius: parent.radius
+                opacity: 0.5
+            }
 
             anchors {
                 top: parent.top
@@ -131,7 +150,13 @@ Rectangle {
             topRightRadius: root.roundingSmall
             topLeftRadius: root.roundingSmall
 
-            clip: true
+            Elevation {
+                anchors.fill: parent
+                level: 3
+                z: -1
+                radius: parent.radius
+                opacity: 0.5
+            }
 
             Text {
                 anchors.centerIn: parent
