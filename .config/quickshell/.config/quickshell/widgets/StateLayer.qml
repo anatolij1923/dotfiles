@@ -31,10 +31,13 @@ MouseArea {
     hoverEnabled: true
     acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
 
+    property bool _isHeld: false
+
     Timer {
         id: holdTimer
-        interval: 300
+        interval: 400
         onTriggered: {
+            root._isHeld = true;
             root.held();
         }
     }
@@ -45,6 +48,7 @@ MouseArea {
 
         if (event.button === Qt.LeftButton) {
             holdTimer.start();
+            root._isHeld = false;
             rippleExitAnim.stop();
 
             rippleEnterAnim.startX = event.x;
@@ -73,11 +77,8 @@ MouseArea {
     }
 
     onClicked: event => {
-        if (!disabled && event.button === Qt.LeftButton) {
-            if (holdTimer.running) {
-                holdTimer.stop();
-                onClicked(event);
-            }
+        if (!disabled && event.button === Qt.LeftButton && !root._isHeld) {
+            root.onClicked(event);
         }
     }
 
