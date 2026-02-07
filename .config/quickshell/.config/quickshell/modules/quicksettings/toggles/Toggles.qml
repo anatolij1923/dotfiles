@@ -74,6 +74,7 @@ Rectangle {
             SleepToggle {}
             MicToggle {
                 onRightClicked: root.openMicDialogRequested()
+                onHeld: root.openMicDialogRequested()
             }
         }
 
@@ -84,9 +85,8 @@ Rectangle {
             // TrasparencyToggle {}
             ScreenRecordToggle {}
             NightLightToggle {
-                onRightClicked: {
-                    root.openNightLightDialogRequested();
-                }
+                onRightClicked: root.openNightLightDialogRequested()
+                onHeld: root.openNightLightDialogRequested()
             }
         }
     }

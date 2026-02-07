@@ -30,6 +30,7 @@ Rectangle {
     signal clicked
     signal rightClicked
     signal middleClicked
+    signal held
 
     onCheckedChanged: internalChecked = checked
 
@@ -65,6 +66,7 @@ Rectangle {
         onExited: root.hovered = false
         onRightClicked: root.rightClicked()
         onMiddleClicked: root.middleClicked()
+        onHeld: root.held()
 
         function onClicked(): void {
             if (root.toggle)
