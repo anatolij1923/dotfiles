@@ -17,7 +17,7 @@ Singleton {
     readonly property string tag_error: "\x1b[30;41m ERROR \x1b[0m"
 
     function _formatMessage(tag, args) {
-        const time = new Date().toLocaleTimeString("ru-RU", {
+        const time = new Date().toLocaleTimeString("en-US", {
             hour12: false
         });
         const timeStr = `${c_gray}[${time}]${c_reset}`;
