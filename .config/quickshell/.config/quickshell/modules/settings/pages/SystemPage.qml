@@ -250,4 +250,15 @@ ContentPage {
             onValueChanged: Config.lock.dimOpacity = value
         }
     }
+
+    ContentItem {
+        title: Translation.tr("settings.system.language")
+
+        TextFieldRow {
+            label: Translation.tr("settings.system.interface_language")
+            placeholder: "en"
+            value: Config.system.locale
+            onValueChanged: Config.system.locale = value
+        }
+    }
 }

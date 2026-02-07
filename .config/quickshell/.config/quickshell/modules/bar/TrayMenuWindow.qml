@@ -52,7 +52,7 @@ StyledWindow {
         color: Colors.palette.m3surfaceContainer
         border.color: Colors.palette.m3surfaceContainerHigh
         border.width: 1
-        radius: Appearance.rounding.normal || 12
+        radius: Appearance.rounding.normal 
 
         width: Math.max(200, (stackView.currentItem ? stackView.currentItem.implicitWidth : 200) + 16)
         height: (stackView.currentItem ? stackView.currentItem.implicitHeight : 100) + 16
