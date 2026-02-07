@@ -19,10 +19,13 @@ Item {
     property real currentProgress: 0
     property real currentSeconds: 0
 
+    clip: true
     state: expanded ? "expanded" : "collapsed"
 
     function formatTime(seconds) {
-        if (seconds === undefined || seconds === null || seconds < 0) return "0:00";
+        if (seconds === undefined || seconds === null || seconds < 0) {
+            return "0:00";
+        }
         let totalSeconds = Math.floor(seconds);
         let minutes = Math.floor(totalSeconds / 60);
         let secs = totalSeconds % 60;
@@ -47,6 +50,8 @@ Item {
         id: background
         anchors.fill: parent
         color: "transparent"
+        radius: Appearance.rounding.small
+        clip: true
 
         Image {
             id: blurredArt
@@ -55,22 +60,28 @@ Item {
             fillMode: Image.PreserveAspectCrop
             opacity: 0.3
             layer.enabled: true
-            layer.effect: MultiEffect { blurEnabled: true; blurMax: 64; saturation: -0.2; blur: 1.0 }
+            layer.effect: MultiEffect {
+                blurEnabled: true
+                blurMax: 64
+                saturation: -0.2
+                blur: 1.0
+            }
         }
 
         Rectangle {
             anchors.fill: parent
             color: Colors.palette.m3shadow
-            opacity: 0.2
+            visible: blurredArt.status === Image.StatusReady
+            opacity: 0
         }
 
         ClippingRectangle {
             id: cover
             radius: Appearance.rounding.normal
             color: Colors.palette.m3surfaceContainerHigh
-            
+
             height: root.expanded ? (parent.height - Appearance.padding.large * 2) : (parent.width - Appearance.padding.normal * 2)
-            width: height 
+            width: height
 
             anchors {
                 left: parent.left
@@ -84,7 +95,9 @@ Item {
                 source: root.trackArtUrl
                 fillMode: Image.PreserveAspectCrop
                 opacity: status === Image.Ready ? 1 : 0
-                Behavior on opacity { Anim {} }
+                Behavior on opacity {
+                    Anim {}
+                }
             }
         }
 
@@ -94,7 +107,7 @@ Item {
                 left: root.expanded ? cover.right : parent.left
                 right: parent.right
                 top: root.expanded ? cover.top : cover.bottom
-                
+
                 leftMargin: root.expanded ? Appearance.padding.large : Appearance.padding.normal
                 rightMargin: root.expanded ? Appearance.padding.large : Appearance.padding.normal
                 topMargin: root.expanded ? 0 : Appearance.padding.small
@@ -137,9 +150,20 @@ Item {
             Row {
                 anchors.horizontalCenter: parent.horizontalCenter
                 spacing: 6
-                StyledText { text: root.formatTime(root.currentSeconds); size: Appearance.font.size.small }
-                StyledText { text: "/"; size: Appearance.font.size.small; opacity: 0.5 }
-                StyledText { text: root.formatTime(root.player?.length); size: Appearance.font.size.small; opacity: 0.7 }
+                StyledText {
+                    text: root.formatTime(root.currentSeconds)
+                    size: Appearance.font.size.small
+                }
+                StyledText {
+                    text: "/"
+                    size: Appearance.font.size.small
+                    opacity: 0.5
+                }
+                StyledText {
+                    text: root.formatTime(root.player?.length)
+                    size: Appearance.font.size.small
+                    opacity: 0.7
+                }
             }
         }
 
@@ -183,7 +207,11 @@ Item {
 
         StyledSlider {
             id: progressSlider
-            anchors { bottom: cover.bottom; left: textGroup.left; right: textGroup.right }
+            anchors {
+                bottom: cover.bottom
+                left: textGroup.left
+                right: textGroup.right
+            }
             visible: root.expanded
             opacity: root.expanded ? 1 : 0
             value: pressed ? value : root.currentProgress
@@ -192,7 +220,10 @@ Item {
         }
         StyledText {
             id: timeCurrent
-            anchors { bottom: progressSlider.top; left: textGroup.left }
+            anchors {
+                bottom: progressSlider.top
+                left: textGroup.left
+            }
             size: Appearance.font.size.small
             text: root.formatTime(root.currentSeconds)
             visible: root.expanded
@@ -200,7 +231,10 @@ Item {
         }
         StyledText {
             id: timeTotal
-            anchors { bottom: progressSlider.top; right: textGroup.right }
+            anchors {
+                bottom: progressSlider.top
+                right: textGroup.right
+            }
             size: Appearance.font.size.small
             text: root.formatTime(root.player?.length)
             visible: root.expanded
@@ -209,8 +243,14 @@ Item {
     }
 
     states: [
-        State { name: "collapsed"; when: !root.expanded },
-        State { name: "expanded"; when: root.expanded }
+        State {
+            name: "collapsed"
+            when: !root.expanded
+        },
+        State {
+            name: "expanded"
+            when: root.expanded
+        }
     ]
 
     transitions: Transition {
