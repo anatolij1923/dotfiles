@@ -22,13 +22,21 @@
       "power_profiles": "Профили питания",
       "screen_record": "Запись экрана",
       "transparency": "Прозрачность",
-      "gamemode": "Игровой режим"
+      "gamemode": "Игровой режим",
+      "night_light": "Ночной свет"
     },
     "dialogs": {
       "mic": {
         "title": "Микрофон",
+        "mute": "Выключить микрофон",
         "input_volume": "Громкость входа"
-      }      
+      },
+      "night_light": {
+        "title": "Ночной свет",
+        "enable": "Включить",
+        "temperature": "Температура",
+        "night_gamma": "Ночная гамма"
+      }
     },
     "notifications": {
       "everything_quiet": "Уведомлений нет",
@@ -124,7 +132,9 @@
       "lock_screen": "Экран блокировки",
       "blur_enabled": "Размытие включено",
       "blur_radius": "Радиус размытия",
-      "dim_opacity": "Непрозрачность затемнения"
+      "dim_opacity": "Непрозрачность затемнения",
+      "language": "Язык",
+      "interface_language": "Язык интерфейса"
     },
     "about": {
       "title": "О программе",
@@ -155,4 +165,3 @@
     "entries": "элементов"
   }
 }
-

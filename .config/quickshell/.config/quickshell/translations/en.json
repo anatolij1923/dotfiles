@@ -22,13 +22,21 @@
       "power_profiles": "Change power profiles",
       "screen_record": "Enable screen recording",
       "transparency": "Toggle transparency",
-      "gamemode": "Enable game mode"
+      "gamemode": "Enable game mode",
+      "night_light": "Night light"
     },
     "dialogs": {
       "mic": {
         "title": "Microphone",
+        "mute": "Mute",
         "input_volume": "Input volume"
-      }      
+      },
+      "night_light": {
+        "title": "Night light",
+        "enable": "Enable",
+        "temperature": "Temperature",
+        "night_gamma": "Night gamma"
+      }
     },
     "notifications": {
       "everything_quiet": "Everything is quiet",
@@ -124,7 +132,9 @@
       "lock_screen": "Lock Screen",
       "blur_enabled": "Blur enabled",
       "blur_radius": "Blur radius",
-      "dim_opacity": "Dim opacity"
+      "dim_opacity": "Dim opacity",
+      "language": "Language",
+      "interface_language": "Interface language"
     },
     "about": {
       "title": "About",
