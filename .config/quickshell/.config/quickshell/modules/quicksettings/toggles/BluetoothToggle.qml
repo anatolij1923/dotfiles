@@ -24,6 +24,6 @@ QuickToggle {
     //     GlobalStates.quicksettingsOpened = false;
     // }
     StyledTooltip {
-        text: BluetoothService.connected ? `${BluetoothService.battery}` : "Toggle bluetooth. Right click to open blueman"
+        text: BluetoothService.connected ? (BluetoothService.connectedDeviceName + " · " + Math.round(BluetoothService.battery * 100) + "%") : "Toggle bluetooth. Right click to open blueman"
     }
 }

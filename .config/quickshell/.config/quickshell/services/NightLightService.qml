@@ -14,8 +14,8 @@ Singleton {
     id: root
 
     property bool running: false
-    property int temperature: 3300   // night_temp, 1000-20000 K
-    property real gamma: 90           // night_gamma, 10-100%
+    property int temperature
+    property real gamma
 
     property bool _stopCooldown: false
 
@@ -97,6 +97,7 @@ Singleton {
     Timer {
         id: statusCheckTimer
         interval: 2000
+        triggeredOnStart: true
         onTriggered: {
             if (root._stopCooldown) {
                 Logger.i("NightLightService", "status check skipped (stop cooldown)");

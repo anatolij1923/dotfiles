@@ -19,6 +19,10 @@ Rectangle {
     signal clicked
     signal rightClicked
     signal middleClicked
+    signal held
+    signal textAreaClicked
+    signal textAreaHeld
+    signal textAreaRightClicked
 
     radius: checked ? Appearance.rounding.huge : Appearance.rounding.full
 
@@ -41,10 +45,6 @@ Rectangle {
         }
     }
 
-    StateLayer {
-        anchors.fill: parent
-    }
-
     Elevation {
         anchors.fill: parent
         level: 3
@@ -59,41 +59,10 @@ Rectangle {
         anchors.centerIn: parent
         anchors.margins: root.padding
         spacing: Appearance.padding.normal
-        IconButton {
-            id: button
-            padding: Appearance.padding.normal
-            // radius: checked ? Appearance.rounding.normal : 50
-            radius: checked ? (stateLayer.pressed ? Appearance.rounding.small : Appearance.rounding.normal) : (stateLayer.pressed ? Appearance.rounding.huge : Appearance.rounding.full)
-
-            Behavior on radius {
-                Anim {
-                    duration: Appearance.animDuration.expressiveDefaultSpatial
-                    easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
-                }
-            }
-
-            checked: true
-            iconSize: 32
-
-            inactiveColor: Colors.palette.m3surfaceContainerHigh
-            activeColor: Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3primary, 0.8)
-
-            onClicked: root.clicked()
-            onRightClicked: root.rightClicked()
-            onMiddleClicked: root.middleClicked()
-
-            // Behavior on radius {
-            //     Anim {
-            //         duration: Appearance.animDuration.expressiveFastSpatial
-            //         easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
-            //     }
-            // }
-            //
-            StyledTooltip {
-                text: root.tooltipText
-            }
+        Item {
+            Layout.preferredWidth: button.implicitWidth
+            Layout.preferredHeight: button.implicitHeight
         }
-
         Column {
             id: text
             Layout.fillWidth: true
@@ -110,6 +79,54 @@ Rectangle {
                 width: 115
                 elide: Text.ElideRight
             }
+        }
+    }
+
+    StateLayer {
+        id: rootStateLayer
+        anchors.fill: parent
+        z: 0
+        disabled: !root.enabled
+        function onClicked(event) {
+            if (root.toggle)
+                button.internalChecked = !button.internalChecked;
+            root.textAreaClicked();
+        }
+        onHeld: root.textAreaHeld()
+        onRightClicked: root.textAreaRightClicked()
+        onMiddleClicked: root.middleClicked()
+    }
+    readonly property bool pressed: rootStateLayer.pressed
+
+    IconButton {
+        id: button
+        z: 1
+        anchors.left: parent.left
+        anchors.leftMargin: root.padding
+        anchors.verticalCenter: parent.verticalCenter
+        padding: Appearance.padding.normal
+        radius: checked ? (stateLayer.pressed ? Appearance.rounding.small : Appearance.rounding.normal) : (stateLayer.pressed ? Appearance.rounding.huge : Appearance.rounding.full)
+
+        Behavior on radius {
+            Anim {
+                duration: Appearance.animDuration.expressiveDefaultSpatial
+                easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
+            }
+        }
+
+        checked: true
+        iconSize: 32
+
+        inactiveColor: Colors.palette.m3surfaceContainerHigh
+        activeColor: Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3primary, 0.8)
+
+        onClicked: root.clicked()
+        onRightClicked: root.rightClicked()
+        onMiddleClicked: root.middleClicked()
+        onHeld: root.held()
+
+        StyledTooltip {
+            text: root.tooltipText
         }
     }
 }

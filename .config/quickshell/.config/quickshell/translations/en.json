@@ -36,6 +36,13 @@
         "enable": "Enable",
         "temperature": "Temperature",
         "night_gamma": "Night gamma"
+      },
+      "bluetooth": {
+        "title": "Bluetooth",
+        "enable": "Enable Bluetooth",
+        "scan": "Search for devices",
+        "scanning": "Searching…",
+        "devices": "Devices"
       }
     },
     "notifications": {

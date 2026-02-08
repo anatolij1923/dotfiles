@@ -13,6 +13,7 @@ Rectangle {
     property int padding: Appearance.padding.normal
     signal openMicDialogRequested
     signal openNightLightDialogRequested
+    signal openBluetoothDialogRequested
 
     implicitHeight: content.implicitHeight + padding * 2
     implicitWidth: content.implicitWidth + padding * 2
@@ -33,9 +34,8 @@ Rectangle {
                 substring: Network.networkName
                 checked: Network.wifiEnabled
                 icon: Network.icon
-                onClicked: () => {
-                    Network.toggleWifi();
-                }
+                onClicked: () => Network.toggleWifi()
+                onTextAreaClicked: () => Network.toggleWifi()
                 onRightClicked: () => {
                     Quickshell.execDetached("nmgui");
                     GlobalStates.quicksettingsOpened = false;
@@ -48,20 +48,24 @@ Rectangle {
             BigQuickToggle {
                 Layout.fillWidth: true
                 title: Translation.tr("quicksettings.toggles.bluetooth")
-                substring: BluetoothService.firstActiveDevice.name
+                substring: BluetoothService.connectedDeviceName
                 icon: BluetoothService.icon
                 checked: BluetoothService.enabled
+                toggle: false
                 onClicked: () => {
                     const adapter = Bluetooth.defaultAdapter;
                     if (adapter)
                         adapter.enabled = !adapter.enabled;
                 }
+                onTextAreaClicked: root.openBluetoothDialogRequested()
+                onTextAreaHeld: root.openBluetoothDialogRequested()
+                onTextAreaRightClicked: root.openBluetoothDialogRequested()
                 onRightClicked: () => {
                     Quickshell.execDetached(["blueman-manager"]);
                     GlobalStates.quicksettingsOpened = false;
                 }
 
-                tooltipText: BluetoothService.connected ? Translation.tr("quicksettings.toggles.bluetooth_tooltip_connected").replace("%1", BluetoothService.battery * 100) : Translation.tr("quicksettings.toggles.bluetooth_tooltip")
+                tooltipText: BluetoothService.connected ? Translation.tr("quicksettings.toggles.bluetooth_tooltip_connected").replace("%1", Math.round(BluetoothService.battery * 100)) : Translation.tr("quicksettings.toggles.bluetooth_tooltip")
             }
         }
 

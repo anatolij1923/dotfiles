@@ -36,6 +36,13 @@
         "enable": "Включить",
         "temperature": "Температура",
         "night_gamma": "Ночная гамма"
+      },
+      "bluetooth": {
+        "title": "Bluetooth",
+        "enable": "Включить Bluetooth",
+        "scan": "Искать устройства",
+        "scanning": "Поиск…",
+        "devices": "Устройства"
       }
     },
     "notifications": {

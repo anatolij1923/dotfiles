@@ -42,7 +42,7 @@ Item {
     Rectangle {
         id: overlay
         anchors.fill: parent
-        color: Colors.alpha(Colors.palette.m3shadow, 0.4)
+        color: Colors.alpha(Colors.palette.m3scrim, 0.4)
         opacity: root._animShownValue ? 1 : 0
 
         Behavior on opacity {
