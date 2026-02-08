@@ -255,11 +255,27 @@ ContentPage {
     ContentItem {
         title: Translation.tr("settings.system.language")
 
-        TextFieldRow {
-            label: Translation.tr("settings.system.interface_language")
-            placeholder: "en"
-            value: Config.system.locale
-            onValueChanged: Config.system.locale = value
+        RowLayout {
+            TextButton {
+                text: "en"
+                inactiveColor: Colors.palette.m3secondaryContainer
+                verticalPadding: Appearance.padding.normal
+                horizontalPadding: Appearance.padding.huge
+                checked: Config.system.locale === "en"
+                onClicked: {
+                    Config.system.locale = text;
+                }
+            }
+            TextButton {
+                text: "ru"
+                inactiveColor: Colors.palette.m3secondaryContainer
+                verticalPadding: Appearance.padding.normal
+                horizontalPadding: Appearance.padding.huge
+                checked: Config.system.locale === "ru"
+                onClicked: {
+                    Config.system.locale = text;
+                }
+            }
         }
     }
 }
