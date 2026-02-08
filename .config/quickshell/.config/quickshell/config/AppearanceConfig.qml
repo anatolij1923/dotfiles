@@ -3,6 +3,7 @@ import Quickshell.Io
 JsonObject {
     property Transparency transparency: Transparency {}
     property Theming theming: Theming {}
+    property Fonts fonts: Fonts {}
 
     property bool darkMode: true
     property bool enableScreenCorners: true
@@ -25,5 +26,11 @@ JsonObject {
         property bool gtk: false
         property bool zellij: false
         property bool yazi: false
+    }
+
+    component Fonts: JsonObject {
+        property string main: "Rubik"
+        property string nerdFont: "JetBrainsMono NF"
+        property string monospace: "JetBrainsMono NF"
     }
 }

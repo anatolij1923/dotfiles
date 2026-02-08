@@ -19,8 +19,8 @@ Item {
         anchors.fill: parent
         spacing: Appearance.padding.normal
 
-        anchors.leftMargin: root.padding
-        anchors.rightMargin: root.padding
+        // anchors.leftMargin: root.padding
+        // anchors.rightMargin: root.padding
 
         StyledText {
             text: root.label

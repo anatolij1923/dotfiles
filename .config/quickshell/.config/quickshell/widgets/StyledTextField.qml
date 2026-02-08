@@ -3,7 +3,7 @@ import Quickshell
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Effects
-import qs
+import qs.config
 import qs.services
 
 TextField {
@@ -19,7 +19,7 @@ TextField {
     placeholderText: placeholder
     placeholderTextColor: Colors.palette.m3onSurface
     font.pixelSize: root.fontSize
-    font.family: "Rubik"
+    font.family: Config.appearance.fonts.main
     font.weight: root.fontWeight
     font.hintingPreference: Font.PreferFullHinting
     font.variableAxes: {

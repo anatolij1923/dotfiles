@@ -138,4 +138,27 @@ ContentPage {
             onValueChanged: Config.appearance.transparency.alpha = value
         }
     }
+
+    ContentItem {
+        title: Translation.tr("settings.appearance.fonts")
+
+        TextFieldRow {
+            label: Translation.tr("settings.appearance.main_font")
+            placeholder: "e.g Adwaita Sans"
+            value: Config.appearance.fonts.main
+            onValueChanged: Config.appearance.fonts.main = value
+        }
+        TextFieldRow {
+            label: Translation.tr("settings.appearance.mono_font")
+            placeholder: "e.g JetBrainsMono NF"
+            value: Config.appearance.fonts.monospace
+            onValueChanged: Config.appearance.fonts.monospace = value
+        }
+        TextFieldRow {
+            label: Translation.tr("settings.appearance.nerd_font")
+            placeholder: "e.g JetBrainsMono NF"
+            value: Config.appearance.fonts.nerdFont
+            onValueChanged: Config.appearance.fonts.nerdFont = value
+        }
+    }
 }

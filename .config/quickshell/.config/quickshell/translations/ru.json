@@ -84,7 +84,11 @@
       "dark_mode": "Тёмный режим",
       "transparency": "Прозрачность",
       "enable": "Включить",
-      "alpha": "Прозрачность (Alpha)"
+      "alpha": "Прозрачность",
+      "fonts": "Шрифты",
+      "main_font": "Основной",
+      "mono_font": "Моноширинный",
+      "nerd_font": "Nerd шрифт"
     },
     "general": {
       "title": "Общие",

@@ -84,7 +84,11 @@
       "dark_mode": "Dark mode",
       "transparency": "Transparency",
       "enable": "Enable",
-      "alpha": "Alpha"
+      "alpha": "Alpha",
+      "fonts": "Fonts",
+      "main_font": "Main",
+      "mono_font": "Monospace",
+      "nerd_font": "Nerd font"
     },
     "general": {
       "title": "General",

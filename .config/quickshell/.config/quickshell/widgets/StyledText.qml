@@ -44,7 +44,7 @@ Text {
     }
 
     Layout.alignment: Qt.AlignVCenter
-    font.family: "Rubik"
+    font.family: Config.appearance.fonts.main
     font.weight: weight
     font.pixelSize: size
     font.variableAxes: {
