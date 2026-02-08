@@ -13,23 +13,27 @@ Item {
     property real to: 100
     property int step: 1
     property string suffix: ""
-    property int padding: Appearance.padding.normal
+    property int padding: Appearance.padding.smaller
+    property alias tooltipContent: slider.tooltipContent
 
-    implicitHeight: Math.max(slider.implicitHeight, 40) + padding * 2
+    // implicitHeight: Math.max(slider.implicitHeight, 40) + padding * 2
+    implicitHeight: content.implicitHeight
     Layout.fillWidth: true
 
     ColumnLayout {
+        id: content
         anchors.fill: parent
         spacing: Appearance.padding.smaller
 
-        anchors.leftMargin: root.padding
-        anchors.rightMargin: root.padding
+        // anchors.leftMargin: root.padding
+        // anchors.rightMargin: root.padding
 
         RowLayout {
             Layout.fillWidth: true
 
             StyledText {
                 text: root.label
+                size: Appearance.font.size.normal
             }
 
             Item {
@@ -47,7 +51,7 @@ Item {
                     }
                 }
                 color: Colors.palette.m3onSurfaceVariant
-                size: 14
+                size: Appearance.font.size.tiny
             }
         }
 

@@ -53,7 +53,7 @@ Item {
 
         border {
             width: 1
-            color: Colors.palette.m3onSecondary
+            color: Colors.palette.m3outline
         }
         radius: 16
 
@@ -62,7 +62,7 @@ Item {
             anchors.centerIn: parent
             color: Colors.palette.m3surface
             text: root.text
-            weight: 400
+            size: Appearance.font.size.small
             wrapMode: Text.Wrap
         }
     }

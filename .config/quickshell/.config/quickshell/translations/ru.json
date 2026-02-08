@@ -141,7 +141,7 @@
       "chroma_shell": "Chroma Shell",
       "chroma_settings": "Настройки Chroma Shell",
       "description": "Современная настраиваемая оболочка, созданная на базе Quickshell",
-      "activate_dotfiles": "Активировать dotfiles"
+      "activate_dotfiles": "Активировать дотфайлы"
     }
   },
   "lock": {

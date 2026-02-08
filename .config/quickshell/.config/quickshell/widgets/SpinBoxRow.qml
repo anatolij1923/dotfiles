@@ -12,17 +12,18 @@ Item {
     property int step: 1
     property int from: 0
     property int to: 100
-    property int padding: Appearance.padding.normal
+    property int padding: Appearance.padding.smaller
 
-    implicitHeight: Math.max(spin.baseHeight, 40)
+    implicitHeight: content.implicitHeight
     Layout.fillWidth: true
 
     RowLayout {
+        id: content
         anchors.fill: parent
         spacing: Appearance.padding.normal
 
-        anchors.leftMargin: root.padding
-        anchors.rightMargin: root.padding
+        // anchors.leftMargin: root.padding
+        // anchors.rightMargin: root.padding
 
         StyledText {
             text: root.label
