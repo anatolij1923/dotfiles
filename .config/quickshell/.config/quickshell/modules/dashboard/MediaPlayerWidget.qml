@@ -38,10 +38,16 @@ Item {
         running: !!root.player && root.player.isPlaying
         repeat: true
         triggeredOnStart: true
+
         onTriggered: {
             if (root.player) {
                 root.currentSeconds = root.player.position;
-                root.currentProgress = root.player.length > 0 ? root.currentSeconds / root.player.length : 0;
+
+                if (root.player.length > 0) {
+                    root.currentProgress = root.currentSeconds / root.player.length;
+                } else {
+                    root.currentProgress = 0;
+                }
             }
         }
     }
@@ -217,6 +223,22 @@ Item {
             value: pressed ? value : root.currentProgress
             handleHeight: 12
             configuration: StyledSlider.Configuration.XS
+
+            tooltipContent: root.formatTime(value * (root.player?.length || 0))
+
+            onPressedChanged: {
+                if (pressed) {
+                    Qt.callLater(() => {
+                        value = position;
+                    });
+                } else {
+                    if (root.player && root.player.length > 0) {
+                        let newPos = value * root.player.length;
+                        root.player.position = newPos;
+                        root.currentSeconds = newPos;
+                    }
+                }
+            }
         }
         StyledText {
             id: timeCurrent
