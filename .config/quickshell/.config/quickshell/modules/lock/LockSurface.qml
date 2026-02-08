@@ -87,7 +87,7 @@ WlSessionLockSurface {
                 }
 
                 StyledText {
-                    text: "Locked"
+                    text: Translation.tr("lock.locked")
                     size: 20
                     color: Colors.isDarkMode ? Colors.palette.m3onSurface : Colors.palette.m3surface
                 }
@@ -172,12 +172,30 @@ WlSessionLockSurface {
                         x: passwordBoxContainer.shakeX
                     }
 
+                    MaterialSymbol {
+                        id: icon
+                        anchors {
+                            left: parent.left
+                            verticalCenter: parent.verticalCenter
+                            leftMargin: Appearance.padding.larger
+                        }
+
+                        icon: "person"
+
+                        color: Colors.palette.m3onSurface
+                    }
+
                     StyledTextField {
                         id: passwordBox
-                        anchors.fill: parent
+                        anchors {
+                            top: parent.top
+                            bottom: parent.bottom
+                            right: parent.bottom
+                            left: icon.right
+                        }
                         focus: true
                         echoMode: TextInput.Password
-                        leftPadding: Appearance.padding.huge
+                        leftPadding: Appearance.padding.normal
 
                         placeholder: root.context.showFailure ? "Wrong password" : Quickshell.env("USER")
                         placeholderTextColor: root.context.showFailure ? Colors.palette.m3error : Colors.palette.m3onSurfaceVariant
