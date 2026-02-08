@@ -68,11 +68,7 @@ Scope {
                 }
 
                 focus: GlobalStates.quicksettingsOpened
-                Keys.onPressed: event => {
-                    if (event.key === Qt.Key_Escape) {
-                        quicksettingsRoot.hide();
-                    }
-                }
+                Keys.onEscapePressed: quicksettingsRoot.hide()
 
                 MouseArea {
                     anchors.fill: parent
@@ -80,23 +76,23 @@ Scope {
                 }
 
                 sourceComponent: QuicksettingsContent {
-                implicitWidth: {
-                const sw = quicksettingsRoot.screen.width
+                    implicitWidth: {
+                        const sw = quicksettingsRoot.screen.width;
 
-                if (sw < 1100) return 300   
-                if (sw < 1600) return 400   
-                if (sw < 2200) return 500   
-                return 650                  
-
-                }
-                // implicitWidth: Math.min(
-                //     Math.max(quicksettingsRoot.screen.width * 0.25, 320),
-                //     550
-                // )
+                        if (sw < 1100)
+                            return 300;
+                        if (sw < 1600)
+                            return 400;
+                        if (sw < 2200)
+                            return 500;
+                        return 650;
+                    }
+                    // implicitWidth: Math.min(
+                    //     Math.max(quicksettingsRoot.screen.width * 0.25, 320),
+                    //     550
+                    // )
                 }
             }
-
-            
         }
     }
 

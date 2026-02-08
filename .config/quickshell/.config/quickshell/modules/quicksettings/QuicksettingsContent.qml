@@ -76,14 +76,19 @@ Item {
             DialogSwitchRow {
                 label: Translation.tr("quicksettings.dialogs.mic.mute")
                 value: Audio.source.audio.muted
-                onToggled: (v) => Audio.source.audio.muted = v
+                onToggled: v => Audio.source.audio.muted = v
             }
             DialogDivider {}
+            // DialogSliderRow {
+            //     value: 0.7
+            //     stopIndicatorValues: [0, 0.25, 0.5, 0.75, 1]
+            //     onValueChanged: () => { /* placeholder */ }
+            // }
+
             DialogSliderRow {
                 label: Translation.tr("quicksettings.dialogs.mic.input_volume")
-                value: 0.7
-                stopIndicatorValues: [0, 0.25, 0.5, 0.75, 1]
-                onValueChanged: () => { /* placeholder */ }
+                value: Audio.source.audio.volume
+                onValueChanged: Audio.source.audio.volume = value
             }
         }
         M3Dialog {
@@ -92,13 +97,14 @@ Item {
             visible: false
             title: Translation.tr("quicksettings.dialogs.night_light.title")
 
-            onVisibleChanged: if (visible) NightLightService.refreshConfig()
+            onVisibleChanged: if (visible)
+                NightLightService.refreshConfig()
 
             DialogDivider {}
             DialogSwitchRow {
                 label: Translation.tr("quicksettings.dialogs.night_light.enable")
                 value: NightLightService.running
-                onToggled: (v) => v ? NightLightService.start() : NightLightService.stop()
+                onToggled: v => v ? NightLightService.start() : NightLightService.stop()
             }
             DialogDivider {}
             DialogSliderRow {
