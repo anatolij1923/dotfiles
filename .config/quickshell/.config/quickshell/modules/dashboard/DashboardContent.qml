@@ -1,5 +1,6 @@
 pragma ComponentBehavior: Bound
 import QtQuick
+import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 import qs.config
@@ -158,11 +159,44 @@ Rectangle {
                 opacity: 0.5
             }
 
-            Text {
-                anchors.centerIn: parent
-                text: "Clock & Cal"
-                color: "white"
+            ColumnLayout {
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    bottom: parent.bottom
+                }
+
+                property var timeParts: Time.formatTime()
+
+                ColumnLayout {
+                    Layout.alignment: Qt.AlingVCenter
+                    spacing: Appearance.padding.smaller
+
+                    StyledText {
+                        text: Time.hours
+                        Layout.alignment: Qt.AlignHCenter
+                        color: Colors.palette.m3primary
+                        size: 40
+                        weight: 500
+                    }
+                    StyledText {
+                        text: "••"
+                        Layout.alignment: Qt.AlignHCenter
+                        color: Colors.palette.m3tertiary
+                        size: 32
+                    }
+                    StyledText {
+                        text: Time.minutes
+                        Layout.alignment: Qt.AlignHCenter
+                        color: Colors.palette.m3primary
+                        size: 40
+                        weight: 500
+                    }
+                }
             }
+
+            // Calendar {}
+
         }
 
         states: [

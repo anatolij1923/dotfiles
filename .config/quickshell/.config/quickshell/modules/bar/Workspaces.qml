@@ -29,9 +29,9 @@ Item {
         }
     }
 
-    readonly property int inactiveSize: 16
+    readonly property int inactiveSize: 14
+    readonly property int itemHeight: 14
     readonly property int activeWidth: inactiveSize * 2
-    readonly property int itemHeight: 16
     readonly property int spacing: Appearance.padding.smaller
 
     implicitWidth: layout.width

@@ -1,9 +1,11 @@
 import Quickshell.Io
+import qs.common
 
 JsonObject {
     property Sizes sizes: Sizes {}
     property int maxShown: 8
 
+    property string wallpaperDir: `${Paths.strip(Paths.pictures)}/wallpapers`
     property string prefix: ":"
 
     component Sizes: JsonObject {

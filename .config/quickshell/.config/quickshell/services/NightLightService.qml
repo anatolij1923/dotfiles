@@ -6,9 +6,6 @@ import qs.common
 
 /**
  * Service for managing sunsetr (blue light filter) process.
- * Start only via: sunsetr restart -b
- * Stop: sunsetr stop
- * Config: sunsetr get/set night_temp, night_gamma (and optionally day_*)
  */
 Singleton {
     id: root
@@ -48,7 +45,29 @@ Singleton {
 
     function refreshConfig() {
         Logger.i("NightLightService", "refreshConfig");
-        getProc.running = true;
+        configFile.reload();
+    }
+
+    function _parseConfig(text) {
+        const tempMatch = text.match(/night_temp\s*=\s*(\d+)/);
+        const gammaMatch = text.match(/night_gamma\s*=\s*([\d.]+)/);
+        if (tempMatch)
+            root.temperature = parseInt(tempMatch[1], 10);
+        if (gammaMatch)
+            root.gamma = parseFloat(gammaMatch[1]);
+    }
+
+    FileView {
+        id: configFile
+        path: `${Paths.config}/sunsetr/sunsetr.toml`
+        onLoaded: root._parseConfig(text())
+        onLoadFailed: err => {
+            if (err === FileViewError.FileNotFound) {
+                Logger.w("NightLightService", "Config not found");
+            } else {
+                Logger.e("NightLightService", "Config load failed", String(err));
+            }
+        }
     }
 
     readonly property int _setDebounceMs: 400
@@ -111,15 +130,7 @@ Singleton {
         id: statusProc
         command: ["sunsetr", "status", "--json"]
         stdout: StdioCollector {
-            onStreamFinished: {
-                try {
-                    const o = JSON.parse(text);
-                    if (o.current_temp !== undefined)
-                        root.temperature = Math.round(o.current_temp);
-                    if (o.current_gamma !== undefined)
-                        root.gamma = Math.round(o.current_gamma * 10) / 10;
-                } catch (_) {}
-            }
+            onStreamFinished: { /* temp/gamma from config file only */ }
         }
         onExited: exitCode => {
             if (root._stopCooldown) {
@@ -129,25 +140,6 @@ Singleton {
             }
             root.running = (exitCode === 0);
             Logger.i("NightLightService", "status exited", exitCode, "-> running =", root.running);
-        }
-    }
-
-    Process {
-        id: getProc
-        command: ["sunsetr", "get", "night_temp", "night_gamma", "--json"]
-        stdout: StdioCollector {
-            onStreamFinished: {
-                try {
-                    const o = JSON.parse(text);
-                    if (o.night_temp !== undefined)
-                        root.temperature = o.night_temp;
-                    if (o.night_gamma !== undefined)
-                        root.gamma = o.night_gamma;
-                    Logger.i("NightLightService", "get -> temp", root.temperature, "gamma", root.gamma);
-                } catch (e) {
-                    Logger.e("NightLightService", "get parse error", String(e));
-                }
-            }
         }
     }
 

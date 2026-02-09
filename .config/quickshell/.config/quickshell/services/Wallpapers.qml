@@ -12,7 +12,7 @@ import QtQuick
 Singleton {
     id: root
 
-    property string wallpaperDir: `${Paths.strip(Paths.pictures)}/wallpapers`
+    property string wallpaperDir: Config.launcher.wallpaperDir
     property var list: []
     property string actualCurrent: Config.background.wallpaperPath || ""
 

@@ -30,23 +30,33 @@ Scope {
                 top: true
                 right: true
                 bottom: true
-                left: true
             }
+
+            implicitWidth: {
+                const sw = quicksettingsRoot.screen.width;
+
+                if (sw < 1100)
+                    return 300;
+                if (sw < 1600)
+                    return 400;
+                if (sw < 2200)
+                    return 500;
+                return 650;
+            }
+
             exclusiveZone: 0
 
             HyprlandFocusGrab {
                 windows: [quicksettingsRoot]
                 active: GlobalStates.quicksettingsOpened
-                onCleared: () => {
-                    if (!active)
-                        quicksettingsRoot.hide();
-                }
+                onCleared: if (!active)
+                    quicksettingsRoot.hide()
             }
 
-            MouseArea {
-                anchors.fill: parent
-                onPressed: quicksettingsRoot.hide()
-            }
+            // MouseArea {
+            //     anchors.fill: parent
+            //     onPressed: quicksettingsRoot.hide()
+            // }
 
             Connections {
                 target: GlobalStates
@@ -58,39 +68,10 @@ Scope {
                 // }
             }
 
-            Loader {
-                active: GlobalStates.quicksettingsOpened
+            QuicksettingsContent {
                 anchors {
-                    top: parent.top
-                    right: parent.right
-                    bottom: parent.bottom
-                    margins: 16
-                }
-
-                focus: GlobalStates.quicksettingsOpened
-                Keys.onEscapePressed: quicksettingsRoot.hide()
-
-                MouseArea {
-                    anchors.fill: parent
-                    onPressed: mouse => mouse.accepted = true
-                }
-
-                sourceComponent: QuicksettingsContent {
-                    implicitWidth: {
-                        const sw = quicksettingsRoot.screen.width;
-
-                        if (sw < 1100)
-                            return 300;
-                        if (sw < 1600)
-                            return 400;
-                        if (sw < 2200)
-                            return 500;
-                        return 650;
-                    }
-                    // implicitWidth: Math.min(
-                    //     Math.max(quicksettingsRoot.screen.width * 0.25, 320),
-                    //     550
-                    // )
+                    fill: parent
+                    margins: Appearance.padding.smaller
                 }
             }
         }

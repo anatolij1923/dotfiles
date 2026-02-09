@@ -18,7 +18,7 @@ BarWidget {
     StateLayer {
         anchors.fill: parent
         onClicked: {
-            GlobalStates.dashboardOpened = !GlobalStates.dashboardOpened
+            GlobalStates.dashboardOpened = !GlobalStates.dashboardOpened;
         }
     }
 
@@ -27,8 +27,14 @@ BarWidget {
             id: content
 
             StyledText {
-                id: timeSection
-                text: Time.format(`${root.timeFormat} • ${root.dateFormat}`)
+                text: Time.format(`${root.timeFormat}`)
+                weight: 450
+            }
+            StyledText {
+                text: "•"
+            }
+            StyledText {
+                text: Time.format(`${root.dateFormat}`)
             }
         }
     ]

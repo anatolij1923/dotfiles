@@ -74,7 +74,7 @@ Rectangle {
             spacing: Appearance.padding.smaller
             DNDToggle {}
             IdleToggle {}
-            // GamemodeToggle {}
+            GamemodeToggle {}
             SleepToggle {}
             MicToggle {
                 onRightClicked: root.openMicDialogRequested()

@@ -35,7 +35,7 @@ Item {
     ClippingRectangle {
         id: background
         anchors.fill: parent
-        radius: Appearance.rounding.hugeass
+        radius: Appearance.rounding.larger
         color: root.transparent ? Qt.alpha(Colors.palette.m3surface, root.alpha) : Colors.palette.m3surface
         clip: true
         Behavior on color {
@@ -88,7 +88,7 @@ Item {
             DialogSliderRow {
                 label: Translation.tr("quicksettings.dialogs.mic.input_volume")
                 value: Audio.source.audio.volume
-                onValueChanged: Audio.source.audio.volume = value
+                onMoved: v => Audio.source.audio.volume = v
             }
         }
         M3Dialog {
@@ -115,7 +115,8 @@ Item {
                 stopIndicatorValues: [1000, 2000, 3000, 4000, 5000, 6000]
                 valueSuffix: " K"
                 tooltipContent: Math.round(NightLightService.temperature) + " K"
-                onValueChanged: () => NightLightService.setTemperature(nightTempRow.value)
+                // onValueChanged: () => NightLightService.setTemperature(nightTempRow.value)
+                onMoved: v => NightLightService.setTemperature(v)
             }
             DialogSliderRow {
                 id: nightGammaRow
@@ -126,7 +127,8 @@ Item {
                 stopIndicatorValues: [25, 50, 75, 100]
                 valueSuffix: " %"
                 tooltipContent: (NightLightService.gamma).toFixed(1) + " %"
-                onValueChanged: () => NightLightService.setGamma(nightGammaRow.value)
+                // onValueChanged: () => NightLightService.setGamma(nightGammaRow.value)
+                onMoved: v => NightLightService.setGamma(v)
             }
         }
         M3Dialog {

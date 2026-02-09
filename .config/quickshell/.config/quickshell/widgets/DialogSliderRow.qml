@@ -16,6 +16,8 @@ Item {
     property string valueSuffix: ""
     property string tooltipContent: ""
 
+    signal moved(var val)
+
     implicitHeight: column.implicitHeight
     Layout.fillWidth: true
     Layout.topMargin: Appearance.padding.small
@@ -28,8 +30,12 @@ Item {
 
         RowLayout {
             Layout.fillWidth: true
-            StyledText { text: root.label }
-            Item { Layout.fillWidth: true }
+            StyledText {
+                text: root.label
+            }
+            Item {
+                Layout.fillWidth: true
+            }
             StyledText {
                 text: root.valueSuffix ? (slider.value.toFixed(2) + root.valueSuffix) : slider.value.toFixed(2)
                 color: Colors.palette.m3onSurfaceVariant
@@ -46,13 +52,17 @@ Item {
             configuration: StyledSlider.Configuration.M
             Layout.fillWidth: true
             tooltipContent: root.tooltipContent !== "" ? root.tooltipContent : `${Math.round(slider.value * 100)}%`
-            onValueChanged: () => root.value = slider.value
+            // onValueChanged: () => root.value = slider.value
+            onMoved: {
+                // ПЕРЕДАЕМ значение в сигнал
+                root.moved(slider.value);
+            }
         }
     }
 
-    onValueChanged: () => {
-        if (typeof slider !== "undefined" && Math.abs(slider.value - root.value) > 0.001)
-            slider.value = root.value
-    }
-    Component.onCompleted: slider.value = root.value
+    // onValueChanged: () => {
+    //     if (typeof slider !== "undefined" && Math.abs(slider.value - root.value) > 0.001)
+    //         slider.value = root.value
+    // }
+    // Component.onCompleted: slider.value = root.value
 }
