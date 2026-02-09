@@ -57,6 +57,7 @@ Scope {
             //     anchors.fill: parent
             //     onPressed: quicksettingsRoot.hide()
             // }
+            //
 
             Connections {
                 target: GlobalStates
@@ -69,9 +70,11 @@ Scope {
             }
 
             QuicksettingsContent {
+                focus: true
+                Keys.onEscapePressed: quicksettingsRoot.hide()
                 anchors {
                     fill: parent
-                    margins: Appearance.spacing.xs
+                    margins: Appearance.spacing.md
                 }
             }
         }
