@@ -7,9 +7,9 @@
     },
     "toggles": {
       "network": "Network",
-      "network_tooltip": "Click to toggle Wi-Fi. Right click to open nmgui",
+      "network_tooltip": "Click to toggle Wi-Fi.\nRight click to open nmgui",
       "bluetooth": "Bluetooth",
-      "bluetooth_tooltip": "Toggle bluetooth. Right click to open blueman",
+      "bluetooth_tooltip": "Toggle bluetooth.\nRight click to open blueman",
       "bluetooth_tooltip_connected": "Toggle bluetooth. Right click to open blueman\nConnected: %1%",
       "wifi_tooltip": "Click to toggle Wi-Fi",
       "dark_mode": "Enable dark mode",

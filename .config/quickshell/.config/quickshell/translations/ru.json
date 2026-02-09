@@ -7,10 +7,10 @@
     },
     "toggles": {
       "network": "Сеть",
-      "network_tooltip": "Нажмите, чтобы переключить Wi-Fi. Правый клик — открыть nmgui",
+      "network_tooltip": "Нажмите, чтобы переключить Wi-Fi.\nПравый клик — открыть nmgui",
       "bluetooth": "Bluetooth",
-      "bluetooth_tooltip": "Переключить Bluetooth. Правый клик — открыть blueman",
-      "bluetooth_tooltip_connected": "Переключить Bluetooth. Правый клик — открыть blueman\nПодключено: %1%",
+      "bluetooth_tooltip": "Переключить Bluetooth.\nПравый клик — открыть blueman",
+      "bluetooth_tooltip_connected": "Переключить Bluetooth.\nПравый клик — открыть blueman\nПодключено: %1%",
       "wifi_tooltip": "Нажмите, чтобы переключить Wi-Fi",
       "dark_mode": "Тёмная тема",
       "light_mode": "Светлая тема",
