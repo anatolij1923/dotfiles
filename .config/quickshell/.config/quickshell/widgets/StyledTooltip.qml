@@ -10,8 +10,8 @@ ToolTip {
     property bool extraVisibleCondition: true
     property bool alternativeVisibleCondition: false
     readonly property bool internalVisibleCondition: (extraVisibleCondition && (parent.hovered === undefined || parent?.hovered)) || alternativeVisibleCondition
-    verticalPadding: Appearance.padding.normal
-    horizontalPadding: Appearance.padding.larger
+    verticalPadding: Appearance.spacing.md
+    horizontalPadding: Appearance.spacing.xl
 
     background: null
 

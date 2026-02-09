@@ -25,7 +25,7 @@ Item {
         color: Colors.palette.m3surface
         border.width: 1
         border.color: Colors.palette.m3surfaceContainerHigh
-        radius: Appearance.rounding.hugeass
+        radius: Appearance.rounding.xxl
 
         ColumnLayout {
             id: mainLayout
@@ -33,9 +33,9 @@ Item {
                 top: parent.top
                 left: parent.left
                 right: parent.right
-                margins: Appearance.padding.huge
+                margins: Appearance.spacing.xl
             }
-            spacing: Appearance.padding.large
+            spacing: Appearance.spacing.lg
 
             RowLayout {
                 Layout.fillWidth: true
@@ -89,7 +89,7 @@ Item {
 
             RowLayout {
                 Layout.fillWidth: true
-                spacing: Appearance.padding.small
+                spacing: Appearance.spacing.sm
 
                 Item {
                     Layout.fillWidth: true
@@ -97,7 +97,7 @@ Item {
 
                 TextButton {
                     text: "Cancel"
-                    padding: Appearance.padding.normal
+                    padding: Appearance.spacing.md
                     onClicked: PolkitService.cancel()
                     textSize: 20
                 }
@@ -105,7 +105,7 @@ Item {
                 TextButton {
                     id: submitBtn
                     text: "Submit"
-                    padding: Appearance.padding.normal
+                    padding: Appearance.spacing.md
 
                     color: input.text.length > 0 ? Colors.palette.m3primary : Colors.palette.m3surfaceContainerHigh
                     textSize: 20

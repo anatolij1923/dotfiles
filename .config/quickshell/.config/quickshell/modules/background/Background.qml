@@ -91,12 +91,12 @@ Variants {
 
                 Behavior on opacity {
                     Anim {
-                        duration: Appearance.animDuration.extraLarge
+                        duration: Appearance.animDuration.xl
                     }
                 }
                 Behavior on scale {
                     Anim {
-                        duration: Appearance.animDuration.extraLarge
+                        duration: Appearance.animDuration.xl
                     }
                 }
                 Behavior on x {
@@ -126,12 +126,12 @@ Variants {
 
                 Behavior on opacity {
                     Anim {
-                        duration: Appearance.animDuration.extraLarge
+                        duration: Appearance.animDuration.xl
                     }
                 }
                 Behavior on scale {
                     Anim {
-                        duration: Appearance.animDuration.extraLarge
+                        duration: Appearance.animDuration.xl
                     }
                 }
                 Behavior on x {
@@ -161,7 +161,7 @@ Variants {
 
             Behavior on opacity {
                 Anim {
-                    duration: Appearance.animDuration.large
+                    duration: Appearance.animDuration.lg
                 }
             }
 

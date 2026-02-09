@@ -24,7 +24,7 @@ ClippingRectangle {
     Layout.fillWidth: true
 
     color: Colors.alpha(Colors.palette.m3surfaceContainer, 0.4)
-    radius: Appearance.rounding.huge
+    radius: Appearance.rounding.xl
 
     Timer {
         id: progressTimer
@@ -52,7 +52,7 @@ ClippingRectangle {
 
         anchors {
             fill: parent
-            margins: Appearance.padding.normal
+            margins: Appearance.spacing.md
         }
 
         Image {
@@ -91,10 +91,10 @@ ClippingRectangle {
                 left: parent.left
             }
             implicitWidth: height
-            radius: Appearance.rounding.normal
+            radius: Appearance.rounding.lg
 
             Layout.alignment: Qt.AlignLeft
-            Layout.margins: Appearance.padding.normal
+            Layout.margins: Appearance.spacing.md
 
             color: Colors.palette.m3surfaceContainerHigh
 
@@ -123,13 +123,13 @@ ClippingRectangle {
             anchors {
                 left: cover.right
                 right: pause.left
-                leftMargin: Appearance.padding.large
+                leftMargin: Appearance.spacing.lg
             }
 
             StyledText {
                 id: track
                 text: root.trackTitle
-                size: Appearance.font.size.large
+                size: Appearance.fontSize.lg
                 elide: Text.ElideRight
                 Layout.fillWidth: true
                 weight: 550
@@ -138,7 +138,7 @@ ClippingRectangle {
             StyledText {
                 id: artist
                 text: root.trackArtist
-                size: Appearance.font.size.small
+                size: Appearance.fontSize.sm
                 // color: Colors.palette.m3outline
                 opacity: 0.7
                 weight: 450
@@ -154,9 +154,9 @@ ClippingRectangle {
                 right: parent.right
                 // verticalCenter: parent.verticalCenter
                 bottom: next.top
-                bottomMargin: Appearance.padding.normal
+                bottomMargin: Appearance.spacing.md
             }
-            padding: Appearance.padding.small
+            padding: Appearance.spacing.sm
             activeColor: Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3primary, 0.8)
             checked: true
             icon: Players.active?.isPlaying ? "pause" : "play_arrow"
@@ -172,8 +172,8 @@ ClippingRectangle {
             anchors {
                 bottom: parent.bottom
                 left: cover.right
-                leftMargin: Appearance.padding.normal
-                // bottomMargin: Appearance.padding.smaller
+                leftMargin: Appearance.spacing.md
+                // bottomMargin: Appearance.spacing.xs
             }
             icon: "skip_previous"
             inactiveColor: "transparent"
@@ -195,8 +195,8 @@ ClippingRectangle {
                 bottom: parent.bottom
                 left: previous.right
                 right: next.left
-                leftMargin: Appearance.padding.smaller
-                rightMargin: Appearance.padding.smaller
+                leftMargin: Appearance.spacing.xs
+                rightMargin: Appearance.spacing.xs
             }
 
             configuration: StyledSlider.Configuration.XS
@@ -207,7 +207,7 @@ ClippingRectangle {
             anchors {
                 bottom: parent.bottom
                 right: parent.right
-                // bottomMargin: Appearance.padding.smaller
+                // bottomMargin: Appearance.spacing.xs
 
             }
             icon: "skip_next"

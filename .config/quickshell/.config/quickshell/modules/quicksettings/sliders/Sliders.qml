@@ -10,14 +10,14 @@ import qs
 Rectangle {
     id: root
 
-    property int padding: Appearance.padding.normal
+    property int padding: Appearance.spacing.md
     property var screen: root.QsWindow.window?.screen
     property var brightnessMonitor: Brightness.getMonitorForScreen(screen)
 
     implicitHeight: content.implicitHeight + padding * 2
     implicitWidth: content.implicitWidth + padding * 2
     color: Qt.alpha(Colors.palette.m3surfaceContainer, 0.4)
-    radius: Appearance.rounding.huge
+    radius: Appearance.rounding.xl
 
     Layout.fillWidth: true
 
@@ -67,7 +67,7 @@ Rectangle {
 
             anchors.verticalCenter: parent.verticalCenter
 
-            x: sliderInstance.iconShouldJump ? (sliderInstance.handle.x - width - Appearance.padding.small) : (parent.width - width - Appearance.padding.normal)
+            x: sliderInstance.iconShouldJump ? (sliderInstance.handle.x - width - Appearance.spacing.sm) : (parent.width - width - Appearance.spacing.md)
 
             Behavior on x {
                 Anim {

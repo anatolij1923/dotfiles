@@ -15,14 +15,14 @@ Item {
     signal toggled(bool value)
     Layout.fillWidth: true
 
-    property int padding: Appearance.padding.smaller
+    property int padding: Appearance.spacing.xs
 
     implicitHeight: content.implicitHeight + padding * 2
 
     // StateLayer {
     //     anchors.fill: parent
     //
-    //     radius: Appearance.rounding.normal
+    //     radius: Appearance.rounding.lg
     //
     //     onClicked: {
     //         sw.checked = !sw.checked;
@@ -37,7 +37,7 @@ Item {
             // leftMargin: root.padding
             // rightMargin: root.padding
         }
-        spacing: Appearance.padding.normal
+        spacing: Appearance.spacing.md
 
         StyledText {
             text: root.label

@@ -10,7 +10,7 @@ import qs.services
 Rectangle {
     id: root
 
-    property int padding: Appearance.padding.normal
+    property int padding: Appearance.spacing.md
     signal openMicDialogRequested
     signal openNightLightDialogRequested
     signal openBluetoothDialogRequested
@@ -19,13 +19,13 @@ Rectangle {
     implicitWidth: content.implicitWidth + padding * 2
 
     color: Qt.alpha(Colors.palette.m3surfaceContainer, 0.4)
-    radius: Appearance.rounding.huge
+    radius: Appearance.rounding.xl
     Layout.fillWidth: true
 
     ColumnLayout {
         id: content
         anchors.fill: parent
-        spacing: Appearance.padding.normal
+        spacing: Appearance.spacing.md
         anchors.margins: root.padding
 
         RowLayout {
@@ -71,7 +71,7 @@ Rectangle {
 
         RowLayout {
             id: buttonsRow
-            spacing: Appearance.padding.smaller
+            spacing: Appearance.spacing.xs
             DNDToggle {}
             IdleToggle {}
             GamemodeToggle {}
@@ -83,7 +83,7 @@ Rectangle {
         }
 
         RowLayout {
-            spacing: Appearance.padding.smaller
+            spacing: Appearance.spacing.xs
             PowerprofilesToggle {}
             DarkModeToggle {}
             // TrasparencyToggle {}

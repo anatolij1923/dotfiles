@@ -10,14 +10,14 @@ Item {
     property string label
     property string value
     property string placeholder: ""
-    property int padding: Appearance.padding.normal
+    property int padding: Appearance.spacing.md
 
     implicitHeight: Math.max(textField.implicitHeight, 40)
     Layout.fillWidth: true
 
     RowLayout {
         anchors.fill: parent
-        spacing: Appearance.padding.normal
+        spacing: Appearance.spacing.md
 
         // anchors.leftMargin: root.padding
         // anchors.rightMargin: root.padding
@@ -33,7 +33,7 @@ Item {
         Rectangle {
             Layout.preferredWidth: 200
             Layout.preferredHeight: 40
-            radius: Appearance.rounding.normal
+            radius: Appearance.rounding.lg
             color: Colors.palette.m3surfaceContainer
             border.width: 1
             border.color: textField.focus ? Colors.palette.m3primary : Colors.palette.m3outline

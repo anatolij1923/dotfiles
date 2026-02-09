@@ -67,7 +67,7 @@ Scope {
             }
             margins {
                 left: GlobalStates.lastClickX - (playerRoot.implicitWidth / 4)
-                top: Appearance.padding.normal
+                top: Appearance.spacing.md
             }
 
             WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
@@ -88,7 +88,7 @@ Scope {
                 id: background
                 anchors.fill: parent
                 color: Colors.palette.m3surfaceContainer
-                radius: Appearance.rounding.huge
+                radius: Appearance.rounding.xl
 
                 focus: true
                 Keys.onEscapePressed: {
@@ -125,10 +125,10 @@ Scope {
                         left: parent.left
                         top: parent.top
                         bottom: parent.bottom
-                        margins: Appearance.padding.large
+                        margins: Appearance.spacing.lg
                     }
                     width: height
-                    radius: Appearance.rounding.normal
+                    radius: Appearance.rounding.lg
                     color: Colors.palette.m3surfaceContainerHigh
 
                     Image {
@@ -150,8 +150,8 @@ Scope {
                         top: cover.top
                         left: cover.right
                         right: parent.right
-                        leftMargin: Appearance.padding.large
-                        rightMargin: Appearance.padding.large
+                        leftMargin: Appearance.spacing.lg
+                        rightMargin: Appearance.spacing.lg
                     }
                     height: titleText.height + artistText.height
 
@@ -159,7 +159,7 @@ Scope {
                         id: titleText
                         width: parent.width
                         text: root.trackTitle
-                        size: Appearance.font.size.large
+                        size: Appearance.fontSize.lg
                         weight: 600
                         elide: Text.ElideRight
                     }
@@ -169,7 +169,7 @@ Scope {
                         anchors.top: titleText.bottom
                         width: parent.width
                         text: root.trackArtist
-                        size: Appearance.font.size.small
+                        size: Appearance.fontSize.sm
                         opacity: 0.7
                         elide: Text.ElideRight
                     }
@@ -180,14 +180,14 @@ Scope {
                     anchors {
                         left: cover.right
                         right: parent.right
-                        topMargin: Appearance.padding.large
+                        topMargin: Appearance.spacing.lg
                         top: textGroup.bottom
                     }
 
                     Row {
                         id: controlButtons
                         anchors.horizontalCenter: parent.horizontalCenter
-                        spacing: Appearance.padding.large
+                        spacing: Appearance.spacing.lg
 
                         IconButton {
                             icon: "skip_previous"
@@ -218,7 +218,7 @@ Scope {
                         left: textGroup.left
                     }
                     opacity: 0.7
-                    size: Appearance.font.size.small
+                    size: Appearance.fontSize.sm
                     text: root.formatTime(root.currentSeconds)
                 }
 
@@ -228,7 +228,7 @@ Scope {
                         right: textGroup.right
                     }
                     opacity: 0.7
-                    size: Appearance.font.size.small
+                    size: Appearance.fontSize.sm
                     text: root.formatTime(root.player?.length)
                 }
 

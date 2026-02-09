@@ -27,7 +27,7 @@ ContentPage {
             color: Colors.palette.m3onSurfaceVariant
             wrapMode: Text.WordWrap
             Layout.fillWidth: true
-            Layout.topMargin: Appearance.padding.normal
+            Layout.topMargin: Appearance.spacing.md
         }
 
         SwitchRow {

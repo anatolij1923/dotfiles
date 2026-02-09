@@ -12,7 +12,7 @@ Item {
 
     required property string modelData
 
-    implicitHeight: isImage ? (headerText.implicitHeight + layout.spacing + imgPreview.implicitHeight + Appearance.padding.normal * 2) : Config.launcher.sizes.itemHeight
+    implicitHeight: isImage ? (headerText.implicitHeight + layout.spacing + imgPreview.implicitHeight + Appearance.spacing.md * 2) : Config.launcher.sizes.itemHeight
 
     anchors.left: parent?.left
     anchors.right: parent?.right
@@ -27,24 +27,24 @@ Item {
 
     StateLayer {
         anchors.fill: parent
-        radius: Appearance.rounding.huge
+        radius: Appearance.rounding.xl
         onClicked: root.execute()
     }
 
     Item {
         id: content
         anchors.fill: parent
-        anchors.margins: Appearance.padding.normal
+        anchors.margins: Appearance.spacing.md
 
         Column {
             id: layout
             anchors {
                 left: parent.left
                 right: actionButtons.left
-                rightMargin: Appearance.padding.normal
+                rightMargin: Appearance.spacing.md
                 verticalCenter: parent.verticalCenter
             }
-            spacing: Appearance.padding.small
+            spacing: Appearance.spacing.sm
 
             StyledText {
                 id: headerText
@@ -70,19 +70,19 @@ Item {
             id: actionButtons
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
-            spacing: Appearance.padding.small
+            spacing: Appearance.spacing.sm
             z: 10
 
             IconButton {
                 icon: "content_copy"
-                radius: Appearance.rounding.small
+                radius: Appearance.rounding.md
                 inactiveColor: "transparent"
                 onClicked: ClipboardService.copy(root.modelData)
             }
 
             IconButton {
                 icon: "delete"
-                radius: Appearance.rounding.small
+                radius: Appearance.rounding.md
                 inactiveColor: "transparent"
                 onClicked: ClipboardService.remove(root.modelData)
             }

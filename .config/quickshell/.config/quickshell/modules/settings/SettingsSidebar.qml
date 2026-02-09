@@ -23,7 +23,7 @@ Rectangle {
     color: Colors.palette.m3surfaceContainer
 
     implicitWidth: collapsed ? railWidth : drawerWidth
-    implicitHeight: layout.implicitHeight + Appearance.padding.large * 2
+    implicitHeight: layout.implicitHeight + Appearance.spacing.lg * 2
 
     Behavior on implicitWidth {
         Anim {
@@ -44,17 +44,17 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.leftMargin: Appearance.padding.large
-        anchors.rightMargin: Appearance.padding.small
-        anchors.topMargin: Appearance.padding.large
-        spacing: Appearance.padding.normal
+        anchors.leftMargin: Appearance.spacing.lg
+        anchors.rightMargin: Appearance.spacing.sm
+        anchors.topMargin: Appearance.spacing.lg
+        spacing: Appearance.spacing.md
 
         // states: State {
         //     name: "expanded"
         //     when: root.expanded
         //
         //     PropertyChanges {
-        //         layout.spacing: Appearance.padding.small
+        //         layout.spacing: Appearance.spacing.sm
         //     }
         // }
         //
@@ -69,7 +69,7 @@ Rectangle {
         IconButton {
             id: menuBtn
             Layout.alignment: Qt.AlignLeft
-            Layout.leftMargin: Appearance.padding.large
+            Layout.leftMargin: Appearance.spacing.lg
             icon: root.collapsed ? "menu" : "menu_open"
             onClicked: root.collapsed = !root.collapsed
         }
@@ -80,13 +80,13 @@ Rectangle {
             readonly property int fabSize: 64
 
             Layout.alignment: root.collapsed ? Qt.AlignHCenter : Qt.AlignLeft
-            // Layout.leftMargin: root.collapsed ? 0 : Appearance.padding.small
+            // Layout.leftMargin: root.collapsed ? 0 : Appearance.spacing.sm
 
             implicitHeight: fabSize
-            implicitWidth: root.collapsed ? fabSize : expandedRow.implicitWidth + Appearance.padding.large * 2
+            implicitWidth: root.collapsed ? fabSize : expandedRow.implicitWidth + Appearance.spacing.lg * 2
 
             color: Colors.palette.m3primaryContainer
-            radius: Appearance.rounding.normal
+            radius: Appearance.rounding.lg
             clip: true
 
             Behavior on implicitWidth {
@@ -108,7 +108,7 @@ Rectangle {
                 id: expandedRow
                 anchors.verticalCenter: parent.verticalCenter
                 leftPadding: (fab.fabSize - editIcon.width) / 2
-                spacing: Appearance.padding.normal
+                spacing: Appearance.spacing.md
 
                 MaterialSymbol {
                     id: editIcon
@@ -173,7 +173,7 @@ Rectangle {
                 expandedLabel.opacity: 1
                 smallLabel.opacity: 0
                 background.implicitWidth: iconItem.implicitWidth + iconItem.anchors.leftMargin * 2 + expandedLabel.anchors.leftMargin + expandedLabel.implicitWidth
-                background.implicitHeight: iconItem.implicitHeight + Appearance.padding.normal * 2
+                background.implicitHeight: iconItem.implicitHeight + Appearance.spacing.md * 2
                 item.implicitHeight: background.implicitHeight
             }
         }
@@ -199,7 +199,7 @@ Rectangle {
             color: Qt.alpha(Colors.palette.m3secondaryContainer, item.active ? 1 : 0)
 
             implicitWidth: iconItem.implicitWidth + iconItem.anchors.leftMargin * 2
-            implicitHeight: iconItem.implicitHeight + Appearance.padding.small
+            implicitHeight: iconItem.implicitHeight + Appearance.spacing.sm
 
             StateLayer {
                 color: item.active ? Colors.palette.m3onSecondaryContainer : Colors.palette.m3onSurface
@@ -214,7 +214,7 @@ Rectangle {
 
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.leftMargin: Appearance.padding.large
+                anchors.leftMargin: Appearance.spacing.lg
 
                 icon: item.icon
                 color: item.active ? Colors.palette.m3onSecondaryContainer : Colors.palette.m3onSurface
@@ -225,7 +225,7 @@ Rectangle {
 
                 anchors.left: iconItem.right
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.leftMargin: Appearance.padding.normal
+                anchors.leftMargin: Appearance.spacing.md
 
                 opacity: 0
                 text: item.label
@@ -237,10 +237,10 @@ Rectangle {
 
                 anchors.horizontalCenter: iconItem.horizontalCenter
                 anchors.top: iconItem.bottom
-                anchors.topMargin: Appearance.padding.small / 2
+                anchors.topMargin: Appearance.spacing.sm / 2
 
                 text: item.label
-                size: Appearance.font.size.small
+                size: Appearance.fontSize.sm
             }
         }
     }

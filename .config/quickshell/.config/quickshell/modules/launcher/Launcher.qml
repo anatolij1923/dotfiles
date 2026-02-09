@@ -12,8 +12,8 @@ import qs.widgets
 
 Scope {
     id: root
-    property int padding: Appearance.padding.large
-    property int rounding: Appearance.rounding.hugeass
+    property int padding: Appearance.spacing.lg
+    property int rounding: Appearance.rounding.xxl
     property string searchingText: ""
 
     property real alpha: Config.appearance.transparency.alpha
@@ -65,7 +65,7 @@ Scope {
                 id: mainContainer
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: parent.top
-                anchors.topMargin: Appearance.padding.huge
+                anchors.topMargin: Appearance.spacing.xl
 
                 property real maxHeight: launcherRoot.screen.height * 0.8
 
@@ -122,7 +122,7 @@ Scope {
                                 margins: root.padding
                             }
                             implicitHeight: Math.max(icon.implicitHeight, searchField.implicitHeight)
-                            radius: Appearance.rounding.hugeass
+                            radius: Appearance.rounding.xxl
                             color: root.transparent ? Qt.alpha(Colors.palette.m3surfaceContainer, root.alpha) : Colors.palette.m3surfaceContainer
 
                             MaterialSymbol {
@@ -149,8 +149,8 @@ Scope {
                                 }
 
                                 text: root.searchingText
-                                topPadding: Appearance.padding.larger
-                                bottomPadding: Appearance.padding.larger
+                                topPadding: Appearance.spacing.xl
+                                bottomPadding: Appearance.spacing.xl
                                 placeholderText: `Search or run commands with ":"`
                                 fontSize: 20
                                 fontWeight: 500

@@ -65,7 +65,7 @@ Scope {
 
                 anchors.top: parent.top
                 anchors.horizontalCenter: parent.horizontalCenter
-                anchors.topMargin: Appearance.padding.huge
+                anchors.topMargin: Appearance.spacing.xl
 
                 sourceComponent: OverviewContent {
                     id: overviewContent

@@ -259,8 +259,8 @@ ContentPage {
             TextButton {
                 text: "en"
                 inactiveColor: Colors.palette.m3secondaryContainer
-                verticalPadding: Appearance.padding.normal
-                horizontalPadding: Appearance.padding.huge
+                verticalPadding: Appearance.spacing.md
+                horizontalPadding: Appearance.spacing.xl
                 checked: Config.system.locale === "en"
                 onClicked: {
                     Config.system.locale = text;
@@ -269,8 +269,8 @@ ContentPage {
             TextButton {
                 text: "ru"
                 inactiveColor: Colors.palette.m3secondaryContainer
-                verticalPadding: Appearance.padding.normal
-                horizontalPadding: Appearance.padding.huge
+                verticalPadding: Appearance.spacing.md
+                horizontalPadding: Appearance.spacing.xl
                 checked: Config.system.locale === "ru"
                 onClicked: {
                     Config.system.locale = text;

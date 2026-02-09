@@ -13,7 +13,7 @@ BarWidget {
     property string timeFormat: Config.time.format
     property string dateFormat: Config.time.dateFormat
 
-    padding: Appearance.padding.huge
+    padding: Appearance.spacing.xl
 
     StateLayer {
         anchors.fill: parent

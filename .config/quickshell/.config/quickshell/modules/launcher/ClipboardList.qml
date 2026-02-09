@@ -12,7 +12,7 @@ Item {
     id: root
 
     required property string search
-    property int spacing: Appearance.padding.small
+    property int spacing: Appearance.spacing.sm
 
     function activate() {
         if (currentItem && typeof currentItem.execute === "function") {
@@ -59,7 +59,7 @@ Item {
         highlight: Rectangle {
             color: Colors.palette.m3onSurface
             opacity: 0.1
-            radius: Appearance.rounding.huge
+            radius: Appearance.rounding.xl
             y: listView.currentItem?.y ?? 0
             implicitWidth: listView.width
             implicitHeight: listView.currentItem?.implicitHeight ?? 0
@@ -96,7 +96,7 @@ Item {
             anchors {
                 verticalCenter: parent.verticalCenter
                 left: parent.left
-                leftMargin: Appearance.padding.small
+                leftMargin: Appearance.spacing.sm
             }
         }
 
@@ -112,10 +112,10 @@ Item {
             anchors {
                 verticalCenter: parent.verticalCenter
                 right: parent.right
-                rightMargin: Appearance.padding.small
+                rightMargin: Appearance.spacing.sm
             }
 
-            horizontalPadding: Appearance.padding.large
+            horizontalPadding: Appearance.spacing.lg
 
             onClicked: {
                 ClipboardService.wipe();

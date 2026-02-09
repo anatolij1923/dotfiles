@@ -20,15 +20,15 @@ Item {
 
     StateLayer {
         anchors.fill: parent
-        radius: Appearance.rounding.huge
+        radius: Appearance.rounding.xl
         onClicked: root.execute()
     }
 
     Row {
         anchors.fill: parent
-        anchors.leftMargin: Appearance.padding.normal
-        anchors.rightMargin: Appearance.padding.normal
-        spacing: Appearance.padding.normal
+        anchors.leftMargin: Appearance.spacing.md
+        anchors.rightMargin: Appearance.spacing.md
+        spacing: Appearance.spacing.md
 
         StyledText {
             text: modelData.emoji

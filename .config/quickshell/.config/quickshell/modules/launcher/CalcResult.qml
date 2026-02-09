@@ -22,7 +22,7 @@ Item {
         return false;
     }
 
-    implicitHeight: Math.max(Config.launcher.sizes.itemHeight, (row ? (row.implicitHeight || 0) : 0) + Appearance.padding.large * 2)
+    implicitHeight: Math.max(Config.launcher.sizes.itemHeight, (row ? (row.implicitHeight || 0) : 0) + Appearance.spacing.lg * 2)
 
     property string result
 
@@ -63,20 +63,20 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        radius: Appearance.rounding.huge
+        radius: Appearance.rounding.xl
         color: root.transparent ? Qt.alpha(Colors.palette.m3surfaceContainer, root.alpha) : Colors.palette.m3surfaceContainer
         // border.width: 1
         // border.color: Colors.palette.m3surfaceContainerHigh
 
         Row {
             id: row
-            spacing: Appearance.padding.large
+            spacing: Appearance.spacing.lg
             anchors {
                 left: parent.left
                 right: parent.right
                 verticalCenter: parent.verticalCenter
-                leftMargin: Appearance.padding.huge
-                rightMargin: Appearance.padding.huge
+                leftMargin: Appearance.spacing.xl
+                rightMargin: Appearance.spacing.xl
             }
 
             property real columnWidth: (width - spacing) / 2

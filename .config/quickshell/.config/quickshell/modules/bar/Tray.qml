@@ -20,7 +20,7 @@ Item {
 
     Behavior on implicitWidth {
         Anim {
-            duration: Appearance.animDuration.large
+            duration: Appearance.animDuration.lg
             easing.bezierCurve: Appearance.animCurves.emphasized
         }
     }

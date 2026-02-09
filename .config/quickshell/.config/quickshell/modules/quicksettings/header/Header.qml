@@ -13,8 +13,8 @@ RowLayout {
     Layout.alignment: Qt.AlignTop
 
     Rectangle {
-        implicitWidth: uptime.implicitWidth + Appearance.padding.larger * 2
-        implicitHeight: buttons.implicitHeight + Appearance.padding.normal
+        implicitWidth: uptime.implicitWidth + Appearance.spacing.xl * 2
+        implicitHeight: buttons.implicitHeight + Appearance.spacing.md
 
         color: Colors.palette.m3surfaceContainer
         radius: Appearance.rounding.full
@@ -23,7 +23,7 @@ RowLayout {
             id: uptime
             text: `${Time.uptime}`
             anchors.centerIn: parent
-            size: Appearance.font.size.normal
+            size: Appearance.fontSize.md
             weight: 500
         }
     }
@@ -35,8 +35,8 @@ RowLayout {
     Rectangle {
         color: Colors.palette.m3surfaceContainer
 
-        implicitWidth: buttons.implicitWidth + Appearance.padding.small * 2
-        implicitHeight: buttons.implicitHeight + Appearance.padding.normal
+        implicitWidth: buttons.implicitWidth + Appearance.spacing.sm * 2
+        implicitHeight: buttons.implicitHeight + Appearance.spacing.md
 
         radius: Appearance.rounding.full
 
@@ -44,11 +44,11 @@ RowLayout {
             id: buttons
             anchors.centerIn: parent
 
-            spacing: Appearance.padding.smaller
+            spacing: Appearance.spacing.xs
 
             IconButton {
                 icon: "restart_alt"
-                padding: Appearance.padding.small
+                padding: Appearance.spacing.sm
                 // inactiveColor: Colors.palette.m3surface
 
                 onClicked: {
@@ -63,7 +63,7 @@ RowLayout {
 
             IconButton {
                 icon: "settings"
-                padding: Appearance.padding.small
+                padding: Appearance.spacing.sm
                 // inactiveColor: Colors.palette.m3surface
 
                 onClicked: {
@@ -78,9 +78,9 @@ RowLayout {
 
             IconButton {
                 icon: "power_settings_new"
-                padding: Appearance.padding.small
+                padding: Appearance.spacing.sm
                 // inactiveColor: Colors.palette.m3surface
-                // radius: Appearance.rounding.large
+                // radius: Appearance.rounding.xl
 
                 onClicked: {
                     GlobalStates.quicksettingsOpened = false;

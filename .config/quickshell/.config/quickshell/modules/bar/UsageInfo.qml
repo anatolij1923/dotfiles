@@ -7,7 +7,7 @@ import qs.widgets
 
 BarWidget {
     id: root
-    // padding: Appearance.padding.large
+    // padding: Appearance.spacing.lg
 
     rowContent: [
         RowLayout {

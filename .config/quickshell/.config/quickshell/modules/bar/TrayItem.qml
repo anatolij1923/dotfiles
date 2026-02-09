@@ -19,7 +19,7 @@ Item {
 
     StateLayer {
         anchors.fill: parent
-        radius: Appearance.rounding.small
+        radius: Appearance.rounding.md
         onClicked: event => {
             if (event.button === Qt.LeftButton) {
                 modelData.activate();

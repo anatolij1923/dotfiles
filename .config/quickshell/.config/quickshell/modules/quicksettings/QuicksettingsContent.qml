@@ -35,7 +35,7 @@ Item {
     ClippingRectangle {
         id: background
         anchors.fill: parent
-        radius: Appearance.rounding.larger
+        radius: Appearance.rounding.xl
         color: root.transparent ? Qt.alpha(Colors.palette.m3surface, root.alpha) : Colors.palette.m3surface
         clip: true
         Behavior on color {
@@ -53,7 +53,7 @@ Item {
         ColumnLayout {
             anchors.fill: parent
             anchors.margins: root.padding
-            spacing: Appearance.padding.normal
+            spacing: Appearance.spacing.md
             Layout.fillHeight: true
             Header {}
             Toggles {
@@ -146,9 +146,9 @@ Item {
             // DialogDivider {}
             StyledText {
                 text: Translation.tr("quicksettings.dialogs.bluetooth.devices")
-                size: Appearance.font.size.small
-                Layout.bottomMargin: Appearance.padding.small
-                Layout.topMargin: Appearance.padding.small
+                size: Appearance.fontSize.sm
+                Layout.bottomMargin: Appearance.spacing.sm
+                Layout.topMargin: Appearance.spacing.sm
             }
             ListView {
                 id: btDeviceList
@@ -160,7 +160,7 @@ Item {
                 delegate: Rectangle {
                     width: btDeviceList.width - 2
                     height: 36
-                    radius: Appearance.rounding.small
+                    radius: Appearance.rounding.md
                     color: Colors.palette.m3surfaceContainerHigh
                     required property var modelData
                     property var device: modelData
@@ -174,9 +174,9 @@ Item {
                     }
                     RowLayout {
                         anchors.fill: parent
-                        anchors.leftMargin: Appearance.padding.normal
-                        anchors.rightMargin: Appearance.padding.normal
-                        spacing: Appearance.padding.small
+                        anchors.leftMargin: Appearance.spacing.md
+                        anchors.rightMargin: Appearance.spacing.md
+                        spacing: Appearance.spacing.sm
                         MaterialSymbol {
                             icon: device?.connected ? "bluetooth_connected" : "bluetooth"
                             color: device?.connected ? Colors.palette.m3primary : Colors.palette.m3onSurfaceVariant
@@ -190,14 +190,14 @@ Item {
                         StyledText {
                             visible: device?.connected && device?.batteryAvailable
                             text: Math.round((device?.battery ?? 0) * 100) + "%"
-                            size: Appearance.font.size.small
+                            size: Appearance.fontSize.sm
                             color: Colors.palette.m3onSurfaceVariant
                         }
                     }
                 }
             }
             TextIconButton {
-                Layout.topMargin: Appearance.padding.small
+                Layout.topMargin: Appearance.spacing.sm
 
                 text: BluetoothService.discovering ? Translation.tr("quicksettings.dialogs.bluetooth.scanning") : Translation.tr("quicksettings.dialogs.bluetooth.scan")
                 icon: BluetoothService.discovering ? "search" : "add"

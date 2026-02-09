@@ -208,7 +208,7 @@ StyledWindow {
         color: "transparent"
         border.color: Colors.palette.m3primary
         border.width: 2
-        radius: Appearance.rounding.small
+        radius: Appearance.rounding.md
         visible: root.showOverlay
     }
 
@@ -216,7 +216,7 @@ StyledWindow {
         id: toolbar
         z: 15
         visible: root.hasSelection && !root.dragging
-        property int p: Appearance.padding.normal
+        property int p: Appearance.spacing.md
         implicitWidth: toolbarContent.implicitWidth + p * 2
         implicitHeight: toolbarContent.implicitHeight + p * 2
         color: Colors.palette.m3surface
@@ -243,25 +243,25 @@ StyledWindow {
                 icon: "content_copy"
                 text: "Copy"
                 onClicked: root.prepareCapture("copy")
-                padding: Appearance.padding.small
+                padding: Appearance.spacing.sm
             }
             TextIconButton {
                 icon: "save_as"
                 text: "Save"
                 onClicked: root.prepareCapture("save")
-                padding: Appearance.padding.small
+                padding: Appearance.spacing.sm
             }
             TextIconButton {
                 icon: "edit"
                 text: "Edit"
                 onClicked: root.prepareCapture("edit")
-                padding: Appearance.padding.small
+                padding: Appearance.spacing.sm
             }
             TextIconButton {
                 icon: "dictionary"
                 text: "OCR"
                 onClicked: root.prepareCapture("ocr")
-                padding: Appearance.padding.small
+                padding: Appearance.spacing.sm
             }
         }
     }

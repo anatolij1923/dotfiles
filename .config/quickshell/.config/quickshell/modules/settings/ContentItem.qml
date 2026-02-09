@@ -13,8 +13,8 @@ Rectangle {
     // property string icon: ""
     property string title: ""
 
-    property int margins: Appearance.padding.huge
-    property int innerMargins: Appearance.padding.large 
+    property int margins: Appearance.spacing.xl
+    property int innerMargins: Appearance.spacing.lg 
 
     Layout.fillWidth: true
     Layout.leftMargin: margins
@@ -23,7 +23,7 @@ Rectangle {
     implicitHeight: mainColumn.implicitHeight
 
     color: Colors.palette.m3surfaceContainer
-    radius: Appearance.rounding.huge
+    radius: Appearance.rounding.xl
 
     ColumnLayout {
         id: mainColumn
@@ -37,8 +37,8 @@ Rectangle {
             Layout.topMargin: innerMargins
             Layout.leftMargin: innerMargins
             Layout.rightMargin: innerMargins
-            Layout.bottomMargin: Appearance.padding.normal
-            spacing: Appearance.padding.larger
+            Layout.bottomMargin: Appearance.spacing.md
+            spacing: Appearance.spacing.xl
 
             // MaterialSymbol {
             //     icon: root.icon
@@ -62,7 +62,7 @@ Rectangle {
             Layout.leftMargin: innerMargins
             Layout.rightMargin: innerMargins
             Layout.bottomMargin: innerMargins
-            spacing: Appearance.padding.normal
+            spacing: Appearance.spacing.md
         }
     }
 }

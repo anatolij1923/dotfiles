@@ -34,7 +34,7 @@ Item {
     }
 
     readonly property string searchQuery: search.startsWith(":wallpaper") ? search.slice(":wallpaper".length).trim() : ""
-    readonly property real spacing: Appearance.padding.normal
+    readonly property real spacing: Appearance.spacing.md
 
     property var wallpaperModel: []
 
@@ -130,7 +130,7 @@ Item {
             anchors {
                 verticalCenter: parent.verticalCenter
                 left: parent.left
-                leftMargin: Appearance.padding.small
+                leftMargin: Appearance.spacing.sm
             }
         }
 
@@ -142,12 +142,12 @@ Item {
             text: Translation.tr("launcher.random")
             textSize: 18
             textWeight: 500
-            horizontalPadding: Appearance.padding.large
+            horizontalPadding: Appearance.spacing.lg
 
             anchors {
                 verticalCenter: parent.verticalCenter
                 right: parent.right
-                rightMargin: Appearance.padding.small
+                rightMargin: Appearance.spacing.sm
             }
 
             onClicked: {

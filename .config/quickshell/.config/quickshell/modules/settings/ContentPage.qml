@@ -12,7 +12,7 @@ Rectangle {
     default property alias content: contentColumn.children
 
     color: Colors.palette.m3surface
-    radius: Appearance.rounding.huge
+    radius: Appearance.rounding.xl
     clip: true
 
     ColumnLayout {
@@ -21,7 +21,7 @@ Rectangle {
 
         Item {
             Layout.fillWidth: true
-            Layout.preferredHeight: headerRow.implicitHeight + Appearance.padding.large * 2
+            Layout.preferredHeight: headerRow.implicitHeight + Appearance.spacing.lg * 2
 
             RowLayout {
                 id: headerRow
@@ -29,7 +29,7 @@ Rectangle {
 
                 StyledText {
                     text: root.title
-                    size: Appearance.font.size.xlarge
+                    size: Appearance.fontSize.xl
                     weight: 500
                     color: Colors.palette.m3onSurface
                 }
@@ -43,7 +43,7 @@ Rectangle {
             clip: true
 
             contentWidth: width
-            contentHeight: contentColumn.implicitHeight + Appearance.padding.huge
+            contentHeight: contentColumn.implicitHeight + Appearance.spacing.xl
 
             ScrollBar.vertical: ScrollBar {
                 policy: ScrollBar.AsNeeded
@@ -53,7 +53,7 @@ Rectangle {
             ColumnLayout {
                 id: contentColumn
                 width: flickable.width
-                spacing: Appearance.padding.huge
+                spacing: Appearance.spacing.xl
             }
         }
     }

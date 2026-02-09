@@ -18,7 +18,7 @@ ListView {
         }
     }
 
-    spacing: Appearance.padding.small
+    spacing: Appearance.spacing.sm
 
     implicitHeight: (Config.launcher.sizes.itemHeight + spacing) * Math.min(Config.launcher.maxShown, count) - spacing
 
@@ -33,7 +33,7 @@ ListView {
     highlight: Rectangle {
         color: Colors.palette.m3onSurface
         opacity: 0.1
-        radius: Appearance.rounding.huge
+        radius: Appearance.rounding.xl
 
         y: root.currentItem?.y ?? 0
         implicitWidth: root.width

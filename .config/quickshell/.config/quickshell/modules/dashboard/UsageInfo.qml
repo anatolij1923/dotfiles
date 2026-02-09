@@ -19,7 +19,7 @@ Item {
         id: content
         anchors.centerIn: parent
         width: parent.width
-        spacing: Appearance.padding.small
+        spacing: Appearance.spacing.sm
 
         RamSwapSwitcher {
             Layout.fillWidth: true
@@ -100,13 +100,13 @@ Item {
 
         Layout.fillWidth: true
 
-        implicitHeight: col.implicitHeight + Appearance.padding.normal * 2
+        implicitHeight: col.implicitHeight + Appearance.spacing.md * 2
 
         ColumnLayout {
             id: col
             anchors.centerIn: parent
             width: parent.width
-            spacing: Appearance.padding.smaller
+            spacing: Appearance.spacing.xs
 
             CircularProgress {
                 id: circProgress
@@ -141,7 +141,7 @@ Item {
                 StyledText {
                     text: widget.valueText
                     Layout.alignment: Qt.AlignHCenter
-                    size: Appearance.font.size.large
+                    size: Appearance.fontSize.lg
                     weight: 700
                     font.family: "JetBrainsMono Nerd Font"
                     color: Colors.palette.m3onSurface
@@ -150,7 +150,7 @@ Item {
                 StyledText {
                     text: widget.label
                     Layout.alignment: Qt.AlignHCenter
-                    size: Appearance.font.size.tiny
+                    size: Appearance.fontSize.xs
                     font.capitalization: Font.AllUppercase
                     font.letterSpacing: 2
                     weight: 500

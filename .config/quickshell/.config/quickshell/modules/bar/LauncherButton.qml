@@ -7,7 +7,7 @@ import qs.common
 Rectangle {
     id: root
 
-    property int padding: Appearance.padding.smaller
+    property int padding: Appearance.spacing.xs
     property bool launcherOpened
 
     Connections {
@@ -26,7 +26,7 @@ Rectangle {
         CAnim {}
     }
 
-    radius: Appearance.rounding.small
+    radius: Appearance.rounding.md
 
     StateLayer {
         anchors.fill: parent

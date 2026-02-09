@@ -56,7 +56,7 @@ Item {
         id: background
         anchors.fill: parent
         color: "transparent"
-        radius: Appearance.rounding.small
+        radius: Appearance.rounding.md
         clip: true
 
         Image {
@@ -83,17 +83,17 @@ Item {
 
         ClippingRectangle {
             id: cover
-            radius: Appearance.rounding.normal
+            radius: Appearance.rounding.lg
             color: Colors.palette.m3surfaceContainerHigh
 
-            height: root.expanded ? (parent.height - Appearance.padding.large * 2) : (parent.width - Appearance.padding.normal * 2)
+            height: root.expanded ? (parent.height - Appearance.spacing.lg * 2) : (parent.width - Appearance.spacing.md * 2)
             width: height
 
             anchors {
                 left: parent.left
                 top: parent.top
-                leftMargin: root.expanded ? Appearance.padding.large : Appearance.padding.normal
-                topMargin: root.expanded ? Appearance.padding.large : Appearance.padding.normal
+                leftMargin: root.expanded ? Appearance.spacing.lg : Appearance.spacing.md
+                topMargin: root.expanded ? Appearance.spacing.lg : Appearance.spacing.md
             }
 
             Image {
@@ -114,9 +114,9 @@ Item {
                 right: parent.right
                 top: root.expanded ? cover.top : cover.bottom
 
-                leftMargin: root.expanded ? Appearance.padding.large : Appearance.padding.normal
-                rightMargin: root.expanded ? Appearance.padding.large : Appearance.padding.normal
-                topMargin: root.expanded ? 0 : Appearance.padding.small
+                leftMargin: root.expanded ? Appearance.spacing.lg : Appearance.spacing.md
+                rightMargin: root.expanded ? Appearance.spacing.lg : Appearance.spacing.md
+                topMargin: root.expanded ? 0 : Appearance.spacing.sm
             }
             height: titleText.height + artistText.height
 
@@ -124,7 +124,7 @@ Item {
                 id: titleText
                 width: parent.width
                 text: root.trackTitle
-                size: root.expanded ? Appearance.font.size.large : Appearance.font.size.normal
+                size: root.expanded ? Appearance.fontSize.lg : Appearance.fontSize.md
                 weight: 600
                 elide: Text.ElideRight
                 horizontalAlignment: root.expanded ? Text.AlignLeft : Text.AlignHCenter
@@ -135,7 +135,7 @@ Item {
                 anchors.top: titleText.bottom
                 width: parent.width
                 text: root.trackArtist
-                size: root.expanded ? Appearance.font.size.small : Appearance.font.size.tiny
+                size: root.expanded ? Appearance.fontSize.sm : Appearance.fontSize.xs
                 opacity: 0.7
                 elide: Text.ElideRight
                 horizontalAlignment: root.expanded ? Text.AlignLeft : Text.AlignHCenter
@@ -151,23 +151,23 @@ Item {
                 top: textGroup.bottom
                 left: parent.left
                 right: parent.right
-                topMargin: Appearance.padding.smaller
+                topMargin: Appearance.spacing.xs
             }
             Row {
                 anchors.horizontalCenter: parent.horizontalCenter
                 spacing: 6
                 StyledText {
                     text: root.formatTime(root.currentSeconds)
-                    size: Appearance.font.size.small
+                    size: Appearance.fontSize.sm
                 }
                 StyledText {
                     text: "/"
-                    size: Appearance.font.size.small
+                    size: Appearance.fontSize.sm
                     opacity: 0.5
                 }
                 StyledText {
                     text: root.formatTime(root.player?.length)
-                    size: Appearance.font.size.small
+                    size: Appearance.fontSize.sm
                     opacity: 0.7
                 }
             }
@@ -179,14 +179,14 @@ Item {
                 left: root.expanded ? cover.right : parent.left
                 right: parent.right
                 top: root.expanded ? textGroup.bottom : timeRowCenter.bottom
-                topMargin: root.expanded ? Appearance.padding.large : 0
+                topMargin: root.expanded ? Appearance.spacing.lg : 0
             }
             height: 48
 
             Row {
                 id: controlButtons
                 anchors.centerIn: parent
-                spacing: root.expanded ? Appearance.padding.large : Appearance.padding.normal
+                spacing: root.expanded ? Appearance.spacing.lg : Appearance.spacing.md
 
                 IconButton {
                     icon: "skip_previous"
@@ -246,7 +246,7 @@ Item {
                 bottom: progressSlider.top
                 left: textGroup.left
             }
-            size: Appearance.font.size.small
+            size: Appearance.fontSize.sm
             text: root.formatTime(root.currentSeconds)
             visible: root.expanded
             opacity: root.expanded ? 0.7 : 0
@@ -257,7 +257,7 @@ Item {
                 bottom: progressSlider.top
                 right: textGroup.right
             }
-            size: Appearance.font.size.small
+            size: Appearance.fontSize.sm
             text: root.formatTime(root.player?.length)
             visible: root.expanded
             opacity: root.expanded ? 0.7 : 0

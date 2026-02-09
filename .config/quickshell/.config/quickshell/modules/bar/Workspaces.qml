@@ -32,7 +32,7 @@ Item {
     readonly property int inactiveSize: 14
     readonly property int itemHeight: 14
     readonly property int activeWidth: inactiveSize * 2
-    readonly property int spacing: Appearance.padding.smaller
+    readonly property int spacing: Appearance.spacing.xs
 
     implicitWidth: layout.width
 

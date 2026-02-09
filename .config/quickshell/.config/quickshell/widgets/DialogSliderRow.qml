@@ -20,13 +20,13 @@ Item {
 
     implicitHeight: column.implicitHeight
     Layout.fillWidth: true
-    Layout.topMargin: Appearance.padding.small
-    Layout.bottomMargin: Appearance.padding.small
+    Layout.topMargin: Appearance.spacing.sm
+    Layout.bottomMargin: Appearance.spacing.sm
 
     ColumnLayout {
         id: column
         anchors.fill: parent
-        spacing: Appearance.padding.smaller
+        spacing: Appearance.spacing.xs
 
         RowLayout {
             Layout.fillWidth: true

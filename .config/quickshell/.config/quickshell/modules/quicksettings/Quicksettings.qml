@@ -71,7 +71,7 @@ Scope {
             QuicksettingsContent {
                 anchors {
                     fill: parent
-                    margins: Appearance.padding.smaller
+                    margins: Appearance.spacing.xs
                 }
             }
         }

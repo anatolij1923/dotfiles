@@ -21,7 +21,7 @@ Switch {
         color: root.checked ? Colors.palette.m3primary : Colors.palette.m3surfaceContainerHighest
 
         implicitWidth: implicitHeight * 1.7
-        implicitHeight: Appearance.font.size.xlarge + Appearance.padding.smaller * 2
+        implicitHeight: Appearance.fontSize.xl + Appearance.spacing.xs * 2
 
         border {
             width: root.checked ? 0 : 2
@@ -34,9 +34,9 @@ Switch {
             radius: Appearance.rounding.full
             color: root.checked ? Colors.palette.m3onPrimary : Colors.palette.m3outline
 
-            x: root.checked ? parent.implicitWidth - nonAnimWidth - Appearance.padding.small / 2 : Appearance.padding.small / 2
+            x: root.checked ? parent.implicitWidth - nonAnimWidth - Appearance.spacing.sm / 2 : Appearance.spacing.sm / 2
             implicitWidth: nonAnimWidth
-            implicitHeight: parent.implicitHeight - Appearance.padding.small
+            implicitHeight: parent.implicitHeight - Appearance.spacing.sm
             anchors.verticalCenter: parent.verticalCenter
 
             Rectangle {
@@ -91,15 +91,15 @@ Switch {
 
                 anchors.centerIn: parent
                 width: height
-                height: parent.implicitHeight - Appearance.padding.small * 2
+                height: parent.implicitHeight - Appearance.spacing.sm * 2
                 preferredRendererType: Shape.CurveRenderer
                 asynchronous: true
 
                 ShapePath {
-                    strokeWidth: Appearance.font.size.normal * 0.15
+                    strokeWidth: Appearance.fontSize.md * 0.15
                     strokeColor: root.checked ? Colors.palette.m3primary : Colors.palette.m3surfaceContainerHighest
                     fillColor: "transparent"
-                    capStyle: Appearance.rounding.smaller === 0 ? ShapePath.SquareCap : ShapePath.RoundCap
+                    capStyle: Appearance.rounding.sm === 0 ? ShapePath.SquareCap : ShapePath.RoundCap
 
                     startX: icon.start1.x
                     startY: icon.start1.y
@@ -153,7 +153,7 @@ Switch {
     }
 
     component PropAnim: PropertyAnimation {
-        duration: Appearance.animDuration.normal
+        duration: Appearance.animDuration.md
         easing.type: Easing.BezierSpline
         easing.bezierCurve: Appearance.animCurves.standard
     }

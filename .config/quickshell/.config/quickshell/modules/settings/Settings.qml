@@ -45,7 +45,7 @@ Scope {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
-                    Layout.margins: Appearance.padding.small
+                    Layout.margins: Appearance.spacing.sm
 
                     SettingsPage {
                         anchors.fill: parent
