@@ -7,12 +7,12 @@ import Quickshell.Io
 
 Singleton {
     id: root
-    property AnimCurves animCurves: AnimCurves {}
-    property AnimDuration animDuration: AnimDuration {}
-    property Rounding rounding: Rounding {}
-    property Spacing spacing: Spacing {}
+    readonly property AnimCurves animCurves: AnimCurves {}
+    readonly property AnimDuration animDuration: AnimDuration {}
+    readonly property Rounding rounding: Rounding {}
+    readonly property Spacing spacing: Spacing {}
     readonly property FontSize fontSize: FontSize {}
-    property Sizes sizes: Sizes {}
+    readonly property Sizes sizes: Sizes {}
 
     component AnimCurves: JsonObject {
         readonly property list<real> expressiveFastSpatial: [0.42, 1.67, 0.21, 0.90, 1, 1] // Default, 350ms
@@ -32,11 +32,11 @@ Singleton {
     component AnimDuration: JsonObject {
         property real scale: 1.0
 
-        readonly property int xs: 100 * scale 
+        readonly property int xs: 100 * scale
         readonly property int sm: 200 * scale
-        readonly property int md: 400 * scale 
-        readonly property int lg: 600 * scale 
-        readonly property int xl: 1000 * scale 
+        readonly property int md: 400 * scale
+        readonly property int lg: 600 * scale
+        readonly property int xl: 1000 * scale
         readonly property int expressiveFastSpatial: 350 * scale
         readonly property int expressiveDefaultSpatial: 500 * scale
         readonly property int expressiveSlowSpatial: 650 * scale
