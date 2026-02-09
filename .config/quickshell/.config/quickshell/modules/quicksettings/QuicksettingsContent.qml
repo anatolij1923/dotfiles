@@ -148,12 +148,12 @@ Item {
                 model: Bluetooth.defaultAdapter?.devices?.values ?? []
                 spacing: 2
                 delegate: Rectangle {
+                    required property var modelData
+                    property var device: modelData
                     width: btDeviceList.width - 2
                     height: 36
                     radius: Appearance.rounding.md
-                    color: Colors.palette.m3surfaceContainerHigh
-                    required property var modelData
-                    property var device: modelData
+                    color: device?.connected ? Colors.palette.m3secondaryContainer : Colors.palette.m3surfaceContainerHigh
                     StateLayer {
                         id: deviceRow
                         anchors.fill: parent
@@ -174,6 +174,7 @@ Item {
                         }
                         StyledText {
                             text: device?.name || device?.deviceName || device?.address || ""
+                            color: device?.connected ? Colors.palette.m3onSecondaryContainer : Colors.palette.m3onSurface
                             Layout.fillWidth: true
                             elide: Text.ElideRight
                         }
