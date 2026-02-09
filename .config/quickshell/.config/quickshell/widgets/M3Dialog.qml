@@ -110,7 +110,7 @@ Item {
             StyledText {
                 text: root.title
                 visible: root.title !== ""
-                size: Appearance.font.size.xlarge
+                size: Appearance.fontSize.xl
                 Layout.fillWidth: true
                 Layout.bottomMargin: Appearance.spacing.sm
             }

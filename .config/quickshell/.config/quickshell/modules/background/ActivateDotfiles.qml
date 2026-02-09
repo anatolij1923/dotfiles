@@ -32,12 +32,12 @@ StyledWindow {
         opacity: 0.8
         StyledText {
             text: "Activate Dotfiles"
-            size: Appearance.font.size.xlarge
+            size: Appearance.fontSize.xl
             weight: 500
         }
         StyledText {
             text: "Go to settings to activate dotfiles"
-            size: Appearance.font.size.large
+            size: Appearance.fontSize.lg
         }
     }
 }

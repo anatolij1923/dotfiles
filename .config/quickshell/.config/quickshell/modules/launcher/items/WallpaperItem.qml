@@ -90,7 +90,7 @@ Item {
                 width: parent.width
                 text: root.relativePath
 
-                size: isCurrent ? Appearance.font.size.normal : Appearance.font.size.small
+                size: isCurrent ? Appearance.fontSize.md : Appearance.fontSize.sm
                 weight: isCurrent ? 600 : 400
 
                 color: isCurrent ? Colors.palette.m3onSurface : Colors.palette.m3onSurfaceVariant

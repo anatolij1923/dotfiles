@@ -240,7 +240,7 @@ Rectangle {
                 anchors.topMargin: Appearance.spacing.sm / 2
 
                 text: item.label
-                size: Appearance.font.size.small
+                size: Appearance.fontSize.sm
             }
         }
     }

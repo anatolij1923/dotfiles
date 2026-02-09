@@ -46,7 +46,7 @@ Item {
             id: appLabel
             text: root.getAppName(root.activeWindow)
             weight: 400
-            size: Appearance.font.size.normal
+            size: Appearance.fontSize.md
             opacity: text === "Desktop" ? 0.7 : 1
             Behavior on opacity {
                 Anim {}

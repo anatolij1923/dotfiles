@@ -62,7 +62,7 @@ Item {
             anchors.centerIn: parent
             color: Colors.palette.m3surface
             text: root.text
-            size: Appearance.font.size.small
+            size: Appearance.fontSize.sm
             wrapMode: Text.Wrap
         }
     }

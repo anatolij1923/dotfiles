@@ -29,7 +29,7 @@ Rectangle {
 
                 StyledText {
                     text: root.title
-                    size: Appearance.font.size.xlarge
+                    size: Appearance.fontSize.xl
                     weight: 500
                     color: Colors.palette.m3onSurface
                 }

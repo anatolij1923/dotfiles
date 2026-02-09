@@ -141,7 +141,7 @@ Item {
                 StyledText {
                     text: widget.valueText
                     Layout.alignment: Qt.AlignHCenter
-                    size: Appearance.font.size.large
+                    size: Appearance.fontSize.lg
                     weight: 700
                     font.family: "JetBrainsMono Nerd Font"
                     color: Colors.palette.m3onSurface
@@ -150,7 +150,7 @@ Item {
                 StyledText {
                     text: widget.label
                     Layout.alignment: Qt.AlignHCenter
-                    size: Appearance.font.size.tiny
+                    size: Appearance.fontSize.xs
                     font.capitalization: Font.AllUppercase
                     font.letterSpacing: 2
                     weight: 500

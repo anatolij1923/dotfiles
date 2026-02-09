@@ -23,7 +23,7 @@ RowLayout {
             id: uptime
             text: `${Time.uptime}`
             anchors.centerIn: parent
-            size: Appearance.font.size.normal
+            size: Appearance.fontSize.md
             weight: 500
         }
     }

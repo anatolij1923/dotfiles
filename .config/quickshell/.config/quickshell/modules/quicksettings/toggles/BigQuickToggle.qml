@@ -74,7 +74,7 @@ Rectangle {
             StyledText {
                 id: substring
                 visible: root.substring !== ""
-                size: Appearance.font.size.small
+                size: Appearance.fontSize.sm
                 animate: true
                 width: 115
                 elide: Text.ElideRight

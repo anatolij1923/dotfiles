@@ -33,7 +33,7 @@ Item {
 
             StyledText {
                 text: root.label
-                size: Appearance.font.size.normal
+                size: Appearance.fontSize.md
             }
 
             Item {
@@ -51,7 +51,7 @@ Item {
                     }
                 }
                 color: Colors.palette.m3onSurfaceVariant
-                size: Appearance.font.size.tiny
+                size: Appearance.fontSize.xs
             }
         }
 

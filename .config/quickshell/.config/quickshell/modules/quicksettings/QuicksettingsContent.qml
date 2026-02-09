@@ -146,7 +146,7 @@ Item {
             // DialogDivider {}
             StyledText {
                 text: Translation.tr("quicksettings.dialogs.bluetooth.devices")
-                size: Appearance.font.size.small
+                size: Appearance.fontSize.sm
                 Layout.bottomMargin: Appearance.spacing.sm
                 Layout.topMargin: Appearance.spacing.sm
             }
@@ -190,7 +190,7 @@ Item {
                         StyledText {
                             visible: device?.connected && device?.batteryAvailable
                             text: Math.round((device?.battery ?? 0) * 100) + "%"
-                            size: Appearance.font.size.small
+                            size: Appearance.fontSize.sm
                             color: Colors.palette.m3onSurfaceVariant
                         }
                     }

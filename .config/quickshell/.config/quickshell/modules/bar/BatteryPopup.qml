@@ -31,7 +31,7 @@ BarPopup {
 
             StyledText {
                 text: `${Battery.percentage}%`
-                size: Appearance.font.size.huge
+                size: Appearance.fontSize.xxl
                 weight: 600
                 color: Colors.palette.m3onSurface
             }
@@ -42,7 +42,7 @@ BarPopup {
 
             StyledText {
                 text: Battery.isCharging ? "Charging" : "Discharging"
-                size: Appearance.font.size.large
+                size: Appearance.fontSize.lg
                 weight: 500
 
                 color: Colors.palette.m3onSurface
@@ -104,7 +104,7 @@ BarPopup {
                         return root.formatTime(Battery.timeToEmpty) + " remaining";
                     }
                 }
-                size: Appearance.font.size.normal
+                size: Appearance.fontSize.md
                 color: Colors.palette.m3onSurface
             }
 
@@ -123,7 +123,7 @@ BarPopup {
 
                 StyledText {
                     text: Battery.energyRate.toFixed(1) + " W"
-                    size: Appearance.font.size.normal
+                    size: Appearance.fontSize.md
                     color: Colors.palette.m3onSurfaceVariant
                 }
             }

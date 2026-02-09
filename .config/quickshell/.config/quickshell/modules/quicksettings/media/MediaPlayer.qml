@@ -129,7 +129,7 @@ ClippingRectangle {
             StyledText {
                 id: track
                 text: root.trackTitle
-                size: Appearance.font.size.large
+                size: Appearance.fontSize.lg
                 elide: Text.ElideRight
                 Layout.fillWidth: true
                 weight: 550
@@ -138,7 +138,7 @@ ClippingRectangle {
             StyledText {
                 id: artist
                 text: root.trackArtist
-                size: Appearance.font.size.small
+                size: Appearance.fontSize.sm
                 // color: Colors.palette.m3outline
                 opacity: 0.7
                 weight: 450

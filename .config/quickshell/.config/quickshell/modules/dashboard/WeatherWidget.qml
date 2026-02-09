@@ -43,7 +43,7 @@ Item {
             StyledText {
                 text: `${Weather.data.temp}°`
                 weight: 600
-                size: Appearance.font.size.huge
+                size: Appearance.fontSize.xxl
                 Layout.alignment: Qt.AlignHCenter
             }
         }
@@ -95,7 +95,7 @@ Item {
                             StyledText {
                                 anchors.horizontalCenter: parent.horizontalCenter
                                 text: dayItem.modelData.day
-                                size: Appearance.font.size.large
+                                size: Appearance.fontSize.lg
                                 weight: 500
                             }
 
@@ -108,7 +108,7 @@ Item {
 
                             StyledText {
                                 text: dayItem.modelData.avg + "°"
-                                size: Appearance.font.size.normal
+                                size: Appearance.fontSize.md
                                 weight: 450
                                 anchors.horizontalCenter: parent.horizontalCenter
                             }
@@ -129,18 +129,18 @@ Item {
             StyledText {
                 text: `${Weather.data.city}`
                 Layout.alignment: Qt.AlignRight
-                size: Appearance.font.size.large
+                size: Appearance.fontSize.lg
                 color: Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3primary, 0.4)
             }
             StyledText {
                 Layout.alignment: Qt.AlignRight
                 text: Weather.data.desc || "Loading..."
-                size: Appearance.font.size.xlarge
+                size: Appearance.fontSize.xl
                 color: Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3primary, 0.4)
                 weight: 500
             }
             StyledText {
-                size: Appearance.font.size.large
+                size: Appearance.fontSize.lg
                 Layout.alignment: Qt.AlignRight
                 text: `Feels like: ${Weather.data.tempFeelsLike}°`
             }
@@ -148,7 +148,7 @@ Item {
             StyledText {
                 Layout.alignment: Qt.AlignRight
                 text: `Humidity: ${Weather.data.humidity}%`
-                size: Appearance.font.size.large
+                size: Appearance.fontSize.lg
             }
 
             Row {

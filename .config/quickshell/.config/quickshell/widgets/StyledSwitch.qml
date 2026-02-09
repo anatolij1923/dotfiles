@@ -21,7 +21,7 @@ Switch {
         color: root.checked ? Colors.palette.m3primary : Colors.palette.m3surfaceContainerHighest
 
         implicitWidth: implicitHeight * 1.7
-        implicitHeight: Appearance.font.size.xlarge + Appearance.spacing.xs * 2
+        implicitHeight: Appearance.fontSize.xl + Appearance.spacing.xs * 2
 
         border {
             width: root.checked ? 0 : 2
@@ -96,7 +96,7 @@ Switch {
                 asynchronous: true
 
                 ShapePath {
-                    strokeWidth: Appearance.font.size.normal * 0.15
+                    strokeWidth: Appearance.fontSize.md * 0.15
                     strokeColor: root.checked ? Colors.palette.m3primary : Colors.palette.m3surfaceContainerHighest
                     fillColor: "transparent"
                     capStyle: Appearance.rounding.sm === 0 ? ShapePath.SquareCap : ShapePath.RoundCap

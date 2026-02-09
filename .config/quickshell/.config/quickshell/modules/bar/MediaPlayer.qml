@@ -159,7 +159,7 @@ Scope {
                         id: titleText
                         width: parent.width
                         text: root.trackTitle
-                        size: Appearance.font.size.large
+                        size: Appearance.fontSize.lg
                         weight: 600
                         elide: Text.ElideRight
                     }
@@ -169,7 +169,7 @@ Scope {
                         anchors.top: titleText.bottom
                         width: parent.width
                         text: root.trackArtist
-                        size: Appearance.font.size.small
+                        size: Appearance.fontSize.sm
                         opacity: 0.7
                         elide: Text.ElideRight
                     }
@@ -218,7 +218,7 @@ Scope {
                         left: textGroup.left
                     }
                     opacity: 0.7
-                    size: Appearance.font.size.small
+                    size: Appearance.fontSize.sm
                     text: root.formatTime(root.currentSeconds)
                 }
 
@@ -228,7 +228,7 @@ Scope {
                         right: textGroup.right
                     }
                     opacity: 0.7
-                    size: Appearance.font.size.small
+                    size: Appearance.fontSize.sm
                     text: root.formatTime(root.player?.length)
                 }
 

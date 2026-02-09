@@ -124,7 +124,7 @@ Item {
                 id: titleText
                 width: parent.width
                 text: root.trackTitle
-                size: root.expanded ? Appearance.font.size.large : Appearance.font.size.normal
+                size: root.expanded ? Appearance.fontSize.lg : Appearance.fontSize.md
                 weight: 600
                 elide: Text.ElideRight
                 horizontalAlignment: root.expanded ? Text.AlignLeft : Text.AlignHCenter
@@ -135,7 +135,7 @@ Item {
                 anchors.top: titleText.bottom
                 width: parent.width
                 text: root.trackArtist
-                size: root.expanded ? Appearance.font.size.small : Appearance.font.size.tiny
+                size: root.expanded ? Appearance.fontSize.sm : Appearance.fontSize.xs
                 opacity: 0.7
                 elide: Text.ElideRight
                 horizontalAlignment: root.expanded ? Text.AlignLeft : Text.AlignHCenter
@@ -158,16 +158,16 @@ Item {
                 spacing: 6
                 StyledText {
                     text: root.formatTime(root.currentSeconds)
-                    size: Appearance.font.size.small
+                    size: Appearance.fontSize.sm
                 }
                 StyledText {
                     text: "/"
-                    size: Appearance.font.size.small
+                    size: Appearance.fontSize.sm
                     opacity: 0.5
                 }
                 StyledText {
                     text: root.formatTime(root.player?.length)
-                    size: Appearance.font.size.small
+                    size: Appearance.fontSize.sm
                     opacity: 0.7
                 }
             }
@@ -246,7 +246,7 @@ Item {
                 bottom: progressSlider.top
                 left: textGroup.left
             }
-            size: Appearance.font.size.small
+            size: Appearance.fontSize.sm
             text: root.formatTime(root.currentSeconds)
             visible: root.expanded
             opacity: root.expanded ? 0.7 : 0
@@ -257,7 +257,7 @@ Item {
                 bottom: progressSlider.top
                 right: textGroup.right
             }
-            size: Appearance.font.size.small
+            size: Appearance.fontSize.sm
             text: root.formatTime(root.player?.length)
             visible: root.expanded
             opacity: root.expanded ? 0.7 : 0

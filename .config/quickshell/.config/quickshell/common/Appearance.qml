@@ -11,7 +11,7 @@ Singleton {
     property AnimDuration animDuration: AnimDuration {}
     property Rounding rounding: Rounding {}
     property Spacing spacing: Spacing {}
-    property Font font: Font {}
+    readonly property FontSize fontSize: FontSize {}
     property Sizes sizes: Sizes {}
 
     component AnimCurves: JsonObject {
@@ -63,17 +63,14 @@ Singleton {
         readonly property int xxxl: 48
     }
 
-    component Font: JsonObject {
-
-        property JsonObject size: JsonObject {
-            property int scale: 1
-            property int tiny: 14 * scale
-            property int small: 16 * scale
-            property int normal: 18 * scale
-            property int large: 22 * scale
-            property int xlarge: 28 * scale
-            property int huge: 32 * scale
-        }
+    component FontSize: JsonObject {
+        property real scale: 1.0
+        readonly property int xs: 14 * scale  
+        readonly property int sm: 16 * scale  
+        readonly property int md: 18 * scale  
+        readonly property int lg: 22 * scale  
+        readonly property int xl: 28 * scale  
+        readonly property int xxl: 32 * scale 
     }
 
     component Sizes: JsonObject {

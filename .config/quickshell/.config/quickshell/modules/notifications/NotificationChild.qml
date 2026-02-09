@@ -165,14 +165,14 @@ Rectangle {
                         active: !root.hasAppIcon
                         asynchronous: true
                         anchors.centerIn: parent
-                        // anchors.horizontalCenterOffset: -Appearance.font.size.large * 0.02
-                        // anchors.verticalCenterOffset: Appearance.font.size.large * 0.02
+                        // anchors.horizontalCenterOffset: -Appearance.fontSize.lg * 0.02
+                        // anchors.verticalCenterOffset: Appearance.fontSize.lg * 0.02
 
                         sourceComponent: MaterialSymbol {
                             icon: Icons.getNotifIcon(root.modelData.summary, root.modelData.urgency)
 
                             color: root.modelData.urgency === NotificationUrgency.Critical ? Colors.palette.m3onError : root.modelData.urgency === NotificationUrgency.Low ? Colors.palette.m3onSurface : Colors.palette.m3onSecondaryContainer
-                            // font.pointSize: Appearance.font.size.large
+                            // font.pointSize: Appearance.fontSize.lg
                         }
                     }
                 }
