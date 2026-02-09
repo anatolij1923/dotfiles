@@ -27,11 +27,6 @@ Item {
     implicitWidth: background.implicitWidth
     implicitHeight: background.implicitHeight
 
-    // StyledShadow {
-    //     target: root
-    //     radius: background.radius
-    // }
-
     ClippingRectangle {
         id: background
         anchors.fill: parent
@@ -41,10 +36,11 @@ Item {
         Behavior on color {
             CAnim {}
         }
-        // implicitWidth: 500
 
-        border.width: 1
-        border.color: Colors.palette.m3surfaceContainerHigh
+        border {
+            width: 1
+            color: Colors.palette.border
+        }
 
         Behavior on border.color {
             CAnim {}
@@ -63,7 +59,6 @@ Item {
                 onOpenBluetoothDialogRequested: () => bluetoothDialog.open()
             }
             Sliders {}
-            // MediaPlayer {}
             NotificationsList {}
         }
 
@@ -79,11 +74,6 @@ Item {
                 value: Audio.source.audio.muted
                 onToggled: v => Audio.source.audio.muted = v
             }
-            // DialogSliderRow {
-            //     value: 0.7
-            //     stopIndicatorValues: [0, 0.25, 0.5, 0.75, 1]
-            //     onValueChanged: () => { /* placeholder */ }
-            // }
 
             DialogSliderRow {
                 label: Translation.tr("quicksettings.dialogs.mic.input_volume")

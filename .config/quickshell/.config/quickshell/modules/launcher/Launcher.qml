@@ -34,14 +34,9 @@ Scope {
             }
 
             WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
-            // WlrLayershell.layer: WlrLayer.Overlay
 
             visible: GlobalStates.launcherOpened
             color: "transparent"
-
-            // mask: Region {
-            //     item: mainContainer
-            // }
 
             function hide() {
                 GlobalStates.launcherOpened = false;
@@ -73,9 +68,9 @@ Scope {
                 width: {
                     if (root.searchingText.startsWith(":wallpaper")) {
                         // Wide enough to show carousel with side items
-                        return screen.width * 0.7;
+                        return launcherRoot.screen.width * 0.7;
                     }
-                    return screen.width * 0.3;
+                    return launcherRoot.screen.width * 0.3;
                 }
 
                 height: Math.min(maxHeight, searchWrapper.implicitHeight + listWrapper.implicitHeight + root.padding * 2) + root.padding
@@ -94,18 +89,16 @@ Scope {
                     }
                 }
 
-                // StyledShadow {
-                //     target: background
-                // }
-
                 Rectangle {
                     id: background
                     anchors.fill: parent
                     color: root.transparent ? Qt.alpha(Colors.palette.m3surface, root.alpha) : Colors.palette.m3surface
                     radius: root.rounding
                     smooth: true
-                    border.width: 1
-                    border.color: Colors.palette.m3surfaceContainerHigh
+                    border {
+                        width: 1
+                        color: Colors.palette.border
+                    }
 
                     clip: true
 
@@ -149,8 +142,8 @@ Scope {
                                 }
 
                                 text: root.searchingText
-                                topPadding: Appearance.spacing.xl
-                                bottomPadding: Appearance.spacing.xl
+                                topPadding: Appearance.spacing.lg
+                                bottomPadding: Appearance.spacing.lg
                                 placeholderText: `Search or run commands with ":"`
                                 fontSize: 20
                                 fontWeight: 500

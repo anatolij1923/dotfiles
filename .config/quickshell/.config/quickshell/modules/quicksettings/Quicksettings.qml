@@ -53,20 +53,8 @@ Scope {
                     quicksettingsRoot.hide()
             }
 
-            // MouseArea {
-            //     anchors.fill: parent
-            //     onPressed: quicksettingsRoot.hide()
-            // }
-            //
-
             Connections {
                 target: GlobalStates
-
-                // function onQuicksettingsOpenedChanged() {
-                //     GlobalStates.launcherOpened = false;
-                //     GlobalStates.overviewOpened = false;
-                //     GlobalStates.powermenuOpened = false;
-                // }
             }
 
             QuicksettingsContent {

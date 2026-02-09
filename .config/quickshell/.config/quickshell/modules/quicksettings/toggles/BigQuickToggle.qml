@@ -105,7 +105,7 @@ Rectangle {
         anchors.leftMargin: root.padding
         anchors.verticalCenter: parent.verticalCenter
         padding: Appearance.spacing.md
-        radius: checked ? (stateLayer.pressed ? Appearance.rounding.md : Appearance.rounding.lg) : (stateLayer.pressed ? Appearance.rounding.xl : Appearance.rounding.full)
+        radius: checked ? (stateLayer.pressed ? Appearance.rounding.md : Appearance.rounding.lg) : (stateLayer.pressed ? Appearance.rounding.xl : Appearance.rounding.xxl)
 
         Behavior on radius {
             Anim {

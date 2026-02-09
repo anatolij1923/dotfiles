@@ -94,6 +94,7 @@ Singleton {
         readonly property color m3surfaceContainer: root.ready ? root.colors.surface_container : "#1d2024"
 
         readonly property color m3surfaceTinted: root.mix(m3background, m3primary, 0.05)
+        readonly property color border: root.alpha(m3surfaceVariant, 0.5)
 
         readonly property color m3error: root.ready ? root.colors.error : "#ffb4ab"
         readonly property color m3errorContainer: root.ready ? root.colors.error_container : "#93000a"
