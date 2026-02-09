@@ -23,10 +23,10 @@ Rectangle {
     property bool enabled: true
     property bool internalChecked: checked
 
-    property real padding: Appearance.padding.smaller
+    property real padding: Appearance.spacing.xs
     property real horizontalPadding: padding
     property real verticalPadding: padding
-    property real spacing: Appearance.padding.small
+    property real spacing: Appearance.spacing.sm
 
     property color inactiveColor: Colors.palette.m3surfaceContainer
     property color inactiveOnColor: Colors.palette.m3onSurface

@@ -12,7 +12,7 @@ Item {
     property int step: 1
     property int from: 0
     property int to: 100
-    property int padding: Appearance.padding.smaller
+    property int padding: Appearance.spacing.xs
 
     implicitHeight: content.implicitHeight
     Layout.fillWidth: true
@@ -20,7 +20,7 @@ Item {
     RowLayout {
         id: content
         anchors.fill: parent
-        spacing: Appearance.padding.normal
+        spacing: Appearance.spacing.md
 
         // anchors.leftMargin: root.padding
         // anchors.rightMargin: root.padding

@@ -13,7 +13,7 @@ Item {
     property real to: 100
     property int step: 1
     property string suffix: ""
-    property int padding: Appearance.padding.smaller
+    property int padding: Appearance.spacing.xs
     property alias tooltipContent: slider.tooltipContent
 
     // implicitHeight: Math.max(slider.implicitHeight, 40) + padding * 2
@@ -23,7 +23,7 @@ Item {
     ColumnLayout {
         id: content
         anchors.fill: parent
-        spacing: Appearance.padding.smaller
+        spacing: Appearance.spacing.xs
 
         // anchors.leftMargin: root.padding
         // anchors.rightMargin: root.padding

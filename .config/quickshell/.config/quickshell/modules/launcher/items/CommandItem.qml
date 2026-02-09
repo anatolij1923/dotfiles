@@ -44,8 +44,8 @@ Item {
     Item {
         id: content
         anchors.fill: parent
-        anchors.leftMargin: Appearance.padding.normal
-        anchors.rightMargin: Appearance.padding.normal
+        anchors.leftMargin: Appearance.spacing.md
+        anchors.rightMargin: Appearance.spacing.md
 
         MaterialSymbol {
             id: icon
@@ -56,7 +56,7 @@ Item {
             anchors {
                 verticalCenter: parent.verticalCenter
                 left: parent.left
-                leftMargin: Appearance.padding.normal
+                leftMargin: Appearance.spacing.md
             }
         }
 
@@ -64,7 +64,7 @@ Item {
             id: textColumn
             anchors {
                 left: icon.right
-                leftMargin: Appearance.padding.normal
+                leftMargin: Appearance.spacing.md
                 verticalCenter: parent.verticalCenter
                 right: parent.right
             }

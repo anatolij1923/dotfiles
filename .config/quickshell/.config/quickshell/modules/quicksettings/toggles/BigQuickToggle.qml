@@ -13,7 +13,7 @@ Rectangle {
     property alias checked: button.checked
     property alias toggle: button.toggle
     property alias enabled: button.enabled
-    property int padding: Appearance.padding.normal
+    property int padding: Appearance.spacing.md
     property string tooltipText: ""
 
     signal clicked
@@ -58,7 +58,7 @@ Rectangle {
         anchors.fill: parent
         anchors.centerIn: parent
         anchors.margins: root.padding
-        spacing: Appearance.padding.normal
+        spacing: Appearance.spacing.md
         Item {
             Layout.preferredWidth: button.implicitWidth
             Layout.preferredHeight: button.implicitHeight
@@ -104,7 +104,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.leftMargin: root.padding
         anchors.verticalCenter: parent.verticalCenter
-        padding: Appearance.padding.normal
+        padding: Appearance.spacing.md
         radius: checked ? (stateLayer.pressed ? Appearance.rounding.md : Appearance.rounding.lg) : (stateLayer.pressed ? Appearance.rounding.xl : Appearance.rounding.full)
 
         Behavior on radius {

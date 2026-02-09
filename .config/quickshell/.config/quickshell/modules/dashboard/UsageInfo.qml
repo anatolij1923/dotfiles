@@ -19,7 +19,7 @@ Item {
         id: content
         anchors.centerIn: parent
         width: parent.width
-        spacing: Appearance.padding.small
+        spacing: Appearance.spacing.sm
 
         RamSwapSwitcher {
             Layout.fillWidth: true
@@ -100,13 +100,13 @@ Item {
 
         Layout.fillWidth: true
 
-        implicitHeight: col.implicitHeight + Appearance.padding.normal * 2
+        implicitHeight: col.implicitHeight + Appearance.spacing.md * 2
 
         ColumnLayout {
             id: col
             anchors.centerIn: parent
             width: parent.width
-            spacing: Appearance.padding.smaller
+            spacing: Appearance.spacing.xs
 
             CircularProgress {
                 id: circProgress

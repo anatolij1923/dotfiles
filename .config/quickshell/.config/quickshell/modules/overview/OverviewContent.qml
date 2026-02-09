@@ -20,8 +20,8 @@ Item {
     property real screenH: QsWindow.window?.screen.height || 0
     property int columns: 4
     property int rows: 2
-    property real gap: Appearance.padding.small
-    property real outerPadding: Appearance.padding.large
+    property real gap: Appearance.spacing.sm
+    property real outerPadding: Appearance.spacing.lg
 
     property int dragSourceWorkspace: -1
     property int dragTargetWorkspace: -1

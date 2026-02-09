@@ -42,7 +42,7 @@ Item {
         RowLayout {
             id: classicBatteryContent
             anchors.fill: parent
-            spacing: Appearance.padding.small
+            spacing: Appearance.spacing.sm
 
             StyledText {
                 text: `${root.percentage}%`

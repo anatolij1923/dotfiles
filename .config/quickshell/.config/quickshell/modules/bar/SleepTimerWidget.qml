@@ -4,7 +4,7 @@ import qs.services
 import qs.common
 
 Rectangle {
-    implicitWidth: icon.implicitWidth + Appearance.padding.small * 2
+    implicitWidth: icon.implicitWidth + Appearance.spacing.sm * 2
     implicitHeight: icon.implicitHeight
 
     radius: Appearance.rounding.full

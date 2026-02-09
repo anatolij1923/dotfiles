@@ -7,7 +7,7 @@ import qs.services
 Rectangle {
     implicitHeight: 1
     Layout.fillWidth: true
-    Layout.topMargin: Appearance.padding.small
-    Layout.bottomMargin: Appearance.padding.small
+    Layout.topMargin: Appearance.spacing.sm
+    Layout.bottomMargin: Appearance.spacing.sm
     color: Colors.palette.m3outline
 }

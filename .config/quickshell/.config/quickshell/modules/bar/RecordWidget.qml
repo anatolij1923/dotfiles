@@ -8,7 +8,7 @@ Rectangle {
     id: root
     visible: Record.isRecording || scale > 0
 
-    property int padding: Appearance.padding.smaller
+    property int padding: Appearance.spacing.xs
     implicitWidth: visible ? (content.implicitWidth + padding * 2) : 0
     implicitHeight: content.implicitHeight + padding * 2
 

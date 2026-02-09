@@ -11,9 +11,9 @@ ContentPage {
     // Section: Buttons
     ColumnLayout {
         Layout.fillWidth: true
-        Layout.leftMargin: Appearance.padding.large * 4
-        Layout.rightMargin: Appearance.padding.large * 4
-        spacing: Appearance.padding.normal
+        Layout.leftMargin: Appearance.spacing.lg * 4
+        Layout.rightMargin: Appearance.spacing.lg * 4
+        spacing: Appearance.spacing.md
 
         StyledText {
             text: "Buttons"
@@ -24,7 +24,7 @@ ContentPage {
 
         RowLayout {
             Layout.fillWidth: true
-            spacing: Appearance.padding.normal
+            spacing: Appearance.spacing.md
 
             TextButton {
                 text: "Primary Button"
@@ -45,7 +45,7 @@ ContentPage {
 
         RowLayout {
             Layout.fillWidth: true
-            spacing: Appearance.padding.normal
+            spacing: Appearance.spacing.md
 
             IconButton {
                 icon: "favorite"
@@ -79,9 +79,9 @@ ContentPage {
     // Section: Inputs
     ColumnLayout {
         Layout.fillWidth: true
-        Layout.leftMargin: Appearance.padding.large * 4
-        Layout.rightMargin: Appearance.padding.large * 4
-        spacing: Appearance.padding.normal
+        Layout.leftMargin: Appearance.spacing.lg * 4
+        Layout.rightMargin: Appearance.spacing.lg * 4
+        spacing: Appearance.spacing.md
 
         StyledText {
             text: "Inputs"
@@ -101,7 +101,7 @@ ContentPage {
             StyledTextField {
                 id: textField
                 anchors.fill: parent
-                anchors.margins: Appearance.padding.normal
+                anchors.margins: Appearance.spacing.md
                 placeholder: "Enter text here..."
                 fontSize: 16
             }
@@ -117,9 +117,9 @@ ContentPage {
     // Section: Sliders
     ColumnLayout {
         Layout.fillWidth: true
-        Layout.leftMargin: Appearance.padding.large * 4
-        Layout.rightMargin: Appearance.padding.large * 4
-        spacing: Appearance.padding.normal
+        Layout.leftMargin: Appearance.spacing.lg * 4
+        Layout.rightMargin: Appearance.spacing.lg * 4
+        spacing: Appearance.spacing.md
 
         StyledText {
             text: "Sliders"
@@ -130,7 +130,7 @@ ContentPage {
 
         ColumnLayout {
             Layout.fillWidth: true
-            spacing: Appearance.padding.smaller
+            spacing: Appearance.spacing.xs
 
             StyledText {
                 text: "Volume: " + Math.round(volumeSlider.value * 100) + "%"
@@ -147,7 +147,7 @@ ContentPage {
 
         ColumnLayout {
             Layout.fillWidth: true
-            spacing: Appearance.padding.smaller
+            spacing: Appearance.spacing.xs
 
             StyledText {
                 text: "Brightness: " + Math.round(brightnessSlider.value * 100) + "%"
@@ -166,9 +166,9 @@ ContentPage {
     // Section: Toggles
     ColumnLayout {
         Layout.fillWidth: true
-        Layout.leftMargin: Appearance.padding.large * 4
-        Layout.rightMargin: Appearance.padding.large * 4
-        spacing: Appearance.padding.normal
+        Layout.leftMargin: Appearance.spacing.lg * 4
+        Layout.rightMargin: Appearance.spacing.lg * 4
+        spacing: Appearance.spacing.md
 
         StyledText {
             text: "Toggles"
@@ -179,7 +179,7 @@ ContentPage {
 
         RowLayout {
             Layout.fillWidth: true
-            spacing: Appearance.padding.normal
+            spacing: Appearance.spacing.md
 
             TextIconButton {
                 icon: "notifications"
@@ -210,6 +210,6 @@ ContentPage {
     // Bottom spacing
     Item {
         Layout.fillWidth: true
-        Layout.minimumHeight: Appearance.padding.large
+        Layout.minimumHeight: Appearance.spacing.lg
     }
 }

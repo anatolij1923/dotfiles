@@ -10,8 +10,8 @@ Rectangle {
     id: root
     anchors.fill: parent
 
-    property int sideMargins: Appearance.padding.huge
-    property int contentSpacing: Appearance.padding.large
+    property int sideMargins: Appearance.spacing.xl
+    property int contentSpacing: Appearance.spacing.lg
 
     property real alpha: Config.appearance.transparency.alpha
     property bool transparent: Config.appearance.transparency.enabled
@@ -39,7 +39,7 @@ Rectangle {
     //     anchors {
     //         right: clock.left
     //         verticalCenter: parent.verticalCenter
-    //         rightMargin: Appearance.padding.smaller
+    //         rightMargin: Appearance.spacing.xs
     //     }
     // }
 
@@ -47,7 +47,7 @@ Rectangle {
     //     id: usageInfo
     //     anchors {
     //         right: clock.left
-    //         rightMargin: Appearance.padding.smaller
+    //         rightMargin: Appearance.spacing.xs
     //         verticalCenter: parent.verticalCenter
     //     }
     // }
@@ -65,7 +65,7 @@ Rectangle {
     //     id: weather
     //     anchors {
     //         left: clock.right
-    //         leftMargin: Appearance.padding.smaller
+    //         leftMargin: Appearance.spacing.xs
     //         verticalCenter: parent.verticalCenter
     //     }
     // }
@@ -74,7 +74,7 @@ Rectangle {
     //     id: tools
     //     anchors {
     //         left: weather.right
-    //         leftMargin: Appearance.padding.smaller
+    //         leftMargin: Appearance.spacing.xs
     //         verticalCenter: parent.verticalCenter
     //     }
     // }

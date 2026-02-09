@@ -46,8 +46,8 @@ SpinBox {
         text: root.value
         anchors.centerIn: parent
 
-        leftPadding: Appearance.padding.normal
-        rightPadding: Appearance.padding.normal
+        leftPadding: Appearance.spacing.md
+        rightPadding: Appearance.spacing.md
 
         horizontalAlignment: Qt.AlignHCenter
         verticalAlignment: Qt.AlignVCenter

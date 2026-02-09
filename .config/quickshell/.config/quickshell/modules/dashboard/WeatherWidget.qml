@@ -77,7 +77,7 @@ Item {
 
             Row {
                 anchors.centerIn: parent
-                spacing: Appearance.padding.normal
+                spacing: Appearance.spacing.md
 
                 Repeater {
                     model: root.forecastModel
@@ -91,7 +91,7 @@ Item {
                         Column {
                             id: dayItemContent
                             anchors.centerIn: parent
-                            spacing: Appearance.padding.normal
+                            spacing: Appearance.spacing.md
                             StyledText {
                                 anchors.horizontalCenter: parent.horizontalCenter
                                 text: dayItem.modelData.day
@@ -123,7 +123,7 @@ Item {
             anchors {
                 top: parent.top
                 right: parent.right
-                margins: Appearance.padding.large
+                margins: Appearance.spacing.lg
             }
 
             StyledText {

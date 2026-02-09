@@ -6,7 +6,7 @@ import qs.widgets
 
 BarPopup {
     id: root
-    padding: Appearance.padding.larger
+    padding: Appearance.spacing.xl
 
     ColumnLayout {
         spacing: 12

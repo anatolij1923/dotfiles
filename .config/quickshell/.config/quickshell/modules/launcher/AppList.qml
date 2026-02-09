@@ -18,7 +18,7 @@ ListView {
         }
     }
 
-    spacing: Appearance.padding.small
+    spacing: Appearance.spacing.sm
 
     implicitHeight: (Config.launcher.sizes.itemHeight + spacing) * Math.min(Config.launcher.maxShown, count) - spacing
 

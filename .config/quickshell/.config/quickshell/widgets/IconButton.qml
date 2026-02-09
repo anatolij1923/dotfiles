@@ -16,7 +16,7 @@ Rectangle {
     property bool enabled: true
     property bool internalChecked: checked
 
-    property real padding: Appearance.padding.smaller
+    property real padding: Appearance.spacing.xs
     property real horizontalPadding: padding
     property real verticalPadding: padding
 

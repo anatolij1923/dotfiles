@@ -16,8 +16,8 @@ Rectangle {
     property int roundingSmall: Appearance.rounding.md
     property int roundingOuter: Appearance.rounding.xl
 
-    property int marginOuter: Appearance.padding.large
-    property int marginInner: Appearance.padding.small
+    property int marginOuter: Appearance.spacing.lg
+    property int marginInner: Appearance.spacing.sm
 
     property int widgetBaseSize: 200
     property int sidebarWidth: 200
@@ -170,7 +170,7 @@ Rectangle {
 
                 ColumnLayout {
                     Layout.alignment: Qt.AlingVCenter
-                    spacing: Appearance.padding.smaller
+                    spacing: Appearance.spacing.xs
 
                     StyledText {
                         text: Time.hours

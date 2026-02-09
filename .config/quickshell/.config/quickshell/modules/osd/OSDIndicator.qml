@@ -13,7 +13,7 @@ Item {
     property bool rotateIcon: false
     property real value
     property string icon
-    property int padding: Appearance.padding.large
+    property int padding: Appearance.spacing.lg
 
     property real alpha: Config.appearance.transparency.alpha
     property bool transparent: Config.appearance.transparency.enabled

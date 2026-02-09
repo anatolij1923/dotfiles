@@ -14,13 +14,13 @@ Item {
 
     implicitHeight: row.implicitHeight
     Layout.fillWidth: true
-    Layout.topMargin: Appearance.padding.small
-    Layout.bottomMargin: Appearance.padding.small
+    Layout.topMargin: Appearance.spacing.sm
+    Layout.bottomMargin: Appearance.spacing.sm
 
     RowLayout {
         id: row
         anchors.fill: parent
-        spacing: Appearance.padding.normal
+        spacing: Appearance.spacing.md
 
         StyledText { text: root.label }
         Item { Layout.fillWidth: true }

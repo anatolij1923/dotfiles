@@ -10,14 +10,14 @@ Item {
     property string label
     property string value
     property string placeholder: ""
-    property int padding: Appearance.padding.normal
+    property int padding: Appearance.spacing.md
 
     implicitHeight: Math.max(textField.implicitHeight, 40)
     Layout.fillWidth: true
 
     RowLayout {
         anchors.fill: parent
-        spacing: Appearance.padding.normal
+        spacing: Appearance.spacing.md
 
         // anchors.leftMargin: root.padding
         // anchors.rightMargin: root.padding

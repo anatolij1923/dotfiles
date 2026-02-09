@@ -12,7 +12,7 @@ StyledWindow {
 
     WlrLayershell.layer: WlrLayer.Overlay
 
-    property int padding: Appearance.padding.huge
+    property int padding: Appearance.spacing.xl
 
     implicitWidth: content.implicitWidth + padding * 5
     implicitHeight: content.implicitHeight + padding * 4

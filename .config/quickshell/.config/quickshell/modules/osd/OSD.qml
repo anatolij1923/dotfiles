@@ -83,7 +83,7 @@ Scope {
             }
 
             margins {
-                top: Config.bar.height + Appearance.padding.huge
+                top: Config.bar.height + Appearance.spacing.xl
             }
 
             WlrLayershell.layer: WlrLayer.Overlay

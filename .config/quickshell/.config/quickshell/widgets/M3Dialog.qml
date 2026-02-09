@@ -67,7 +67,7 @@ Item {
         id: card
         anchors.centerIn: parent
         width: root.parent ? root.parent.width * contentWidthRatio : 300
-        height: contentLayout.implicitHeight + Appearance.padding.large * 2
+        height: contentLayout.implicitHeight + Appearance.spacing.lg * 2
         color: Colors.palette.m3surfaceContainer
         radius: Appearance.rounding.xl
         transformOrigin: Item.Center
@@ -90,8 +90,8 @@ Item {
             }
         }
 
-        implicitWidth: contentLayout.implicitWidth + Appearance.padding.large * 2
-        implicitHeight: contentLayout.implicitHeight + Appearance.padding.large * 2
+        implicitWidth: contentLayout.implicitWidth + Appearance.spacing.lg * 2
+        implicitHeight: contentLayout.implicitHeight + Appearance.spacing.lg * 2
 
         MouseArea {
             anchors.fill: parent
@@ -103,7 +103,7 @@ Item {
             id: contentLayout
             anchors {
                 fill: parent
-                margins: Appearance.padding.large
+                margins: Appearance.spacing.lg
             }
             spacing: 0
 
@@ -112,7 +112,7 @@ Item {
                 visible: root.title !== ""
                 size: Appearance.font.size.xlarge
                 Layout.fillWidth: true
-                Layout.bottomMargin: Appearance.padding.small
+                Layout.bottomMargin: Appearance.spacing.sm
             }
         }
     }

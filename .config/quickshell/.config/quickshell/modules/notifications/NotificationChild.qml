@@ -85,7 +85,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
-            anchors.margins: Appearance.padding.normal
+            anchors.margins: Appearance.spacing.md
 
             Behavior on implicitHeight {
                 Anim {
@@ -184,7 +184,7 @@ Rectangle {
                 text: root.modelData.appName || "Unknown"
                 anchors.top: parent.top
                 anchors.left: image.right
-                anchors.leftMargin: Appearance.padding.normal
+                anchors.leftMargin: Appearance.spacing.md
                 color: Qt.alpha(Colors.palette.m3onSurface, 0.7)
 
                 animate: true
@@ -198,7 +198,7 @@ Rectangle {
                 id: summary
                 anchors.top: parent.top
                 anchors.left: image.right
-                anchors.leftMargin: Appearance.padding.normal
+                anchors.leftMargin: Appearance.spacing.md
 
                 animate: true
                 text: summaryMetrics.elidedText
@@ -236,7 +236,7 @@ Rectangle {
                 font.family: summary.font.family
                 font.pointSize: summary.font.pointSize
                 elide: Text.ElideRight
-                elideWidth: expandButton.x - time.width - timeSep.width - summary.x - Appearance.padding.small * 3
+                elideWidth: expandButton.x - time.width - timeSep.width - summary.x - Appearance.spacing.sm * 3
             }
 
             StyledText {
@@ -244,7 +244,7 @@ Rectangle {
                 text: "•"
                 anchors.top: parent.top
                 anchors.left: summary.right
-                anchors.leftMargin: Appearance.padding.small
+                anchors.leftMargin: Appearance.spacing.sm
                 color: Qt.alpha(Colors.palette.m3onSurface, 0.7)
 
                 states: State {
@@ -274,7 +274,7 @@ Rectangle {
                 text: root.modelData.timeStr
                 anchors.top: parent.top
                 anchors.left: timeSep.right
-                anchors.leftMargin: Appearance.padding.small
+                anchors.leftMargin: Appearance.spacing.sm
                 color: Qt.alpha(Colors.palette.m3onSurface, 0.7)
             }
 
@@ -283,7 +283,7 @@ Rectangle {
                 icon: root.expanded ? "keyboard_arrow_down" : "keyboard_arrow_up"
                 anchors.right: parent.right
                 anchors.top: parent.top
-                implicitHeight: time.implicitHeight + Appearance.padding.normal
+                implicitHeight: time.implicitHeight + Appearance.spacing.md
 
                 color: root.modelData.urgency === NotificationUrgency.Critical ? Colors.palette.m3secondaryContainer : Colors.palette.m3surfaceContainer
 
@@ -296,7 +296,7 @@ Rectangle {
                 anchors.left: summary.left
                 anchors.right: expandButton.left
                 anchors.top: summary.bottom
-                anchors.rightMargin: Appearance.padding.normal
+                anchors.rightMargin: Appearance.spacing.md
                 color: Qt.alpha(Colors.palette.m3onSurface, 0.7)
                 wrapMode: Text.Wrap
                 maximumLineCount: 1
@@ -314,7 +314,7 @@ Rectangle {
                 anchors.left: summary.left
                 anchors.right: expandButton.left
                 anchors.top: summary.bottom
-                anchors.rightMargin: Appearance.padding.normal
+                anchors.rightMargin: Appearance.spacing.md
                 color: Qt.alpha(Colors.palette.m3onSurface, 0.7)
                 wrapMode: Text.Wrap
                 visible: root.expanded
@@ -332,7 +332,7 @@ Rectangle {
                     left: parent.left
                     right: parent.right
                 }
-                anchors.topMargin: Appearance.padding.small
+                anchors.topMargin: Appearance.spacing.sm
                 opacity: root.expanded ? 1 : 0
 
                 Behavior on opacity {
@@ -347,7 +347,7 @@ Rectangle {
                     inactiveColor: root.modelData.urgency === NotificationUrgency.Critical ? Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3secondaryContainer, 0.3) : Colors.palette.m3surfaceContainerHigh
                     inactiveOnColor: root.modelData.urgency === NotificationUrgency.Critical ? Colors.palette.m3secondaryContainer : Colors.palette.m3onSurface
                     onClicked: root.modelData.close()
-                    padding: Appearance.padding.small
+                    padding: Appearance.spacing.sm
                     Layout.fillWidth: true
                 }
 
@@ -360,7 +360,7 @@ Rectangle {
                         inactiveColor: root.modelData.urgency === NotificationUrgency.Critical ? Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3secondaryContainer, 0.3) : Colors.palette.m3surfaceContainerHigh
                         inactiveOnColor: root.modelData.urgency === NotificationUrgency.Critical ? Colors.palette.m3secondaryContainer : Colors.palette.m3onSurface
 
-                        padding: Appearance.padding.normal
+                        padding: Appearance.spacing.md
                         onClicked: () => {
                             modelData.invoke();
                         }

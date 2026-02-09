@@ -41,7 +41,7 @@ Item {
             anchors {
                 verticalCenter: parent.verticalCenter
                 left: parent.left
-                leftMargin: Appearance.padding.normal
+                leftMargin: Appearance.spacing.md
             }
         }
 
@@ -51,7 +51,7 @@ Item {
             anchors {
                 left: icon.right
                 verticalCenter: icon.verticalCenter
-                leftMargin: Appearance.padding.smaller
+                leftMargin: Appearance.spacing.xs
             }
         }
     }

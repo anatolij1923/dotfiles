@@ -7,7 +7,7 @@ import qs.widgets
 
 Rectangle {
     id: root
-    property int padding: Appearance.padding.normal
+    property int padding: Appearance.spacing.md
 
     implicitHeight: content.implicitHeight + padding * 2
     implicitWidth: content.implicitWidth + padding * 2
@@ -22,7 +22,7 @@ Rectangle {
         id: content
         anchors.fill: parent
         anchors.margins: root.padding
-        spacing: Appearance.padding.large
+        spacing: Appearance.spacing.lg
 
         // Header with DND toggle only (no title)
         // Item {
@@ -32,7 +32,7 @@ Rectangle {
 
         //     RowLayout {
         //         anchors.fill: parent
-        //         spacing: Appearance.padding.normal
+        //         spacing: Appearance.spacing.md
 
         //         // Spacer to push DND button to the right
         //         Item {
@@ -44,8 +44,8 @@ Rectangle {
         //             icon: Notifications.dnd ? "notifications_off" : "notifications"
         //             checked: Notifications.dnd
         //             onClicked: Notifications.dnd = !Notifications.dnd
-        //             horizontalPadding: Appearance.padding.larger
-        //             verticalPadding: Appearance.padding.small
+        //             horizontalPadding: Appearance.spacing.xl
+        //             verticalPadding: Appearance.spacing.sm
 
         //             StyledTooltip {
         //                 text: "Do not disturb"
@@ -76,7 +76,7 @@ Rectangle {
 
                 ColumnLayout {
                     anchors.centerIn: parent
-                    spacing: Appearance.padding.large
+                    spacing: Appearance.spacing.lg
 
                     MaterialSymbol {
                         icon: "notifications_paused"
@@ -110,7 +110,7 @@ Rectangle {
         id: clearAllButton
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.margins: Appearance.padding.normal
+        anchors.margins: Appearance.spacing.md
 
         text: Translation.tr("quicksettings.notifications.clear")
         icon: "delete_sweep"
@@ -118,8 +118,8 @@ Rectangle {
 
         onClicked: Notifications.clearAll()
 
-        horizontalPadding: Appearance.padding.larger
-        verticalPadding: Appearance.padding.small
+        horizontalPadding: Appearance.spacing.xl
+        verticalPadding: Appearance.spacing.sm
 
         // Make it appear as an overlay with elevation
         // Elevation {

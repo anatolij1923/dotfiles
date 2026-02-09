@@ -7,7 +7,7 @@ import qs.common
 Rectangle {
     id: root
 
-    property int padding: Appearance.padding.smaller
+    property int padding: Appearance.spacing.xs
     property bool launcherOpened
 
     Connections {

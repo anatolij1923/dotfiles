@@ -7,7 +7,7 @@ import qs.widgets
 BarPopup {
     id: root
 
-    padding: Appearance.padding.larger
+    padding: Appearance.spacing.xl
 
     ColumnLayout {
         StyledText {
@@ -60,7 +60,7 @@ BarPopup {
         property alias value: circProgress.value
         property string label
         property string metrics
-        spacing: Appearance.padding.normal
+        spacing: Appearance.spacing.md
 
         CircularProgress {
             id: circProgress

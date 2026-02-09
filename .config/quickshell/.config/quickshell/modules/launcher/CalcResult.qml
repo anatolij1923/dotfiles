@@ -22,7 +22,7 @@ Item {
         return false;
     }
 
-    implicitHeight: Math.max(Config.launcher.sizes.itemHeight, (row ? (row.implicitHeight || 0) : 0) + Appearance.padding.large * 2)
+    implicitHeight: Math.max(Config.launcher.sizes.itemHeight, (row ? (row.implicitHeight || 0) : 0) + Appearance.spacing.lg * 2)
 
     property string result
 
@@ -70,13 +70,13 @@ Item {
 
         Row {
             id: row
-            spacing: Appearance.padding.large
+            spacing: Appearance.spacing.lg
             anchors {
                 left: parent.left
                 right: parent.right
                 verticalCenter: parent.verticalCenter
-                leftMargin: Appearance.padding.huge
-                rightMargin: Appearance.padding.huge
+                leftMargin: Appearance.spacing.xl
+                rightMargin: Appearance.spacing.xl
             }
 
             property real columnWidth: (width - spacing) / 2

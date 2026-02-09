@@ -21,7 +21,7 @@ BarPopup {
         return `${m}m`;
     }
 
-    padding: Appearance.padding.larger
+    padding: Appearance.spacing.xl
 
     ColumnLayout {
         spacing: 12

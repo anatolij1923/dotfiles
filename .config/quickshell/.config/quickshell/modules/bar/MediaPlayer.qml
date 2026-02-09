@@ -67,7 +67,7 @@ Scope {
             }
             margins {
                 left: GlobalStates.lastClickX - (playerRoot.implicitWidth / 4)
-                top: Appearance.padding.normal
+                top: Appearance.spacing.md
             }
 
             WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
@@ -125,7 +125,7 @@ Scope {
                         left: parent.left
                         top: parent.top
                         bottom: parent.bottom
-                        margins: Appearance.padding.large
+                        margins: Appearance.spacing.lg
                     }
                     width: height
                     radius: Appearance.rounding.lg
@@ -150,8 +150,8 @@ Scope {
                         top: cover.top
                         left: cover.right
                         right: parent.right
-                        leftMargin: Appearance.padding.large
-                        rightMargin: Appearance.padding.large
+                        leftMargin: Appearance.spacing.lg
+                        rightMargin: Appearance.spacing.lg
                     }
                     height: titleText.height + artistText.height
 
@@ -180,14 +180,14 @@ Scope {
                     anchors {
                         left: cover.right
                         right: parent.right
-                        topMargin: Appearance.padding.large
+                        topMargin: Appearance.spacing.lg
                         top: textGroup.bottom
                     }
 
                     Row {
                         id: controlButtons
                         anchors.horizontalCenter: parent.horizontalCenter
-                        spacing: Appearance.padding.large
+                        spacing: Appearance.spacing.lg
 
                         IconButton {
                             icon: "skip_previous"

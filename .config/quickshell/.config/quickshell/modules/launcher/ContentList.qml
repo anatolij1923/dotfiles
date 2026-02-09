@@ -155,8 +155,8 @@ Item {
         id: empty
         opacity: root.currentList?.count === 0 ? 1 : 0
         scale: root.currentList?.count === 0 ? 1 : 0.5
-        spacing: Appearance.padding.normal
-        padding: Appearance.padding.large
+        spacing: Appearance.spacing.md
+        padding: Appearance.spacing.lg
         anchors.fill: parent
 
         MaterialSymbol {

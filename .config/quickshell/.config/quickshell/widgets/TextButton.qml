@@ -21,7 +21,7 @@ Rectangle {
     property color activeColor: Colors.palette.m3primary
     property color activeOnColor: Colors.palette.m3surface
 
-    property real padding: Appearance.padding.small
+    property real padding: Appearance.spacing.sm
     property real horizontalPadding: padding
     property real verticalPadding: padding
 

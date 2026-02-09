@@ -38,7 +38,7 @@ ContentPage {
                 TextIconButton {
                     icon: "wallpaper"
                     text: Translation.tr("settings.appearance.random_wallhaven")
-                    padding: Appearance.padding.normal
+                    padding: Appearance.spacing.md
                     inactiveColor: Colors.palette.m3surfaceContainerHigh
 
                     checked: RandomWallpaper.isLoading
@@ -55,7 +55,7 @@ ContentPage {
                 TextIconButton {
                     icon: "wallpaper"
                     text: Translation.tr("settings.appearance.random_konachan")
-                    padding: Appearance.padding.normal
+                    padding: Appearance.spacing.md
                     inactiveColor: Colors.palette.m3surfaceContainerHigh
 
                     checked: RandomWallpaper.isLoading

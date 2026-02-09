@@ -177,7 +177,7 @@ WlSessionLockSurface {
                         anchors {
                             left: parent.left
                             verticalCenter: parent.verticalCenter
-                            leftMargin: Appearance.padding.larger
+                            leftMargin: Appearance.spacing.xl
                         }
 
                         icon: "person"
@@ -195,7 +195,7 @@ WlSessionLockSurface {
                         }
                         focus: true
                         echoMode: TextInput.Password
-                        leftPadding: Appearance.padding.normal
+                        leftPadding: Appearance.spacing.md
 
                         placeholder: root.context.showFailure ? "Wrong password" : Quickshell.env("USER")
                         placeholderTextColor: root.context.showFailure ? Colors.palette.m3error : Colors.palette.m3onSurfaceVariant

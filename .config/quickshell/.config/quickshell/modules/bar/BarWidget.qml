@@ -21,7 +21,7 @@ Rectangle {
 
     implicitWidth: layout.implicitWidth + (padding * 2)
 
-    property int padding: Appearance.padding.normal
+    property int padding: Appearance.spacing.md
 
     radius: Appearance.rounding.lg
     color: transparentWidgets ? "transparent" : transparent ? Qt.alpha(Colors.palette.m3surfaceContainerLow, alpha - 0.2) : Colors.palette.m3surfaceContainerLow
