@@ -17,7 +17,7 @@ Rectangle {
     implicitHeight: content.implicitHeight + padding * 2
     implicitWidth: content.implicitWidth + padding * 2
     color: Qt.alpha(Colors.palette.m3surfaceContainer, 0.4)
-    radius: Appearance.rounding.huge
+    radius: Appearance.rounding.xl
 
     Layout.fillWidth: true
 

@@ -26,7 +26,7 @@ Item {
         anchors.fill: parent
         implicitWidth: content.implicitWidth
         implicitHeight: content.implicitHeight * 2
-        radius: Appearance.rounding.huge
+        radius: Appearance.rounding.xl
         border {
             width: 1
             color: Colors.palette.m3surfaceContainerHighest

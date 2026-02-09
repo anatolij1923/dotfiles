@@ -22,7 +22,7 @@ Item {
     // StateLayer {
     //     anchors.fill: parent
     //
-    //     radius: Appearance.rounding.normal
+    //     radius: Appearance.rounding.lg
     //
     //     onClicked: {
     //         sw.checked = !sw.checked;

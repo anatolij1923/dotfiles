@@ -22,7 +22,7 @@ ContentPage {
                 Layout.preferredWidth: 330
                 clip: true
                 color: "transparent"
-                radius: Appearance.rounding.normal
+                radius: Appearance.rounding.lg
 
                 Image {
                     anchors.fill: parent

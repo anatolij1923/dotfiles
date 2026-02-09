@@ -63,7 +63,7 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        radius: Appearance.rounding.huge
+        radius: Appearance.rounding.xl
         color: root.transparent ? Qt.alpha(Colors.palette.m3surfaceContainer, root.alpha) : Colors.palette.m3surfaceContainer
         // border.width: 1
         // border.color: Colors.palette.m3surfaceContainerHigh

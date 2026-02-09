@@ -12,9 +12,9 @@ import qs
 Rectangle {
     id: root
 
-    property int roundingLarge: Appearance.rounding.large
-    property int roundingSmall: Appearance.rounding.small
-    property int roundingOuter: Appearance.rounding.huge
+    property int roundingLarge: Appearance.rounding.xl
+    property int roundingSmall: Appearance.rounding.md
+    property int roundingOuter: Appearance.rounding.xl
 
     property int marginOuter: Appearance.padding.large
     property int marginInner: Appearance.padding.small

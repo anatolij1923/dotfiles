@@ -16,7 +16,7 @@ Rectangle {
     property real alpha: Config.appearance.transparency.alpha
     property bool transparent: Config.appearance.transparency.enabled
 
-    radius: Config.bar.floating ? Appearance.rounding.large : 0
+    radius: Config.bar.floating ? Appearance.rounding.xl : 0
 
     color: transparent ? Qt.alpha(Colors.palette.m3surface, alpha) : Colors.palette.m3surface
 

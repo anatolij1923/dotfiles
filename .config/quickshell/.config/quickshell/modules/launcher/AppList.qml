@@ -33,7 +33,7 @@ ListView {
     highlight: Rectangle {
         color: Colors.palette.m3onSurface
         opacity: 0.1
-        radius: Appearance.rounding.huge
+        radius: Appearance.rounding.xl
 
         y: root.currentItem?.y ?? 0
         implicitWidth: root.width

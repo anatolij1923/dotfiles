@@ -208,7 +208,7 @@ StyledWindow {
         color: "transparent"
         border.color: Colors.palette.m3primary
         border.width: 2
-        radius: Appearance.rounding.small
+        radius: Appearance.rounding.md
         visible: root.showOverlay
     }
 

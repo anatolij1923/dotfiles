@@ -16,7 +16,7 @@ Rectangle {
 
     color: Qt.alpha(Colors.palette.m3errorContainer, 0.3)
 
-    radius: Appearance.rounding.normal
+    radius: Appearance.rounding.lg
 
     Behavior on scale {
         Anim {

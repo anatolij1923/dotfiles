@@ -69,7 +69,7 @@ Item {
         width: root.parent ? root.parent.width * contentWidthRatio : 300
         height: contentLayout.implicitHeight + Appearance.padding.large * 2
         color: Colors.palette.m3surfaceContainer
-        radius: Appearance.rounding.large
+        radius: Appearance.rounding.xl
         transformOrigin: Item.Center
 
         scale: root._animShownValue ? 1 : 0.95

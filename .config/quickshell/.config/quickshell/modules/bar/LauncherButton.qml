@@ -26,7 +26,7 @@ Rectangle {
         CAnim {}
     }
 
-    radius: Appearance.rounding.small
+    radius: Appearance.rounding.md
 
     StateLayer {
         anchors.fill: parent

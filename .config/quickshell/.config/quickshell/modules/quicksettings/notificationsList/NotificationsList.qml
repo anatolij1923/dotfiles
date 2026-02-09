@@ -16,7 +16,7 @@ Rectangle {
     Layout.fillWidth: true
 
     color: Colors.alpha(Colors.palette.m3surfaceContainer, 0.4)
-    radius: Appearance.rounding.huge
+    radius: Appearance.rounding.xl
 
     ColumnLayout {
         id: content

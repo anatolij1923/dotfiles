@@ -22,7 +22,7 @@ Rectangle {
     //     CAnim {}
     // }
 
-    radius: Appearance.rounding.normal
+    radius: Appearance.rounding.lg
 
     property url iconPath: Quickshell.shellPath("assets/arch.svg")
 

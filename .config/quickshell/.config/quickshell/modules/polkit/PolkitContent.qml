@@ -25,7 +25,7 @@ Item {
         color: Colors.palette.m3surface
         border.width: 1
         border.color: Colors.palette.m3surfaceContainerHigh
-        radius: Appearance.rounding.hugeass
+        radius: Appearance.rounding.xxl
 
         ColumnLayout {
             id: mainLayout

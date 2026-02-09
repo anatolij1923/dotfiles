@@ -24,7 +24,7 @@ Rectangle {
     signal textAreaHeld
     signal textAreaRightClicked
 
-    radius: checked ? Appearance.rounding.huge : Appearance.rounding.full
+    radius: checked ? Appearance.rounding.xl : Appearance.rounding.full
 
     Behavior on radius {
         Anim {
@@ -105,7 +105,7 @@ Rectangle {
         anchors.leftMargin: root.padding
         anchors.verticalCenter: parent.verticalCenter
         padding: Appearance.padding.normal
-        radius: checked ? (stateLayer.pressed ? Appearance.rounding.small : Appearance.rounding.normal) : (stateLayer.pressed ? Appearance.rounding.huge : Appearance.rounding.full)
+        radius: checked ? (stateLayer.pressed ? Appearance.rounding.md : Appearance.rounding.lg) : (stateLayer.pressed ? Appearance.rounding.xl : Appearance.rounding.full)
 
         Behavior on radius {
             Anim {

@@ -34,7 +34,7 @@ Item {
 
     StateLayer {
         anchors.fill: parent
-        radius: Appearance.rounding.huge
+        radius: Appearance.rounding.xl
 
         onClicked: {
             root.execute();

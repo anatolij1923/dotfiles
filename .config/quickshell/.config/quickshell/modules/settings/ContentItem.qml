@@ -23,7 +23,7 @@ Rectangle {
     implicitHeight: mainColumn.implicitHeight
 
     color: Colors.palette.m3surfaceContainer
-    radius: Appearance.rounding.huge
+    radius: Appearance.rounding.xl
 
     ColumnLayout {
         id: mainColumn

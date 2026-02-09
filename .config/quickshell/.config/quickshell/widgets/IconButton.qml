@@ -25,7 +25,7 @@ Rectangle {
     property color activeColor: Colors.palette.m3primary
     property color activeOnColor: Colors.palette.m3onPrimary
 
-    readonly property real pressedRadius: Appearance.rounding.small
+    readonly property real pressedRadius: Appearance.rounding.md
 
     property alias stateLayer: stateLayer
 
@@ -39,7 +39,7 @@ Rectangle {
     radius: {
         if (stateLayer.pressed)
             return root.pressedRadius;
-        return internalChecked ? Appearance.rounding.large : height / 2;
+        return internalChecked ? Appearance.rounding.xl : height / 2;
     }
 
     Behavior on radius {

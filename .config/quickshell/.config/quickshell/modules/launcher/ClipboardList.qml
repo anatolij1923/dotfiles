@@ -59,7 +59,7 @@ Item {
         highlight: Rectangle {
             color: Colors.palette.m3onSurface
             opacity: 0.1
-            radius: Appearance.rounding.huge
+            radius: Appearance.rounding.xl
             y: listView.currentItem?.y ?? 0
             implicitWidth: listView.width
             implicitHeight: listView.currentItem?.implicitHeight ?? 0

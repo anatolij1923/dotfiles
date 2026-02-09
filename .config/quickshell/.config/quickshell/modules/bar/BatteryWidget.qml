@@ -63,7 +63,7 @@ Item {
                         id: classicBatteryContainer
                         anchors.fill: parent
                         color: "transparent"
-                        radius: Appearance.rounding.smaller
+                        radius: Appearance.rounding.sm
                         border {
                             width: 2
                             color: Colors.palette.m3onSecondaryContainer
@@ -134,7 +134,7 @@ Item {
 
                 Rectangle {
                     color: Colors.palette.m3onSecondaryContainer
-                    radius: Appearance.rounding.smaller
+                    radius: Appearance.rounding.sm
                     Layout.preferredHeight: classicBatteryContainer.height * 0.42
                     Layout.preferredWidth: 3
                 }
@@ -165,7 +165,7 @@ Item {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 width: Battery.percentage * parent.width / 100
-                radius: Appearance.rounding.smaller
+                radius: Appearance.rounding.sm
                 color: Battery.isCharging ? Colors.palette.m3primary : (Battery.percentage > Config.battery.low ? Colors.palette.m3onSecondaryContainer : Colors.palette.m3error)
 
                 Behavior on color {

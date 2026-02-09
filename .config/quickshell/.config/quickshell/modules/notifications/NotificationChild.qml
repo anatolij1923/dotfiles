@@ -35,7 +35,7 @@ Rectangle {
     property bool expanded: false
 
     color: root.modelData.urgency === NotificationUrgency.Critical ? Colors.palette.m3secondaryContainer : Colors.palette.m3surfaceContainer
-    radius: Appearance.rounding.large
+    radius: Appearance.rounding.xl
 
     MouseArea {
         property int startY

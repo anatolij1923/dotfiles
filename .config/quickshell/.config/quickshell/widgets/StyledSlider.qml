@@ -30,7 +30,7 @@ Slider {
     property color handleColor: Colors.palette.m3primary
     property color dotColor: Colors.palette.m3onSecondaryContainer
     property color dotColorHighlighted: Colors.palette.m3onPrimary
-    property real unsharpenRadius: Appearance.rounding.unsharpen
+    property real unsharpenRadius: Appearance.rounding.xs
     property real trackWidth: configuration
     property real trackRadius: trackWidth >= StyledSlider.Configuration.XL ? 21 : trackWidth >= StyledSlider.Configuration.L ? 12 : trackWidth >= StyledSlider.Configuration.M ? 9 : trackWidth >= StyledSlider.Configuration.S ? 6 : height / 2
     property real handleHeight: (configuration === StyledSlider.Configuration.Wavy) ? 24 : Math.max(33, trackWidth + 9)

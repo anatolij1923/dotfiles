@@ -93,7 +93,7 @@ ContentPage {
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredHeight: 50
-            radius: Appearance.rounding.normal
+            radius: Appearance.rounding.lg
             color: Colors.palette.m3surfaceContainer
             border.width: 1
             border.color: Colors.palette.m3outline

@@ -13,7 +13,7 @@ import qs.widgets
 Scope {
     id: root
     property int padding: Appearance.padding.large
-    property int rounding: Appearance.rounding.hugeass
+    property int rounding: Appearance.rounding.xxl
     property string searchingText: ""
 
     property real alpha: Config.appearance.transparency.alpha
@@ -122,7 +122,7 @@ Scope {
                                 margins: root.padding
                             }
                             implicitHeight: Math.max(icon.implicitHeight, searchField.implicitHeight)
-                            radius: Appearance.rounding.hugeass
+                            radius: Appearance.rounding.xxl
                             color: root.transparent ? Qt.alpha(Colors.palette.m3surfaceContainer, root.alpha) : Colors.palette.m3surfaceContainer
 
                             MaterialSymbol {

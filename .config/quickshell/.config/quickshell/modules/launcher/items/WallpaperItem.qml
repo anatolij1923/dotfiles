@@ -68,7 +68,7 @@ Item {
                 width: parent.width
                 height: parent.height - (label.height + parent.spacing)
 
-                radius: Appearance.rounding.normal
+                radius: Appearance.rounding.lg
                 color: Colors.palette.m3surfaceContainer
                 clip: true
 

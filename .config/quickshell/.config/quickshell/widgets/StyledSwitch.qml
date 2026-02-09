@@ -99,7 +99,7 @@ Switch {
                     strokeWidth: Appearance.font.size.normal * 0.15
                     strokeColor: root.checked ? Colors.palette.m3primary : Colors.palette.m3surfaceContainerHighest
                     fillColor: "transparent"
-                    capStyle: Appearance.rounding.smaller === 0 ? ShapePath.SquareCap : ShapePath.RoundCap
+                    capStyle: Appearance.rounding.sm === 0 ? ShapePath.SquareCap : ShapePath.RoundCap
 
                     startX: icon.start1.x
                     startY: icon.start1.y

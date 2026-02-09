@@ -27,7 +27,7 @@ Item {
 
     StateLayer {
         anchors.fill: parent
-        radius: Appearance.rounding.huge
+        radius: Appearance.rounding.xl
         onClicked: root.execute()
     }
 
@@ -75,14 +75,14 @@ Item {
 
             IconButton {
                 icon: "content_copy"
-                radius: Appearance.rounding.small
+                radius: Appearance.rounding.md
                 inactiveColor: "transparent"
                 onClicked: ClipboardService.copy(root.modelData)
             }
 
             IconButton {
                 icon: "delete"
-                radius: Appearance.rounding.small
+                radius: Appearance.rounding.md
                 inactiveColor: "transparent"
                 onClicked: ClipboardService.remove(root.modelData)
             }

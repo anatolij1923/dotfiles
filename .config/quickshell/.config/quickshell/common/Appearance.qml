@@ -43,14 +43,14 @@ Singleton {
     }
 
     component Rounding: JsonObject {
-        property int unsharpen: 2
-        property int smaller: 8
-        property int small: 12
-        property int normal: 16
-        property int large: 20
-        property int huge: 24
-        property int hugeass: 30
-        property int full: 50
+        readonly property int none: 0
+        readonly property int xs: 4
+        readonly property int sm: 8
+        readonly property int md: 12  
+        readonly property int lg: 16
+        readonly property int xl: 24
+        readonly property int xxl: 32
+        readonly property int full: 9999 
     }
     component Padding: JsonObject {
         property int smaller: 4

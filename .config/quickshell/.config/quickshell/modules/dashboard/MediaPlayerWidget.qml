@@ -56,7 +56,7 @@ Item {
         id: background
         anchors.fill: parent
         color: "transparent"
-        radius: Appearance.rounding.small
+        radius: Appearance.rounding.md
         clip: true
 
         Image {
@@ -83,7 +83,7 @@ Item {
 
         ClippingRectangle {
             id: cover
-            radius: Appearance.rounding.normal
+            radius: Appearance.rounding.lg
             color: Colors.palette.m3surfaceContainerHigh
 
             height: root.expanded ? (parent.height - Appearance.padding.large * 2) : (parent.width - Appearance.padding.normal * 2)

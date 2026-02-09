@@ -25,7 +25,7 @@ Rectangle {
     property real horizontalPadding: padding
     property real verticalPadding: padding
 
-    readonly property real pressedRadius: Appearance.rounding.small
+    readonly property real pressedRadius: Appearance.rounding.md
 
     signal clicked
     signal rightClicked
@@ -38,7 +38,7 @@ Rectangle {
         if (stateLayer.pressed) {
             return pressedRadius;
         }
-        return internalChecked ? Appearance.rounding.large : implicitHeight / 2;
+        return internalChecked ? Appearance.rounding.xl : implicitHeight / 2;
     }
 
     Behavior on radius {

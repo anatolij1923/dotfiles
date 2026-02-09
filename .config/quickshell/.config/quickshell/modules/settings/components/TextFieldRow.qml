@@ -33,7 +33,7 @@ Item {
         Rectangle {
             Layout.preferredWidth: 200
             Layout.preferredHeight: 40
-            radius: Appearance.rounding.normal
+            radius: Appearance.rounding.lg
             color: Colors.palette.m3surfaceContainer
             border.width: 1
             border.color: textField.focus ? Colors.palette.m3primary : Colors.palette.m3outline

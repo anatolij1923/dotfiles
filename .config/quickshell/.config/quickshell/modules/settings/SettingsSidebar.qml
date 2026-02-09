@@ -86,7 +86,7 @@ Rectangle {
             implicitWidth: root.collapsed ? fabSize : expandedRow.implicitWidth + Appearance.padding.large * 2
 
             color: Colors.palette.m3primaryContainer
-            radius: Appearance.rounding.normal
+            radius: Appearance.rounding.lg
             clip: true
 
             Behavior on implicitWidth {

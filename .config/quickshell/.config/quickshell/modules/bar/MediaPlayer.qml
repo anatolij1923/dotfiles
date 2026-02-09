@@ -88,7 +88,7 @@ Scope {
                 id: background
                 anchors.fill: parent
                 color: Colors.palette.m3surfaceContainer
-                radius: Appearance.rounding.huge
+                radius: Appearance.rounding.xl
 
                 focus: true
                 Keys.onEscapePressed: {
@@ -128,7 +128,7 @@ Scope {
                         margins: Appearance.padding.large
                     }
                     width: height
-                    radius: Appearance.rounding.normal
+                    radius: Appearance.rounding.lg
                     color: Colors.palette.m3surfaceContainerHigh
 
                     Image {

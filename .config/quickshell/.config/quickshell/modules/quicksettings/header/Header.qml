@@ -80,7 +80,7 @@ RowLayout {
                 icon: "power_settings_new"
                 padding: Appearance.padding.small
                 // inactiveColor: Colors.palette.m3surface
-                // radius: Appearance.rounding.large
+                // radius: Appearance.rounding.xl
 
                 onClicked: {
                     GlobalStates.quicksettingsOpened = false;

@@ -8,8 +8,8 @@ SpinBox {
     id: root
 
     property int baseHeight: 40
-    property int radius: Appearance.rounding.normal
-    property int innerRadius: Appearance.rounding.small
+    property int radius: Appearance.rounding.lg
+    property int innerRadius: Appearance.rounding.md
 
     background: Rectangle {
         color: Colors.palette.m3surfaceContainerHighest

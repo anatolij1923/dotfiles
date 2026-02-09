@@ -35,7 +35,7 @@ Item {
     ClippingRectangle {
         id: background
         anchors.fill: parent
-        radius: Appearance.rounding.larger
+        radius: Appearance.rounding.xl
         color: root.transparent ? Qt.alpha(Colors.palette.m3surface, root.alpha) : Colors.palette.m3surface
         clip: true
         Behavior on color {
@@ -160,7 +160,7 @@ Item {
                 delegate: Rectangle {
                     width: btDeviceList.width - 2
                     height: 36
-                    radius: Appearance.rounding.small
+                    radius: Appearance.rounding.md
                     color: Colors.palette.m3surfaceContainerHigh
                     required property var modelData
                     property var device: modelData

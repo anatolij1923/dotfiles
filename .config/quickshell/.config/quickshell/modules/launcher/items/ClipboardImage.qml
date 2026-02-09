@@ -33,7 +33,7 @@ Rectangle {
     property real scale: Math.min(maxWidth / imgWidth, maxHeight / imgHeight, 1)
 
     color: "transparent"
-    radius: Appearance.rounding.small
+    radius: Appearance.rounding.md
     implicitWidth: imgWidth * scale
     implicitHeight: imgHeight * scale
 

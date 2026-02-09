@@ -40,7 +40,7 @@ Item {
         anchors.fill: parent
         color: root.transparent ? Qt.alpha(Colors.palette.m3surface, root.alpha) : Colors.palette.m3surface
 
-        radius: Appearance.rounding.large
+        radius: Appearance.rounding.xl
     }
 
     GridLayout {
@@ -103,7 +103,7 @@ Item {
 
                 property color baseColor: model.focused ? Colors.palette.m3surfaceContainerHigh : Colors.palette.m3surfaceContainer
 
-                radius: Appearance.rounding.small
+                radius: Appearance.rounding.md
                 color: root.transparent ? Qt.alpha(baseColor, root.alpha) : baseColor
                 border.width: model.focused || cardHoverHandler.hovered ? 2 : 1
                 border.color: model.focused ? Colors.palette.m3primary : Colors.palette.m3surfaceContainer
@@ -187,7 +187,7 @@ Item {
                         ClippingRectangle {
                             id: visualCard
                             anchors.fill: parent
-                            radius: Appearance.rounding.small
+                            radius: Appearance.rounding.md
                             color: "transparent"
                             clip: true
 
@@ -335,7 +335,7 @@ Item {
 
                 Rectangle {
                     anchors.fill: parent
-                    radius: Appearance.rounding.normal
+                    radius: Appearance.rounding.lg
                     color: Colors.palette.m3primary
                     opacity: root.dragTargetWorkspace === wsCard.currentCardId ? 0.15 : 0
                     visible: opacity > 0
