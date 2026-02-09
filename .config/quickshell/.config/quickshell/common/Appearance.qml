@@ -12,7 +12,6 @@ Singleton {
     readonly property Rounding rounding: Rounding {}
     readonly property Spacing spacing: Spacing {}
     readonly property FontSize fontSize: FontSize {}
-    readonly property Sizes sizes: Sizes {}
 
     component AnimCurves: JsonObject {
         readonly property list<real> expressiveFastSpatial: [0.42, 1.67, 0.21, 0.90, 1, 1] // Default, 350ms
@@ -72,10 +71,5 @@ Singleton {
         readonly property int lg: 22 * scale
         readonly property int xl: 28 * scale
         readonly property int xxl: 32 * scale
-    }
-
-    component Sizes: JsonObject {
-        property int osdWidth: 250
-        property int quicksettingsWidth: 500
     }
 }
