@@ -22,7 +22,7 @@ Scope {
 
     Timer {
         id: unlockTimer
-        interval: Appearance.animDuration.normal * 0.8
+        interval: Appearance.animDuration.md * 0.8
         repeat: false
         onTriggered: {
             GlobalStates.screenLocked = false;

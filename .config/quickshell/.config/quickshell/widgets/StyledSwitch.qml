@@ -153,7 +153,7 @@ Switch {
     }
 
     component PropAnim: PropertyAnimation {
-        duration: Appearance.animDuration.normal
+        duration: Appearance.animDuration.md
         easing.type: Easing.BezierSpline
         easing.bezierCurve: Appearance.animCurves.standard
     }

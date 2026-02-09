@@ -30,16 +30,17 @@ Singleton {
     }
 
     component AnimDuration: JsonObject {
-        property real scale: 1
-        property int smaller: 100 * scale
-        property int small: 200 * scale
-        property int normal: 400 * scale
-        property int large: 600 * scale
-        property int extraLarge: 1000 * scale
-        property int expressiveFastSpatial: 350 * scale
-        property int expressiveDefaultSpatial: 500 * scale
-        property int expressiveSlowSpatial: 650 * scale
-        property int expressiveEffects: 200 * scale
+        property real scale: 1.0
+
+        readonly property int xs: 100 * scale 
+        readonly property int sm: 200 * scale
+        readonly property int md: 400 * scale 
+        readonly property int lg: 600 * scale 
+        readonly property int xl: 1000 * scale 
+        readonly property int expressiveFastSpatial: 350 * scale
+        readonly property int expressiveDefaultSpatial: 500 * scale
+        readonly property int expressiveSlowSpatial: 650 * scale
+        readonly property int expressiveEffects: 200 * scale
     }
 
     component Rounding: JsonObject {
@@ -65,12 +66,12 @@ Singleton {
 
     component FontSize: JsonObject {
         property real scale: 1.0
-        readonly property int xs: 14 * scale  
-        readonly property int sm: 16 * scale  
-        readonly property int md: 18 * scale  
-        readonly property int lg: 22 * scale  
-        readonly property int xl: 28 * scale  
-        readonly property int xxl: 32 * scale 
+        readonly property int xs: 14 * scale
+        readonly property int sm: 16 * scale
+        readonly property int md: 18 * scale
+        readonly property int lg: 22 * scale
+        readonly property int xl: 28 * scale
+        readonly property int xxl: 32 * scale
     }
 
     component Sizes: JsonObject {

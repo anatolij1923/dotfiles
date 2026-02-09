@@ -11,7 +11,7 @@ Text {
     property string animateProp: "scale"
     property real animateFrom: 0
     property real animateTo: 1
-    property int animateDuration: Appearance.animDuration.smaller
+    property int animateDuration: Appearance.animDuration.xs
     property int size: Appearance.fontSize.md
 
     property int weight: 400

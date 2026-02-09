@@ -32,7 +32,7 @@ WlSessionLockSurface {
             opacity: root.showContent ? Config.lock.dimOpacity : 0
             Behavior on opacity {
                 Anim {
-                    duration: Appearance.animDuration.large
+                    duration: Appearance.animDuration.lg
                 }
             }
         }
@@ -46,12 +46,12 @@ WlSessionLockSurface {
 
             Behavior on opacity {
                 Anim {
-                    duration: Appearance.animDuration.large
+                    duration: Appearance.animDuration.lg
                 }
             }
             Behavior on scale {
                 Anim {
-                    duration: Appearance.animDuration.large
+                    duration: Appearance.animDuration.lg
                     easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
                 }
             }
@@ -69,13 +69,13 @@ WlSessionLockSurface {
 
                 Behavior on anchors.topMargin {
                     Anim {
-                        duration: Appearance.animDuration.large
+                        duration: Appearance.animDuration.lg
                         easing.bezierCurve: Appearance.animCurves.emphasizedDecel
                     }
                 }
                 Behavior on opacity {
                     Anim {
-                        duration: Appearance.animDuration.large
+                        duration: Appearance.animDuration.lg
                     }
                 }
 
@@ -104,7 +104,7 @@ WlSessionLockSurface {
                 opacity: root.showContent ? 1 : 0
                 Behavior on opacity {
                     Anim {
-                        duration: Appearance.animDuration.large
+                        duration: Appearance.animDuration.lg
                     }
                 }
 
@@ -138,13 +138,13 @@ WlSessionLockSurface {
 
                 Behavior on anchors.bottomMargin {
                     Anim {
-                        duration: Appearance.animDuration.large
+                        duration: Appearance.animDuration.lg
                         easing.bezierCurve: Appearance.animCurves.emphasizedDecel
                     }
                 }
                 Behavior on opacity {
                     Anim {
-                        duration: Appearance.animDuration.large
+                        duration: Appearance.animDuration.lg
                     }
                 }
 
