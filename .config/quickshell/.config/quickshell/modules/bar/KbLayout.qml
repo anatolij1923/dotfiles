@@ -14,7 +14,7 @@ Item {
 
     RowLayout {
         id: row
-        spacing: 8
+        spacing: Appearance.spacing.sm
 
         anchors {
             centerIn: parent
@@ -32,7 +32,7 @@ Item {
             text: WmService.isNiri ? NiriService.currentLayout : HyprlandData.currentLayoutCode
             animate: true
             weight: 400
-            size: 18
+            size: Appearance.fontSize.md
         }
     }
 }

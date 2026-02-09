@@ -66,7 +66,7 @@ Item {
     Rectangle {
         id: card
         anchors.centerIn: parent
-        width: root.parent ? root.parent.width * contentWidthRatio : 300
+        width: root.parent ? root.parent.width * root.contentWidthRatio : 300
         height: contentLayout.implicitHeight + Appearance.spacing.lg * 2
         color: Colors.palette.m3surfaceContainer
         radius: Appearance.rounding.xl
