@@ -131,5 +131,6 @@ Item {
     function close() {
         root._animShownValue = false;
         closeSeq.restart();
+        parent.focus = true // ts returning focus to quicsettings so we can close it on ESC normally
     }
 }
