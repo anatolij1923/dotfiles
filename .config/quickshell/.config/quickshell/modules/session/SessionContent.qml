@@ -64,7 +64,7 @@ Item {
     Rectangle {
         id: shadow
         anchors.fill: parent
-        color: Colors.alpha(Colors.palette.m3shadow, 0.6)
+        color: Colors.alpha(Colors.palette.tintedShadow, 0.6)
     }
 
     Rectangle {

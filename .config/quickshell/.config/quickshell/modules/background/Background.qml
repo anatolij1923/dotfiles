@@ -184,7 +184,7 @@ Variants {
                 Anim {}
             }
             sourceComponent: Rectangle {
-                color: Qt.alpha("black", Config.background.dim.opacity)
+                color: Colors.alpha(Colors.palette.tintedShadow, Config.background.dim.opacity)
             }
         }
     }
