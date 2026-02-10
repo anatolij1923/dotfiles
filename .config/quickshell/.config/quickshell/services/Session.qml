@@ -4,6 +4,7 @@ import QtQuick
 
 import Quickshell
 import Quickshell.Io
+import qs.common
 
 Singleton {
     id: root
@@ -50,7 +51,7 @@ Singleton {
 
     Process {
         id: detectDownloadProc
-        command: ["bash", "-c", "pidof curl wget aria2c yt-dlp || ls ~/Downloads | grep -E '\.crdownload$|\.part$'"]
+        command: ["bash", "-c", `pidof curl wget aria2c yt-dlp || ls ${Paths.strip(Paths.downloads)} | grep -E '\.crdownload$|\.part$'`]
         onExited: (exitCode, exitStatus) => {
             root.downloadRunning = (exitCode === 0);
         }
