@@ -11,7 +11,7 @@ Singleton {
     id: root
 
     property bool launcherOpened: false
-    property bool powerMenuOpened: false
+    property bool sessionOpened: false
     property bool screenLocked: false
     property bool screenLockContainsCharacters: false
     property bool screenUnlockFailed: false

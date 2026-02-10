@@ -10,7 +10,7 @@ import qs.modules.background
 import qs.modules.bar
 import qs.modules.corners
 import qs.modules.lock
-import qs.modules.powermenu
+import qs.modules.session
 import qs.modules.launcher
 import qs.modules.notifications
 import qs.modules.tit
@@ -30,7 +30,7 @@ ShellRoot {
     // property bool enableReloadPopup: false
     property bool enableScreenCorners: true
     property bool enableLock: true
-    property bool enablePowermenu: true
+    property bool enableSession: true
     property bool enableQuicksettings: true
     property bool enableNotifications: true
     property bool enableTit: false
@@ -45,7 +45,7 @@ ShellRoot {
     Component.onCompleted: {
         Idle.init();
     }
-    
+
     // Test {}
 
     LazyLoader {
@@ -84,8 +84,8 @@ ShellRoot {
         component: Lock {}
     }
     LazyLoader {
-        active: root.enablePowermenu
-        component: Powermenu {}
+        active: root.enableSession
+        component: SessionMenu {}
     }
     LazyLoader {
         active: root.enableNotifications

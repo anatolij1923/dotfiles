@@ -51,12 +51,23 @@
       "clear_all": "Clear all notifications"
     }
   },
-  "powermenu": {
+  "session": {
+    "warning": "Warning",
+    "pkg_running": "Package manager is running!",
+    "down_running": "Download process is running!",
+    "uptime": "Uptime",
     "lock": "Lock",
     "shutdown": "Shutdown",
     "suspend": "Suspend",
-    "restart": "Restart",
-    "logout": "Logout"
+    "reboot": "Reboot",
+    "logout": "Logout",
+    "desc": {
+      "lock": "Lock your screen",
+      "shutdown": "Turn off your PC",
+      "suspend": "Suspend your PC",
+      "reboot": "Reboot your PC",
+      "logout": "Exit Hyprland"
+    }
   },
   "settings": {
     "window_title": "quickshell-settings",
@@ -175,8 +186,7 @@
     "wipe": "Wipe",
     "entries": "entries"
   },
-    "appname": {
-        "desktop": "Desktop"
-    }
-
+  "appname": {
+    "desktop": "Desktop"
+  }
 }

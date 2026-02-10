@@ -1,27 +1,25 @@
 pragma Singleton
 import qs.services
+import QtQuick
 
 import Quickshell
+import Quickshell.Io
 
 Singleton {
     id: root
-    // function closeAllWindows() {
-    //     Hyprland.windowList.map(w => w.pid).forEach(pid => {
-    //         Quickshell.execDetached(["kill", pid]);
-    //     });
-    // }
+
+    property bool packageManagerRunning: false
+    property bool downloadRunning: false
 
     function lock() {
         Quickshell.execDetached(["loginctl", "lock-session"]);
     }
 
     function poweroff() {
-        // closeAllWindows();
         Quickshell.execDetached(["bash", "-c", `systemctl poweroff || loginctl poweroff`]);
     }
 
     function reboot() {
-        // closeAllWindows();
         Quickshell.execDetached(["bash", "-c", `reboot || loginctl reboot`]);
     }
 
@@ -30,8 +28,31 @@ Singleton {
     }
 
     function logout() {
-        // closeAllWindows();
-        // Quickshell.execDetached(["pkill", "Hyprland"]);
         HyprlandData.dispatch("exit");
+    }
+
+    function refresh() {
+        packageManagerRunning = false;
+        downloadRunning = false;
+        detectPackageManagerProc.running = false;
+        detectPackageManagerProc.running = true;
+        detectDownloadProc.running = false;
+        detectDownloadProc.running = true;
+    }
+
+    Process {
+        id: detectPackageManagerProc
+        command: ["bash", "-c", "pidof pacman yay paru dnf zypper apt apx xbps snap apk yum epsi pikman"]
+        onExited: (exitCode, exitStatus) => {
+            root.packageManagerRunning = (exitCode === 0);
+        }
+    }
+
+    Process {
+        id: detectDownloadProc
+        command: ["bash", "-c", "pidof curl wget aria2c yt-dlp || ls ~/Downloads | grep -E '\.crdownload$|\.part$'"]
+        onExited: (exitCode, exitStatus) => {
+            root.downloadRunning = (exitCode === 0);
+        }
     }
 }
