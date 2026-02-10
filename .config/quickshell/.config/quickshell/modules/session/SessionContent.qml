@@ -92,7 +92,7 @@ Item {
 
             Rectangle {
                 id: warnIconContainer
-                implicitWidth: warnIconContainer.implicitHeight 
+                implicitWidth: warnIconContainer.implicitHeight
                 implicitHeight: warnIcon.implicitHeight + Appearance.spacing.sm * 2
                 radius: Appearance.rounding.full
                 color: Colors.palette.m3error
@@ -100,7 +100,7 @@ Item {
                 MaterialSymbol {
                     id: warnIcon
 
-                    anchors.centerIn:parent
+                    anchors.centerIn: parent
 
                     icon: Session.packageManagerRunning ? "package_2" : "download"
                     size: 40
@@ -156,6 +156,14 @@ Item {
 
                     activeFocusOnTab: true
                     checked: activeFocus
+
+                    Elevation {
+                        anchors.fill: parent
+                        radius: parent.radius
+                        z: -1
+                        level: 4
+                        opacity: 0.6
+                    }
 
                     onActiveFocusChanged: {
                         if (activeFocus) {
