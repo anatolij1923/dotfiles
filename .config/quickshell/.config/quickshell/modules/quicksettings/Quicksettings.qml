@@ -83,7 +83,7 @@ Scope {
     }
 
     GlobalShortcut {
-        name: "openQuicksettings"
+        name: "toggleQuicksettings"
         description: "Open quicksettings window"
 
         onPressed: {
