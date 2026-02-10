@@ -176,7 +176,7 @@ Variants {
 
         Loader {
             id: dimLoader
-            property bool shouldShow: GlobalStates.launcherOpened || GlobalStates.overviewOpened || GlobalStates.quicksettingsOpened || GlobalStates.powerMenuOpened
+            property bool shouldShow: GlobalStates.launcherOpened || GlobalStates.overviewOpened || GlobalStates.quicksettingsOpened || GlobalStates.sessionOpened
             active: Config.background.dim.enabled && (shouldShow || opacity > 0)
             anchors.fill: parent
             opacity: shouldShow ? 1 : 0
