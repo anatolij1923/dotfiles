@@ -174,5 +174,9 @@
     "wallpapers": "wallpapers",
     "wipe": "Wipe",
     "entries": "entries"
-  }
+  },
+    "appname": {
+        "desktop": "Desktop"
+    }
+
 }

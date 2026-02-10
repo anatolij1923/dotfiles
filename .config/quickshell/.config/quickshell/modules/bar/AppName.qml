@@ -15,7 +15,7 @@ Item {
 
     function getAppName(win) {
         if (!win || !win.activated)
-            return "Desktop";
+            return Translation.tr("appname.desktop")
 
         let initial = win.HyprlandToplevel?.lastIpcObject?.initialTitle;
         if (initial && initial !== "")
@@ -23,7 +23,7 @@ Item {
 
         let id = win.appId || win.HyprlandToplevel?.class || "";
         if (!id)
-            return "Desktop";
+            return Translation.tr("appname.desktop")
 
         let parts = id.split('.');
         let junk = ["org", "com", "io", "net", "desktop", "bin", "generic"];
@@ -47,7 +47,7 @@ Item {
             text: root.getAppName(root.activeWindow)
             weight: 400
             size: Appearance.fontSize.md
-            opacity: text === "Desktop" ? 0.7 : 1
+            opacity: text === Translation.tr("appname.desktop") ? 0.7 : 1
             Behavior on opacity {
                 Anim {}
             }
