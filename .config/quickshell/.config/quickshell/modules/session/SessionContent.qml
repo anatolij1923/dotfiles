@@ -143,4 +143,15 @@ Item {
             }
         }
     }
+
+    StyledText {
+        anchors {
+            left: parent.left
+            bottom: parent.bottom
+            margins: Appearance.spacing.xxl
+        }
+
+        text: "Uptime: " + Time.uptime
+        color: Colors.palette.m3outline
+    }
 }
