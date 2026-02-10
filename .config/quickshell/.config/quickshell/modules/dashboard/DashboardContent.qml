@@ -160,20 +160,21 @@ Rectangle {
             }
 
             ColumnLayout {
+                id: clock
                 anchors {
                     top: parent.top
                     left: parent.left
                     bottom: parent.bottom
                 }
 
-                property var timeParts: Time.formatTime()
+                property var timeParts: Time.format(Config.time.format).split(":")
 
                 ColumnLayout {
                     Layout.alignment: Qt.AlingVCenter
                     spacing: Appearance.spacing.xs
 
                     StyledText {
-                        text: Time.hours
+                        text: clock.timeParts[0]
                         Layout.alignment: Qt.AlignHCenter
                         color: Colors.palette.m3primary
                         size: 40
@@ -186,7 +187,7 @@ Rectangle {
                         size: 32
                     }
                     StyledText {
-                        text: Time.minutes
+                        text: clock.timeParts[1]
                         Layout.alignment: Qt.AlignHCenter
                         color: Colors.palette.m3primary
                         size: 40

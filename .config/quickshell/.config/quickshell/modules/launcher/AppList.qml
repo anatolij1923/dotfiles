@@ -41,8 +41,8 @@ ListView {
 
         Behavior on y {
             Anim {
-                duration: Appearance.animDuration.expressiveDefaultSpatial
-                easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
+                duration: Appearance.animDuration.expressiveEffects
+                easing.bezierCurve: Appearance.animCurves.expressiveEffects
             }
         }
     }

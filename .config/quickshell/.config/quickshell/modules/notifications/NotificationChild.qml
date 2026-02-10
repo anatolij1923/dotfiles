@@ -202,6 +202,7 @@ Rectangle {
 
                 animate: true
                 text: summaryMetrics.elidedText
+                weight: 500
 
                 states: State {
                     name: "expanded"
@@ -347,7 +348,10 @@ Rectangle {
                     inactiveColor: root.modelData.urgency === NotificationUrgency.Critical ? Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3secondaryContainer, 0.3) : Colors.palette.m3surfaceContainerHigh
                     inactiveOnColor: root.modelData.urgency === NotificationUrgency.Critical ? Colors.palette.m3secondaryContainer : Colors.palette.m3onSurface
                     onClicked: root.modelData.close()
+
                     padding: Appearance.spacing.sm
+                    
+                    Layout.minimumWidth: parent.width * 0.2
                     Layout.fillWidth: true
                 }
 

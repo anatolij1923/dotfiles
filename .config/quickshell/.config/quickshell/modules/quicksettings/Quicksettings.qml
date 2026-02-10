@@ -81,4 +81,13 @@ Scope {
             GlobalStates.quicksettingsOpened = false;
         }
     }
+
+    GlobalShortcut {
+        name: "openQuicksettings"
+        description: "Open quicksettings window"
+
+        onPressed: {
+            GlobalStates.quicksettingsOpened = !GlobalStates.quicksettingsOpened;
+        }
+    }
 }

@@ -12,7 +12,7 @@ post_hook = 'pkill -SIGUSR1 kitty'
 # [templates.wezterm]
 # input_path = 'templates/wezterm.lua'
 # output_path = '~/.config/wezterm/colors.lua'
-#
+
 [templates.hyprland]
 input_path = 'templates/hyprland-colors.conf'
 output_path = '~/.config/hypr/colors.conf'

@@ -18,7 +18,7 @@ Item {
     property real alpha: Config.appearance.transparency.alpha
     property bool transparent: Config.appearance.transparency.enabled
 
-    implicitWidth: 300 + padding * 2
+    implicitWidth: 220 + padding * 2
     implicitHeight: content.implicitHeight + padding * 2
 
     Rectangle {
