@@ -102,9 +102,8 @@ Item {
 
                     anchors.centerIn:parent
 
-                    icon: "dangerous"
+                    icon: Session.packageManagerRunning ? "package_2" : "download"
                     size: 40
-                    fill: 1
                     color: Colors.palette.m3errorContainer
                 }
             }
