@@ -19,7 +19,7 @@ import qs.modules.osd
 import qs.modules.overview
 import qs.modules.polkit
 import qs.modules.settings
-import qs.modules.screenshot
+import qs.modules.picker
 import qs.modules.dashboard
 
 ShellRoot {
@@ -38,13 +38,15 @@ ShellRoot {
     property bool enableOverview: true
     property bool enablePolkit: true
     property bool enableSettings: true
-    property bool enableScreenshot: true
+    property bool enablePicker: true
     property bool enableMediaplayer: true
     property bool enableDashboard: true
 
     Component.onCompleted: {
         Idle.init();
     }
+    
+    // Test {}
 
     LazyLoader {
         active: root.enableBar
@@ -113,8 +115,8 @@ ShellRoot {
     }
 
     LazyLoader {
-        active: root.enableScreenshot
-        component: ScreenshotManager {}
+        active: root.enablePicker
+        component: Picker {}
     }
 
     LazyLoader {
