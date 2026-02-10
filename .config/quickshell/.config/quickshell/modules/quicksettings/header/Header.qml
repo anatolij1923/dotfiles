@@ -84,7 +84,7 @@ RowLayout {
 
                 onClicked: {
                     GlobalStates.quicksettingsOpened = false;
-                    GlobalStates.powerMenuOpened = true;
+                    GlobalStates.sessionOpened = true;
                 }
 
                 StyledTooltip {
