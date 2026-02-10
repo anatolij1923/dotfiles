@@ -15,7 +15,7 @@ ContentPage {
     ContentItem {
         title: Translation.tr("settings.appearance.background")
 
-        RowLayout {
+        ColumnLayout {
 
             ClippingRectangle {
                 Layout.preferredHeight: 220
@@ -34,38 +34,43 @@ ContentPage {
                 }
             }
 
-            ColumnLayout {
-                TextIconButton {
-                    icon: "wallpaper"
-                    text: Translation.tr("settings.appearance.random_wallhaven")
-                    padding: Appearance.spacing.md
-                    inactiveColor: Colors.palette.m3surfaceContainerHigh
+            RowLayout {
+                ButtonGroup {
 
-                    checked: RandomWallpaper.isLoading
+                    TextIconButton {
+                        icon: "wallpaper"
+                        text: Translation.tr("settings.appearance.random_wallhaven")
+                        padding: Appearance.spacing.md
+                        inactiveColor: Colors.palette.m3surfaceContainerHigh
 
-                    onClicked: {
-                        RandomWallpaper.fetchWallhaven();
+                        radius: Appearance.rounding.sm
+                        checked: RandomWallpaper.isLoading
+
+                        onClicked: {
+                            RandomWallpaper.fetchWallhaven();
+                        }
+
+                        StyledTooltip {
+                            text: Translation.tr("settings.appearance.random_wallhaven_tooltip")
+                        }
                     }
+                    TextIconButton {
+                        icon: "wallpaper"
+                        text: Translation.tr("settings.appearance.random_konachan")
+                        padding: Appearance.spacing.md
 
-                    StyledTooltip {
-                        text: Translation.tr("settings.appearance.random_wallhaven_tooltip")
-                    }
-                }
+                        inactiveColor: Colors.palette.m3surfaceContainerHigh
 
-                TextIconButton {
-                    icon: "wallpaper"
-                    text: Translation.tr("settings.appearance.random_konachan")
-                    padding: Appearance.spacing.md
-                    inactiveColor: Colors.palette.m3surfaceContainerHigh
+                        radius: Appearance.rounding.sm
+                        checked: RandomWallpaper.isLoading
 
-                    checked: RandomWallpaper.isLoading
+                        onClicked: {
+                            RandomWallpaper.fetchKonachan();
+                        }
 
-                    onClicked: {
-                        RandomWallpaper.fetchKonachan();
-                    }
-
-                    StyledTooltip {
-                        text: Translation.tr("settings.appearance.random_konachan_tooltip")
+                        StyledTooltip {
+                            text: Translation.tr("settings.appearance.random_konachan_tooltip")
+                        }
                     }
                 }
             }
