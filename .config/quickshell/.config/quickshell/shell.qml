@@ -85,7 +85,7 @@ ShellRoot {
     }
     LazyLoader {
         active: root.enableSession
-        component: Session {}
+        component: SessionMenu {}
     }
     LazyLoader {
         active: root.enableNotifications
