@@ -5,6 +5,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import qs.common
+import qs.config
 import qs.widgets
 import qs.services
 import Qt5Compat.GraphicalEffects 
@@ -18,32 +19,32 @@ Item {
 
     readonly property var sessionModel: [
         {
-            label: "Lock",
-            desc: "Lock your screen",
+            label: Translation.tr("session.lock"),
+            desc: Translation.tr("session.desc.lock"),
             icon: "lock",
             action: Session.lock
         },
         {
-            label: "Suspend",
-            desc: "Suspend your device",
+            label: Translation.tr("session.suspend"),
+            desc: Translation.tr("session.desc.suspend"),
             icon: "bedtime",
             action: Session.suspend
         },
         {
-            label: "Logout",
-            desc: "Exit Hyprland",
+            label: Translation.tr("session.logout"),
+            desc: Translation.tr("session.desc.logout"),
             icon: "exit_to_app",
             action: Session.logout
         },
         {
-            label: "Reboot",
-            desc: "Reboot your device",
+            label: Translation.tr("session.reboot"),
+            desc: Translation.tr("session.desc.reboot"),
             icon: "refresh",
             action: Session.reboot
         },
         {
-            label: "Poweroff",
-            desc: "Turn off your device",
+            label: Translation.tr("session.shutdown"),
+            desc: Translation.tr("session.desc.shutdown"),
             icon: "power_settings_new",
             action: Session.poweroff
         }
@@ -123,7 +124,7 @@ Item {
                 Layout.alignment: Qt.AlignHCenter
                 text: root.currentActionLabel
                 size: Appearance.fontSize.lg
-                color: Colors.palette.m3onSurface
+                color: Config.appearance.darkMode ? Colors.palette.m3onSurface : Colors.palette.m3surface
                 weight: 500
                 opacity: text === "" ? 0 : 1
                 Behavior on opacity {
@@ -151,7 +152,7 @@ Item {
             margins: Appearance.spacing.xxl
         }
 
-        text: "Uptime: " + Time.uptime
+        text: `${Translation.tr("session.uptime")}: ${Time.uptime}`
         color: Colors.palette.m3outline
     }
 }

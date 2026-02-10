@@ -51,12 +51,20 @@
       "clear_all": "Очистить все уведомления"
     }
   },
-  "powermenu": {
+  "session": {
+    "uptime": "Время работы",
     "lock": "Заблокировать",
     "shutdown": "Выключить",
-    "suspend": "Спящий режим",
-    "restart": "Перезагрузка",
-    "logout": "Выйти"
+    "suspend": "Сон",
+    "reboot": "Перезагрузить",
+    "logout": "Выйти",
+    "desc": {
+      "lock": "Заблокировать экран",
+      "shutdown": "Выключить компьютер",
+      "suspend": "Перевести компьютер в спящий режим",
+      "reboot": "Перезагрузить компьютер",
+      "logout": "Выйти из Hyprland"
+    }
   },
   "settings": {
     "window_title": "quickshell-settings",
@@ -175,7 +183,7 @@
     "wipe": "Очистить",
     "entries": "элементов"
   },
-"appname": {
-        "desktop": "Рабочий стол"
-    }
+  "appname": {
+    "desktop": "Рабочий стол"
+  }
 }
