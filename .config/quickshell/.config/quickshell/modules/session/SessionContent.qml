@@ -8,11 +8,10 @@ import qs.common
 import qs.config
 import qs.widgets
 import qs.services
-import Qt5Compat.GraphicalEffects 
+import Qt5Compat.GraphicalEffects
 
 Item {
     id: root
-
 
     property string currentActionLabel: ""
     property string currentActionDesc: ""
@@ -58,8 +57,7 @@ Item {
         layer.enabled: true
         layer.effect: FastBlur {
             source: bg
-            radius: 64 
-
+            radius: 64
         }
     }
 
@@ -67,6 +65,65 @@ Item {
         id: shadow
         anchors.fill: parent
         color: Colors.alpha(Colors.palette.m3shadow, 0.6)
+    }
+
+    Rectangle {
+        visible: Session.packageManagerRunning || Session.downloadRunning
+
+        anchors {
+            top: parent.top
+            topMargin: Appearance.spacing.xxl
+            horizontalCenter: parent.horizontalCenter
+        }
+
+        implicitWidth: warnContent.implicitWidth + Appearance.spacing.md * 2
+        implicitHeight: warnContent.implicitHeight + Appearance.spacing.md * 2
+
+        radius: Appearance.rounding.full
+
+        color: Colors.palette.m3secondaryContainer
+
+        RowLayout {
+            id: warnContent
+            spacing: Appearance.spacing.lg
+            anchors {
+                centerIn: parent
+            }
+
+            Rectangle {
+                id: warnIconContainer
+                implicitWidth: warnIconContainer.implicitHeight 
+                implicitHeight: warnIcon.implicitHeight + Appearance.spacing.sm * 2
+                radius: Appearance.rounding.full
+                color: Colors.palette.m3error
+
+                MaterialSymbol {
+                    id: warnIcon
+
+                    anchors.centerIn:parent
+
+                    icon: "dangerous"
+                    size: 40
+                    fill: 1
+                    color: Colors.palette.m3errorContainer
+                }
+            }
+
+            ColumnLayout {
+                id: warnText
+
+                StyledText {
+                    text: Translation.tr("session.warning")
+                    weight: 500
+                    size: Appearance.fontSize.lg
+                    color: Colors.palette.m3onSecondaryContainer
+                }
+                StyledText {
+                    text: Session.packageManagerRunning ? Translation.tr("session.pkg_running") : Translation.tr("session.down_running")
+                    color: Colors.palette.m3onSecondaryContainer
+                }
+            }
+        }
     }
 
     ColumnLayout {
@@ -83,6 +140,8 @@ Item {
                 model: root.sessionModel
 
                 Component.onCompleted: {
+                    Session.refresh();
+
                     if (repeater.count > 0)
                         repeater.itemAt(0).forceActiveFocus();
                 }
@@ -110,6 +169,7 @@ Item {
                     KeyNavigation.left: (index > 0) ? repeater.itemAt(index - 1) : repeater.itemAt(repeater.count - 1)
 
                     onClicked: modelData.action()
+                    // onHover: btnDelegate.forceActiveFocus()
                     Keys.onEnterPressed: clicked()
                     Keys.onReturnPressed: clicked()
                 }

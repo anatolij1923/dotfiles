@@ -52,6 +52,9 @@
     }
   },
   "session": {
+    "warning": "Warning",
+    "pkg_running": "Package manager is running!",
+    "down_running": "Download process is running!",
     "uptime": "Uptime",
     "lock": "Lock",
     "shutdown": "Shutdown",
