@@ -7,11 +7,11 @@ import Quickshell.Wayland
 import qs.common
 import qs.widgets
 import qs.services
+import Qt5Compat.GraphicalEffects 
 
-Rectangle {
+Item {
     id: root
 
-    color: Colors.alpha(Colors.palette.m3shadow, 0.4)
 
     property string currentActionLabel: ""
     property string currentActionDesc: ""
@@ -52,18 +52,20 @@ Rectangle {
     ScreencopyView {
         id: bg
         captureSource: root.QsWindow.window?.screen
-        scale: 1.05
         anchors.fill: parent
 
         layer.enabled: true
-        layer.effect: MultiEffect {
+        layer.effect: FastBlur {
             source: bg
-            blur: 1
-            blurEnabled: true
-            brightness: -0.05
+            radius: 64 
 
-            blurMax: 100
         }
+    }
+
+    Rectangle {
+        id: shadow
+        anchors.fill: parent
+        color: Colors.alpha(Colors.palette.m3shadow, 0.6)
     }
 
     ColumnLayout {
@@ -73,7 +75,6 @@ Rectangle {
 
         RowLayout {
             id: buttons
-
             KeyNavigation.tab: repeater.itemAt(0)
 
             Repeater {
@@ -81,9 +82,8 @@ Rectangle {
                 model: root.sessionModel
 
                 Component.onCompleted: {
-                    if (repeater.count > 0) {
+                    if (repeater.count > 0)
                         repeater.itemAt(0).forceActiveFocus();
-                    }
                 }
 
                 delegate: IconButton {
@@ -109,7 +109,6 @@ Rectangle {
                     KeyNavigation.left: (index > 0) ? repeater.itemAt(index - 1) : repeater.itemAt(repeater.count - 1)
 
                     onClicked: modelData.action()
-
                     Keys.onEnterPressed: clicked()
                     Keys.onReturnPressed: clicked()
                 }
@@ -126,28 +125,20 @@ Rectangle {
                 size: Appearance.fontSize.lg
                 color: Colors.palette.m3onSurface
                 weight: 500
-
                 opacity: text === "" ? 0 : 1
                 Behavior on opacity {
-                    NumberAnimation {
-                        duration: 200
-                    }
+                    Anim {}
                 }
             }
 
             StyledText {
                 Layout.alignment: Qt.AlignHCenter
-
                 text: root.currentActionDesc
-
                 size: Appearance.fontSize.md
                 color: Colors.palette.m3outline
-
                 opacity: text === "" ? 0 : 1
                 Behavior on opacity {
-                    NumberAnimation {
-                        duration: 200
-                    }
+                    Anim {}
                 }
             }
         }
