@@ -7,29 +7,14 @@ import qs.services
 import qs.common
 import qs.widgets
 
-Item {
-    id: root
-    implicitWidth: content.implicitWidth
-    implicitHeight: content.implicitHeight
+StatusPillWidget {
+    icon: BluetoothService.icon
 
-    RowLayout {
-        id: content
-
-        spacing: 2
-
-        MaterialSymbol {
-            id: icon
-            icon: BluetoothService.icon
-            color: Colors.palette.m3onSurface
-            size: 22
-        }
-
-        BatteryProgress {
-            visible: BluetoothService.connected
-            implicitHeight: parent.height * 0.85
-            implicitWidth: 6
-            battery: BluetoothService.battery
-        }
+    BatteryProgress {
+        visible: BluetoothService.connected
+        implicitHeight: parent.height * 0.85
+        implicitWidth: 6
+        battery: BluetoothService.battery
     }
 
     component BatteryProgress: Item {

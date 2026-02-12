@@ -1,9 +1,11 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import qs.common
 import qs.widgets
 import qs.services
 import qs
+import qs.modules.bar.components.statusPill.components
 
 Rectangle {
     id: root
@@ -11,7 +13,7 @@ Rectangle {
     property int padding: Appearance.spacing.sm
     property bool quicksettingsOpened: GlobalStates.quicksettingsOpened
 
-    implicitWidth: content.implicitWidth + padding * 2
+    implicitWidth: content.implicitWidth + root.padding
     implicitHeight: parent.height * 0.8
     color: quicksettingsOpened ? Colors.palette.m3secondaryContainer : Colors.palette.m3surface
     radius: Appearance.rounding.xl
@@ -29,56 +31,84 @@ Rectangle {
 
     RowLayout {
         id: content
-        anchors.centerIn: parent
-        spacing: root.padding
+        anchors.left: parent.left
+        anchors.leftMargin: root.padding
+        anchors.verticalCenter: parent.verticalCenter
+        spacing: 0
 
-        KbLayout {}
+        AnimatedItem {
+            condition: true
+            contentItem: KbLayout {
+                quicksettingsOpened: root.quicksettingsOpened
+            }
+        }
 
         AnimatedItem {
             condition: Idle.enabled
-            contentItem: IdleWidget {}
+            contentItem: IdleWidget {
+                quicksettingsOpened: root.quicksettingsOpened
+            }
         }
 
         AnimatedItem {
             condition: SleepTimer.enabled
-            contentItem: SleepTimerWidget {}
+            contentItem: SleepTimerWidget {
+            }
         }
 
         AnimatedItem {
             condition: Notifications.dnd || Notifications.list.length > 0
-            contentItem: NotifWidget {}
+            contentItem: NotifWidget {
+                quicksettingsOpened: root.quicksettingsOpened
+            }
         }
 
         AnimatedItem {
             condition: Audio.sink?.audio?.muted || false
-            contentItem: AudioMutedWidget {}
+            contentItem: AudioMutedWidget {
+                quicksettingsOpened: root.quicksettingsOpened
+            }
         }
 
         AnimatedItem {
             condition: Audio.source?.audio?.muted || false
-            contentItem: MicWidget {}
+            contentItem: MicWidget {
+                quicksettingsOpened: root.quicksettingsOpened
+            }
         }
 
-        NetworkWidget {}
+        AnimatedItem {
+            condition: true
+            contentItem: NetworkWidget {
+                quicksettingsOpened: root.quicksettingsOpened
+            }
+        }
 
         AnimatedItem {
             condition: BluetoothService.enabled
-            contentItem: BluetoothWidget {}
+            contentItem: BluetoothWidget {
+                quicksettingsOpened: root.quicksettingsOpened
+            }
         }
     }
 
     component AnimatedItem: Item {
+        id: itemRoot
         property bool condition: false
         property Component contentItem: null
 
-        Layout.preferredWidth: condition ? loader.implicitWidth : 0
+        readonly property real contentWidth: loader.item ? loader.item.implicitWidth : 22
+
+        implicitWidth: condition ? (contentWidth + root.padding) : 0
+        Layout.preferredWidth: implicitWidth
         Layout.fillHeight: true
 
         opacity: condition ? 1.0 : 0.0
-        scale: condition ? 1.0 : 0.8
+        scale: condition ? 1.0 : 0.5
+
         visible: opacity > 0
 
-        Behavior on Layout.preferredWidth {
+        Behavior on implicitWidth {
             Anim {
                 duration: Appearance.animDuration.expressiveEffects
                 easing.bezierCurve: Appearance.animCurves.expressiveEffects
@@ -101,9 +131,11 @@ Rectangle {
 
         Loader {
             id: loader
-            anchors.centerIn: parent
-            active: parent.condition || parent.opacity > 0
-            sourceComponent: parent.contentItem
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+
+            active: itemRoot.condition || itemRoot.opacity > 0
+            sourceComponent: itemRoot.contentItem
         }
     }
 }
