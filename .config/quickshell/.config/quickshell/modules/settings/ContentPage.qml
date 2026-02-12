@@ -12,7 +12,7 @@ Rectangle {
     default property alias content: contentColumn.children
 
     color: Colors.palette.m3surface
-    radius: Appearance.rounding.xl
+    radius: Appearance.rounding.lg
     clip: true
 
     ColumnLayout {
