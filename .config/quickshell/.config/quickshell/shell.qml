@@ -24,113 +24,23 @@ import qs.modules.dashboard
 
 ShellRoot {
     id: root
-    property bool enableBar: true
-    property bool enableLauncher: true
-    property bool enableBackground: true
-    // property bool enableReloadPopup: false
-    property bool enableScreenCorners: true
-    property bool enableLock: true
-    property bool enableSession: true
-    property bool enableQuicksettings: true
-    property bool enableNotifications: true
-    property bool enableTit: false
-    property bool enableOsd: true
-    property bool enableOverview: true
-    property bool enablePolkit: true
-    property bool enableSettings: true
-    property bool enablePicker: true
-    property bool enableMediaplayer: true
-    property bool enableDashboard: true
 
     Component.onCompleted: {
         Idle.init();
     }
 
-    // Test {}
-
-    LazyLoader {
-        active: root.enableBar
-        component: Bar {}
-    }
-    LazyLoader {
-        active: root.enableLauncher
-        component: Launcher {}
-    }
-
-    LazyLoader {
-        active: root.enableQuicksettings
-        component: Quicksettings {}
-    }
-
-    LazyLoader {
-        active: root.enableBackground
-        component: Background {}
-    }
-    // LazyLoader {
-    //     active: root.enableReloadPopup
-    //
-    //     component: ReloadPopup {}
-    // }
-
-    LazyLoader {
-        active: root.enableScreenCorners && !Config.bar.floating
-
-        component: ScreenCorners {}
-    }
-
-    LazyLoader {
-        active: root.enableLock
-
-        component: Lock {}
-    }
-    LazyLoader {
-        active: root.enableSession
-        component: SessionMenu {}
-    }
-    LazyLoader {
-        active: root.enableNotifications
-        component: NotificationPopup {}
-    }
-    LazyLoader {
-        active: root.enableTit
-        component: Tit {}
-    }
-    LazyLoader {
-        active: root.enableOsd
-        component: OSD {}
-    }
-    LazyLoader {
-        active: root.enableOverview
-        component: Overview {}
-    }
-
-    LazyLoader {
-        active: root.enablePolkit
-        component: Polkit {}
-    }
-
-    LazyLoader {
-        active: root.enableSettings
-        component: Settings {}
-    }
-
-    LazyLoader {
-        active: root.enablePicker
-        component: Picker {}
-    }
-
-    LazyLoader {
-        active: Config.ready && !Config.system.dotfilesActivated
-        component: ActivateDotfiles {}
-    }
-
-    LazyLoader {
-        active: root.enableMediaplayer
-        component: MediaPlayer {}
-    }
-
-    LazyLoader {
-        active: root.enableDashboard
-        component: Dashboard {}
-    }
+    Bar {}
+    ScreenCorners {}
+    Quicksettings {}
+    Launcher {}
+    Dashboard {}
+    Settings {}
+    Picker {}
+    Overview {}
+    SessionMenu {}
+    Lock {}
+    NotificationPopup {}
+    Background {}
+    OSD {}
+    Polkit {}
 }
