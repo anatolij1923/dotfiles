@@ -7,6 +7,7 @@ import qs.services
 import qs.config
 import QtQuick
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Io
 import Quickshell.Services.Pipewire
 
@@ -76,6 +77,13 @@ Singleton {
         target: "audio"
         function micToggle(): void {
             Audio.source.audio.muted = !Audio.source.audio.muted;
+        }
+    }
+
+    GlobalShortcut {
+        name: "muteMic"
+        onPressed: {
+            Audio.source.audio.muted = !Audio.source.audio.muted
         }
     }
 }
