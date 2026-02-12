@@ -18,7 +18,7 @@ Singleton {
     property string schemeType: Config.appearance.theming.schemeType
     property string wallpaperPath: Config.background.wallpaperPath
 
-    readonly property var colors: JSON.parse(colorsFile.text()).colors[isDarkMode ? "dark" : "light"]
+    readonly property var colors: ready && JSON.parse(colorsFile.text()).colors[isDarkMode ? "dark" : "light"]
 
     function mix(c1, c2, weight = 0.5) {
         let a = Qt.color(c1);
