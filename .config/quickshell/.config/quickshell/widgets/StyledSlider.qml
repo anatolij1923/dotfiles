@@ -38,6 +38,11 @@ Slider {
     property real handleMargins: 4
     property real trackDotSize: 3
     property string tooltipContent: `${Math.round(value * 100)}%`
+    property bool wavy: configuration === StyledSlider.Configuration.Wavy // If true, the progress bar will have a wavy fill effect
+    property bool animateWave: true
+    property real waveAmplitudeMultiplier: wavy ? 0.5 : 0
+    property real waveFrequency: 6
+    property real waveFps: 60
 
     leftPadding: handleMargins
     rightPadding: handleMargins
@@ -92,6 +97,7 @@ Slider {
 
             width: root.handleMargins + (root.visualPosition * root.effectiveDraggingWidth) - (root.handleWidth / 2 + root.handleMargins)
             height: root.trackWidth
+            active: !root.wavy
             sourceComponent: Rectangle {
                 color: root.highlightColor
                 Behavior on color {
@@ -101,6 +107,40 @@ Slider {
                 bottomLeftRadius: root.trackRadius
                 topRightRadius: root.unsharpenRadius
                 bottomRightRadius: root.unsharpenRadius
+            }
+        }
+
+        Loader {
+            anchors {
+                verticalCenter: parent.verticalCenter
+                left: parent.left
+            }
+            width: root.handleMargins + (root.visualPosition * root.effectiveDraggingWidth) - (root.handleWidth / 2 + root.handleMargins)
+            height: root.height
+            active: root.wavy
+            sourceComponent: Wave {
+                id: wavyFill
+                frequency: root.waveFrequency
+                fullLength: root.width
+                color: root.highlightColor
+                amplitudeMultiplier: root.wavy ? 0.5 : 0
+                width: root.handleMargins + (root.visualPosition * root.effectiveDraggingWidth) - (root.handleWidth / 2 + root.handleMargins)
+                height: root.trackWidth
+                Connections {
+                    target: root
+                    function onValueChanged() {
+                        wavyFill.requestPaint();
+                    }
+                    function onHighlightColorChanged() {
+                        wavyFill.requestPaint();
+                    }
+                }
+                FrameAnimation {
+                    running: root.animateWave
+                    onTriggered: {
+                        wavyFill.requestPaint();
+                    }
+                }
             }
         }
 

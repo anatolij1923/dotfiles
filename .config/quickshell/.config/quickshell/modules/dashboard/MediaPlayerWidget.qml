@@ -221,8 +221,9 @@ Item {
             visible: root.expanded
             opacity: root.expanded ? 1 : 0
             value: pressed ? value : root.currentProgress
-            handleHeight: 12
+            handleHeight: 18
             configuration: StyledSlider.Configuration.XS
+            wavy: true
 
             tooltipContent: root.formatTime(value * (root.player?.length || 0))
 
