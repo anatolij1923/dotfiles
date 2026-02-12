@@ -52,7 +52,7 @@ Rectangle {
     color: root.enabled ? (root.internalChecked ? root.activeColor : root.inactiveColor) : Qt.alpha(root.inactiveColor, 0.5)
     Behavior on color {
         CAnim {
-            duration: Appearance.animDuration.expressiveEffects
+            duration: Appearance.animDuration.lg
         }
     }
 
@@ -87,11 +87,10 @@ Rectangle {
         opacity: root.enabled ? 1.0 : 0.5
 
         Behavior on color {
-            CAnim {}
+            CAnim {
+                duration: Appearance.animDuration.lg
+            }
         }
-        // Behavior on opacity {
-        //     CAnim {}
-        // }
         Behavior on fill {
             Anim {
                 duration: Appearance.animDuration.expressiveEffects

@@ -51,7 +51,9 @@ Rectangle {
 
     color: root.enabled ? (root.internalChecked ? root.activeColor : root.inactiveColor) : Qt.alpha(root.inactiveColor, 0.5)
     Behavior on color {
-        CAnim {}
+        CAnim {
+            duration: Appearance.animDuration.lg
+        }
     }
 
     implicitWidth: label.implicitWidth + horizontalPadding * 2.5
@@ -80,6 +82,11 @@ Rectangle {
         id: label
         anchors.centerIn: parent
         color: root.internalChecked ? root.activeOnColor : root.inactiveOnColor
+        Behavior on color {
+            CAnim {
+                duration: Appearance.animDuration.lg
+            }
+        }
         opacity: root.enabled ? 1.0 : 0.5
     }
 }
