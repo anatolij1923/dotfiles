@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Io
 import QtQuick
 import QtQuick.Controls
@@ -66,6 +67,14 @@ Scope {
         }
         function toggle(): void {
             GlobalStates.settingsOpened = !GlobalStates.settingsOpened;
+        }
+    }
+
+    GlobalShortcut {
+        name: "toggleSettings"
+        description: "Toggle settings"
+        onPressed: {
+            GlobalStates.settingsOpened = !GlobalStates.settingsOpened
         }
     }
 }

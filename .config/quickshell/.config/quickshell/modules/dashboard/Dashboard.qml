@@ -58,4 +58,12 @@ Scope {
             GlobalStates.dashboardOpened = !GlobalStates.dashboardOpened;
         }
     }
+
+    GlobalShortcut {
+        name: "toggleDashboard"
+        description: "Toggle dashboard"
+        onPressed: {
+            GlobalStates.dashboardOpened = !GlobalStates.dashboardOpened;
+        }
+    }
 }

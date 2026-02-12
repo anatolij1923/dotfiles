@@ -1,6 +1,7 @@
 pragma Singleton
 
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Io
 import QtQuick
 import qs.config
@@ -53,6 +54,14 @@ Singleton {
         target: "gamemode"
 
         function toggle(): void {
+            root.enable();
+        }
+    }
+
+    GlobalShortcut {
+        name: "toggleGamemode"
+        description: "Toggle game mode"
+        onPressed: {
             root.enable();
         }
     }

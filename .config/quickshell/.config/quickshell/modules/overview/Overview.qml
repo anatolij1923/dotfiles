@@ -85,4 +85,12 @@ Scope {
             GlobalStates.overviewOpened = !GlobalStates.overviewOpened;
         }
     }
+
+    GlobalShortcut {
+        name: "toggleOverview"
+        description: "Toggle overview"
+        onPressed: {
+            GlobalStates.overviewOpened = !GlobalStates.overviewOpened
+        }
+    }
 }

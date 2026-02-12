@@ -75,4 +75,23 @@ Scope {
             root.captureFullscreen("save");
         }
     }
+
+    GlobalShortcut {
+        name: "togglePicker"
+        onPressed: {
+            GlobalStates.pickerOpened = !GlobalStates.pickerOpened
+        }
+    }
+    GlobalShortcut {
+        name: "fullscreenCopy"
+        onPressed: {
+            root.captureFullscreen("copy")
+        }
+    }
+    GlobalShortcut {
+        name: "fullscreenSave"
+        onPressed: {
+            root.captureFullscreen("save")
+        }
+    }
 }
