@@ -94,7 +94,7 @@ Rectangle {
         Behavior on fill {
             Anim {
                 duration: Appearance.animDuration.expressiveEffects
-                easing.type: Appearance.animCurves.emphasized
+                easing.bezierCurve: Appearance.animCurves.emphasized
             }
         }
     }
