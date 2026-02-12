@@ -13,7 +13,7 @@ import qs.modules.bar.components.tray
 Rectangle {
     id: root
 
-    property int sideMargins: Appearance.spacing.md
+    property int sideMargins: Appearance.spacing.lg
     property int contentSpacing: Appearance.spacing.md
 
     property real alpha: Config.appearance.transparency.alpha
@@ -21,7 +21,7 @@ Rectangle {
 
     radius: Config.bar.floating ? Appearance.rounding.xl : 0
 
-    color: transparent ? Qt.alpha(Colors.palette.m3surface, alpha) : Colors.palette.m3surface
+    color: transparent ? Colors.alpha(Colors.palette.m3surface, alpha) : Colors.palette.m3surface
 
     RowLayout {
         anchors {
