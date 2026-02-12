@@ -102,6 +102,9 @@ Item {
                 Behavior on size {
                     Anim {}
                 }
+                Behavior on color {
+                    CAnim {}
+                }
             }
         }
     }
