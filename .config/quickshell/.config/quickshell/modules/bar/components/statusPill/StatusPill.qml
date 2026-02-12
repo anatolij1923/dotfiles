@@ -95,21 +95,21 @@ Rectangle {
 
         Behavior on implicitWidth {
             Anim {
-                duration: Appearance.animDuration.expressiveEffects * 10
+                duration: Appearance.animDuration.expressiveEffects
                 easing.bezierCurve: Appearance.animCurves.expressiveEffects
             }
         }
 
         Behavior on opacity {
             Anim {
-                duration: Appearance.animDuration.expressiveEffects * 10
+                duration: Appearance.animDuration.expressiveEffects
                 easing.bezierCurve: Appearance.animCurves.expressiveEffects
             }
         }
 
         Behavior on scale {
             Anim {
-                duration: Appearance.animDuration.expressiveEffects * 10
+                duration: Appearance.animDuration.expressiveEffects
                 easing.bezierCurve: Appearance.animCurves.expressiveEffects
             }
         }
