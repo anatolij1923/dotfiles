@@ -154,11 +154,26 @@ WlSessionLockSurface {
                     radius: Appearance.rounding.full
                     implicitWidth: kbLayout.implicitWidth + 32
                     implicitHeight: 56
-                    KbLayout {
-                        id: kbLayout
+                    
+                    RowLayout {
                         anchors.centerIn: parent
-                        showIcon: true
+                        id: kbLayout
+                        MaterialSymbol {
+                            icon: "language"
+                            size: 24
+                            color: Colors.palette.m3onSurface
+                        }
+
+                        StyledText {
+                            text: WmService.isNiri ? NiriService.currentLayout : HyprlandData.currentLayoutCode
+                        }
                     }
+
+                    // KbLayout {
+                    //     id: kbLayout
+                    //     anchors.centerIn: parent
+                    //     showIcon: true
+                    // }
                 }
 
                 Rectangle {
