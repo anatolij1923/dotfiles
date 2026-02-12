@@ -89,7 +89,7 @@ Rectangle {
         Layout.fillHeight: true
 
         opacity: condition ? 1.0 : 0.0
-        scale: condition ? 1.0 : 0.1
+        scale: condition ? 1.0 : 0.5
 
         visible: opacity > 0
 
