@@ -270,6 +270,41 @@ Scope {
         }
     }
 
+    GlobalShortcut {
+        name: "toggleLauncher"
+        description: "Open launcher window"
+        onPressed: {
+            GlobalStates.launcherOpened = !GlobalStates.launcherOpened;
+        }
+    }
+
+    GlobalShortcut {
+        name: "launcherWallMode"
+        description: "Open launcher in wallpaper mode"
+        onPressed: {
+            root.searchingText = ":wallpaper ";
+            GlobalStates.launcherOpened = true;
+        }
+    }
+
+    GlobalShortcut {
+        name: "launcherClipboardMode"
+        description: "Open launcher in clipboard mode"
+        onPressed: {
+            root.searchingText = ":clipboard ";
+            GlobalStates.launcherOpened = true;
+        }
+    }
+
+    GlobalShortcut {
+        name: "launcherEmojiMode"
+        description: "Open launcher in emoji mode"
+        onPressed: {
+            root.searchingText = ":emoji ";
+            GlobalStates.launcherOpened = true;
+        }
+    }
+
     Connections {
         target: GlobalStates
         function onLauncherOpenedChanged() {
