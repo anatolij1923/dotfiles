@@ -11,7 +11,8 @@ Rectangle {
     property int padding: Appearance.spacing.sm
     property bool quicksettingsOpened: GlobalStates.quicksettingsOpened
 
-    implicitWidth: content.implicitWidth + Appearance.spacing.sm * 2
+
+    implicitWidth: content.implicitWidth + padding * 2
     implicitHeight: parent.height * 0.8
     color: quicksettingsOpened ? Colors.palette.m3secondaryContainer : Colors.palette.m3surface
     radius: Appearance.rounding.xl

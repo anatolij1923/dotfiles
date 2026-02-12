@@ -8,10 +8,9 @@ import qs.widgets
 
 Rectangle {
     id: root
-    anchors.fill: parent
 
-    property int sideMargins: Appearance.spacing.xl
-    property int contentSpacing: Appearance.spacing.lg
+    property int sideMargins: Appearance.spacing.md
+    property int contentSpacing: Appearance.spacing.md
 
     property real alpha: Config.appearance.transparency.alpha
     property bool transparent: Config.appearance.transparency.enabled
@@ -35,23 +34,6 @@ Rectangle {
         AppName {}
     }
 
-    // Media {
-    //     anchors {
-    //         right: clock.left
-    //         verticalCenter: parent.verticalCenter
-    //         rightMargin: Appearance.spacing.xs
-    //     }
-    // }
-
-    // UsageInfo {
-    //     id: usageInfo
-    //     anchors {
-    //         right: clock.left
-    //         rightMargin: Appearance.spacing.xs
-    //         verticalCenter: parent.verticalCenter
-    //     }
-    // }
-
     ClockWidget {
         id: clock
         anchors {
@@ -61,32 +43,14 @@ Rectangle {
         }
     }
 
-    // WeatherWidget {
-    //     id: weather
-    //     anchors {
-    //         left: clock.right
-    //         leftMargin: Appearance.spacing.xs
-    //         verticalCenter: parent.verticalCenter
-    //     }
-    // }
-
-    // Tools {
-    //     id: tools
-    //     anchors {
-    //         left: weather.right
-    //         leftMargin: Appearance.spacing.xs
-    //         verticalCenter: parent.verticalCenter
-    //     }
-    // }
-
     RowLayout {
         id: rightSide
 
         anchors {
             right: parent.right
+            rightMargin: root.sideMargins
             top: parent.top
             bottom: parent.bottom
-            rightMargin: root.sideMargins
         }
 
         spacing: root.contentSpacing

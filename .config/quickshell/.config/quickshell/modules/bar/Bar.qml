@@ -42,6 +42,8 @@ StyledWindow {
             leftMargin: root.floating ? root.m.horizontal : 0
             rightMargin: root.floating ? root.m.horizontal : 0
         }
-        sourceComponent: BarContent {}
+        sourceComponent: BarContent {
+        anchors.fill: parent
+        }
     }
 }
