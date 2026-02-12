@@ -9,7 +9,8 @@ import qs.modules.lock
 import qs.common
 import qs.widgets
 import qs.services
-import qs.modules.bar
+import qs.modules.bar.components
+import qs.modules.bar.components.statusPill.components
 
 WlSessionLockSurface {
     id: root
