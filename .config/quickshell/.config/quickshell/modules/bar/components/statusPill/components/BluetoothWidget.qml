@@ -9,6 +9,7 @@ import qs.widgets
 
 Item {
     id: root
+    property bool quicksettingsOpened
     implicitWidth: content.implicitWidth
     implicitHeight: content.implicitHeight
 
@@ -20,7 +21,10 @@ Item {
         MaterialSymbol {
             id: icon
             icon: BluetoothService.icon
-            color: Colors.palette.m3onSurface
+            color: root.quicksettingsOpened ? Colors.palette.m3onSecondaryContainer : Colors.palette.m3onSurface
+            Behavior on color {
+                CAnim {}
+            }
             size: 22
         }
 

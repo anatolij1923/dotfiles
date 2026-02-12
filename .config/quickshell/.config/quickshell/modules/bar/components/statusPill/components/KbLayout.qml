@@ -11,6 +11,7 @@ Item {
     implicitWidth: row.implicitWidth
     implicitHeight: row.implicitHeight
     property bool showIcon: false
+    property bool quicksettingsOpened
 
     RowLayout {
         id: row
@@ -32,6 +33,10 @@ Item {
             text: WmService.isNiri ? NiriService.currentLayout : HyprlandData.currentLayoutCode
             animate: true
             weight: 400
+            color: root.quicksettingsOpened ? Colors.palette.m3onSecondaryContainer : Colors.palette.m3onSurface
+            Behavior on color {
+                CAnim {}
+            }
             size: Appearance.fontSize.md
         }
     }

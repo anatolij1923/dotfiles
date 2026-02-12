@@ -38,42 +38,57 @@ Rectangle {
 
         AnimatedItem {
             condition: true
-            contentItem: KbLayout {}
+            contentItem: KbLayout {
+                quicksettingsOpened: root.quicksettingsOpened
+            }
         }
 
         AnimatedItem {
             condition: Idle.enabled
-            contentItem: IdleWidget {}
+            contentItem: IdleWidget {
+                quicksettingsOpened: root.quicksettingsOpened
+            }
         }
 
         AnimatedItem {
             condition: SleepTimer.enabled
-            contentItem: SleepTimerWidget {}
+            contentItem: SleepTimerWidget {
+            }
         }
 
         AnimatedItem {
             condition: Notifications.dnd || Notifications.list.length > 0
-            contentItem: NotifWidget {}
+            contentItem: NotifWidget {
+                quicksettingsOpened: root.quicksettingsOpened
+            }
         }
 
         AnimatedItem {
             condition: Audio.sink?.audio?.muted || false
-            contentItem: AudioMutedWidget {}
+            contentItem: AudioMutedWidget {
+                quicksettingsOpened: root.quicksettingsOpened
+            }
         }
 
         AnimatedItem {
             condition: Audio.source?.audio?.muted || false
-            contentItem: MicWidget {}
+            contentItem: MicWidget {
+                quicksettingsOpened: root.quicksettingsOpened
+            }
         }
 
         AnimatedItem {
             condition: true
-            contentItem: NetworkWidget {}
+            contentItem: NetworkWidget {
+                quicksettingsOpened: root.quicksettingsOpened
+            }
         }
 
         AnimatedItem {
             condition: BluetoothService.enabled
-            contentItem: BluetoothWidget {}
+            contentItem: BluetoothWidget {
+                quicksettingsOpened: root.quicksettingsOpened
+            }
         }
     }
 
