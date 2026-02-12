@@ -121,6 +121,9 @@ MouseArea {
         anchors.fill: parent
 
         color: Qt.alpha(root.color, root.disabled ? 0 : root.containsMouse ? 0.08 : 0)
+        Behavior on color {
+            CAnim {}
+        }
         radius: root.radius
 
         Item {

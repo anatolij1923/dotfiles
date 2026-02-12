@@ -31,7 +31,7 @@ IconButton {
 
     Elevation {
         anchors.fill: parent
-        level: 3
+        level: root.stateLayer.containsMouse ? 4 : 2
         radius: parent.radius
         opacity: 0.5
         z: -1
