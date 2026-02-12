@@ -13,6 +13,7 @@ ListView {
 
     function activate() {
         if (currentItem) {
+            LauncherStats.recordLaunch(currentItem.modelData.id);
             currentItem.modelData.execute();
             GlobalStates.launcherOpened = false;
         }
