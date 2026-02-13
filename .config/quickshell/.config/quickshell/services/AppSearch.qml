@@ -186,7 +186,11 @@ Singleton {
 
         const result = _performGuess(str);
 
-        iconCache[str] = result;
+        // fix missing icons on hotreload
+        if (iconExists(result)) {
+            iconCache[str] = result;
+        }
+
         return result;
     }
 
