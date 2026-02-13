@@ -48,6 +48,7 @@ ContentPage {
                     }
                 ]
 
+                wrap: true
                 inactiveColor: Colors.palette.m3secondaryContainer
                 currentValue: RandomWallpaper.isLoading ? lastWallpaperSource : ""
 

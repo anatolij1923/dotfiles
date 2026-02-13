@@ -266,6 +266,7 @@ ContentPage {
                     value: "ru"
                 }
             ]
+                wrap: true
             inactiveColor: Colors.palette.m3secondaryContainer
             currentValue: Config.system.locale
             onSelected: val => Config.system.locale = val
