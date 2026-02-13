@@ -40,6 +40,7 @@ ShellRoot {
     SessionMenu {}
     Lock {}
     NotificationPopup {}
+    ActivateDotfiles {}
     Background {}
     OSD {}
     Polkit {}
