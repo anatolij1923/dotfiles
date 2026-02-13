@@ -33,45 +33,30 @@ ContentPage {
                     cache: true
                 }
             }
-
-            RowLayout {
-                ButtonGroup {
-
-                    TextIconButton {
+            ButtonGroup {
+                property string lastWallpaperSource: ""
+                model: [
+                    {
+                        text: Translation.tr("settings.appearance.random_wallhaven"),
+                        value: "wallhaven",
                         icon: "wallpaper"
-                        text: Translation.tr("settings.appearance.random_wallhaven")
-                        padding: Appearance.spacing.md
-                        inactiveColor: Colors.palette.m3surfaceContainerHigh
-
-                        radius: Appearance.rounding.sm
-                        checked: RandomWallpaper.isLoading
-
-                        onClicked: {
-                            RandomWallpaper.fetchWallhaven();
-                        }
-
-                        StyledTooltip {
-                            text: Translation.tr("settings.appearance.random_wallhaven_tooltip")
-                        }
-                    }
-                    TextIconButton {
+                    },
+                    {
+                        text: Translation.tr("settings.appearance.random_konachan"),
+                        value: "konachan",
                         icon: "wallpaper"
-                        text: Translation.tr("settings.appearance.random_konachan")
-                        padding: Appearance.spacing.md
-
-                        inactiveColor: Colors.palette.m3surfaceContainerHigh
-
-                        radius: Appearance.rounding.sm
-                        checked: RandomWallpaper.isLoading
-
-                        onClicked: {
-                            RandomWallpaper.fetchKonachan();
-                        }
-
-                        StyledTooltip {
-                            text: Translation.tr("settings.appearance.random_konachan_tooltip")
-                        }
                     }
+                ]
+
+                inactiveColor: Colors.palette.m3secondaryContainer
+                currentValue: RandomWallpaper.isLoading ? lastWallpaperSource : ""
+
+                onSelected: val => {
+                    lastWallpaperSource = val;
+                    if (val === "wallhaven")
+                        RandomWallpaper.fetchWallhaven();
+                    else
+                        RandomWallpaper.fetchKonachan();
                 }
             }
         }
@@ -125,53 +110,139 @@ ContentPage {
         }
 
         ButtonGroup {
-            Repeater {
-                model: ["Tonal Spot", "Content", "Expressive", "Fidelity", "Fruit Salad"]
-
-                delegate: TextButton {
-                    readonly property string schemeId: "scheme-" + modelData.toLowerCase().replace(" ", "-")
-
-                    text: modelData
-                    checked: Config.appearance.theming.schemeType === schemeId
-
-                    inactiveColor: Colors.palette.m3secondaryContainer
-                    radius: checked ? Appearance.rounding.xl : Appearance.rounding.sm
-
-                    verticalPadding: Appearance.spacing.md
-                    horizontalPadding: Appearance.spacing.xl
-
-                    onClicked: {
-                        Config.appearance.theming.schemeType = schemeId;
-                        Colors.generateColors();
-                    }
-                }
-            }
-        }
-        ButtonGroup {
-            Repeater {
-                model: ["Monochrome", "Neutral", "Rainbow", "Vibrant"]
-
-                delegate: TextButton {
-                    readonly property string schemeId: "scheme-" + modelData.toLowerCase().replace(" ", "-")
-
-                    text: modelData
-                    checked: Config.appearance.theming.schemeType === schemeId
-
-                    inactiveColor: Colors.palette.m3secondaryContainer
-                    radius: checked ? Appearance.rounding.xl : Appearance.rounding.sm
-
-                    verticalPadding: Appearance.spacing.md
-                    horizontalPadding: Appearance.spacing.xl
-
-                    onClicked: {
-                        Config.appearance.theming.schemeType = schemeId;
-                        Colors.generateColors();
-                    }
-                }
+            model: ["Tonal Spot", "Content", "Expressive", "Fidelity", "Fruit Salad", "Monochrome", "Neutral", "Rainbow", "Vibrant"].map(n => ({
+                        text: n,
+                        value: "scheme-" + n.toLowerCase().replace(" ", "-")
+                    }))
+            wrap: true
+            inactiveColor: Colors.palette.m3secondaryContainer
+            currentValue: Config.appearance.theming.schemeType
+            onSelected: val => {
+                Config.appearance.theming.schemeType = val;
+                Colors.generateColors();
             }
         }
 
-        
+        // ButtonGroup {
+        //     // Убираем ClippingRectangle или ставим ему color: transparent,
+        //     // так как теперь кнопки сами отвечают за свои углы.
+        //
+        //     Repeater {
+        //         id: schemes // Даем ID, чтобы обращаться к schemes.count
+        //         model: ["Tonal Spot", "Content", "Expressive", "Fidelity", "Fruit Salad", "Monochrome", "Neutral", "Rainbow", "Vibrant"]
+        //
+        //         delegate: TextButton {
+        //             readonly property string schemeId: "scheme-" + modelData.toLowerCase().replace(" ", "-")
+        //
+        //             text: modelData
+        //             checked: Config.appearance.theming.schemeType === schemeId
+        //
+        //             radius: {
+        //                 if (checked) {
+        //                     return Appearance.rounding.xl;
+        //                 } else {
+        //                     return Appearance.rounding.sm;
+        //                 }
+        //             }
+        //
+        //             topLeftRadius: {
+        //                 if (index === 0) {
+        //                     return Appearance.rounding.xl;
+        //                 }
+        //             }
+        //             bottomLeftRadius: {
+        //                 if (index === 0) {
+        //                     return Appearance.rounding.xl;
+        //                 }
+        //             }
+        //             topRightRadius: {
+        //                 if (index === schemes.count - 1) {
+        //                     return Appearance.rounding.xl;
+        //                 }
+        //             }
+        //             bottomRightRadius: {
+        //                 if (index === schemes.count - 1) {
+        //                     return Appearance.rounding.xl;
+        //                 }
+        //             }
+        //
+        //             // ЛОГИКА Скругления (M3 Style):
+        //             // radius: {
+        //             //     // 1. Если кнопка выбрана — она всегда "капсула" (максимальный радиус)
+        //             //     if (checked)
+        //             //         return Appearance.rounding.xl;
+        //             //
+        //             //     // 2. Если это первая кнопка в списке
+        //             //     if (index === 0)
+        //             //         return Appearance.rounding.lg;
+        //             //
+        //             //     // 3. Если это последняя кнопка в списке
+        //             //     if (index === schemes.count - 1)
+        //             //         return Appearance.rounding.lg;
+        //             //
+        //             //     // 4. Для всех остальных внутренних кнопок
+        //             //     return Appearance.rounding.sm;
+        //             // }
+        //
+        //             // Добавим небольшие отступы, чтобы M3 эффект был заметен
+        //             inactiveColor: Colors.palette.m3secondaryContainer
+        //             verticalPadding: Appearance.spacing.md
+        //             horizontalPadding: Appearance.spacing.xl
+        //
+        //             onClicked: {
+        //                 Config.appearance.theming.schemeType = schemeId;
+        //                 Colors.generateColors();
+        //             }
+        //         }
+        //     }
+        // }
+        //
+        // ButtonGroup {
+        //     Repeater {
+        //         model: ["Tonal Spot", "Content", "Expressive", "Fidelity", "Fruit Salad"]
+        //
+        //         delegate: TextButton {
+        //             readonly property string schemeId: "scheme-" + modelData.toLowerCase().replace(" ", "-")
+        //
+        //             text: modelData
+        //             checked: Config.appearance.theming.schemeType === schemeId
+        //
+        //             inactiveColor: Colors.palette.m3secondaryContainer
+        //             radius: checked ? Appearance.rounding.xl : Appearance.rounding.sm
+        //
+        //             verticalPadding: Appearance.spacing.md
+        //             horizontalPadding: Appearance.spacing.xl
+        //
+        //             onClicked: {
+        //                 Config.appearance.theming.schemeType = schemeId;
+        //                 Colors.generateColors();
+        //             }
+        //         }
+        //     }
+        // }
+        // ButtonGroup {
+        //     Repeater {
+        //         model: ["Monochrome", "Neutral", "Rainbow", "Vibrant"]
+        //
+        //         delegate: TextButton {
+        //             readonly property string schemeId: "scheme-" + modelData.toLowerCase().replace(" ", "-")
+        //
+        //             text: modelData
+        //             checked: Config.appearance.theming.schemeType === schemeId
+        //
+        //             inactiveColor: Colors.palette.m3secondaryContainer
+        //             radius: checked ? Appearance.rounding.xl : Appearance.rounding.sm
+        //
+        //             verticalPadding: Appearance.spacing.md
+        //             horizontalPadding: Appearance.spacing.xl
+        //
+        //             onClicked: {
+        //                 Config.appearance.theming.schemeType = schemeId;
+        //                 Colors.generateColors();
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     ContentItem {

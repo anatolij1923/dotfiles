@@ -265,6 +265,7 @@ StyledWindow {
             id: toolbar
             visible: root.hasSelection && !root.isDragging && !root.isResizing
             property int margin: 16
+
             implicitWidth: toolbarContent.implicitWidth + Appearance.spacing.md * 2
             implicitHeight: toolbarContent.implicitHeight + Appearance.spacing.md * 2
 
@@ -280,40 +281,40 @@ StyledWindow {
                     return root.rectY + root.rectH + 10;
                 if (root.rectY > needed)
                     return root.rectY - height - 10;
-                return root.rectY + root.rectH - height - 20;
+                return root.rectY - height - 10;
             }
 
             ButtonGroup {
                 id: toolbarContent
                 anchors.centerIn: parent
 
-                TextIconButton {
-                    icon: "content_copy"
-                    text: "Copy"
-                    padding: Appearance.spacing.md
-                    onClicked: root.prepareCapture("copy")
-                    radius: Appearance.rounding.sm
-                }
-                TextIconButton {
-                    icon: "save_as"
-                    text: "Save"
-                    padding: Appearance.spacing.md
-                    radius: Appearance.rounding.sm
-                    onClicked: root.prepareCapture("save")
-                }
-                TextIconButton {
-                    icon: "edit"
-                    text: "Edit"
-                    padding: Appearance.spacing.md
-                    onClicked: root.prepareCapture("edit")
-                    radius: Appearance.rounding.sm
-                }
-                TextIconButton {
-                    icon: "dictionary"
-                    text: "OCR"
-                    padding: Appearance.spacing.md
-                    onClicked: root.prepareCapture("ocr")
-                    radius: Appearance.rounding.sm
+                model: [
+                    {
+                        text: "Copy",
+                        value: "copy",
+                        icon: "content_copy"
+                    },
+                    {
+                        text: "Save",
+                        value: "save",
+                        icon: "save_as"
+                    },
+                    {
+                        text: "Edit",
+                        value: "edit",
+                        icon: "edit"
+                    },
+                    {
+                        text: "OCR",
+                        value: "ocr",
+                        icon: "dictionary"
+                    }
+                ]
+
+                currentValue: ""
+
+                onSelected: val => {
+                    root.prepareCapture(val);
                 }
             }
         }

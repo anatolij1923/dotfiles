@@ -256,28 +256,19 @@ ContentPage {
         title: Translation.tr("settings.system.language")
 
         ButtonGroup {
-            TextButton {
-                text: "en"
-                inactiveColor: Colors.palette.m3secondaryContainer
-                verticalPadding: Appearance.spacing.md
-                horizontalPadding: Appearance.spacing.xl
-                checked: Config.system.locale === "en"
-                radius: checked ? Appearance.rounding.xl : Appearance.rounding.sm
-                onClicked: {
-                    Config.system.locale = text;
+            model: [
+                {
+                    text: "en",
+                    value: "en"
+                },
+                {
+                    text: "ru",
+                    value: "ru"
                 }
-            }
-            TextButton {
-                text: "ru"
-                inactiveColor: Colors.palette.m3secondaryContainer
-                verticalPadding: Appearance.spacing.md
-                horizontalPadding: Appearance.spacing.xl
-                checked: Config.system.locale === "ru"
-                radius: checked ? Appearance.rounding.xl : Appearance.rounding.sm
-                onClicked: {
-                    Config.system.locale = text;
-                }
-            }
+            ]
+            inactiveColor: Colors.palette.m3secondaryContainer
+            currentValue: Config.system.locale
+            onSelected: val => Config.system.locale = val
         }
     }
 }
