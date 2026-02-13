@@ -86,7 +86,9 @@ Singleton {
                     return a.name.localeCompare(b.name);
                 });
                 // Return top 8 most used apps
-                return topApps.slice(0, 8);
+                // return topApps.slice(0, 8);
+                // Or return all apps
+                return topApps
             } else {
                 // Return standard alphabetical list
                 return list;
