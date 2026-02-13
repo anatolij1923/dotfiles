@@ -34,7 +34,7 @@ Scope {
 
             Corners {
                 corners: Config.bar.bottom ? [2, 3] : [0, 1]
-                cornerHeight: 24
+                cornerHeight: 27
                 cornerType: "inverted"
                 color: cornersRoot.transparent ? Qt.alpha(Colors.palette.m3surface, cornersRoot.alpha) : Colors.palette.m3surface
                 Behavior on color {
