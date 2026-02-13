@@ -67,9 +67,7 @@ Singleton {
      * Fuzzy search for applications with optional Frecency integration.
      */
     function fuzzyQuery(search: string): var {
-        // ---------------------------------------------------------
-        // 1. EMPTY SEARCH STRATEGY
-        // ---------------------------------------------------------
+        // 1. Empty search strategy
         if (!search || search.trim() === "") {
             // Reset highlights
             list.forEach(entry => {
@@ -97,9 +95,7 @@ Singleton {
 
         const lowerSearch = search.toLowerCase();
 
-        // ---------------------------------------------------------
-        // 2. ACTIVE SEARCH STRATEGY
-        // ---------------------------------------------------------
+        // 2. Active search strategy
 
         // Get raw fuzzy results
         // threshold: -5000 filters out irrelevant noise
@@ -130,7 +126,7 @@ Singleton {
             }
             entry.highlightedName = highlighted;
 
-            // --- SCORE CALCULATION ---
+            // Score calculation
 
             let baseScore = 0;
             const lowerName = entry.name.toLowerCase();
@@ -166,7 +162,7 @@ Singleton {
                 // Cap the bonus to 500 so stats never override Tiers
                 // (e.g. Tier 4 with high stats should not beat Tier 2)
                 if (statsBonus > 500)
-                    statsBonus = 500; 
+                    statsBonus = 500;
             }
 
             // Final combined score
