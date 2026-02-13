@@ -5,6 +5,8 @@ JsonObject {
     property Sizes sizes: Sizes {}
     property int maxShown: 8
 
+    property bool useStatsForApps: true
+
     property string wallpaperDir: `${Paths.strip(Paths.pictures)}/wallpapers`
     property string prefix: ":"
 

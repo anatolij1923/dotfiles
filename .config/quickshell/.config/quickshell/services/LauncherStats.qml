@@ -18,10 +18,6 @@ Singleton {
     // Path to the stats file in user cache
     readonly property string statsPath: Paths.strip(Paths.cache) + "/quickshell/launcherstats.json"
 
-    Component.onCompleted: {
-        Logger.i("STATS", "Singleton initialized");
-    }
-
     FileView {
         id: statsFile
         path: root.statsPath
@@ -51,14 +47,14 @@ Singleton {
                 Logger.e("STATS", "Failed to load stats: " + err);
             }
         }
-        
-        onSaved: Logger.s("STATS", "Statistics saved to disk");
+
+        onSaved: Logger.s("STATS", "Statistics saved to disk")
     }
 
     // Write debounce: wait 500ms after last change before writing to disk
     Timer {
         id: saveTimer
-        interval: 500 
+        interval: 500
         onTriggered: {
             let jsonString = JSON.stringify(root.stats);
             statsFile.setText(jsonString);
@@ -70,20 +66,24 @@ Singleton {
      * @param appId - The application ID (usually .desktop filename)
      */
     function recordLaunch(appId) {
-        if (!appId) return;
+        if (!appId)
+            return;
 
-        let current = root.stats[appId] || { count: 0, last: 0 };
-        
+        let current = root.stats[appId] || {
+            count: 0,
+            last: 0
+        };
+
         root.stats[appId] = {
             count: (current.count || 0) + 1,
             last: Date.now()
         };
 
         // Notify QML about object changes
-        root.statsChanged(); 
-        
+        root.statsChanged();
+
         saveTimer.restart();
-        
+
         Logger.i("STATS", `Recorded launch: ${appId} (Total: ${root.stats[appId].count})`);
     }
 
@@ -93,7 +93,8 @@ Singleton {
      */
     function getScore(appId) {
         const data = root.stats[appId];
-        if (!data || !data.count) return 0;
+        if (!data || !data.count)
+            return 0;
 
         const now = Date.now();
         const diffMs = now - (data.last || 0);

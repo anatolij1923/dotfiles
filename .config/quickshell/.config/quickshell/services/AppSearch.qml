@@ -4,6 +4,7 @@ import qs.common.functions
 import Quickshell
 import QtQuick
 import qs.common
+import qs.config // Import Config to access useStatsForApps
 
 /**
  * Service for application searching and icon resolution with caching.
@@ -63,74 +64,118 @@ Singleton {
             }))
 
     /**
-     * Fuzzy search for applications with Frecency integration.
+     * Fuzzy search for applications with optional Frecency integration.
      */
     function fuzzyQuery(search: string): var {
-        // 1. Empty Search: Return Top-8 most used apps
+        // ---------------------------------------------------------
+        // 1. EMPTY SEARCH STRATEGY
+        // ---------------------------------------------------------
         if (!search || search.trim() === "") {
             // Reset highlights
             list.forEach(entry => {
                 entry.highlightedName = undefined;
             });
 
-            // Create a copy to sort by frecency score
-            let topApps = [...list];
-            topApps.sort((a, b) => {
-                let scoreA = LauncherStats.getScore(a.id);
-                let scoreB = LauncherStats.getScore(b.id);
-                
-                // Sort by score DESC
-                if (scoreA !== scoreB) return scoreB - scoreA;
-                
-                // Fallback: Sort by name ASC
-                return a.name.localeCompare(b.name);
-            });
-
-            // Return only the top 8 (simulate "Recents" view)
-            // You can remove .slice(0, 8) if you want to show ALL apps sorted by frequency
-            // return topApps.slice(0, 8);
-            return topApps
+            // Check if stats are enabled in config
+            if (Config.launcher.useStatsForApps) {
+                // Copy and sort by usage score
+                let topApps = [...list];
+                topApps.sort((a, b) => {
+                    let scoreA = LauncherStats.getScore(a.id);
+                    let scoreB = LauncherStats.getScore(b.id);
+                    if (scoreA !== scoreB)
+                        return scoreB - scoreA;
+                    return a.name.localeCompare(b.name);
+                });
+                // Return top 8 most used apps
+                return topApps.slice(0, 8);
+            } else {
+                // Return standard alphabetical list
+                return list;
+            }
         }
 
-        // 2. Active Search: Fuzzy + Frecency
+        const lowerSearch = search.toLowerCase();
+
+        // ---------------------------------------------------------
+        // 2. ACTIVE SEARCH STRATEGY
+        // ---------------------------------------------------------
+
+        // Get raw fuzzy results
+        // threshold: -5000 filters out irrelevant noise
         const searchResults = Fuzzy.go(search, preppedNames, {
             all: true,
-            key: "name"
+            key: "name",
+            threshold: -5000
         });
-        
-        // Get name-only results for highlighting purposes
+
+        // Prepare highlighting map
         const nameOnlyResults = Fuzzy.go(search, preppedNamesOnly, {
             all: true,
             key: "name"
         });
-        
-        // Map for highlighting lookup
         const nameHighlightMap = {};
-        nameOnlyResults.forEach(nameResult => {
-            const entryId = nameResult.obj.entry.id;
-            nameHighlightMap[entryId] = nameResult;
+        nameOnlyResults.forEach(nr => {
+            nameHighlightMap[nr.obj.entry.id] = nr;
         });
-        
+
         return searchResults.map(r => {
             const entry = r.obj.entry;
             const nameResult = nameHighlightMap[entry.id];
-            
+
             // Highlight logic
-            let highlighted = entry.name; 
+            let highlighted = entry.name;
             if (nameResult) {
                 highlighted = nameResult.highlight(`<u><font color="${Colors.palette.m3primary}">`, "</font></u>");
             }
             entry.highlightedName = highlighted;
 
-            // --- Frecency Logic ---
-            const fScore = LauncherStats.getScore(entry.id);
-            
-            // Combine Fuzzy Score (usually negative) with Frecency Bonus.
-            // Multiplier 10 makes usage history significant but preserves fuzzy accuracy.
-            entry.combinedScore = r.score + (fScore * 10);
+            // --- SCORE CALCULATION ---
+
+            let baseScore = 0;
+            const lowerName = entry.name.toLowerCase();
+            const lowerId = entry.id.toLowerCase();
+            const lowerExec = (entry.exec || "").toLowerCase();
+
+            // TIER 1: Exact start of name (Highest Priority)
+            // Ex: "fire" -> "Firefox"
+            if (lowerName.startsWith(lowerSearch)) {
+                baseScore = 100000;
+            } else
+            // TIER 2: Contains the full word
+            // Ex: "code" -> "Visual Studio Code"
+            if (lowerName.includes(lowerSearch)) {
+                baseScore = 50000;
+            } else
+            // TIER 3: Match in ID or Exec command
+            // Ex: "code" -> "cursor" (if id=cursor.desktop)
+            if (lowerId.includes(lowerSearch) || lowerExec.includes(lowerSearch)) {
+                baseScore = 10000;
+            } else
+            // TIER 4: Pure Fuzzy (characters exist but scattered)
+            // Keeps original library score (negative value)
+            {
+                baseScore = r.score;
+            }
+
+            // BONUS: Frecency Stats
+            // Only apply if enabled in config
+            let statsBonus = 0;
+            if (Config.launcher.useStatsForApps) {
+                statsBonus = LauncherStats.getScore(entry.id);
+                // Cap the bonus to 500 so stats never override Tiers
+                // (e.g. Tier 4 with high stats should not beat Tier 2)
+                if (statsBonus > 500)
+                    statsBonus = 500; 
+            }
+
+            // Final combined score
+            entry._finalScore = baseScore + statsBonus;
 
             return entry;
-        }).sort((a, b) => b.combinedScore - a.combinedScore); // Sort by combined score
+        })
+        // Filter out very poor matches
+        .filter(entry => entry._finalScore > -2000).sort((a, b) => b._finalScore - a._finalScore);
     }
 
     /**
@@ -220,6 +265,5 @@ Singleton {
 
     Component.onCompleted: {
         fuzzyQuery("");
-        Logger.i("AppSearch", "Initialized. Stats Ready: " + LauncherStats.ready);
     }
 }

@@ -116,7 +116,9 @@
       "wallpaper_height": "Высота обоев",
       "commands": "Команды",
       "commands_hint": "Настройка команд доступна в файле config.json",
-      "total_commands": "Всего команд: %1"
+      "total_commands": "Всего команд: %1",
+      "stats": "Статистика",
+      "stats_label": "Использовать статистику для недавних приложений"
     },
     "system": {
       "title": "Система",
