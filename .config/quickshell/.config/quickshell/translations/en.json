@@ -162,10 +162,11 @@
     },
     "about": {
       "title": "About",
-      "chroma_shell": "Chroma Shell",
-      "chroma_settings": "Chroma Shell Settings",
-      "description": "A modern, customizable shell environment built with Quickshell",
-      "activate_dotfiles": "Activate dotfiles"
+      "shell_name": "Not yet named shell",
+      "activate_dotfiles": "Activate dotfiles",
+      "open_repo": "Open repo",
+      "open_repo_tooltip": "Open repository in your browser",
+        "stop_it": "STOP IT!!!"
     }
   },
   "lock": {

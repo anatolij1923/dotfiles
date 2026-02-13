@@ -162,10 +162,11 @@
     },
     "about": {
       "title": "О программе",
-      "chroma_shell": "Chroma Shell",
-      "chroma_settings": "Настройки Chroma Shell",
-      "description": "Современная настраиваемая оболочка, созданная на базе Quickshell",
-      "activate_dotfiles": "Активировать дотфайлы"
+      "shell_name": "Пока не названный шелл",
+      "activate_dotfiles": "Активировать дотфайлы",
+      "open_repo": "Открыть репозиторий",
+      "open_repo_tooltip": "Открыть репозиторий в браузере",
+      "stop_it": "ХВАТИТ!!!"
     }
   },
   "lock": {
