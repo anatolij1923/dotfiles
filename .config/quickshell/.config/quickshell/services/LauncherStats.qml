@@ -3,6 +3,7 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 import qs.common
+import qs.config
 
 /**
  * Singleton for tracking application launch statistics (Frecency).
@@ -66,6 +67,9 @@ Singleton {
      * @param appId - The application ID (usually .desktop filename)
      */
     function recordLaunch(appId) {
+        if (!Config.launcher.useStatsForApps)
+            return;
+
         if (!appId)
             return;
 
