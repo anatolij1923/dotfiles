@@ -166,7 +166,7 @@
       "activate_dotfiles": "Activate dotfiles",
       "open_repo": "Open repo",
       "open_repo_tooltip": "Open repository in your browser",
-        "stop_it": "STOP IT!!!"
+      "stop_it": "STOP IT!!!"
     }
   },
   "lock": {
@@ -191,5 +191,9 @@
   },
   "appname": {
     "desktop": "Desktop"
+  },
+  "activation": {
+    "label": "Activate Dotfiles",
+    "desc": "Go to settings to activate dotfiles"
   }
 }

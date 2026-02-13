@@ -35,12 +35,12 @@ Scope {
                 anchors.centerIn: parent
                 opacity: 0.8
                 StyledText {
-                    text: "Activate Dotfiles"
+                    text: Translation.tr("activation.label")
                     size: Appearance.fontSize.xl
                     weight: 500
                 }
                 StyledText {
-                    text: "Go to settings to activate dotfiles"
+                    text: Translation.tr("activation.desc")
                     size: Appearance.fontSize.lg
                 }
             }
