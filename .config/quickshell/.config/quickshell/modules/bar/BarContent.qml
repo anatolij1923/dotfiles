@@ -1,10 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
 import qs.services
 import qs.config
 import qs.common
-import qs.widgets
 import qs.modules.bar.components
 import qs.modules.bar.components.statusPill
 import qs.modules.bar.components.tray

@@ -116,7 +116,9 @@
       "wallpaper_height": "Wallpaper height",
       "commands": "Commands",
       "commands_hint": "Commands configuration is available in config.json file",
-      "total_commands": "Total commands: %1"
+      "total_commands": "Total commands: %1",
+      "stats": "Stats",
+      "stats_label": "Use statistic for recent apps"
     },
     "system": {
       "title": "System",

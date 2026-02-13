@@ -12,8 +12,13 @@ ListView {
     required property string search
 
     function activate() {
-        if (currentItem) {
-            currentItem.modelData.execute();
+        if (currentItem && currentItem.modelData) {
+            const app = currentItem.modelData;
+
+            LauncherStats.recordLaunch(app.id);
+
+            app.execute();
+
             GlobalStates.launcherOpened = false;
         }
     }
@@ -28,7 +33,11 @@ ListView {
     highlightFollowsCurrentItem: false
     highlightRangeMode: ListView.ApplyRange
     model: AppSearch.fuzzyQuery(search)
-    currentIndex: 0
+    // currentIndex: 0
+    onSearchChanged: {
+        currentIndex = 0;
+    }
+    Component.onCompleted: currentIndex = 0
 
     highlight: Rectangle {
         color: Colors.palette.m3onSurface

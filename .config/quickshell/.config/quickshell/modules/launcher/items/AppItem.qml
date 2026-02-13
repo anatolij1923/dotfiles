@@ -22,6 +22,7 @@ Item {
         radius: Appearance.rounding.xl
 
         onClicked: {
+            LauncherStats.recordLaunch(root.modelData.id);
             root.modelData.execute();
             GlobalStates.launcherOpened = false;
         }

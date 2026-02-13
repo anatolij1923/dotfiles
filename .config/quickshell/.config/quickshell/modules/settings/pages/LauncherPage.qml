@@ -50,6 +50,15 @@ ContentPage {
     }
 
     ContentItem {
+        title: Translation.tr("settings.launcher.stats")
+        SwitchRow {
+            label: Translation.tr("settings.launcher.stats_label")
+            value: Config.launcher.useStatsForApps
+            onToggled: Config.launcher.useStatsForApps = value
+        }
+    }
+
+    ContentItem {
         title: Translation.tr("settings.launcher.commands")
 
         StyledText {
