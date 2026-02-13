@@ -15,6 +15,10 @@ MouseArea {
     property bool disabled
     property color color: Colors.palette.m3onSurface
     property real radius: parent?.radius ?? 0
+    property real topLeftRadius: parent?.topLeftRadius ?? 0
+    property real topRightRadius: parent?.topRightRadius ?? 0
+    property real bottomLeftRadius: parent?.bottomLeftRadius ?? 0
+    property real bottomRightRadius: parent?.bottomRightRadius ?? 0
     property alias rect: hoverLayer
 
     signal rightClicked
@@ -125,6 +129,10 @@ MouseArea {
             CAnim {}
         }
         radius: root.radius
+        topLeftRadius: root.topLeftRadius
+        topRightRadius: root.topRightRadius
+        bottomLeftRadius: root.topLeftRadius
+        bottomRightRadius: root.topRightRadius
 
         Item {
             id: ripple
