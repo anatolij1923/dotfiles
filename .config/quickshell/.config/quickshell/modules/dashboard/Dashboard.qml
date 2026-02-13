@@ -15,10 +15,11 @@ Scope {
     property bool bottom: Config.bar.bottom
 
     Loader {
-        active: GlobalStates.dashboardOpened
+        active: true
 
         sourceComponent: StyledWindow {
             id: dashRoot
+            visible: GlobalStates.dashboardOpened
 
             name: "dashboard"
             anchors {
