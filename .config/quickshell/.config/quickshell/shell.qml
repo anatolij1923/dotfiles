@@ -27,6 +27,7 @@ ShellRoot {
 
     Component.onCompleted: {
         Idle.init();
+        Gamemode.init()
     }
 
     Bar {}

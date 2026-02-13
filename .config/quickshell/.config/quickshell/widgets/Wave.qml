@@ -9,9 +9,15 @@ Canvas {
     property real lineWidth: 4
     property real fullLength: width
 
+    onWidthChanged: requestPaint()
+    onHeightChanged: requestPaint()
+
     onPaint: {
         var ctx = getContext("2d");
+        ctx.reset(); 
         ctx.clearRect(0, 0, width, height);
+
+        if (width <= 0 || root.fullLength <= 0) return; 
 
         var amplitude = root.lineWidth * root.amplitudeMultiplier;
         var frequency = root.frequency;
@@ -21,13 +27,20 @@ Canvas {
         ctx.strokeStyle = root.color;
         ctx.lineWidth = root.lineWidth;
         ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        
         ctx.beginPath();
-        for (var x = ctx.lineWidth / 2; x <= root.width - ctx.lineWidth / 2; x += 1) {
-            var waveY = centerY + amplitude * Math.sin(frequency * 2 * Math.PI * x / root.fullLength + phase);
-            if (x === 0)
+        
+        var first = true;
+        for (var x = 0; x <= width; x += 1) {
+            var waveY = centerY + amplitude * Math.sin(frequency * 2 * Math.PI * x / Math.max(1, root.fullLength) + phase);
+            
+            if (first) {
                 ctx.moveTo(x, waveY);
-            else
+                first = false;
+            } else {
                 ctx.lineTo(x, waveY);
+            }
         }
         ctx.stroke();
     }

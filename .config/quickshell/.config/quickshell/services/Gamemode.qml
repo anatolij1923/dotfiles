@@ -46,8 +46,7 @@ Singleton {
             root.enabled = exitCode !== 0;
         }
     }
-    function init(): void {
-        Logger.i("wassup");
+    function init() {
     }
 
     IpcHandler {
