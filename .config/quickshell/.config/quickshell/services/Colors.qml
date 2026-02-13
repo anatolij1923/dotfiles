@@ -68,7 +68,10 @@ Singleton {
 
     Process {
         id: matugenProc
-        command: ["matugen", "-c", Quickshell.shellPath("matugen/config.toml"), "-m", root.matugenMode, "-t", root.schemeType, "image", root.wallpaperPath]
+        command: ["matugen", "-c", Quickshell.shellPath("matugen/config.toml"), "-m", root.matugenMode, "-t", root.schemeType, "image", root.wallpaperPath, "--source-color-index", "0"]
+        onStarted: {
+            Logger.i("COLORS", command.join(" "))
+        }
         onExited: code => {
             if (code === 0)
                 Logger.s("COLORS", "Palette updated");
