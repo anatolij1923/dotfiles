@@ -123,6 +123,55 @@ ContentPage {
             value: Config.appearance.darkMode
             onToggled: Config.appearance.darkMode = value
         }
+
+        ButtonGroup {
+            Repeater {
+                model: ["Tonal Spot", "Content", "Expressive", "Fidelity", "Fruit Salad"]
+
+                delegate: TextButton {
+                    readonly property string schemeId: "scheme-" + modelData.toLowerCase().replace(" ", "-")
+
+                    text: modelData
+                    checked: Config.appearance.theming.schemeType === schemeId
+
+                    inactiveColor: Colors.palette.m3secondaryContainer
+                    radius: checked ? Appearance.rounding.xl : Appearance.rounding.sm
+
+                    verticalPadding: Appearance.spacing.md
+                    horizontalPadding: Appearance.spacing.xl
+
+                    onClicked: {
+                        Config.appearance.theming.schemeType = schemeId;
+                        Colors.generateColors();
+                    }
+                }
+            }
+        }
+        ButtonGroup {
+            Repeater {
+                model: ["Monochrome", "Neutral", "Rainbow", "Vibrant"]
+
+                delegate: TextButton {
+                    readonly property string schemeId: "scheme-" + modelData.toLowerCase().replace(" ", "-")
+
+                    text: modelData
+                    checked: Config.appearance.theming.schemeType === schemeId
+
+                    inactiveColor: Colors.palette.m3secondaryContainer
+                    radius: checked ? Appearance.rounding.xl : Appearance.rounding.sm
+
+                    verticalPadding: Appearance.spacing.md
+                    horizontalPadding: Appearance.spacing.xl
+
+                    onClicked: {
+                        Config.appearance.theming.schemeType = schemeId;
+                        Colors.generateColors();
+                    }
+                }
+            }
+        }
+
+        
     }
 
     ContentItem {
