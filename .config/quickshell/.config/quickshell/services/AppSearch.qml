@@ -63,51 +63,74 @@ Singleton {
             }))
 
     /**
-     * Fuzzy search for applications.
+     * Fuzzy search for applications with Frecency integration.
      */
     function fuzzyQuery(search: string): var {
+        // 1. Empty Search: Return Top-8 most used apps
         if (!search || search.trim() === "") {
-            // Clear the highlightedName property when search is empty
+            // Reset highlights
             list.forEach(entry => {
                 entry.highlightedName = undefined;
             });
-            return list;
+
+            // Create a copy to sort by frecency score
+            let topApps = [...list];
+            topApps.sort((a, b) => {
+                let scoreA = LauncherStats.getScore(a.id);
+                let scoreB = LauncherStats.getScore(b.id);
+                
+                // Sort by score DESC
+                if (scoreA !== scoreB) return scoreB - scoreA;
+                
+                // Fallback: Sort by name ASC
+                return a.name.localeCompare(b.name);
+            });
+
+            // Return only the top 8 (simulate "Recents" view)
+            // You can remove .slice(0, 8) if you want to show ALL apps sorted by frequency
+            // return topApps.slice(0, 8);
+            return topApps
         }
 
+        // 2. Active Search: Fuzzy + Frecency
         const searchResults = Fuzzy.go(search, preppedNames, {
             all: true,
             key: "name"
         });
-
+        
         // Get name-only results for highlighting purposes
         const nameOnlyResults = Fuzzy.go(search, preppedNamesOnly, {
             all: true,
             key: "name"
         });
-
-        // Create a map from entry to its name-only result for highlighting
+        
+        // Map for highlighting lookup
         const nameHighlightMap = {};
         nameOnlyResults.forEach(nameResult => {
             const entryId = nameResult.obj.entry.id;
             nameHighlightMap[entryId] = nameResult;
         });
-
-        // Add highlighted versions of the app names with both bold and underline
+        
         return searchResults.map(r => {
             const entry = r.obj.entry;
             const nameResult = nameHighlightMap[entry.id];
-            let highlighted = entry.name; // fallback to original name
-
+            
+            // Highlight logic
+            let highlighted = entry.name; 
             if (nameResult) {
-                // Use theme color for highlighting instead of bold
                 highlighted = nameResult.highlight(`<u><font color="${Colors.palette.m3primary}">`, "</font></u>");
             }
-
             entry.highlightedName = highlighted;
-            // Log for debugging
-            // Logger.i("APPSEARCH", `Search: "${search}", Name: "${entry.name}", Highlighted: "${highlighted}"`);
+
+            // --- Frecency Logic ---
+            const fScore = LauncherStats.getScore(entry.id);
+            
+            // Combine Fuzzy Score (usually negative) with Frecency Bonus.
+            // Multiplier 10 makes usage history significant but preserves fuzzy accuracy.
+            entry.combinedScore = r.score + (fScore * 10);
+
             return entry;
-        });
+        }).sort((a, b) => b.combinedScore - a.combinedScore); // Sort by combined score
     }
 
     /**
@@ -128,7 +151,6 @@ Singleton {
 
     /**
      * Internal heavy logic for icon detection.
-     * Separated to keep guessIcon() clean and cache-focused.
      */
     function _performGuess(str: string): string {
         const entry = DesktopEntries.heuristicLookup(str);
@@ -155,18 +177,19 @@ Singleton {
         if (iconExists(lowerStr))
             return lowerStr;
 
-        // Domain name (com.discordapp.Discord -> Discord)
+        // Domain name
         const reverseName = str.split('.').slice(-1)[0];
         if (iconExists(reverseName))
             return reverseName;
         if (iconExists(reverseName.toLowerCase()))
             return reverseName.toLowerCase();
 
-        // Kebab-case (Visual Studio Code -> visual-studio-code)
+        // Kebab-case
         const kebab = str.toLowerCase().replace(/\s+/g, "-");
         if (iconExists(kebab))
             return kebab;
 
+        // Fuzzy icons
         const iconResults = Fuzzy.go(str, preppedIcons, {
             all: true,
             key: "name"
@@ -177,6 +200,7 @@ Singleton {
                 return guess;
         }
 
+        // Fuzzy names fallback
         const nameResults = fuzzyQuery(str);
         if (nameResults.length > 0) {
             const guess = nameResults[0].icon;
@@ -196,6 +220,6 @@ Singleton {
 
     Component.onCompleted: {
         fuzzyQuery("");
-        LauncherStats.init();
+        Logger.i("AppSearch", "Initialized. Stats Ready: " + LauncherStats.ready);
     }
 }
