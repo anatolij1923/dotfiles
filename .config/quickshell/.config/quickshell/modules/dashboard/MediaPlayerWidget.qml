@@ -19,6 +19,10 @@ Item {
     property real currentProgress: 0
     property real currentSeconds: 0
 
+    onCurrentProgressChanged: {
+        Logger.i("PLAYER", root.currentProgress);
+    }
+
     clip: true
     state: expanded ? "expanded" : "collapsed"
 
@@ -32,6 +36,14 @@ Item {
         return minutes + ":" + (secs < 10 ? "0" : "") + secs;
     }
 
+    property bool isSeeking: false
+
+    Timer {
+        id: seekDebounce
+        interval: 800
+        onTriggered: root.isSeeking = false
+    }
+
     Timer {
         id: progressTimer
         interval: 500
@@ -40,13 +52,11 @@ Item {
         triggeredOnStart: true
 
         onTriggered: {
-            if (root.player) {
+            // ОБНОВЛЯЕМ ТОЛЬКО ЕСЛИ МЫ НЕ МОТАЕМ ПРЯМО СЕЙЧАС
+            if (root.player && !root.isSeeking) {
                 root.currentSeconds = root.player.position;
-
                 if (root.player.length > 0) {
                     root.currentProgress = root.currentSeconds / root.player.length;
-                } else {
-                    root.currentProgress = 0;
                 }
             }
         }
@@ -220,24 +230,48 @@ Item {
             }
             visible: root.expanded
             opacity: root.expanded ? 1 : 0
-            value: pressed ? value : root.currentProgress
+
+            Binding {
+                target: progressSlider
+                property: "value"
+                value: root.currentProgress
+                when: !progressSlider.pressed && !root.isSeeking
+                restoreMode: Binding.RestoreBindingOrValue
+            }
+
             handleHeight: 18
-            configuration: StyledSlider.Configuration.XS
+            configuration: StyledSlider.Configuration.Wavy
             wavy: true
 
-            tooltipContent: root.formatTime(value * (root.player?.length || 0))
+            onValueChanged: {
+                Logger.i("SLIDER", value);
+            }
 
+            tooltipContent: root.formatTime(value * (root.player?.length || 0))
             onPressedChanged: {
                 if (pressed) {
-                    Qt.callLater(() => {
-                        value = position;
-                    });
+                    root.isSeeking = true; 
+                    seekDebounce.stop();
+                    value = position;
                 } else {
                     if (root.player && root.player.length > 0) {
                         let newPos = value * root.player.length;
-                        root.player.position = newPos;
+
+                        root.currentProgress = value;
                         root.currentSeconds = newPos;
+
+                        root.player.position = newPos;
+
+                        seekDebounce.restart();
+                    } else {
+                        root.isSeeking = false;
                     }
+                }
+            }
+
+            onMoved: {
+                if (pressed) {
+                    value = position;
                 }
             }
         }
