@@ -1,25 +1,25 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import Qt5Compat.GraphicalEffects
-import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
 import qs.common
 import qs.widgets
-import qs.services
 import qs.config
 
-Item {
+Rectangle {
     id: root
     required property SystemTrayItem modelData
     signal openMenuRequested(var handle, int x, int y, int w, int h)
+
+    color: "transparent"
+    radius: Appearance.rounding.md
 
     implicitWidth: 32
     implicitHeight: 32
 
     StateLayer {
         anchors.fill: parent
-        radius: Appearance.rounding.md
         onClicked: event => {
             if (event.button === Qt.LeftButton) {
                 modelData.activate();

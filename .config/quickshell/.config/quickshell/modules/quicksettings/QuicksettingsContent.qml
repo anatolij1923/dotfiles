@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import Quickshell
 import Quickshell.Widgets
 import QtQuick
@@ -19,7 +20,9 @@ import Quickshell.Bluetooth
 
 Item {
     id: root
-    property int padding: 16
+    property int margins: Appearance.spacing.md
+    property int spacing: Appearance.spacing.md
+    property int rounding: Appearance.rounding.xxl
 
     property real alpha: Config.appearance.transparency.alpha
     property bool transparent: Config.appearance.transparency.enabled
@@ -30,7 +33,7 @@ Item {
     ClippingRectangle {
         id: background
         anchors.fill: parent
-        radius: Appearance.rounding.xl
+        radius: root.rounding
         color: root.transparent ? Qt.alpha(Colors.palette.m3surface, root.alpha) : Colors.palette.m3surface
         clip: true
         Behavior on color {
@@ -48,8 +51,8 @@ Item {
 
         ColumnLayout {
             anchors.fill: parent
-            anchors.margins: root.padding
-            spacing: Appearance.spacing.md
+            anchors.margins: root.margins
+            spacing: root.spacing
             Layout.fillHeight: true
             Header {}
             Toggles {
