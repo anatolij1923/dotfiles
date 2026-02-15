@@ -89,11 +89,11 @@ Rectangle {
         implicitHeight: 48
         radius: Appearance.rounding.full 
 
-        color: active ? Colors.palette.m3secondaryContainer : "transparent"
+        color: active ? Colors.palette.m3secondaryContainer : Colors.palette.m3surfaceContainer
 
         Behavior on color {
             CAnim {
-                duration: Appearance.animDuration.expressiveEffects
+
             }
         }
 
