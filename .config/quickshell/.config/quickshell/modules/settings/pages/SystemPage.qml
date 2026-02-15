@@ -237,7 +237,7 @@ ContentPage {
             to: 50
             enabled: Config.lock.blur.enabled
             onValueChanged: Config.lock.blur.radius = value
-            tooltipContent: `${Math.round(value)}`
+            // tooltipContent: `${Math.round(value)}`
         }
 
         SliderRow {

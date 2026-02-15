@@ -4,81 +4,43 @@ import qs.common
 import qs.widgets
 import qs.services
 
-Item {
+ColumnLayout {
     id: root
-
     property string label
     property real value
     property real from: 0
     property real to: 100
-    property int step: 1
+    property real step: 1
     property string suffix: ""
-    property int padding: Appearance.spacing.xs
-    property alias tooltipContent: slider.tooltipContent
 
-    // implicitHeight: Math.max(slider.implicitHeight, 40) + padding * 2
-    implicitHeight: content.implicitHeight
     Layout.fillWidth: true
+    spacing: 0
 
-    ColumnLayout {
-        id: content
-        anchors.fill: parent
-        spacing: Appearance.spacing.xs
+    RowLayout {
+        Layout.fillWidth: true
+        Layout.preferredHeight: 32
 
-        // anchors.leftMargin: root.padding
-        // anchors.rightMargin: root.padding
-
-        RowLayout {
+        StyledText {
+            text: root.label
             Layout.fillWidth: true
-
-            StyledText {
-                text: root.label
-                size: Appearance.fontSize.md
-            }
-
-            Item {
-                Layout.fillWidth: true
-            }
-
-            StyledText {
-                text: {
-                    if (root.step >= 100) {
-                        return Math.round(root.value * 100) + root.suffix;
-                    } else if (root.step > 1) {
-                        return Math.round(root.value * root.step) + root.suffix;
-                    } else {
-                        return root.value.toFixed(2) + root.suffix;
-                    }
-                }
-                color: Colors.palette.m3onSurfaceVariant
-                size: Appearance.fontSize.xs
-            }
         }
 
-        StyledSlider {
-            id: slider
-            value: root.value
-            from: root.from
-            to: root.to
-            configuration: StyledSlider.Configuration.M
-
-            property bool updating: false
-
-            onValueChanged: {
-                if (!updating && Math.abs(root.value - value) > 0.001) {
-                    root.value = value;
-                }
-            }
+        StyledText {
+            // Форматирование вынесено в Row для красоты
+            text: (root.step >= 100 ? Math.round(root.value * 100) : root.value.toFixed(2)) + root.suffix
+            color: Colors.palette.m3primary
+            weight: Font.Bold
+            size: Appearance.fontSize.sm
         }
     }
 
-    property bool updating: false
-
-    onValueChanged: {
-        if (!updating && Math.abs(slider.value - value) > 0.001) {
-            updating = true;
-            slider.value = value;
-            updating = false;
-        }
+    StyledSlider {
+        id: slider
+        Layout.fillWidth: true
+        value: root.value
+        from: root.from
+        to: root.to
+        // Настройка шага и т.д.
+        onMoved: root.value = value
     }
 }
