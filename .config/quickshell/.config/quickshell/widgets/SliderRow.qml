@@ -26,7 +26,6 @@ ColumnLayout {
         }
 
         StyledText {
-            // Форматирование вынесено в Row для красоты
             text: (root.step >= 100 ? Math.round(root.value * 100) : root.value.toFixed(2)) + root.suffix
             color: Colors.palette.m3primary
             weight: Font.Bold
@@ -40,7 +39,6 @@ ColumnLayout {
         value: root.value
         from: root.from
         to: root.to
-        // Настройка шага и т.д.
         onMoved: root.value = value
     }
 }
