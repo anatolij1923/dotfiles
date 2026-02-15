@@ -8,7 +8,7 @@ ListModel {
     }
     ListElement {
         pageId: "bar"
-        textKey: "Bar"
+        textKey: "settings.bar.bar"
         icon: "toolbar"
     }
     ListElement {
