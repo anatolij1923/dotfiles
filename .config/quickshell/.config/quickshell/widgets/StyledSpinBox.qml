@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 import qs.services
 import qs.common
 import qs.widgets
@@ -8,79 +9,171 @@ SpinBox {
     id: root
 
     property int baseHeight: 40
-    property int radius: Appearance.rounding.lg
-    property int innerRadius: Appearance.rounding.md
+    implicitHeight: baseHeight
+    implicitWidth: 160
 
-    background: Rectangle {
-        color: Colors.palette.m3surfaceContainerHighest
+    readonly property bool canDecrease: value > from
+    readonly property bool canIncrease: value < to
 
-        radius: root.radius
+    background: Item {}
+
+    Timer {
+        id: repeatTimer
+        repeat: true
+        property bool isIncrease: true
+
+        onTriggered: {
+            if (isIncrease)
+                root.increase();
+            else
+                root.decrease();
+
+            if (interval > 30) {
+                interval = Math.max(30, interval - 40);
+            }
+        }
     }
 
     down.indicator: Rectangle {
-        anchors {
-            left: parent.left
-            verticalCenter: parent.verticalCenter
+        id: downRect
+        x: 0
+        height: parent.height
+        width: parent.height
+        radius: height / 2
+
+        enabled: root.canDecrease
+        opacity: enabled ? 1.0 : 0.3
+        color: {
+            if (!enabled)
+                return Colors.palette.m3surfaceContainerHighest;
+            if (downState.pressed)
+                return Colors.palette.m3secondaryContainer; 
+            if (downState.containsMouse)
+                return Colors.palette.m3surfaceContainerHigh; 
+            return Colors.palette.m3surfaceContainerHighest;
         }
 
-        implicitHeight: root.baseHeight
-        implicitWidth: root.baseHeight
+        Behavior on color {
+            CAnim {
+            }
+        }
 
-        color: root.down.pressed ? Qt.alpha(Colors.palette.m3onSurface, 0.1) : root.down.hovered ? Qt.alpha(Colors.palette.m3onSurface, 0.08) : Colors.palette.m3surfaceContainerHighest
+        StateLayer {
+            id: downState
+            anchors.fill: parent
+            radius: parent.radius
+            color: Colors.palette.m3onSurface
 
-        topLeftRadius: root.radius
-        bottomLeftRadius: root.radius
-        topRightRadius: root.innerRadius
-        bottomRightRadius: root.innerRadius
+            onPressed: {
+                root.decrease(); 
+                repeatTimer.isIncrease = false;
+                repeatTimer.interval = 300; 
+                repeatTimer.start();
+            }
+            onReleased: repeatTimer.stop()
+            onCanceled: repeatTimer.stop()
+        }
 
         MaterialSymbol {
             icon: "remove"
             anchors.centerIn: parent
-            color: Colors.palette.m3onSurface
+            size: 20
+            color: (downState.containsMouse || downState.pressed) && root.canDecrease ? Colors.palette.m3primary : Colors.palette.m3onSurface
+
+            Behavior on color {
+                CAnim {
+                }
+            }
         }
     }
 
-    contentItem: StyledTextField {
-        id: input
+    contentItem: Rectangle {
+        anchors.left: root.down.indicator.right
+        anchors.right: root.up.indicator.left
+        anchors.leftMargin: 6
+        anchors.rightMargin: 6
 
-        text: root.value
-        anchors.centerIn: parent
+        height: parent.height
+        radius: Appearance.rounding.full
+        color: Colors.palette.m3surfaceContainerHighest
 
-        leftPadding: Appearance.spacing.md
-        rightPadding: Appearance.spacing.md
+        border.width: 1
+        border.color: root.activeFocus ? Colors.palette.m3primary : "transparent"
+        Behavior on border.color {
+            CAnim {}
+        }
 
-        horizontalAlignment: Qt.AlignHCenter
-        verticalAlignment: Qt.AlignVCenter
+        StyledTextField {
+            id: input
+            anchors.fill: parent
+            text: root.textFromValue(root.value, root.locale)
+            horizontalAlignment: Qt.AlignHCenter
+            verticalAlignment: Qt.AlignVCenter
 
-        validator: root.validator
+            background: null
+            color: Colors.palette.m3onSurface
+            fontSize: Appearance.fontSize.md
 
-        placeholderText: ""
+            validator: root.validator
+            inputMethodHints: Qt.ImhDigitsOnly
 
-        onTextChanged: {
-            root.value = parseFloat(text);
+            onEditingFinished: {
+                root.value = root.valueFromText(text, root.locale);
+            }
         }
     }
 
     up.indicator: Rectangle {
-        anchors {
-            right: parent.right
-            verticalCenter: parent.verticalCenter
+        id: upRect
+        x: parent.width - width
+        height: parent.height
+        width: parent.height
+        radius: height / 2
+
+        enabled: root.canIncrease
+        opacity: enabled ? 1.0 : 0.3
+
+        color: {
+            if (!enabled)
+                return Colors.palette.m3surfaceContainerHighest;
+            if (upState.pressed)
+                return Colors.palette.m3secondaryContainer;
+            if (upState.containsMouse)
+                return Colors.palette.m3surfaceContainerHigh;
+            return Colors.palette.m3surfaceContainerHighest;
         }
 
-        implicitHeight: root.baseHeight
-        implicitWidth: root.baseHeight
+        Behavior on color {
+            CAnim {
+            }
+        }
 
-        color: root.up.pressed ? Qt.alpha(Colors.palette.m3onSurface, 0.1) : root.up.hovered ? Qt.alpha(Colors.palette.m3onSurface, 0.08) : Colors.palette.m3surfaceContainerHighest
+        StateLayer {
+            id: upState
+            anchors.fill: parent
+            radius: parent.radius
+            color: Colors.palette.m3onSurface
 
-        topRightRadius: root.radius
-        bottomRightRadius: root.radius
-        topLeftRadius: root.innerRadius
-        bottomLeftRadius: root.innerRadius
+            onPressed: {
+                root.increase(); 
+                repeatTimer.isIncrease = true;
+                repeatTimer.interval = 400; 
+                repeatTimer.start();
+            }
+            onReleased: repeatTimer.stop()
+            onCanceled: repeatTimer.stop()
+        }
 
         MaterialSymbol {
             icon: "add"
             anchors.centerIn: parent
-            color: Colors.palette.m3onSurface
+            size: 20
+            color: (upState.containsMouse || upState.pressed) && root.canIncrease ? Colors.palette.m3primary : Colors.palette.m3onSurface
+
+            Behavior on color {
+                CAnim {
+                }
+            }
         }
     }
 }
