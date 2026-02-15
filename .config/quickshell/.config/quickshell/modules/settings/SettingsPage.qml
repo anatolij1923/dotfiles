@@ -12,7 +12,8 @@ StackLayout {
     currentIndex: root.currentPage
 
     AppearancePage {}
-    GeneralPage {}
+    BarPage {}
+    BackgroundPage {}
     LauncherPage {}
     SystemPage {}
     AboutPage {}

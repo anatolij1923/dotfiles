@@ -103,6 +103,9 @@
       "mono_font": "Monospace",
       "nerd_font": "Nerd font"
     },
+    "bar": {
+                "title": "Bar"
+        },
     "general": {
       "title": "General",
       "information": "Information",

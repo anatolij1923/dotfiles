@@ -103,6 +103,9 @@
       "mono_font": "Моноширинный",
       "nerd_font": "Nerd шрифт"
     },
+    "bar": {
+                "title": "Bar"
+        },
     "general": {
       "title": "Общие",
       "information": "Информация",
