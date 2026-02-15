@@ -72,11 +72,9 @@ Item {
                 color: Colors.palette.m3surfaceContainer
                 clip: true
 
-                Image {
+                StyledImage {
                     anchors.fill: parent
                     source: root.wallpaperPath.startsWith("/") ? "file://" + root.wallpaperPath : root.wallpaperPath
-                    fillMode: Image.PreserveAspectCrop
-                    asynchronous: true
                     smooth: true
                     sourceSize {
                         width: Math.round(Config.launcher.sizes.wallWidth + 100)
