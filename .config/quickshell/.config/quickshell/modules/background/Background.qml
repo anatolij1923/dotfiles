@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import QtQuick
+import Qt5Compat.GraphicalEffects
 import qs.common
 import qs.widgets
 import qs
@@ -31,6 +32,7 @@ Variants {
         exclusionMode: ExclusionMode.Ignore
 
         property bool shouldDim: GlobalStates.launcherOpened || GlobalStates.overviewOpened || GlobalStates.quicksettingsOpened || GlobalStates.dashboardOpened
+        property bool isLocked: GlobalStates.screenLocked
 
         property bool zoomEnabled: Config.background.zoom.enabled
         property real zoomScale: Config.background.zoom.scale
@@ -38,7 +40,6 @@ Variants {
 
         property bool parallaxEnabled: Config.background.parallax.enabled
         property real parallaxFactor: Config.background.parallax.wallpaperScale
-
         property string wallpaperPath: Config.ready ? Config.background.wallpaperPath : ""
 
         property HyprlandMonitor monitor: Hyprland.monitorFor(modelData)
@@ -58,38 +59,69 @@ Variants {
         property real movableX: (root.width * parallaxFactor - root.width) / 2
         property real movableY: (root.height * parallaxFactor - root.height) / 2
 
-        StyledImage {
-            id: wallpaper
+        Item {
+            id: wallpaperViewport
+            anchors.fill: parent
+            clip: true
 
-            width: root.parallaxEnabled ? root.width * root.parallaxFactor : root.width
-            height: root.parallaxEnabled ? root.height * root.parallaxFactor : root.height
+            StyledImage {
+                id: wallpaper
 
-            x: root.parallaxEnabled ? -root.movableX - (root.effectiveParallax - 0.5) * 2 * root.movableX : 0
+                width: root.parallaxEnabled ? root.width * root.parallaxFactor : root.width
+                height: root.parallaxEnabled ? root.height * root.parallaxFactor : root.height
 
-            y: root.parallaxEnabled ? -root.movableY : 0
+                x: root.parallaxEnabled ? -root.movableX - (root.effectiveParallax - 0.5) * 2 * root.movableX : 0
+                y: root.parallaxEnabled ? -root.movableY : 0
 
-            source: root.wallpaperPath
+                source: root.wallpaperPath
 
-            scale: (status === Image.Ready) ? root.activeScale : 1.1
+                scale: (status === Image.Ready) ? root.activeScale : 1.1
 
-            sourceSize: Qt.size(width, height)
+                sourceSize: Qt.size(width, height)
 
-            Behavior on x {
-                enabled: root.parallaxEnabled
-                NumberAnimation {
-                    duration: 600
-                    easing.type: Easing.OutCubic
+                Behavior on x {
+                    enabled: root.parallaxEnabled
+                    NumberAnimation {
+                        duration: 600
+                        easing.type: Easing.OutCubic
+                    }
+                }
+
+                Behavior on scale {
+                    Anim {
+                        duration: Appearance.animDuration.md
+                    }
                 }
             }
+        }
 
-            Behavior on scale {
+        ShaderEffectSource {
+            id: wallpaperSource
+            sourceItem: wallpaperViewport
+            anchors.fill: parent
+
+            live: root.isLocked || blurLoader.opacity > 0
+            hideSource: false
+            visible: false
+        }
+
+        Loader {
+            id: blurLoader
+            anchors.fill: parent
+            active: Config.lock.blur.enabled && (root.isLocked || opacity > 0)
+            opacity: root.isLocked ? 1 : 0
+
+            Behavior on opacity {
                 Anim {
                     duration: Appearance.animDuration.md
                 }
             }
 
-            Component.onCompleted: {
-                Logger.i(wallpaper.sourceSize);
+            sourceComponent: GaussianBlur {
+                anchors.fill: parent
+                source: wallpaperSource
+                radius: Config.lock.blur.radius
+                samples: radius
             }
         }
 
