@@ -4,14 +4,20 @@
 input_path = 'templates/colors.json'
 output_path = '~/.config/quickshell/colors.json'
 
-[templates.kitty]
-input_path = 'templates/kitty.conf'
-output_path = '~/.config/kitty/colors.conf'
-post_hook = 'pkill -SIGUSR1 kitty'
+# [templates.kitty]
+# input_path = 'templates/kitty.conf'
+# output_path = '~/.config/kitty/colors.conf'
+# post_hook = 'pkill -SIGUSR1 kitty'
 
 # [templates.wezterm]
 # input_path = 'templates/wezterm.lua'
 # output_path = '~/.config/wezterm/colors.lua'
+
+[templates.ghostty]
+input_path = 'templates/ghostty.conf'
+output_path = '~/.config/ghostty/colors'
+
+
 
 [templates.hyprland]
 input_path = 'templates/hyprland-colors.conf'

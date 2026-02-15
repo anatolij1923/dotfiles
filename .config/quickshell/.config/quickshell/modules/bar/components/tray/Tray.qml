@@ -28,7 +28,7 @@ Item {
     MaterialSymbol {
         id: chevronIcon
         icon: root.expanded ? "chevron_right" : "chevron_left"
-        color: Colors.palette.m3secondaryContainer
+        color: Colors.palette.m3outline
         visible: repeater.count > 1
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter

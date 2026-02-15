@@ -129,10 +129,10 @@ MouseArea {
             CAnim {}
         }
         radius: root.radius
-        topLeftRadius: root.topLeftRadius
-        topRightRadius: root.topRightRadius
-        bottomLeftRadius: root.topLeftRadius
-        bottomRightRadius: root.topRightRadius
+        // topLeftRadius: root.topLeftRadius
+        // topRightRadius: root.topRightRadius
+        // bottomLeftRadius: root.topLeftRadius
+        // bottomRightRadius: root.topRightRadius
 
         Item {
             id: ripple

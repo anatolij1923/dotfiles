@@ -20,7 +20,7 @@ Item {
     property real currentSeconds: 0
 
     onCurrentProgressChanged: {
-        Logger.i("PLAYER", root.currentProgress);
+        // Logger.i("PLAYER", root.currentProgress);
     }
 
     clip: true
@@ -244,7 +244,7 @@ Item {
             wavy: true
 
             onValueChanged: {
-                Logger.i("SLIDER", value);
+                // Logger.i("SLIDER", value);
             }
 
             tooltipContent: root.formatTime(value * (root.player?.length || 0))

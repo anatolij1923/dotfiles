@@ -3,17 +3,13 @@ pragma Singleton
 import qs.common.functions
 import Quickshell
 import QtQuick
-import qs.common
-import qs.config // Import Config to access useStatsForApps
+import qs.config 
 
 /**
  * Service for application searching and icon resolution with caching.
  */
 Singleton {
     id: root
-
-    property bool sloppySearch: false
-    property real scoreThreshold: 0.2
 
     property var iconCache: ({})
 
