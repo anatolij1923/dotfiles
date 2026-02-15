@@ -91,6 +91,8 @@
       "parallax_scale": "Parallax scale",
       "dim_effect": "Dim effect",
       "dim_transparency": "Dim transparency",
+      "zoom_effect": "Zoom effect",
+      "zoom_scale": "Zoom scale",
       "theme": "Theme",
       "dark_mode": "Dark mode",
       "transparency": "Transparency",

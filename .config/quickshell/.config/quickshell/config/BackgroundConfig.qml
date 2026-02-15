@@ -3,9 +3,10 @@ import Quickshell
 
 JsonObject {
 
-    property string wallpaperPath: `${Quickshell.shellDir}/assets/fallback.png`
+    property string wallpaperPath: ""
 
     property Parallax parallax: Parallax {}
+    property Zoom zoom: Zoom {}
 
     property Dim dim: Dim {}
 
@@ -20,6 +21,11 @@ JsonObject {
     component Parallax: JsonObject {
         property bool enabled: true
         property real wallpaperScale: 1.1
+    }
+
+    component Zoom: JsonObject  {
+        property bool enabled: true
+        property real scale: 1.1
     }
 
     component Wallhaven: JsonObject {

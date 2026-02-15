@@ -91,6 +91,8 @@
       "parallax_scale": "Масштаб параллакса",
       "dim_effect": "Эффект затемнения",
       "dim_transparency": "Прозрачность затемнения",
+      "zoom_effect": "Эффект зума",
+      "zoom_scale": "Сила зума",
       "theme": "Тема",
       "dark_mode": "Тёмный режим",
       "transparency": "Прозрачность",

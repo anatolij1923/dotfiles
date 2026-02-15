@@ -4,61 +4,22 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import QtQuick
-import QtQuick.Layouts
-import QtQuick.Effects
 import Qt5Compat.GraphicalEffects
-
-import qs
-import qs.widgets
 import qs.common
+import qs.widgets
+import qs
 import qs.services
 import qs.config
 
 Variants {
-    id: root
     model: Quickshell.screens
 
     StyledWindow {
-        id: bgRoot
-
-        name: "background"
+        id: root
         required property var modelData
 
-        property HyprlandMonitor monitor: Hyprland.monitorFor(modelData)
-        property var workspacesForMonitor: (Hyprland.workspaces?.values || []).filter(ws => ws.monitor?.name === monitor?.name)
-        property int firstWorkspaceId: 1
-        property int lastWorkspaceId: {
-            const realIds = workspacesForMonitor.map(ws => ws.id);
-            const maxId = realIds.length > 0 ? Math.max(...realIds) : 0;
-            return Math.max(10, maxId);
-        }
-        property int range: Math.max(1, lastWorkspaceId - firstWorkspaceId)
-
-        property string wallpaperPath: Config.ready && Config.background.wallpaperPath
-        property bool isFirstImageActive: true
-
-        onWallpaperPathChanged: {
-            if (isFirstImageActive) {
-                wallpaper2.source = wallpaperPath;
-                isFirstImageActive = false;
-            } else {
-                wallpaper1.source = wallpaperPath;
-                isFirstImageActive = true;
-            }
-        }
-
-        property bool parallaxEnabled: Config.background.parallax.enabled
-        property real wallpaperScale: Config.background.parallax.wallpaperScale
-        property real movableXSpace: (bgRoot.width * wallpaperScale - bgRoot.width) / 2
-        property real movableYSpace: (bgRoot.height * wallpaperScale - bgRoot.height) / 2
-        property real parallaxValue: range > 0 ? (Hyprland.focusedWorkspace.id - firstWorkspaceId) / range : 0.5
-        property real effectiveParallaxValue: Math.max(0, Math.min(1, parallaxValue))
-
+        name: "background"
         screen: modelData
-        exclusionMode: ExclusionMode.Ignore
-        WlrLayershell.layer: (GlobalStates.screenLocked || GlobalStates.screenUnlocking) ? WlrLayer.Overlay : WlrLayer.Background
-
-        color: "transparent"
 
         anchors {
             top: true
@@ -67,77 +28,68 @@ Variants {
             right: true
         }
 
+        WlrLayershell.layer: (GlobalStates.screenLocked || GlobalStates.screenUnlocking) ? WlrLayer.Overlay : WlrLayer.Background
+        exclusionMode: ExclusionMode.Ignore
+
+        property bool shouldDim: GlobalStates.launcherOpened || GlobalStates.overviewOpened || GlobalStates.quicksettingsOpened || GlobalStates.dashboardOpened
+        property bool isLocked: GlobalStates.screenLocked
+
+        property bool zoomEnabled: Config.background.zoom.enabled
+        property real zoomScale: Config.background.zoom.scale
+        property real activeScale: (zoomEnabled && shouldDim) ? zoomScale : 1.0
+
+        property bool parallaxEnabled: Config.background.parallax.enabled
+        property real parallaxFactor: Config.background.parallax.wallpaperScale
+        property string wallpaperPath: Config.ready ? Config.background.wallpaperPath : ""
+
+        property HyprlandMonitor monitor: Hyprland.monitorFor(modelData)
+        property var workspacesForMonitor: (Hyprland.workspaces?.values || []).filter(ws => ws.monitor?.name === root.monitor?.name)
+
+        property int firstWorkspaceId: 1
+        property int lastWorkspaceId: {
+            const realIds = workspacesForMonitor.map(ws => ws.id);
+            const maxId = realIds.length > 0 ? Math.max(...realIds) : 0;
+            return Math.max(10, maxId);
+        }
+        property int range: Math.max(1, lastWorkspaceId - firstWorkspaceId)
+
+        property real parallaxValue: range > 0 ? (Hyprland.focusedWorkspace.id - firstWorkspaceId) / range : 0.5
+        property real effectiveParallax: Math.max(0, Math.min(1, parallaxValue))
+
+        property real movableX: (root.width * parallaxFactor - root.width) / 2
+        property real movableY: (root.height * parallaxFactor - root.height) / 2
+
         Item {
-            id: imageGroup
+            id: wallpaperViewport
             anchors.fill: parent
             clip: true
 
-            Image {
-                id: wallpaper1
-                source: bgRoot.isFirstImageActive ? bgRoot.wallpaperPath : ""
-                asynchronous: true
-                cache: false
-                fillMode: Image.PreserveAspectCrop
-                sourceSize: Qt.size(bgRoot.width * wallpaperScale, bgRoot.height * wallpaperScale)
-                width: bgRoot.width * wallpaperScale
-                height: bgRoot.height * wallpaperScale
-                x: parallaxEnabled ? -movableXSpace - (effectiveParallaxValue - 0.5) * 2 * movableXSpace : -movableXSpace
-                y: -movableYSpace
-                opacity: bgRoot.isFirstImageActive ? 1 : 0
-                scale: bgRoot.isFirstImageActive ? 1 : 1.1
+            StyledImage {
+                id: wallpaper
 
-                onOpacityChanged: if (opacity === 0)
-                    source = ""
+                width: root.parallaxEnabled ? root.width * root.parallaxFactor : root.width
+                height: root.parallaxEnabled ? root.height * root.parallaxFactor : root.height
 
-                Behavior on opacity {
-                    Anim {
-                        duration: Appearance.animDuration.xl
-                    }
-                }
-                Behavior on scale {
-                    Anim {
-                        duration: Appearance.animDuration.xl
-                    }
-                }
+                x: root.parallaxEnabled ? -root.movableX - (root.effectiveParallax - 0.5) * 2 * root.movableX : 0
+                y: root.parallaxEnabled ? -root.movableY : 0
+
+                source: root.wallpaperPath
+
+                scale: (status === Image.Ready) ? root.activeScale : 1.1
+
+                sourceSize: Qt.size(width, height)
+
                 Behavior on x {
+                    enabled: root.parallaxEnabled
                     NumberAnimation {
                         duration: 600
                         easing.type: Easing.OutCubic
                     }
                 }
-            }
 
-            Image {
-                id: wallpaper2
-                source: !bgRoot.isFirstImageActive ? bgRoot.wallpaperPath : ""
-                asynchronous: true
-                cache: false
-                fillMode: Image.PreserveAspectCrop
-                sourceSize: Qt.size(bgRoot.width * wallpaperScale, bgRoot.height * wallpaperScale)
-                width: bgRoot.width * wallpaperScale
-                height: bgRoot.height * wallpaperScale
-                x: parallaxEnabled ? -movableXSpace - (effectiveParallaxValue - 0.5) * 2 * movableXSpace : -movableXSpace
-                y: -movableYSpace
-                opacity: !bgRoot.isFirstImageActive ? 1 : 0
-                scale: !bgRoot.isFirstImageActive ? 1 : 1.1
-
-                onOpacityChanged: if (opacity === 0)
-                    source = ""
-
-                Behavior on opacity {
-                    Anim {
-                        duration: Appearance.animDuration.xl
-                    }
-                }
                 Behavior on scale {
                     Anim {
-                        duration: Appearance.animDuration.xl
-                    }
-                }
-                Behavior on x {
-                    NumberAnimation {
-                        duration: 600
-                        easing.type: Easing.OutCubic
+                        duration: Appearance.animDuration.md
                     }
                 }
             }
@@ -145,27 +97,26 @@ Variants {
 
         ShaderEffectSource {
             id: wallpaperSource
-            sourceItem: imageGroup
+            sourceItem: wallpaperViewport
             anchors.fill: parent
+
+            live: root.isLocked || blurLoader.opacity > 0
+            hideSource: false
             visible: false
-            live: true
-            recursive: false
         }
 
         Loader {
             id: blurLoader
-            active: (GlobalStates.screenLocked || GlobalStates.screenUnlocking) && Config.lock.blur.enabled
-
-            opacity: (GlobalStates.screenLocked && !GlobalStates.screenUnlocking) ? 1 : 0
-            visible: opacity > 0
+            anchors.fill: parent
+            active: Config.lock.blur.enabled && (root.isLocked || opacity > 0)
+            opacity: root.isLocked ? 1 : 0
 
             Behavior on opacity {
                 Anim {
-                    duration: Appearance.animDuration.lg
+                    duration: Appearance.animDuration.md
                 }
             }
 
-            anchors.fill: parent
             sourceComponent: GaussianBlur {
                 anchors.fill: parent
                 source: wallpaperSource
@@ -176,13 +127,16 @@ Variants {
 
         Loader {
             id: dimLoader
-            property bool shouldShow: GlobalStates.launcherOpened || GlobalStates.overviewOpened || GlobalStates.quicksettingsOpened
-            active: Config.background.dim.enabled && (shouldShow || opacity > 0)
             anchors.fill: parent
-            opacity: shouldShow ? 1 : 0
+            active: Config.background.dim.enabled && (root.shouldDim || opacity > 0)
+            opacity: root.shouldDim ? 1 : 0
+
             Behavior on opacity {
-                Anim {}
+                Anim {
+                    duration: Appearance.animDuration.lg
+                }
             }
+
             sourceComponent: Rectangle {
                 color: Colors.alpha(Colors.palette.tintedShadow, Config.background.dim.opacity)
             }
