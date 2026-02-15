@@ -7,62 +7,38 @@ import qs.services
 
 Rectangle {
     id: root
-
     default property alias contentData: contentColumn.children
-
-    // property string icon: ""
     property string title: ""
 
-    property int margins: Appearance.spacing.xl
-    property int innerMargins: Appearance.spacing.lg 
-
     Layout.fillWidth: true
-    Layout.leftMargin: margins
-    Layout.rightMargin: margins
+    implicitHeight: mainColumn.implicitHeight + Appearance.spacing.lg * 2
 
-    implicitHeight: mainColumn.implicitHeight
-
-    color: Colors.palette.m3surfaceContainer
+    color: Colors.alpha(Colors.palette.m3surfaceContainer, 0.6)
     radius: Appearance.rounding.xl
 
     ColumnLayout {
         id: mainColumn
-        width: parent.width
-        spacing: 0
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+            margins: Appearance.spacing.lg 
+        }
+        spacing: Appearance.spacing.md
 
-        // Header with icon and title
-        RowLayout {
-            id: header
-            Layout.fillWidth: true
-            Layout.topMargin: innerMargins
-            Layout.leftMargin: innerMargins
-            Layout.rightMargin: innerMargins
-            Layout.bottomMargin: Appearance.spacing.md
-            spacing: Appearance.spacing.xl
-
-            // MaterialSymbol {
-            //     icon: root.icon
-            //     color: Colors.palette.m3onSurface
-            //     size: 32
-            //     visible: root.icon !== ""
-            // }
-
-            StyledText {
-                text: root.title
-                size: 22
-                weight: 500
-                color: Colors.palette.m3onSurface
-            }
+        StyledText {
+            text: root.title
+            size: Appearance.fontSize.md
+            weight: 600
+            color: Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3primary, 0.5)
+            visible: text !== ""
+            Layout.bottomMargin: Appearance.spacing.xs
         }
 
-        // Content area
         ColumnLayout {
             id: contentColumn
             Layout.fillWidth: true
-            Layout.leftMargin: innerMargins
-            Layout.rightMargin: innerMargins
-            Layout.bottomMargin: innerMargins
-            spacing: Appearance.spacing.md
+            spacing: Appearance.spacing.sm 
         }
     }
 }
