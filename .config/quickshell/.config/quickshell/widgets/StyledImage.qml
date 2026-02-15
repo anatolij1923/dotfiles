@@ -7,11 +7,12 @@ Image {
     asynchronous: true
     retainWhileLoading: true
     visible: opacity > 0
+    mipmap: true
     opacity: (status === Image.Ready) ? 1 : 0
 
     Behavior on opacity {
         Anim {
-            duration: Appearance.animDuration.xl
+            duration: Appearance.animDuration.md
         }
     }
 }
