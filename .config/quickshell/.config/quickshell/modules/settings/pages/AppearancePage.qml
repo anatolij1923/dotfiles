@@ -99,6 +99,21 @@ ContentPage {
             suffix: "%"
             onValueChanged: Config.background.dim.opacity = value
         }
+
+        SwitchRow {
+            label: Translation.tr("settings.appearance.zoom_effect")
+            value: Config.background.zoom.enabled
+            onToggled: Config.background.zoom.enabled = value
+        }
+        SliderRow {
+            label: Translation.tr("settings.appearance.zoom_scale")
+            value: Config.background.zoom.scale
+            from: 1
+            to: 1.2
+            step: 1
+            suffix: "x"
+            onValueChanged: Config.background.zoom.scale = value
+        }
     }
 
     ContentItem {
