@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.modules.settings
-import qs.modules.settings.components
 import qs.common
 import qs.widgets
 import qs.services
@@ -9,89 +8,6 @@ import qs.config
 
 ContentPage {
     title: Translation.tr("settings.system.title")
-
-    ContentItem {
-        title: Translation.tr("settings.system.bar")
-
-        SpinBoxRow {
-            label: Translation.tr("settings.system.height")
-            value: Config.bar.height
-            from: 30
-            to: 100
-            step: 5
-            onValueChanged: Config.bar.height = value
-        }
-
-        SwitchRow {
-            label: Translation.tr("settings.system.bottom_position")
-            value: Config.bar.bottom
-            onToggled: Config.bar.bottom = value
-        }
-
-        SwitchRow {
-            label: Translation.tr("settings.system.floating")
-            value: Config.bar.floating
-            onToggled: Config.bar.floating = value
-        }
-
-        SpinBoxRow {
-            label: Translation.tr("settings.system.vertical_margins")
-            value: Config.bar.margins.vertical
-            from: 0
-            to: 50
-            onValueChanged: Config.bar.margins.vertical = value
-        }
-
-        SpinBoxRow {
-            label: Translation.tr("settings.system.horizontal_margins")
-            value: Config.bar.margins.horizontal
-            from: 0
-            to: 50
-            onValueChanged: Config.bar.margins.horizontal = value
-        }
-
-        SpinBoxRow {
-            label: Translation.tr("settings.system.workspaces_shown")
-            value: Config.bar.workspaces.shown
-            from: 1
-            to: 10
-            onValueChanged: Config.bar.workspaces.shown = value
-        }
-
-        SwitchRow {
-            label: Translation.tr("settings.system.make_tray_monochrome")
-            value: Config.bar.tray.monochromeTrayIcons
-            onToggled: Config.bar.tray.monochromeTrayIcons = value
-        }
-
-        SliderRow {
-            label: Translation.tr("settings.system.icon_desaturation")
-            value: Config.bar.tray.desaturation
-            from: 0
-            to: 1
-            step: 100
-            suffix: "%"
-            onValueChanged: Config.bar.tray.desaturation = value
-        }
-
-        SwitchRow {
-            label: Translation.tr("settings.system.classic_battery")
-            value: Config.bar.battery.classicBatteryStyle
-            onToggled: Config.bar.battery.classicBatteryStyle = value
-        }
-
-        SwitchRow {
-            label: Translation.tr("settings.system.show_percentage")
-            value: Config.bar.battery.showPercentage
-            onToggled: Config.bar.battery.showPercentage = value
-        }
-
-        SwitchRow {
-            label: Translation.tr("settings.system.transparent_center_widgets")
-            value: Config.bar.transparentCenterWidgets
-            onToggled: Config.bar.transparentCenterWidgets = value
-        }
-    }
 
     ContentItem {
         title: Translation.tr("settings.system.time")
@@ -238,7 +154,7 @@ ContentPage {
             to: 50
             enabled: Config.lock.blur.enabled
             onValueChanged: Config.lock.blur.radius = value
-            tooltipContent: `${Math.round(value)}`
+            // tooltipContent: `${Math.round(value)}`
         }
 
         SliderRow {

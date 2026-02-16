@@ -3,7 +3,6 @@ pragma ComponentBehavior: Bound
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import qs.common
 import qs.widgets
 import qs.services
@@ -11,236 +10,144 @@ import qs.services
 Rectangle {
     id: root
 
-    property bool collapsed: true
-    readonly property bool expanded: !collapsed
-
     required property int currentPage
     signal pageSelected(int page)
 
-    readonly property int railWidth: 120
-    readonly property int drawerWidth: 240
-
+    implicitWidth: 280
     color: Colors.palette.m3surfaceContainer
 
-    implicitWidth: collapsed ? railWidth : drawerWidth
-    implicitHeight: layout.implicitHeight + Appearance.spacing.lg * 2
-
-    Behavior on implicitWidth {
-        Anim {
-            duration: Appearance.animDuration.expressiveDefaultSpatial
-            easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
-        }
-    }
-    Behavior on implicitHeight {
-        Anim {
-            duration: Appearance.animDuration.expressiveDefaultSpatial
-            easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
-        }
-    }
-
     ColumnLayout {
-        id: layout
+        anchors.fill: parent
+        anchors {
+            leftMargin: Appearance.spacing.lg
+            rightMargin: Appearance.spacing.sm
+            topMargin: Appearance.spacing.lg
+            bottomMargin: Appearance.spacing.lg
+        }
+        spacing: Appearance.spacing.xs
 
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.leftMargin: Appearance.spacing.lg
-        anchors.rightMargin: Appearance.spacing.sm
-        anchors.topMargin: Appearance.spacing.lg
-        spacing: Appearance.spacing.md
+        StyledText {
+            text: Translation.tr("settings.settings")
+            size: Appearance.fontSize.lg
+            weight: Font.DemiBold
+            color: Colors.palette.m3onSurface
+            Layout.leftMargin: Appearance.spacing.md
+            Layout.topMargin: Appearance.spacing.md
+            Layout.bottomMargin: Appearance.spacing.xl
+        }
 
-        // states: State {
-        //     name: "expanded"
-        //     when: root.expanded
-        //
-        //     PropertyChanges {
-        //         layout.spacing: Appearance.spacing.sm
-        //     }
-        // }
-        //
-        // transitions: Transition {
-        //     Anim {
-        //         properties: "spacing"
-        //         duration: Appearance.animDuration.expressiveFastSpatial
-        //         easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
-        //     }
-        // }
+        Repeater {
+            model: SettingsModel {}
+            delegate: NavItem {}
+        }
 
-        IconButton {
-            id: menuBtn
-            Layout.alignment: Qt.AlignLeft
-            Layout.leftMargin: Appearance.spacing.lg
-            icon: root.collapsed ? "menu" : "menu_open"
-            onClicked: root.collapsed = !root.collapsed
+        Item {
+            Layout.fillHeight: true
         }
 
         Rectangle {
-            id: fab
-
-            readonly property int fabSize: 64
-
-            Layout.alignment: root.collapsed ? Qt.AlignHCenter : Qt.AlignLeft
-            // Layout.leftMargin: root.collapsed ? 0 : Appearance.spacing.sm
-
-            implicitHeight: fabSize
-            implicitWidth: root.collapsed ? fabSize : expandedRow.implicitWidth + Appearance.spacing.lg * 2
-
-            color: Colors.palette.m3primaryContainer
-            radius: Appearance.rounding.lg
-            clip: true
-
-            Behavior on implicitWidth {
-                Anim {
-                    duration: Appearance.animDuration.expressiveDefaultSpatial
-                    easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
-                }
-            }
+            id: editConfigBtn
+            Layout.fillWidth: true
+            implicitHeight: 56
+            radius: Appearance.rounding.md
+            color: Colors.palette.m3surfaceContainerHigh
 
             StateLayer {
-                id: fabState
-                color: Colors.palette.m3onPrimaryContainer
                 onClicked: {
                     Quickshell.execDetached(["kitty", "-e", Quickshell.env("EDITOR") || "nvim", `${Quickshell.shellDir}/config.json`]);
                 }
             }
 
-            Row {
-                id: expandedRow
-                anchors.verticalCenter: parent.verticalCenter
-                leftPadding: (fab.fabSize - editIcon.width) / 2
+            RowLayout {
+                anchors.centerIn: parent
                 spacing: Appearance.spacing.md
 
                 MaterialSymbol {
-                    id: editIcon
                     icon: "edit"
-                    size: 24
-                    color: Colors.palette.m3onPrimaryContainer
-                    anchors.verticalCenter: parent.verticalCenter
+                    size: 20
+                    color: Colors.palette.m3primary
                 }
 
                 StyledText {
-                    id: editLabel
                     text: Translation.tr("settings.edit_config")
-                    color: Colors.palette.m3onPrimaryContainer
-                    anchors.verticalCenter: parent.verticalCenter
-
-                    // Текст плавно исчезает/появляется
-                    opacity: root.expanded ? 1 : 0
-                    visible: opacity > 0
-
-                    Behavior on opacity {
-                        Anim {
-                            duration: Appearance.animDuration.expressiveFastSpatial
-                        }
-                    }
+                    color: Colors.palette.m3onSurfaceVariant
+                    size: Appearance.fontSize.sm
+                    weight: 500
                 }
             }
         }
-
-        Item {
-            Layout.fillWidth: true
-            Layout.preferredHeight: 12
-        }
-
-        Repeater {
-            model: SettingsModel {}
-
-            delegate: NavItem {}
-        }
     }
 
-    component NavItem: Item {
+    component NavItem: Rectangle {
         id: item
 
         required property var modelData
         required property int index
 
-        readonly property string icon: modelData.icon
-        readonly property string label: Translation.tr(modelData.textKey)
-
         readonly property bool active: root.currentPage === index
 
-        implicitWidth: background.implicitWidth
-        implicitHeight: background.implicitHeight + smallLabel.implicitHeight + smallLabel.anchors.topMargin
+        Layout.fillWidth: true
+        implicitHeight: 48
+        radius: Appearance.rounding.full 
 
-        Layout.alignment: root.collapsed ? Qt.AlignHCenter : Qt.AlignLeft
+        color: active ? Colors.palette.m3secondaryContainer : Colors.palette.m3surfaceContainer
 
-        states: State {
-            name: "expanded"
-            when: root.expanded
+        Behavior on color {
+            CAnim {
 
-            PropertyChanges {
-                expandedLabel.opacity: 1
-                smallLabel.opacity: 0
-                background.implicitWidth: iconItem.implicitWidth + iconItem.anchors.leftMargin * 2 + expandedLabel.anchors.leftMargin + expandedLabel.implicitWidth
-                background.implicitHeight: iconItem.implicitHeight + Appearance.spacing.md * 2
-                item.implicitHeight: background.implicitHeight
             }
         }
 
-        transitions: Transition {
-            Anim {
-                property: "opacity"
-                duration: Appearance.animDuration.expressiveFastSpatial
-                easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
-            }
-
-            Anim {
-                properties: "implicitWidth,implicitHeight"
-                duration: Appearance.animDuration.expressiveDefaultSpatial
-                easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
-            }
+        StateLayer {
+            id: stateLayer
+            color: item.active ? Colors.palette.m3onSecondaryContainer : Colors.palette.m3onSurface
+            onClicked: root.pageSelected(item.index)
         }
 
-        Rectangle {
-            id: background
+        RowLayout {
+            anchors.fill: parent
+            anchors.leftMargin: Appearance.spacing.lg
+            anchors.rightMargin: Appearance.spacing.lg
+            spacing: Appearance.spacing.md
 
-            radius: Appearance.rounding.full
-            color: Qt.alpha(Colors.palette.m3secondaryContainer, item.active ? 1 : 0)
+            MaterialSymbol {
+                icon: item.modelData.icon
+                size: 24
+                color: item.active ? Colors.palette.m3onSecondaryContainer : Colors.palette.m3onSurfaceVariant
 
-            implicitWidth: iconItem.implicitWidth + iconItem.anchors.leftMargin * 2
-            implicitHeight: iconItem.implicitHeight + Appearance.spacing.sm
-
-            StateLayer {
-                color: item.active ? Colors.palette.m3onSecondaryContainer : Colors.palette.m3onSurface
-
-                function onClicked(): void {
-                    root.pageSelected(item.index);
+                Behavior on color {
+                    CAnim {
+                        duration: Appearance.animDuration.expressiveEffects
+                    }
                 }
             }
 
-            MaterialSymbol {
-                id: iconItem
-
-                anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.leftMargin: Appearance.spacing.lg
-
-                icon: item.icon
-                color: item.active ? Colors.palette.m3onSecondaryContainer : Colors.palette.m3onSurface
-            }
-
             StyledText {
-                id: expandedLabel
-
-                anchors.left: iconItem.right
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.leftMargin: Appearance.spacing.md
-
-                opacity: 0
-                text: item.label
-                color: item.active ? Colors.palette.m3onSecondaryContainer : Colors.palette.m3onSurface
-            }
-
-            StyledText {
-                id: smallLabel
-
-                anchors.horizontalCenter: iconItem.horizontalCenter
-                anchors.top: iconItem.bottom
-                anchors.topMargin: Appearance.spacing.sm / 2
-
-                text: item.label
+                Layout.fillWidth: true
+                text: Translation.tr(item.modelData.textKey)
+                color: item.active ? Colors.palette.m3onSecondaryContainer : Colors.palette.m3onSurfaceVariant
                 size: Appearance.fontSize.sm
+                weight: item.active ? 550 : 450
+
+                Behavior on color {
+                    CAnim {
+                        duration: Appearance.animDuration.expressiveEffects
+                    }
+                }
+            }
+
+            Rectangle {
+                implicitWidth: 4
+                implicitHeight: 4
+                radius: 2
+                color: Colors.palette.m3primary
+                visible: item.active
+                opacity: item.active ? 1 : 0
+                Behavior on opacity {
+                    Anim {
+                        duration: 200
+                    }
+                }
             }
         }
     }

@@ -3,7 +3,6 @@ import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell
 import qs.modules.settings
-import qs.modules.settings.components
 import qs.config
 import qs.common
 import qs.widgets

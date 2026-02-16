@@ -7,9 +7,14 @@ ListModel {
         icon: "palette"
     }
     ListElement {
-        pageId: "general"
-        textKey: "settings.sidebar.general"
-        icon: "settings"
+        pageId: "bar"
+        textKey: "settings.bar.bar"
+        icon: "toolbar"
+    }
+    ListElement {
+        pageId: "background"
+        textKey: "settings.background.background"
+        icon: "image"
     }
     ListElement {
         pageId: "launcher"

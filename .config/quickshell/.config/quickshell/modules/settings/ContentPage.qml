@@ -7,13 +7,11 @@ import qs.services
 
 Rectangle {
     id: root
-
     required property string title
     default property alias content: contentColumn.children
 
-    color: Colors.palette.m3surface
-    radius: Appearance.rounding.lg
-    clip: true
+    color: Colors.palette.m3surface 
+    radius: Appearance.rounding.xl
 
     ColumnLayout {
         anchors.fill: parent
@@ -21,17 +19,17 @@ Rectangle {
 
         Item {
             Layout.fillWidth: true
-            Layout.preferredHeight: headerRow.implicitHeight + Appearance.spacing.lg * 2
+            Layout.preferredHeight: 80 
 
-            RowLayout {
-                id: headerRow
-                anchors.centerIn: parent
-
-                StyledText {
-                    text: root.title
-                    size: Appearance.fontSize.xl
-                    weight: 500
-                    color: Colors.palette.m3onSurface
+            StyledText {
+                text: root.title
+                size: Appearance.fontSize.xl
+                weight: 750
+                color: Colors.palette.m3onSurface
+                anchors {
+                    left: parent.left
+                    verticalCenter: parent.verticalCenter
+                    leftMargin: Appearance.spacing.xl
                 }
             }
         }
@@ -41,19 +39,29 @@ Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
             clip: true
-
+            
             contentWidth: width
-            contentHeight: contentColumn.implicitHeight + Appearance.spacing.xl
+            contentHeight: contentColumn.implicitHeight + Appearance.spacing.xxxl
 
             ScrollBar.vertical: ScrollBar {
+                id: scroll
                 policy: ScrollBar.AsNeeded
-                anchors.rightMargin: 2
+                width: 4
+                background: null
+                contentItem: Rectangle {
+                    implicitWidth: 4
+                    radius: 2
+                    color: Colors.palette.m3outline
+                    opacity: scroll.active || scroll.hovered ? 0.5 : 0
+                    Behavior on opacity { CAnim { duration: 200 } }
+                }
             }
 
             ColumnLayout {
                 id: contentColumn
-                width: flickable.width
-                spacing: Appearance.spacing.xl
+                width: parent.width - Appearance.spacing.xl * 2
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: Appearance.spacing.lg 
             }
         }
     }

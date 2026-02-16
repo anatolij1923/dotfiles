@@ -72,6 +72,7 @@
   "settings": {
     "window_title": "quickshell-settings",
     "edit_config": "Edit config",
+    "settings": "Settings",
     "sidebar": {
       "appearance": "Appearance",
       "general": "General",
@@ -103,12 +104,30 @@
       "mono_font": "Monospace",
       "nerd_font": "Nerd font"
     },
-    "general": {
-      "title": "General",
-      "information": "Information",
-      "welcome": "Welcome to Chroma Settings",
-      "configure_hint": "Configure your shell environment from here. All changes are saved automatically to config.json"
+    "bar": {
+      "title": "Bar",
+      "bar": "Bar",
+      "positioning": "Positioning and height",
+      "tray": "Tray",
+      "make_tray_monochrome": "Make tray icons monochrome",
+      "icon_desaturation": "Icon desaturation",
+      "height": "Height",
+      "bottom_position": "Bottom position",
+      "floating": "Floating",
+      "vertical_margins": "Vertical Margins",
+      "horizontal_margins": "Horizontal Margins",
+      "workspaces": "Workspaces",
+      "workspaces_shown": "Workspaces shown",
+      "battery": "Battery",
+      "classic_battery": "Use classic battery style",
+      "show_percentage": "Show percentage",
+      "transparent_center_widgets": "Trasparent center widgets"
     },
+    "background": {
+      "title": "Background",
+      "background": "background"
+    },
+
     "launcher": {
       "title": "Launcher",
       "display": "Display",
@@ -124,18 +143,6 @@
     },
     "system": {
       "title": "System",
-      "bar": "Bar",
-      "height": "Height",
-      "bottom_position": "Bottom position",
-      "floating": "Floating",
-      "vertical_margins": "Vertical Margins",
-      "horizontal_margins": "Horizontal Margins",
-      "workspaces_shown": "Workspaces shown",
-      "make_tray_monochrome": "Make tray icons monochrome",
-      "icon_desaturation": "Icon desaturation",
-      "classic_battery": "Use classic battery style",
-      "show_percentage": "Show percentage",
-      "transparent_center_widgets": "Trasparent center widgets",
       "time": "Time",
       "time_format": "Time format",
       "date_format": "Date format",

@@ -72,6 +72,7 @@
   "settings": {
     "window_title": "quickshell-settings",
     "edit_config": "Изменить конфиг",
+    "settings": "Настройки",
     "sidebar": {
       "appearance": "Внешний вид",
       "general": "Общие",
@@ -103,11 +104,28 @@
       "mono_font": "Моноширинный",
       "nerd_font": "Nerd шрифт"
     },
-    "general": {
-      "title": "Общие",
-      "information": "Информация",
-      "welcome": "Добро пожаловать в настройки Chroma",
-      "configure_hint": "Настройте вашу оболочку здесь. Все изменения автоматически сохраняются в файл config.json"
+    "bar": {
+      "title": "Панель",
+      "bar": "Панель",
+      "positioning": "Позиционирование и высота",
+      "tray": "Трей",
+      "make_tray_monochrome": "Монохромные иконки трея",
+      "icon_desaturation": "Обесцвечивание иконок",
+      "height": "Высота",
+      "bottom_position": "Расположение снизу",
+      "floating": "Плавающая панель",
+      "vertical_margins": "Вертикальные отступы",
+      "horizontal_margins": "Горизонтальные отступы",
+      "workspaces": "Воркспейсы",
+      "workspaces_shown": "Рабочих столов отображено",
+      "battery": "Батарея",
+      "classic_battery": "Классический стиль батареи",
+      "show_percentage": "Показывать проценты",
+      "transparent_center_widgets": "Прозрачные центр. виджеты"
+    },
+    "background": {
+      "title": "Обои",
+      "background": "Обои"
     },
     "launcher": {
       "title": "Лаунчер",
@@ -124,18 +142,6 @@
     },
     "system": {
       "title": "Система",
-      "bar": "Панель",
-      "height": "Высота",
-      "bottom_position": "Расположение снизу",
-      "floating": "Плавающая панель",
-      "vertical_margins": "Вертикальные отступы",
-      "horizontal_margins": "Горизонтальные отступы",
-      "workspaces_shown": "Рабочих столов отображено",
-      "make_tray_monochrome": "Монохромные иконки трея",
-      "icon_desaturation": "Обесцвечивание иконок",
-      "classic_battery": "Классический стиль батареи",
-      "show_percentage": "Показывать проценты",
-      "transparent_center_widgets": "Прозрачные центр. виджеты",
       "time": "Время",
       "time_format": "Формат времени",
       "date_format": "Формат даты",
