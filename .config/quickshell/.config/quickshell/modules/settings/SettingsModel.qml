@@ -13,7 +13,7 @@ ListModel {
     }
     ListElement {
         pageId: "background"
-        textKey: "Background"
+        textKey: "settings.background.background"
         icon: "image"
     }
     ListElement {

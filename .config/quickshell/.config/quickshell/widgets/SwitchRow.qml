@@ -13,6 +13,15 @@ Item {
     Layout.fillWidth: true
     implicitHeight: 48 
 
+    StateLayer {
+        anchors.fill: parent
+            radius: Appearance.rounding.lg
+            opacity: 0.3
+            onClicked: {
+                sw.toggle();
+                root.toggled(sw.checked);
+            }
+    }
     RowLayout {
         anchors.fill: parent
         spacing: Appearance.spacing.md
@@ -30,14 +39,4 @@ Item {
         }
     }
     
-    // Делаем всю строку кликабельной для удобства
-    StateLayer {
-        anchors.fill: parent
-        radius: Appearance.rounding.lg
-        opacity: 0.3
-        onClicked: {
-            sw.toggle();
-            root.toggled(sw.checked);
-        }
-    }
 }

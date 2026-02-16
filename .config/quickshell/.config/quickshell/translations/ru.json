@@ -72,6 +72,7 @@
   "settings": {
     "window_title": "quickshell-settings",
     "edit_config": "Изменить конфиг",
+    "settings": "Настройки",
     "sidebar": {
       "appearance": "Внешний вид",
       "general": "Общие",
@@ -122,11 +123,9 @@
       "show_percentage": "Показывать проценты",
       "transparent_center_widgets": "Прозрачные центр. виджеты"
     },
-    "general": {
-      "title": "Общие",
-      "information": "Информация",
-      "welcome": "Добро пожаловать в настройки Chroma",
-      "configure_hint": "Настройте вашу оболочку здесь. Все изменения автоматически сохраняются в файл config.json"
+    "background": {
+      "title": "Обои",
+      "background": "Обои"
     },
     "launcher": {
       "title": "Лаунчер",

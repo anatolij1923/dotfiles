@@ -27,12 +27,13 @@ Rectangle {
         spacing: Appearance.spacing.xs
 
         StyledText {
-            text: "Settings"
+            text: Translation.tr("settings.settings")
             size: Appearance.fontSize.lg
             weight: Font.DemiBold
             color: Colors.palette.m3onSurface
             Layout.leftMargin: Appearance.spacing.md
-            Layout.bottomMargin: Appearance.spacing.md
+            Layout.topMargin: Appearance.spacing.md
+            Layout.bottomMargin: Appearance.spacing.xl
         }
 
         Repeater {

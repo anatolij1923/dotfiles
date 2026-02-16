@@ -72,6 +72,7 @@
   "settings": {
     "window_title": "quickshell-settings",
     "edit_config": "Edit config",
+    "settings": "Settings",
     "sidebar": {
       "appearance": "Appearance",
       "general": "General",
@@ -115,19 +116,18 @@
       "floating": "Floating",
       "vertical_margins": "Vertical Margins",
       "horizontal_margins": "Horizontal Margins",
-        "workspaces": "Workspaces",
+      "workspaces": "Workspaces",
       "workspaces_shown": "Workspaces shown",
       "battery": "Battery",
       "classic_battery": "Use classic battery style",
       "show_percentage": "Show percentage",
       "transparent_center_widgets": "Trasparent center widgets"
     },
-    "general": {
-      "title": "General",
-      "information": "Information",
-      "welcome": "Welcome to Chroma Settings",
-      "configure_hint": "Configure your shell environment from here. All changes are saved automatically to config.json"
+    "background": {
+      "title": "Background",
+      "background": "background"
     },
+
     "launcher": {
       "title": "Launcher",
       "display": "Display",
