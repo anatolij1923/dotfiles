@@ -30,10 +30,10 @@ Singleton {
     // --- Battery (0.0..1.0), only valid when device reports it ---
     readonly property real battery: (firstActiveDevice?.batteryAvailable && firstActiveDevice) ? firstActiveDevice.battery : 0
 
-    // --- Icon for bar / toggles ---
+    // Icon for bar / toggles
     readonly property string icon: enabled ? (connected ? "bluetooth_connected" : "bluetooth") : "bluetooth_disabled"
 
-    // --- Adapter control ---
+    // Adapter control
     function setEnabled(on) {
         if (adapter)
             adapter.enabled = !!on;
@@ -54,7 +54,6 @@ Singleton {
             adapter.discovering = !adapter.discovering;
     }
 
-    // --- Device control ---
     function connectDevice(device) {
         if (device)
             device.connect();
@@ -67,7 +66,6 @@ Singleton {
         if (device)
             device.forget();
     }
-    /** Toggle connection for a device (connect if disconnected, disconnect if connected). */
     function toggleDevice(device) {
         if (device)
             device.connected = !device.connected;

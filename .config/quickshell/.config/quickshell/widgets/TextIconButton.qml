@@ -33,8 +33,6 @@ Rectangle {
     property color activeColor: Colors.palette.m3primary
     property color activeOnColor: Colors.palette.m3surface
 
-    readonly property real pressedRadius: Appearance.rounding.md
-
     signal clicked
     signal rightClicked
     signal middleClicked
@@ -43,9 +41,8 @@ Rectangle {
     onCheckedChanged: internalChecked = checked
 
     radius: {
-        if (stateLayer.pressed) {
-            return root.pressedRadius;
-        }
+        if (stateLayer.pressed)
+            return Appearance.rounding.md;
         return internalChecked ? Appearance.rounding.xl : implicitHeight / 2;
     }
 

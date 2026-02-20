@@ -6,17 +6,19 @@ import qs.widgets
 
 Rectangle {
     id: root
-    visible: Record.isRecording || scale > 0
+    // visible: Record.isRecording || scale > 0
+    visible: true
+    
 
-    property int padding: Appearance.spacing.xs
-    implicitWidth: visible ? (content.implicitWidth + padding * 2) : 0
-    implicitHeight: content.implicitHeight + padding * 2
+    implicitWidth: visible ? (content.implicitWidth + Appearance.spacing.md * 2) : 0
+    implicitHeight: content.implicitHeight + Appearance.spacing.xs * 2
 
     scale: Record.isRecording ? 1 : 0
 
-    color: Qt.alpha(Colors.palette.m3errorContainer, 0.3)
+    // color: Qt.alpha(Colors.palette.m3errorContainer, 0.3)
+    color: Colors.palette.m3errorContainer
 
-    radius: Appearance.rounding.lg
+    radius: Appearance.rounding.full
 
     Behavior on scale {
         Anim {
@@ -37,12 +39,13 @@ Rectangle {
         MaterialSymbol {
             id: icon
             icon: "screen_record"
-            color: Colors.palette.m3error
+            color: Colors.palette.m3onErrorContainer
         }
         StyledText {
             text: Record.duration
-            color: Colors.palette.m3error
-            weight: 600
+            color: Colors.palette.m3onErrorContainer
+            size: Appearance.fontSize.md
+            weight: 450
         }
     }
 }

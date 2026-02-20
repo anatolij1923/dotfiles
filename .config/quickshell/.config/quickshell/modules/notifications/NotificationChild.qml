@@ -281,7 +281,7 @@ Rectangle {
 
             IconButton {
                 id: expandButton
-                icon: root.expanded ? "keyboard_arrow_down" : "keyboard_arrow_up"
+                icon: root.expanded ? "keyboard_arrow_up" : "keyboard_arrow_down"
                 anchors.right: parent.right
                 anchors.top: parent.top
                 implicitHeight: time.implicitHeight + Appearance.spacing.md
