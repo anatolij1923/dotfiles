@@ -225,6 +225,21 @@ return {
 			},
 			capabilities = capabilities,
 		}
+		vim.lsp.config["svelte-language-server"] = {
+			cmd = { "svelteserver", "--stdio" },
+			filetypes = { "svelte" },
+			capabilities = capabilities,
+			root_markers = { "package.json", ".git", "svelte.config.js" },
+			settings = {
+				svelte = {
+					plugin = {
+						svelte = {
+							--
+						},
+					},
+				},
+			},
+		}
 		--
 		-- python
 		vim.lsp.config["pyright"] = {
@@ -275,6 +290,7 @@ return {
 			"emmet_language_server",
 			"cssls",
 			"tailwindcss",
+			"svelte-language-server",
 			-- "ts_ls",
 			"vtsls",
 			"clangd",
