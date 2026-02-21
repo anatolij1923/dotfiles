@@ -15,23 +15,42 @@ Item {
 
     function getAppName(win) {
         if (!win || !win.activated)
-            return Translation.tr("appname.desktop")
-
-        let initial = win.HyprlandToplevel?.lastIpcObject?.initialTitle;
-        if (initial && initial !== "")
-            return initial;
+            return Translation.tr("appname.desktop");
 
         let id = win.appId || win.HyprlandToplevel?.class || "";
         if (!id)
-            return Translation.tr("appname.desktop")
+            return Translation.tr("appname.desktop");
 
-        let parts = id.split('.');
-        let junk = ["org", "com", "io", "net", "desktop", "bin", "generic"];
+        const friendlyNames = {
+            "thorium-browser": "Thorium",
+            "google-chrome": "Google Chrome",
+            "firefox": "Firefox",
+            "org.gnome.Nautilus": "Files",
+            "com.mitchellh.ghostty": "Ghostty",
+            "org.quickshell": "Quickshell",
+            "code-oss": "VS Code",
+            "visual-studio-code-bin": "VS Code",
+            "discord": "Discord",
+            "vesktop": "Vesktop",
+            "spotify": "Spotify",
+            "telegram-desktop": "Telegram",
+            "org.kde.dolphin": "Dolphin"
+        };
+
+        if (friendlyNames[id])
+            return friendlyNames[id];
+
+        let name = id.replace(/\.desktop$/, "");
+
+        let parts = name.split('.');
+        let junk = ["org", "com", "io", "net", "desktop", "bin", "generic", "apps", "linux"];
         let filtered = parts.filter(p => !junk.includes(p.toLowerCase()));
 
-        let name = filtered.length > 0 ? filtered[filtered.length - 1] : parts[parts.length - 1];
+        name = filtered.length > 0 ? filtered[filtered.length - 1] : parts[parts.length - 1];
 
-        return name.charAt(0).toUpperCase() + name.slice(1);
+        name = name.replace(/-browser$/, "").replace(/[-_]/g, " ");
+
+        return name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     }
 
     implicitWidth: layout.implicitWidth
@@ -45,31 +64,38 @@ Item {
         StyledText {
             id: appLabel
             text: root.getAppName(root.activeWindow)
-            weight: 400
+            weight: 500
             size: Appearance.fontSize.md
-            opacity: text === Translation.tr("appname.desktop") ? 0.7 : 1
-            Behavior on opacity {
-                Anim {}
-            }
+            color: Colors.palette.m3onSurface
+            opacity: text === Translation.tr("appname.desktop") ? 0.5 : 1
         }
+
 
         Rectangle {
             implicitWidth: 1
-            implicitHeight: 12
+            implicitHeight: 14
             color: Colors.palette.m3outline
             opacity: 0.3
-            visible: root.showMoreData && root.activeWindow?.activated && titleLabel.text !== ""
+            visible: titleLabel.text !== "" && titleLabel.visible
         }
 
         StyledText {
             id: titleLabel
             visible: root.showMoreData
-            property string fullTitle: root.activeWindow?.title || ""
 
-            text: (root.activeWindow?.activated) ? (fullTitle.startsWith(appLabel.text) ? fullTitle.replace(appLabel.text, "").replace(/^[:\-\s]+/, "") : fullTitle) : ""
+            property string rawTitle: root.activeWindow?.title || ""
 
-            opacity: 0.6
-            Layout.maximumWidth: 300
+            text: {
+                if (!root.activeWindow?.activated || rawTitle === appLabel.text)
+                    return "";
+
+                let cleanTitle = rawTitle.replace(new RegExp(`[\\s\\-\\|·]*${appLabel.text}$`, "i"), "");
+                return cleanTitle.trim();
+            }
+
+            opacity: 0.7
+            size: Appearance.fontSize.sm
+            Layout.maximumWidth: 400
             elide: Text.ElideRight
         }
     }
