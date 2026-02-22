@@ -19,7 +19,7 @@ Scope {
             name: "mediaplayer"
 
             implicitWidth: 400
-            implicitHeight: 600
+            implicitHeight: 650
 
             anchors {
                 top: true
