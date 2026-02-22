@@ -3,12 +3,12 @@
   "logo": {
     "type": "auto",
     // "source": "arch_small",
-    "source": "$HOME/.config/fastfetch/arch.txt",
+    "source": "$HOME/.config/fastfetch/cachy.txt",
     // "source": "$HOME/.config/fastfetch/cross.png",
     "color": {"1": "blue"},
     // "height": 11,
     "padding": {
-      "top": 1,
+      "top": 2,
       "left": 3
     }
   },
