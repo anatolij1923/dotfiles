@@ -13,6 +13,7 @@ import qs.modules.lock
 import qs.modules.session
 import qs.modules.launcher
 import qs.modules.notifications
+import qs.modules.mediaplayer
 import qs.modules.tit
 import qs.modules.quicksettings
 import qs.modules.osd
@@ -45,4 +46,5 @@ ShellRoot {
     Background {}
     OSD {}
     Polkit {}
+    Mediaplayer {}
 }
