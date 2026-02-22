@@ -8,21 +8,26 @@ Singleton {
 
     readonly property list<MprisPlayer> list: Mpris.players.values
     
+    property MprisPlayer manualPlayer: null
+
     readonly property MprisPlayer active: {
-        const players = Mpris.players.values;
-        if (players.length === 0) return null;
+        if (manualPlayer && list.indexOf(manualPlayer) !== -1) {
+            return manualPlayer;
+        }
         
-        for (let i = 0; i < players.length; i++) {
-            if (players[i].playbackStatus === Mpris.Playing) {
-                return players[i];
+        if (list.length === 0) return null;
+        
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].playbackStatus === Mpris.Playing) {
+                return list[i];
             }
         }
         
-        return players[0];
+        return list[0];
     }
 
     function getSourceName(player) {
-        if (!player) return "";
+        if (!player) return "None";
         return player.identity || "Unknown";
     }
 }
