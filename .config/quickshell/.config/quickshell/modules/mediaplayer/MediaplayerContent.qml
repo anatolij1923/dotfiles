@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell.Widgets
+import Quickshell.Services.Mpris
 import qs.services
 import qs.common
 import qs.widgets
@@ -11,10 +12,46 @@ import qs
 ClippingRectangle {
     id: root
 
+    // --- ЛОГИКА ПЛЕЕРА ---
     property var player: Players.active
     property string trackTitle: (player && player.trackTitle) || "Not Playing"
     property string trackArtist: (player && player.trackArtist) || "Select a track"
     property string trackArtUrl: (player && player.trackArtUrl) || ""
+
+    property real currentProgress: 0
+    property real currentSeconds: 0
+    property bool isSeeking: false
+
+    function formatTime(seconds) {
+        if (seconds === undefined || seconds === null || seconds < 0)
+            return "0:00";
+        let totalSeconds = Math.floor(seconds);
+        let minutes = Math.floor(totalSeconds / 60);
+        let secs = totalSeconds % 60;
+        return minutes + ":" + (secs < 10 ? "0" : "") + secs;
+    }
+
+    Timer {
+        id: seekDebounce
+        interval: 500
+        onTriggered: root.isSeeking = false
+    }
+
+    Timer {
+        id: progressTimer
+        interval: 500
+        running: !!root.player && root.player.playbackStatus === Mpris.Playing
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: {
+            if (root.player && !root.isSeeking) {
+                root.currentSeconds = root.player.position;
+                if (root.player.length > 0) {
+                    root.currentProgress = root.currentSeconds / root.player.length;
+                }
+            }
+        }
+    }
 
     property bool showSelector: false
 
@@ -78,32 +115,20 @@ ClippingRectangle {
         RowLayout {
             Layout.alignment: Qt.AlignHCenter
             Layout.fillWidth: true
-
             Item {
                 Layout.fillWidth: true
             }
-
-            // Rectangle {
-            //     width: 32
-            //     height: 4
-            //     radius: Appearance.rounding.full
-            //     color: Colors.alpha(Colors.palette.m3onSurface, 0.15)
-            // }
-
             Item {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 24
-
                 RowLayout {
                     anchors.right: parent.right
                     spacing: Appearance.spacing.xs
-
                     Rectangle {
                         implicitWidth: sourceName.implicitWidth + 12
                         implicitHeight: 24
                         radius: Appearance.rounding.sm
                         color: root.showSelector ? Colors.alpha(Colors.palette.m3primary, 0.2) : "transparent"
-
                         StyledText {
                             id: sourceName
                             anchors.centerIn: parent
@@ -113,7 +138,6 @@ ClippingRectangle {
                             color: root.showSelector ? Colors.palette.m3primary : Colors.palette.m3onSurface
                             opacity: root.showSelector ? 1.0 : 0.5
                         }
-
                         StateLayer {
                             anchors.fill: parent
                             onClicked: root.showSelector = !root.showSelector
@@ -131,7 +155,6 @@ ClippingRectangle {
                 id: mainPlayerContent
                 anchors.fill: parent
                 spacing: Appearance.spacing.md
-
                 opacity: root.showSelector ? 0.1 : 1.0
                 property real currentScale: root.showSelector ? 0.95 : 1.0
                 scale: currentScale
@@ -153,7 +176,6 @@ ClippingRectangle {
                     Layout.alignment: Qt.AlignHCenter
                     Layout.preferredWidth: parent.width * 0.72
                     Layout.preferredHeight: width
-
                     Rectangle {
                         anchors.fill: artContainer
                         anchors.topMargin: 12
@@ -166,13 +188,11 @@ ClippingRectangle {
                             blur: 0.7
                         }
                     }
-
                     ClippingRectangle {
                         id: artContainer
                         anchors.fill: parent
                         radius: Appearance.rounding.xl
                         color: Colors.palette.m3surfaceContainer
-
                         StyledImage {
                             source: root.trackArtUrl || "fallback_icon"
                             anchors.fill: parent
@@ -207,24 +227,70 @@ ClippingRectangle {
                 ColumnLayout {
                     Layout.fillWidth: true
                     spacing: 0
+
                     StyledSlider {
+                        id: progressSlider
                         Layout.fillWidth: true
                         configuration: StyledSlider.Configuration.Wavy
+                        stopIndicatorValues: [0]
+
+                        tooltipContent: root.formatTime(value * (root.player?.length || 0))
+
+                        Binding {
+                            target: progressSlider
+                            property: "value"
+                            value: root.currentProgress
+                            when: !progressSlider.pressed && !root.isSeeking
+                            restoreMode: Binding.RestoreBindingOrValue
+                        }
+
+                        onMoved: {
+                            if (pressed) {
+                                root.currentSeconds = value * (root.player?.length || 0);
+                            }
+                        }
+
+                        onPressedChanged: {
+                            if (pressed) {
+                                root.isSeeking = true; 
+                                seekDebounce.stop();  
+
+                                value = position;
+                            } else {
+                                if (root.player && root.player.length > 0) {
+                                    let targetPos = value * root.player.length;
+
+                                    root.player.position = targetPos;
+
+                                    root.currentSeconds = targetPos;
+                                    root.currentProgress = value;
+
+                                    seekDebounce.restart();
+                                } else {
+                                    root.isSeeking = false;
+                                }
+                            }
+                        }
                     }
+
                     RowLayout {
                         Layout.fillWidth: true
                         StyledText {
-                            text: "1:24"
+                            text: root.formatTime(root.currentSeconds)
+                            weight: 500
                             size: Appearance.fontSize.xs
-                            opacity: 0.5
+                            color: Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3primary, 0.5)
+                            opacity: 0.7
                         }
                         Item {
                             Layout.fillWidth: true
                         }
                         StyledText {
-                            text: "3:45"
+                            text: root.formatTime(root.player?.length)
+                            weight: 500
                             size: Appearance.fontSize.xs
-                            opacity: 0.5
+                            color: Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3primary, 0.5)
+                            opacity: 0.7
                         }
                     }
                 }
@@ -238,6 +304,7 @@ ClippingRectangle {
                         horizontalPadding: Appearance.spacing.xl
                         verticalPadding: Appearance.spacing.lg
                         inactiveColor: Colors.palette.m3surfaceContainerHigh
+                        onClicked: root.player?.previous()
                     }
                     IconButton {
                         id: playButton
@@ -250,6 +317,7 @@ ClippingRectangle {
                         inactiveColor: Colors.palette.m3primary
                         inactiveOnColor: Colors.palette.m3onPrimary
                         checked: true
+                        onClicked: root.player?.togglePlaying()
                     }
                     IconButton {
                         icon: "skip_next"
@@ -257,11 +325,11 @@ ClippingRectangle {
                         horizontalPadding: Appearance.spacing.xl
                         verticalPadding: Appearance.spacing.lg
                         inactiveColor: Colors.palette.m3surfaceContainerHigh
+                        onClicked: root.player?.next()
                     }
                 }
 
                 Rectangle {
-                    // Layout.topMargin: Appearance.spacing.xs
                     Layout.alignment: Qt.AlignHCenter
                     implicitWidth: parent.width * 0.5
                     implicitHeight: 50
@@ -294,7 +362,6 @@ ClippingRectangle {
                 anchors.fill: parent
                 radius: Appearance.rounding.xl
                 color: Colors.alpha(Colors.palette.m3surfaceContainerHigh, 0.8)
-
                 visible: opacity > 0
                 opacity: root.showSelector ? 1.0 : 0.0
                 property real currentScale: root.showSelector ? 1.0 : 0.9
@@ -317,14 +384,12 @@ ClippingRectangle {
                     anchors.fill: parent
                     anchors.margins: Appearance.spacing.md
                     spacing: Appearance.spacing.md
-
                     StyledText {
                         text: "Active Players"
                         size: Appearance.fontSize.md
                         weight: 700
                         Layout.alignment: Qt.AlignHCenter
                     }
-
                     ListView {
                         id: playersList
                         Layout.fillWidth: true
@@ -332,26 +397,21 @@ ClippingRectangle {
                         model: Players.list
                         spacing: Appearance.spacing.sm
                         clip: true
-
                         delegate: Rectangle {
                             required property var modelData
-
                             width: playersList.width
                             height: 56
                             radius: Appearance.rounding.lg
                             color: modelData === Players.active ? Colors.palette.m3primary : Colors.alpha(Colors.palette.m3surface, 0.3)
-
                             RowLayout {
                                 anchors.fill: parent
                                 anchors.margins: Appearance.spacing.md
                                 spacing: Appearance.spacing.md
-
                                 MaterialSymbol {
                                     icon: "music_note"
                                     size: 24
                                     color: parent.parent.modelData === Players.active ? Colors.palette.m3onPrimary : Colors.palette.m3onSurface
                                 }
-
                                 ColumnLayout {
                                     spacing: 0
                                     Layout.fillWidth: true
@@ -371,7 +431,6 @@ ClippingRectangle {
                                     }
                                 }
                             }
-
                             StateLayer {
                                 anchors.fill: parent
                                 onClicked: {

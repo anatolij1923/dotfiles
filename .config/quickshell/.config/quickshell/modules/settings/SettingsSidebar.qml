@@ -54,7 +54,7 @@ Rectangle {
 
             StateLayer {
                 onClicked: {
-                    Quickshell.execDetached(["kitty", "-e", Quickshell.env("EDITOR") || "nvim", `${Quickshell.shellDir}/config.json`]);
+                    Quickshell.execDetached(["ghostty", "-e", Quickshell.env("EDITOR") || "nvim", `${Quickshell.shellDir}/config.json`]);
                 }
             }
 
