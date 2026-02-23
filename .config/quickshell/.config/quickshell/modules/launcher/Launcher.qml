@@ -165,32 +165,18 @@ Scope {
                                     }
                                 }
 
-                                Keys.onEscapePressed: launcherRoot.hide()
-                                Keys.onUpPressed: contentList.currentList?.decrementCurrentIndex()
-                                Keys.onDownPressed: contentList.currentList?.incrementCurrentIndex()
+                                Shortcut {
+                                    sequence: "Escape"
+                                    onActivated: launcherRoot.hide()
+                                }
+                                Shortcut {
+                                    sequences: ["Down", "Tab", "Ctrl+J"]
+                                    onActivated: contentList.currentList?.incrementCurrentIndex()
+                                }
 
-                                Keys.onPressed: event => {
-                                    // Tab navigation
-                                    //
-                                    const isCtrl = event.modifiers & Qt.ControlModifier;
-
-                                    if (event.key === Qt.Key_Tab || (isCtrl && event.key === Qt.Key_J)) {
-                                        contentList.currentList?.incrementCurrentIndex();
-                                        event.accepted = true;
-                                    } else if (event.key === Qt.Key_Backtab || (isCtrl && event.key === Qt.Key_K)) {
-                                        contentList.currentList?.decrementCurrentIndex();
-                                        event.accepted = true;
-                                    } else
-                                    // Carousel navigation for wallpapers
-                                    if (contentList.showWallpaper) {
-                                        // if (event.key === Qt.Key_Left) {
-                                        //     contentList.currentList?.decrementCurrentIndex();
-                                        //     event.accepted = true;
-                                        // } else if (event.key === Qt.Key_Right) {
-                                        //     contentList.currentList?.incrementCurrentIndex();
-                                        //     event.accepted = true;
-                                        // }
-                                    }
+                                Shortcut {
+                                    sequences: ["Up", "Backtab", "Ctrl+K"]
+                                    onActivated: contentList.currentList?.decrementCurrentIndex()
                                 }
                             }
 
