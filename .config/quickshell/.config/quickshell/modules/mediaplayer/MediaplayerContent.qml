@@ -12,7 +12,6 @@ import qs
 ClippingRectangle {
     id: root
 
-    // --- ЛОГИКА ПЛЕЕРА ---
     property var player: Players.active
     property string trackTitle: (player && player.trackTitle) || "Not Playing"
     property string trackArtist: (player && player.trackArtist) || "Select a track"
@@ -63,7 +62,20 @@ ClippingRectangle {
     border.color: Colors.alpha(Colors.palette.m3outlineVariant, 0.2)
 
     focus: true
-    Keys.onEscapePressed: showSelector === true ? showSelector = false : GlobalStates.mediaplayerOpened = false
+    Shortcut {
+        sequence: "Escape"
+        onActivated: {
+            if (root.showSelector) {
+                root.showSelector = false;
+            } else {
+                GlobalStates.mediaplayerOpened = false;
+            }
+        }
+    }
+    Shortcut {
+        sequence: "Space"
+        onActivated: root.player?.togglePlaying()
+    }
 
     Item {
         id: background
@@ -95,7 +107,7 @@ ClippingRectangle {
                 }
                 GradientStop {
                     position: 0.5
-                    color: Colors.palette.m3surfaceContainerLowest
+                    color: Colors.alpha(Colors.palette.m3surfaceContainerLowest, 0.75)
                 }
                 GradientStop {
                     position: 1.0
@@ -232,7 +244,7 @@ ClippingRectangle {
                         id: progressSlider
                         Layout.fillWidth: true
                         configuration: StyledSlider.Configuration.Wavy
-                        stopIndicatorValues: [0]
+                        stopIndicatorValues: []
 
                         tooltipContent: root.formatTime(value * (root.player?.length || 0))
 
@@ -252,8 +264,8 @@ ClippingRectangle {
 
                         onPressedChanged: {
                             if (pressed) {
-                                root.isSeeking = true; 
-                                seekDebounce.stop();  
+                                root.isSeeking = true;
+                                seekDebounce.stop();
 
                                 value = position;
                             } else {
