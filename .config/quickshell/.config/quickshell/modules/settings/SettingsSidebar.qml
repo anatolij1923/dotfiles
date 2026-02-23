@@ -54,7 +54,18 @@ Rectangle {
 
             StateLayer {
                 onClicked: {
-                    Quickshell.execDetached(["ghostty", "-e", Quickshell.env("EDITOR") || "nvim", `${Quickshell.shellDir}/config.json`]);
+                    const configFile = `${Quickshell.shellDir}/config.json`;
+
+                    const editors = [Quickshell.env("EDITOR"), "nvim", "vim", "nano", "zed", "code"].filter(Boolean);
+                    const terminals = [Quickshell.env("TERMINAL"), "ghostty", "kitty", "foot", "xterm"].filter(Boolean);
+
+                    const editList = editors.join(" ");
+                    const termList = terminals.join(" ");
+
+                    const shellCmd = `for t in ${termList}; do if command -v $t >/dev/null; then for e in ${editList}; do if command -v $e >/dev/null; then exec $t -e $e ${configFile}; fi; done; break; fi; done`;
+
+                    // Logger.i(`[SHELL_EXEC]: ${shellCmd}`);
+                    Quickshell.execDetached(["sh", "-c", shellCmd]);
                 }
             }
 
@@ -88,14 +99,12 @@ Rectangle {
 
         Layout.fillWidth: true
         implicitHeight: 48
-        radius: Appearance.rounding.full 
+        radius: Appearance.rounding.full
 
         color: active ? Colors.palette.m3secondaryContainer : Colors.palette.m3surfaceContainer
 
         Behavior on color {
-            CAnim {
-
-            }
+            CAnim {}
         }
 
         StateLayer {
