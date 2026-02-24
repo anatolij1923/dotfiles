@@ -62,7 +62,7 @@ return {
                             vim.notify("Treesitter: installing parser for " .. lang)
                             local res = ts.install(lang)
                             if res then
-                                res:wait(5000)
+                                -- res:wait(5000)
                                 vim.schedule(enable_ts)
                             end
                         end
