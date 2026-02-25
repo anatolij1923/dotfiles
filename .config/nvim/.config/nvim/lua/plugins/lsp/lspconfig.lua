@@ -101,7 +101,7 @@ return {
 		-- emmet_language_server
 		vim.lsp.config["emmet_language_server"] = {
 			capabilities = capabilities,
-			filetypes = { "html", "typescriptreact", "javascriptreact" },
+			filetypes = { "html", "typescriptreact", "javascriptreact", "svelte" },
 			init_options = {
 				includeLanguages = {},
 				excludeLanguages = {},
@@ -234,7 +234,10 @@ return {
 				svelte = {
 					plugin = {
 						svelte = {
-							--
+							enable = true,
+						},
+						typescript = {
+							enable = true,
 						},
 					},
 				},
