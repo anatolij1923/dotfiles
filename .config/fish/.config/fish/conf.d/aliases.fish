@@ -11,7 +11,7 @@ abbr -a ff "fastfetch"
 abbr -a zj "zellij"
 
 # Neovim
-abbr -a svim "sudo -E nvim"
+abbr -a sv "sudo nvim"
 abbr -a v "nvim"
 
 # Git
