@@ -31,7 +31,7 @@ Variants {
         WlrLayershell.layer: (GlobalStates.screenLocked || GlobalStates.screenUnlocking) ? WlrLayer.Overlay : WlrLayer.Background
         exclusionMode: ExclusionMode.Ignore
 
-        property bool shouldDim: GlobalStates.launcherOpened || GlobalStates.overviewOpened || GlobalStates.quicksettingsOpened || GlobalStates.dashboardOpened
+        property bool shouldDim: GlobalStates.launcherOpened || GlobalStates.overviewOpened || GlobalStates.quicksettingsOpened || GlobalStates.dashboardOpened || GlobalStates.mediaplayerOpened
         property bool isLocked: GlobalStates.screenLocked
 
         property bool zoomEnabled: Config.background.zoom.enabled

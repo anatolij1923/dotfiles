@@ -7,6 +7,10 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "when_closing_with_no_tabs": "keep_window_open",
+  "session": {
+    "trust_all_worktrees": true,
+  },
   "agent_servers": {
     "Qwen CLI": {
       "type": "custom",
@@ -34,9 +38,9 @@
   // font settings
   "ui_font_size": 20,
   "agent_ui_font_size": 22,
-  "ui_font_family": "JetBrains Mono",
+  "ui_font_family": "Rubik",
   "ui_font_weight": 500,
-  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+  "buffer_font_family": "JetBrainsMono Nerd Font Propo",
 
   // theme settings
   "theme": "Kanagawa Wave",
