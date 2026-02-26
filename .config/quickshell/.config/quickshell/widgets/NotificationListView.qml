@@ -10,6 +10,9 @@ ListView {
 
     implicitHeight: contentHeight
 
+    interactive: contentHeight > height
+    flickableDirection: Flickable.VerticalFlick
+
     spacing: 8
     ScrollBar.vertical: ScrollBar {}
     clip: true
@@ -19,8 +22,8 @@ ListView {
     }
     delegate: NotificationChild {
         // required property Notifications.Notif modelData
-        anchors.left: parent?.left
-        anchors.right: parent?.right
+        width: listView.width
+
         Layout.fillWidth: true
 
         // appIcon: modelData.appIcon

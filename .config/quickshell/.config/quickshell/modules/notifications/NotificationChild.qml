@@ -34,6 +34,15 @@ Rectangle {
 
     property bool expanded: false
 
+    Behavior on x {
+        Anim {
+            duration: Appearance.animDuration.expressiveEffects
+            easing.bezierCurve: Appearance.animCurves.expressiveEffects
+        }
+    }
+
+    opacity: 1.0 - (Math.abs(x) / (width * 1.2))
+
     color: root.modelData.urgency === NotificationUrgency.Critical ? Colors.palette.m3secondaryContainer : Colors.palette.m3surfaceContainer
     radius: Appearance.rounding.xl
 
@@ -67,7 +76,7 @@ Rectangle {
             if (Math.abs(root.x) < 400 * 0.4)
                 root.x = 0;
             else
-                root.modelData.popup = false;
+                root.modelData.close();
         }
         onPositionChanged: event => {
             if (pressed) {
@@ -350,7 +359,7 @@ Rectangle {
                     onClicked: root.modelData.close()
 
                     padding: Appearance.spacing.sm
-                    
+
                     Layout.minimumWidth: parent.width * 0.2
                     Layout.fillWidth: true
                 }
