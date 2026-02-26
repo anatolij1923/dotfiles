@@ -162,7 +162,7 @@ ContentPage {
             value: Config.lock.dimOpacity
             from: 0
             to: 1
-            step: 100
+            step: 0.01
             suffix: "%"
             onValueChanged: Config.lock.dimOpacity = value
         }

@@ -84,7 +84,7 @@
       "title": "Appearance",
       "background": "Background",
       "random_wallhaven": "Random: Wallhaven",
-      "random_wallhaven_tooltip": "Download random wallpaper from Wallhavem.cc",
+      "random_wallhaven_tooltip": "Download random wallpaper from Wallhaven.cc",
       "random_konachan": "Random: Konachan",
       "random_konachan_tooltip": "Download random anime wallpaper from Konachan",
       "wallpaper": "Wallpaper",
@@ -121,11 +121,11 @@
       "battery": "Battery",
       "classic_battery": "Use classic battery style",
       "show_percentage": "Show percentage",
-      "transparent_center_widgets": "Trasparent center widgets"
+      "transparent_center_widgets": "Transparent center widgets"
     },
     "background": {
       "title": "Background",
-      "background": "background"
+      "background": "Background"
     },
 
     "launcher": {
