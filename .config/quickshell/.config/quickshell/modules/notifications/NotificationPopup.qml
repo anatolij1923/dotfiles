@@ -8,40 +8,39 @@ import qs.services
 import qs.common
 import qs.widgets
 
-Scope {
-    Loader {
-        active: Notifications.dnd ? 0 : 1
+Loader {
+    active: Notifications.dnd ? 0 : 1
 
-        sourceComponent: PanelWindow {
-            id: root
-            WlrLayershell.layer: WlrLayer.Overlay
-            implicitHeight: listView.contentHeight
-            implicitWidth: 450
+    sourceComponent: StyledWindow {
+        id: root
+        name: "notifications"
+        implicitHeight: listView.contentHeight
+        implicitWidth: 450
 
-            exclusiveZone: 0
+        exclusiveZone: 0
 
-            anchors {
-                top: true
-                right: true
-                bottom: true
-            }
-            margins {
-                top: 16
-                right: 16
-            }
+        anchors {
+            top: true
+            right: true
+            bottom: true
+        }
 
-            color: "transparent"
+        margins {
+            top: Appearance.spacing.md
+            right: Appearance.spacing.md
+        }
 
-            mask: Region {
-                item: listView.contentItem
-            }
+        color: "transparent"
 
-            NotificationListView {
-                id: listView
-                implicitWidth: parent.width
-                model: Notifications.popupList
-                visible: GlobalStates.quicksettingsOpened ? 0 : 1
-            }
+        mask: Region {
+            item: listView.contentItem
+        }
+
+        NotificationListView {
+            id: listView
+            implicitWidth: parent.width
+            model: Notifications.popupList
+            visible: GlobalStates.quicksettingsOpened ? 0 : 1
         }
     }
 }
