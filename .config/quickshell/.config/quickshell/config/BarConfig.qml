@@ -14,8 +14,7 @@ JsonObject {
     property Battery battery: Battery {}
 
     component Battery: JsonObject {
-        property bool classicBatteryStyle: true
-        property bool showPercentage: true
+        property int margins: 1
     }
 
     component Margins: JsonObject {

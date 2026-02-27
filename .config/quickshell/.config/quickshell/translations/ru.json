@@ -119,8 +119,7 @@
       "workspaces": "Воркспейсы",
       "workspaces_shown": "Рабочих столов отображено",
       "battery": "Батарея",
-      "classic_battery": "Классический стиль батареи",
-      "show_percentage": "Показывать проценты",
+      "battery_margins": "Отступы в батарее",
       "transparent_center_widgets": "Прозрачные центр. виджеты"
     },
     "background": {

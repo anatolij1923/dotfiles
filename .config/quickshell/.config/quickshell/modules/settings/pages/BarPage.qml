@@ -72,16 +72,12 @@ ContentPage {
     ContentItem {
         title: Translation.tr("settings.bar.battery")
 
-        SwitchRow {
-            label: Translation.tr("settings.bar.classic_battery")
-            value: Config.bar.battery.classicBatteryStyle
-            onToggled: Config.bar.battery.classicBatteryStyle = value
-        }
-
-        SwitchRow {
-            label: Translation.tr("settings.bar.show_percentage")
-            value: Config.bar.battery.showPercentage
-            onToggled: Config.bar.battery.showPercentage = value
+        SpinBoxRow {
+            label: Translation.tr("settings.bar.battery_margins")
+            value: Config.bar.battery.margins
+            from: 0
+            to: 3
+            onValueChanged: Config.bar.battery.margins = value
         }
     }
 
