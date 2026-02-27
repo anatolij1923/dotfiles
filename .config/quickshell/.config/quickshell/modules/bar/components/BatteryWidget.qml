@@ -29,7 +29,7 @@ ClippingRectangle {
         anchors.centerIn: parent
         text: Battery.percentage
         color: Colors.palette.m3onSecondaryContainer
-        weight: 700
+        weight: 650
     }
 
     ClippingRectangle {
@@ -79,7 +79,7 @@ ClippingRectangle {
         },
         State {
             name: "low"
-            when: (root.testValue * 100) <= Config.battery.low
+            when: Battery.percentage <= Config.battery.low
             PropertyChanges {
                 target: fill
                 color: Colors.palette.m3error
