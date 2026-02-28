@@ -72,7 +72,8 @@ Item {
             title: Translation.tr("quicksettings.dialogs.mic.title")
 
             DialogDivider {}
-            DialogSwitchRow {
+
+            SwitchRow {
                 label: Translation.tr("quicksettings.dialogs.mic.mute")
                 value: Audio.source.audio.muted
                 onToggled: v => Audio.source.audio.muted = v
@@ -94,7 +95,7 @@ Item {
                 NightLightService.refreshConfig()
 
             DialogDivider {}
-            DialogSwitchRow {
+            SwitchRow {
                 label: Translation.tr("quicksettings.dialogs.night_light.enable")
                 value: NightLightService.running
                 onToggled: v => v ? NightLightService.start() : NightLightService.stop()
@@ -131,7 +132,7 @@ Item {
             title: Translation.tr("quicksettings.dialogs.bluetooth.title")
 
             DialogDivider {}
-            DialogSwitchRow {
+            SwitchRow {
                 label: Translation.tr("quicksettings.dialogs.bluetooth.enable")
                 value: BluetoothService.enabled
                 onToggled: v => BluetoothService.setEnabled(v)
