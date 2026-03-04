@@ -1,6 +1,6 @@
 [user]
     name = anatolij1923
-    email = kostyahaustow@gmail.com
+    email = 140535586+anatolij1923@users.noreply.github.com
 
 [alias]
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
