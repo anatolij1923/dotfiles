@@ -13,7 +13,7 @@ Rectangle {
     property alias checked: button.checked
     property alias toggle: button.toggle
     property alias enabled: button.enabled
-    property int padding: Appearance.spacing.md
+    property int padding: Appearance.spacing.sm
     property string tooltipText: ""
 
     signal clicked
@@ -28,8 +28,8 @@ Rectangle {
 
     Behavior on radius {
         Anim {
-            duration: Appearance.animDuration.expressiveFastSpatial
-            easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
+            duration: Appearance.animDuration.expressiveDefaultSpatial
+            easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
         }
     }
 
@@ -117,8 +117,8 @@ Rectangle {
         checked: true
         iconSize: 32
 
-        inactiveColor: Colors.palette.m3surfaceContainerHigh
-        activeColor: Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3primary, 0.8)
+        inactiveColor: Colors.mix(Colors.palette.m3surfaceContainerHigh, Colors.palette.m3primary, 0.1)
+        activeColor: Colors.palette.m3primary
 
         onClicked: root.clicked()
         onRightClicked: root.rightClicked()

@@ -12,7 +12,7 @@ IconButton {
     Layout.preferredWidth: implicitWidth + (stateLayer.pressed ? Appearance.spacing.lg : internalChecked ? Appearance.spacing.sm : 0)
     Layout.fillWidth: true
 
-    activeColor: Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3primary, 0.8)
+    activeColor: Colors.palette.m3primary
 
     iconSize: 32
 
