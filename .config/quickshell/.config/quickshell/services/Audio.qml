@@ -83,7 +83,7 @@ Singleton {
     GlobalShortcut {
         name: "muteMic"
         onPressed: {
-            Audio.source.audio.muted = !Audio.source.audio.muted
+            Audio.source.audio.muted = !Audio.source.audio.muted;
         }
     }
 }
