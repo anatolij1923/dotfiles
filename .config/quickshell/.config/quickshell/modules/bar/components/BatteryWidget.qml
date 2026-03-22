@@ -1,8 +1,6 @@
 pragma ComponentBehavior: Bound
-import Quickshell
 import Quickshell.Widgets
 import QtQuick
-import QtQuick.Layouts
 import qs.config
 import qs.services
 import qs.common
@@ -17,55 +15,33 @@ ClippingRectangle {
     implicitHeight: 28
 
     radius: Appearance.rounding.full
-    color: "transparent"
-    // color: Colors.palette.m3outlineVariant
-    border {
-        width: 2
+    color: Colors.palette.m3outline
+
+    Rectangle {
+        id: fill
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            left: parent.left
+        }
+
+        implicitWidth: parent.width * (Battery.percentage / 100)
+
+        topRightRadius: Appearance.rounding.sm
+        bottomRightRadius: Appearance.rounding.sm
+
         color: Colors.palette.m3onSecondaryContainer
+        Behavior on color {
+            CAnim {}
+        }
     }
 
     StyledText {
         id: bgText
         anchors.centerIn: parent
         text: Battery.percentage
-        color: Colors.palette.m3onSecondaryContainer
+        color: Colors.palette.m3surface
         weight: 650
-    }
-
-    ClippingRectangle {
-        anchors {
-            fill: parent
-            margins: Config.bar.battery.margins
-        }
-        radius: Appearance.rounding.full
-        color: "transparent"
-
-        ClippingRectangle {
-            id: fill
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-                left: parent.left
-            }
-
-            implicitWidth: parent.width * (Battery.percentage / 100)
-
-            radius: Appearance.rounding.xs
-            color: Colors.palette.m3onSecondaryContainer
-
-            Behavior on color {
-                CAnim {}
-            }
-
-            StyledText {
-                text: bgText.text
-                color: Colors.palette.m3surface
-                weight: bgText.weight
-
-                x: bgText.x - Config.bar.battery.margins
-                y: bgText.y - Config.bar.battery.margins
-            }
-        }
     }
 
     states: [
@@ -74,7 +50,7 @@ ClippingRectangle {
             when: Battery.isCharging
             PropertyChanges {
                 target: fill
-                color: Colors.mix(Colors.palette.m3primary, "#58e046", 0.5)
+                color: Colors.mix(Colors.palette.m3primary, "#58e046", 0.7)
             }
         },
         State {
