@@ -70,7 +70,7 @@ Singleton {
         id: matugenProc
         command: ["matugen", "-c", Quickshell.shellPath("matugen/config.toml"), "-m", root.matugenMode, "-t", root.schemeType, "image", root.wallpaperPath, "--source-color-index", "0"]
         onStarted: {
-            Logger.i("COLORS", command.join(" "))
+            Logger.i("COLORS", command.join(" "));
         }
         onExited: code => {
             if (code === 0)
@@ -98,7 +98,7 @@ Singleton {
 
         readonly property color m3surfaceTinted: root.mix(m3background, m3primary, 0.05)
         readonly property color border: root.alpha(m3surfaceVariant, 0.5)
-        readonly property color tintedShadow: root.mix(m3shadow, m3primary, 0.05)
+        readonly property color tintedShadow: root.mix(m3shadow, m3primary, 0.15)
 
         readonly property color m3error: root.ready ? root.colors.error : "#ffb4ab"
         readonly property color m3errorContainer: root.ready ? root.colors.error_container : "#93000a"

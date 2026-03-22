@@ -1,20 +1,15 @@
 pragma ComponentBehavior: Bound
-import Quickshell
 import Quickshell.Widgets
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
-import qs
 import qs.config
 import qs.services
-import qs.modules.notifications
 import qs.common
 import qs.widgets
 import qs.modules.quicksettings.toggles
 import qs.modules.quicksettings.header
 import qs.modules.quicksettings.sliders
 import qs.modules.quicksettings.notificationsList
-import qs.modules.quicksettings.media
 
 import Quickshell.Bluetooth
 

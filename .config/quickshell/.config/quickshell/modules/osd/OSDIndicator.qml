@@ -26,7 +26,7 @@ Item {
         anchors.fill: parent
         implicitWidth: content.implicitWidth
         implicitHeight: content.implicitHeight * 2
-        radius: Appearance.rounding.xl
+        radius: Appearance.rounding.full
         border {
             width: 1
             color: Colors.palette.m3surfaceContainerHighest
@@ -60,7 +60,7 @@ Item {
             StyledSlider {
                 configuration: StyledSlider.Configuration.XS
                 value: root.value
-                handleHeight: 15
+                // handleHeight: 15
             }
 
             StyledText {

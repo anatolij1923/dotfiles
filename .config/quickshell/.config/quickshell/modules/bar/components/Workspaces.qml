@@ -10,8 +10,8 @@ import qs.config
 Item {
     id: root
 
-    property int emptySize: 12
-    property int occupiedSize: 14
+    property int emptySize: 10
+    property int occupiedSize: 12
     property int focusedWidth: 32
     property int focusedHeight: 16
 

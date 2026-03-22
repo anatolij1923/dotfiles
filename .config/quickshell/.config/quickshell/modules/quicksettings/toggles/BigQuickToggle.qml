@@ -28,8 +28,8 @@ Rectangle {
 
     Behavior on radius {
         Anim {
-            duration: Appearance.animDuration.expressiveDefaultSpatial
-            easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
+            duration: Appearance.animDuration.expressiveEffects
+            easing.bezierCurve: Appearance.animCurves.expressiveEffects
         }
     }
 
@@ -109,8 +109,8 @@ Rectangle {
 
         Behavior on radius {
             Anim {
-                duration: Appearance.animDuration.expressiveDefaultSpatial
-                easing.bezierCurve: Appearance.animCurves.expressiveDefaultSpatial
+                duration: Appearance.animDuration.expressiveEffects
+                easing.bezierCurve: Appearance.animCurves.expressiveEffects
             }
         }
 

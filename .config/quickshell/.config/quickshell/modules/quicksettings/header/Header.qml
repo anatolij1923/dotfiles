@@ -1,7 +1,6 @@
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import qs
 import qs.services
 import qs.common
@@ -10,21 +9,19 @@ import qs.widgets
 RowLayout {
     id: root
     Layout.fillHeight: false
-    Layout.alignment: Qt.AlignTop
 
     Rectangle {
-        implicitWidth: uptime.implicitWidth + Appearance.spacing.xl * 2
-        implicitHeight: buttons.implicitHeight + Appearance.spacing.md
+        implicitWidth: uptime.implicitWidth + Appearance.spacing.xxl * 2
+        implicitHeight: buttons.implicitHeight + Appearance.spacing.sm
 
-        color: Colors.palette.m3surfaceContainer
+        color: Colors.alpha(Colors.palette.m3surfaceContainer, 0.4)
         radius: Appearance.rounding.full
 
         StyledText {
             id: uptime
-            text: `${Time.uptime}`
+            text: Time.uptime
             anchors.centerIn: parent
-            size: Appearance.fontSize.md
-            weight: 500
+            color: Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3primary, 0.15)
         }
     }
 
@@ -33,11 +30,11 @@ RowLayout {
     }
 
     Rectangle {
-        color: Colors.palette.m3surfaceContainer
 
-        implicitWidth: buttons.implicitWidth + Appearance.spacing.sm * 2
-        implicitHeight: buttons.implicitHeight + Appearance.spacing.md
+        implicitWidth: buttons.implicitWidth + Appearance.spacing.xs * 2
+        implicitHeight: buttons.implicitHeight + Appearance.spacing.sm
 
+        color: Colors.alpha(Colors.palette.m3surfaceContainer, 0.4)
         radius: Appearance.rounding.full
 
         RowLayout {
@@ -49,7 +46,7 @@ RowLayout {
             IconButton {
                 icon: "restart_alt"
                 padding: Appearance.spacing.sm
-                // inactiveColor: Colors.palette.m3surface
+                inactiveColor: "transparent"
 
                 onClicked: {
                     GlobalStates.quicksettingsOpened = false;
@@ -64,7 +61,7 @@ RowLayout {
             IconButton {
                 icon: "settings"
                 padding: Appearance.spacing.sm
-                // inactiveColor: Colors.palette.m3surface
+                inactiveColor: "transparent"
 
                 onClicked: {
                     GlobalStates.settingsOpened = true;
@@ -79,8 +76,7 @@ RowLayout {
             IconButton {
                 icon: "power_settings_new"
                 padding: Appearance.spacing.sm
-                // inactiveColor: Colors.palette.m3surface
-                // radius: Appearance.rounding.xl
+                inactiveColor: "transparent"
 
                 onClicked: {
                     GlobalStates.quicksettingsOpened = false;

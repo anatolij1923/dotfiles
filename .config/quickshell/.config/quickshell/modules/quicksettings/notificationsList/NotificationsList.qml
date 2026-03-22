@@ -15,13 +15,14 @@ Rectangle {
     Layout.fillHeight: true
     Layout.fillWidth: true
 
-    color: Colors.alpha(Colors.palette.m3surfaceContainer, 0.4)
+    // color: Colors.alpha(Colors.palette.m3surfaceContainer, 0.4)
+    color: "transparent"
     radius: Appearance.rounding.xl
 
     ColumnLayout {
         id: content
         anchors.fill: parent
-        anchors.margins: root.padding
+        anchors.margins: Appearance.spacing.sm
         spacing: Appearance.spacing.lg
 
         // Header with DND toggle only (no title)
@@ -120,6 +121,12 @@ Rectangle {
 
         horizontalPadding: Appearance.spacing.xl
         verticalPadding: Appearance.spacing.sm
+
+        opacity: Notifications.list.length > 0
+
+        Behavior on opacity {
+          Anim {}
+        }
 
         // Make it appear as an overlay with elevation
         // Elevation {

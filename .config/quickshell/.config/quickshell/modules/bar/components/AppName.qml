@@ -34,7 +34,8 @@ Item {
             "vesktop": "Vesktop",
             "spotify": "Spotify",
             "telegram-desktop": "Telegram",
-            "org.kde.dolphin": "Dolphin"
+            "org.kde.dolphin": "Dolphin",
+            "affinity.exe": "Affinity"
         };
 
         if (friendlyNames[id])
@@ -69,7 +70,6 @@ Item {
             color: Colors.palette.m3onSurface
             opacity: text === Translation.tr("appname.desktop") ? 0.5 : 1
         }
-
 
         Rectangle {
             implicitWidth: 1

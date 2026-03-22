@@ -6,9 +6,8 @@ import qs.widgets
 
 Rectangle {
     id: root
-    // visible: Record.isRecording || scale > 0
-    visible: true
-    
+    visible: Record.isRecording || scale > 0
+    // visible: true
 
     implicitWidth: visible ? (content.implicitWidth + Appearance.spacing.md * 2) : 0
     implicitHeight: content.implicitHeight + Appearance.spacing.xs * 2

@@ -35,6 +35,14 @@ Switch {
             color: root.checked ? Colors.palette.m3onPrimary : Colors.palette.m3outline
 
             x: root.checked ? parent.implicitWidth - nonAnimWidth - Appearance.spacing.sm / 2 : Appearance.spacing.sm / 2
+
+            Behavior on x {
+                Anim {
+                    duration: Appearance.animDuration.expressiveEffects
+                    easing.bezierCurve: Appearance.animCurves.expressiveEffects
+                }
+            }
+
             implicitWidth: nonAnimWidth
             implicitHeight: parent.implicitHeight - Appearance.spacing.sm
             anchors.verticalCenter: parent.verticalCenter

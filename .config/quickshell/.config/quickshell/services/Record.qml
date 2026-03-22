@@ -2,7 +2,6 @@ pragma Singleton
 import Quickshell
 import QtQuick
 import qs.common
-import qs.services
 
 Singleton {
     id: root
@@ -19,7 +18,8 @@ Singleton {
     }
 
     function toggle() {
-        Quickshell.execDetached([`${Quickshell.shellDir}/scripts/record.sh`]);
+      Logger.trace ()
+      Quickshell.execDetached([`${Quickshell.shellDir}/scripts/record.sh`]);
 
         if (root.isRecording) {
             stop();

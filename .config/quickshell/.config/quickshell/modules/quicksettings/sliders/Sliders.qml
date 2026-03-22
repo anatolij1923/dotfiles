@@ -1,11 +1,9 @@
 import Quickshell
-import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
 import qs.common
 import qs.widgets
 import qs.services
-import qs
 
 Rectangle {
     id: root
@@ -16,7 +14,7 @@ Rectangle {
 
     implicitHeight: content.implicitHeight + padding * 2
     implicitWidth: content.implicitWidth + padding * 2
-    color: Qt.alpha(Colors.palette.m3surfaceContainer, 0.4)
+    color: Colors.alpha(Colors.palette.m3surfaceContainer, 0.4)
     radius: Appearance.rounding.xl
 
     Layout.fillWidth: true
@@ -68,13 +66,6 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
 
             x: sliderInstance.iconShouldJump ? (sliderInstance.handle.x - width - Appearance.spacing.sm) : (parent.width - width - Appearance.spacing.md)
-
-            Behavior on x {
-                Anim {
-                    easing.bezierCurve: Appearance.animCurves.expressiveFastSpatial
-                    duration: Appearance.animDuration.expressiveFastSpatial
-                }
-            }
 
             Behavior on color {
                 CAnim {}

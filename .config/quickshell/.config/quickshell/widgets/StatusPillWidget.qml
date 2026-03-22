@@ -4,7 +4,6 @@ import QtQuick.Layouts
 import qs.common
 import qs.widgets
 import qs.services
-import qs
 
 Item {
     id: root

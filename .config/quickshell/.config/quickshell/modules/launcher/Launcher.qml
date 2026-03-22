@@ -68,7 +68,7 @@ Scope {
                 width: {
                     if (root.searchingText.startsWith(":wallpaper")) {
                         // Wide enough to show carousel with side items
-                        return launcherRoot.screen.width * 0.7;
+                        return launcherRoot.screen.width * 0.9;
                     }
                     return launcherRoot.screen.width * 0.3;
                 }
