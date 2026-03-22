@@ -1,97 +1,139 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run `zed: open default settings` from the
-// command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "when_closing_with_no_tabs": "keep_window_open",
-  "session": {
-    "trust_all_worktrees": true,
-  },
-  "agent_servers": {
-    "Qwen CLI": {
-      "type": "custom",
-      "command": "qwen",
-      "args": ["--experimental-acp"],
-      "env": {},
-      "favorite_models": [],
-      "default_config_options": {},
-      "favorite_config_option_values": {},
+    // UI & General Aesthetics
+    "agent_servers": {
+        "qwen-code": {
+            "type": "registry"
+        }
     },
-  },
-  "buffer_line_height": "comfortable",
-  "buffer_font_size": 20.0,
-  "minimap": {
-    "show": "never",
-  },
-  "agent": {
-    "default_model": {
-      "provider": "google",
-      "model": "gemini-2.5-flash",
+    "agent_buffer_font_size": 20.0,
+    "agent_ui_font_size": 20.0,
+    "preview_tabs": {
+        "enabled": true,
     },
-  },
-  "vim_mode": false,
+    "theme": "Kanagawa Dragon - No Italics",
+    "icon_theme": "Flow Dark",
+    "font_antialiasing": "none",
+    "text_rendering_mode": "grayscale",
+    "ui_font_family": "JetBrainsMono Nerd Font",
+    "ui_font_size": 20,
+    "ui_font_weight": 500,
+    "buffer_font_family": "JetBrainsMono Nerd Font Propo",
+    "buffer_font_size": 20.0,
+    "buffer_font_weight": 450.0,
+    "vertical_scroll_margin": 10,
+    "cursor_blink": false,
+    "cursor_shape": "bar",
+    "show_whitespaces": "selection",
+    "confirm_quit": true,
+    "when_closing_with_no_tabs": "keep_window_open",
 
-  // font settings
-  "ui_font_size": 20,
-  "agent_ui_font_size": 22,
-  "ui_font_family": "Rubik",
-  "ui_font_weight": 500,
-  "buffer_font_family": "JetBrainsMono Nerd Font Propo",
-
-  // theme settings
-  "theme": "Kanagawa Wave",
-  "icon_theme": "Warm Charmed Icons",
-
-  // project panel
-  "project_panel": {
-    "default_width": 300,
-    "auto_fold_dirs": false,
-    "indent_size": 25,
-    "entry_spacing": "comfortable",
-    "indent_guides": {
-      "show": "never",
+    "title_bar": {
+        "show_user_picture": false,
+        "show_menus": false,
+        "show_sign_in": true,
+        "show_user_menu": true,
+        "show_onboarding_banner": false,
+        "show_branch_name": false,
+        "show_project_items": false,
+        "show_branch_icon": false,
     },
-  },
 
-  // terminal settings
-  "terminal": {
-    "default_height": 400,
-  },
+    "gutter": {
+        "min_line_number_digits": 2,
+        "line_numbers": true,
+    },
 
-  // extensions to install
-  "auto_install_extensions": {
-    "kanagawa-themes": true,
-    "charmed-icons": true,
-  },
+    "status_bar": {
+        "cursor_position_button": true,
+    },
 
-  "languages": {
-    "SCSS": {
-      "tab_size": 2,
+    "tab_bar": {
+        "show_nav_history_buttons": true,
+        "show": true,
     },
-    "HTML": {
-      "tab_size": 2,
-    },
-  },
 
-  // diagnostics
-  "diagnostics": {
-    "button": true,
-    "include_warnings": true,
-    "lsp_pull_diagnostics": {
-      "enabled": true,
-      "debounce_ms": 50,
+    "minimap": {
+        "show": "never",
     },
-    "inline": {
-      "enabled": true,
-      "update_debounce_ms": 50,
-      "padding": 4,
-      "min_column": 0,
-      "max_severity": null,
+
+    // Editor Behavior (The "Sane Defaults")
+    "vim_mode": true,
+    "relative_line_numbers": "enabled",
+    "autosave": "off",
+    "format_on_save": "on",
+    "tab_size": 4,
+    "use_smarttabs": true,
+    "soft_wrap": "editor_width",
+    "scrolloff": 10,
+    "spell_check": { "enabled": false },
+
+    "search": {
+        "smart_case": true,
+        "case_sensitive": false,
+        "regex": true,
     },
-    "cargo": null,
-  },
+
+    "which_key": {
+        "delay_ms": 250,
+        "enabled": true,
+    },
+
+    // Panels & Terminal
+    "project_panel": {
+        "default_width": 400.0,
+        "auto_fold_dirs": false,
+        "indent_size": 20,
+        "entry_spacing": "comfortable",
+        "indent_guides": {
+            "show": "always",
+        },
+    },
+
+    "terminal": {
+        "button": true,
+        "default_height": 400,
+        "toolbar": {
+            "breadcrumbs": false,
+        },
+    },
+
+    // LSP & Diagnostics
+    "diagnostics": {
+        "button": true,
+        "include_warnings": true,
+        "lsp_pull_diagnostics": {
+            "enabled": true,
+            "debounce_ms": 50,
+        },
+        "inline": {
+            "enabled": true,
+            "update_debounce_ms": 50,
+            "padding": 4,
+        },
+    },
+
+    // AI & Agents
+    "agent": {
+        "default_model": {
+            "provider": "google",
+            "model": "gemini-2.5-flash",
+        },
+    },
+
+    "session": {
+        "trust_all_worktrees": true,
+    },
+
+    // Extensions & Languages
+    "auto_install_extensions": {
+        "kanagawa-themes": true,
+        "charmed-icons": true,
+    },
+
+    "languages": {
+        "SCSS": { "tab_size": 2 },
+        "HTML": { "tab_size": 2 },
+        "TypeScript": { "tab_size": 2 },
+        "JavaScript": { "tab_size": 2 },
+    },
 }

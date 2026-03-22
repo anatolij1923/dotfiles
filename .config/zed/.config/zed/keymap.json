@@ -1,0 +1,109 @@
+[
+    // Erase bindings
+    {
+        "bindings": {
+            "ctrl-q": null,
+            "ctrl-shift-w": null,
+        },
+    },
+
+    // Workspace bindings
+    {
+        "context": "Workspace",
+        "bindings": {},
+    },
+
+    {
+        "context": "FileFinder || (FileFinder > Picker > Editor) || (FileFinder > Picker > menu)",
+        "bindings": {
+            "ctrl-j": "menu::SelectNext",
+            "ctrl-k": "menu::SelectPrevious",
+        },
+    },
+
+    {
+        "context": "Picker",
+        "bindings": {
+            "ctrl-j": "menu::SelectNext",
+            "ctrl-k": "menu::SelectPrevious",
+        },
+    },
+
+    {
+        "context": "Editor && (showing_completions || showing_code_actions) ",
+        "bindings": {
+            "tab": "editor::ContextMenuNext",
+            "shift-tab": "editor::ContextMenuPrevious",
+            "ctrl-j": "editor::ContextMenuNext",
+            "ctrl-k": "editor::ContextMenuPrevious",
+        },
+    },
+
+    {
+        "context": "Workspace && !Editor && !Terminal",
+        "bindings": {
+            "space f": "file_finder::Toggle",
+            "space /": "pane::DeploySearch",
+            "space e": "project_panel::Toggle",
+        },
+    },
+
+    {
+        "context": "Editor && vim_mode == normal",
+        "bindings": {
+            "space f": "file_finder::Toggle",
+            "space /": "pane::DeploySearch",
+            "space e": "project_panel::Toggle",
+            "space o": "outline::Toggle",
+            "space O": "project_symbols::Toggle",
+        },
+    },
+    {
+        "context": "Editor && vim_mode == normal",
+        "bindings": {
+            "space v": "pane::SplitRight",
+            "space h": "pane::SplitDown",
+            "space x": "pane::CloseActiveItem",
+        },
+    },
+
+    // Vim: Normal & Visual
+    {
+        "context": "Editor && (vim_mode == normal || vim_mode == visual) && !showing_code_actions",
+        "bindings": {
+            ";": "command_palette::Toggle",
+            "ctrl-c": "editor::Cancel",
+            "enter": "vim::SelectLargerSyntaxNode",
+            "backspace": "vim::SelectSmallerSyntaxNode",
+            "ctrl-w": null,
+            // "ctrl-l": "pane::",
+        },
+    },
+
+    // Vim: Insert Mode
+    {
+        "context": "Editor && vim_mode == insert && !AgentPanel",
+        "bindings": {
+            "j k": "vim::NormalBefore",
+        },
+    },
+
+    // Vim: Visual Mode
+    {
+        "context": "Editor && vim_mode == visual",
+        "bindings": {
+            "ctrl-c": "editor::Copy",
+            ">": "editor::Indent",
+            "<": "editor::Outdent",
+            "J": "editor::MoveLineDown",
+            "K": "editor::MoveLineUp",
+        },
+    },
+
+    {
+        "context": "((VimControl && !menu) || (!Editor && !Terminal))",
+        "bindings": {
+            "space q": "pane::CloseActiveItem",
+        },
+    },
+]
