@@ -15,7 +15,7 @@ binds {
     Mod+P { spawn "pavucontrol"; }
 
     // Actions
-    Mod+Return hotkey-overlay-title="Open a Terminal: wezterm" { spawn "wezterm"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
     Mod+O repeat=false { toggle-overview; }
     Mod+Q repeat=false { close-window; }
     Print { screenshot; }

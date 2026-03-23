@@ -7,7 +7,6 @@ import qs.modules.bar.components
 import qs.modules.bar.components.statusPill
 import qs.modules.bar.components.tray
 
-
 Rectangle {
     id: root
 
