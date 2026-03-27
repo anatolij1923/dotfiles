@@ -1,5 +1,7 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
+import Quickshell.Widgets
 import qs
 import qs.services
 import qs.common
@@ -11,27 +13,49 @@ BarWidget {
 
     rowContent: [
         RowLayout {
-            id: content
-            spacing: 12
+            spacing: Appearance.spacing.md
+            UsageInfoWidget {
+                value: SystemUsage.cpuUsage
+                icon: "memory"
+            }
 
-            RowLayout {
-                id: mem
-                CircularProgress {
-                    implicitSize: 32
-                    MaterialSymbol {
-                        anchors.centerIn: parent
-                        color: Colors.palette.m3onSurface
-                        icon: "memory_alt"
-                        size: 20
-                    }
-                    value: SystemUsage.memoryUsedPercentage
-                }
-                StyledText {
-                    text: `${Math.round(SystemUsage.memoryUsedPercentage * 100).toString()}`
-                }
+            UsageInfoWidget {
+                value: SystemUsage.memoryUsedPercentage
+                icon: "memory_alt"
+            }
+
+            UsageInfoWidget {
+                value: SystemUsage.storagePerc
+                icon: "hard_disk"
+            }
+
+            UsageInfoWidget {
+                value: SystemUsage.cpuTemp
+                icon: "local_fire_department"
             }
         }
     ]
+
+    component UsageInfoWidget: RowLayout {
+        id: usageWidgetRoot
+
+        required property real value
+        required property string icon
+
+        spacing: 2
+
+        MaterialSymbol {
+            icon: usageWidgetRoot.icon
+            color: Colors.palette.m3onSurface
+            size: 24
+        }
+
+        VerticalProgressbar {
+            value: usageWidgetRoot.value
+            implicitHeight: parent.height * 0.7
+            implicitWidth: 5
+        }
+    }
 
     MouseArea {
         id: mouseArea
