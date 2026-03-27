@@ -15,6 +15,8 @@ Singleton {
     readonly property NetworkStats network: NetworkStats {}
     readonly property StorageStats storage: StorageStats {}
 
+    property string _cpuHwmonPath: ""
+
     component CpuStats: QtObject {
         id: cpuStats
 
@@ -61,8 +63,8 @@ Singleton {
         id: cpuStatFile
         path: "/proc/stat"
 
-        property var lastTotal: 0
-        property var lastIdle: 0
+        property real lastTotal: 0
+        property real lastIdle: 0
 
         onLoaded: {
             let content = text();
@@ -100,7 +102,7 @@ Singleton {
     }
 
     Timer {
-        id: cpuTimer
+        id: cpuStatTimer
         running: true
         interval: 1000
         repeat: true
@@ -108,5 +110,64 @@ Singleton {
         onTriggered: {
             cpuStatFile.reload();
         }
+    }
+
+    Process {
+        id: scanHwmon
+
+        command: ["sh", "-c", "for d in /sys/class/hwmon/hwmon*/name; do echo \"$d:$(cat \"$d\" 2>/dev/null)\"; done"]
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                const lines = text.trim().split("\n");
+                const targets = ["k10temp", "coretemp", "acpitz"];
+                let foundPath = "";
+
+                const sensors = {};
+                for (const line of lines) {
+                    if (!line.includes(":")) {
+                        continue;
+                    }
+                    const [fullPath, name] = line.trim().split(":");
+                    sensors[name] = fullPath.replace("/name", "");
+                }
+
+                for (const target of targets) {
+                    if (sensors[target]) {
+                        foundPath = sensors[target];
+                        break;
+                    }
+                }
+
+                if (foundPath) {
+                    root._cpuHwmonPath = foundPath;
+                } else {
+                    Logger.w("SYS_STATS", "No hwmon sensor found");
+                }
+            }
+        }
+    }
+
+    FileView {
+        id: cpuTempFile
+        path: root._cpuHwmonPath ? root._cpuHwmonPath + "/temp1_input" : ""
+
+        onLoaded: {
+            const content = parseInt(text().trim() || "0", 10);
+            root.cpu.temp = content / 1000;
+        }
+    }
+
+    Timer {
+        id: cpuTempTimer
+        interval: 3000
+        running: true
+        onTriggered: {
+            cpuTempFile.reload();
+        }
+    }
+
+    Component.onCompleted: {
+        scanHwmon.running = true;
     }
 }
