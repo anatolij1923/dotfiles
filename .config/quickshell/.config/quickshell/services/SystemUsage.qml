@@ -109,26 +109,49 @@ Singleton {
         }
     }
 
-    // CPU Temp
+    // CPU Temperature
+    property string _hwmonPath: ""
+
     Process {
-        id: tempProcess
-        command: ["sensors"]
+        id: hwmonScanProcess
+        command: ["sh", "-c", "for d in /sys/class/hwmon/hwmon*/name; do echo \"$d:$(cat \"$d\" 2>/dev/null)\"; done"]
         stdout: StdioCollector {
             onStreamFinished: {
-                const match = text.match(/(?:Tctl|Package id 0):\s+\+([\d.]+)°C/);
-                if (match)
-                    root.cpuTemp = parseFloat(match[1]);
+                let fallbackPath = "";
+                for (const line of text.trim().split("\n")) {
+                    const [path, name] = line.trim().split(":");
+                    if (name === "k10temp") {
+                        root._hwmonPath = path.replace("/name", "");
+                        return;
+                    }
+                    if (name === "acpitz" && !fallbackPath)
+                        fallbackPath = path.replace("/name", "");
+                }
+                if (!root._hwmonPath && fallbackPath)
+                    root._hwmonPath = fallbackPath;
             }
         }
     }
 
+    FileView {
+        id: cpuTempFile
+        path: root._hwmonPath ? root._hwmonPath + "/temp1_input" : ""
+    }
+
+    Component.onCompleted: hwmonScanProcess.running = true
+
     Timer {
-        id: tempTimer
+        id: tempReadTimer
         interval: 5000
         running: true
         repeat: true
-        triggeredOnStart: true
-        onTriggered: tempProcess.running = true
+        onTriggered: {
+            if (cpuTempFile.path) {
+                cpuTempFile.reload();
+                const raw = parseInt(cpuTempFile.text().trim() || "0", 10);
+                root.cpuTemp = raw / 1000;
+            }
+        }
     }
 
     // Storage
