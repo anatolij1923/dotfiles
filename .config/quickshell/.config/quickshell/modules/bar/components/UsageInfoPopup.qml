@@ -190,6 +190,9 @@ BarPopup {
                     Rectangle {
                         height: parent.height
                         width: Math.min(metricBar.value, 1) * parent.width
+                        Behavior on width {
+                            Anim {}
+                        }
                         radius: parent.radius
                         color: metricBar._accentColor
                     }
@@ -245,7 +248,7 @@ BarPopup {
             MaterialSymbol {
                 icon: networkPill.icon
                 color: networkPill.accentColor
-                size: 20
+                size: 24
             }
 
             ColumnLayout {
