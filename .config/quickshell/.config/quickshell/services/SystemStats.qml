@@ -359,6 +359,58 @@ Singleton {
         }
     }
 
+    FileView {
+        id: networkFile
+        path: "/proc/net/dev"
+
+        property real _prevRx: 0
+        property real _prevTx: 0
+
+        onLoaded: {
+            const content = text();
+            if (!content)
+                return;
+
+            const lines = content.trim().split("\n").slice(2);
+
+            let rxBytes = 0;
+            let txBytes = 0;
+
+            for (const line of lines) {
+                const parts = line.trim().split(/\s+/);
+                const iface = parts[0].replace(":", "");
+
+                if (iface === "lo")
+                    continue;
+
+                rxBytes += parseInt(parts[1], 10) || 0;
+                txBytes += parseInt(parts[9], 10) || 0;
+            }
+
+            if (_prevRx > 0 && _prevTx > 0) {
+                const rxDelta = rxBytes - _prevRx;
+                const txDelta = txBytes - _prevTx;
+
+                root.network.downloadSpeed = rxDelta / 1024;  // KB/s
+                root.network.uploadSpeed = txDelta / 1024;    // KB/s
+            }
+
+            _prevRx = rxBytes;
+            _prevTx = txBytes;
+        }
+    }
+
+    Timer {
+        id: networkFileTimer
+        interval: 1000
+        repeat: true
+        running: true
+        triggeredOnStart: true
+        onTriggered: {
+            networkFile.reload();
+        }
+    }
+
     Component.onCompleted: {
         scanHwmon.running = true;
         gpuCardScan.running = true;
