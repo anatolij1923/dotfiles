@@ -104,6 +104,7 @@ Singleton {
     Timer {
         id: cpuStatTimer
         running: true
+        triggeredOnStart: true
         interval: 1000
         repeat: true
 
@@ -162,9 +163,40 @@ Singleton {
         id: cpuTempTimer
         interval: 3000
         running: true
+        triggeredOnStart: true
         repeat: true
         onTriggered: {
             cpuTempFile.reload();
+        }
+    }
+
+    FileView {
+        id: cpuInfoFile
+        path: "/proc/cpuinfo"
+
+        onLoaded: {
+            let content = text();
+            let matches = content.match(/cpu MHz\s+:\s+([0-9.]+)/g);
+
+            if (matches && matches.length > 0) {
+                let sumFrequency = 0.0;
+                for (let i = 0; i < matches.length; i++) {
+                    sumFrequency += parseFloat(matches[i].split(":")[1]);
+                }
+                let avg = sumFrequency / matches.length;
+                root.cpu.frequency = avg;
+            }
+        }
+    }
+
+    Timer {
+        id: cpuInfoFileTimer
+        interval: 3000
+        running: true
+        triggeredOnStart: true
+        repeat: true
+        onTriggered: {
+            cpuInfoFile.reload();
         }
     }
 
