@@ -67,7 +67,7 @@ Singleton {
         property real lastIdle: 0
 
         onLoaded: {
-            let content = text();
+            const content = text();
             if (!content) {
                 return;
             }
@@ -155,6 +155,10 @@ Singleton {
 
         onLoaded: {
             const content = parseInt(text().trim() || "0", 10);
+            if (!content) {
+                return;
+            }
+
             root.cpu.temp = content / 1000;
         }
     }
@@ -175,8 +179,11 @@ Singleton {
         path: "/proc/cpuinfo"
 
         onLoaded: {
-            let content = text();
-            let matches = content.match(/cpu MHz\s+:\s+([0-9.]+)/g);
+            const content = text();
+            if (!content) {
+                return;
+            }
+            const matches = content.match(/cpu MHz\s+:\s+([0-9.]+)/g);
 
             if (matches && matches.length > 0) {
                 let sumFrequency = 0.0;
@@ -197,6 +204,42 @@ Singleton {
         repeat: true
         onTriggered: {
             cpuInfoFile.reload();
+        }
+    }
+
+    FileView {
+        id: memFile
+        path: "/proc/meminfo"
+
+        onLoaded: {
+            const content = text();
+            if (!content) {
+                return;
+            }
+
+            const memTotal = parseInt(content.match(/MemTotal:\s+(\d+)/)?.[1] || "0", 10);
+            const memAvailable = parseInt(content.match(/MemAvailable:\s+(\d+)/)?.[1] || "0", 10);
+            const swapTotal = parseInt(content.match(/SwapTotal:\s+(\d+)/)?.[1] || "0", 10);
+            const swapFree = parseInt(content.match(/SwapFree:\s+(\d+)/)?.[1] || "0", 10);
+
+            root.mem.ramTotal = memTotal * 1024;
+            root.mem.ramUsed = (memTotal - memAvailable) * 1024;
+            root.mem.ramUsedPercentage = memTotal > 0 ? (memTotal - memAvailable) / memTotal : 0;
+
+            root.mem.swapTotal = swapTotal * 1024;
+            root.mem.swapUsed = (swapTotal - swapFree) * 1024;
+            root.mem.swapUsedPercentage = swapTotal > 0 ? (swapTotal - swapFree) / swapTotal : 0;
+        }
+    }
+
+    Timer {
+        id: memInfoTimer
+        interval: 3000
+        repeat: true
+        running: true
+        triggeredOnStart: true
+        onTriggered: {
+            memFile.reload();
         }
     }
 
