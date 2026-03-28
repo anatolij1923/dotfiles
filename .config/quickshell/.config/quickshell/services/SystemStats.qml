@@ -162,6 +162,7 @@ Singleton {
         id: cpuTempTimer
         interval: 3000
         running: true
+        repeat: true
         onTriggered: {
             cpuTempFile.reload();
         }
