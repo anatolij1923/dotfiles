@@ -32,7 +32,9 @@ Rectangle {
 
         LauncherButton {}
         Workspaces {}
-        AppName {}
+        // AppName {}
+        //
+        UsageInfo {}
     }
 
     ClockWidget {
@@ -58,7 +60,6 @@ Rectangle {
 
         RecordWidget {}
         Tray {}
-        // SysButton {}
         StatusPill {}
         BatteryWidget {
             showPopup: true

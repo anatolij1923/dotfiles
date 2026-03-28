@@ -10,8 +10,11 @@ import qs.widgets
 
 StyledWindow {
     id: root
-
     name: "bar"
+
+    property bool floating: Config.bar.floating
+    property bool bottom: Config.bar.bottom
+    property var m: Config.bar.margins
 
     anchors {
         top: !Config.bar.bottom
@@ -24,14 +27,9 @@ StyledWindow {
 
     WlrLayershell.layer: WlrLayer.Top
 
-    color: "transparent"
     Behavior on color {
         CAnim {}
     }
-
-    property bool floating: Config.bar.floating
-    property bool bottom: Config.bar.bottom
-    property var m: Config.bar.margins
 
     Loader {
         active: true
@@ -43,7 +41,7 @@ StyledWindow {
             rightMargin: root.floating ? root.m.horizontal : 0
         }
         sourceComponent: BarContent {
-        anchors.fill: parent
+            anchors.fill: parent
         }
     }
 }
