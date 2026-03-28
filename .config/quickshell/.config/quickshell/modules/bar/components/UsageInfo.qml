@@ -15,22 +15,20 @@ BarWidget {
         RowLayout {
             spacing: Appearance.spacing.md
             UsageInfoWidget {
-                value: SystemUsage.cpuUsage
+                value: SystemStats.cpu.usage
                 icon: "memory"
             }
 
             UsageInfoWidget {
-                value: SystemUsage.memoryUsedPercentage
+                value: SystemStats.mem.ramUsedPercentage
                 icon: "memory_alt"
             }
 
             UsageInfoWidget {
-                value: SystemUsage.storagePerc
-                icon: "hard_disk"
-            }
-
-            UsageInfoWidget {
-                value: SystemUsage.cpuTemp
+                readonly property real minTemp: 22.0
+                readonly property real maxTemp: 90.0
+                property real rawTemp: SystemStats.cpu.temp
+                value: Math.min(Math.max((rawTemp - minTemp) / (maxTemp - minTemp), 0.0), 1.0)
                 icon: "local_fire_department"
             }
         }
@@ -54,6 +52,7 @@ BarWidget {
             value: usageWidgetRoot.value
             implicitHeight: parent.height * 0.7
             implicitWidth: 5
+            fillColor: value >= 0.9 ? "#ff5050" : Colors.palette.m3secondary
         }
     }
 

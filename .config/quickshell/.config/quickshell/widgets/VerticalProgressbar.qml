@@ -1,6 +1,5 @@
 pragma ComponentBehavior: Bound
 import QtQuick
-import QtQuick.Layouts
 import Quickshell.Widgets
 import qs.services
 import qs.common
@@ -9,6 +8,7 @@ ClippingRectangle {
     id: root
 
     required property real value
+    property string fillColor: Colors.palette.m3secondary
 
     implicitHeight: parent.height
     implicitWidth: 6
@@ -18,7 +18,7 @@ ClippingRectangle {
 
     Rectangle {
         id: fill
-        color: Colors.palette.m3secondary
+        color: root.fillColor
         anchors {
             left: parent.left
             right: parent.right
