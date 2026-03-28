@@ -16,6 +16,8 @@ Singleton {
     readonly property StorageStats storage: StorageStats {}
 
     property string _cpuHwmonPath: ""
+    property string _gpuHwmonPath: ""
+    property string _gpuCardPath: ""
 
     component CpuStats: QtObject {
         id: cpuStats
@@ -121,8 +123,9 @@ Singleton {
         stdout: StdioCollector {
             onStreamFinished: {
                 const lines = text.trim().split("\n");
-                const targets = ["k10temp", "coretemp", "acpitz"];
-                let foundPath = "";
+                const cpuTargets = ["k10temp", "coretemp", "acpitz"];
+                let foundCpuPath = "";
+                let foundGpuPath = "";
 
                 const sensors = {};
                 for (const line of lines) {
@@ -133,17 +136,27 @@ Singleton {
                     sensors[name] = fullPath.replace("/name", "");
                 }
 
-                for (const target of targets) {
+                for (const target of cpuTargets) {
                     if (sensors[target]) {
-                        foundPath = sensors[target];
+                        foundCpuPath = sensors[target];
                         break;
                     }
                 }
 
-                if (foundPath) {
-                    root._cpuHwmonPath = foundPath;
+                if (sensors["amdgpu"]) {
+                    foundGpuPath = sensors["amdgpu"];
+                }
+
+                if (foundCpuPath) {
+                    root._cpuHwmonPath = foundCpuPath;
                 } else {
-                    Logger.w("SYS_STATS", "No hwmon sensor found");
+                    Logger.w("SYS_STATS", "No CPU hwmon sensor found");
+                }
+
+                if (foundGpuPath) {
+                    root._gpuHwmonPath = foundGpuPath;
+                } else {
+                    Logger.w("SYS_STATS", "No GPU hwmon sensor found");
                 }
             }
         }
@@ -285,7 +298,69 @@ Singleton {
         }
     }
 
+    FileView {
+        id: gpuUsageFile
+        path: root._gpuCardPath
+
+        onLoaded: {
+            const usage = parseInt(text().trim() || "0", 10);
+            root.gpu.usage = Math.max(0, Math.min(1, usage / 100));
+        }
+    }
+
+    Timer {
+        id: gpuUsageTimer
+        interval: 2000
+        running: true
+        triggeredOnStart: true
+        repeat: true
+        onTriggered: {
+            gpuUsageFile.reload();
+        }
+    }
+
+    FileView {
+        id: gpuTempFile
+        path: root._gpuHwmonPath ? root._gpuHwmonPath + "/temp1_input" : ""
+
+        onLoaded: {
+            const raw = parseInt(text().trim() || "0", 10);
+            if (raw > 0) {
+                root.gpu.temp = raw / 1000;
+            }
+        }
+    }
+
+    Timer {
+        id: gpuTempTimer
+        interval: 5000
+        running: true
+        triggeredOnStart: true
+        repeat: true
+        onTriggered: {
+            if (gpuTempFile.path) {
+                gpuTempFile.reload();
+            }
+        }
+    }
+
+    Process {
+        id: gpuCardScan
+        command: ["sh", "-c", "for d in /sys/class/drm/card*/device/gpu_busy_percent; do if [ -f \"$d\" ]; then echo \"$d\"; break; fi; done"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                const path = text.trim();
+                if (path) {
+                    root._gpuCardPath = path;
+                } else {
+                    Logger.w("SYS_STATS", "No GPU card with gpu_busy_percent found");
+                }
+            }
+        }
+    }
+
     Component.onCompleted: {
         scanHwmon.running = true;
+        gpuCardScan.running = true;
     }
 }
