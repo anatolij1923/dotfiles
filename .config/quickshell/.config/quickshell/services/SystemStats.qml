@@ -243,6 +243,48 @@ Singleton {
         }
     }
 
+    Process {
+        id: storageProc
+        command: ["sh", "-c", "df --output=size,used,avail,pcent /"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                const lines = text.trim().split("\n");
+                if (lines.length < 2) {
+                    Logger.w("SYS_STATS", "df output empty");
+                    return;
+                }
+
+                const dataLine = lines[1];
+                const parts = dataLine.trim().split(/\s+/);
+
+                if (parts.length < 3) {
+                    Logger.w("SYS_STATS", "df parse failed: " + dataLine);
+                    return;
+                }
+
+                const sizeKb = parseInt(parts[0], 10) || 0;
+                const usedKb = parseInt(parts[1], 10) || 0;
+                const availKb = parseInt(parts[2], 10) || 0;
+                const percent = parseInt(parts[3], 10) || 0;
+
+                root.storage.total = sizeKb * 1024;
+                root.storage.used = usedKb * 1024;
+                root.storage.usedPercentage = percent / 100;
+            }
+        }
+    }
+
+    Timer {
+        id: storageProcTimer
+        interval: 60000
+        repeat: true
+        running: true
+        triggeredOnStart: true
+        onTriggered: {
+            storageProc.running = true;
+        }
+    }
+
     Component.onCompleted: {
         scanHwmon.running = true;
     }
