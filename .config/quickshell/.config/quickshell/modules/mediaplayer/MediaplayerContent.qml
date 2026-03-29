@@ -86,7 +86,6 @@ ClippingRectangle {
             anchors.fill: parent
             source: root.trackArtUrl
             fillMode: Image.PreserveAspectCrop
-            opacity: 0.35
             visible: root.trackArtUrl !== ""
 
             layer.enabled: true
@@ -103,15 +102,15 @@ ClippingRectangle {
             gradient: Gradient {
                 GradientStop {
                     position: 0.0
-                    color: Colors.alpha(Colors.palette.m3surfaceContainerLowest, 0.2)
+                    color: Colors.alpha(Colors.palette.m3surfaceContainerLowest, 0.3)
                 }
                 GradientStop {
-                    position: 0.5
+                    position: 0.4
                     color: Colors.alpha(Colors.palette.m3surfaceContainerLowest, 0.75)
                 }
                 GradientStop {
                     position: 1.0
-                    color: Colors.palette.m3surfaceContainerLowest
+                    color: Colors.alpha(Colors.palette.m3surfaceContainerLowest, 0.95)
                 }
             }
         }
