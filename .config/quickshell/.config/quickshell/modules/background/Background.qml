@@ -32,7 +32,7 @@ Variants {
         exclusionMode: ExclusionMode.Ignore
 
         property bool shouldDim: GlobalStates.launcherOpened || GlobalStates.overviewOpened || GlobalStates.quicksettingsOpened || GlobalStates.dashboardOpened || GlobalStates.mediaplayerOpened
-        property bool isLocked: GlobalStates.screenLocked
+        property bool isLocked: GlobalStates.screenLocked && !GlobalStates.screenUnlocking
 
         property bool zoomEnabled: Config.background.zoom.enabled
         property real zoomScale: Config.background.zoom.scale
