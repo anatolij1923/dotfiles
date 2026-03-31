@@ -91,7 +91,7 @@ ClippingRectangle {
             layer.enabled: true
             layer.effect: MultiEffect {
                 blurEnabled: true
-                blurMax: 100
+                blurMax: 64
                 blur: 1.0
                 saturation: 0.4
             }
@@ -218,20 +218,20 @@ ClippingRectangle {
                     StyledText {
                         text: root.trackTitle
                         size: Appearance.fontSize.xl
-                        weight: 800
+                        weight: 700
                         Layout.fillWidth: true
                         horizontalAlignment: Text.AlignHCenter
                         elide: Text.ElideRight
                     }
                     StyledText {
                         text: root.trackArtist
-                        size: Appearance.fontSize.sm
-                        weight: 500
-                        opacity: 0.8
+                        size: Appearance.fontSize.md
+                        weight: 400
+                        opacity: 1
                         Layout.fillWidth: true
                         horizontalAlignment: Text.AlignHCenter
                         elide: Text.ElideRight
-                        color: Colors.palette.m3primary
+                        color: Colors.palette.m3outline
                     }
                 }
 
@@ -290,7 +290,7 @@ ClippingRectangle {
                             text: root.formatTime(root.currentSeconds)
                             weight: 500
                             size: Appearance.fontSize.xs
-                            color: Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3primary, 0.5)
+                            color: Colors.palette.m3outline
                             opacity: 0.7
                         }
                         Item {
@@ -300,7 +300,7 @@ ClippingRectangle {
                             text: root.formatTime(root.player?.length)
                             weight: 500
                             size: Appearance.fontSize.xs
-                            color: Colors.mix(Colors.palette.m3onSurface, Colors.palette.m3primary, 0.5)
+                            color: Colors.palette.m3outline
                             opacity: 0.7
                         }
                     }
@@ -397,8 +397,8 @@ ClippingRectangle {
                     spacing: Appearance.spacing.md
                     StyledText {
                         text: "Active Players"
-                        size: Appearance.fontSize.md
-                        weight: 700
+                        size: Appearance.fontSize.lg
+                        weight: 600
                         Layout.alignment: Qt.AlignHCenter
                     }
                     ListView {
@@ -406,43 +406,64 @@ ClippingRectangle {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         model: Players.list
-                        spacing: Appearance.spacing.sm
+                        spacing: Appearance.spacing.xs
                         clip: true
                         delegate: Rectangle {
+                            id: playerDelegate
                             required property var modelData
                             width: playersList.width
-                            height: 56
-                            radius: Appearance.rounding.lg
-                            color: modelData === Players.active ? Colors.palette.m3primary : Colors.alpha(Colors.palette.m3surface, 0.3)
-                            RowLayout {
-                                anchors.fill: parent
-                                anchors.margins: Appearance.spacing.md
-                                spacing: Appearance.spacing.md
-                                MaterialSymbol {
-                                    icon: "music_note"
-                                    size: 24
-                                    color: parent.parent.modelData === Players.active ? Colors.palette.m3onPrimary : Colors.palette.m3onSurface
+                            height: playerDelegateContent.implicitHeight + Appearance.spacing.sm * 2
+                            radius: playerDelegateStateLayer.pressed ? Appearance.rounding.sm : (playerDelegate.modelData === Players.active ? Appearance.rounding.full : Appearance.rounding.lg)
+                            color: modelData === Players.active ? Colors.palette.m3secondaryContainer : Colors.alpha(Colors.palette.m3surface, 0.3)
+
+                            Behavior on radius {
+                                Anim {
+                                    duration: Appearance.animDuration.expressiveEffects
+                                    easing.bezierCurve: Appearance.animCurves.expressiveEffects
                                 }
+                            }
+                            //
+                            RowLayout {
+                                id: playerDelegateContent
+                                anchors {
+                                    fill: parent
+                                    leftMargin: Appearance.spacing.md
+                                }
+                                MaterialSymbol {
+                                    icon: "equalizer"
+                                    size: 32
+                                    color: playerDelegate.modelData === Players.active ? Colors.palette.m3secondary : Colors.palette.m3onSurface
+                                }
+
                                 ColumnLayout {
-                                    spacing: 0
                                     Layout.fillWidth: true
+                                    Layout.alignment: Qt.AlignVCenter
+                                    spacing: 0
                                     StyledText {
-                                        text: parent.parent.parent.modelData.identity
+                                        text: playerDelegate.modelData.identity
+                                        // elide: Text.ElideRight
+                                        // Layout.preferredWidth: parent.width
+                                        weight: 500
+                                        size: Appearance.fontSize.md
+                                        color: playerDelegate.modelData === Players.active ? Colors.palette.m3secondary : Colors.palette.m3onSurface
+                                    }
+
+                                    StyledText {
+                                        text: playerDelegate.modelData.trackTitle || "Idle"
+                                        // elide: Text.ElideRight
+                                        // Layout.preferredWidth: parent.width
+                                        opacity: 0.75
                                         size: Appearance.fontSize.sm
-                                        weight: 700
-                                        color: parent.parent.parent.modelData === Players.active ? Colors.palette.m3onPrimary : Colors.palette.m3onSurface
+                                        color: playerDelegate.modelData === Players.active ? Colors.palette.m3secondary : Colors.palette.m3onSurface
                                     }
-                                    StyledText {
-                                        text: parent.parent.parent.modelData.trackTitle || "Idle"
-                                        size: Appearance.fontSize.xs
-                                        opacity: 0.7
-                                        elide: Text.ElideRight
-                                        Layout.fillWidth: true
-                                        color: parent.parent.parent.modelData === Players.active ? Colors.palette.m3onPrimary : Colors.palette.m3onSurface
-                                    }
+                                }
+
+                                Item {
+                                    Layout.fillWidth: true
                                 }
                             }
                             StateLayer {
+                                id: playerDelegateStateLayer
                                 anchors.fill: parent
                                 onClicked: {
                                     Players.manualPlayer = parent.modelData;

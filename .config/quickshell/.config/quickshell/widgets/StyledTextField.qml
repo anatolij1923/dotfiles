@@ -4,14 +4,15 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Effects
 import qs.config
+import qs.common
 import qs.services
 
 TextField {
     id: root
 
     property string placeholder: "Type..."
-    property int fontSize: 16
-    property int fontWeight: 500
+    property int fontSize: Appearance.fontSize.md
+    property int fontWeight: 400
 
     // verticalAlignment: TextInput.AlignVCenter
     background: null

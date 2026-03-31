@@ -1,206 +1,207 @@
 {
-  "quicksettings": {
-    "header": {
-      "restart": "Перезапустить Quickshell",
-      "open_settings": "Открыть настройки",
-      "open_power_menu": "Меню питания"
+    "quicksettings": {
+        "header": {
+            "restart": "Перезапустить Quickshell",
+            "open_settings": "Открыть настройки",
+            "open_power_menu": "Меню питания"
+        },
+        "toggles": {
+            "network": "Сеть",
+            "network_tooltip": "Нажмите, чтобы переключить Wi-Fi.\nПравый клик — открыть nmgui",
+            "bluetooth": "Bluetooth",
+            "bluetooth_tooltip": "Переключить Bluetooth.\nПравый клик — открыть blueman",
+            "bluetooth_tooltip_connected": "Переключить Bluetooth.\nПравый клик — открыть blueman\nПодключено: %1%",
+            "wifi_tooltip": "Нажмите, чтобы переключить Wi-Fi",
+            "dark_mode": "Тёмная тема",
+            "light_mode": "Светлая тема",
+            "dnd": "Не беспокоить",
+            "idle": "Не давать системе уснуть",
+            "sleep_tooltip": "Таймер сна. Правый клик — отмена",
+            "sleep_remaining": "Осталось",
+            "mic": "Выключить микрофон",
+            "power_profiles": "Профили питания",
+            "screen_record": "Запись экрана",
+            "transparency": "Прозрачность",
+            "gamemode": "Игровой режим",
+            "night_light": "Ночной свет"
+        },
+        "dialogs": {
+            "mic": {
+                "title": "Микрофон",
+                "mute": "Выключить микрофон",
+                "input_volume": "Громкость входа"
+            },
+            "night_light": {
+                "title": "Ночной свет",
+                "enable": "Включить",
+                "temperature": "Температура",
+                "night_gamma": "Ночная гамма"
+            },
+            "bluetooth": {
+                "title": "Bluetooth",
+                "enable": "Включить Bluetooth",
+                "scan": "Искать устройства",
+                "scanning": "Поиск…",
+                "devices": "Устройства"
+            }
+        },
+        "notifications": {
+            "everything_quiet": "Уведомлений нет",
+            "clear": "Очистить",
+            "clear_all": "Очистить все уведомления"
+        }
     },
-    "toggles": {
-      "network": "Сеть",
-      "network_tooltip": "Нажмите, чтобы переключить Wi-Fi.\nПравый клик — открыть nmgui",
-      "bluetooth": "Bluetooth",
-      "bluetooth_tooltip": "Переключить Bluetooth.\nПравый клик — открыть blueman",
-      "bluetooth_tooltip_connected": "Переключить Bluetooth.\nПравый клик — открыть blueman\nПодключено: %1%",
-      "wifi_tooltip": "Нажмите, чтобы переключить Wi-Fi",
-      "dark_mode": "Тёмная тема",
-      "light_mode": "Светлая тема",
-      "dnd": "Не беспокоить",
-      "idle": "Не давать системе уснуть",
-      "sleep_tooltip": "Таймер сна. Правый клик — отмена",
-      "sleep_remaining": "Осталось",
-      "mic": "Выключить микрофон",
-      "power_profiles": "Профили питания",
-      "screen_record": "Запись экрана",
-      "transparency": "Прозрачность",
-      "gamemode": "Игровой режим",
-      "night_light": "Ночной свет"
+    "session": {
+        "warning": "Внимание",
+        "pkg_running": "Запущен пакетный менеджер!",
+        "down_running": "Запущен процесс загрузки!",
+        "uptime": "Время работы",
+        "lock": "Заблокировать",
+        "shutdown": "Выключить",
+        "suspend": "Сон",
+        "reboot": "Перезагрузить",
+        "logout": "Выйти",
+        "desc": {
+            "lock": "Заблокировать экран",
+            "shutdown": "Выключить компьютер",
+            "suspend": "Перевести компьютер в спящий режим",
+            "reboot": "Перезагрузить компьютер",
+            "logout": "Выйти из Hyprland"
+        }
     },
-    "dialogs": {
-      "mic": {
-        "title": "Микрофон",
-        "mute": "Выключить микрофон",
-        "input_volume": "Громкость входа"
-      },
-      "night_light": {
-        "title": "Ночной свет",
-        "enable": "Включить",
-        "temperature": "Температура",
-        "night_gamma": "Ночная гамма"
-      },
-      "bluetooth": {
-        "title": "Bluetooth",
-        "enable": "Включить Bluetooth",
-        "scan": "Искать устройства",
-        "scanning": "Поиск…",
-        "devices": "Устройства"
-      }
+    "settings": {
+        "window_title": "quickshell-settings",
+        "edit_config": "Изменить конфиг",
+        "settings": "Настройки",
+        "sidebar": {
+            "appearance": "Внешний вид",
+            "general": "Общие",
+            "launcher": "Лаунчер",
+            "system": "Система",
+            "about": "О программе"
+        },
+        "appearance": {
+            "title": "Внешний вид",
+            "background": "Фон",
+            "random_wallhaven": "Случайные: Wallhaven",
+            "random_wallhaven_tooltip": "Скачать случайные обои с Wallhaven.cc",
+            "random_konachan": "Случайные: Konachan",
+            "random_konachan_tooltip": "Скачать случайные аниме-обои с Konachan",
+            "wallpaper": "Обои",
+            "parallax_effect": "Эффект параллакса",
+            "parallax_scale": "Масштаб параллакса",
+            "dim_effect": "Эффект затемнения",
+            "dim_transparency": "Прозрачность затемнения",
+            "zoom_effect": "Эффект зума",
+            "zoom_scale": "Сила зума",
+            "theme": "Тема",
+            "dark_mode": "Тёмный режим",
+            "transparency": "Прозрачность",
+            "enable": "Включить",
+            "alpha": "Прозрачность",
+            "fonts": "Шрифты",
+            "main_font": "Основной",
+            "mono_font": "Моноширинный",
+            "nerd_font": "Nerd шрифт"
+        },
+        "bar": {
+            "title": "Панель",
+            "bar": "Панель",
+            "positioning": "Позиционирование и высота",
+            "tray": "Трей",
+            "make_tray_monochrome": "Монохромные иконки трея",
+            "icon_desaturation": "Обесцвечивание иконок",
+            "height": "Высота",
+            "bottom_position": "Расположение снизу",
+            "floating": "Плавающая панель",
+            "vertical_margins": "Вертикальные отступы",
+            "horizontal_margins": "Горизонтальные отступы",
+            "workspaces": "Воркспейсы",
+            "workspaces_shown": "Рабочих столов отображено",
+            "battery": "Батарея",
+            "battery_margins": "Отступы в батарее",
+            "transparent_center_widgets": "Прозрачные центр. виджеты"
+        },
+        "background": {
+            "title": "Обои",
+            "background": "Обои"
+        },
+        "launcher": {
+            "title": "Лаунчер",
+            "display": "Отображение",
+            "max_items_shown": "Макс. элементов",
+            "item_height": "Высота элемента",
+            "wallpaper_width": "Ширина обоев",
+            "wallpaper_height": "Высота обоев",
+            "commands": "Команды",
+            "commands_hint": "Настройка команд доступна в файле config.json",
+            "total_commands": "Всего команд: %1",
+            "stats": "Статистика",
+            "stats_label": "Использовать статистику для недавних приложений"
+        },
+        "system": {
+            "title": "Система",
+            "time": "Время",
+            "time_format": "Формат времени",
+            "date_format": "Формат даты",
+            "gamemode": "Игровой режим",
+            "gaps_in": "Внутренние отступы",
+            "gaps_out": "Внешние отступы",
+            "border_size": "Размер границ",
+            "rounding": "Скругление",
+            "send_notification": "Отправить уведомление",
+            "disable_blur": "Отключить размытие",
+            "blur_size": "Сила размытия",
+            "blur_passes": "Проходы размытия",
+            "weather": "Погода",
+            "update_interval_minutes": "Интервал обновления (мин)",
+            "city": "Город",
+            "city_placeholder": "Введите название города",
+            "notifications": "Уведомления",
+            "timeout_ms": "Тайм-аут (мс)",
+            "osd": "OSD (Экранное меню)",
+            "lock_screen": "Экран блокировки",
+            "blur_enabled": "Размытие включено",
+            "blur_radius": "Радиус размытия",
+            "dim_opacity": "Непрозрачность затемнения",
+            "language": "Язык",
+            "interface_language": "Язык интерфейса"
+        },
+        "about": {
+            "title": "О программе",
+            "shell_name": "Пока не названный шелл",
+            "activate_dotfiles": "Активировать дотфайлы",
+            "open_repo": "Открыть репозиторий",
+            "open_repo_tooltip": "Открыть репозиторий в браузере",
+            "stop_it": "ХВАТИТ!!!"
+        }
     },
-    "notifications": {
-      "everything_quiet": "Уведомлений нет",
-      "clear": "Очистить",
-      "clear_all": "Очистить все уведомления"
-    }
-  },
-  "session": {
-    "warning": "Внимание",
-    "pkg_running": "Запущен пакетный менеджер!",
-    "down_running": "Запущен процесс загрузки!",
-    "uptime": "Время работы",
-    "lock": "Заблокировать",
-    "shutdown": "Выключить",
-    "suspend": "Сон",
-    "reboot": "Перезагрузить",
-    "logout": "Выйти",
-    "desc": {
-      "lock": "Заблокировать экран",
-      "shutdown": "Выключить компьютер",
-      "suspend": "Перевести компьютер в спящий режим",
-      "reboot": "Перезагрузить компьютер",
-      "logout": "Выйти из Hyprland"
-    }
-  },
-  "settings": {
-    "window_title": "quickshell-settings",
-    "edit_config": "Изменить конфиг",
-    "settings": "Настройки",
-    "sidebar": {
-      "appearance": "Внешний вид",
-      "general": "Общие",
-      "launcher": "Лаунчер",
-      "system": "Система",
-      "about": "О программе"
+    "lock": {
+        "locked": "Заблокировано",
+        "wrong_password": "Неверный пароль"
     },
-    "appearance": {
-      "title": "Внешний вид",
-      "background": "Фон",
-      "random_wallhaven": "Случайные: Wallhaven",
-      "random_wallhaven_tooltip": "Скачать случайные обои с Wallhaven.cc",
-      "random_konachan": "Случайные: Konachan",
-      "random_konachan_tooltip": "Скачать случайные аниме-обои с Konachan",
-      "wallpaper": "Обои",
-      "parallax_effect": "Эффект параллакса",
-      "parallax_scale": "Масштаб параллакса",
-      "dim_effect": "Эффект затемнения",
-      "dim_transparency": "Прозрачность затемнения",
-      "zoom_effect": "Эффект зума",
-      "zoom_scale": "Сила зума",
-      "theme": "Тема",
-      "dark_mode": "Тёмный режим",
-      "transparency": "Прозрачность",
-      "enable": "Включить",
-      "alpha": "Прозрачность",
-      "fonts": "Шрифты",
-      "main_font": "Основной",
-      "mono_font": "Моноширинный",
-      "nerd_font": "Nerd шрифт"
+    "dashboard": {
+        "usage": {
+            "cpu": "Процессор",
+            "memory": "Память",
+            "swap": "Swap",
+            "temperature": "Температура"
+        }
     },
     "bar": {
-      "title": "Панель",
-      "bar": "Панель",
-      "positioning": "Позиционирование и высота",
-      "tray": "Трей",
-      "make_tray_monochrome": "Монохромные иконки трея",
-      "icon_desaturation": "Обесцвечивание иконок",
-      "height": "Высота",
-      "bottom_position": "Расположение снизу",
-      "floating": "Плавающая панель",
-      "vertical_margins": "Вертикальные отступы",
-      "horizontal_margins": "Горизонтальные отступы",
-      "workspaces": "Воркспейсы",
-      "workspaces_shown": "Рабочих столов отображено",
-      "battery": "Батарея",
-      "battery_margins": "Отступы в батарее",
-      "transparent_center_widgets": "Прозрачные центр. виджеты"
-    },
-    "background": {
-      "title": "Обои",
-      "background": "Обои"
+        "back": "‹ Назад"
     },
     "launcher": {
-      "title": "Лаунчер",
-      "display": "Отображение",
-      "max_items_shown": "Макс. элементов",
-      "item_height": "Высота элемента",
-      "wallpaper_width": "Ширина обоев",
-      "wallpaper_height": "Высота обоев",
-      "commands": "Команды",
-      "commands_hint": "Настройка команд доступна в файле config.json",
-      "total_commands": "Всего команд: %1",
-      "stats": "Статистика",
-      "stats_label": "Использовать статистику для недавних приложений"
+        "random": "Случайно",
+        "wallpapers": "обоев",
+        "wipe": "Очистить",
+        "entries": "элементов"
     },
-    "system": {
-      "title": "Система",
-      "time": "Время",
-      "time_format": "Формат времени",
-      "date_format": "Формат даты",
-      "gamemode": "Игровой режим",
-      "gaps_in": "Внутренние отступы",
-      "gaps_out": "Внешние отступы",
-      "border_size": "Размер границ",
-      "rounding": "Скругление",
-      "send_notification": "Отправить уведомление",
-      "disable_blur": "Отключить размытие",
-      "blur_size": "Сила размытия",
-      "blur_passes": "Проходы размытия",
-      "weather": "Погода",
-      "update_interval_minutes": "Интервал обновления (мин)",
-      "city": "Город",
-      "city_placeholder": "Введите название города",
-      "notifications": "Уведомления",
-      "timeout_ms": "Тайм-аут (мс)",
-      "osd": "OSD (Экранное меню)",
-      "lock_screen": "Экран блокировки",
-      "blur_enabled": "Размытие включено",
-      "blur_radius": "Радиус размытия",
-      "dim_opacity": "Непрозрачность затемнения",
-      "language": "Язык",
-      "interface_language": "Язык интерфейса"
+    "appname": {
+        "desktop": "Рабочий стол"
     },
-    "about": {
-      "title": "О программе",
-      "shell_name": "Пока не названный шелл",
-      "activate_dotfiles": "Активировать дотфайлы",
-      "open_repo": "Открыть репозиторий",
-      "open_repo_tooltip": "Открыть репозиторий в браузере",
-      "stop_it": "ХВАТИТ!!!"
+    "activation": {
+        "label": "Активируйте дотфайлы",
+        "desc": "Откройте настройки чтобы активировать"
     }
-  },
-  "lock": {
-    "locked": "Заблокировано"
-  },
-  "dashboard": {
-    "usage": {
-      "cpu": "Процессор",
-      "memory": "Память",
-      "swap": "Swap",
-      "temperature": "Температура"
-    }
-  },
-  "bar": {
-    "back": "‹ Назад"
-  },
-  "launcher": {
-    "random": "Случайно",
-    "wallpapers": "обоев",
-    "wipe": "Очистить",
-    "entries": "элементов"
-  },
-  "appname": {
-    "desktop": "Рабочий стол"
-  },
-  "activation": {
-    "label": "Активируйте дотфайлы",
-    "desc": "Откройте настройки чтобы активировать"
-  }
 }

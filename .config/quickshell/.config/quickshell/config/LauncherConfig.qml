@@ -18,12 +18,6 @@ JsonObject {
 
     property list<var> commands: [
         {
-            name: "Hello",
-            description: "Just say hello!",
-            icon: "waving_hand",
-            action: ["notify-send", "-a", "shell", "Welcome!", "Hello from Quickshell"]
-        },
-        {
             name: "Wallpaper",
             description: "Open wallpaper selector",
             icon: "wallpaper",
