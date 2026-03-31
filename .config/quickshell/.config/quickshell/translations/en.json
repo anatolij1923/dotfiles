@@ -1,207 +1,208 @@
 {
-  "quicksettings": {
-    "header": {
-      "restart": "Restart Quickshell",
-      "open_settings": "Open settings",
-      "open_power_menu": "Open power menu"
+    "quicksettings": {
+        "header": {
+            "restart": "Restart Quickshell",
+            "open_settings": "Open settings",
+            "open_power_menu": "Open power menu"
+        },
+        "toggles": {
+            "network": "Network",
+            "network_tooltip": "Click to toggle Wi-Fi.\nRight click to open nmgui",
+            "bluetooth": "Bluetooth",
+            "bluetooth_tooltip": "Toggle bluetooth.\nRight click to open blueman",
+            "bluetooth_tooltip_connected": "Toggle bluetooth. Right click to open blueman\nConnected: %1%",
+            "wifi_tooltip": "Click to toggle Wi-Fi",
+            "dark_mode": "Enable dark mode",
+            "light_mode": "Enable light mode",
+            "dnd": "Do not disturb",
+            "idle": "Keep your system awake",
+            "sleep_tooltip": "Sleep timer. Right click to cancel",
+            "sleep_remaining": "Remaining",
+            "mic": "Mute microphone",
+            "power_profiles": "Change power profiles",
+            "screen_record": "Enable screen recording",
+            "transparency": "Toggle transparency",
+            "gamemode": "Enable game mode",
+            "night_light": "Night light"
+        },
+        "dialogs": {
+            "mic": {
+                "title": "Microphone",
+                "mute": "Mute",
+                "input_volume": "Input volume"
+            },
+            "night_light": {
+                "title": "Night light",
+                "enable": "Enable",
+                "temperature": "Temperature",
+                "night_gamma": "Night gamma"
+            },
+            "bluetooth": {
+                "title": "Bluetooth",
+                "enable": "Enable Bluetooth",
+                "scan": "Search for devices",
+                "scanning": "Searching…",
+                "devices": "Devices"
+            }
+        },
+        "notifications": {
+            "everything_quiet": "Everything is quiet",
+            "clear": "Clear",
+            "clear_all": "Clear all notifications"
+        }
     },
-    "toggles": {
-      "network": "Network",
-      "network_tooltip": "Click to toggle Wi-Fi.\nRight click to open nmgui",
-      "bluetooth": "Bluetooth",
-      "bluetooth_tooltip": "Toggle bluetooth.\nRight click to open blueman",
-      "bluetooth_tooltip_connected": "Toggle bluetooth. Right click to open blueman\nConnected: %1%",
-      "wifi_tooltip": "Click to toggle Wi-Fi",
-      "dark_mode": "Enable dark mode",
-      "light_mode": "Enable light mode",
-      "dnd": "Do not disturb",
-      "idle": "Keep your system awake",
-      "sleep_tooltip": "Sleep timer. Right click to cancel",
-      "sleep_remaining": "Remaining",
-      "mic": "Mute microphone",
-      "power_profiles": "Change power profiles",
-      "screen_record": "Enable screen recording",
-      "transparency": "Toggle transparency",
-      "gamemode": "Enable game mode",
-      "night_light": "Night light"
+    "session": {
+        "warning": "Warning",
+        "pkg_running": "Package manager is running!",
+        "down_running": "Download process is running!",
+        "uptime": "Uptime",
+        "lock": "Lock",
+        "shutdown": "Shutdown",
+        "suspend": "Suspend",
+        "reboot": "Reboot",
+        "logout": "Logout",
+        "desc": {
+            "lock": "Lock your screen",
+            "shutdown": "Turn off your PC",
+            "suspend": "Suspend your PC",
+            "reboot": "Reboot your PC",
+            "logout": "Exit Hyprland"
+        }
     },
-    "dialogs": {
-      "mic": {
-        "title": "Microphone",
-        "mute": "Mute",
-        "input_volume": "Input volume"
-      },
-      "night_light": {
-        "title": "Night light",
-        "enable": "Enable",
-        "temperature": "Temperature",
-        "night_gamma": "Night gamma"
-      },
-      "bluetooth": {
-        "title": "Bluetooth",
-        "enable": "Enable Bluetooth",
-        "scan": "Search for devices",
-        "scanning": "Searching…",
-        "devices": "Devices"
-      }
+    "settings": {
+        "window_title": "quickshell-settings",
+        "edit_config": "Edit config",
+        "settings": "Settings",
+        "sidebar": {
+            "appearance": "Appearance",
+            "general": "General",
+            "launcher": "Launcher",
+            "system": "System",
+            "about": "About"
+        },
+        "appearance": {
+            "title": "Appearance",
+            "background": "Background",
+            "random_wallhaven": "Random: Wallhaven",
+            "random_wallhaven_tooltip": "Download random wallpaper from Wallhaven.cc",
+            "random_konachan": "Random: Konachan",
+            "random_konachan_tooltip": "Download random anime wallpaper from Konachan",
+            "wallpaper": "Wallpaper",
+            "parallax_effect": "Parallax effect",
+            "parallax_scale": "Parallax scale",
+            "dim_effect": "Dim effect",
+            "dim_transparency": "Dim transparency",
+            "zoom_effect": "Zoom effect",
+            "zoom_scale": "Zoom scale",
+            "theme": "Theme",
+            "dark_mode": "Dark mode",
+            "transparency": "Transparency",
+            "enable": "Enable",
+            "alpha": "Alpha",
+            "fonts": "Fonts",
+            "main_font": "Main",
+            "mono_font": "Monospace",
+            "nerd_font": "Nerd font"
+        },
+        "bar": {
+            "title": "Bar",
+            "bar": "Bar",
+            "positioning": "Positioning and height",
+            "tray": "Tray",
+            "make_tray_monochrome": "Make tray icons monochrome",
+            "icon_desaturation": "Icon desaturation",
+            "height": "Height",
+            "bottom_position": "Bottom position",
+            "floating": "Floating",
+            "vertical_margins": "Vertical Margins",
+            "horizontal_margins": "Horizontal Margins",
+            "workspaces": "Workspaces",
+            "workspaces_shown": "Workspaces shown",
+            "battery": "Battery",
+            "battery_margins": "Battery margins",
+            "transparent_center_widgets": "Transparent center widgets"
+        },
+        "background": {
+            "title": "Background",
+            "background": "Background"
+        },
+
+        "launcher": {
+            "title": "Launcher",
+            "display": "Display",
+            "max_items_shown": "Max items shown",
+            "item_height": "Item height",
+            "wallpaper_width": "Wallpaper width",
+            "wallpaper_height": "Wallpaper height",
+            "commands": "Commands",
+            "commands_hint": "Commands configuration is available in config.json file",
+            "total_commands": "Total commands: %1",
+            "stats": "Stats",
+            "stats_label": "Use statistic for recent apps"
+        },
+        "system": {
+            "title": "System",
+            "time": "Time",
+            "time_format": "Time format",
+            "date_format": "Date format",
+            "gamemode": "Gamemode",
+            "gaps_in": "Gaps in",
+            "gaps_out": "Gaps out",
+            "border_size": "Border size",
+            "rounding": "Rounding",
+            "send_notification": "Send notification",
+            "disable_blur": "Disable blur",
+            "blur_size": "Blur size",
+            "blur_passes": "Blur passes",
+            "weather": "Weather",
+            "update_interval_minutes": "Update interval (minutes)",
+            "city": "City",
+            "city_placeholder": "Enter city name",
+            "notifications": "Notifications",
+            "timeout_ms": "Timeout (ms)",
+            "osd": "OSD",
+            "lock_screen": "Lock Screen",
+            "blur_enabled": "Blur enabled",
+            "blur_radius": "Blur radius",
+            "dim_opacity": "Dim opacity",
+            "language": "Language",
+            "interface_language": "Interface language"
+        },
+        "about": {
+            "title": "About",
+            "shell_name": "Not yet named shell",
+            "activate_dotfiles": "Activate dotfiles",
+            "open_repo": "Open repo",
+            "open_repo_tooltip": "Open repository in your browser",
+            "stop_it": "STOP IT!!!"
+        }
     },
-    "notifications": {
-      "everything_quiet": "Everything is quiet",
-      "clear": "Clear",
-      "clear_all": "Clear all notifications"
-    }
-  },
-  "session": {
-    "warning": "Warning",
-    "pkg_running": "Package manager is running!",
-    "down_running": "Download process is running!",
-    "uptime": "Uptime",
-    "lock": "Lock",
-    "shutdown": "Shutdown",
-    "suspend": "Suspend",
-    "reboot": "Reboot",
-    "logout": "Logout",
-    "desc": {
-      "lock": "Lock your screen",
-      "shutdown": "Turn off your PC",
-      "suspend": "Suspend your PC",
-      "reboot": "Reboot your PC",
-      "logout": "Exit Hyprland"
-    }
-  },
-  "settings": {
-    "window_title": "quickshell-settings",
-    "edit_config": "Edit config",
-    "settings": "Settings",
-    "sidebar": {
-      "appearance": "Appearance",
-      "general": "General",
-      "launcher": "Launcher",
-      "system": "System",
-      "about": "About"
+    "lock": {
+        "locked": "Locked",
+        "wrong_password": "Wrong password"
     },
-    "appearance": {
-      "title": "Appearance",
-      "background": "Background",
-      "random_wallhaven": "Random: Wallhaven",
-      "random_wallhaven_tooltip": "Download random wallpaper from Wallhaven.cc",
-      "random_konachan": "Random: Konachan",
-      "random_konachan_tooltip": "Download random anime wallpaper from Konachan",
-      "wallpaper": "Wallpaper",
-      "parallax_effect": "Parallax effect",
-      "parallax_scale": "Parallax scale",
-      "dim_effect": "Dim effect",
-      "dim_transparency": "Dim transparency",
-      "zoom_effect": "Zoom effect",
-      "zoom_scale": "Zoom scale",
-      "theme": "Theme",
-      "dark_mode": "Dark mode",
-      "transparency": "Transparency",
-      "enable": "Enable",
-      "alpha": "Alpha",
-      "fonts": "Fonts",
-      "main_font": "Main",
-      "mono_font": "Monospace",
-      "nerd_font": "Nerd font"
+    "dashboard": {
+        "usage": {
+            "cpu": "Cpu",
+            "memory": "Memory",
+            "swap": "Swap",
+            "temperature": "Temperature"
+        }
     },
     "bar": {
-      "title": "Bar",
-      "bar": "Bar",
-      "positioning": "Positioning and height",
-      "tray": "Tray",
-      "make_tray_monochrome": "Make tray icons monochrome",
-      "icon_desaturation": "Icon desaturation",
-      "height": "Height",
-      "bottom_position": "Bottom position",
-      "floating": "Floating",
-      "vertical_margins": "Vertical Margins",
-      "horizontal_margins": "Horizontal Margins",
-      "workspaces": "Workspaces",
-      "workspaces_shown": "Workspaces shown",
-      "battery": "Battery",
-      "battery_margins": "Battery margins",
-      "transparent_center_widgets": "Transparent center widgets"
+        "back": "‹ Back"
     },
-    "background": {
-      "title": "Background",
-      "background": "Background"
-    },
-
     "launcher": {
-      "title": "Launcher",
-      "display": "Display",
-      "max_items_shown": "Max items shown",
-      "item_height": "Item height",
-      "wallpaper_width": "Wallpaper width",
-      "wallpaper_height": "Wallpaper height",
-      "commands": "Commands",
-      "commands_hint": "Commands configuration is available in config.json file",
-      "total_commands": "Total commands: %1",
-      "stats": "Stats",
-      "stats_label": "Use statistic for recent apps"
+        "random": "Random",
+        "wallpapers": "wallpapers",
+        "wipe": "Wipe",
+        "entries": "entries"
     },
-    "system": {
-      "title": "System",
-      "time": "Time",
-      "time_format": "Time format",
-      "date_format": "Date format",
-      "gamemode": "Gamemode",
-      "gaps_in": "Gaps in",
-      "gaps_out": "Gaps out",
-      "border_size": "Border size",
-      "rounding": "Rounding",
-      "send_notification": "Send notification",
-      "disable_blur": "Disable blur",
-      "blur_size": "Blur size",
-      "blur_passes": "Blur passes",
-      "weather": "Weather",
-      "update_interval_minutes": "Update interval (minutes)",
-      "city": "City",
-      "city_placeholder": "Enter city name",
-      "notifications": "Notifications",
-      "timeout_ms": "Timeout (ms)",
-      "osd": "OSD",
-      "lock_screen": "Lock Screen",
-      "blur_enabled": "Blur enabled",
-      "blur_radius": "Blur radius",
-      "dim_opacity": "Dim opacity",
-      "language": "Language",
-      "interface_language": "Interface language"
+    "appname": {
+        "desktop": "Desktop"
     },
-    "about": {
-      "title": "About",
-      "shell_name": "Not yet named shell",
-      "activate_dotfiles": "Activate dotfiles",
-      "open_repo": "Open repo",
-      "open_repo_tooltip": "Open repository in your browser",
-      "stop_it": "STOP IT!!!"
+    "activation": {
+        "label": "Activate Dotfiles",
+        "desc": "Go to settings to activate dotfiles"
     }
-  },
-  "lock": {
-    "locked": "Locked"
-  },
-  "dashboard": {
-    "usage": {
-      "cpu": "Cpu",
-      "memory": "Memory",
-      "swap": "Swap",
-      "temperature": "Temperature"
-    }
-  },
-  "bar": {
-    "back": "‹ Back"
-  },
-  "launcher": {
-    "random": "Random",
-    "wallpapers": "wallpapers",
-    "wipe": "Wipe",
-    "entries": "entries"
-  },
-  "appname": {
-    "desktop": "Desktop"
-  },
-  "activation": {
-    "label": "Activate Dotfiles",
-    "desc": "Go to settings to activate dotfiles"
-  }
 }

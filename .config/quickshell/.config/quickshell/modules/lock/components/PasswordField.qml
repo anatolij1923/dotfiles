@@ -15,6 +15,11 @@ Rectangle {
 
     required property LockContext context
 
+    property real shakeX: 0
+    transform: Translate {
+        x: root.shakeX
+    }
+
     implicitHeight: 64
     implicitWidth: 350
 
@@ -27,10 +32,11 @@ Rectangle {
             margins: Appearance.spacing.sm
         }
         spacing: Appearance.spacing.sm
+
         Rectangle {
             Layout.fillWidth: true
             implicitHeight: parent.height
-            color: Colors.palette.m3surfaceContainerHigh
+            color: Colors.palette.m3surfaceContainer
             radius: Appearance.rounding.full
 
             MaterialSymbol {
@@ -67,7 +73,7 @@ Rectangle {
                     }
                     function onShowFailureChanged() {
                         if (root.context.showFailure) {
-                            // shakeAnimation.start();
+                            shakeAnimation.start();
                             input.text = "";
                         }
                     }
@@ -75,33 +81,52 @@ Rectangle {
             }
         }
 
-        Rectangle {
-            id: button
+        IconButton {
             implicitHeight: parent.height
             implicitWidth: implicitHeight
-            radius: Appearance.rounding.full
 
-            color: input.text === "" ? Colors.palette.m3surfaceContainerHigh : Colors.palette.m3secondary
-            Behavior on color {
-                CAnim {}
+            icon: input.text === "" ? "lock" : "arrow_forward"
+            checked: input.text !== ""
+
+            onClicked: {
+                root.context.tryUnlock();
             }
+        }
+    }
 
-            MaterialSymbol {
-                anchors {
-                    centerIn: parent
-                }
-
-                icon: input.text === "" ? "lock" : "arrow_forward"
-                color: input.text === "" ? Colors.palette.m3onSurface : Colors.palette.m3onSecondary
-            }
-
-            StateLayer {
-                anchors.fill: parent
-
-                onClicked: {
-                    root.context.tryUnlock();
-                }
-            }
+    SequentialAnimation {
+        id: shakeAnimation
+        NumberAnimation {
+            target: root
+            property: "shakeX"
+            from: 0
+            to: 15
+            duration: 50
+            easing.type: Easing.OutQuad
+        }
+        NumberAnimation {
+            target: root
+            property: "shakeX"
+            from: 15
+            to: -15
+            duration: 50
+            easing.type: Easing.InOutQuad
+        }
+        NumberAnimation {
+            target: root
+            property: "shakeX"
+            from: -15
+            to: 10
+            duration: 50
+            easing.type: Easing.InOutQuad
+        }
+        NumberAnimation {
+            target: root
+            property: "shakeX"
+            from: 10
+            to: 0
+            duration: 50
+            easing.type: Easing.InQuad
         }
     }
 }

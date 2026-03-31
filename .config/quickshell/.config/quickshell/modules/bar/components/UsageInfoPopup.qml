@@ -96,7 +96,7 @@ BarPopup {
         // Network
         RowLayout {
             Layout.fillWidth: true
-            spacing: Appearance.spacing.md
+            spacing: Appearance.spacing.sm
 
             NetworkPill {
                 Layout.fillWidth: true
@@ -164,7 +164,6 @@ BarPopup {
                     StyledText {
                         text: metricBar.label
                         size: Appearance.fontSize.md
-                        weight: 500
                         color: Colors.palette.m3onSurfaceVariant
                     }
 
@@ -175,7 +174,7 @@ BarPopup {
                     StyledText {
                         text: metricBar.valueText
                         size: Appearance.fontSize.md
-                        weight: 650
+                        weight: 600
                         color: metricBar._accentColor
                     }
                 }
@@ -257,8 +256,7 @@ BarPopup {
 
                 StyledText {
                     text: networkPill.label
-                    size: Appearance.fontSize.xs
-                    weight: 500
+                    size: Appearance.fontSize.sm
                     color: Colors.palette.m3onSurfaceVariant
                 }
 

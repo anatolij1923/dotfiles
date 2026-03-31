@@ -8,7 +8,7 @@ ClippingRectangle {
     id: root
 
     required property real value
-    property string fillColor: Colors.palette.m3secondary
+    property color fillColor: Colors.palette.m3secondary
 
     implicitHeight: parent.height
     implicitWidth: 6

@@ -15,17 +15,17 @@ Rectangle {
     color: "transparent"
     radius: Appearance.rounding.md
 
-    implicitWidth: 32
-    implicitHeight: 32
+    implicitWidth: 28
+    implicitHeight: 28
 
     StateLayer {
         anchors.fill: parent
         onClicked: event => {
             if (event.button === Qt.LeftButton) {
-                modelData.activate();
+                root.modelData.activate();
             } else {
                 const pos = root.mapToGlobal(0, 0);
-                root.openMenuRequested(modelData.menu, pos.x, pos.y, root.width, root.height);
+                root.openMenuRequested(root.modelData.menu, pos.x, pos.y, root.width, root.height);
             }
         }
     }
@@ -34,7 +34,7 @@ Rectangle {
         id: icon
         anchors.centerIn: parent
         source: Icons.getTrayIcon(root.modelData.id, root.modelData.icon)
-        implicitSize: parent.height * 0.7
+        implicitSize: parent.height * 0.8
         visible: !Config.bar.tray.monochromeTrayIcons
     }
 
