@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 import Quickshell.Widgets
 import QtQuick
+import QtQuick.Layouts
 import qs.config
 import qs.services
 import qs.common
@@ -11,8 +12,8 @@ ClippingRectangle {
 
     property bool showPopup
 
-    implicitWidth: 50
-    implicitHeight: 28
+    implicitWidth: 48
+    implicitHeight: 26
 
     radius: Appearance.rounding.full
     color: Colors.palette.m3outline
@@ -27,8 +28,8 @@ ClippingRectangle {
 
         implicitWidth: parent.width * (Battery.percentage / 100)
 
-        topRightRadius: Appearance.rounding.sm
-        bottomRightRadius: Appearance.rounding.sm
+        // bottomRightRadius: Appearance.rounding.xs
+        // topRightRadius: Appearance.rounding.xs
 
         color: Colors.palette.m3onSecondaryContainer
         Behavior on color {
@@ -41,7 +42,7 @@ ClippingRectangle {
         anchors.centerIn: parent
         text: Battery.percentage
         color: Colors.palette.m3surface
-        weight: 650
+        weight: 500
     }
 
     states: [
