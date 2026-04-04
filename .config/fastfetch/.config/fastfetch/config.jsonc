@@ -37,6 +37,10 @@
       "key": "pkgs",
     },
     {
+        "type": "wm",
+        "key": "wm"
+    },
+    {
       "type": "shell",
       "key": "sh",
     },
