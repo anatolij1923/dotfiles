@@ -6,6 +6,7 @@ JsonObject {
     property int height: 50
     property bool bottom: false
     property bool floating: false
+    property int radius: 10
     property bool monochromeTrayIcons: false
 
     property bool transparentCenterWidgets: false
