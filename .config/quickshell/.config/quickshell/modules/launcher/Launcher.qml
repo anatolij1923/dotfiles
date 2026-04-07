@@ -219,7 +219,7 @@ Scope {
 
                             ContentList {
                                 id: contentList
-                                maxHeight: mainContainer.maxHeight - searchWrapper.height - root.padding * 3
+                                maxHeight: mainContainer.maxHeight - searchWrapper.height
                                 search: root.searchingText
                                 searchField: searchField
                             }

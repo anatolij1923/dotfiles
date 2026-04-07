@@ -47,15 +47,14 @@ SpinBox {
             if (!enabled)
                 return Colors.palette.m3surfaceContainerHighest;
             if (downState.pressed)
-                return Colors.palette.m3secondaryContainer; 
+                return Colors.palette.m3secondaryContainer;
             if (downState.containsMouse)
-                return Colors.palette.m3surfaceContainerHigh; 
+                return Colors.palette.m3surfaceContainerHigh;
             return Colors.palette.m3surfaceContainerHighest;
         }
 
         Behavior on color {
-            CAnim {
-            }
+            CAnim {}
         }
 
         StateLayer {
@@ -65,10 +64,10 @@ SpinBox {
             color: Colors.palette.m3onSurface
 
             onPressed: {
-                root.decrease(); 
-                repeatTimer.isIncrease = false;
-                repeatTimer.interval = 300; 
-                repeatTimer.start();
+                root.decrease();
+                // repeatTimer.isIncrease = false;
+                // repeatTimer.interval = 300;
+                // repeatTimer.start();
             }
             onReleased: repeatTimer.stop()
             onCanceled: repeatTimer.stop()
@@ -81,8 +80,7 @@ SpinBox {
             color: (downState.containsMouse || downState.pressed) && root.canDecrease ? Colors.palette.m3primary : Colors.palette.m3onSurface
 
             Behavior on color {
-                CAnim {
-                }
+                CAnim {}
             }
         }
     }
@@ -144,8 +142,7 @@ SpinBox {
         }
 
         Behavior on color {
-            CAnim {
-            }
+            CAnim {}
         }
 
         StateLayer {
@@ -155,9 +152,9 @@ SpinBox {
             color: Colors.palette.m3onSurface
 
             onPressed: {
-                root.increase(); 
+                root.increase();
                 repeatTimer.isIncrease = true;
-                repeatTimer.interval = 400; 
+                repeatTimer.interval = 400;
                 repeatTimer.start();
             }
             onReleased: repeatTimer.stop()
@@ -171,8 +168,7 @@ SpinBox {
             color: (upState.containsMouse || upState.pressed) && root.canIncrease ? Colors.palette.m3primary : Colors.palette.m3onSurface
 
             Behavior on color {
-                CAnim {
-                }
+                CAnim {}
             }
         }
     }

@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Layouts
 import qs.modules.settings
 import qs.common
@@ -31,6 +32,14 @@ ContentPage {
             label: Translation.tr("settings.bar.floating")
             value: Config.bar.floating
             onToggled: Config.bar.floating = value
+        }
+
+        SpinBoxRow {
+            label: Translation.tr("settings.bar.vertical_margins")
+            value: Config.bar.radius
+            from: 0
+            to: 30
+            onValueChanged: Config.bar.radius = value
         }
 
         SpinBoxRow {

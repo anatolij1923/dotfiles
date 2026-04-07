@@ -53,7 +53,6 @@ Item {
         id: bg
         captureSource: root.QsWindow.window?.screen
         anchors.fill: parent
-
         layer.enabled: true
         layer.effect: FastBlur {
             source: bg

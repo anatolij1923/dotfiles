@@ -244,6 +244,7 @@ ClippingRectangle {
                         Layout.fillWidth: true
                         configuration: StyledSlider.Configuration.Wavy
                         stopIndicatorValues: []
+                        waveFrequency: 8
 
                         tooltipContent: root.formatTime(value * (root.player?.length || 0))
 
