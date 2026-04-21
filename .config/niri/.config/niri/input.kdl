@@ -13,6 +13,7 @@ input {
 
     touchpad {
         tap
+        dwt
         natural-scroll
         accel-profile "flat"
         accel-speed 0.5
