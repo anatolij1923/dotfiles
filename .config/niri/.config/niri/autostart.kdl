@@ -1,13 +1,13 @@
 spawn-at-startup "dbus-update-activation-environment" "--all"
 
-spawn-sh-at-startup "wl-paste --type text --watch cliphist store" 
-spawn-sh-at-startup "wl-paste --type image --watch cliphist store"  
+spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
+spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 
-spawn-sh-at-startup "swayidle -w"
+spawn-sh-at-startup "qs -c ~/code/projects/chroma -d"
+
+// spawn-sh-at-startup "swayidle -w"
 spawn-at-startup "sunsetr"
 
 spawn-at-startup "easyeffects" "--gapplication-service"
 spawn-at-startup "flclash"
-
-spawn-sh-at-startup "qs -c $CHROMA_DIR -d"
-    
+spawn-sh-at-startup "hypridle -c ~/.config/niri/hypridle.conf"
