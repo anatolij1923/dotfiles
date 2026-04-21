@@ -28,9 +28,9 @@ window-rule {
     draw-border-with-background false
     open-maximized true
 
-    background-effect {
-        xray true
-    }
+    // background-effect {
+    //     xray true
+    // }
 }
 
 window-rule {
