@@ -13,7 +13,7 @@ title = "Ghostty"
 confirm-close-surface = false
 
 # Colors
-config-file = ./colors
+# config-file = ./colors
 
 gtk-titlebar = false
 window-decoration = false
