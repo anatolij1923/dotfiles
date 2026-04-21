@@ -1,6 +1,7 @@
 [user]
     name = anatolij1923
     email = 140535586+anatolij1923@users.noreply.github.com
+    signingkey = 5CA45E96F761BDEF
 
 [alias]
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
@@ -36,3 +37,5 @@
 
 [merge]
     conflictstyle = zdiff3
+[commit]
+	gpgsign = true
