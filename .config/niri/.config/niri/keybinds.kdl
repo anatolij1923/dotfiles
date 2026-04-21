@@ -3,13 +3,12 @@ binds {
 
     // Quickshell
     Mod+D { spawn-sh "vicinae toggle"; }
-    Mod+V { spawn-sh "qs -c $CHROMA_DIR ipc call launcher openInClipboardMode"; }
-    Mod+Shift+L { spawn-sh "qs -c /home/anatolij1923/code/projects/chroma/ ipc call lockscreen lock"; }
-    Mod+Shift+M { spawn-sh "qs -c /home/anatolij1923/code/projects/chroma/ ipc call audio toggleMic"; }
-    Mod+S { spawn-sh "qs -c /home/anatolij1923/code/projects/chroma/ ipc call controlCenter toggle"; }
-    Mod+N { spawn-sh "qs -c /home/anatolij1923/code/projects/chroma/ ipc call notificationCenter toggle"; }
-    Mod+I { spawn-sh "qs -c $CHROMA_DIR ipc call settings toggle"; }
-    Mod+Shift+T { spawn-sh "qs -c $CHROMA_DIR ipc call test toggle"; }
+    Mod+Shift+L { spawn-sh "qs -c chroma ipc call lockscreen lock"; }
+    Mod+Shift+M { spawn-sh "qs -c chroma ipc call audio toggleMic"; }
+    Mod+S { spawn-sh "qs -c chroma ipc call controlCenter toggle"; }
+    Mod+N { spawn-sh "qs -c chroma ipc call notificationCenter toggle"; }
+
+    Mod+Alt+R { spawn-sh "killall qs; qs -c chroma"; }
 
     // Apps
     Mod+E { spawn "nautilus"; }

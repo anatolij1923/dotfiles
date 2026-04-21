@@ -1,4 +1,4 @@
-lock "qs -c /home/$USER/code/projects/chroma ipc call lockscreen lock" 
+lock "qs -c chroma ipc call lockscreen lock" 
 timeout 180 "loginctl lock-session" 
 timeout 300 "brightnessctl -s set 0" resume "brightnessctl -r" 
 timeout 600 "niri msg action power-off-monitors" resume "niri msg action power-on-monitors" 
