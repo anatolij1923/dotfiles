@@ -10,6 +10,7 @@ abbr -a zj zellij
 abbr -a sv "sudo nvim"
 abbr -a v nvim
 abbr -a hx helix
+abbr -a shx sudo helix
 
 abbr -a gcl "git clone"
 abbr -a ga "git add"
