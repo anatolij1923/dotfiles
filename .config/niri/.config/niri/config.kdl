@@ -14,12 +14,15 @@ overview {
     }
 }
 
-
-
 recent-windows {
     highlight {
-        corner-radius 20
+        corner-radius 24
     }
+}
+
+cursor {
+    xcursor-theme "Bibata-Modern-Classic"
+    xcursor-size 24
 }
 
 hotkey-overlay {

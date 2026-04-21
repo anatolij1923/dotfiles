@@ -1,11 +1,6 @@
 window-rule {
-    geometry-corner-radius 20
+    geometry-corner-radius 24
     clip-to-geometry true
-}
-
-window-rule {
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
 }
 
 window-rule {
@@ -28,12 +23,18 @@ window-rule {
 }
 
 window-rule {
-    match app-id="zen"
+    match app-id="helium"
+
+    draw-border-with-background false
     open-maximized true
+
+    background-effect {
+        xray true
+    }
 }
 
 window-rule {
-    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id="Bitwarden"
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
     match app-id="org.telegram.desktop"
 
@@ -45,10 +46,5 @@ window-rule {
 
 window-rule {
     match is-active=false
-    opacity 0.97
+    opacity 0.98
 }
-
-// layer-rule {
-//     match namespace="chroma:background"
-//     place-within-backdrop true
-// }

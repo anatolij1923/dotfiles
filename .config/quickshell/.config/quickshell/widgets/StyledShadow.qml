@@ -5,7 +5,7 @@ import qs.services
 
 RectangularShadow {
     id: root
-    required property var target
+    property var target: parent
     anchors.fill: target
     radius: target.radius
     color: Colors.palette.m3shadow

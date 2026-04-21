@@ -1,8 +1,7 @@
 # Font Settings
-font-family = JetBrainsMono NF
-# font-family = Cascadia Code NF
+font-family = JetBrainsMono Nerd Font
 font-size = 14
-font-style = normal
+font-style = Regular
 font-feature = 1
 
 # Theme Settings

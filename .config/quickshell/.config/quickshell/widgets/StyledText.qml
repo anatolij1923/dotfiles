@@ -43,7 +43,7 @@ Text {
         }
     }
 
-    Layout.alignment: Qt.AlignVCenter
+    verticalAlignment: Text.AlignVCenter
     font.family: Config.appearance.fonts.main
     font.weight: weight
     font.pixelSize: size

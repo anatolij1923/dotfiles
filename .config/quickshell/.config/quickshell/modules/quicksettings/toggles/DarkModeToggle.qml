@@ -8,7 +8,7 @@ import qs.widgets
 QuickToggle {
 
     checked: Colors.isDarkMode
-    icon: checked ? "dark_mode" : "light_mode"
+    icon: "contrast"
 
     onClicked: () => {
         Colors.switchDarkLightMode();

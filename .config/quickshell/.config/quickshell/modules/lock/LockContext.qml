@@ -38,7 +38,7 @@ Scope {
                 root.unlocked();
             } else {
                 root.showFailure = true;
-                
+
                 failureResetTimer.restart();
             }
             root.currentText = "";

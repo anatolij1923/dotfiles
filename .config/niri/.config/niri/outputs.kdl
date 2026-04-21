@@ -2,7 +2,7 @@ output "eDP-1" {
     // Uncomment this line to disable this output.
     // off
 
-    mode "1920x1200@60"
+    mode "1920x1200@59.989"
 
     scale 1
 

@@ -1,9 +1,14 @@
 {
     // UI & General Aesthetics
+    "helix_mode": true,
+    "telemetry": {
+        "diagnostics": false,
+        "metrics": true,
+    },
     "agent_servers": {
         "qwen-code": {
-            "type": "registry"
-        }
+            "type": "registry",
+        },
     },
     "agent_buffer_font_size": 20.0,
     "agent_ui_font_size": 20.0,
@@ -11,7 +16,7 @@
         "enabled": true,
     },
     "theme": "Kanagawa Dragon - No Italics",
-    "icon_theme": "Flow Dark",
+    "icon_theme": "Material Icon Theme",
     "font_antialiasing": "none",
     "text_rendering_mode": "grayscale",
     "ui_font_family": "JetBrainsMono Nerd Font",
@@ -34,7 +39,6 @@
         "show_user_menu": true,
         "show_onboarding_banner": false,
         "show_branch_name": false,
-        "show_project_items": false,
         "show_branch_icon": false,
     },
 
@@ -57,7 +61,7 @@
     },
 
     // Editor Behavior (The "Sane Defaults")
-    "vim_mode": true,
+    "vim_mode": false,
     "relative_line_numbers": "enabled",
     "autosave": "off",
     "format_on_save": "on",
@@ -127,7 +131,6 @@
     // Extensions & Languages
     "auto_install_extensions": {
         "kanagawa-themes": true,
-        "charmed-icons": true,
     },
 
     "languages": {
