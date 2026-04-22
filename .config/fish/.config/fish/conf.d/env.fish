@@ -25,5 +25,3 @@ set -gx XDG_PICTURES_DIR "$HOME/Изображения"
 set -gx XDG_VIDEOS_DIR "$HOME/Видео"
 
 set -gx LIBVIRT_DEFAULT_URI "qemu:///system"
-
-set -gx ESP_PATH /boot/EFI/limine/

@@ -1,0 +1,20 @@
+theme = "kanagawa"
+
+[editor]
+line-number = "relative"
+color-modes = true 
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+
+[editor.lsp]
+display-messages = true
+
+[editor.statusline]
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+left = ["mode", "spacer", "spinner", "file-name", "read-only-indicator", "file-modification-indicator"]
+center = ["diagnostics"]
+right = ["selections", "primary-selection-length", "position", "position-percentage", "file-encoding", "file-type", "file-line-ending"]

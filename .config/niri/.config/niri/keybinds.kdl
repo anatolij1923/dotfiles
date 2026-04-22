@@ -88,8 +88,8 @@ binds {
 
     // XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+5%"; }
     // XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%-"; }
-    XF86MonBrightnessUp allow-when-locked=true { spawn-sh "qs -c /home/anatolij1923/code/projects/chroma/ ipc call brightness increment"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "qs -c /home/anatolij1923/code/projects/chroma/ ipc call brightness decrement"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn-sh "qs -c chroma ipc call brightness increment"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "qs -c chroma ipc call brightness decrement"; }
 
     // Example media keys mapping using playerctl.
     // This will work with any MPRIS-enabled media player.
