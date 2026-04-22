@@ -1,0 +1,4 @@
+[language-server.qmlls]
+command = "qmlls6"
+formatter = { command = "qmlformat" }
+auto-format = true

@@ -3,6 +3,8 @@ theme = "kanagawa"
 [editor]
 line-number = "relative"
 color-modes = true 
+end-of-line-diagnostics = "hint"
+completion-timeout = 50
 
 [editor.cursor-shape]
 insert = "bar"
@@ -10,11 +12,24 @@ normal = "block"
 
 [editor.lsp]
 display-messages = true
+display-inlay-hints = true
 
 [editor.statusline]
 mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
-left = ["mode", "spacer", "spinner", "file-name", "read-only-indicator", "file-modification-indicator"]
+left = ["mode", "spinner", "file-name", "read-only-indicator", "file-modification-indicator"]
 center = ["diagnostics"]
-right = ["selections", "primary-selection-length", "position", "position-percentage", "file-encoding", "file-type", "file-line-ending"]
+right = ["version-control", "selections", "position", "file-type"]
+
+[editor.soft-wrap]
+enable = true
+
+[editor.indent-guides]
+render = true
+
+[keys.normal.space]
+"q" = ":buffer-close"
+
+[keys.insert]
+j = { k = "normal_mode" }
