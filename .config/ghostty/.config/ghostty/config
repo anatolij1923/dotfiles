@@ -12,6 +12,8 @@ background-blur = true
 title = "Ghostty"
 confirm-close-surface = false
 
+theme = "Kanagawa Wave"
+
 # Colors
 # config-file = ./colors
 
