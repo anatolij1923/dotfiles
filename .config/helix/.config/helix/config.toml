@@ -5,6 +5,8 @@ line-number = "relative"
 color-modes = true 
 end-of-line-diagnostics = "hint"
 completion-timeout = 50
+bufferline = "always"
+scrolloff = 10
 
 [editor.cursor-shape]
 insert = "bar"
@@ -28,6 +30,13 @@ enable = true
 [editor.indent-guides]
 render = true
 
+[keys.normal]
+"X" = ["extend_line_up"]
+"L" = ":buffer-next"
+"H" = ":buffer-previous"
+"A-u" = "switch_to_uppercase"
+"A-l" = "switch_to_lowercase"
+ 
 [keys.normal.space]
 "q" = ":buffer-close"
 
