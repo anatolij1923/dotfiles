@@ -3,12 +3,12 @@ binds {
 
     // Quickshell
     Mod+D { spawn-sh "vicinae toggle"; }
-    Mod+Shift+L { spawn-sh "qs -c chroma ipc call lockscreen lock"; }
+    Mod+Shift+L allow-when-locked=true { spawn-sh "qs -c chroma ipc call lockscreen lock"; }
     Mod+Shift+M { spawn-sh "qs -c chroma ipc call audio toggleMic"; }
     Mod+S { spawn-sh "qs -c chroma ipc call controlCenter toggle"; }
     Mod+N { spawn-sh "qs -c chroma ipc call notificationCenter toggle"; }
 
-    Mod+Alt+R { spawn-sh "killall qs; qs -c chroma"; }
+    Mod+Alt+R allow-when-locked=true { spawn-sh "killall qs; qs -c chroma"; }
 
     // Apps
     Mod+E { spawn "nautilus"; }
@@ -45,6 +45,7 @@ binds {
     Mod+Ctrl+R { reset-window-height; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
+    Mod+M { maximize-window-to-edges; }
 
     // Navigation
     Mod+H     { focus-column-left; }

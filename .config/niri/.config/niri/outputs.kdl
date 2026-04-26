@@ -4,7 +4,7 @@ output "eDP-1" {
 
     mode "1920x1200@59.989"
 
-    scale 1
+    scale 1.2
 
     transform "normal"
 

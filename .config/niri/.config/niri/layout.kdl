@@ -25,7 +25,6 @@ layout {
 
     focus-ring {
         off
-        width 0
     }
 
     border {
@@ -40,7 +39,7 @@ layout {
         offset x=0 y=5
         color "#0007"
     }
-
+  
     struts {
         // right 8
         // left 8
