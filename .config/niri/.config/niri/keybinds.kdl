@@ -1,6 +1,12 @@
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
+    Mod+D { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+    Mod+Shift+L { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
+    Mod+S { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
+    Mod+I{ spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
+    Mod+N{ spawn-sh "qs -c noctalia-shell ipc call notifications toggleHistory"; }
+
     // Apps
     Mod+E { spawn "nautilus"; }
     Mod+T { spawn "Telegram"; }
@@ -84,10 +90,8 @@ binds {
     XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
-    // XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+5%"; }
-    // XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%-"; }
-    XF86MonBrightnessUp allow-when-locked=true { spawn-sh "qs -c chroma ipc call brightness increment"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "qs -c chroma ipc call brightness decrement"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+5%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%-"; }
 
     // Example media keys mapping using playerctl.
     // This will work with any MPRIS-enabled media player.

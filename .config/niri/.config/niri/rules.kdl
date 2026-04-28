@@ -49,6 +49,18 @@ window-rule {
     }
 }
 
+layer-rule {
+    match namespace="^noctalia-overview*"
+    place-within-backdrop true
+}
+
+layer-rule {
+    match namespace="^noctalia-(background|launcher-overlay|dock)-.*$"
+    background-effect {
+        xray false
+    }
+}
+
 window-rule {
     match is-active=false
     opacity 0.98
