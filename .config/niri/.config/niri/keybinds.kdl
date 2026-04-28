@@ -1,15 +1,6 @@
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    // Quickshell
-    Mod+D { spawn-sh "vicinae toggle"; }
-    Mod+Shift+L allow-when-locked=true { spawn-sh "qs -c chroma ipc call lockscreen lock"; }
-    Mod+Shift+M { spawn-sh "qs -c chroma ipc call audio toggleMic"; }
-    Mod+S { spawn-sh "qs -c chroma ipc call controlCenter toggle"; }
-    Mod+N { spawn-sh "qs -c chroma ipc call notificationCenter toggle"; }
-
-    Mod+Alt+R allow-when-locked=true { spawn-sh "killall qs; qs -c chroma"; }
-
     // Apps
     Mod+E { spawn "nautilus"; }
     Mod+T { spawn "Telegram"; }
@@ -19,14 +10,14 @@ binds {
     Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
     Mod+O repeat=false { toggle-overview; }
     Mod+Q repeat=false { close-window; }
-    Print { screenshot; }
 
+    Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
 
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
-    Ctrl+Alt+Delete { quit; }
+    Mod+Shift+E { quit; }
 
     Mod+Shift+P { power-off-monitors; }
 
@@ -46,6 +37,12 @@ binds {
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
     Mod+M { maximize-window-to-edges; }
+    Mod+C { center-column; }
+
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Equal { set-column-width "+10%"; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
 
     // Navigation
     Mod+H     { focus-column-left; }

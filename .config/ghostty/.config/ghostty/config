@@ -5,8 +5,7 @@ font-style = Regular
 font-feature = 1
 
 # Theme Settings
-background-opacity = 1
-background-blur = true
+background-opacity = 0.9
 
 # Window Settings
 title = "Ghostty"
@@ -15,7 +14,7 @@ confirm-close-surface = false
 theme = "Kanagawa Wave"
 
 # Colors
-# config-file = ./colors
+config-file = ./themes/dankcolors
 
-gtk-titlebar = false
-window-decoration = false
+# gtk-titlebar = false
+# window-decoration = false

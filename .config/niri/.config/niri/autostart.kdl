@@ -3,11 +3,11 @@ spawn-at-startup "dbus-update-activation-environment" "--all"
 spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
 spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 
-spawn-sh-at-startup "qs -c chroma -d"
+// spawn-sh-at-startup "qs -c chroma -d"
 
 spawn-at-startup "sunsetr"
 spawn-sh-at-startup "swayidle -C ~/.config/niri/swayidle"
 
 spawn-at-startup "easyeffects" "--gapplication-service"
 spawn-at-startup "flclash"
-spawn-sh-at-startup "vicinae server"
+// spawn-sh-at-startup "vicinae server"

@@ -5,7 +5,10 @@ include "outputs.kdl"
 include "environment.kdl"
 include "input.kdl"
 include "autostart.kdl"
-include "niri-colors.kdl"
+// dms
+include "dms/binds.kdl"
+include "dms/windowrules.kdl"
+include "dms/colors.kdl"
 
 overview {
     zoom 0.4
@@ -27,6 +30,10 @@ cursor {
 
 hotkey-overlay {
     skip-at-startup
+}
+
+blur {
+    passes 3
 }
 
 prefer-no-csd

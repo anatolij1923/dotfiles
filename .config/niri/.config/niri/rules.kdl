@@ -1,5 +1,5 @@
 window-rule {
-    geometry-corner-radius 24
+    geometry-corner-radius 12
     clip-to-geometry true
 }
 
@@ -28,9 +28,6 @@ window-rule {
     draw-border-with-background false
     open-maximized true
 
-    // background-effect {
-    //     xray true
-    // }
 }
 
 window-rule {
@@ -42,6 +39,14 @@ window-rule {
 
     // Use this instead if you want them visible on third-party screenshot tools.
     // block-out-from "screencast"
+}
+
+window-rule {
+    match app-id="com.mitchellh.ghostty"
+    background-effect {
+        blur true
+        xray false
+    }
 }
 
 window-rule {
