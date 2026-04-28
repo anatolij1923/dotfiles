@@ -13,9 +13,9 @@
 .config/quickshell/.config/quickshell/colors.json
 .config/qt6ct/.config/qt6ct/colors/matugen.conf
 .config/ghostty/.config/ghostty/themes
-.config/yazi/.config/yazi/theme.toml
+.config/yazi/.config/yazi/flavors
 .config/zellij/.config/zellij/themes/matugen.kdl
-.config/niri/.config/niri/dms/colors.kdl
+.config/niri/.config/niri/noctalia.kdl
 
 # fish
 .config/fish/.config/fish/completions/fisher.fish

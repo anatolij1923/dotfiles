@@ -5,6 +5,7 @@ include "outputs.kdl"
 include "environment.kdl"
 include "input.kdl"
 include "autostart.kdl"
+include optional=true "noctalia.kdl"
 
 overview {
     zoom 0.4
