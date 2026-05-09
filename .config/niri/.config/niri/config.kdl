@@ -5,7 +5,7 @@ include "outputs.kdl"
 include "environment.kdl"
 include "input.kdl"
 include "autostart.kdl"
-include optional=true "noctalia.kdl"
+include "noctalia.kdl"
 
 overview {
     zoom 0.4
@@ -30,7 +30,9 @@ hotkey-overlay {
 }
 
 blur {
-    passes 3
+    off
+    passes 2
+    saturation 2
 }
 
 prefer-no-csd

@@ -11,10 +11,10 @@ background-opacity = 0.9
 title = "Ghostty"
 confirm-close-surface = false
 
-theme = noctalia
+theme = "Kanagawa Dragon"
 
 # Colors
-config-file = ./themes/noctalia
+# config-file = ./themes/noctalia
 
 # gtk-titlebar = false
 # window-decoration = false

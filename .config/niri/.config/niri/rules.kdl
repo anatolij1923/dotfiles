@@ -1,5 +1,5 @@
 window-rule {
-    geometry-corner-radius 14
+    geometry-corner-radius 20
     clip-to-geometry true
 }
 
@@ -27,7 +27,6 @@ window-rule {
 
     draw-border-with-background false
     open-maximized true
-
 }
 
 window-rule {
@@ -39,6 +38,21 @@ window-rule {
 
     // Use this instead if you want them visible on third-party screenshot tools.
     // block-out-from "screencast"
+}
+
+window-rule {
+    match app-id="vicinae"
+    background-effect {
+        blur true
+        xray false
+    }
+}
+
+layer-rule {
+    match namespace="vicinae"
+    background-effect {
+        xray false
+    }
 }
 
 window-rule {
