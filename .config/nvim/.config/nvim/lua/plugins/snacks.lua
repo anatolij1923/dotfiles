@@ -109,7 +109,7 @@ return {
 			desc = "Notification History",
 		},
 		{
-			"<leader>j",
+			"<leader>`",
 			function()
 				Snacks.terminal.toggle()
 			end,

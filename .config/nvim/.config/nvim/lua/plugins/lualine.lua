@@ -25,6 +25,8 @@ return {
 			return "LSP: " .. names_str
 		end
 
+		local function check_macro_recording() end
+
 		require("lualine").setup({
 
 			options = {
@@ -67,11 +69,11 @@ return {
 				lualine_c = {
 					{ "branch", icon = "" },
 					{ "diff", symbols = { added = " ", modified = " ", removed = " " } },
-					{
-						require("noice").api.statusline.mode.get,
-						cond = require("noice").api.statusline.mode.has,
-						color = { fg = "#ff9e64" },
-					},
+					-- {
+					-- 	require("noice").api.statusline.mode.get,
+					-- 	cond = require("noice").api.statusline.mode.has,
+					-- 	color = { fg = "#ff9e64" },
+					-- },
 				},
 				lualine_x = {},
 				lualine_y = {

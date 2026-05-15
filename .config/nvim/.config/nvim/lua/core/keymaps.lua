@@ -12,19 +12,22 @@ map("v", "<C-c>", '"+y', { desc = "Copy to system clipboard" })
 map("n", "<leader>/", "gcc", { remap = true, desc = "Comment line" })
 map("v", "<leader>/", "gc", { remap = true, desc = "Comment selection" })
 
+-- Remove this BS bind
+vim.keymap.set("n", "q:", "<nop>", { noremap = true, silent = true })
+
 -- Save on enter, uses <CR> to save in normal buffers, but keeps original behavior in popups
 map("n", "<CR>", function()
-    local ignore_buftypes = { "quickfix", "nofile", "help", "terminal", "prompt" }
-    local ignore_filetypes = { "lazy", "mason", "snacks_picker_input" }
+	local ignore_buftypes = { "quickfix", "nofile", "help", "terminal", "prompt" }
+	local ignore_filetypes = { "lazy", "mason", "snacks_picker_input" }
 
-    if
-        vim.tbl_contains(ignore_buftypes, vim.bo.buftype)
-        or vim.tbl_contains(ignore_filetypes, vim.bo.filetype)
-        or vim.bo.readonly
-    then
-        return "<CR>"
-    end
-    return "<cmd>update<CR>"
+	if
+		vim.tbl_contains(ignore_buftypes, vim.bo.buftype)
+		or vim.tbl_contains(ignore_filetypes, vim.bo.filetype)
+		or vim.bo.readonly
+	then
+		return "<CR>"
+	end
+	return "<cmd>update<CR>"
 end, { expr = true, desc = "Smart save on enter" })
 
 -- Better movement
@@ -61,12 +64,11 @@ map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 map("n", "<Tab>", "<cmd>bn<CR>", { desc = "Next buffer" })
 map("n", "<S-Tab>", "<cmd>bp<CR>", { desc = "Previous buffer" })
 map("n", "<leader>q", function()
-    Snacks.bufdelete()
+	Snacks.bufdelete()
 end, { desc = "Close current buffer" })
 
 -- Terminal
-map("t", "jk", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-
+map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 map("n", "<M-o>", "van", { desc = "TS: Start incremental selection", remap = true })
 map("x", "<M-o>", "an", { desc = "TS: Increment selection", remap = true })
 map("x", "<M-i>", "in", { desc = "TS: Decrement selection", remap = true })
