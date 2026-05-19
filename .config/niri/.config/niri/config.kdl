@@ -30,7 +30,7 @@ hotkey-overlay {
 }
 
 blur {
-    off
+    on
     passes 2
     saturation 2
 }

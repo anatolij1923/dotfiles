@@ -1,9 +1,7 @@
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    Mod+D { spawn-sh "vicinae toggle"; }
-    // Mod+D { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
-    Mod+V { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
+    Mod+Space { spawn-sh "vicinae toggle"; }
     Mod+Shift+L { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
     Mod+S { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
     Mod+I { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
@@ -67,7 +65,7 @@ binds {
     Mod+Ctrl+K     { move-window-up; }
     Mod+Ctrl+L     { move-column-right; }
 
-    Mod+Space { toggle-window-floating; }
+    Mod+Shift+Space { toggle-window-floating; }
 
     // Workspaces
     Mod+1 { focus-workspace 1; }
