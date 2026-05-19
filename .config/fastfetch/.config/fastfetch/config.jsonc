@@ -5,7 +5,7 @@
     "source": "$HOME/.config/fastfetch/squidward.txt",
     "color": { "1": "blue" },
     "padding": {
-      "top": 1,
+      "top": 2,
       "left": 3,
     },
   },

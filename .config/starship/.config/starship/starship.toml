@@ -24,16 +24,16 @@ symbol = " "
 style = "bold blue"
 truncation_length = 3
 truncate_to_repo = false
-format = ' [$path]($style)[$read_only]($read_only_style) '
+format = " [$path]($style)[$read_only]($read_only_style) "
 
 [python]
-format = 'via [$symbol(${version} ($virtualenv))]($style)'
-symbol = ' '
+format = "via [$symbol(${version} ($virtualenv))]($style)"
+symbol = " "
 
 [nix_shell]
 format = '[$symbol$state( \($name\))]($style)'
-symbol = '❄️ '
-style = 'bold blue'
+symbol = "❄️ "
+style = "bold blue"
 
 [git_branch]
 symbol = " "
@@ -44,11 +44,10 @@ format = "[$symbol$branch]($style)"
 format = " [$all_status]($style) "
 
 [character]
-success_symbol = "[ ~>](bold green)"
-error_symbol = "[ ~>](bold red)"
-format = '$symbol '
+success_symbol = "[ ->](bold green)"
+error_symbol = "[ ->](bold red)"
+format = "$symbol "
 
 [cmd_duration]
 min_time = 1000
-format = 'took [$duration]($style) '
-
+format = "took [$duration]($style) "
