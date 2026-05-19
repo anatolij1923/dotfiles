@@ -19,8 +19,8 @@ return {
 				preview = true,
 				width_focus = 35,
 				width_preview = 50,
-				options = { use_as_default_explorer = true, lsp_timeout = 0 },
 			},
+			options = { use_as_default_explorer = true, lsp_timeout = 0 },
 		})
 
 		local mini_icons = require("mini.icons")
