@@ -10,6 +10,7 @@ return {
 		config = function()
 			local ensure_installed = {
 				"vtsls",
+				"svelte-language-server",
 				"lua-language-server",
 				"fish-lsp",
 				"rust-analyzer",
@@ -145,6 +146,52 @@ return {
 				filetypes = { "markdown" },
 			})
 
+			vim.lsp.config("clangd", {
+				cmd = { "clangd" },
+				filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+			})
+
+			vim.lsp.config("qmlls", {
+				cmd = { "qmlls" },
+				filetypes = { "qml", "qmljs" },
+			})
+
+			vim.lsp.config("svelte-language-server", {
+				cmd = { "svelteserver", "--stdio" },
+				filetypes = { "svelte" },
+				settings = {
+					typescript = {
+						inlayHints = {
+							parameterNames = {
+								enabled = "literals",
+								suppressWhenArgumentMatchesName = true,
+							},
+							parameterTypes = { enabled = true },
+							variableTypes = { enabled = true },
+							propertyDeclarationTypes = { enabled = true },
+							functionLikeReturnTypes = { enabled = true },
+							enumMemberValues = { enabled = true },
+						},
+					},
+				},
+				root_dir = function(bufnr, on_dir)
+					local fname = vim.api.nvim_buf_get_name(bufnr)
+					if vim.uv.fs_stat(fname) ~= nil then
+						local root_markers = {
+							"package-lock.json",
+							"yarn.lock",
+							"pnpm-lock.yaml",
+							"bun.lockb",
+							"bun.lock",
+							"deno.lock",
+							".git",
+						}
+						local project_root = vim.fs.root(bufnr, root_markers) or vim.fn.getcwd()
+						on_dir(project_root)
+					end
+				end,
+			})
+
 			vim.lsp.enable({
 				"lua_ls",
 				"vtsls",
@@ -153,6 +200,9 @@ return {
 				"tombi",
 				"gopls",
 				"markdown_oxide",
+				"clangd",
+				"qmlls",
+				"svelte-language-server",
 			})
 		end,
 	},
