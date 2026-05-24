@@ -80,17 +80,7 @@ return {
 			end,
 		})
 
-		local signs = {
-			[vim.diagnostic.severity.ERROR] = " ",
-			[vim.diagnostic.severity.WARN] = " ",
-			[vim.diagnostic.severity.HINT] = "󰠠 ",
-			[vim.diagnostic.severity.INFO] = " ",
-		}
-
 		vim.diagnostic.config({
-			signs = {
-				text = signs, -- Enable signs in the gutter
-			},
 			virtual_text = true, -- Specify Enable virtual text for diagnostics
 			underline = true, -- Specify Underline diagnostics
 			update_in_insert = false, -- Keep diagnostics active in insert mode
