@@ -44,5 +44,18 @@ return {
 		sources = { default = { "lsp", "path", "snippets", "buffer" } },
 
 		fuzzy = { implementation = "rust" },
+
+		cmdline = {
+			enabled = true,
+			keymap = {
+				preset = "cmdline",
+				["<Right>"] = false,
+				["<Left>"] = false,
+			},
+			completion = {
+				list = { selection = { preselect = false } },
+				ghost_text = { enabled = true },
+			},
+		},
 	},
 }
