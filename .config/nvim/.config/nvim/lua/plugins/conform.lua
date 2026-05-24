@@ -6,9 +6,11 @@ return {
 			lua = { "stylua" },
 			toml = { "tombi" },
 			markdown = { "prettier" },
+			svelte = { "prettier" },
+			json = { "prettier" },
 		},
 
-		format_on_save = { timeout_ms = 500, lsp_fallback = true },
+		format_on_save = { timeout_ms = 1000, lsp_fallback = true },
 	},
 	keys = {
 		{
@@ -16,7 +18,7 @@ return {
 			mode = { "n", "v" },
 			function()
 				require("conform").format({
-					lsp_fallback = true,
+					lsp_fallback = "fallback",
 					async = false,
 					timeout_ms = 1000,
 				})
