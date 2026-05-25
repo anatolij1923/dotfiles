@@ -7,10 +7,12 @@ return {
 			toml = { "tombi" },
 			markdown = { "prettier" },
 			svelte = { "prettier" },
+			typescript = { "prettier" },
+			javascript = { "prettier" },
 			json = { "prettier" },
 		},
 
-		format_on_save = { timeout_ms = 1000, lsp_fallback = true },
+		-- format_on_save = { timeout_ms = 1000, lsp_fallback = true },
 	},
 	keys = {
 		{
