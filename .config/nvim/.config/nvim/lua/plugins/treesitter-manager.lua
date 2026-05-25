@@ -1,7 +1,7 @@
 return {
 	"romus204/tree-sitter-manager.nvim",
 	dependencies = {},
-	cmd = { "TSManager", "TSInstall", "TSUninstall" },
+	event = { "BufReadPre" },
 	config = function()
 		require("tree-sitter-manager").setup({
 			ensure_installed = {
