@@ -20,7 +20,7 @@ return {
 			mode = { "n", "v" },
 			function()
 				require("conform").format({
-					lsp_fallback = "fallback",
+					lsp_fallback = true,
 					async = false,
 					timeout_ms = 1000,
 				})
