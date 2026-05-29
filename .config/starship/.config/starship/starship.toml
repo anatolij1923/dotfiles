@@ -1,21 +1,31 @@
+"$schema" = 'https://starship.rs/config-schema.json'
 add_newline = true
 
-format = """\
+format = """
 $directory\
-$python\
-$nix_shell\
-$rust\
-$nodejs\
-$fill\
 $git_branch\
-$git_status
+$git_status\
+$fill\
+$time\
+$cmd_duration
 $character\
 """
 
-right_format = """\
-$cmd_duration\
-$time\
-"""
+[git_branch]
+style = "bright-black"
+format = "[$branch]($style)"
+
+[git_status]
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+style = "cyan"
+conflicted = "​"
+untracked = "​"
+modified = "​"
+staged = "​"
+renamed = "​"
+deleted = "​"
+stashed = "≡"
+
 
 [fill]
 symbol = " "
@@ -26,26 +36,9 @@ truncation_length = 3
 truncate_to_repo = false
 format = " [$path]($style)[$read_only]($read_only_style) "
 
-[python]
-format = "via [$symbol(${version} ($virtualenv))]($style)"
-symbol = " "
-
-[nix_shell]
-format = '[$symbol$state( \($name\))]($style)'
-symbol = "❄️ "
-style = "bold blue"
-
-[git_branch]
-symbol = " "
-style = "bold purple"
-format = "[$symbol$branch]($style)"
-
-[git_status]
-format = " [$all_status]($style) "
-
 [character]
-success_symbol = "[ ->](bold green)"
-error_symbol = "[ ->](bold red)"
+success_symbol = "[ ->](green)"
+error_symbol = "[ ->](red)"
 format = "$symbol "
 
 [cmd_duration]
