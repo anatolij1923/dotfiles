@@ -18,7 +18,6 @@ input {
         accel-profile "flat"
         accel-speed 0.5
         scroll-factor 0.3
-        // sensitivity 0.2
     }
 
     mouse {
