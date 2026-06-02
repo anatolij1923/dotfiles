@@ -37,8 +37,8 @@ truncate_to_repo = false
 format = " [$path]($style)[$read_only]($read_only_style) "
 
 [character]
-success_symbol = "[ ->](green)"
-error_symbol = "[ ->](red)"
+success_symbol = "[ ->](bold green)"
+error_symbol = "[ ->](bold red)"
 format = "$symbol "
 
 [cmd_duration]

@@ -1,6 +1,5 @@
 abbr -a ls "eza -1 --group-directories-first"
-# alias ls="eza -1  --color=always --group-directories-first --icons=always"
-# abbr -a ll "eza -la --color=always --icons=always --git"
+abbr -a ll "eza -la  --git"
 abbr -a tree "eza --tree"
 
 abbr -a cat bat

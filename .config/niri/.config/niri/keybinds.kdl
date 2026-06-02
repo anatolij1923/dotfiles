@@ -10,6 +10,8 @@ binds {
     Mod+N { spawn-sh "qs  ipc call notificationHistory toggle"; }
     Ctrl+Alt+Delete { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
 
+    Mod+Alt+R { spawn-sh "pkill qs; qs -d"; }
+
     // Apps
     Mod+E { spawn "nautilus"; }
     Mod+T { spawn "Telegram"; }
@@ -96,8 +98,8 @@ binds {
     // XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+5%"; }
     // XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%-"; }
 
-    XF86MonBrightnessUp allow-when-locked=true { spawn-sh "qs ipc call brightness increment";}
-    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "qs ipc call brightness decrement";}
+    XF86MonBrightnessUp allow-when-locked=true { spawn-sh "qs ipc call brightness increment 0.05";}
+    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "qs ipc call brightness decrement -0.05";}
 
     // Example media keys mapping using playerctl.
     // This will work with any MPRIS-enabled media player.

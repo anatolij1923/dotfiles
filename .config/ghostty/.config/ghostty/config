@@ -1,20 +1,11 @@
-# Font Settings
 font-family = JetBrainsMono Nerd Font
 font-size = 14
 font-style = Regular
 font-feature = 1
 
-# Theme Settings
 background-opacity = 0.9
 
-# Window Settings
 title = "Ghostty"
 confirm-close-surface = false
 
 theme = "Kanagawa Dragon"
-
-# Colors
-# config-file = ./themes/noctalia
-
-# gtk-titlebar = false
-# window-decoration = false

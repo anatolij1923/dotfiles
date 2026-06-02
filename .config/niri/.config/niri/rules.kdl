@@ -70,19 +70,11 @@ layer-rule {
 }
 
 layer-rule {
-    match namespace="quickshell:bar"
+    match namespace="quickshell:(bar|osd|corners)"
     background-effect {
-        blur true
         xray false
     }
 }
-
-// layer-rule {
-//     match namespace="^noctalia-(background|launcher-overlay|dock)-.*$"
-//     background-effect {
-//         xray false
-//     }
-// }
 
 window-rule {
     match is-active=false

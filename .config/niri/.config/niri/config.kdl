@@ -33,7 +33,7 @@ hotkey-overlay {
 blur {
     on
     passes 2
-    saturation 2
+    saturation 1.2
 }
 
 prefer-no-csd

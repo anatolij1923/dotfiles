@@ -71,5 +71,5 @@ function sleep_timer
     echo -e "\n\nPausing media and suspending..."
     playerctl -a pause 2>/dev/null
     loginctl lock-session
-    systemctl suspend -f
+    systemctl suspend
 end
