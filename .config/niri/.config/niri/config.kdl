@@ -5,7 +5,8 @@ include "outputs.kdl"
 include "environment.kdl"
 include "input.kdl"
 include "autostart.kdl"
-include "noctalia.kdl"
+include "gestures.kdl"
+include optional=true "niri-colors.kdl"
 
 overview {
     zoom 0.4
@@ -21,7 +22,7 @@ recent-windows {
 }
 
 cursor {
-    xcursor-theme "Bibata-Modern-Classic"
+    xcursor-theme "Bibata-Modern-Ice"
     xcursor-size 24
 }
 
